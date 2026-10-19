@@ -212,5 +212,12 @@
     "dayFeedFolderHint": "ここに写真と動画を表示するにはメディアフォルダを選択してください",
     "dayFeedChooseFolder": "選択",
     "dayFeedMute": "ミュート",
-    "dayFeedUnmute": "ミュート解除"
+    "dayFeedUnmute": "ミュート解除",
+    "holdToRecordAudio": "長押しで音声メッセージを録音",
+    "holdToRecordVideo": "長押しでビデオメッセージを録画",
+    "roundVideoRecordError": "ビデオを録画できませんでした",
+    "roundVideoCameraUnavailable": "このデバイスではカメラを利用できません",
+    "roundVideoRetake": "撮り直す",
+    "roundVideoUse": "使用する",
+    "removeMedia": "メディアを削除"
 }

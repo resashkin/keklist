@@ -36,6 +36,8 @@
             android:value="2" />
     </application>
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <!-- Location permission for weather feature -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 

@@ -58,6 +58,15 @@ final class MindEdit extends MindEvent {
   MindEdit({required this.mind});
 }
 
+final class MindRemoveMedia extends MindEvent {
+  final Mind mind;
+
+  @override
+  List<Object?> get props => [mind];
+
+  MindRemoveMedia({required this.mind});
+}
+
 final class MindEditNote extends MindEvent {
   final String uuid;
   final String newNote;

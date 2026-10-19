@@ -475,5 +475,12 @@
     "dayFeedFolderHint": "Bu yerda foto va videolarni ko‘rish uchun media papkasini tanlang",
     "dayFeedChooseFolder": "Tanlash",
     "dayFeedMute": "Ovozni o‘chirish",
-    "dayFeedUnmute": "Ovozni yoqish"
+    "dayFeedUnmute": "Ovozni yoqish",
+    "holdToRecordAudio": "Ovozli xabar yozish uchun bosib turing",
+    "holdToRecordVideo": "Video xabar yozish uchun bosib turing",
+    "roundVideoRecordError": "Videoni yozib bo‘lmadi",
+    "roundVideoCameraUnavailable": "Bu qurilmada kamera mavjud emas",
+    "roundVideoRetake": "Qayta olish",
+    "roundVideoUse": "Foydalanish",
+    "removeMedia": "Mediani o‘chirish"
 }

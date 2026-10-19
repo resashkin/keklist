@@ -1400,6 +1400,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unmute'**
   String get dayFeedUnmute;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Hold to record a voice message'**
+  String get holdToRecordAudio;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Hold to record a video message'**
+  String get holdToRecordVideo;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t record the video'**
+  String get roundVideoRecordError;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Camera is unavailable on this device'**
+  String get roundVideoCameraUnavailable;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Retake'**
+  String get roundVideoRetake;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Use'**
+  String get roundVideoUse;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Remove media'**
+  String get removeMedia;
 }
 
 class _AppLocalizationsDelegate

@@ -865,5 +865,33 @@
     "dayFeedUnmute": "Unmute",
     "@dayFeedUnmute": {
         "description": "Unified day grid (All mode) label"
+    },
+    "holdToRecordAudio": "Hold to record a voice message",
+    "@holdToRecordAudio": {
+        "description": "Audio/video mind recording"
+    },
+    "holdToRecordVideo": "Hold to record a video message",
+    "@holdToRecordVideo": {
+        "description": "Audio/video mind recording"
+    },
+    "roundVideoRecordError": "Couldn't record the video",
+    "@roundVideoRecordError": {
+        "description": "Audio/video mind recording"
+    },
+    "roundVideoCameraUnavailable": "Camera is unavailable on this device",
+    "@roundVideoCameraUnavailable": {
+        "description": "Audio/video mind recording"
+    },
+    "roundVideoRetake": "Retake",
+    "@roundVideoRetake": {
+        "description": "Audio/video mind recording"
+    },
+    "roundVideoUse": "Use",
+    "@roundVideoUse": {
+        "description": "Audio/video mind recording"
+    },
+    "removeMedia": "Remove media",
+    "@removeMedia": {
+        "description": "Audio/video mind recording"
     }
 }

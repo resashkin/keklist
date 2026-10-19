@@ -660,4 +660,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => 'ミュート解除';
+
+  @override
+  String get holdToRecordAudio => '長押しで音声メッセージを録音';
+
+  @override
+  String get holdToRecordVideo => '長押しでビデオメッセージを録画';
+
+  @override
+  String get roundVideoRecordError => 'ビデオを録画できませんでした';
+
+  @override
+  String get roundVideoCameraUnavailable => 'このデバイスではカメラを利用できません';
+
+  @override
+  String get roundVideoRetake => '撮り直す';
+
+  @override
+  String get roundVideoUse => '使用する';
+
+  @override
+  String get removeMedia => 'メディアを削除';
 }

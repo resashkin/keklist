@@ -212,5 +212,12 @@
     "dayFeedFolderHint": "Выберите папку с медиа, чтобы видеть здесь фото и видео",
     "dayFeedChooseFolder": "Выбрать",
     "dayFeedMute": "Выключить звук",
-    "dayFeedUnmute": "Включить звук"
+    "dayFeedUnmute": "Включить звук",
+    "holdToRecordAudio": "Удерживайте, чтобы записать голосовое",
+    "holdToRecordVideo": "Удерживайте, чтобы записать видеосообщение",
+    "roundVideoRecordError": "Не удалось записать видео",
+    "roundVideoCameraUnavailable": "Камера недоступна на этом устройстве",
+    "roundVideoRetake": "Переснять",
+    "roundVideoUse": "Использовать",
+    "removeMedia": "Удалить медиа"
 }

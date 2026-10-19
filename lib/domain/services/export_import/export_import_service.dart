@@ -89,9 +89,7 @@ final class ExportImportService {
 
       for (final mind in minds) {
         final noteContent = MindNoteContent.parse(mind.note);
-        for (final audioPiece in noteContent.audioPieces) {
-          audioFiles.add(audioPiece.appRelativeAbsoulutePath);
-        }
+        audioFiles.addAll(noteContent.mediaFilePaths);
       }
 
       // Create archive
@@ -120,9 +118,8 @@ final class ExportImportService {
 
           if (await file.exists()) {
             final bytes = await file.readAsBytes();
-            // Extract just the filename from the relative path (e.g., "audio/uuid.m4a" -> "uuid.m4a")
-            final fileName = relativePath.split('/').last;
-            archive.addFile(ArchiveFile('audio/$fileName', bytes.length, bytes));
+            // The relative path ("audio/uuid.m4a", "video/uuid.mp4") doubles as the archive path.
+            archive.addFile(ArchiveFile(relativePath, bytes.length, bytes));
             successfulAudioCount++;
           } else {
             missingAudioFiles.add(relativePath);
@@ -452,17 +449,18 @@ final class ExportImportService {
           ..addAll(remapped);
       }
 
-      // Copy audio files to app directory
-      final audioDir = Directory('${tempExtractDir.path}/audio');
+      // Copy audio and video files to app directory
       int audioFilesCopied = 0;
       final skippedAudioFiles = <String>[];
 
-      if (await audioDir.exists()) {
-        final audioFiles = await audioDir.list().where((entity) => entity is File).cast<File>().toList();
+      for (final String mediaFolder in AppFileRepository.mediaFolderNames) {
+        final mediaDir = Directory('${tempExtractDir.path}/$mediaFolder');
+        if (!await mediaDir.exists()) continue;
+        final mediaFiles = await mediaDir.list().where((entity) => entity is File).cast<File>().toList();
 
-        for (final audioFile in audioFiles) {
-          final fileName = audioFile.path.split('/').last;
-          final relativePath = 'audio/$fileName';
+        for (final mediaFile in mediaFiles) {
+          final fileName = mediaFile.path.split('/').last;
+          final relativePath = '$mediaFolder/$fileName';
           final targetPath = await _fileRepository.resolveAbsolutePath(relativePath);
           final targetFile = File(targetPath);
 
@@ -476,7 +474,7 @@ final class ExportImportService {
           await targetFile.parent.create(recursive: true);
 
           // Copy file
-          await audioFile.copy(targetPath);
+          await mediaFile.copy(targetPath);
           audioFilesCopied++;
         }
       }

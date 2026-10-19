@@ -656,4 +656,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => '取消静音';
+
+  @override
+  String get holdToRecordAudio => '按住录制语音消息';
+
+  @override
+  String get holdToRecordVideo => '按住录制视频消息';
+
+  @override
+  String get roundVideoRecordError => '无法录制视频';
+
+  @override
+  String get roundVideoCameraUnavailable => '此设备上的相机不可用';
+
+  @override
+  String get roundVideoRetake => '重拍';
+
+  @override
+  String get roundVideoUse => '使用';
+
+  @override
+  String get removeMedia => '移除媒体';
 }

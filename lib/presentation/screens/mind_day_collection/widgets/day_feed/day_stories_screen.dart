@@ -13,11 +13,17 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 
 const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
 const double _kOpenMindDragDistance = -80.0;
 const Duration _kVideoFallbackDuration = Duration(seconds: 5);
+const double _kStoryRoundVideoSize = 280.0;
 
 final class DayStoriesScreen extends StatefulWidget {
   final List<DayFeedItem> items;
@@ -47,6 +53,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
       if (status == AnimationStatus.completed) _goNext();
     });
   VideoPlayerController? _videoController;
+  AudioPlayer? _audioPlayer;
   StreamSubscription<double>? _volumeSubscription;
   bool _isPaused = false;
   double _dragOffsetY = 0.0;
@@ -65,6 +72,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     _volumeSubscription?.cancel();
     FlutterVolumeController.removeListener();
     _videoController?.dispose();
+    _audioPlayer?.dispose();
     _progress.dispose();
     super.dispose();
   }
@@ -83,9 +91,14 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
       ..stop()
       ..value = 0.0;
     await _disposeVideo();
+    await _disposeAudio();
 
     final DayFeedItem item = _currentItem;
     switch (item) {
+      case DayFeedMind(:final mind) when mind.noteContent.hasVideo:
+        await _playVideo(item);
+      case DayFeedMind(:final mind) when mind.noteContent.hasAudio:
+        await _playAudio(mind.noteContent.audioPieces.first, fallback: DayFeedLayout.mindStoryDuration(mind));
       case DayFeedMind(:final mind):
         _startProgress(DayFeedLayout.mindStoryDuration(mind));
       case DayFeedAsset(isVideo: true):
@@ -129,9 +142,34 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
         return VideoPlayerController.file(file);
       case DayFeedFolderMedia(item: FolderSafItem(:final uri)):
         return VideoPlayerController.contentUri(uri);
-      case DayFeedMind():
-        return null;
+      case DayFeedMind(:final mind):
+        final MindNoteVideo? video = mind.noteContent.videoPieces.firstOrNull;
+        if (video == null) return null;
+        final String path = await context.read<AppFileRepository>().resolveAbsolutePath(video.appRelativePath);
+        return VideoPlayerController.file(File(path));
     }
+  }
+
+  Future<void> _playAudio(MindNoteAudio audio, {required Duration fallback}) async {
+    final int requestedIndex = _index;
+    final String path = await context.read<AppFileRepository>().resolveAbsolutePath(audio.appRelativeAbsoulutePath);
+    final AudioPlayer player = AudioPlayer();
+    final Duration? loadedDuration = await player.setFilePath(path).catchError((_) => null);
+    if (!mounted || requestedIndex != _index) {
+      await player.dispose();
+      return;
+    }
+    await player.setVolume(_isMutedForSession ? 0.0 : 1.0);
+    _audioPlayer = player;
+    final Duration duration = loadedDuration ?? audio.duration ?? fallback;
+    _startProgress(duration > Duration.zero ? duration : fallback);
+    if (!_isPaused) unawaited(player.play());
+  }
+
+  Future<void> _disposeAudio() async {
+    final AudioPlayer? player = _audioPlayer;
+    _audioPlayer = null;
+    await player?.dispose();
   }
 
   Future<void> _disposeVideo() async {
@@ -164,18 +202,21 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     _isPaused = true;
     _progress.stop();
     _videoController?.pause();
+    _audioPlayer?.pause();
   }
 
   void _resume() {
     _isPaused = false;
     if (_progress.duration != null) _progress.forward();
     _videoController?.play();
+    _audioPlayer?.play();
   }
 
   void _setMuted(bool isMuted) {
     if (!mounted) return;
     _isMutedForSession = isMuted;
     _videoController?.setVolume(isMuted ? 0.0 : 1.0);
+    _audioPlayer?.setVolume(isMuted ? 0.0 : 1.0);
     setState(() {});
   }
 
@@ -268,7 +309,9 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
   Widget _buildHeader(BuildContext context) {
     final String time = DateFormat.Hm(Localizations.localeOf(context).toString()).format(_currentItem.timestamp.toLocal());
     final DayFeedItem item = _currentItem;
-    final bool isVideo = (item is DayFeedAsset && item.isVideo) || (item is DayFeedFolderMedia && item.isVideo);
+    final bool isVideo = (item is DayFeedAsset && item.isVideo) ||
+        (item is DayFeedFolderMedia && item.isVideo) ||
+        (item is DayFeedMind && item.mind.noteContent.hasMedia);
     return Row(
       children: [
         const SizedBox(width: 16.0),
@@ -289,6 +332,9 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
   Widget _buildContent(BuildContext context) {
     final DayFeedItem item = _currentItem;
     final VideoPlayerController? video = _videoController;
+    if (item is DayFeedMind) {
+      return _MindStory(item: item, isTextHidden: widget.isMindTextHidden, roundVideo: video);
+    }
     if (video != null && video.value.isInitialized) {
       return Center(child: AspectRatio(aspectRatio: video.value.aspectRatio, child: VideoPlayer(video)));
     }
@@ -310,30 +356,43 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
 final class _MindStory extends StatelessWidget {
   final DayFeedMind item;
   final bool isTextHidden;
+  final VideoPlayerController? roundVideo;
 
-  const _MindStory({required this.item, required this.isTextHidden});
+  const _MindStory({required this.item, required this.isTextHidden, this.roundVideo});
 
   @override
   Widget build(BuildContext context) {
     final String text = item.mind.plainNote.trim();
+    final VideoPlayerController? video = roundVideo;
+    final bool hasVideo = item.mind.noteContent.hasVideo;
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(32.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(item.mind.emoji, style: const TextStyle(fontSize: 96.0)),
+            if (hasVideo)
+              SizedBox.square(
+                dimension: _kStoryRoundVideoSize,
+                child: video != null && video.value.isInitialized
+                    ? Stack(
+                        fit: StackFit.expand,
+                        children: [RoundVideoSurface(controller: video), RoundVideoProgressRing(controller: video)],
+                      )
+                    : const _Loading(),
+              ),
+            Text(item.mind.emoji, style: TextStyle(fontSize: hasVideo ? 48.0 : 96.0)),
             if (!isTextHidden && text.isNotEmpty) ...[
               const SizedBox(height: 24.0),
               Text(text, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 20.0)),
             ],
-            if (item.mind.audioNotes.isNotEmpty || item.reflectionCount > 0) ...[
+            if (item.reflectionCount > 0 || item.mind.noteContent.hasAudio) ...[
               const SizedBox(height: 16.0),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 spacing: 12.0,
                 children: [
-                  if (item.mind.audioNotes.isNotEmpty) const Icon(Icons.mic, color: Colors.white70),
+                  if (item.mind.noteContent.hasAudio) const Icon(Icons.graphic_eq, color: Colors.white70),
                   if (item.reflectionCount > 0)
                     Row(
                       mainAxisSize: MainAxisSize.min,

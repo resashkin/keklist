@@ -683,4 +683,25 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => 'Үнүн күйгүзүү';
+
+  @override
+  String get holdToRecordAudio => 'Үн билдирүү жазуу үчүн басып туруңуз';
+
+  @override
+  String get holdToRecordVideo => 'Видео билдирүү жазуу үчүн басып туруңуз';
+
+  @override
+  String get roundVideoRecordError => 'Видеону жазуу мүмкүн болбоду';
+
+  @override
+  String get roundVideoCameraUnavailable => 'Бул түзмөктө камера жеткиликсиз';
+
+  @override
+  String get roundVideoRetake => 'Кайра тартуу';
+
+  @override
+  String get roundVideoUse => 'Колдонуу';
+
+  @override
+  String get removeMedia => 'Медианы өчүрүү';
 }

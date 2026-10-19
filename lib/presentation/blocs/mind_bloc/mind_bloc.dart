@@ -39,6 +39,7 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     on<MindDelete>(_deleteMind);
     on<MindClearCache>(_clearCache);
     on<MindEdit>(_editMind);
+    on<MindRemoveMedia>(_removeMedia);
     on<MindStartSearch>(_startSearch);
     on<MindStopSearch>(_stopSearch);
     on<MindEnterSearchText>(
@@ -84,6 +85,10 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
                   ),
           );
         },
+        video: (MindNoteVideo videoPiece) {
+          if (videoPiece.appRelativePath.trim().isEmpty) return;
+          sanitizedPieces.add(videoPiece);
+        },
         unknown: () => null,
       );
     }
@@ -122,9 +127,7 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     final audioFilesToDelete = <String>{};
     for (final mind in mindsToDelete) {
       final noteContent = MindNoteContent.parse(mind.note);
-      for (final audioPiece in noteContent.audioPieces) {
-        audioFilesToDelete.add(audioPiece.appRelativeAbsoulutePath);
-      }
+      audioFilesToDelete.addAll(noteContent.mediaFilePaths);
     }
 
     // Delete all audio files
@@ -166,6 +169,23 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     return minds.toList();
   }
 
+  Future<void> _removeMedia(MindRemoveMedia event, Emitter<MindState> emit) async {
+    final MindNoteContent content = event.mind.noteContent;
+    await _deleteFiles(content.mediaFilePaths);
+    await _mindRepository.updateMind(mind: event.mind.copyWith(note: content.withoutMedia().toRawNoteString()));
+  }
+
+  Future<void> _deleteFiles(Iterable<String> relativePaths) async {
+    for (final String relativePath in relativePaths) {
+      try {
+        final File file = File(await _fileRepository.resolveAbsolutePath(relativePath));
+        if (await file.exists()) await file.delete();
+      } catch (e) {
+        debugPrint('Error deleting media file $relativePath: $e');
+      }
+    }
+  }
+
   Future<void> _editMind(MindEdit event, Emitter<MindState> emit) async {
     final Mind editedMind = event.mind;
     await _mindRepository.updateMind(mind: editedMind);
@@ -180,9 +200,7 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     final audioFilesToDelete = <String>{};
     for (final mind in _mindRepository.values) {
       final noteContent = MindNoteContent.parse(mind.note);
-      for (final audioPiece in noteContent.audioPieces) {
-        audioFilesToDelete.add(audioPiece.appRelativeAbsoulutePath);
-      }
+      audioFilesToDelete.addAll(noteContent.mediaFilePaths);
     }
 
     // Delete all audio files

@@ -475,5 +475,12 @@
     "dayFeedFolderHint": "Scegli una cartella multimediale per vedere qui foto e video",
     "dayFeedChooseFolder": "Scegli",
     "dayFeedMute": "Disattiva audio",
-    "dayFeedUnmute": "Attiva audio"
+    "dayFeedUnmute": "Attiva audio",
+    "holdToRecordAudio": "Tieni premuto per registrare un messaggio vocale",
+    "holdToRecordVideo": "Tieni premuto per registrare un videomessaggio",
+    "roundVideoRecordError": "Impossibile registrare il video",
+    "roundVideoCameraUnavailable": "Fotocamera non disponibile su questo dispositivo",
+    "roundVideoRetake": "Rifai",
+    "roundVideoUse": "Usa",
+    "removeMedia": "Rimuovi media"
 }

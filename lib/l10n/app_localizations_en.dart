@@ -680,4 +680,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => 'Unmute';
+
+  @override
+  String get holdToRecordAudio => 'Hold to record a voice message';
+
+  @override
+  String get holdToRecordVideo => 'Hold to record a video message';
+
+  @override
+  String get roundVideoRecordError => 'Couldn\'t record the video';
+
+  @override
+  String get roundVideoCameraUnavailable =>
+      'Camera is unavailable on this device';
+
+  @override
+  String get roundVideoRetake => 'Retake';
+
+  @override
+  String get roundVideoUse => 'Use';
+
+  @override
+  String get removeMedia => 'Remove media';
 }

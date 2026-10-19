@@ -688,4 +688,26 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => 'Ton an';
+
+  @override
+  String get holdToRecordAudio => 'Gedrückt halten für eine Sprachnachricht';
+
+  @override
+  String get holdToRecordVideo => 'Gedrückt halten für eine Videonachricht';
+
+  @override
+  String get roundVideoRecordError => 'Video konnte nicht aufgenommen werden';
+
+  @override
+  String get roundVideoCameraUnavailable =>
+      'Kamera auf diesem Gerät nicht verfügbar';
+
+  @override
+  String get roundVideoRetake => 'Neu aufnehmen';
+
+  @override
+  String get roundVideoUse => 'Verwenden';
+
+  @override
+  String get removeMedia => 'Medien entfernen';
 }

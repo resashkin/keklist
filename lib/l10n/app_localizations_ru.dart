@@ -680,4 +680,26 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => 'Включить звук';
+
+  @override
+  String get holdToRecordAudio => 'Удерживайте, чтобы записать голосовое';
+
+  @override
+  String get holdToRecordVideo => 'Удерживайте, чтобы записать видеосообщение';
+
+  @override
+  String get roundVideoRecordError => 'Не удалось записать видео';
+
+  @override
+  String get roundVideoCameraUnavailable =>
+      'Камера недоступна на этом устройстве';
+
+  @override
+  String get roundVideoRetake => 'Переснять';
+
+  @override
+  String get roundVideoUse => 'Использовать';
+
+  @override
+  String get removeMedia => 'Удалить медиа';
 }
