@@ -636,4 +636,51 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык майндтардан өчүрүлөт.';
+
+  @override
+  String get dayFeedShowAll => 'Баарын көрсөтүү';
+
+  @override
+  String get dayFeedShowSources => 'Булактарды көрсөтүү';
+
+  @override
+  String get dayFeedTileSettings => 'Плитка жөндөөлөрү';
+
+  @override
+  String get dayFeedColumns => 'Мамычалар';
+
+  @override
+  String get dayFeedMindTileSize => 'Плитканын өлчөмү';
+
+  @override
+  String get dayFeedMindTileSquare => 'Чарчы';
+
+  @override
+  String get dayFeedMindTileWide => 'Кең';
+
+  @override
+  String get dayFeedShowMindText => 'Текстти көрсөтүү';
+
+  @override
+  String get dayFeedShowAudioBadge => 'Аудио белгисин көрсөтүү';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Бул жерде сүрөт жана видеолорду көрүү үчүн сүрөткө уруксат бериңиз';
+
+  @override
+  String get dayFeedAllowAccess => 'Уруксат берүү';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Бул жерде сүрөт жана видеолорду көрүү үчүн медиа папканы тандаңыз';
+
+  @override
+  String get dayFeedChooseFolder => 'Тандоо';
+
+  @override
+  String get dayFeedMute => 'Үнүн өчүрүү';
+
+  @override
+  String get dayFeedUnmute => 'Үнүн күйгүзүү';
 }

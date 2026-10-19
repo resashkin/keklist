@@ -1310,6 +1310,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete this emotion? It will be removed from any minds using it.'**
   String get deleteEmotionMessage;
+
+  /// Day screen action that switches to the unified grid of minds and media
+  ///
+  /// In en, this message translates to:
+  /// **'Show all'**
+  String get dayFeedShowAll;
+
+  /// Day screen action that switches back to the source tiles
+  ///
+  /// In en, this message translates to:
+  /// **'Show sources'**
+  String get dayFeedShowSources;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Tile settings'**
+  String get dayFeedTileSettings;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Columns'**
+  String get dayFeedColumns;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Mind tile size'**
+  String get dayFeedMindTileSize;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Square'**
+  String get dayFeedMindTileSquare;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Wide'**
+  String get dayFeedMindTileWide;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Show text'**
+  String get dayFeedShowMindText;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Show audio badge'**
+  String get dayFeedShowAudioBadge;
+
+  /// Banner in the unified day grid when photo access is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Allow photo access to see your photos and videos here'**
+  String get dayFeedPhotoAccessHint;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get dayFeedAllowAccess;
+
+  /// Banner in the unified day grid on Android when no media folder is chosen
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a media folder to see your photos and videos here'**
+  String get dayFeedFolderHint;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Choose'**
+  String get dayFeedChooseFolder;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Mute'**
+  String get dayFeedMute;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Unmute'**
+  String get dayFeedUnmute;
 }
 
 class _AppLocalizationsDelegate

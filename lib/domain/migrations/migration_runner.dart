@@ -82,6 +82,7 @@ class MigrationRunner {
                 mediaFolderPath: updatedSettings.mediaFolderPath,
                 isMediaFolderRecursive: updatedSettings.isMediaFolderRecursive,
                 hasSeededEmotions: updatedSettings.hasSeededEmotions,
+                dayFeed: updatedSettings.dayFeed,
               ),
             );
 

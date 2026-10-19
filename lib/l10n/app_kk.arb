@@ -460,5 +460,20 @@
     "doneEditing": "Дайын",
     "emotionEditHint": "Атын өзгерту үшін түртіңіз · ✕ жою үшін · реттеу үшін сүйреңіз",
     "emotionInUseMessage": "Бұл эмоция кейбір майндтарда қолданылады. Оны сонда сақтау үшін мұрағаттаңыз немесе барлық жерден жойыңыз.",
-    "deleteEmotionMessage": "Бұл эмоцияны жою керек пе? Ол оны пайдаланатын барлық майндтардан жойылады."
+    "deleteEmotionMessage": "Бұл эмоцияны жою керек пе? Ол оны пайдаланатын барлық майндтардан жойылады.",
+    "dayFeedShowAll": "Барлығын көрсету",
+    "dayFeedShowSources": "Дереккөздерді көрсету",
+    "dayFeedTileSettings": "Тақта баптаулары",
+    "dayFeedColumns": "Бағандар",
+    "dayFeedMindTileSize": "Тақта өлшемі",
+    "dayFeedMindTileSquare": "Шаршы",
+    "dayFeedMindTileWide": "Кең",
+    "dayFeedShowMindText": "Мәтінді көрсету",
+    "dayFeedShowAudioBadge": "Аудио белгісін көрсету",
+    "dayFeedPhotoAccessHint": "Мұнда фото мен видеоны көру үшін фотоға рұқсат беріңіз",
+    "dayFeedAllowAccess": "Рұқсат ету",
+    "dayFeedFolderHint": "Мұнда фото мен видеоны көру үшін медиа қалтасын таңдаңыз",
+    "dayFeedChooseFolder": "Таңдау",
+    "dayFeedMute": "Дыбысты өшіру",
+    "dayFeedUnmute": "Дыбысты қосу"
 }

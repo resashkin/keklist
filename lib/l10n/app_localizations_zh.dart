@@ -611,4 +611,49 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage => '删除此情绪？它将从所有使用它的 mind 中移除。';
+
+  @override
+  String get dayFeedShowAll => '显示全部';
+
+  @override
+  String get dayFeedShowSources => '显示来源';
+
+  @override
+  String get dayFeedTileSettings => '磁贴设置';
+
+  @override
+  String get dayFeedColumns => '列数';
+
+  @override
+  String get dayFeedMindTileSize => '磁贴大小';
+
+  @override
+  String get dayFeedMindTileSquare => '方形';
+
+  @override
+  String get dayFeedMindTileWide => '宽';
+
+  @override
+  String get dayFeedShowMindText => '显示文字';
+
+  @override
+  String get dayFeedShowAudioBadge => '显示音频标记';
+
+  @override
+  String get dayFeedPhotoAccessHint => '允许访问照片以在此查看你的照片和视频';
+
+  @override
+  String get dayFeedAllowAccess => '允许';
+
+  @override
+  String get dayFeedFolderHint => '选择媒体文件夹以在此查看你的照片和视频';
+
+  @override
+  String get dayFeedChooseFolder => '选择';
+
+  @override
+  String get dayFeedMute => '静音';
+
+  @override
+  String get dayFeedUnmute => '取消静音';
 }

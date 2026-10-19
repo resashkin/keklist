@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:cupertino_ui/cupertino_ui.dart' as cupertino_ui;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:keklist/domain/repositories/settings/keklist_theme_mode.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
@@ -53,7 +54,12 @@ final class KeklistAppState extends KekWidgetState<KeklistApp> {
         KeklistThemeMode.system => ThemeMode.system,
       },
       locale: _currentLanguage.locale,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      // material_ui and cupertino_ui ship their own localization types, separate from flutter_localizations'.
+      localizationsDelegates: const [
+        ...AppLocalizations.localizationsDelegates,
+        GlobalMaterialLocalizations.delegate,
+        cupertino_ui.GlobalCupertinoLocalizations.delegate,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
       builder: EasyLoading.init(),
     );

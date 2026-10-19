@@ -21,6 +21,31 @@ abstract class SettingsRepository {
   FutureOr<void> updateWeatherSettings({bool? isEnabled, double? latitude, double? longitude});
   FutureOr<void> updateMediaFolderSource({bool? isEnabled, String? folderPath, bool? isRecursive});
   FutureOr<void> updateHasSeededEmotions(bool value);
+  FutureOr<void> updateDayFeedSettings({
+    bool? isEnabled,
+    int? columnCount,
+    int? mindCellSpan,
+    bool? isMindTextVisible,
+    bool? isAudioBadgeVisible,
+  });
+}
+
+final class DayFeedSettings {
+  static const List<int> columnCountOptions = [3, 4, 5];
+
+  final bool isEnabled;
+  final int columnCount;
+  final int mindCellSpan;
+  final bool isMindTextVisible;
+  final bool isAudioBadgeVisible;
+
+  const DayFeedSettings({
+    this.isEnabled = false,
+    this.columnCount = 4,
+    this.mindCellSpan = 1,
+    this.isMindTextVisible = true,
+    this.isAudioBadgeVisible = true,
+  });
 }
 
 final class KeklistSettings {
@@ -46,6 +71,8 @@ final class KeklistSettings {
   /// twice — including after the user deletes them all. See ADR-0003.
   final bool hasSeededEmotions;
 
+  final DayFeedSettings dayFeed;
+
   KeklistSettings({
     required this.isMindContentVisible,
     required this.previousAppVersion,
@@ -65,6 +92,7 @@ final class KeklistSettings {
     this.mediaFolderPath,
     this.isMediaFolderRecursive = false,
     this.hasSeededEmotions = false,
+    this.dayFeed = const DayFeedSettings(),
   });
 
   SettingsObject toObject() => SettingsObject()
@@ -86,7 +114,12 @@ final class KeklistSettings {
     ..isMediaFolderSourceEnabled = isMediaFolderSourceEnabled
     ..mediaFolderPath = mediaFolderPath
     ..isMediaFolderRecursive = isMediaFolderRecursive
-    ..hasSeededEmotions = hasSeededEmotions;
+    ..hasSeededEmotions = hasSeededEmotions
+    ..isDayFeedModeEnabled = dayFeed.isEnabled
+    ..dayFeedColumnCount = dayFeed.columnCount
+    ..dayFeedMindCellSpan = dayFeed.mindCellSpan
+    ..isDayFeedMindTextVisible = dayFeed.isMindTextVisible
+    ..isDayFeedAudioBadgeVisible = dayFeed.isAudioBadgeVisible;
 
   factory KeklistSettings.initial() => KeklistSettings(
         isMindContentVisible: true,

@@ -197,5 +197,20 @@
     "doneEditing": "Готово",
     "emotionEditHint": "Додирните за преименовање · ✕ за уклањање · превуците за преуређивање",
     "emotionInUseMessage": "Ова емоција се користи у неким мислима. Архивирајте је да остане тамо, или је обришите свуда.",
-    "deleteEmotionMessage": "Обрисати ову емоцију? Биће уклоњена из свих мисли које је користе."
+    "deleteEmotionMessage": "Обрисати ову емоцију? Биће уклоњена из свих мисли које је користе.",
+    "dayFeedShowAll": "Прикажи све",
+    "dayFeedShowSources": "Прикажи изворе",
+    "dayFeedTileSettings": "Подешавања плочица",
+    "dayFeedColumns": "Колоне",
+    "dayFeedMindTileSize": "Величина плочице",
+    "dayFeedMindTileSquare": "Квадрат",
+    "dayFeedMindTileWide": "Широка",
+    "dayFeedShowMindText": "Прикажи текст",
+    "dayFeedShowAudioBadge": "Прикажи ознаку звука",
+    "dayFeedPhotoAccessHint": "Дозволи приступ фотографијама да би овде видео фотографије и видео записе",
+    "dayFeedAllowAccess": "Дозволи",
+    "dayFeedFolderHint": "Изабери медијску фасциклу да би овде видео фотографије и видео записе",
+    "dayFeedChooseFolder": "Изабери",
+    "dayFeedMute": "Искључи звук",
+    "dayFeedUnmute": "Укључи звук"
 }

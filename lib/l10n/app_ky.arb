@@ -460,5 +460,20 @@
     "doneEditing": "Даяр",
     "emotionEditHint": "Атын өзгөртүү үчүн басыңыз · ✕ өчүрүү үчүн · иреттөө үчүн сүйрөңүз",
     "emotionInUseMessage": "Бул эмоция кээ бир майндтарда колдонулат. Аны ошол жерде сактоо үчүн архивдеңиз же бардык жерден өчүрүңүз.",
-    "deleteEmotionMessage": "Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык майндтардан өчүрүлөт."
+    "deleteEmotionMessage": "Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык майндтардан өчүрүлөт.",
+    "dayFeedShowAll": "Баарын көрсөтүү",
+    "dayFeedShowSources": "Булактарды көрсөтүү",
+    "dayFeedTileSettings": "Плитка жөндөөлөрү",
+    "dayFeedColumns": "Мамычалар",
+    "dayFeedMindTileSize": "Плитканын өлчөмү",
+    "dayFeedMindTileSquare": "Чарчы",
+    "dayFeedMindTileWide": "Кең",
+    "dayFeedShowMindText": "Текстти көрсөтүү",
+    "dayFeedShowAudioBadge": "Аудио белгисин көрсөтүү",
+    "dayFeedPhotoAccessHint": "Бул жерде сүрөт жана видеолорду көрүү үчүн сүрөткө уруксат бериңиз",
+    "dayFeedAllowAccess": "Уруксат берүү",
+    "dayFeedFolderHint": "Бул жерде сүрөт жана видеолорду көрүү үчүн медиа папканы тандаңыз",
+    "dayFeedChooseFolder": "Тандоо",
+    "dayFeedMute": "Үнүн өчүрүү",
+    "dayFeedUnmute": "Үнүн күйгүзүү"
 }

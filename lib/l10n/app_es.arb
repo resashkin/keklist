@@ -460,5 +460,20 @@
     "doneEditing": "Listo",
     "emotionEditHint": "Toca para renombrar · ✕ para quitar · arrastra para reordenar",
     "emotionInUseMessage": "Esta emoción se usa en algunas mentes. Archívala para conservarla ahí, o elimínala en todas partes.",
-    "deleteEmotionMessage": "¿Eliminar esta emoción? Se quitará de todas las mentes que la usan."
+    "deleteEmotionMessage": "¿Eliminar esta emoción? Se quitará de todas las mentes que la usan.",
+    "dayFeedShowAll": "Mostrar todo",
+    "dayFeedShowSources": "Mostrar fuentes",
+    "dayFeedTileSettings": "Ajustes de mosaicos",
+    "dayFeedColumns": "Columnas",
+    "dayFeedMindTileSize": "Tamaño del mosaico",
+    "dayFeedMindTileSquare": "Cuadrado",
+    "dayFeedMindTileWide": "Ancho",
+    "dayFeedShowMindText": "Mostrar texto",
+    "dayFeedShowAudioBadge": "Mostrar icono de audio",
+    "dayFeedPhotoAccessHint": "Permite el acceso a fotos para ver aquí tus fotos y vídeos",
+    "dayFeedAllowAccess": "Permitir",
+    "dayFeedFolderHint": "Elige una carpeta de medios para ver aquí tus fotos y vídeos",
+    "dayFeedChooseFolder": "Elegir",
+    "dayFeedMute": "Silenciar",
+    "dayFeedUnmute": "Activar sonido"
 }

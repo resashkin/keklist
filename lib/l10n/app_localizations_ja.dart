@@ -615,4 +615,49 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage => 'この感情を削除しますか？使用しているすべてのマインドから削除されます。';
+
+  @override
+  String get dayFeedShowAll => 'すべて表示';
+
+  @override
+  String get dayFeedShowSources => 'ソースを表示';
+
+  @override
+  String get dayFeedTileSettings => 'タイル設定';
+
+  @override
+  String get dayFeedColumns => '列数';
+
+  @override
+  String get dayFeedMindTileSize => 'タイルのサイズ';
+
+  @override
+  String get dayFeedMindTileSquare => '正方形';
+
+  @override
+  String get dayFeedMindTileWide => 'ワイド';
+
+  @override
+  String get dayFeedShowMindText => 'テキストを表示';
+
+  @override
+  String get dayFeedShowAudioBadge => '音声バッジを表示';
+
+  @override
+  String get dayFeedPhotoAccessHint => 'ここに写真と動画を表示するには写真へのアクセスを許可してください';
+
+  @override
+  String get dayFeedAllowAccess => '許可';
+
+  @override
+  String get dayFeedFolderHint => 'ここに写真と動画を表示するにはメディアフォルダを選択してください';
+
+  @override
+  String get dayFeedChooseFolder => '選択';
+
+  @override
+  String get dayFeedMute => 'ミュート';
+
+  @override
+  String get dayFeedUnmute => 'ミュート解除';
 }

@@ -41,6 +41,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsToggleWeatherSource>(_toggleWeatherSource);
     on<SettingsUpdateWeatherLocation>(_updateWeatherLocation);
     on<SettingsUpdateMediaFolderSource>(_updateMediaFolderSource);
+    on<SettingsUpdateDayFeed>(_updateDayFeed);
 
     _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
   }
@@ -223,6 +224,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       isMediaFolderSourceEnabled: currentSettings.isMediaFolderSourceEnabled,
       mediaFolderPath: currentSettings.mediaFolderPath,
       isMediaFolderRecursive: currentSettings.isMediaFolderRecursive,
+      dayFeed: currentSettings.dayFeed,
     );
     await _repository.updateSettings(updatedSettings);
   }
@@ -244,6 +246,16 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       isEnabled: event.isEnabled,
       folderPath: event.folderPath,
       isRecursive: event.isRecursive,
+    );
+  }
+
+  FutureOr<void> _updateDayFeed(SettingsUpdateDayFeed event, Emitter<SettingsState> emit) async {
+    await _repository.updateDayFeedSettings(
+      isEnabled: event.isEnabled,
+      columnCount: event.columnCount,
+      mindCellSpan: event.mindCellSpan,
+      isMindTextVisible: event.isMindTextVisible,
+      isAudioBadgeVisible: event.isAudioBadgeVisible,
     );
   }
 

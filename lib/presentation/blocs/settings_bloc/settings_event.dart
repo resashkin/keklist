@@ -100,3 +100,18 @@ final class SettingsUpdateMediaFolderSource extends SettingsEvent {
   final bool? isRecursive;
   const SettingsUpdateMediaFolderSource({this.isEnabled, this.folderPath, this.isRecursive});
 }
+
+final class SettingsUpdateDayFeed extends SettingsEvent {
+  final bool? isEnabled;
+  final int? columnCount;
+  final int? mindCellSpan;
+  final bool? isMindTextVisible;
+  final bool? isAudioBadgeVisible;
+  const SettingsUpdateDayFeed({
+    this.isEnabled,
+    this.columnCount,
+    this.mindCellSpan,
+    this.isMindTextVisible,
+    this.isAudioBadgeVisible,
+  });
+}

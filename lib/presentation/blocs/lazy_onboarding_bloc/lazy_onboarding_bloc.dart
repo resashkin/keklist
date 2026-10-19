@@ -130,6 +130,7 @@ final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingS
       hasSeenLazyOnboarding: true,
       isDebugMenuVisible: currentSettings.isDebugMenuVisible,
       isPhotoVideoSourceEnabled: currentSettings.isPhotoVideoSourceEnabled,
+      dayFeed: currentSettings.dayFeed,
     );
 
     await _settingsRepository.updateSettings(updatedSettings);
@@ -161,6 +162,7 @@ final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingS
       hasSeenLazyOnboarding: false,
       isDebugMenuVisible: currentSettings.isDebugMenuVisible,
       isPhotoVideoSourceEnabled: currentSettings.isPhotoVideoSourceEnabled,
+      dayFeed: currentSettings.dayFeed,
     );
 
     await _settingsRepository.updateSettings(updatedSettings);

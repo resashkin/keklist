@@ -637,4 +637,51 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Bu hissiyotni o\'chirasizmi? U undan foydalanadigan barcha maindlardan olib tashlanadi.';
+
+  @override
+  String get dayFeedShowAll => 'Hammasini ko‘rsatish';
+
+  @override
+  String get dayFeedShowSources => 'Manbalarni ko‘rsatish';
+
+  @override
+  String get dayFeedTileSettings => 'Plitka sozlamalari';
+
+  @override
+  String get dayFeedColumns => 'Ustunlar';
+
+  @override
+  String get dayFeedMindTileSize => 'Plitka o‘lchami';
+
+  @override
+  String get dayFeedMindTileSquare => 'Kvadrat';
+
+  @override
+  String get dayFeedMindTileWide => 'Keng';
+
+  @override
+  String get dayFeedShowMindText => 'Matnni ko‘rsatish';
+
+  @override
+  String get dayFeedShowAudioBadge => 'Audio belgisini ko‘rsatish';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Bu yerda foto va videolarni ko‘rish uchun suratlarga ruxsat bering';
+
+  @override
+  String get dayFeedAllowAccess => 'Ruxsat berish';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Bu yerda foto va videolarni ko‘rish uchun media papkasini tanlang';
+
+  @override
+  String get dayFeedChooseFolder => 'Tanlash';
+
+  @override
+  String get dayFeedMute => 'Ovozni o‘chirish';
+
+  @override
+  String get dayFeedUnmute => 'Ovozni yoqish';
 }

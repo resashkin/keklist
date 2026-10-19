@@ -89,14 +89,16 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
     cancelSubscriptions();
   }
 
+  bool get _isTabBarVisible => _items.length >= 2;
+
   @override
   Widget build(BuildContext context) => Scaffold(
     extendBody: _useLiquidGlass,
     body: IndexedStack(index: _selectedTabIndex, children: _bodyWidgets),
     bottomNavigationBar: BoolWidget(
-      condition: _items.length >= 2,
+      condition: _isTabBarVisible,
       trueChild: AdaptiveBottomNavigationBar(
-        items: List.of(_items.length >= 2 ? _items : _getFakeItems()),
+        items: List.of(_isTabBarVisible ? _items : _getFakeItems()),
         tabTypes: _tabTypes,
         useLiquidGlass: _useLiquidGlass,
         selectedIndex: _selectedTabIndex,
@@ -135,7 +137,7 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
           // overlaps the body via `extendBody`. In Material mode the solid nav
           // bar already reserves its space, so the extra offset would leave a
           // strange gap under the FAB.
-          fabBottomOffset: _useLiquidGlass ? kBottomNavigationBarHeight + 48.0 : 0.0,
+          fabBottomOffset: _useLiquidGlass && _isTabBarVisible ? kBottomNavigationBarHeight + 48.0 : 0.0,
         );
       case TabType.debugMenu:
         return const SizedBox.shrink();

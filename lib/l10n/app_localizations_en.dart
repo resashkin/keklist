@@ -633,4 +633,51 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Delete this emotion? It will be removed from any minds using it.';
+
+  @override
+  String get dayFeedShowAll => 'Show all';
+
+  @override
+  String get dayFeedShowSources => 'Show sources';
+
+  @override
+  String get dayFeedTileSettings => 'Tile settings';
+
+  @override
+  String get dayFeedColumns => 'Columns';
+
+  @override
+  String get dayFeedMindTileSize => 'Mind tile size';
+
+  @override
+  String get dayFeedMindTileSquare => 'Square';
+
+  @override
+  String get dayFeedMindTileWide => 'Wide';
+
+  @override
+  String get dayFeedShowMindText => 'Show text';
+
+  @override
+  String get dayFeedShowAudioBadge => 'Show audio badge';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Allow photo access to see your photos and videos here';
+
+  @override
+  String get dayFeedAllowAccess => 'Allow';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Choose a media folder to see your photos and videos here';
+
+  @override
+  String get dayFeedChooseFolder => 'Choose';
+
+  @override
+  String get dayFeedMute => 'Mute';
+
+  @override
+  String get dayFeedUnmute => 'Unmute';
 }

@@ -197,5 +197,20 @@
     "doneEditing": "完了",
     "emotionEditHint": "タップで名前変更 · ✕ で削除 · ドラッグで並び替え",
     "emotionInUseMessage": "この感情は一部のマインドで使われています。アーカイブしてそこに残すか、すべてから削除します。",
-    "deleteEmotionMessage": "この感情を削除しますか？使用しているすべてのマインドから削除されます。"
+    "deleteEmotionMessage": "この感情を削除しますか？使用しているすべてのマインドから削除されます。",
+    "dayFeedShowAll": "すべて表示",
+    "dayFeedShowSources": "ソースを表示",
+    "dayFeedTileSettings": "タイル設定",
+    "dayFeedColumns": "列数",
+    "dayFeedMindTileSize": "タイルのサイズ",
+    "dayFeedMindTileSquare": "正方形",
+    "dayFeedMindTileWide": "ワイド",
+    "dayFeedShowMindText": "テキストを表示",
+    "dayFeedShowAudioBadge": "音声バッジを表示",
+    "dayFeedPhotoAccessHint": "ここに写真と動画を表示するには写真へのアクセスを許可してください",
+    "dayFeedAllowAccess": "許可",
+    "dayFeedFolderHint": "ここに写真と動画を表示するにはメディアフォルダを選択してください",
+    "dayFeedChooseFolder": "選択",
+    "dayFeedMute": "ミュート",
+    "dayFeedUnmute": "ミュート解除"
 }

@@ -43,13 +43,26 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..interfaceStyleIndex = fields[19] == null
           ? 1
           : (fields[19] as num).toInt()
-      ..hasSeededEmotions = fields[20] == null ? false : fields[20] as bool;
+      ..hasSeededEmotions = fields[20] == null ? false : fields[20] as bool
+      ..isDayFeedModeEnabled = fields[21] == null ? false : fields[21] as bool
+      ..dayFeedColumnCount = fields[22] == null
+          ? 4
+          : (fields[22] as num).toInt()
+      ..dayFeedMindCellSpan = fields[23] == null
+          ? 1
+          : (fields[23] as num).toInt()
+      ..isDayFeedMindTextVisible = fields[24] == null
+          ? true
+          : fields[24] as bool
+      ..isDayFeedAudioBadgeVisible = fields[25] == null
+          ? true
+          : fields[25] as bool;
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(24)
       ..writeByte(0)
       ..write(obj.isMindContentVisible)
       ..writeByte(1)
@@ -87,7 +100,17 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(19)
       ..write(obj.interfaceStyleIndex)
       ..writeByte(20)
-      ..write(obj.hasSeededEmotions);
+      ..write(obj.hasSeededEmotions)
+      ..writeByte(21)
+      ..write(obj.isDayFeedModeEnabled)
+      ..writeByte(22)
+      ..write(obj.dayFeedColumnCount)
+      ..writeByte(23)
+      ..write(obj.dayFeedMindCellSpan)
+      ..writeByte(24)
+      ..write(obj.isDayFeedMindTextVisible)
+      ..writeByte(25)
+      ..write(obj.isDayFeedAudioBadgeVisible);
   }
 
   @override
