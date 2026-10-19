@@ -247,7 +247,7 @@
     "@yourNickname": {
         "description": "Nickname input hint"
     },
-    "create": "Write",
+    "create": "Create",
     "@create": {
         "description": "Create button"
     },
@@ -893,5 +893,21 @@
     "removeMedia": "Remove media",
     "@removeMedia": {
         "description": "Audio/video mind recording"
+    },
+    "shakeToCustomize": "Shake to customize",
+    "@shakeToCustomize": {
+        "description": "Shake-to-customize: shakeToCustomize"
+    },
+    "shakeToCustomizeHint": "or long-press the title",
+    "@shakeToCustomizeHint": {
+        "description": "Shake-to-customize: shakeToCustomizeHint"
+    },
+    "customizeSettings": "Customize settings",
+    "@customizeSettings": {
+        "description": "Shake-to-customize: customizeSettings"
+    },
+    "customizeSettingsDescription": "Unchecked sections and rows are hidden from the Settings screen.",
+    "@customizeSettingsDescription": {
+        "description": "Shake-to-customize: customizeSettingsDescription"
     }
 }

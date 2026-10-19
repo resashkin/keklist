@@ -4,7 +4,7 @@
 
 The day screen (`MindDayCollectionScreen`) has two modes:
 
-- **Sources**: the original stack of cards (minds card, photo/folder media tile, weather tile). The Sources button now sits below the last tile instead of in the AppBar.
+- **Sources**: the original stack of cards (minds card, photo/folder media tile, weather tile). The sources sheet opens by shaking the phone or long-pressing the title (see `SHAKE_TO_TWEAK_IMPLEMENTATION.md`).
 - **All**: one gallery-like grid where the day's minds and media are mixed in time order. Tapping any tile opens an Instagram-style stories viewer.
 
 The AppBar icon (`grid_view` / `view_agenda_outlined`) switches modes. The choice is persisted.
@@ -30,9 +30,9 @@ The AppBar icon (`grid_view` / `view_agenda_outlined`) switches modes. The choic
 
 - `DayFeedSliver` renders the banner, the grid and the empty state as slivers inside a `CustomScrollView` that shares the screen's `ScrollController`, so overscroll-to-switch-day keeps working.
 - Rows are packed by `DayFeedLayout.packIntoRows` and built lazily with `SliverList.builder`. A wide mind that does not fit at the end of a row starts a new row; order is never changed to fill gaps.
-- In All mode a floating `KekFloatingButton` ("+ Write", same as the minds list) opens the mind creator; on other days it sits next to "To now". The grid ends with bottom padding so the button never covers the last row.
+- In All mode a floating `KekFloatingButton` ("+ Create", same as the minds list) opens the mind creator; on other days it sits next to "To now". The grid ends with bottom padding so the button never covers the last row.
 - While media loads, `2 × columnCount` shimmer cells are appended.
-- `DayFeedSettingsBottomSheet` (AppBar `tune` icon, All mode only): column count (3/4/5, whole grid), mind tile size (square / wide), mind text, audio badge.
+- `DayFeedSettingsBottomSheet` (shake or long-press the title, All mode only): column count (3/4/5, whole grid), mind tile size (square / wide), mind text, audio badge.
 - `DayStoriesScreen`: progress bars, auto-advance, tap left/right third for previous/next, middle tap or swipe up on a mind opens `MindInfoScreen`, hold to pause, swipe down to close, closes after the last item.
 - `FolderMediaThumbnail` was extracted from `FolderGalleryScreen` so the grid can reuse it.
 

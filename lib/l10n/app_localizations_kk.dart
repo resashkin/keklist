@@ -196,7 +196,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get yourNickname => 'Сіздің никнейміңіз';
 
   @override
-  String get create => 'Жазу';
+  String get create => 'Жасау';
 
   @override
   String get yourFolderName => 'Сіздің бума атауыңыз';
@@ -703,4 +703,17 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get removeMedia => 'Медианы жою';
+
+  @override
+  String get shakeToCustomize => 'Баптау үшін сілкіңіз';
+
+  @override
+  String get shakeToCustomizeHint => 'немесе тақырыпты басып тұрыңыз';
+
+  @override
+  String get customizeSettings => 'Баптауларды реттеу';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Белгісі алынған бөлімдер мен жолдар баптаулар экранында жасырылады.';
 }

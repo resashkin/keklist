@@ -196,7 +196,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get yourNickname => 'あなたのニックネーム';
 
   @override
-  String get create => '書く';
+  String get create => '作成';
 
   @override
   String get yourFolderName => 'あなたのフォルダー名';
@@ -681,4 +681,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get removeMedia => 'メディアを削除';
+
+  @override
+  String get shakeToCustomize => '振ってカスタマイズ';
+
+  @override
+  String get shakeToCustomizeHint => 'またはタイトルを長押し';
+
+  @override
+  String get customizeSettings => '設定をカスタマイズ';
+
+  @override
+  String get customizeSettingsDescription => 'チェックを外したセクションと項目は設定画面に表示されません。';
 }

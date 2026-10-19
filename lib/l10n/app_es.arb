@@ -223,7 +223,7 @@
     "@yourNickname": {
         "description": "Sugerencia de entrada de apodo"
     },
-    "create": "Escribir",
+    "create": "Crear",
     "@create": {
         "description": "Botón crear"
     },
@@ -482,5 +482,9 @@
     "roundVideoCameraUnavailable": "La cámara no está disponible en este dispositivo",
     "roundVideoRetake": "Repetir",
     "roundVideoUse": "Usar",
-    "removeMedia": "Quitar multimedia"
+    "removeMedia": "Quitar multimedia",
+    "shakeToCustomize": "Agita para personalizar",
+    "shakeToCustomizeHint": "o mantén pulsado el título",
+    "customizeSettings": "Personalizar ajustes",
+    "customizeSettingsDescription": "Las secciones y filas desmarcadas se ocultan en Ajustes."
 }

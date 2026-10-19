@@ -195,7 +195,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get yourNickname => '您的昵称';
 
   @override
-  String get create => '写';
+  String get create => '创建';
 
   @override
   String get yourFolderName => '您的文件夹名称';
@@ -677,4 +677,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get removeMedia => '移除媒体';
+
+  @override
+  String get shakeToCustomize => '摇一摇进行自定义';
+
+  @override
+  String get shakeToCustomizeHint => '或长按标题';
+
+  @override
+  String get customizeSettings => '自定义设置';
+
+  @override
+  String get customizeSettingsDescription => '取消勾选的分区和行将在设置页面中隐藏。';
 }

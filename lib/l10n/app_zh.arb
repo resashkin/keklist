@@ -66,7 +66,7 @@
     "confirmPassword": "确认密码",
     "continue_": "继续",
     "corruptedFile": "文件已损坏",
-    "create": "写",
+    "create": "创建",
     "debugMenuDescription": "用于切换实验性功能的开发者工具",
     "digest": "摘要",
     "enterPassword": "输入密码",
@@ -219,5 +219,9 @@
     "roundVideoCameraUnavailable": "此设备上的相机不可用",
     "roundVideoRetake": "重拍",
     "roundVideoUse": "使用",
-    "removeMedia": "移除媒体"
+    "removeMedia": "移除媒体",
+    "shakeToCustomize": "摇一摇进行自定义",
+    "shakeToCustomizeHint": "或长按标题",
+    "customizeSettings": "自定义设置",
+    "customizeSettingsDescription": "取消勾选的分区和行将在设置页面中隐藏。"
 }

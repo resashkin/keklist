@@ -196,7 +196,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get yourNickname => 'Сиздин никнэмиңиз';
 
   @override
-  String get create => 'Жазуу';
+  String get create => 'Түзүү';
 
   @override
   String get yourFolderName => 'Сиздин папка атыңыз';
@@ -704,4 +704,17 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get removeMedia => 'Медианы өчүрүү';
+
+  @override
+  String get shakeToCustomize => 'Ыңгайлаштыруу үчүн силкиңиз';
+
+  @override
+  String get shakeToCustomizeHint => 'же аталышты басып туруңуз';
+
+  @override
+  String get customizeSettings => 'Жөндөөлөрдү ыңгайлаштыруу';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Белгиси алынган бөлүмдөр жана саптар жөндөөлөр экранында жашырылат.';
 }

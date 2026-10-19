@@ -12,6 +12,7 @@ import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dar
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_creator_bloc/mind_creator_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
+import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/core/widgets/mind_widget.dart';
 import 'package:keklist/presentation/core/widgets/overscroll_listener.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
@@ -73,7 +74,7 @@ final class MindDayCollectionScreen extends StatefulWidget {
   State<MindDayCollectionScreen> createState() => MindDayCollectionScreenState(dayIndex: initialDayIndex);
 }
 
-final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectionScreen> {
+final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectionScreen> with ShakeToTweakMixin {
   int dayIndex;
   final List<Mind> allMinds = [];
 
@@ -210,6 +211,12 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   }
 
   @override
+  String get shakeScreenId => ShakeScreenIds.day;
+
+  @override
+  void onShakeToTweak() => _dayFeedSettings.isEnabled ? _showDayFeedSettings() : _showSources();
+
+  @override
   Widget build(BuildContext context) {
     final Locale locale = Localizations.localeOf(context);
     final DateTime dayDate = DateUtils.getDateFromDayIndex(dayIndex);
@@ -225,6 +232,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
             if (selectedDayIndex == null) return;
             _switchToDayIndex(selectedDayIndex);
           },
+          onLongPress: requestTweak,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -237,12 +245,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
           ),
         ),
         actions: [
-          if (_dayFeedSettings.isEnabled)
-            IconButton(
-              icon: const Icon(Icons.tune),
-              tooltip: context.l10n.dayFeedTileSettings,
-              onPressed: () => _showDayFeedSettings(),
-            ),
           IconButton(
             icon: Icon(_dayFeedSettings.isEnabled ? Icons.view_agenda_outlined : Icons.grid_view),
             tooltip: _dayFeedSettings.isEnabled ? context.l10n.dayFeedShowSources : context.l10n.dayFeedShowAll,
@@ -420,13 +422,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
                         return const SizedBox.shrink();
                       },
                     ),
-                  Center(
-                    child: TextButton.icon(
-                      icon: const Icon(Icons.tune),
-                      label: Text(context.l10n.sources),
-                      onPressed: () => _showSources(),
-                    ),
-                  ),
                 ],
               ),
             ),

@@ -223,7 +223,7 @@
     "@yourNickname": {
         "description": "Nikname kiritish ko'rsatkichi"
     },
-    "create": "Yozish",
+    "create": "Yaratish",
     "@create": {
         "description": "Yaratish tugmasi"
     },
@@ -482,5 +482,9 @@
     "roundVideoCameraUnavailable": "Bu qurilmada kamera mavjud emas",
     "roundVideoRetake": "Qayta olish",
     "roundVideoUse": "Foydalanish",
-    "removeMedia": "Mediani o‘chirish"
+    "removeMedia": "Mediani o‘chirish",
+    "shakeToCustomize": "Sozlash uchun silkiting",
+    "shakeToCustomizeHint": "yoki sarlavhani bosib turing",
+    "customizeSettings": "Sozlamalarni moslash",
+    "customizeSettingsDescription": "Belgisi olib tashlangan bo‘lim va qatorlar Sozlamalar ekranida yashiriladi."
 }

@@ -196,7 +196,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourNickname => 'Your nickname';
 
   @override
-  String get create => 'Write';
+  String get create => 'Create';
 
   @override
   String get yourFolderName => 'Your folder name';
@@ -702,4 +702,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get removeMedia => 'Remove media';
+
+  @override
+  String get shakeToCustomize => 'Shake to customize';
+
+  @override
+  String get shakeToCustomizeHint => 'or long-press the title';
+
+  @override
+  String get customizeSettings => 'Customize settings';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Unchecked sections and rows are hidden from the Settings screen.';
 }

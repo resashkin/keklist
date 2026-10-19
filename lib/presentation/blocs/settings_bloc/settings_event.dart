@@ -115,3 +115,14 @@ final class SettingsUpdateDayFeed extends SettingsEvent {
     this.isAudioBadgeVisible,
   });
 }
+
+final class SettingsUpdateItemHidden extends SettingsEvent {
+  final String id;
+  final bool isHidden;
+  const SettingsUpdateItemHidden({required this.id, required this.isHidden});
+}
+
+final class SettingsMarkShakeDiscovered extends SettingsEvent {
+  final String screenId;
+  const SettingsMarkShakeDiscovered({required this.screenId});
+}

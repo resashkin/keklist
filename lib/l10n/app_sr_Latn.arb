@@ -221,7 +221,7 @@
     "@yourNickname": {
         "description": "Savet za unos nadimka"
     },
-    "create": "Napiši",
+    "create": "Napravi",
     "@create": {
         "description": "Dugme kreiraj"
     },
@@ -482,5 +482,9 @@
     "roundVideoCameraUnavailable": "Kamera nije dostupna na ovom uređaju",
     "roundVideoRetake": "Snimi ponovo",
     "roundVideoUse": "Koristi",
-    "removeMedia": "Ukloni medije"
+    "removeMedia": "Ukloni medije",
+    "shakeToCustomize": "Protresite za prilagođavanje",
+    "shakeToCustomizeHint": "ili dugo pritisnite naslov",
+    "customizeSettings": "Prilagodi podešavanja",
+    "customizeSettingsDescription": "Neoznačeni odeljci i redovi se skrivaju sa ekrana podešavanja."
 }

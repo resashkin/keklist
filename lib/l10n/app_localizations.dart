@@ -492,7 +492,7 @@ abstract class AppLocalizations {
   /// Create button
   ///
   /// In en, this message translates to:
-  /// **'Write'**
+  /// **'Create'**
   String get create;
 
   /// Folder name input hint
@@ -1442,6 +1442,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remove media'**
   String get removeMedia;
+
+  /// Shake-to-customize: shakeToCustomize
+  ///
+  /// In en, this message translates to:
+  /// **'Shake to customize'**
+  String get shakeToCustomize;
+
+  /// Shake-to-customize: shakeToCustomizeHint
+  ///
+  /// In en, this message translates to:
+  /// **'or long-press the title'**
+  String get shakeToCustomizeHint;
+
+  /// Shake-to-customize: customizeSettings
+  ///
+  /// In en, this message translates to:
+  /// **'Customize settings'**
+  String get customizeSettings;
+
+  /// Shake-to-customize: customizeSettingsDescription
+  ///
+  /// In en, this message translates to:
+  /// **'Unchecked sections and rows are hidden from the Settings screen.'**
+  String get customizeSettingsDescription;
 }
 
 class _AppLocalizationsDelegate
