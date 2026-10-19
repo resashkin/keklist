@@ -197,5 +197,20 @@
     "doneEditing": "Готово",
     "emotionEditHint": "Нажмите, чтобы переименовать · ✕ чтобы удалить · перетащите, чтобы упорядочить",
     "emotionInUseMessage": "Эта эмоция используется в некоторых миндах. Архивируйте, чтобы сохранить её там, или удалите везде.",
-    "deleteEmotionMessage": "Удалить эту эмоцию? Она будет удалена из всех минд, где используется."
+    "deleteEmotionMessage": "Удалить эту эмоцию? Она будет удалена из всех минд, где используется.",
+    "dayFeedShowAll": "Показать всё",
+    "dayFeedShowSources": "Показать источники",
+    "dayFeedTileSettings": "Настройки плиток",
+    "dayFeedColumns": "Колонки",
+    "dayFeedMindTileSize": "Размер плитки минда",
+    "dayFeedMindTileSquare": "Квадрат",
+    "dayFeedMindTileWide": "Широкая",
+    "dayFeedShowMindText": "Показывать текст",
+    "dayFeedShowAudioBadge": "Показывать значок аудио",
+    "dayFeedPhotoAccessHint": "Разрешите доступ к фото, чтобы видеть здесь фото и видео",
+    "dayFeedAllowAccess": "Разрешить",
+    "dayFeedFolderHint": "Выберите папку с медиа, чтобы видеть здесь фото и видео",
+    "dayFeedChooseFolder": "Выбрать",
+    "dayFeedMute": "Выключить звук",
+    "dayFeedUnmute": "Включить звук"
 }

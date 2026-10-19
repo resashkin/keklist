@@ -805,5 +805,65 @@
     "deleteEmotionMessage": "Delete this emotion? It will be removed from any minds using it.",
     "@deleteEmotionMessage": {
         "description": "Confirmation when permanently deleting an emotion"
+    },
+    "dayFeedShowAll": "Show all",
+    "@dayFeedShowAll": {
+        "description": "Day screen action that switches to the unified grid of minds and media"
+    },
+    "dayFeedShowSources": "Show sources",
+    "@dayFeedShowSources": {
+        "description": "Day screen action that switches back to the source tiles"
+    },
+    "dayFeedTileSettings": "Tile settings",
+    "@dayFeedTileSettings": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedColumns": "Columns",
+    "@dayFeedColumns": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedMindTileSize": "Mind tile size",
+    "@dayFeedMindTileSize": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedMindTileSquare": "Square",
+    "@dayFeedMindTileSquare": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedMindTileWide": "Wide",
+    "@dayFeedMindTileWide": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedShowMindText": "Show text",
+    "@dayFeedShowMindText": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedShowAudioBadge": "Show audio badge",
+    "@dayFeedShowAudioBadge": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedPhotoAccessHint": "Allow photo access to see your photos and videos here",
+    "@dayFeedPhotoAccessHint": {
+        "description": "Banner in the unified day grid when photo access is missing"
+    },
+    "dayFeedAllowAccess": "Allow",
+    "@dayFeedAllowAccess": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedFolderHint": "Choose a media folder to see your photos and videos here",
+    "@dayFeedFolderHint": {
+        "description": "Banner in the unified day grid on Android when no media folder is chosen"
+    },
+    "dayFeedChooseFolder": "Choose",
+    "@dayFeedChooseFolder": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedMute": "Mute",
+    "@dayFeedMute": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedUnmute": "Unmute",
+    "@dayFeedUnmute": {
+        "description": "Unified day grid (All mode) label"
     }
 }

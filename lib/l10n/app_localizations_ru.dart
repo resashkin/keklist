@@ -633,4 +633,51 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Удалить эту эмоцию? Она будет удалена из всех минд, где используется.';
+
+  @override
+  String get dayFeedShowAll => 'Показать всё';
+
+  @override
+  String get dayFeedShowSources => 'Показать источники';
+
+  @override
+  String get dayFeedTileSettings => 'Настройки плиток';
+
+  @override
+  String get dayFeedColumns => 'Колонки';
+
+  @override
+  String get dayFeedMindTileSize => 'Размер плитки минда';
+
+  @override
+  String get dayFeedMindTileSquare => 'Квадрат';
+
+  @override
+  String get dayFeedMindTileWide => 'Широкая';
+
+  @override
+  String get dayFeedShowMindText => 'Показывать текст';
+
+  @override
+  String get dayFeedShowAudioBadge => 'Показывать значок аудио';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Разрешите доступ к фото, чтобы видеть здесь фото и видео';
+
+  @override
+  String get dayFeedAllowAccess => 'Разрешить';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Выберите папку с медиа, чтобы видеть здесь фото и видео';
+
+  @override
+  String get dayFeedChooseFolder => 'Выбрать';
+
+  @override
+  String get dayFeedMute => 'Выключить звук';
+
+  @override
+  String get dayFeedUnmute => 'Включить звук';
 }

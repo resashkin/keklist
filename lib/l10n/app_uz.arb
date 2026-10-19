@@ -460,5 +460,20 @@
     "doneEditing": "Tayyor",
     "emotionEditHint": "Nomini o'zgartirish uchun bosing · ✕ o'chirish uchun · tartiblash uchun torting",
     "emotionInUseMessage": "Bu hissiyot ba'zi maindlarda ishlatiladi. Uni o'sha yerda saqlash uchun arxivlang yoki hamma joydan o'chiring.",
-    "deleteEmotionMessage": "Bu hissiyotni o'chirasizmi? U undan foydalanadigan barcha maindlardan olib tashlanadi."
+    "deleteEmotionMessage": "Bu hissiyotni o'chirasizmi? U undan foydalanadigan barcha maindlardan olib tashlanadi.",
+    "dayFeedShowAll": "Hammasini ko‘rsatish",
+    "dayFeedShowSources": "Manbalarni ko‘rsatish",
+    "dayFeedTileSettings": "Plitka sozlamalari",
+    "dayFeedColumns": "Ustunlar",
+    "dayFeedMindTileSize": "Plitka o‘lchami",
+    "dayFeedMindTileSquare": "Kvadrat",
+    "dayFeedMindTileWide": "Keng",
+    "dayFeedShowMindText": "Matnni ko‘rsatish",
+    "dayFeedShowAudioBadge": "Audio belgisini ko‘rsatish",
+    "dayFeedPhotoAccessHint": "Bu yerda foto va videolarni ko‘rish uchun suratlarga ruxsat bering",
+    "dayFeedAllowAccess": "Ruxsat berish",
+    "dayFeedFolderHint": "Bu yerda foto va videolarni ko‘rish uchun media papkasini tanlang",
+    "dayFeedChooseFolder": "Tanlash",
+    "dayFeedMute": "Ovozni o‘chirish",
+    "dayFeedUnmute": "Ovozni yoqish"
 }

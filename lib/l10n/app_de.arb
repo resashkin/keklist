@@ -197,5 +197,20 @@
     "doneEditing": "Fertig",
     "emotionEditHint": "Tippen zum Umbenennen · ✕ zum Entfernen · ziehen zum Sortieren",
     "emotionInUseMessage": "Diese Emotion wird von einigen Minds verwendet. Archiviere sie, um sie dort zu behalten, oder lösche sie überall.",
-    "deleteEmotionMessage": "Diese Emotion löschen? Sie wird aus allen Minds entfernt, die sie verwenden."
+    "deleteEmotionMessage": "Diese Emotion löschen? Sie wird aus allen Minds entfernt, die sie verwenden.",
+    "dayFeedShowAll": "Alles anzeigen",
+    "dayFeedShowSources": "Quellen anzeigen",
+    "dayFeedTileSettings": "Kachel-Einstellungen",
+    "dayFeedColumns": "Spalten",
+    "dayFeedMindTileSize": "Kachelgröße",
+    "dayFeedMindTileSquare": "Quadrat",
+    "dayFeedMindTileWide": "Breit",
+    "dayFeedShowMindText": "Text anzeigen",
+    "dayFeedShowAudioBadge": "Audio-Symbol anzeigen",
+    "dayFeedPhotoAccessHint": "Erlaube den Fotozugriff, um hier deine Fotos und Videos zu sehen",
+    "dayFeedAllowAccess": "Erlauben",
+    "dayFeedFolderHint": "Wähle einen Medienordner, um hier deine Fotos und Videos zu sehen",
+    "dayFeedChooseFolder": "Wählen",
+    "dayFeedMute": "Stummschalten",
+    "dayFeedUnmute": "Ton an"
 }

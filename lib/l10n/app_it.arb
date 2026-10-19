@@ -460,5 +460,20 @@
     "doneEditing": "Fatto",
     "emotionEditHint": "Tocca per rinominare · ✕ per rimuovere · trascina per riordinare",
     "emotionInUseMessage": "Questa emozione è usata in alcune menti. Archiviala per mantenerla lì, o eliminala ovunque.",
-    "deleteEmotionMessage": "Eliminare questa emozione? Verrà rimossa da tutte le menti che la usano."
+    "deleteEmotionMessage": "Eliminare questa emozione? Verrà rimossa da tutte le menti che la usano.",
+    "dayFeedShowAll": "Mostra tutto",
+    "dayFeedShowSources": "Mostra fonti",
+    "dayFeedTileSettings": "Impostazioni riquadri",
+    "dayFeedColumns": "Colonne",
+    "dayFeedMindTileSize": "Dimensione riquadro",
+    "dayFeedMindTileSquare": "Quadrato",
+    "dayFeedMindTileWide": "Largo",
+    "dayFeedShowMindText": "Mostra testo",
+    "dayFeedShowAudioBadge": "Mostra icona audio",
+    "dayFeedPhotoAccessHint": "Consenti l'accesso alle foto per vedere qui foto e video",
+    "dayFeedAllowAccess": "Consenti",
+    "dayFeedFolderHint": "Scegli una cartella multimediale per vedere qui foto e video",
+    "dayFeedChooseFolder": "Scegli",
+    "dayFeedMute": "Disattiva audio",
+    "dayFeedUnmute": "Attiva audio"
 }

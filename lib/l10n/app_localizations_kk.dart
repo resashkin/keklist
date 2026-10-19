@@ -635,4 +635,51 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Бұл эмоцияны жою керек пе? Ол оны пайдаланатын барлық майндтардан жойылады.';
+
+  @override
+  String get dayFeedShowAll => 'Барлығын көрсету';
+
+  @override
+  String get dayFeedShowSources => 'Дереккөздерді көрсету';
+
+  @override
+  String get dayFeedTileSettings => 'Тақта баптаулары';
+
+  @override
+  String get dayFeedColumns => 'Бағандар';
+
+  @override
+  String get dayFeedMindTileSize => 'Тақта өлшемі';
+
+  @override
+  String get dayFeedMindTileSquare => 'Шаршы';
+
+  @override
+  String get dayFeedMindTileWide => 'Кең';
+
+  @override
+  String get dayFeedShowMindText => 'Мәтінді көрсету';
+
+  @override
+  String get dayFeedShowAudioBadge => 'Аудио белгісін көрсету';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Мұнда фото мен видеоны көру үшін фотоға рұқсат беріңіз';
+
+  @override
+  String get dayFeedAllowAccess => 'Рұқсат ету';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Мұнда фото мен видеоны көру үшін медиа қалтасын таңдаңыз';
+
+  @override
+  String get dayFeedChooseFolder => 'Таңдау';
+
+  @override
+  String get dayFeedMute => 'Дыбысты өшіру';
+
+  @override
+  String get dayFeedUnmute => 'Дыбысты қосу';
 }

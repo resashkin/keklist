@@ -69,6 +69,21 @@ final class SettingsObject extends HiveObject {
   @HiveField(20, defaultValue: false)
   late bool hasSeededEmotions;
 
+  @HiveField(21, defaultValue: false)
+  late bool isDayFeedModeEnabled;
+
+  @HiveField(22, defaultValue: 4)
+  late int dayFeedColumnCount;
+
+  @HiveField(23, defaultValue: 1)
+  late int dayFeedMindCellSpan;
+
+  @HiveField(24, defaultValue: true)
+  late bool isDayFeedMindTextVisible;
+
+  @HiveField(25, defaultValue: true)
+  late bool isDayFeedAudioBadgeVisible;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -92,5 +107,12 @@ final class SettingsObject extends HiveObject {
         mediaFolderPath: mediaFolderPath,
         isMediaFolderRecursive: isMediaFolderRecursive,
         hasSeededEmotions: hasSeededEmotions,
+        dayFeed: DayFeedSettings(
+          isEnabled: isDayFeedModeEnabled,
+          columnCount: dayFeedColumnCount,
+          mindCellSpan: dayFeedMindCellSpan,
+          isMindTextVisible: isDayFeedMindTextVisible,
+          isAudioBadgeVisible: isDayFeedAudioBadgeVisible,
+        ),
       );
 }

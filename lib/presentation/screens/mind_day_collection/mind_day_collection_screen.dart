@@ -49,6 +49,14 @@ import 'package:keklist/presentation/screens/date_gallery/folder_gallery_screen.
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/presentation/blocs/membership_bloc/membership_bloc.dart';
 import 'package:keklist/presentation/screens/paywall/paywall_bottom_sheet.dart';
+import 'package:keklist/domain/repositories/settings/settings_repository.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_cubit.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_settings_bottom_sheet.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_sliver.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
+import 'package:photo_manager/photo_manager.dart';
+
+const double _kFloatingButtonClearance = 96.0;
 
 final class MindDayCollectionScreen extends StatefulWidget {
   final int initialDayIndex;
@@ -85,6 +93,16 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   final DayFolderMediaPreviewCubit _folderMediaPreviewCubit = DayFolderMediaPreviewCubit();
   WeatherCubit? _weatherCubit;
   bool _pendingWeatherEnable = false;
+  final DayFeedCubit _dayFeedCubit = DayFeedCubit();
+  DayFeedSettings _dayFeedSettings = const DayFeedSettings();
+
+  bool get _isSensitiveContentHidingAvailable =>
+      _debugMenuState?.debugMenuItems.firstWhereOrNull(
+        (element) => element.type == DebugMenuType.sensitiveContent && element.value,
+      ) !=
+      null;
+
+  bool get _isMindTextHidden => _isSensitiveContentHidingAvailable && !_isMindContentVisible;
 
   DebugMenuDataState? _debugMenuState;
 
@@ -109,6 +127,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
               ..clear()
               ..addAll(state.values.sortedBySortIndex());
           });
+          _dayFeedCubit.setMinds(dayIndex: dayIndex, allMinds: allMinds);
         }
       },
     )?.disposed(by: this);
@@ -151,7 +170,12 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
             if (folderEnabled && folderPath != null) {
               _folderMediaPreviewCubit.load(dayIndex, folderPath, recursive: folderRecursive);
             }
+            _reloadDayFeedMedia(dayIndex);
           }
+          final DayFeedSettings dayFeedSettings = state.settings.dayFeed;
+          final bool isDayFeedTurningOn = dayFeedSettings.isEnabled && !_dayFeedSettings.isEnabled;
+          setState(() => _dayFeedSettings = dayFeedSettings);
+          if (isDayFeedTurningOn) _reloadDayFeedMedia(dayIndex);
         }
       },
     )?.disposed(by: this);
@@ -213,13 +237,19 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
           ),
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.tune), tooltip: context.l10n.sources, onPressed: () => _showSources()),
+          if (_dayFeedSettings.isEnabled)
+            IconButton(
+              icon: const Icon(Icons.tune),
+              tooltip: context.l10n.dayFeedTileSettings,
+              onPressed: () => _showDayFeedSettings(),
+            ),
+          IconButton(
+            icon: Icon(_dayFeedSettings.isEnabled ? Icons.view_agenda_outlined : Icons.grid_view),
+            tooltip: _dayFeedSettings.isEnabled ? context.l10n.dayFeedShowSources : context.l10n.dayFeedShowAll,
+            onPressed: () => _toggleDayFeed(),
+          ),
           BoolWidget(
-            condition:
-                _debugMenuState?.debugMenuItems.firstWhereOrNull(
-                  (element) => element.type == DebugMenuType.sensitiveContent && element.value,
-                ) !=
-                null,
+            condition: _isSensitiveContentHidingAvailable,
             trueChild: IconButton(
               icon: BoolWidget(
                 condition: _isMindContentVisible,
@@ -233,17 +263,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: dayIndex == DateUtils.getTodayIndex()
-          ? null
-          : Padding(
-              padding: EdgeInsets.only(bottom: widget.fabBottomOffset),
-              child: KekFloatingButton(
-                onPressed: () => goToToday(),
-                label: 'To now',
-                fallbackIcon: dayIndex < DateUtils.getTodayIndex() ? Icons.arrow_downward : Icons.arrow_upward,
-                sfSymbol: dayIndex < DateUtils.getTodayIndex() ? 'arrow.down' : 'arrow.up',
-              ),
-            ),
+      floatingActionButton: _buildFloatingButtons(),
       body: OverscrollListener(
         onOverscrollTopPointerUp: () => _switchToDayIndexWithScrollToTop(dayIndex - 1),
         onOverscrollBottomPointerUp: () => _switchToDayIndexWithScrollToBottom(dayIndex + 1),
@@ -274,7 +294,65 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
             ),
           ],
         ),
-        child: LayoutBuilder(
+        child: _dayFeedSettings.isEnabled ? _buildDayFeedBody() : _buildSourcesBody(),
+      ),
+    );
+  }
+
+  Widget? _buildFloatingButtons() {
+    final bool isToday = dayIndex == DateUtils.getTodayIndex();
+    if (isToday && !_dayFeedSettings.isEnabled) return null;
+    return Padding(
+      padding: EdgeInsets.only(bottom: widget.fabBottomOffset),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 12.0,
+        children: [
+          if (_dayFeedSettings.isEnabled)
+            KekFloatingButton(
+              onPressed: () => _showMindCreator(),
+              label: context.l10n.create,
+              fallbackIcon: Icons.add,
+              sfSymbol: 'plus',
+            ),
+          if (!isToday)
+            KekFloatingButton(
+              onPressed: () => goToToday(),
+              label: 'To now',
+              fallbackIcon: dayIndex < DateUtils.getTodayIndex() ? Icons.arrow_downward : Icons.arrow_upward,
+              sfSymbol: dayIndex < DateUtils.getTodayIndex() ? 'arrow.down' : 'arrow.up',
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDayFeedBody() {
+    return CustomScrollView(
+      physics: FlutterConstants.mobileOverscrollPhysics,
+      controller: _scrollController,
+      slivers: [
+        BlocBuilder<DayFeedCubit, DayFeedState>(
+          bloc: _dayFeedCubit,
+          builder: (context, state) => DayFeedSliver(
+            state: state,
+            settings: _dayFeedSettings,
+            isMindTextHidden: _isMindTextHidden,
+            onOpenItem: (index) => _openDayStories(state, index),
+            onResolveMediaIssue: (issue) => _resolveDayFeedMediaIssue(issue),
+          ),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.only(
+            bottom: _kFloatingButtonClearance + widget.fabBottomOffset + MediaQuery.paddingOf(context).bottom,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSourcesBody() {
+    return LayoutBuilder(
           builder: (context, constraints) => SingleChildScrollView(
             physics: FlutterConstants.mobileOverscrollPhysics,
             controller: _scrollController,
@@ -342,12 +420,17 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
                         return const SizedBox.shrink();
                       },
                     ),
+                  Center(
+                    child: TextButton.icon(
+                      icon: const Icon(Icons.tune),
+                      label: Text(context.l10n.sources),
+                      onPressed: () => _showSources(),
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-        ),
-      ),
     );
   }
 
@@ -357,6 +440,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     _mediaPreviewCubit.close();
     _folderMediaPreviewCubit.close();
     _weatherCubit?.close();
+    _dayFeedCubit.close();
     super.dispose();
   }
 
@@ -408,8 +492,8 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     return dayIndex;
   }
 
-  void _showMindInfo(Mind mind) {
-    Navigator.of(context).push(
+  Future<void> _showMindInfo(Mind mind) {
+    return Navigator.of(context).push(
       SwipeablePageRoute(
         builder: (_) => MindInfoScreen(rootMind: mind, allMinds: allMinds),
       ),
@@ -540,6 +624,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     if (_isPhotoVideoSourceEnabled && !Platform.isAndroid) _mediaPreviewCubit.load(dayIndex);
     _reloadFolderMedia(dayIndex);
     _reloadWeather(dayIndex);
+    _reloadDayFeed(dayIndex);
   }
 
   void _switchToDayIndexWithScrollToTop(int dayIndex) {
@@ -551,6 +636,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     if (_isPhotoVideoSourceEnabled && !Platform.isAndroid) _mediaPreviewCubit.load(dayIndex);
     _reloadFolderMedia(dayIndex);
     _reloadWeather(dayIndex);
+    _reloadDayFeed(dayIndex);
   }
 
   void _switchToDayIndexWithScrollToBottom(int dayIndex) {
@@ -562,6 +648,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     if (_isPhotoVideoSourceEnabled && !Platform.isAndroid) _mediaPreviewCubit.load(dayIndex);
     _reloadFolderMedia(dayIndex);
     _reloadWeather(dayIndex);
+    _reloadDayFeed(dayIndex);
   }
 
   void _reloadFolderMedia(int dayIndex) {
@@ -574,6 +661,61 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     if (_isWeatherSourceEnabled && _weatherLatitude != null && _weatherLongitude != null) {
       _weatherCubit?.loadForDay(dayIndex: dayIndex, latitude: _weatherLatitude!, longitude: _weatherLongitude!);
     }
+  }
+
+  void _reloadDayFeed(int dayIndex) {
+    _dayFeedCubit.setMinds(dayIndex: dayIndex, allMinds: allMinds);
+    _reloadDayFeedMedia(dayIndex);
+  }
+
+  void _reloadDayFeedMedia(int dayIndex, {bool requestPhotoAccess = false}) {
+    if (!_dayFeedSettings.isEnabled) return;
+    _dayFeedCubit.loadMedia(
+      dayIndex: dayIndex,
+      folderPath: _mediaFolderPath,
+      isFolderRecursive: _isMediaFolderRecursive,
+      requestPhotoAccess: requestPhotoAccess,
+    );
+  }
+
+  void _toggleDayFeed() {
+    if (_scrollController.hasClients) _scrollController.jumpTo(0);
+    sendEventToBloc<SettingsBloc>(SettingsUpdateDayFeed(isEnabled: !_dayFeedSettings.isEnabled));
+  }
+
+  void _showDayFeedSettings() {
+    showBarModalBottomSheet(context: context, builder: (_) => const DayFeedSettingsBottomSheet());
+  }
+
+  Future<void> _resolveDayFeedMediaIssue(DayFeedMediaIssue issue) async {
+    switch (issue) {
+      case DayFeedMediaIssue.photoAccessDenied:
+        await _dayFeedCubit.loadMedia(
+          dayIndex: dayIndex,
+          folderPath: _mediaFolderPath,
+          isFolderRecursive: _isMediaFolderRecursive,
+          requestPhotoAccess: true,
+        );
+        if (_dayFeedCubit.state.mediaIssue == DayFeedMediaIssue.photoAccessDenied) PhotoManager.openSetting();
+      case DayFeedMediaIssue.folderNotChosen:
+        _showMediaFolderSettings();
+    }
+  }
+
+  void _openDayStories(DayFeedState state, int initialIndex) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        fullscreenDialog: true,
+        pageBuilder: (_, _, _) => DayStoriesScreen(
+          items: state.items,
+          initialIndex: initialIndex,
+          isMindTextHidden: _isMindTextHidden,
+          onOpenMind: (mind) => _showMindInfo(mind),
+        ),
+        transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
+      ),
+    );
   }
 
   void _vibrate() {

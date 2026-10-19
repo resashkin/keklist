@@ -635,6 +635,53 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Обрисати ову емоцију? Биће уклоњена из свих мисли које је користе.';
+
+  @override
+  String get dayFeedShowAll => 'Прикажи све';
+
+  @override
+  String get dayFeedShowSources => 'Прикажи изворе';
+
+  @override
+  String get dayFeedTileSettings => 'Подешавања плочица';
+
+  @override
+  String get dayFeedColumns => 'Колоне';
+
+  @override
+  String get dayFeedMindTileSize => 'Величина плочице';
+
+  @override
+  String get dayFeedMindTileSquare => 'Квадрат';
+
+  @override
+  String get dayFeedMindTileWide => 'Широка';
+
+  @override
+  String get dayFeedShowMindText => 'Прикажи текст';
+
+  @override
+  String get dayFeedShowAudioBadge => 'Прикажи ознаку звука';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Дозволи приступ фотографијама да би овде видео фотографије и видео записе';
+
+  @override
+  String get dayFeedAllowAccess => 'Дозволи';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Изабери медијску фасциклу да би овде видео фотографије и видео записе';
+
+  @override
+  String get dayFeedChooseFolder => 'Изабери';
+
+  @override
+  String get dayFeedMute => 'Искључи звук';
+
+  @override
+  String get dayFeedUnmute => 'Укључи звук';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1267,4 +1314,51 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get deleteEmotionMessage =>
       'Obrisati ovu emociju? Biće uklonjena iz svih misli koje je koriste.';
+
+  @override
+  String get dayFeedShowAll => 'Prikaži sve';
+
+  @override
+  String get dayFeedShowSources => 'Prikaži izvore';
+
+  @override
+  String get dayFeedTileSettings => 'Podešavanja pločica';
+
+  @override
+  String get dayFeedColumns => 'Kolone';
+
+  @override
+  String get dayFeedMindTileSize => 'Veličina pločice';
+
+  @override
+  String get dayFeedMindTileSquare => 'Kvadrat';
+
+  @override
+  String get dayFeedMindTileWide => 'Široka';
+
+  @override
+  String get dayFeedShowMindText => 'Prikaži tekst';
+
+  @override
+  String get dayFeedShowAudioBadge => 'Prikaži oznaku zvuka';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Dozvoli pristup fotografijama da bi ovde video fotografije i video zapise';
+
+  @override
+  String get dayFeedAllowAccess => 'Dozvoli';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Izaberi medijsku fasciklu da bi ovde video fotografije i video zapise';
+
+  @override
+  String get dayFeedChooseFolder => 'Izaberi';
+
+  @override
+  String get dayFeedMute => 'Isključi zvuk';
+
+  @override
+  String get dayFeedUnmute => 'Uključi zvuk';
 }
