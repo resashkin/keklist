@@ -223,7 +223,7 @@
     "@yourNickname": {
         "description": "Никнейм енгізу көрсеткіші"
     },
-    "create": "Жазу",
+    "create": "Жасау",
     "@create": {
         "description": "Жасау батырмасы"
     },
@@ -482,5 +482,9 @@
     "roundVideoCameraUnavailable": "Бұл құрылғыда камера қолжетімсіз",
     "roundVideoRetake": "Қайта түсіру",
     "roundVideoUse": "Пайдалану",
-    "removeMedia": "Медианы жою"
+    "removeMedia": "Медианы жою",
+    "shakeToCustomize": "Баптау үшін сілкіңіз",
+    "shakeToCustomizeHint": "немесе тақырыпты басып тұрыңыз",
+    "customizeSettings": "Баптауларды реттеу",
+    "customizeSettingsDescription": "Белгісі алынған бөлімдер мен жолдар баптаулар экранында жасырылады."
 }

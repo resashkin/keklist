@@ -66,7 +66,7 @@
     "confirmPassword": "パスワードを確認",
     "continue_": "続ける",
     "corruptedFile": "破損したファイル",
-    "create": "書く",
+    "create": "作成",
     "debugMenuDescription": "実験的な機能を切り替えるための開発者ツール",
     "digest": "ダイジェスト",
     "enterPassword": "パスワードを入力",
@@ -219,5 +219,9 @@
     "roundVideoCameraUnavailable": "このデバイスではカメラを利用できません",
     "roundVideoRetake": "撮り直す",
     "roundVideoUse": "使用する",
-    "removeMedia": "メディアを削除"
+    "removeMedia": "メディアを削除",
+    "shakeToCustomize": "振ってカスタマイズ",
+    "shakeToCustomizeHint": "またはタイトルを長押し",
+    "customizeSettings": "設定をカスタマイズ",
+    "customizeSettingsDescription": "チェックを外したセクションと項目は設定画面に表示されません。"
 }

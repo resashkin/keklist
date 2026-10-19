@@ -84,6 +84,12 @@ final class SettingsObject extends HiveObject {
   @HiveField(25, defaultValue: true)
   late bool isDayFeedAudioBadgeVisible;
 
+  @HiveField(26, defaultValue: <String>[])
+  late List<String> hiddenSettingsItemIds;
+
+  @HiveField(27, defaultValue: <String>[])
+  late List<String> shakeDiscoveredScreenIds;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -114,5 +120,7 @@ final class SettingsObject extends HiveObject {
           isMindTextVisible: isDayFeedMindTextVisible,
           isAudioBadgeVisible: isDayFeedAudioBadgeVisible,
         ),
+        hiddenSettingsItemIds: hiddenSettingsItemIds.toSet(),
+        shakeDiscoveredScreenIds: shakeDiscoveredScreenIds.toSet(),
       );
 }

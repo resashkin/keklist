@@ -28,6 +28,8 @@ abstract class SettingsRepository {
     bool? isMindTextVisible,
     bool? isAudioBadgeVisible,
   });
+  FutureOr<void> updateSettingsItemHidden(String id, {required bool isHidden});
+  FutureOr<void> markShakeDiscovered(String screenId);
 }
 
 final class DayFeedSettings {
@@ -72,6 +74,8 @@ final class KeklistSettings {
   final bool hasSeededEmotions;
 
   final DayFeedSettings dayFeed;
+  final Set<String> hiddenSettingsItemIds;
+  final Set<String> shakeDiscoveredScreenIds;
 
   KeklistSettings({
     required this.isMindContentVisible,
@@ -93,6 +97,8 @@ final class KeklistSettings {
     this.isMediaFolderRecursive = false,
     this.hasSeededEmotions = false,
     this.dayFeed = const DayFeedSettings(),
+    this.hiddenSettingsItemIds = const {},
+    this.shakeDiscoveredScreenIds = const {},
   });
 
   SettingsObject toObject() => SettingsObject()
@@ -119,7 +125,9 @@ final class KeklistSettings {
     ..dayFeedColumnCount = dayFeed.columnCount
     ..dayFeedMindCellSpan = dayFeed.mindCellSpan
     ..isDayFeedMindTextVisible = dayFeed.isMindTextVisible
-    ..isDayFeedAudioBadgeVisible = dayFeed.isAudioBadgeVisible;
+    ..isDayFeedAudioBadgeVisible = dayFeed.isAudioBadgeVisible
+    ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
+    ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 
   factory KeklistSettings.initial() => KeklistSettings(
         isMindContentVisible: true,

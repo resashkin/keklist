@@ -196,7 +196,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get yourNickname => 'Ваш никнейм';
 
   @override
-  String get create => 'Написать';
+  String get create => 'Создать';
 
   @override
   String get yourFolderName => 'Название вашей папки';
@@ -702,4 +702,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get removeMedia => 'Удалить медиа';
+
+  @override
+  String get shakeToCustomize => 'Встряхните, чтобы настроить';
+
+  @override
+  String get shakeToCustomizeHint => 'или удерживайте заголовок';
+
+  @override
+  String get customizeSettings => 'Настройка экрана';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Снятые разделы и пункты скрываются с экрана настроек.';
 }

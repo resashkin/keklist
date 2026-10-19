@@ -66,7 +66,7 @@
     "confirmPassword": "Подтвердите пароль",
     "continue_": "Продолжить",
     "corruptedFile": "Поврежденный файл",
-    "create": "Написать",
+    "create": "Создать",
     "debugMenuDescription": "Инструменты разработчика для переключения экспериментальных функций",
     "digest": "Сводка",
     "enterPassword": "Введите пароль",
@@ -219,5 +219,9 @@
     "roundVideoCameraUnavailable": "Камера недоступна на этом устройстве",
     "roundVideoRetake": "Переснять",
     "roundVideoUse": "Использовать",
-    "removeMedia": "Удалить медиа"
+    "removeMedia": "Удалить медиа",
+    "shakeToCustomize": "Встряхните, чтобы настроить",
+    "shakeToCustomizeHint": "или удерживайте заголовок",
+    "customizeSettings": "Настройка экрана",
+    "customizeSettingsDescription": "Снятые разделы и пункты скрываются с экрана настроек."
 }

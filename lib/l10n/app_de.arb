@@ -66,7 +66,7 @@
     "confirmPassword": "Passwort bestätigen",
     "continue_": "Weiter",
     "corruptedFile": "Beschädigte Datei",
-    "create": "Schreiben",
+    "create": "Erstellen",
     "debugMenuDescription": "Entwickler-Tools zum Umschalten experimenteller Funktionen",
     "digest": "Zusammenfassung",
     "enterPassword": "Passwort eingeben",
@@ -219,5 +219,9 @@
     "roundVideoCameraUnavailable": "Kamera auf diesem Gerät nicht verfügbar",
     "roundVideoRetake": "Neu aufnehmen",
     "roundVideoUse": "Verwenden",
-    "removeMedia": "Medien entfernen"
+    "removeMedia": "Medien entfernen",
+    "shakeToCustomize": "Schütteln zum Anpassen",
+    "shakeToCustomizeHint": "oder Titel lange drücken",
+    "customizeSettings": "Einstellungen anpassen",
+    "customizeSettingsDescription": "Abgewählte Bereiche und Zeilen werden in den Einstellungen ausgeblendet."
 }

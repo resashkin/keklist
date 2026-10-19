@@ -196,7 +196,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get yourNickname => 'Ihr Spitzname';
 
   @override
-  String get create => 'Schreiben';
+  String get create => 'Erstellen';
 
   @override
   String get yourFolderName => 'Ihr Ordnername';
@@ -710,4 +710,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get removeMedia => 'Medien entfernen';
+
+  @override
+  String get shakeToCustomize => 'Schütteln zum Anpassen';
+
+  @override
+  String get shakeToCustomizeHint => 'oder Titel lange drücken';
+
+  @override
+  String get customizeSettings => 'Einstellungen anpassen';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Abgewählte Bereiche und Zeilen werden in den Einstellungen ausgeblendet.';
 }

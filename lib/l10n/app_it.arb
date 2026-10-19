@@ -223,7 +223,7 @@
     "@yourNickname": {
         "description": "Suggerimento input nickname"
     },
-    "create": "Scrivi",
+    "create": "Crea",
     "@create": {
         "description": "Pulsante crea"
     },
@@ -482,5 +482,9 @@
     "roundVideoCameraUnavailable": "Fotocamera non disponibile su questo dispositivo",
     "roundVideoRetake": "Rifai",
     "roundVideoUse": "Usa",
-    "removeMedia": "Rimuovi media"
+    "removeMedia": "Rimuovi media",
+    "shakeToCustomize": "Scuoti per personalizzare",
+    "shakeToCustomizeHint": "o tieni premuto il titolo",
+    "customizeSettings": "Personalizza impostazioni",
+    "customizeSettingsDescription": "Le sezioni e le righe deselezionate vengono nascoste nelle Impostazioni."
 }

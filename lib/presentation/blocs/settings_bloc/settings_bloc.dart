@@ -42,6 +42,8 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateWeatherLocation>(_updateWeatherLocation);
     on<SettingsUpdateMediaFolderSource>(_updateMediaFolderSource);
     on<SettingsUpdateDayFeed>(_updateDayFeed);
+    on<SettingsUpdateItemHidden>(_updateItemHidden);
+    on<SettingsMarkShakeDiscovered>(_markShakeDiscovered);
 
     _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
   }
@@ -225,6 +227,8 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       mediaFolderPath: currentSettings.mediaFolderPath,
       isMediaFolderRecursive: currentSettings.isMediaFolderRecursive,
       dayFeed: currentSettings.dayFeed,
+      hiddenSettingsItemIds: currentSettings.hiddenSettingsItemIds,
+      shakeDiscoveredScreenIds: currentSettings.shakeDiscoveredScreenIds,
     );
     await _repository.updateSettings(updatedSettings);
   }
@@ -257,6 +261,14 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       isMindTextVisible: event.isMindTextVisible,
       isAudioBadgeVisible: event.isAudioBadgeVisible,
     );
+  }
+
+  FutureOr<void> _updateItemHidden(SettingsUpdateItemHidden event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettingsItemHidden(event.id, isHidden: event.isHidden);
+  }
+
+  FutureOr<void> _markShakeDiscovered(SettingsMarkShakeDiscovered event, Emitter<SettingsState> emit) async {
+    await _repository.markShakeDiscovered(event.screenId);
   }
 
   // FutureOr<void> _exportToEncryptedImage(

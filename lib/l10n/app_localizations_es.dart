@@ -196,7 +196,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get yourNickname => 'Tu apodo';
 
   @override
-  String get create => 'Escribir';
+  String get create => 'Crear';
 
   @override
   String get yourFolderName => 'Nombre de tu carpeta';
@@ -709,4 +709,17 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get removeMedia => 'Quitar multimedia';
+
+  @override
+  String get shakeToCustomize => 'Agita para personalizar';
+
+  @override
+  String get shakeToCustomizeHint => 'o mantén pulsado el título';
+
+  @override
+  String get customizeSettings => 'Personalizar ajustes';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Las secciones y filas desmarcadas se ocultan en Ajustes.';
 }

@@ -25,7 +25,11 @@ import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/appearance_settings/appearance_settings_screen.dart';
 import 'package:keklist/presentation/screens/debug_menu/debug_menu_screen.dart';
 import 'package:keklist/presentation/screens/language_picker/language_picker_screen.dart';
+import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
+import 'package:keklist/presentation/screens/settings/settings_layout.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
+import 'package:keklist/presentation/screens/settings/widgets/settings_customize_bottom_sheet.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/tabs_settings/tabs_settings_screen.dart';
 import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
 import 'package:keklist/presentation/screens/paywall/paywall_bottom_sheet.dart';
@@ -41,7 +45,7 @@ final class SettingsScreen extends StatefulWidget {
   SettingsScreenState createState() => SettingsScreenState();
 }
 
-final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
+final class SettingsScreenState extends KekWidgetState<SettingsScreen> with ShakeToTweakMixin {
   //bool _isSensitiveContentShowed = false;
   String? translateLanguageCode;
   int _appBarTapCount = 0;
@@ -49,6 +53,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
   bool _isPro = false;
   DateTime? _proNextRenewalDate;
   String? _proPriceString;
+  Set<String> _hiddenItemIds = {};
 
   @override
   void initState() {
@@ -60,6 +65,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
           case SettingsDataState state:
             setState(() {
               _isDebugMenuVisible = state.settings.isDebugMenuVisible;
+              _hiddenItemIds = state.settings.hiddenSettingsItemIds;
             });
             break;
           case SettingsShowMessage state:
@@ -118,138 +124,186 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
   }
 
   @override
+  String get shakeScreenId => ShakeScreenIds.settings;
+
+  @override
+  void onShakeToTweak() {
+    showBarModalBottomSheet(
+      context: context,
+      builder: (_) => SettingsCustomizeBottomSheet(sections: _buildSections(context)),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: GestureDetector(onTap: _handleAppBarTap, child: Text(context.l10n.settings)),
+        title: GestureDetector(onTap: _handleAppBarTap, onLongPress: requestTweak, child: Text(context.l10n.settings)),
       ),
       body: SettingsListView(
         children: [
-          SettingsSectionHeader(context.l10n.userData.toUpperCase()),
-          SettingsSectionCard(
-            children: [
-              ListTile(
-                title: Text(context.l10n.exportData),
-                leading: const Icon(Icons.upload, color: Colors.redAccent),
-                onTap: () => _handleExport(),
-              ),
-              ListTile(
-                title: Text(context.l10n.importData),
-                leading: const Icon(Icons.download, color: Colors.greenAccent),
-                onTap: () => _handleImport(),
-              ),
-            ],
-          ),
-          const SettingsSectionHeader('APPLICATION'), // TODO: localize
-          SettingsSectionCard(
-            children: [
-              if (!_isPro)
-                ListTile(
-                  title: const Text('keklist PRO'),
-                  leading: const Icon(Icons.handshake, color: Colors.yellowAccent),
-                  trailing: settingsNavTrailing(context),
-                  onTap: () => _openPaywall(),
-                ),
-              ListTile(
-                title: Text(context.l10n.releaseNotes),
-                leading: const Icon(Icons.new_releases, color: Color.fromARGB(255, 191, 188, 191)),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _showWhatsNew(),
-              ),
-              ListTile(
-                title: const Text('Dev Blog [Telegram] [RU]'), // TODO: move to feedback settings (new screen)
-                leading: const Icon(Icons.newspaper, color: Colors.blue),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _openAppNews(),
-              ),
-              ListTile(
-                title: Text(context.l10n.suggestFeature),
-                leading: const Icon(Icons.handyman, color: Colors.green),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _openSuggestFeature(),
-              ),
-              ListTile(
-                title: Text(context.l10n.emailUs),
-                leading: const Icon(Icons.feedback, color: Colors.blueGrey),
-                trailing: settingsNavTrailing(context),
-                onTap: () async => await _openEmailFeedbackForm(),
-              ),
-              if (_isPro) _buildProFooterTile(context),
-            ],
-          ),
-          SettingsSectionHeader(context.l10n.appearance.toUpperCase()),
-          SettingsSectionCard(
-            children: [
-              ListTile(
-                leading: const Icon(Icons.language),
-                title: Text(context.l10n.language),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _showLanguagePicker(),
-              ),
-              ListTile(
-                leading: const Icon(Icons.brightness_medium, color: Colors.grey),
-                title: Text(context.l10n.appearance),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _showAppearanceSettings(),
-              ),
-              ListTile(
-                title: Text(context.l10n.tabsSettings),
-                leading: const Icon(Icons.dashboard, color: Colors.blue),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _showTabsSettings(),
-              ),
-              if (_isDebugMenuVisible)
-                ListTile(
-                  title: Text(context.l10n.debugMenu),
-                  leading: const Icon(Icons.bug_report, color: Colors.orange),
-                  trailing: settingsNavTrailing(context),
-                  onTap: () => _showDebugMenu(),
-                ),
-            ],
-          ),
-          SettingsSectionHeader(context.l10n.about.toUpperCase()),
-          SettingsSectionCard(
-            children: [
-              ListTile(
-                title: Text(context.l10n.sourceCode),
-                leading: const Icon(Icons.code, color: Colors.yellow),
-                trailing: settingsNavTrailing(context),
-                onTap: () async => await _openSourceCode(),
-              ),
-              ListTile(
-                title: Text(context.l10n.termsOfUse),
-                leading: const Icon(Icons.verified_user, color: Colors.grey),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _openTermsOfUse(),
-              ),
-              ListTile(
-                title: Text(context.l10n.privacyPolicy),
-                leading: const Icon(Icons.privacy_tip, color: Colors.grey),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _openPrivacyPolicy(),
-              ),
-              ListTile(
-                title: Text(context.l10n.licenses),
-                leading: const Icon(Icons.description_outlined, color: Colors.grey),
-                trailing: settingsNavTrailing(context),
-                onTap: () => showLicensePage(context: context),
-              ),
-            ],
-          ),
-          SettingsSectionHeader(context.l10n.dangerZone.toUpperCase()),
-          SettingsSectionCard(
-            children: [
-              ListTile(
-                title: Text(context.l10n.clearOnDeviceData),
-                leading: const Icon(Icons.delete_outline, color: Colors.red),
-                onTap: () async => await _clearCache(),
-              ),
-            ],
-          ),
+          for (final SettingsSectionModel section in _buildSections(context).visibleExcept(_hiddenItemIds)) ...[
+            SettingsSectionHeader(section.title.toUpperCase()),
+            SettingsSectionCard(children: [for (final SettingsRowModel row in section.rows) row.tile]),
+          ],
         ],
       ),
     );
   }
+
+  List<SettingsSectionModel> _buildSections(BuildContext context) => [
+    SettingsSectionModel(
+      id: SettingsItemIds.userDataSection,
+      title: context.l10n.userData,
+      rows: [
+        _navigationRow(
+          id: SettingsItemIds.exportData,
+          title: context.l10n.exportData,
+          leading: const Icon(Icons.upload, color: Colors.redAccent),
+          hasChevron: false,
+          onTap: () => _handleExport(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.importData,
+          title: context.l10n.importData,
+          leading: const Icon(Icons.download, color: Colors.greenAccent),
+          hasChevron: false,
+          onTap: () => _handleImport(),
+        ),
+      ],
+    ),
+    SettingsSectionModel(
+      id: SettingsItemIds.applicationSection,
+      title: 'Application', // TODO: localize
+      rows: [
+        if (!_isPro)
+          _navigationRow(
+            id: SettingsItemIds.pro,
+            title: 'keklist PRO',
+            leading: const Icon(Icons.handshake, color: Colors.yellowAccent),
+            onTap: () => _openPaywall(),
+          ),
+        _navigationRow(
+          id: SettingsItemIds.releaseNotes,
+          title: context.l10n.releaseNotes,
+          leading: const Icon(Icons.new_releases, color: Color.fromARGB(255, 191, 188, 191)),
+          onTap: () => _showWhatsNew(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.devBlog,
+          title: 'Dev Blog [Telegram] [RU]', // TODO: move to feedback settings (new screen)
+          leading: const Icon(Icons.newspaper, color: Colors.blue),
+          onTap: () => _openAppNews(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.suggestFeature,
+          title: context.l10n.suggestFeature,
+          leading: const Icon(Icons.handyman, color: Colors.green),
+          onTap: () => _openSuggestFeature(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.emailUs,
+          title: context.l10n.emailUs,
+          leading: const Icon(Icons.feedback, color: Colors.blueGrey),
+          onTap: () async => await _openEmailFeedbackForm(),
+        ),
+        if (_isPro)
+          SettingsRowModel(id: SettingsItemIds.proStatus, title: 'keklist PRO', tile: _buildProFooterTile(context)),
+      ],
+    ),
+    SettingsSectionModel(
+      id: SettingsItemIds.appearanceSection,
+      title: context.l10n.appearance,
+      rows: [
+        _navigationRow(
+          id: SettingsItemIds.language,
+          title: context.l10n.language,
+          leading: const Icon(Icons.language),
+          onTap: () => _showLanguagePicker(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.appearance,
+          title: context.l10n.appearance,
+          leading: const Icon(Icons.brightness_medium, color: Colors.grey),
+          onTap: () => _showAppearanceSettings(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.tabsSettings,
+          title: context.l10n.tabsSettings,
+          leading: const Icon(Icons.dashboard, color: Colors.blue),
+          onTap: () => _showTabsSettings(),
+        ),
+        if (_isDebugMenuVisible)
+          _navigationRow(
+            id: SettingsItemIds.debugMenu,
+            title: context.l10n.debugMenu,
+            leading: const Icon(Icons.bug_report, color: Colors.orange),
+            onTap: () => _showDebugMenu(),
+          ),
+      ],
+    ),
+    SettingsSectionModel(
+      id: SettingsItemIds.aboutSection,
+      title: context.l10n.about,
+      rows: [
+        _navigationRow(
+          id: SettingsItemIds.sourceCode,
+          title: context.l10n.sourceCode,
+          leading: const Icon(Icons.code, color: Colors.yellow),
+          onTap: () async => await _openSourceCode(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.termsOfUse,
+          title: context.l10n.termsOfUse,
+          leading: const Icon(Icons.verified_user, color: Colors.grey),
+          onTap: () => _openTermsOfUse(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.privacyPolicy,
+          title: context.l10n.privacyPolicy,
+          leading: const Icon(Icons.privacy_tip, color: Colors.grey),
+          onTap: () => _openPrivacyPolicy(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.licenses,
+          title: context.l10n.licenses,
+          leading: const Icon(Icons.description_outlined, color: Colors.grey),
+          onTap: () => showLicensePage(context: context),
+        ),
+      ],
+    ),
+    SettingsSectionModel(
+      id: SettingsItemIds.dangerZoneSection,
+      title: context.l10n.dangerZone,
+      rows: [
+        _navigationRow(
+          id: SettingsItemIds.clearOnDeviceData,
+          title: context.l10n.clearOnDeviceData,
+          leading: const Icon(Icons.delete_outline, color: Colors.red),
+          hasChevron: false,
+          onTap: () async => await _clearCache(),
+        ),
+      ],
+    ),
+  ];
+
+  SettingsRowModel _navigationRow({
+    required String id,
+    required String title,
+    required Widget leading,
+    required VoidCallback onTap,
+    bool hasChevron = true,
+  }) => SettingsRowModel(
+    id: id,
+    title: title,
+    leading: leading,
+    tile: ListTile(
+      title: Text(title),
+      leading: leading,
+      trailing: hasChevron ? settingsNavTrailing(context) : null,
+      onTap: onTap,
+    ),
+  );
 
   Widget _buildProFooterTile(BuildContext context) {
     final Locale locale = Localizations.localeOf(context);

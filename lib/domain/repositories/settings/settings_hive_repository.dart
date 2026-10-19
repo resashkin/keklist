@@ -143,4 +143,23 @@ final class SettingsHiveRepository implements SettingsRepository {
     if (isAudioBadgeVisible != null) settingsObject.isDayFeedAudioBadgeVisible = isAudioBadgeVisible;
     await settingsObject.save();
   }
+
+  @override
+  FutureOr<void> updateSettingsItemHidden(String id, {required bool isHidden}) async {
+    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
+    if (settingsObject == null) return;
+    final Set<String> hiddenIds = settingsObject.hiddenSettingsItemIds.toSet();
+    final bool isChanged = isHidden ? hiddenIds.add(id) : hiddenIds.remove(id);
+    if (!isChanged) return;
+    settingsObject.hiddenSettingsItemIds = hiddenIds.toList();
+    await settingsObject.save();
+  }
+
+  @override
+  FutureOr<void> markShakeDiscovered(String screenId) async {
+    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
+    if (settingsObject == null || settingsObject.shakeDiscoveredScreenIds.contains(screenId)) return;
+    settingsObject.shakeDiscoveredScreenIds = [...settingsObject.shakeDiscoveredScreenIds, screenId];
+    await settingsObject.save();
+  }
 }

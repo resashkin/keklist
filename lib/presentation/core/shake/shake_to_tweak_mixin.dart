@@ -1,0 +1,105 @@
+import 'dart:async';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
+import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
+import 'package:keklist/presentation/core/shake/shake_detector.dart';
+import 'package:keklist/presentation/core/shake/shake_hint_toast.dart';
+import 'package:sensors_plus/sensors_plus.dart';
+
+abstract final class ShakeScreenIds {
+  static const String day = 'day';
+  static const String settings = 'settings';
+}
+
+mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
+  static final Set<String> _hintShownThisLaunch = {};
+  static const Duration _hintDelay = Duration(milliseconds: 1200);
+  static const Duration _hintVisibleDuration = Duration(seconds: 5);
+  static const double _hintTopSpacing = 8.0;
+  static const double _hintSideSpacing = 16.0;
+
+  final ShakeDetector _shakeDetector = ShakeDetector();
+  StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
+  bool? _isScreenActive;
+  Timer? _hintTimer;
+  OverlayEntry? _hintEntry;
+
+  String get shakeScreenId;
+
+  void onShakeToTweak();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // TickerMode is false for hidden IndexedStack tabs and routes covered by an opaque route.
+    final bool isActive = TickerMode.valuesOf(context).enabled;
+    if (isActive == _isScreenActive) return;
+    _isScreenActive = isActive;
+    isActive ? _activate() : _deactivate();
+  }
+
+  @override
+  void dispose() {
+    _deactivate();
+    super.dispose();
+  }
+
+  void requestTweak() {
+    _hideHint();
+    _hintShownThisLaunch.add(shakeScreenId);
+    sendEventToBloc<SettingsBloc>(SettingsMarkShakeDiscovered(screenId: shakeScreenId));
+    onShakeToTweak();
+  }
+
+  void _activate() {
+    _accelerometerSubscription = accelerometerEventStream(
+      samplingPeriod: SensorInterval.gameInterval,
+    ).listen(_onAccelerometerEvent, onError: (_) {});
+    if (!_hintShownThisLaunch.contains(shakeScreenId)) {
+      _hintTimer = Timer(_hintDelay, _showHintIfUndiscovered);
+    }
+  }
+
+  void _deactivate() {
+    _accelerometerSubscription?.cancel();
+    _accelerometerSubscription = null;
+    _hideHint();
+  }
+
+  bool get _isFrontmost => mounted && _isScreenActive == true && (ModalRoute.of(context)?.isCurrent ?? true);
+
+  void _onAccelerometerEvent(AccelerometerEvent event) {
+    final bool isShake = _shakeDetector.addReading(x: event.x, y: event.y, z: event.z, timestamp: DateTime.now());
+    if (isShake && _isFrontmost) requestTweak();
+  }
+
+  bool get _isShakeDiscovered {
+    final SettingsState state = context.read<SettingsBloc>().state;
+    return state is! SettingsDataState || state.settings.shakeDiscoveredScreenIds.contains(shakeScreenId);
+  }
+
+  void _showHintIfUndiscovered() {
+    if (!_isFrontmost || _isShakeDiscovered) return;
+    _hintShownThisLaunch.add(shakeScreenId);
+    final double top = MediaQuery.paddingOf(context).top + kToolbarHeight + _hintTopSpacing;
+    _hintEntry = OverlayEntry(
+      builder: (_) => Positioned(
+        top: top,
+        left: _hintSideSpacing,
+        right: _hintSideSpacing,
+        child: Center(child: ShakeHintToast(onTap: _hideHint)),
+      ),
+    );
+    Overlay.of(context).insert(_hintEntry!);
+    _hintTimer = Timer(_hintVisibleDuration, _hideHint);
+  }
+
+  void _hideHint() {
+    _hintTimer?.cancel();
+    _hintTimer = null;
+    _hintEntry?.remove();
+    _hintEntry = null;
+  }
+}

@@ -196,7 +196,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get yourNickname => 'Твој надимак';
 
   @override
-  String get create => 'Напиши';
+  String get create => 'Направи';
 
   @override
   String get yourFolderName => 'Назив твог фолдера';
@@ -704,6 +704,19 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get removeMedia => 'Уклони медије';
+
+  @override
+  String get shakeToCustomize => 'Протресите за прилагођавање';
+
+  @override
+  String get shakeToCustomizeHint => 'или дуго притисните наслов';
+
+  @override
+  String get customizeSettings => 'Прилагоди подешавања';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Неозначени одељци и редови се скривају са екрана подешавања.';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -898,7 +911,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get yourNickname => 'Tvoj nadimak';
 
   @override
-  String get create => 'Napiši';
+  String get create => 'Napravi';
 
   @override
   String get yourFolderName => 'Ime tvoje fascikle';
@@ -1405,4 +1418,17 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get removeMedia => 'Ukloni medije';
+
+  @override
+  String get shakeToCustomize => 'Protresite za prilagođavanje';
+
+  @override
+  String get shakeToCustomizeHint => 'ili dugo pritisnite naslov';
+
+  @override
+  String get customizeSettings => 'Prilagodi podešavanja';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Neoznačeni odeljci i redovi se skrivaju sa ekrana podešavanja.';
 }

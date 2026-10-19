@@ -196,7 +196,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get yourNickname => 'Sizning niknamingiz';
 
   @override
-  String get create => 'Yozish';
+  String get create => 'Yaratish';
 
   @override
   String get yourFolderName => 'Sizning papka nomingiz';
@@ -705,4 +705,17 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get removeMedia => 'Mediani o‘chirish';
+
+  @override
+  String get shakeToCustomize => 'Sozlash uchun silkiting';
+
+  @override
+  String get shakeToCustomizeHint => 'yoki sarlavhani bosib turing';
+
+  @override
+  String get customizeSettings => 'Sozlamalarni moslash';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Belgisi olib tashlangan bo‘lim va qatorlar Sozlamalar ekranida yashiriladi.';
 }

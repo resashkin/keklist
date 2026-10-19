@@ -66,7 +66,7 @@
     "confirmPassword": "Потврди лозинку",
     "continue_": "Настави",
     "corruptedFile": "Оштећени фајл",
-    "create": "Напиши",
+    "create": "Направи",
     "debugMenuDescription": "Алати за програмере за укључивање експерименталних функција",
     "digest": "Сажетак",
     "enterPassword": "Унеси лозинку",
@@ -219,5 +219,9 @@
     "roundVideoCameraUnavailable": "Камера није доступна на овом уређају",
     "roundVideoRetake": "Сними поново",
     "roundVideoUse": "Користи",
-    "removeMedia": "Уклони медије"
+    "removeMedia": "Уклони медије",
+    "shakeToCustomize": "Протресите за прилагођавање",
+    "shakeToCustomizeHint": "или дуго притисните наслов",
+    "customizeSettings": "Прилагоди подешавања",
+    "customizeSettingsDescription": "Неозначени одељци и редови се скривају са екрана подешавања."
 }

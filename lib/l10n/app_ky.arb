@@ -223,7 +223,7 @@
     "@yourNickname": {
         "description": "Никнэм киргизүү көрсөткүчү"
     },
-    "create": "Жазуу",
+    "create": "Түзүү",
     "@create": {
         "description": "Жаратуу баскычы"
     },
@@ -482,5 +482,9 @@
     "roundVideoCameraUnavailable": "Бул түзмөктө камера жеткиликсиз",
     "roundVideoRetake": "Кайра тартуу",
     "roundVideoUse": "Колдонуу",
-    "removeMedia": "Медианы өчүрүү"
+    "removeMedia": "Медианы өчүрүү",
+    "shakeToCustomize": "Ыңгайлаштыруу үчүн силкиңиз",
+    "shakeToCustomizeHint": "же аталышты басып туруңуз",
+    "customizeSettings": "Жөндөөлөрдү ыңгайлаштыруу",
+    "customizeSettingsDescription": "Белгиси алынган бөлүмдөр жана саптар жөндөөлөр экранында жашырылат."
 }
