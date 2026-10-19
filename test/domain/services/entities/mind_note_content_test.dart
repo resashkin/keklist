@@ -228,4 +228,38 @@ void main() {
       expect(updated.audioNotes.single.hasDuration, true);
     });
   });
+
+  group('MindNoteContent video', () {
+    test('parses a video tag with caption and round-trips it', () {
+      const String rawNote = '<kekvideo path="video/abc.mp4" duration="12.5"/>\nSunset';
+
+      final MindNoteContent content = MindNoteContent.parse(rawNote);
+
+      expect(content.pieces.first, isA<MindNoteVideo>());
+      expect(content.videoPieces.single.appRelativePath, 'video/abc.mp4');
+      expect(content.videoPieces.single.duration, const Duration(milliseconds: 12500));
+      expect(content.plainText, '\nSunset');
+      expect(content.toRawNoteString(), rawNote);
+    });
+
+    test('media file paths include video thumbnails and audio', () {
+      final MindNoteContent content = MindNoteContent.empty()
+          .copyWithAppendedVideo('video/abc.mov', durationSeconds: 3)
+          .copyWithAppendedAudio('audio/x.m4a', durationSeconds: 2);
+
+      expect(content.mediaFilePaths, ['audio/x.m4a', 'video/abc.mov', 'video/abc.jpg']);
+    });
+
+    test('withoutMedia keeps only text', () {
+      final MindNoteContent content = MindNoteContent.parse('Hi<kekvideo path="video/a.mp4" duration="1.0"/>');
+
+      expect(content.withoutMedia().toRawNoteString(), 'Hi');
+    });
+
+    test('ignores a video tag without a valid duration', () {
+      final MindNoteContent content = MindNoteContent.parse('<kekvideo path="video/a.mp4" duration="x"/>');
+
+      expect(content.hasVideo, isFalse);
+    });
+  });
 }

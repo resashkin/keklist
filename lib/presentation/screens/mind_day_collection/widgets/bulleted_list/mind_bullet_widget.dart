@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:gap/gap.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
+import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/audio/audio_track_widget.dart';
 
 final class MindBulletWidget extends StatelessWidget {
@@ -25,6 +26,7 @@ final class MindBulletWidget extends StatelessWidget {
 
     if (contentWidgets.isEmpty) {
       for (final BaseMindNotePiece piece in pieces) {
+        if (piece is MindNoteText && piece.value.trim().isEmpty) continue;
         if (contentWidgets.isNotEmpty) {
           contentWidgets.add(const Gap(12.0));
         }
@@ -40,7 +42,7 @@ final class MindBulletWidget extends StatelessWidget {
                     child: Padding(
                       padding: .symmetric(horizontal: 14.0, vertical: 10.0),
                       child: Text(
-                        textPiece.value,
+                        textPiece.value.trim(),
                         maxLines: null,
                         style: TextStyle(fontSize: 15.0, color: colorScheme.onPrimaryContainer),
                       ),
@@ -51,6 +53,9 @@ final class MindBulletWidget extends StatelessWidget {
             ),
             audio: (MindNoteAudio audioPiece) => SensitiveWidget(
               child: AudioTrackWidget(audio: audioPiece, emoji: model.emoji),
+            ),
+            video: (MindNoteVideo videoPiece) => SensitiveWidget(
+              child: Align(alignment: .centerRight, child: RoundVideoMessage(video: videoPiece, size: 200.0)),
             ),
             unknown: () => Padding(
               padding: .symmetric(horizontal: 14.0, vertical: 8.0),

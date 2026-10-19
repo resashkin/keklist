@@ -212,5 +212,12 @@
     "dayFeedFolderHint": "Изабери медијску фасциклу да би овде видео фотографије и видео записе",
     "dayFeedChooseFolder": "Изабери",
     "dayFeedMute": "Искључи звук",
-    "dayFeedUnmute": "Укључи звук"
+    "dayFeedUnmute": "Укључи звук",
+    "holdToRecordAudio": "Држи за гласовну поруку",
+    "holdToRecordVideo": "Држи за видео поруку",
+    "roundVideoRecordError": "Снимање видеа није успело",
+    "roundVideoCameraUnavailable": "Камера није доступна на овом уређају",
+    "roundVideoRetake": "Сними поново",
+    "roundVideoUse": "Користи",
+    "removeMedia": "Уклони медије"
 }

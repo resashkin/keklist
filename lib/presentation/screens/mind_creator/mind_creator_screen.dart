@@ -1,4 +1,8 @@
+import 'dart:io';
 import 'dart:math';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/blocs/mind_creator_bloc/mind_creator_bloc.dart';
@@ -7,6 +11,9 @@ import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_picker/mind_picker_screen.dart';
+import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
+import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 final class MindCreatorScreen extends StatefulWidget {
@@ -32,6 +39,7 @@ final class MindCreatorScreen extends StatefulWidget {
 final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
   final TextEditingController _textEditingController = TextEditingController();
   String _selectedEmoji = '🙂';
+  BaseMindNotePiece? _attachedMedia;
 
   @override
   void initState() {
@@ -81,12 +89,18 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            _removeAttachedMedia();
+            Navigator.of(context).pop();
+          },
+        ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-              widget.onDone(_textEditingController.text, _selectedEmoji);
+              widget.onDone(_composeNote(), _selectedEmoji);
             },
             child: Text(context.l10n.save, style: const TextStyle(fontSize: 16.0, color: Colors.blueAccent)),
           ),
@@ -139,6 +153,8 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
               ),
             ),
             const SizedBox(height: 16.0),
+            if (_attachedMedia case final BaseMindNotePiece media)
+              _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
             TextField(
               autofocus: true,
               keyboardType: TextInputType.multiline,
@@ -150,12 +166,45 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
                 contentPadding: const EdgeInsets.all(12.0),
                 border: InputBorder.none,
                 hintText: widget.hintText ?? context.l10n.writeSomething,
+                suffixIcon: _attachedMedia == null
+                    ? MediaRecordToggleButton(
+                        onRecordAudio: () => _attach(MediaRecording.recordAudio),
+                        onRecordVideo: () => _attach(MediaRecording.recordVideo),
+                      )
+                    : null,
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _attach(Future<BaseMindNotePiece?> Function(BuildContext) record) async {
+    final BaseMindNotePiece? media = await record(context);
+    if (media == null || !mounted) return;
+    setState(() => _attachedMedia = media);
+  }
+
+  // A discarded recording is never saved into a mind, so its file can go right away.
+  Future<void> _removeAttachedMedia() async {
+    final BaseMindNotePiece? media = _attachedMedia;
+    setState(() => _attachedMedia = null);
+    if (media == null) return;
+    final AppFileRepository fileRepository = context.read<AppFileRepository>();
+    for (final String path in MindNoteContent.fromPieces([media]).mediaFilePaths) {
+      final File file = File(await fileRepository.resolveAbsolutePath(path));
+      if (await file.exists()) await file.delete();
+    }
+  }
+
+  String _composeNote() {
+    final String text = _textEditingController.text.trim();
+    final BaseMindNotePiece? media = _attachedMedia;
+    return MindNoteContent.fromPieces([
+      ?media,
+      if (text.isNotEmpty) MindNoteText(media == null ? text : '\n$text'),
+    ]).toRawNoteString();
   }
 
   void _showEmojiPickerScreen({required Function(String) onSelect}) async {
@@ -189,4 +238,36 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
 
     return strokeEmojis;
   }
+}
+
+final class _AttachedMediaPreview extends StatelessWidget {
+  final BaseMindNotePiece media;
+  final VoidCallback onRemove;
+
+  const _AttachedMediaPreview({required this.media, required this.onRemove});
+
+  @override
+  Widget build(BuildContext context) {
+    final Widget preview = switch (media) {
+      MindNoteVideo video => RoundVideoMessage(video: video, size: 180.0),
+      MindNoteAudio audio => Chip(
+          avatar: const Icon(Icons.mic, size: 18.0),
+          label: Text(_formatDuration(audio.duration ?? Duration.zero)),
+        ),
+      _ => const SizedBox.shrink(),
+    };
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          preview,
+          IconButton(icon: const Icon(Icons.delete_outline), tooltip: context.l10n.removeMedia, onPressed: onRemove),
+        ],
+      ),
+    );
+  }
+
+  String _formatDuration(Duration duration) =>
+      '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
 }

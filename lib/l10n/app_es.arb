@@ -475,5 +475,12 @@
     "dayFeedFolderHint": "Elige una carpeta de medios para ver aquí tus fotos y vídeos",
     "dayFeedChooseFolder": "Elegir",
     "dayFeedMute": "Silenciar",
-    "dayFeedUnmute": "Activar sonido"
+    "dayFeedUnmute": "Activar sonido",
+    "holdToRecordAudio": "Mantén pulsado para grabar un mensaje de voz",
+    "holdToRecordVideo": "Mantén pulsado para grabar un videomensaje",
+    "roundVideoRecordError": "No se pudo grabar el vídeo",
+    "roundVideoCameraUnavailable": "La cámara no está disponible en este dispositivo",
+    "roundVideoRetake": "Repetir",
+    "roundVideoUse": "Usar",
+    "removeMedia": "Quitar multimedia"
 }

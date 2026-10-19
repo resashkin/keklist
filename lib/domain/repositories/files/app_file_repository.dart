@@ -11,6 +11,8 @@ class AppFileRepository {
 
   static const String _userRootFolderName = 'user_files';
   static const String _audioFolderName = 'audio';
+  static const String _videoFolderName = 'video';
+  static const List<String> mediaFolderNames = [_audioFolderName, _videoFolderName];
 
   /// Returns the absolute path to the user root folder, creating it on demand.
   Future<Directory> _ensureUserRoot() async {
@@ -39,6 +41,14 @@ class AppFileRepository {
     final String fileName = '${const Uuid().v4()}.$extension';
     final File file = File('${audioDirectory.path}/$fileName');
     return AppFileHandle(file: file, relativePath: '$_audioFolderName/$fileName');
+  }
+
+  Future<AppFileHandle> createVideoFile({required String extension}) async {
+    final Directory userRoot = await _ensureUserRoot();
+    final Directory videoDirectory = Directory('${userRoot.path}/$_videoFolderName');
+    if (!await videoDirectory.exists()) await videoDirectory.create(recursive: true);
+    final String fileName = '${const Uuid().v4()}.$extension';
+    return AppFileHandle(file: File('${videoDirectory.path}/$fileName'), relativePath: '$_videoFolderName/$fileName');
   }
 
   /// Resolves an app-relative path (obtained from [AppFileHandle.relativePath])

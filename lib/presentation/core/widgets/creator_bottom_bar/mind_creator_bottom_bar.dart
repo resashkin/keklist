@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/helpers/platform_utils.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
+import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
 
 final class MindCreatorBottomBar extends StatefulWidget {
@@ -16,7 +17,8 @@ final class MindCreatorBottomBar extends StatefulWidget {
   final String placeholder;
   final VoidCallback onTapCancelEdit;
   final Function(CreateMindData) onDone;
-  final Function()? onTapRecordAudio;
+  final VoidCallback? onRecordAudio;
+  final VoidCallback? onRecordVideo;
 
   const MindCreatorBottomBar({
     super.key,
@@ -29,7 +31,8 @@ final class MindCreatorBottomBar extends StatefulWidget {
     required this.placeholder,
     this.editableMind,
     required this.onTapCancelEdit,
-    required this.onTapRecordAudio,
+    required this.onRecordAudio,
+    required this.onRecordVideo,
   });
 
   @override
@@ -65,7 +68,8 @@ final class _MindCreatorBottomBarState extends State<MindCreatorBottomBar> {
                   CreateMindData(emoji: widget.selectedEmoji ?? '', text: widget.textEditingController.text),
                 );
               },
-              onTapRecordAudio: widget.onTapRecordAudio,
+              onRecordAudio: widget.onRecordAudio,
+              onRecordVideo: widget.onRecordVideo,
             ),
             const SizedBox(height: 4.0),
           ],
@@ -124,7 +128,8 @@ final class _TextFieldWidget extends StatelessWidget {
     required this.textEditingController,
     required this.doneTitle,
     required this.onDone,
-    required this.onTapRecordAudio,
+    required this.onRecordAudio,
+    required this.onRecordVideo,
   });
 
   final VoidCallback onSearchEmoji;
@@ -133,7 +138,8 @@ final class _TextFieldWidget extends StatelessWidget {
   final String placeholder;
   final String doneTitle;
   final Function() onDone;
-  final Function()? onTapRecordAudio;
+  final VoidCallback? onRecordAudio;
+  final VoidCallback? onRecordVideo;
 
   @override
   Widget build(BuildContext context) {
@@ -176,10 +182,10 @@ final class _TextFieldWidget extends StatelessWidget {
           ),
         ),
         BoolWidget(
-          condition: onTapRecordAudio != null,
-          trueChild: IconButton(
-            onPressed: onTapRecordAudio,
-            icon: Icon(Icons.mic, color: Colors.blueAccent),
+          condition: onRecordAudio != null && onRecordVideo != null,
+          trueChild: MediaRecordToggleButton(
+            onRecordAudio: () => onRecordAudio?.call(),
+            onRecordVideo: () => onRecordVideo?.call(),
           ).animate().fade(),
           falseChild: Gap(0),
         ),

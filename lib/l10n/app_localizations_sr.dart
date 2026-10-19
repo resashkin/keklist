@@ -682,6 +682,28 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => 'Укључи звук';
+
+  @override
+  String get holdToRecordAudio => 'Држи за гласовну поруку';
+
+  @override
+  String get holdToRecordVideo => 'Држи за видео поруку';
+
+  @override
+  String get roundVideoRecordError => 'Снимање видеа није успело';
+
+  @override
+  String get roundVideoCameraUnavailable =>
+      'Камера није доступна на овом уређају';
+
+  @override
+  String get roundVideoRetake => 'Сними поново';
+
+  @override
+  String get roundVideoUse => 'Користи';
+
+  @override
+  String get removeMedia => 'Уклони медије';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1361,4 +1383,26 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get dayFeedUnmute => 'Uključi zvuk';
+
+  @override
+  String get holdToRecordAudio => 'Drži za glasovnu poruku';
+
+  @override
+  String get holdToRecordVideo => 'Drži za video poruku';
+
+  @override
+  String get roundVideoRecordError => 'Snimanje videa nije uspelo';
+
+  @override
+  String get roundVideoCameraUnavailable =>
+      'Kamera nije dostupna na ovom uređaju';
+
+  @override
+  String get roundVideoRetake => 'Snimi ponovo';
+
+  @override
+  String get roundVideoUse => 'Koristi';
+
+  @override
+  String get removeMedia => 'Ukloni medije';
 }

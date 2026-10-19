@@ -475,5 +475,12 @@
     "dayFeedFolderHint": "Мұнда фото мен видеоны көру үшін медиа қалтасын таңдаңыз",
     "dayFeedChooseFolder": "Таңдау",
     "dayFeedMute": "Дыбысты өшіру",
-    "dayFeedUnmute": "Дыбысты қосу"
+    "dayFeedUnmute": "Дыбысты қосу",
+    "holdToRecordAudio": "Дауыстық хабар жазу үшін басып тұрыңыз",
+    "holdToRecordVideo": "Бейнехабар жазу үшін басып тұрыңыз",
+    "roundVideoRecordError": "Бейнені жазу мүмкін болмады",
+    "roundVideoCameraUnavailable": "Бұл құрылғыда камера қолжетімсіз",
+    "roundVideoRetake": "Қайта түсіру",
+    "roundVideoUse": "Пайдалану",
+    "removeMedia": "Медианы жою"
 }

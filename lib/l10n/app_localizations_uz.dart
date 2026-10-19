@@ -684,4 +684,25 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => 'Ovozni yoqish';
+
+  @override
+  String get holdToRecordAudio => 'Ovozli xabar yozish uchun bosib turing';
+
+  @override
+  String get holdToRecordVideo => 'Video xabar yozish uchun bosib turing';
+
+  @override
+  String get roundVideoRecordError => 'Videoni yozib bo‘lmadi';
+
+  @override
+  String get roundVideoCameraUnavailable => 'Bu qurilmada kamera mavjud emas';
+
+  @override
+  String get roundVideoRetake => 'Qayta olish';
+
+  @override
+  String get roundVideoUse => 'Foydalanish';
+
+  @override
+  String get removeMedia => 'Mediani o‘chirish';
 }

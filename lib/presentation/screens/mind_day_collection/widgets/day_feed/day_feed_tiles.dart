@@ -1,6 +1,8 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:keklist/presentation/screens/date_gallery/folder_media_thumbnail.dart';
+import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
@@ -27,6 +29,8 @@ final class DayFeedMindTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final MindNoteVideo? video = item.mind.noteContent.videoPieces.firstOrNull;
+    if (video != null) return _buildVideoTile(video);
     final String text = item.mind.plainNote.trim();
     final bool showText = isTextVisible && text.isNotEmpty;
     final bool hasAudio = item.mind.audioNotes.isNotEmpty;
@@ -64,6 +68,20 @@ final class DayFeedMindTile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+extension on DayFeedMindTile {
+  Widget _buildVideoTile(MindNoteVideo video) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Center(child: RoundVideoThumbnail(video: video, size: size * 0.92, showsPlayIcon: false)),
+        Positioned(bottom: 2, right: 2, child: Text(item.mind.emoji, style: TextStyle(fontSize: size * 0.22))),
+        if (item.reflectionCount > 0)
+          Positioned(top: 4, right: 4, child: _CountBadge(count: item.reflectionCount)),
+      ],
     );
   }
 }

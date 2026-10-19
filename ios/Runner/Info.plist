@@ -84,11 +84,11 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>For showing/hiding sensetive data for other users by current user</string>
 	<key>NSCameraUsageDescription</key>
-	<string>keklist may use the camera via the file picker to attach photos or videos to entries</string>
+	<string>keklist uses the camera to record round video messages and to attach photos or videos to entries</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>keklist needs access to photo library to import your backups from files</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>keklist needs access to your microphone only to record voice messages</string>
+	<string>keklist needs access to your microphone to record voice and video messages</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>keklist uses your location to tag entries with a place and to set weather coordinates</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

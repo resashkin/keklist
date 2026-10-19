@@ -682,4 +682,25 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get dayFeedUnmute => 'Дыбысты қосу';
+
+  @override
+  String get holdToRecordAudio => 'Дауыстық хабар жазу үшін басып тұрыңыз';
+
+  @override
+  String get holdToRecordVideo => 'Бейнехабар жазу үшін басып тұрыңыз';
+
+  @override
+  String get roundVideoRecordError => 'Бейнені жазу мүмкін болмады';
+
+  @override
+  String get roundVideoCameraUnavailable => 'Бұл құрылғыда камера қолжетімсіз';
+
+  @override
+  String get roundVideoRetake => 'Қайта түсіру';
+
+  @override
+  String get roundVideoUse => 'Пайдалану';
+
+  @override
+  String get removeMedia => 'Медианы жою';
 }

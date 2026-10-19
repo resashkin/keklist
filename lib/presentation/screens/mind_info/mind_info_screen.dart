@@ -1,16 +1,13 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
-import 'package:keklist/domain/repositories/files/app_file_repository.dart';
-import 'package:keklist/domain/services/audio_duration_extractor.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
-import 'package:keklist/presentation/core/widgets/mind_audio_recorder_sheet.dart';
+import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/overscroll_listener.dart';
 import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
 import 'package:keklist/presentation/screens/actions/action_model.dart';
@@ -171,58 +168,11 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
                     textEditingController: _createMindEditingController,
                     placeholder: 'Comment mind...',
                     onDone: _handleCommentDone,
-                    onTapRecordAudio: _isAudioRecordButtonVisible
-                        ? () async {
-                            final AppFileRepository fileRepository = context.read<AppFileRepository>();
-                            final AudioRecordingResult audio = await showModalBottomSheet<AudioRecordingResult>(
-                              context: context,
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              builder: (BuildContext sheetContext) => Padding(
-                                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                                child: MindAudioRecorderSheet(fileRepository: fileRepository),
-                              ),
-                            );
-                            if (audio != null) {
-                              final String trimmedPath = audio.trim();
-                              if (trimmedPath.isEmpty) {
-                                return;
-                              }
-
-                              // Extract duration from the recorded audio file
-                              final String absolutePath = await fileRepository.resolveAbsolutePath(trimmedPath);
-                              final double duration = await const AudioDurationExtractor().extractDuration(absolutePath);
-
-                              final String currentText = _createMindEditingController.text;
-
-                              final String normalizedText = currentText.trim();
-                              MindNoteContent content = normalizedText.isEmpty
-                                  ? MindNoteContent.empty()
-                                  : MindNoteContent.parse(normalizedText);
-                              final bool needsLineBreak =
-                                  content.pieces.isNotEmpty &&
-                                  content.pieces.last.map(
-                                    text: (MindNoteText textPiece) =>
-                                        textPiece.value.isNotEmpty && !textPiece.value.endsWith('\n'),
-                                    audio: (_) => false,
-                                    unknown: () => false,
-                                  );
-                              content = content.copyWithAppendedAudio(
-                                trimmedPath,
-                                separator: needsLineBreak ? '\n' : null,
-                                durationSeconds: duration,
-                              );
-                              sendEventToBloc<MindBloc>(
-                                MindCreate(
-                                  dayIndex: _rootMind.dayIndex,
-                                  mindContent: content.pieces,
-                                  emoji: _selectedEmoji,
-                                  rootId: _rootMind.id,
-                                ),
-                              );
-                              _resetMindCreator();
-                            }
-                          }
+                    onRecordAudio: _isAudioRecordButtonVisible
+                        ? () => _createReflectionWithMedia(MediaRecording.recordAudio)
+                        : null,
+                    onRecordVideo: _isAudioRecordButtonVisible
+                        ? () => _createReflectionWithMedia(MediaRecording.recordVideo)
                         : null,
                     selectedEmoji: _selectedEmoji,
                     onTapEmoji: () {
@@ -254,6 +204,20 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
     setState(() => _isAudioRecordButtonVisible = shouldShowAudioRecordButton);
   }
 
+  Future<void> _createReflectionWithMedia(Future<BaseMindNotePiece?> Function(BuildContext) record) async {
+    final BaseMindNotePiece? media = await record(context);
+    if (media == null || !mounted) return;
+    sendEventToBloc<MindBloc>(
+      MindCreate(
+        dayIndex: _rootMind.dayIndex,
+        mindContent: [media],
+        emoji: _selectedEmoji,
+        rootId: _rootMind.id,
+      ),
+    );
+    _resetMindCreator();
+  }
+
   void _handleCommentDone(CreateMindData data) {
     if (_editableMind == null) {
       final String normalizedText = data.text.trim();
@@ -269,7 +233,15 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
         ),
       );
     } else {
-      final Mind mindForEdit = _editableMind!.copyWith(note: data.text, emoji: _selectedEmoji);
+      final List<BaseMindNotePiece> keptMedia = _editableMind!.noteContent.pieces
+          .where((piece) => piece is MindNoteAudio || piece is MindNoteVideo)
+          .toList();
+      final String text = data.text.trim();
+      final MindNoteContent edited = MindNoteContent.fromPieces([
+        ...keptMedia,
+        if (text.isNotEmpty) MindNoteText(keptMedia.isEmpty ? text : '\n$text'),
+      ]);
+      final Mind mindForEdit = _editableMind!.copyWith(note: edited.toRawNoteString(), emoji: _selectedEmoji);
       sendEventToBloc<MindBloc>(MindEdit(mind: mindForEdit));
     }
     _resetMindCreator();
@@ -305,6 +277,11 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
               null)
             (ActionModel.tranlsateToEnglish(context), () => _translateToEnglish(mind: mind)),
           (ActionModel.edit(context), () => _editMind(mind)),
+          if (mind.noteContent.hasMedia)
+            (
+              ActionModel.custom(title: context.l10n.removeMedia, icon: const Icon(Icons.hide_image_outlined)),
+              () => sendEventToBloc<MindBloc>(MindRemoveMedia(mind: mind)),
+            ),
           (ActionModel.showAll(context), () => _showAllMinds(mind)),
           (ActionModel.delete(context), () => _removeMind(mind)),
         ],
@@ -325,7 +302,7 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
       _editableMind = mind;
       _selectedEmoji = mind.emoji;
     });
-    _createMindEditingController.text = mind.note;
+    _createMindEditingController.text = mind.plainNote.trim();
     _mindCreatorFocusNode.requestFocus();
   }
 

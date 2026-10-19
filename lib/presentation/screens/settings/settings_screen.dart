@@ -408,9 +408,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
     final audioFiles = <String>{};
     for (final mind in minds) {
       final noteContent = MindNoteContent.parse(mind.note);
-      for (final audioPiece in noteContent.audioPieces) {
-        audioFiles.add(audioPiece.appRelativeAbsoulutePath);
-      }
+      audioFiles.addAll(noteContent.mediaFilePaths);
     }
     final audioFilesCount = audioFiles.length;
 

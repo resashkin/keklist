@@ -14,6 +14,9 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/bullete
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/mind_bullet_widget.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/widgets/rounded_container.dart';
+import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/audio/audio_track_widget.dart';
 
 final class MindMessageWidget extends StatelessWidget {
   final Mind mind;
@@ -49,9 +52,10 @@ final class MindMessageWidget extends StatelessWidget {
                         style: Theme.of(context).textTheme.displayLarge,
                       ),
                       const SizedBox(height: 8.0),
+                      ..._buildMedia(mind),
                       SensitiveWidget(
                         child: Text(
-                          mind.plainNote,
+                          mind.plainNote.trim(),
                           style: Theme.of(context).textTheme.bodyLarge,
                           textAlign: TextAlign.center,
                         ),
@@ -105,6 +109,20 @@ final class MindMessageWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Widget> _buildMedia(Mind mind) {
+  final MindNoteContent content = mind.noteContent;
+  return [
+    for (final MindNoteVideo video in content.videoPieces) ...[
+      SensitiveWidget(child: RoundVideoMessage(video: video)),
+      const SizedBox(height: 8.0),
+    ],
+    for (final MindNoteAudio audio in content.audioPieces) ...[
+      SensitiveWidget(child: AudioTrackWidget(audio: audio, emoji: mind.emoji)),
+      const SizedBox(height: 8.0),
+    ],
+  ];
 }
 
 /// Renders a mind's tagged emotions as small chips under its main emoji.
