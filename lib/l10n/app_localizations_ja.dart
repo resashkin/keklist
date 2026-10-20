@@ -769,9 +769,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dayFeedShowMindText => 'テキストを表示';
 
   @override
-  String get dayFeedShowAudioBadge => '音声バッジを表示';
-
-  @override
   String get dayFeedPhotoAccessHint => 'ここに写真と動画を表示するには写真へのアクセスを許可してください';
 
   @override

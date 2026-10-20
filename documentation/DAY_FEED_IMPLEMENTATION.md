@@ -10,8 +10,8 @@ There used to be a second "Sources" mode (a stack of minds, photo, folder and we
 
 ### 1. Domain Layer
 
-- `SettingsObject` Hive fields 22–25: `dayFeedColumnCount` (default 4), `dayFeedMindCellSpan` (default 1), `isDayFeedMindTextVisible` (default true), `isDayFeedAudioBadgeVisible` (default true).
-- Retired fields, never to be reused: 11 (`isPhotoVideoSourceEnabled`), 15 (`isMediaFolderSourceEnabled`), 21 (`isDayFeedModeEnabled`). Media always comes from the photo library (iOS) or the chosen folder (Android).
+- `SettingsObject` Hive fields 22–24: `dayFeedColumnCount` (default 4), `dayFeedMindCellSpan` (default 1), `isDayFeedMindTextVisible` (default true). Field 25 (`isDayFeedAudioBadgeVisible`) is retired: audio minds always show their icon.
+- Retired fields, never to be reused: 11 (`isPhotoVideoSourceEnabled`), 15 (`isMediaFolderSourceEnabled`), 21 (`isDayFeedModeEnabled`), 25 (`isDayFeedAudioBadgeVisible`). Media always comes from the photo library (iOS) or the chosen folder (Android).
 - `KeklistSettings.dayFeed` exposes them as a `DayFeedSettings` value object.
 - `SettingsRepository.updateDayFeedSettings(...)` updates any subset of them.
 - Every place that rebuilds `KeklistSettings` field by field (`MigrationRunner`, `SettingsBloc._enableDebugMenu`, `LazyOnboardingBloc`) passes `dayFeed` through, so those flows do not reset the layout.
@@ -30,7 +30,7 @@ There used to be a second "Sources" mode (a stack of minds, photo, folder and we
 - Rows are packed by `DayFeedLayout.packIntoRows` and built lazily with `SliverList.builder`. A wide mind that does not fit at the end of a row starts a new row; order is never changed to fill gaps.
 - A floating `KekFloatingButton` ("+ Create") opens the mind creator; on other days it sits next to "To now". The grid ends with bottom padding so the button never covers the last row.
 - While media loads, `2 × columnCount` shimmer cells are appended.
-- `DayFeedSettingsBottomSheet` (shake or long-press the title): column count (3/4/5, whole grid), mind tile size (square / wide), mind text, audio badge, the PRO weather toggle with its location sheet, and on Android the media folder sheet (folder and subfolders).
+- `DayFeedSettingsBottomSheet` (shake or long-press the title): column count (3/4/5, whole grid), mind tile size (square / wide), mind text, the PRO weather toggle with its location sheet, and on Android the media folder sheet (folder and subfolders).
 - `DayWeatherBackdrop`: a large, very faint icon, temperature and place name pinned to the bottom-right corner in a `Stack` under the scroll view. It ignores touches; tiles cover it on busy days.
 - `DayStoriesScreen`: progress bars, auto-advance, tap left/right third for previous/next, middle tap or swipe up on a mind opens `MindInfoScreen`, hold to pause, swipe down to close, closes after the last item.
 - `FolderMediaThumbnail` and `FolderMediaItem` live in `widgets/day_feed/`.
@@ -96,3 +96,10 @@ Videos start muted. They are unmuted by the speaker icon or by pressing a hardwa
 - The volume listener sets the iOS audio session category to `playback` while the stories viewer is open.
 - Weather has no detail screen any more; the backdrop is decorative only.
 - Media loading reads all of a day's asset metadata up front; thumbnails are built lazily per visible row and cached on disk by `GalleryThumbnailCache`.
+
+## Mind tiles
+- All minds share one card tile (`DayFeedMindTile`).
+- Text minds: emotion emojis on top, then the text as `AutoSizeText` (14 → 7 pt), wrapping to fill the tile.
+- Round-video minds: the video circle (70% of the tile) with no text. Audio minds: a waveform icon of the same size, no circle and no text. Both show their emotion emojis top-left and the duration bottom-right.
+- There are no reflection-count badges on tiles; stories still show the count.
+

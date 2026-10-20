@@ -795,9 +795,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get dayFeedShowMindText => 'Matnni ko‘rsatish';
 
   @override
-  String get dayFeedShowAudioBadge => 'Audio belgisini ko‘rsatish';
-
-  @override
   String get dayFeedPhotoAccessHint =>
       'Bu yerda foto va videolarni ko‘rish uchun suratlarga ruxsat bering';
 

@@ -64,11 +64,6 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
           value: settings.isMindTextVisible,
           onChanged: (value) => update(SettingsUpdateDayFeed(isMindTextVisible: value)),
         ),
-        SwitchListTile(
-          title: Text(context.l10n.dayFeedShowAudioBadge),
-          value: settings.isAudioBadgeVisible,
-          onChanged: (value) => update(SettingsUpdateDayFeed(isAudioBadgeVisible: value)),
-        ),
         const Divider(),
         SwitchListTile(
           secondary: const Icon(Icons.cloud_outlined),

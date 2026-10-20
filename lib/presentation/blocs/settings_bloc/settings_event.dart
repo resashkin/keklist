@@ -93,12 +93,10 @@ final class SettingsUpdateDayFeed extends SettingsEvent {
   final int? columnCount;
   final int? mindCellSpan;
   final bool? isMindTextVisible;
-  final bool? isAudioBadgeVisible;
   const SettingsUpdateDayFeed({
     this.columnCount,
     this.mindCellSpan,
     this.isMindTextVisible,
-    this.isAudioBadgeVisible,
   });
 }
 

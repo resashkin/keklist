@@ -794,9 +794,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get dayFeedShowMindText => 'Мәтінді көрсету';
 
   @override
-  String get dayFeedShowAudioBadge => 'Аудио белгісін көрсету';
-
-  @override
   String get dayFeedPhotoAccessHint =>
       'Мұнда фото мен видеоны көру үшін фотоға рұқсат беріңіз';
 

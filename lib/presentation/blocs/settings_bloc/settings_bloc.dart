@@ -224,7 +224,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       columnCount: event.columnCount,
       mindCellSpan: event.mindCellSpan,
       isMindTextVisible: event.isMindTextVisible,
-      isAudioBadgeVisible: event.isAudioBadgeVisible,
     );
   }
 

@@ -1587,12 +1587,6 @@ abstract class AppLocalizations {
   /// **'Show text'**
   String get dayFeedShowMindText;
 
-  /// Unified day grid (All mode) label
-  ///
-  /// In en, this message translates to:
-  /// **'Show audio badge'**
-  String get dayFeedShowAudioBadge;
-
   /// Banner in the unified day grid when photo access is missing
   ///
   /// In en, this message translates to:

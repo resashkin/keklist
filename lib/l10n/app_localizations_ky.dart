@@ -794,9 +794,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get dayFeedShowMindText => 'Текстти көрсөтүү';
 
   @override
-  String get dayFeedShowAudioBadge => 'Аудио белгисин көрсөтүү';
-
-  @override
   String get dayFeedPhotoAccessHint =>
       'Бул жерде сүрөт жана видеолорду көрүү үчүн сүрөткө уруксат бериңиз';
 

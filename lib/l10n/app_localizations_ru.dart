@@ -792,9 +792,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dayFeedShowMindText => 'Показывать текст';
 
   @override
-  String get dayFeedShowAudioBadge => 'Показывать значок аудио';
-
-  @override
   String get dayFeedPhotoAccessHint =>
       'Разрешите доступ к фото, чтобы видеть здесь фото и видео';
 
