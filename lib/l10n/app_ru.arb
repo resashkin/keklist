@@ -1,4 +1,5 @@
 {
+    "activeTasks": "Активные задачи",
     "galleryIndex": "Индекс галереи",
     "galleryIndexNoAccess": "Нет доступа к Фото",
     "galleryIndexNotIndexed": "Ещё не проиндексировано",

@@ -1,4 +1,5 @@
 {
+    "activeTasks": "进行中的任务",
     "galleryIndex": "图库索引",
     "galleryIndexNoAccess": "无法访问照片",
     "galleryIndexNotIndexed": "尚未建立索引",

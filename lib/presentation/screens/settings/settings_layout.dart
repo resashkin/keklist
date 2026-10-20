@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 abstract final class SettingsItemIds {
+  static const String activeTasksSection = 'section.activeTasks';
   static const String userDataSection = 'section.userData';
   static const String applicationSection = 'section.application';
   static const String appearanceSection = 'section.appearance';

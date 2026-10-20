@@ -9,6 +9,9 @@ class AppLocalizationsKy extends AppLocalizations {
   AppLocalizationsKy([String locale = 'ky']) : super(locale);
 
   @override
+  String get activeTasks => 'Активдүү тапшырмалар';
+
+  @override
   String get galleryIndex => 'Галерея индекси';
 
   @override

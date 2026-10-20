@@ -1,4 +1,5 @@
 {
+    "activeTasks": "Tareas activas",
     "galleryIndex": "Índice de la galería",
     "galleryIndexNoAccess": "Sin acceso a Fotos",
     "galleryIndexNotIndexed": "Aún sin indexar",
