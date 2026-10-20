@@ -99,7 +99,8 @@ Videos start muted. They are unmuted by the speaker icon or by pressing a hardwa
 
 ## Mind tiles
 - All minds share one card tile (`DayFeedMindTile`).
-- Text minds: emotion emojis on top, then the text as `AutoSizeText` (14 → 7 pt), wrapping to fill the tile.
-- Round-video minds: the video circle (70% of the tile) with no text. Audio minds: a waveform icon of the same size, no circle and no text. Both show their emotion emojis top-left and the duration bottom-right.
+- Emotions are a background texture (`MindEmotionTexture`): the mind's emojis repeated in a tilted grid at 20% opacity, behind the text or the media circle.
+- Text minds: the text as `AutoSizeText` (14 → 7 pt), wrapping to fill the tile. With text hidden (or empty), the emojis show centered at full opacity instead of the texture.
+- Round-video minds: the video circle (70% of the tile) with no text. Audio minds: a waveform icon of the same size, no circle and no text. Both show the duration bottom-right.
 - There are no reflection-count badges on tiles; stories still show the count.
 
