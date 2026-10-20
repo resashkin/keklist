@@ -1,18 +1,13 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
-import 'package:flutter/services.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
-import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
-import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
-import 'package:keklist/presentation/blocs/mind_creator_bloc/mind_creator_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/core/widgets/overscroll_listener.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
@@ -22,7 +17,6 @@ import 'package:keklist/presentation/core/dispose_bag.dart';
 import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/screens/mind_info/mind_info_screen.dart';
-import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/presentation/core/widgets/kek_floating_button.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
@@ -40,6 +34,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_sliver.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_weather_backdrop.dart';
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 const double _kFloatingButtonClearance = 96.0;
@@ -65,7 +60,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
 
   final ScrollController _scrollController = ScrollController();
 
-  bool _isMindContentVisible = false;
   bool _hasReceivedSettings = false;
   bool _isWeatherSourceEnabled = false;
   double? _weatherLatitude;
@@ -74,20 +68,8 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   bool _isMediaFolderRecursive = false;
   WeatherCubit? _weatherCubit;
   bool _pendingWeatherEnable = false;
-  final DayFeedCubit _dayFeedCubit = DayFeedCubit();
+  late final DayFeedCubit _dayFeedCubit = DayFeedCubit(galleryIndexer: context.read<GalleryIndexer>());
   DayFeedSettings _dayFeedSettings = const DayFeedSettings();
-
-  bool get _isSensitiveContentHidingAvailable =>
-      _debugMenuState?.debugMenuItems.firstWhereOrNull(
-        (element) => element.type == DebugMenuType.sensitiveContent && element.value,
-      ) !=
-      null;
-
-  bool get _isMindTextHidden => _isSensitiveContentHidingAvailable && !_isMindContentVisible;
-
-  DebugMenuDataState? _debugMenuState;
-
-  Iterable<String> suggestions = KeklistConstants.defaultEmojiesToPick;
 
   MindDayCollectionScreenState({required this.dayIndex});
 
@@ -117,7 +99,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
       onNewState: (state) {
         if (state is SettingsDataState) {
           setState(() {
-            _isMindContentVisible = state.settings.isMindContentVisible;
             _dayFeedSettings = state.settings.dayFeed;
           });
           final bool weatherEnabled = state.settings.isWeatherSourceEnabled;
@@ -146,20 +127,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
       },
     )?.disposed(by: this);
 
-    subscribeToBloc<DebugMenuBloc>(
-      onNewState: (state) {
-        if (state is DebugMenuDataState) {
-          _debugMenuState = state;
-        }
-      },
-    )?.disposed(by: this);
-
-    subscribeToBloc<MindCreatorBloc>(
-      onNewState: (state) {
-        setState(() => suggestions = state.suggestions.take(5));
-      },
-    )?.disposed(by: this);
-
     subscribeToBloc<MembershipBloc>(
       onNewState: (state) {
         if (state is MembershipDataState && state.isPro && _pendingWeatherEnable) {
@@ -171,8 +138,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
 
     sendEventToBloc<MindBloc>(MindGetList());
     sendEventToBloc<SettingsBloc>(SettingsGet());
-    sendEventToBloc<DebugMenuBloc>(DebugMenuGet());
-    sendEventToBloc<MindCreatorBloc>(MindCreatorGetSuggestions(text: ''));
   }
 
   @override
@@ -209,20 +174,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
             ],
           ),
         ),
-        actions: [
-          BoolWidget(
-            condition: _isSensitiveContentHidingAvailable,
-            trueChild: IconButton(
-              icon: BoolWidget(
-                condition: _isMindContentVisible,
-                trueChild: const Icon(Icons.visibility_off_outlined),
-                falseChild: const Icon(Icons.visibility),
-              ),
-              onPressed: () => _changeContentVisibility(),
-            ),
-            falseChild: SizedBox.shrink(),
-          ),
-        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _buildFloatingButtons(),
@@ -315,7 +266,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
           builder: (context, state) => DayFeedSliver(
             state: state,
             settings: _dayFeedSettings,
-            isMindTextHidden: _isMindTextHidden,
             onOpenItem: (index) => _openDayStories(state, index),
             onResolveMediaIssue: (issue) => _resolveDayFeedMediaIssue(issue),
           ),
@@ -335,36 +285,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     _weatherCubit?.close();
     _dayFeedCubit.close();
     super.dispose();
-  }
-
-  Future<void> _changeContentVisibility() async {
-    HapticFeedback.mediumImpact();
-    if (!_isMindContentVisible) {
-      final LocalAuthentication auth = LocalAuthentication();
-      try {
-        final bool canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
-        final bool canAuthenticate = canAuthenticateWithBiometrics || await auth.isDeviceSupported();
-        if (canAuthenticate) {
-          if (!mounted) return;
-          final bool didAuthenticate = await auth.authenticate(
-            localizedReason: context.l10n.pleaseAuthenticateToShowContent,
-          );
-          if (didAuthenticate) {
-            setState(() {
-              sendEventToBloc<SettingsBloc>(const SettingsChangeMindContentVisibility(isVisible: true));
-            });
-          }
-        }
-      } on Exception {
-        setState(() {
-          sendEventToBloc<SettingsBloc>(const SettingsChangeMindContentVisibility(isVisible: true));
-        });
-      }
-    } else {
-      setState(() {
-        sendEventToBloc<SettingsBloc>(const SettingsChangeMindContentVisibility(isVisible: false));
-      });
-    }
   }
 
   Future<int?> _showDateSwitcherToNewDay() async {
@@ -524,7 +444,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
         pageBuilder: (_, _, _) => DayStoriesScreen(
           items: state.items,
           initialIndex: initialIndex,
-          isMindTextHidden: _isMindTextHidden,
           onOpenMind: (mind) => _showMindInfo(mind),
         ),
         transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
@@ -536,7 +455,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     Haptics.vibrate(HapticsType.heavy);
   }
 
-  void _showMindCreator({String? initialText, String? initialEmoji}) {
+  void _showMindCreator() {
     // Pushed as a full-screen route (not a bottom sheet) so a stray swipe can't
     // dismiss it; fullscreenDialog disables the iOS back-swipe — close/save only.
     Navigator.of(context).push(
@@ -544,9 +463,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
         fullscreenDialog: true,
         builder: (_) {
           return MindCreatorScreen(
-            initialEmoji: initialEmoji,
-            initialText: initialText,
-            onDone: (String text, String emoji) {
+            onDone: (String text, List<String> emotionIds) {
               final String normalizedText = text.trim();
               final MindNoteContent content = normalizedText.isEmpty
                   ? MindNoteContent.empty()
@@ -554,8 +471,8 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
               final MindCreate event = MindCreate(
                 dayIndex: dayIndex,
                 mindContent: content.pieces,
-                emoji: emoji,
                 rootId: null,
+                emotionIds: emotionIds,
               );
               sendEventToBloc<MindBloc>(event);
             },

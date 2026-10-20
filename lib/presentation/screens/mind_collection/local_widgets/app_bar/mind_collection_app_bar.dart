@@ -52,14 +52,6 @@ final class _MindCollectionAppBar extends StatelessWidget {
           onPressed: onCalendar,
           onLongPress: onCalendarLongTap,
         ),
-        SensitiveWidget(
-          mode: SensitiveMode.blurred,
-          child: IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              !SensitiveWidget.isProtected ? onSearch() : null;
-            },
-          ),
-        ),
+        IconButton(icon: const Icon(Icons.search), onPressed: onSearch),
       ];
 }

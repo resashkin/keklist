@@ -39,7 +39,7 @@ There used to be a second "Sources" mode (a stack of minds, photo, folder and we
 
 1. On the first settings state, and whenever the Android folder changes, the screen calls `DayFeedCubit.loadMedia`; minds are already set.
 2. Media source:
-   - iOS: the photo library. Permission is only *checked*; the "Allow" banner button requests it and opens system settings if it stays denied.
+   - iOS: the photo library ("All" album), skipped for days the gallery index knows are empty (see `GALLERY_INDEX_IMPLEMENTATION.md`). Permission is only *checked*; the "Allow" banner button requests it and opens system settings if it stays denied.
    - Android: the chosen media folder (SAF). Without one, the banner opens the folder picker.
 3. Items are merged and sorted by timestamp ascending: `Mind.creationDate`, `AssetEntity.createDateTime`, or the file's modification time. A mind written later for a past day therefore sorts by when it was typed.
 4. Reflections (`rootId != null`) are not tiles; the root tile shows their count.
@@ -92,7 +92,7 @@ Videos start muted. They are unmuted by the speaker icon or by pressing a hardwa
 
 ## Edge Cases & Considerations
 
-- When the debug "Sensitive Content" item is enabled and content is hidden, mind tiles and mind stories show only the emoji; media is unaffected.
+- Mind tiles and stories show the emojis of the mind's emotions; a text-less mind without emotions shows a faint notes icon.
 - The volume listener sets the iOS audio session category to `playback` while the stories viewer is open.
 - Weather has no detail screen any more; the backdrop is decorative only.
-- Media loading reads all of a day's asset metadata up front; thumbnails are built lazily per visible row.
+- Media loading reads all of a day's asset metadata up front; thumbnails are built lazily per visible row and cached on disk by `GalleryThumbnailCache`.

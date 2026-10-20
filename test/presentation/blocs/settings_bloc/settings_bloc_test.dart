@@ -23,7 +23,6 @@ void main() {
   late SettingsBloc bloc;
 
   final currentSettings = KeklistSettings(
-    isMindContentVisible: true,
     previousAppVersion: '1.0.0 1',
     themePreference: KeklistThemeMode.dark,
     interfaceStyle: KeklistInterfaceStyle.liquidGlass,

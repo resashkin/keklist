@@ -3,6 +3,8 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
+import 'package:keklist/presentation/core/widgets/mind_emotion_emojis.dart';
 import 'package:flutter_volume_controller/flutter_volume_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
@@ -28,14 +30,12 @@ const double _kStoryRoundVideoSize = 280.0;
 final class DayStoriesScreen extends StatefulWidget {
   final List<DayFeedItem> items;
   final int initialIndex;
-  final bool isMindTextHidden;
   final Future<void> Function(Mind mind) onOpenMind;
 
   const DayStoriesScreen({
     super.key,
     required this.items,
     required this.initialIndex,
-    required this.isMindTextHidden,
     required this.onOpenMind,
   });
 
@@ -333,19 +333,29 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     final DayFeedItem item = _currentItem;
     final VideoPlayerController? video = _videoController;
     if (item is DayFeedMind) {
-      return _MindStory(item: item, isTextHidden: widget.isMindTextHidden, roundVideo: video);
+      return _MindStory(item: item, roundVideo: video);
     }
     if (video != null && video.value.isInitialized) {
       return Center(child: AspectRatio(aspectRatio: video.value.aspectRatio, child: VideoPlayer(video)));
     }
     return switch (item) {
-      DayFeedMind() => _MindStory(item: item, isTextHidden: widget.isMindTextHidden),
+      DayFeedMind() => _MindStory(item: item),
       DayFeedAsset(isVideo: true) || DayFeedFolderMedia(isVideo: true) => const _Loading(),
-      DayFeedAsset(:final asset) => Image(
+      DayFeedAsset(:final asset) => Stack(
           key: ValueKey(item.id),
-          image: AssetEntityImageProvider(asset, isOriginal: true),
-          fit: BoxFit.contain,
-          loadingBuilder: (_, child, progress) => progress == null ? child : const _Loading(),
+          fit: StackFit.expand,
+          children: [
+            Image(image: CachedAssetThumbnailProvider(asset), fit: BoxFit.contain, errorBuilder: (_, _, _) => const _Loading()),
+            Image(
+              image: AssetEntityImageProvider(asset, isOriginal: true),
+              fit: BoxFit.contain,
+              frameBuilder: (_, child, frame, wasSynchronouslyLoaded) => AnimatedOpacity(
+                opacity: frame == null && !wasSynchronouslyLoaded ? 0.0 : 1.0,
+                duration: const Duration(milliseconds: 200),
+                child: child,
+              ),
+            ),
+          ],
         ),
       DayFeedFolderMedia(item: FolderFileItem(:final file)) => Image.file(file, key: ValueKey(item.id), fit: BoxFit.contain),
       DayFeedFolderMedia(item: final FolderSafItem safItem) => _SafPhoto(key: ValueKey(item.id), item: safItem),
@@ -355,10 +365,9 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
 
 final class _MindStory extends StatelessWidget {
   final DayFeedMind item;
-  final bool isTextHidden;
   final VideoPlayerController? roundVideo;
 
-  const _MindStory({required this.item, required this.isTextHidden, this.roundVideo});
+  const _MindStory({required this.item, this.roundVideo});
 
   @override
   Widget build(BuildContext context) {
@@ -381,8 +390,11 @@ final class _MindStory extends StatelessWidget {
                       )
                     : const _Loading(),
               ),
-            Text(item.mind.emoji, style: TextStyle(fontSize: hasVideo ? 48.0 : 96.0)),
-            if (!isTextHidden && text.isNotEmpty) ...[
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: MindEmotionEmojis(mind: item.mind, fontSize: hasVideo ? 32.0 : 48.0),
+            ),
+            if (text.isNotEmpty) ...[
               const SizedBox(height: 24.0),
               Text(text, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 20.0)),
             ],

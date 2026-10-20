@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:csv/csv.dart';
+import 'package:keklist/domain/services/emotions/legacy_emoji_linker.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
@@ -31,6 +32,14 @@ final class ExportImportService {
   }) : _mindRepository = mindRepository,
        _fileRepository = fileRepository,
        _emotionRepository = emotionRepository;
+
+  /// Old backups carry a main emoji instead of emotions; link it like migration v4.
+  List<Mind> _withLegacyEmojiLinked(List<Mind> minds) {
+    final Map<String, Mind> linkedById = {
+      for (final Mind mind in LegacyEmojiLinker.link(minds: minds, emotions: _emotionRepository.values)) mind.id: mind,
+    };
+    return [for (final Mind mind in minds) linkedById[mind.id] ?? mind];
+  }
 
   /// Name of the emotion definitions entry inside a ZIP export.
   static const String emotionsFileName = 'emotions.csv';
@@ -300,17 +309,7 @@ final class ExportImportService {
         }
 
         try {
-          final mind = Mind(
-            id: row[0].toString(),
-            emoji: row[1].toString(),
-            note: row[2].toString(),
-            dayIndex: int.parse(row[3].toString()),
-            sortIndex: int.parse(row[4].toString()),
-            creationDate: DateTime.parse(row[5].toString()),
-            rootId: row[6].toString() == 'null' ? null : row[6].toString(),
-            emotionIds: Mind.emotionIdsFromCSVEntry(row),
-          );
-          mindsToImport.add(mind);
+          mindsToImport.add(Mind.fromCSVEntry(row));
         } catch (e) {
           // Skip invalid rows
           continue;
@@ -321,8 +320,7 @@ final class ExportImportService {
         return const ImportFailure(error: ImportError.invalidFormat, details: 'No valid minds found in CSV file');
       }
 
-      // Batch import
-      await _mindRepository.createMinds(minds: mindsToImport);
+      await _mindRepository.createMinds(minds: _withLegacyEmojiLinked(mindsToImport));
 
       return ImportSuccess(mindsCount: mindsToImport.length, audioFilesCount: 0);
     } catch (e) {
@@ -410,17 +408,7 @@ final class ExportImportService {
         if (row.length < 7) continue;
 
         try {
-          final mind = Mind(
-            id: row[0].toString(),
-            emoji: row[1].toString(),
-            note: row[2].toString(),
-            dayIndex: int.parse(row[3].toString()),
-            sortIndex: int.parse(row[4].toString()),
-            creationDate: DateTime.parse(row[5].toString()),
-            rootId: row[6].toString() == 'null' ? null : row[6].toString(),
-            emotionIds: Mind.emotionIdsFromCSVEntry(row),
-          );
-          mindsToImport.add(mind);
+          mindsToImport.add(Mind.fromCSVEntry(row));
         } catch (e) {
           continue;
         }
@@ -479,8 +467,7 @@ final class ExportImportService {
         }
       }
 
-      // Import minds
-      await _mindRepository.createMinds(minds: mindsToImport);
+      await _mindRepository.createMinds(minds: _withLegacyEmojiLinked(mindsToImport));
 
       // Cleanup
       await tempExtractDir.delete(recursive: true);

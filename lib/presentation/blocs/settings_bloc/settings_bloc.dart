@@ -28,7 +28,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       super(SettingsDataState(settings: KeklistSettings.initial())) {
     on<SettingsExport>(_export);
     on<SettingsImport>(_import);
-    on<SettingsChangeMindContentVisibility>(_changeMindContentVisibility);
     on<SettingsWhatsNewShown>(_disableShowingWhatsNewUntillNewVersion);
     on<SettingsGet>(_getSettings);
     on<SettingGetWhatsNew>(_sendWhatsNewIfNeeded);
@@ -166,13 +165,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     final String appVersion = '${packageInfo.version} ${packageInfo.buildNumber}';
 
     await _repository.updatePreviousAppVersion(appVersion);
-  }
-
-  FutureOr<void> _changeMindContentVisibility(
-    SettingsChangeMindContentVisibility event,
-    Emitter<SettingsState> emit,
-  ) async {
-    await _repository.updateMindContentVisibility(event.isVisible);
   }
 
   FutureOr<void> _changeThemePreference(SettingsChangeThemePreference event, Emitter<SettingsState> emit) async {

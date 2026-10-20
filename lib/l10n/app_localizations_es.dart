@@ -9,6 +9,44 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
+  String get galleryIndex => 'Índice de la galería';
+
+  @override
+  String get galleryIndexNoAccess => 'Sin acceso a Fotos';
+
+  @override
+  String get galleryIndexNotIndexed => 'Aún sin indexar';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Indexando $done de $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count fotos y vídeos · actualizado $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Caché de miniaturas: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle =>
+      '¿Reconstruir el índice de la galería?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Se borrarán las miniaturas y la fototeca se analizará de nuevo.';
+
+  @override
+  String get galleryIndexRebuild => 'Reconstruir';
+
+  @override
+  String get allEmotions => 'Todas…';
+
+  @override
   String get settings => 'Configuración';
 
   @override
@@ -64,9 +102,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get showDigest => 'Mostrar resumen para ...';
-
-  @override
-  String get showAll => 'Mostrar todo';
 
   @override
   String get translateToEnglish => 'Traducir al inglés';
@@ -163,9 +198,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dangerZone => 'Zona de Peligro';
 
   @override
-  String get editMind => 'Editar mente';
-
-  @override
   String get enterTokenHere => 'Ingresa token aquí';
 
   @override
@@ -233,18 +265,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get todayMinds => 'Mentes de hoy';
 
   @override
-  String get randomMind => 'Mente aleatoria';
-
-  @override
   String get spectrum => 'Espectro';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Aún no has recopilado ninguna entrada';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Por favor autentícate para mostrar el contenido de tu mente';
 
   @override
   String get areYouSure => '¿Estás seguro?';
@@ -519,12 +544,6 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'No se pudo detener la grabación. Inténtalo de nuevo.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

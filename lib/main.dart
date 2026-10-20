@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:developer' as developer;
-import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:crypto/crypto.dart';
@@ -13,6 +12,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
+import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
+import 'package:keklist/domain/repositories/media_index/object/media_day_index_object.dart';
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:keklist/domain/repositories/tabs/tabs_settings_repository.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
@@ -31,7 +33,6 @@ import 'package:keklist/domain/hive_constants.dart';
 import 'package:keklist/domain/repositories/settings/object/settings_object.dart';
 import 'package:keklist/domain/repositories/debug_menu/object/debug_menu_object.dart';
 import 'package:keklist/presentation/blocs/audio_player_bloc/audio_player_bloc.dart';
-import 'package:keklist/presentation/blocs/mind_creator_bloc/mind_creator_bloc.dart';
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_bloc.dart';
 import 'package:keklist/presentation/blocs/user_profile_bloc/user_profile_bloc.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
@@ -48,12 +49,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
-import 'package:keklist/presentation/cubits/used_emoji/used_emoji_cubit.dart';
 import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
 import 'package:keklist/presentation/cubits/weather/weather_cubit.dart';
 import 'package:keklist/di/containers.dart';
 
-import 'presentation/native/ios/watch/watch_communication_manager.dart';
 
 // TODO: fix or exclude home_widget for android only
 
@@ -78,6 +77,7 @@ final class _AppRoot extends StatefulWidget {
 final class _AppRootState extends State<_AppRoot> {
   final _stepNotifier = ValueNotifier<String>('');
   Widget? _app;
+  AppLifecycleListener? _galleryIndexLifecycle;
 
   @override
   void initState() {
@@ -99,7 +99,6 @@ final class _AppRootState extends State<_AppRoot> {
     final streamingPrefs = await StreamingSharedPreferences.instance;
     final injector = MainContainer(streamingSharedPreferences: streamingPrefs).initialize(Injector());
 
-    _connectToWatchCommunicationManager(injector);
     _enableDebugBLOCLogs(injector);
 
     final debugBox = Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName);
@@ -115,11 +114,18 @@ final class _AppRootState extends State<_AppRoot> {
 
     final app = _getApplication(injector);
     setState(() => _app = app);
+    _startGalleryIndexing(injector.get<GalleryIndexer>());
+  }
+
+  void _startGalleryIndexing(GalleryIndexer indexer) {
+    indexer.sync();
+    _galleryIndexLifecycle = AppLifecycleListener(onResume: indexer.sync);
   }
 
   @override
   void dispose() {
     _stepNotifier.dispose();
+    _galleryIndexLifecycle?.dispose();
     super.dispose();
   }
 
@@ -232,6 +238,9 @@ Future<void> _initHive(HiveAesCipher cipher) async {
   if (!Hive.isAdapterRegistered(EmotionObjectAdapter().typeId)) {
     Hive.registerAdapter<EmotionObject>(EmotionObjectAdapter());
   }
+  if (!Hive.isAdapterRegistered(MediaDayIndexObjectAdapter().typeId)) {
+    Hive.registerAdapter<MediaDayIndexObject>(MediaDayIndexObjectAdapter());
+  }
 
   await Hive.initFlutter();
 
@@ -247,6 +256,8 @@ Future<void> _initHive(HiveAesCipher cipher) async {
   await Hive.openBox<DebugMenuObject>(HiveConstants.debugMenuBoxName, encryptionCipher: cipher);
   await Hive.openBox<WeatherCacheObject>(HiveConstants.weatherCacheBoxName, encryptionCipher: cipher);
   await Hive.openBox(HiveConstants.blocLogSettingsBoxName);
+  await Hive.openBox<MediaDayIndexObject>(HiveConstants.mediaDayIndexBoxName, encryptionCipher: cipher);
+  await Hive.openBox(HiveConstants.mediaIndexMetaBoxName, encryptionCipher: cipher);
 
   final Box<EmotionObject> emotionBox =
       await Hive.openBox<EmotionObject>(HiveConstants.emotionBoxName, encryptionCipher: cipher);
@@ -281,6 +292,7 @@ Widget _getApplication(Injector mainInjector) => MultiProvider(
     RepositoryProvider(create: (context) => mainInjector.get<MindRepository>()),
     RepositoryProvider(create: (context) => mainInjector.get<AppFileRepository>()),
     RepositoryProvider(create: (context) => mainInjector.get<WeatherRepository>()),
+    RepositoryProvider(create: (context) => mainInjector.get<GalleryIndexer>()),
   ],
   child: MultiBlocProvider(
     providers: [
@@ -292,13 +304,10 @@ Widget _getApplication(Injector mainInjector) => MultiProvider(
         ),
       ),
       BlocProvider(create: (context) => mainInjector.get<MindSearcherCubit>()),
-      BlocProvider(create: (context) => mainInjector.get<UsedEmojiCubit>()),
-      BlocProvider(create: (context) => MindCreatorBloc(mindRepository: mainInjector.get<MindRepository>())),
       BlocProvider<SettingsBloc>.value(value: mainInjector.get<SettingsBloc>()),
       BlocProvider<EmotionBloc>.value(value: mainInjector.get<EmotionBloc>()..add(EmotionGetList())),
       BlocProvider(
         create: (context) => UserProfileBloc(
-          mindRepository: mainInjector.get<MindRepository>(),
           settingsRepository: mainInjector.get<SettingsRepository>(),
         ),
       ),
@@ -319,6 +328,7 @@ Widget _getApplication(Injector mainInjector) => MultiProvider(
         create: (context) => LazyOnboardingBloc(
           mindRepository: mainInjector.get<MindRepository>(),
           settingsRepository: mainInjector.get<SettingsRepository>(),
+          emotionRepository: mainInjector.get<EmotionRepository>(),
         ),
       ),
     ],
@@ -358,17 +368,8 @@ void _enableDebugBLOCLogs(Injector injector) {
   );
 }
 
-void _connectToWatchCommunicationManager(Injector mainInjector) {
-  if (kIsWeb) {
-    // no-op
-  } else if (Platform.isIOS) {
-    mainInjector.get<WatchCommunicationManager>().connect();
-  }
-}
-
 const Map<Type, String> _kBlocEmojis = {
   MindBloc: '🧠',
-  MindCreatorBloc: '✍️',
   MindSearcherCubit: '🔎',
   SettingsBloc: '⚙️',
   DebugMenuBloc: '🐞',
@@ -377,7 +378,6 @@ const Map<Type, String> _kBlocEmojis = {
   LazyOnboardingBloc: '🚀',
   AudioPlayerBloc: '🎧',
   UserProfileBloc: '👤',
-  UsedEmojiCubit: '🎨',
   WeatherCubit: '🌤️',
 };
 

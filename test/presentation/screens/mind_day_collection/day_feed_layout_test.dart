@@ -13,7 +13,7 @@ Mind _mind({
     Mind(
       id: id,
       note: note,
-      emoji: '🙂',
+      legacyEmoji: '🙂',
       dayIndex: dayIndex,
       creationDate: creationDate ?? DateTime(2026, 1, 1, 12),
       sortIndex: 0,

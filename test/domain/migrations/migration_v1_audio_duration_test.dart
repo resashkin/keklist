@@ -20,7 +20,7 @@ void main() {
     registerFallbackValue(
       Mind(
         id: 'fallback',
-        emoji: '🔄',
+        legacyEmoji: '🔄',
         note: 'fallback',
         dayIndex: 0,
         creationDate: DateTime(2024),
@@ -70,7 +70,7 @@ void main() {
     test('skips minds without audio', () async {
       final mindWithoutAudio = Mind(
         id: '1',
-        emoji: '📝',
+        legacyEmoji: '📝',
         note: 'Just plain text',
         dayIndex: 0,
         creationDate: DateTime(2024),
@@ -89,7 +89,7 @@ void main() {
     test('skips minds with audio that already have duration', () async {
       final mindWithDuration = Mind(
         id: '1',
-        emoji: '🎵',
+        legacyEmoji: '🎵',
         note: 'Text<kekaudio path="/audio/file.m4a" duration="30.0"/>more',
         dayIndex: 0,
         creationDate: DateTime(2024),
@@ -113,7 +113,7 @@ void main() {
 
       final mindWithOldAudio = Mind(
         id: '1',
-        emoji: '🎵',
+        legacyEmoji: '🎵',
         note: 'Text<kekaudio>/audio/nonexistent.m4a</kekaudio>more',
         dayIndex: 0,
         creationDate: DateTime(2024),
@@ -138,7 +138,7 @@ void main() {
     test('handles repository update errors gracefully', () async {
       final mindWithOldAudio = Mind(
         id: '1',
-        emoji: '🎵',
+        legacyEmoji: '🎵',
         note: 'Text<kekaudio>/audio/file.m4a</kekaudio>',
         dayIndex: 0,
         creationDate: DateTime(2024),

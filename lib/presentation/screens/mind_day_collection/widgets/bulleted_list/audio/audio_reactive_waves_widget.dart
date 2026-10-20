@@ -2,9 +2,8 @@ import 'package:material_ui/material_ui.dart';
 
 final class AudioReactiveWavesWidget extends StatelessWidget {
   final double amplitude; // 0.0 to 1.0
-  final String emoji;
 
-  const AudioReactiveWavesWidget({super.key, required this.amplitude, required this.emoji});
+  const AudioReactiveWavesWidget({super.key, required this.amplitude});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +17,7 @@ final class AudioReactiveWavesWidget extends StatelessWidget {
               delay: Duration(milliseconds: i * 150),
               scale: 1.0 + (i * 0.1),
             ),
-          // Mind emoji in center
-          Text(emoji, style: const TextStyle(fontSize: 120)),
+          Icon(Icons.graphic_eq, size: 120, color: Theme.of(context).colorScheme.primary),
         ],
       ),
     );

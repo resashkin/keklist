@@ -9,6 +9,43 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get galleryIndex => 'Gallery index';
+
+  @override
+  String get galleryIndexNoAccess => 'No access to Photos';
+
+  @override
+  String get galleryIndexNotIndexed => 'Not indexed yet';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Indexing $done of $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count photos and videos · updated $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Thumbnail cache: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Rebuild the gallery index?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Thumbnails will be cleared and the library scanned again.';
+
+  @override
+  String get galleryIndexRebuild => 'Rebuild';
+
+  @override
+  String get allEmotions => 'All…';
+
+  @override
   String get settings => 'Settings';
 
   @override
@@ -64,9 +101,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get showDigest => 'Show digest for ...';
-
-  @override
-  String get showAll => 'Show all';
 
   @override
   String get translateToEnglish => 'Translate to English';
@@ -163,9 +197,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dangerZone => 'Danger Zone';
 
   @override
-  String get editMind => 'Edit mind';
-
-  @override
   String get enterTokenHere => 'Enter token here';
 
   @override
@@ -232,18 +263,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get todayMinds => 'Today minds';
 
   @override
-  String get randomMind => 'Random mind';
-
-  @override
   String get spectrum => 'Spectrum';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'You did not collect any entries yet';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Please authenticate to show content of your mind';
 
   @override
   String get areYouSure => 'Are you sure?';
@@ -514,12 +538,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'Unable to stop the recording. Please try again.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

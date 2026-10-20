@@ -27,6 +27,7 @@ import 'package:keklist/presentation/screens/debug_menu/debug_menu_screen.dart';
 import 'package:keklist/presentation/screens/language_picker/language_picker_screen.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/screens/settings/settings_layout.dart';
+import 'package:keklist/presentation/screens/settings/widgets/gallery_index_tile.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/settings/widgets/settings_customize_bottom_sheet.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -170,6 +171,12 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
           hasChevron: false,
           onTap: () => _handleImport(),
         ),
+        if (GalleryIndexTile.isAvailable(context))
+          SettingsRowModel(
+            id: SettingsItemIds.galleryIndex,
+            title: context.l10n.galleryIndex,
+            tile: const GalleryIndexTile(),
+          ),
       ],
     ),
     SettingsSectionModel(

@@ -31,7 +31,7 @@ void main() {
       (index) => Mind(
         id: index.toString(),
         note: 'Hahahahahahaasdgasjdglashdglsdhglskdfhglsdkfjhgsldkfahaha',
-        emoji: ' ',
+        legacyEmoji: ' ',
         dayIndex: 0,
         sortIndex: 5,
         creationDate: DateTime.now(),

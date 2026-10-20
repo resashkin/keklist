@@ -68,12 +68,6 @@ final class MindUtils {
     return allMinds.where((item) => item.dayIndex >= yearStartIndex && item.dayIndex <= todayIndex).toList();
   }
 
-  static List<Mind> findMindsByEmoji({
-    required String emoji,
-    required Iterable<Mind> allMinds,
-  }) =>
-      allMinds.where((item) => emoji == item.emoji).sortedByProperty((it) => it.sortIndex).toList();
-
   static Map<String, int> convertToMindCountMap({required List<Mind> minds}) {
     Map<String, int> mindCountMap = {};
     Map<String, int> childCountMap = {};

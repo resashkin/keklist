@@ -42,7 +42,7 @@ Emotion _emotion({
 
 Mind _mind({required String id, List<String> emotionIds = const []}) => Mind(
       id: id,
-      emoji: '😀',
+      legacyEmoji: '😀',
       note: 'note $id',
       dayIndex: 1,
       creationDate: DateTime.utc(2026),

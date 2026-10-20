@@ -1,4 +1,14 @@
 {
+    "galleryIndex": "Indice della galleria",
+    "galleryIndexNoAccess": "Nessun accesso a Foto",
+    "galleryIndexNotIndexed": "Non ancora indicizzato",
+    "galleryIndexIndexing": "Indicizzazione {done} di {total}",
+    "galleryIndexReady": "{count} foto e video · aggiornato {time}",
+    "galleryIndexThumbnails": "Cache miniature: {size}",
+    "galleryIndexRebuildTitle": "Ricostruire l'indice della galleria?",
+    "galleryIndexRebuildMessage": "Le miniature verranno eliminate e la libreria analizzata di nuovo.",
+    "galleryIndexRebuild": "Ricostruisci",
+    "allEmotions": "Tutte…",
     "settings": "Impostazioni",
     "@settings": {
         "description": "Etichetta tab impostazioni"
@@ -62,10 +72,6 @@
     "showDigest": "Mostra riassunto per ...",
     "@showDigest": {
         "description": "Azione mostra riassunto"
-    },
-    "showAll": "Mostra tutto",
-    "@showAll": {
-        "description": "Azione mostra tutto"
     },
     "translateToEnglish": "Traduci in inglese",
     "@translateToEnglish": {
@@ -179,10 +185,6 @@
     "@dangerZone": {
         "description": "Titolo sezione zona pericolo"
     },
-    "editMind": "Modifica mente",
-    "@editMind": {
-        "description": "Titolo dialogo modifica mente"
-    },
     "enterTokenHere": "Inserisci token qui",
     "@enterTokenHere": {
         "description": "Suggerimento input token"
@@ -271,10 +273,6 @@
     "@todayMinds": {
         "description": "Titolo menti di oggi"
     },
-    "randomMind": "Mente casuale",
-    "@randomMind": {
-        "description": "Titolo mente casuale"
-    },
     "spectrum": "Spettro",
     "@spectrum": {
         "description": "Titolo spettro"
@@ -282,10 +280,6 @@
     "youDidNotCollectAnyEntriesYet": "Non hai ancora raccolto nessuna voce",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Messaggio nessuna voce raccolta"
-    },
-    "pleaseAuthenticateToShowContent": "Autenticati per mostrare il contenuto della tua mente",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Messaggio autenticazione richiesta"
     },
     "areYouSure": "Sei sicuro?",
     "@areYouSure": {
@@ -424,8 +418,6 @@
     "audioRecordPermissionError": "Il permesso per il microfono è necessario per registrare audio.",
     "audioRecordStartError": "Impossibile avviare la registrazione. Riprova.",
     "audioRecordStopError": "Impossibile fermare la registrazione. Riprova.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Sei un utente PRO. Il prossimo pagamento di {price} sarà il {date}.",
     "emotions": "Emozioni",
     "archived": "Archiviate",

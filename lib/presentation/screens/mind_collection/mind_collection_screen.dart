@@ -16,7 +16,6 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/helpers/extensions/state_extensions.dart';
 import 'package:keklist/presentation/core/helpers/platform_utils.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
-import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
 import 'package:keklist/presentation/screens/actions/action_model.dart';
 import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/digest/mind_universal_list_screen.dart';
@@ -35,7 +34,6 @@ import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
 import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
-import 'package:keklist/presentation/screens/mind_picker/mind_picker_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
@@ -186,9 +184,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
             condition: _isSearching,
             trueChild: _SearchAppBar(
               searchTextController: _searchTextController,
-              onSearchAddEmotion: () => _showMindPickerScreen(onSelect: (emoji) {
-                _searchTextController.text += emoji;
-              }),
               onSearchCancel: () => _cancelSearch(),
             ),
             falseChild: _MindCollectionAppBar(
@@ -237,13 +232,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
       SwipeablePageRoute(
         builder: (context) => MindDayCollectionScreen(initialDayIndex: groupDayIndex),
       ),
-    );
-  }
-
-  void _showMindPickerScreen({required Function(String) onSelect}) async {
-    await showCupertinoModalBottomSheet(
-      context: context,
-      builder: (context) => MindPickerScreen(onSelect: onSelect),
     );
   }
 

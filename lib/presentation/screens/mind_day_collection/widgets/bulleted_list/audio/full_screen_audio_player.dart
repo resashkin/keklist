@@ -9,9 +9,8 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/bullete
 
 final class FullScreenAudioPlayerScreen extends StatefulWidget {
   final MindNoteAudio audio;
-  final String emoji;
 
-  const FullScreenAudioPlayerScreen({super.key, required this.audio, required this.emoji});
+  const FullScreenAudioPlayerScreen({super.key, required this.audio});
 
   @override
   State<FullScreenAudioPlayerScreen> createState() => _FullScreenAudioPlayerScreenState();
@@ -39,10 +38,9 @@ final class _FullScreenAudioPlayerScreenState extends State<FullScreenAudioPlaye
             children: [
               const SizedBox(height: 12),
 
-              // Audio reactive waves with emoji
               SizedBox(
                 height: 300,
-                child: AudioReactiveWavesWidget(amplitude: state.amplitude, emoji: widget.emoji),
+                child: AudioReactiveWavesWidget(amplitude: state.amplitude),
               ),
 
               const SizedBox(height: 16),

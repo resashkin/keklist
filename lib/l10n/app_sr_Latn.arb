@@ -1,4 +1,14 @@
 {
+    "galleryIndex": "Indeks galerije",
+    "galleryIndexNoAccess": "Nema pristupa Fotografijama",
+    "galleryIndexNotIndexed": "Još nije indeksirano",
+    "galleryIndexIndexing": "Indeksiranje {done} od {total}",
+    "galleryIndexReady": "{count} fotografija i video zapisa · ažurirano {time}",
+    "galleryIndexThumbnails": "Keš sličica: {size}",
+    "galleryIndexRebuildTitle": "Ponovo izgraditi indeks galerije?",
+    "galleryIndexRebuildMessage": "Sličice će biti obrisane, a biblioteka ponovo skenirana.",
+    "galleryIndexRebuild": "Ponovo izgradi",
+    "allEmotions": "Sve…",
     "settings": "Podešavanja",
     "@settings": {
         "description": "Oznaka taba podešavanja"
@@ -60,10 +70,6 @@
     "showDigest": "Prikaži sažetak za ...",
     "@showDigest": {
         "description": "Akcija prikazivanja sažetka"
-    },
-    "showAll": "Prikaži sve",
-    "@showAll": {
-        "description": "Akcija prikazivanja svega"
     },
     "translateToEnglish": "Prevedi na engleski",
     "@translateToEnglish": {
@@ -177,10 +183,6 @@
     "@dangerZone": {
         "description": "Naslov sekcije zone opasnosti"
     },
-    "editMind": "Uredi um",
-    "@editMind": {
-        "description": "Naslov dijaloga uređivanja uma"
-    },
     "enterTokenHere": "Unesite token ovde",
     "@enterTokenHere": {
         "description": "Savet za unos tokena"
@@ -269,10 +271,6 @@
     "@todayMinds": {
         "description": "Naslov današnjih umova"
     },
-    "randomMind": "Slučajni um",
-    "@randomMind": {
-        "description": "Naslov slučajnog uma"
-    },
     "spectrum": "Spektar",
     "@spectrum": {
         "description": "Naslov spektra"
@@ -280,10 +278,6 @@
     "youDidNotCollectAnyEntriesYet": "Još uvek niste prikupili nijedan unos",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Poruka nijedan unos nije prikupljen"
-    },
-    "pleaseAuthenticateToShowContent": "Molimo autentifikujte se da biste videli sadržaj svog uma",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Poruka o potrebi autentifikacije"
     },
     "areYouSure": "Da li ste sigurni?",
     "@areYouSure": {
@@ -424,8 +418,6 @@
     "audioRecordPermissionError": "Potrebna je dozvola za mikrofon za snimanje zvuka.",
     "audioRecordStartError": "Nije moguće pokrenuti snimanje. Pokušajte ponovo.",
     "audioRecordStopError": "Nije moguće zaustaviti snimanje. Pokušajte ponovo.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Vi ste PRO korisnik. Sledeća uplata {price} biće {date}.",
     "emotions": "Emocije",
     "archived": "Arhivirano",

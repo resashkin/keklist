@@ -1,4 +1,14 @@
 {
+    "galleryIndex": "Galereya indeksi",
+    "galleryIndexNoAccess": "Rasmlarga ruxsat yoʻq",
+    "galleryIndexNotIndexed": "Hali indekslanmagan",
+    "galleryIndexIndexing": "Indekslanmoqda {done} / {total}",
+    "galleryIndexReady": "{count} ta rasm va video · yangilandi {time}",
+    "galleryIndexThumbnails": "Miniatyuralar keshi: {size}",
+    "galleryIndexRebuildTitle": "Galereya indeksi qayta tuzilsinmi?",
+    "galleryIndexRebuildMessage": "Miniatyuralar oʻchiriladi va mediateka qayta skanerlanadi.",
+    "galleryIndexRebuild": "Qayta tuzish",
+    "allEmotions": "Hammasi…",
     "settings": "Sozlamalar",
     "@settings": {
         "description": "Sozlamalar tab yorlig'i"
@@ -62,10 +72,6 @@
     "showDigest": "... uchun xulosa ko'rsatish",
     "@showDigest": {
         "description": "Xulosa ko'rsatish harakati"
-    },
-    "showAll": "Hammasini ko'rsatish",
-    "@showAll": {
-        "description": "Hammasini ko'rsatish harakati"
     },
     "translateToEnglish": "Ingliz tiliga tarjima qilish",
     "@translateToEnglish": {
@@ -179,10 +185,6 @@
     "@dangerZone": {
         "description": "Xavfli zona bo'limi sarlavhasi"
     },
-    "editMind": "Fikrni tahrirlash",
-    "@editMind": {
-        "description": "Fikrni tahrirlash dialogi sarlavhasi"
-    },
     "enterTokenHere": "Token bu yerga kiriting",
     "@enterTokenHere": {
         "description": "Token kiritish ko'rsatkichi"
@@ -271,10 +273,6 @@
     "@todayMinds": {
         "description": "Bugungi fikrlar sarlavhasi"
     },
-    "randomMind": "Tasodifiy fikr",
-    "@randomMind": {
-        "description": "Tasodifiy fikr sarlavhasi"
-    },
     "spectrum": "Spektr",
     "@spectrum": {
         "description": "Spektr sarlavhasi"
@@ -282,10 +280,6 @@
     "youDidNotCollectAnyEntriesYet": "Siz hali hech qanday yozuv yig'ganingiz yo'q",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Hech qanday yozuv yig'ilmagan xabari"
-    },
-    "pleaseAuthenticateToShowContent": "Fikringizning kontentini ko'rsatish uchun autentifikatsiyadan o'ting",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Autentifikatsiya talab qilinadigan xabar"
     },
     "areYouSure": "Ishonchingiz komilmi?",
     "@areYouSure": {
@@ -424,8 +418,6 @@
     "audioRecordPermissionError": "Audio yozish uchun mikrofon ruxsati talab qilinadi.",
     "audioRecordStartError": "Yozishni boshlash imkoni bo'lmadi. Qayta urinib ko'ring.",
     "audioRecordStopError": "Yozishni to'xtatish imkoni bo'lmadi. Qayta urinib ko'ring.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Siz PRO foydalanuvchisiz. Keyingi {price} to'lov {date} da bo'ladi.",
     "emotions": "Hissiyotlar",
     "archived": "Arxivlangan",

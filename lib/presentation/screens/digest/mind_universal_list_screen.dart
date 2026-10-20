@@ -22,7 +22,6 @@ import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_collection_empty_day_widget.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/messaged_list/mind_message_widget.dart';
 import 'package:keklist/presentation/screens/mind_info/mind_info_screen.dart';
-import 'package:keklist/presentation/screens/mind_one_emoji_collection/mind_one_emoji_collection.dart';
 
 enum MindUniversalListTitleType {
   text,
@@ -287,7 +286,6 @@ final class _MindUniversalListScreenState extends KekWidgetState<MindUniversalLi
             (ActionModel.tranlsateToEnglish(context), () => _translateToEnglish(mind: mind)),
           (ActionModel.edit(context), () => _editMind(mind)),
           (ActionModel.switchDay(context), () => _switchDay(mind)),
-          (ActionModel.showAll(context), () => _showAllMinds(mind)),
           (ActionModel.delete(context), () => _removeMind(mind)),
         ],
       ),
@@ -306,14 +304,6 @@ final class _MindUniversalListScreenState extends KekWidgetState<MindUniversalLi
     Navigator.of(context).push(
       SwipeablePageRoute(
         builder: (_) => MindInfoScreen(rootMind: mind, allMinds: _allMinds),
-      ),
-    );
-  }
-
-  void _showAllMinds(Mind mind) {
-    Navigator.of(context).push(
-      SwipeablePageRoute(
-        builder: (_) => MindOneEmojiCollectionScreen(emoji: mind.emoji, allMinds: _allMinds),
       ),
     );
   }

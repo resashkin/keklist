@@ -9,6 +9,43 @@ class AppLocalizationsUz extends AppLocalizations {
   AppLocalizationsUz([String locale = 'uz']) : super(locale);
 
   @override
+  String get galleryIndex => 'Galereya indeksi';
+
+  @override
+  String get galleryIndexNoAccess => 'Rasmlarga ruxsat yoʻq';
+
+  @override
+  String get galleryIndexNotIndexed => 'Hali indekslanmagan';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Indekslanmoqda $done / $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count ta rasm va video · yangilandi $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Miniatyuralar keshi: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Galereya indeksi qayta tuzilsinmi?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Miniatyuralar oʻchiriladi va mediateka qayta skanerlanadi.';
+
+  @override
+  String get galleryIndexRebuild => 'Qayta tuzish';
+
+  @override
+  String get allEmotions => 'Hammasi…';
+
+  @override
   String get settings => 'Sozlamalar';
 
   @override
@@ -64,9 +101,6 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get showDigest => '... uchun xulosa ko\'rsatish';
-
-  @override
-  String get showAll => 'Hammasini ko\'rsatish';
 
   @override
   String get translateToEnglish => 'Ingliz tiliga tarjima qilish';
@@ -163,9 +197,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get dangerZone => 'Xavfli zona';
 
   @override
-  String get editMind => 'Fikrni tahrirlash';
-
-  @override
   String get enterTokenHere => 'Token bu yerga kiriting';
 
   @override
@@ -232,18 +263,11 @@ class AppLocalizationsUz extends AppLocalizations {
   String get todayMinds => 'Bugungi fikrlar';
 
   @override
-  String get randomMind => 'Tasodifiy fikr';
-
-  @override
   String get spectrum => 'Spektr';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Siz hali hech qanday yozuv yig\'ganingiz yo\'q';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Fikringizning kontentini ko\'rsatish uchun autentifikatsiyadan o\'ting';
 
   @override
   String get areYouSure => 'Ishonchingiz komilmi?';
@@ -517,12 +541,6 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'Yozishni to\'xtatish imkoni bo\'lmadi. Qayta urinib ko\'ring.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

@@ -13,7 +13,6 @@ abstract class SettingsRepository {
   FutureOr<void> updateSettings(KeklistSettings settings);
   FutureOr<void> updateThemePreference(KeklistThemeMode themeMode);
   FutureOr<void> updateInterfaceStyle(KeklistInterfaceStyle style);
-  FutureOr<void> updateMindContentVisibility(bool isVisible);
   FutureOr<void> updateShouldShowTitles(bool shouldShowTitles);
   FutureOr<void> updatePreviousAppVersion(String? previousAppVersion);
   FutureOr<void> updateLanguage(SupportedLanguage language);
@@ -47,7 +46,6 @@ final class DayFeedSettings {
 }
 
 final class KeklistSettings {
-  final bool isMindContentVisible;
   final String? previousAppVersion;
   final KeklistThemeMode themePreference;
   final KeklistInterfaceStyle interfaceStyle;
@@ -72,7 +70,6 @@ final class KeklistSettings {
   final Set<String> shakeDiscoveredScreenIds;
 
   KeklistSettings({
-    required this.isMindContentVisible,
     required this.previousAppVersion,
     required this.themePreference,
     required this.interfaceStyle,
@@ -94,7 +91,6 @@ final class KeklistSettings {
   });
 
   KeklistSettings copyWith({
-    bool? isMindContentVisible,
     String? previousAppVersion,
     KeklistThemeMode? themePreference,
     KeklistInterfaceStyle? interfaceStyle,
@@ -115,7 +111,6 @@ final class KeklistSettings {
     Set<String>? shakeDiscoveredScreenIds,
   }) {
     return KeklistSettings(
-      isMindContentVisible: isMindContentVisible ?? this.isMindContentVisible,
       previousAppVersion: previousAppVersion ?? this.previousAppVersion,
       themePreference: themePreference ?? this.themePreference,
       interfaceStyle: interfaceStyle ?? this.interfaceStyle,
@@ -138,7 +133,6 @@ final class KeklistSettings {
   }
 
   SettingsObject toObject() => SettingsObject()
-    ..isMindContentVisible = isMindContentVisible
     ..previousAppVersion = previousAppVersion
     ..isDarkMode = themePreference == KeklistThemeMode.dark
     ..themePreferenceIndex = themePreference.index
@@ -163,7 +157,6 @@ final class KeklistSettings {
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 
   factory KeklistSettings.initial() => KeklistSettings(
-        isMindContentVisible: true,
         previousAppVersion: null,
         themePreference: KeklistThemeMode.system,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,

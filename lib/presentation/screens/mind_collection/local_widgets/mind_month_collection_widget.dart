@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
 import 'package:intl/intl.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
+import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_row_widget.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
@@ -84,7 +85,7 @@ final class MindMonthDayWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: AutoSizeText(
-        dayMinds.map((mind) => mind.emoji).join(' '),
+        DayEmotionsText.textOf(context, dayMinds),
         style: TextStyle(fontSize: 64.0),
         textAlign: TextAlign.center,
         minFontSize: 8.0,

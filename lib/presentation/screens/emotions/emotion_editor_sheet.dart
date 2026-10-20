@@ -5,7 +5,7 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
-import 'package:keklist/presentation/screens/mind_picker/mind_picker_screen.dart';
+import 'package:keklist/presentation/screens/emotions/emoji_picker_screen.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 /// Small nested bottom sheet to create or rename a single [Emotion] (emoji +
@@ -73,7 +73,7 @@ class _EmotionEditorSheetState extends KekWidgetState<EmotionEditorSheet> {
   void _pickEmoji() async {
     await showCupertinoModalBottomSheet(
       context: context,
-      builder: (_) => MindPickerScreen(onSelect: (emoji) => setState(() => _emoji = emoji)),
+      builder: (_) => EmojiPickerScreen(onSelect: (emoji) => setState(() => _emoji = emoji)),
     );
   }
 

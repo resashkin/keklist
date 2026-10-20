@@ -117,6 +117,66 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// Settings row for the photo library index
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery index'**
+  String get galleryIndex;
+
+  /// Gallery index subtitle when Photos access is missing
+  ///
+  /// In en, this message translates to:
+  /// **'No access to Photos'**
+  String get galleryIndexNoAccess;
+
+  /// Gallery index subtitle before the first scan
+  ///
+  /// In en, this message translates to:
+  /// **'Not indexed yet'**
+  String get galleryIndexNotIndexed;
+
+  /// Gallery index subtitle while scanning
+  ///
+  /// In en, this message translates to:
+  /// **'Indexing {done} of {total}'**
+  String galleryIndexIndexing(String done, String total);
+
+  /// Gallery index subtitle after a scan
+  ///
+  /// In en, this message translates to:
+  /// **'{count} photos and videos · updated {time}'**
+  String galleryIndexReady(String count, String time);
+
+  /// Size of the on-disk thumbnail cache
+  ///
+  /// In en, this message translates to:
+  /// **'Thumbnail cache: {size}'**
+  String galleryIndexThumbnails(String size);
+
+  /// Confirm dialog title for rebuilding the gallery index
+  ///
+  /// In en, this message translates to:
+  /// **'Rebuild the gallery index?'**
+  String get galleryIndexRebuildTitle;
+
+  /// Confirm dialog message for rebuilding the gallery index
+  ///
+  /// In en, this message translates to:
+  /// **'Thumbnails will be cleared and the library scanned again.'**
+  String get galleryIndexRebuildMessage;
+
+  /// Confirm button that rebuilds the gallery index
+  ///
+  /// In en, this message translates to:
+  /// **'Rebuild'**
+  String get galleryIndexRebuild;
+
+  /// Chip in the mind creator that opens the full emotion list
+  ///
+  /// In en, this message translates to:
+  /// **'All…'**
+  String get allEmotions;
+
   /// Settings screen title
   ///
   /// In en, this message translates to:
@@ -230,12 +290,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show digest for ...'**
   String get showDigest;
-
-  /// Show all action
-  ///
-  /// In en, this message translates to:
-  /// **'Show all'**
-  String get showAll;
 
   /// Translate to English action
   ///
@@ -423,12 +477,6 @@ abstract class AppLocalizations {
   /// **'Danger Zone'**
   String get dangerZone;
 
-  /// Edit mind dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Edit mind'**
-  String get editMind;
-
   /// Token input hint
   ///
   /// In en, this message translates to:
@@ -561,12 +609,6 @@ abstract class AppLocalizations {
   /// **'Today minds'**
   String get todayMinds;
 
-  /// Random mind title
-  ///
-  /// In en, this message translates to:
-  /// **'Random mind'**
-  String get randomMind;
-
   /// Spectrum title
   ///
   /// In en, this message translates to:
@@ -578,12 +620,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You did not collect any entries yet'**
   String get youDidNotCollectAnyEntriesYet;
-
-  /// Authentication required message
-  ///
-  /// In en, this message translates to:
-  /// **'Please authenticate to show content of your mind'**
-  String get pleaseAuthenticateToShowContent;
 
   /// Confirmation dialog title
   ///
@@ -1088,18 +1124,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unable to stop the recording. Please try again.'**
   String get audioRecordStopError;
-
-  /// Section header for emojis used in minds in the emoji picker
-  ///
-  /// In en, this message translates to:
-  /// **'Used in minds'**
-  String get emojiPickerUsedInMinds;
-
-  /// Section header for all emojis in the emoji picker
-  ///
-  /// In en, this message translates to:
-  /// **'All'**
-  String get emojiPickerAll;
 
   /// Footer in APPLICATION settings section when user has active PRO subscription
   ///

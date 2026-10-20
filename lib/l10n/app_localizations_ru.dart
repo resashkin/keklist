@@ -9,6 +9,43 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get galleryIndex => 'Индекс галереи';
+
+  @override
+  String get galleryIndexNoAccess => 'Нет доступа к Фото';
+
+  @override
+  String get galleryIndexNotIndexed => 'Ещё не проиндексировано';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Индексация $done из $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count фото и видео · обновлено $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Кеш миниатюр: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Пересобрать индекс галереи?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Миниатюры будут удалены, а медиатека просканирована заново.';
+
+  @override
+  String get galleryIndexRebuild => 'Пересобрать';
+
+  @override
+  String get allEmotions => 'Все…';
+
+  @override
   String get settings => 'Настройки';
 
   @override
@@ -64,9 +101,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get showDigest => 'Показать сводку для ...';
-
-  @override
-  String get showAll => 'Показать все';
 
   @override
   String get translateToEnglish => 'Перевести на английский';
@@ -163,9 +197,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dangerZone => 'Опасная зона';
 
   @override
-  String get editMind => 'Редактировать заметку';
-
-  @override
   String get enterTokenHere => 'Введите токен здесь';
 
   @override
@@ -232,18 +263,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get todayMinds => 'Сегодняшние заметки';
 
   @override
-  String get randomMind => 'Случайная заметка';
-
-  @override
   String get spectrum => 'Спектр';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Вы еще не собрали ни одной записи';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Пожалуйста, пройдите аутентификацию для отображения содержимого вашей заметки';
 
   @override
   String get areYouSure => 'Вы уверены?';
@@ -514,12 +538,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'Не удалось остановить запись. Попробуйте ещё раз.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

@@ -3,13 +3,14 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/presentation/core/widgets/my_chip_widget.dart';
 import 'package:keklist/presentation/core/widgets/rounded_container.dart';
-import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_collection_empty_day_widget.dart';
 import 'package:keklist/domain/period.dart';
@@ -40,16 +41,15 @@ final class _InsightsPieWidgetState extends State<InsightsPieWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<EmotionBloc>();
     final PeriodType selectedPeriod = _choices[_selectedChoiceIndex];
     final List<Mind> choiceMinds = selectedPeriod.filterMinds(widget.allMinds);
     final HashMap<String, int> intervalChoiceMap = HashMap<String, int>();
 
     for (final Mind mind in choiceMinds) {
       final int noteLength = mind.plainNote.length;
-      if (intervalChoiceMap.containsKey(mind.emoji)) {
-        intervalChoiceMap[mind.emoji] = intervalChoiceMap[mind.emoji]! + noteLength;
-      } else {
-        intervalChoiceMap[mind.emoji] = noteLength;
+      for (final String emoji in _topLevelEmojisOf(mind)) {
+        intervalChoiceMap[emoji] = (intervalChoiceMap[emoji] ?? 0) + noteLength;
       }
     }
 
@@ -78,8 +78,7 @@ final class _InsightsPieWidgetState extends State<InsightsPieWidget> {
                         });
                       },
                       selectedColor: Theme.of(context).colorScheme.primary,
-                      child: SensitiveWidget(
-                        child: Text(
+                      child: Text(
                           _choices[index].localizedTitle(context),
                           style: TextStyle(
                             fontSize: 14.0,
@@ -88,7 +87,6 @@ final class _InsightsPieWidgetState extends State<InsightsPieWidget> {
                                 : Theme.of(context).colorScheme.primary,
                           ),
                         ),
-                      ),
                     ),
                   );
                 }),
@@ -98,8 +96,7 @@ final class _InsightsPieWidgetState extends State<InsightsPieWidget> {
               height: 350,
               child: BoolWidget(
                 condition: pieSections.isNotEmpty,
-                trueChild: SensitiveWidget(
-                  child: PieChart(
+                trueChild: PieChart(
                     PieChartData(
                       sections: pieSections,
                       centerSpaceRadius: 0,
@@ -132,7 +129,6 @@ final class _InsightsPieWidgetState extends State<InsightsPieWidget> {
                     ),
                     curve: Curves.bounceInOut,
                   ),
-                ),
                 falseChild: Center(
                   child: MindCollectionEmptyStateWidget.noMinds(context: context, text: context.l10n.noMindsForPeriod),
                 ),
@@ -156,7 +152,7 @@ final class _InsightsPieWidgetState extends State<InsightsPieWidget> {
                         });
                       },
                       selectedColor: _colorFromEmoji(entry.key),
-                      child: SensitiveWidget(child: Text(entry.key, style: const TextStyle(fontSize: 24.0))),
+                      child: Text(entry.key, style: const TextStyle(fontSize: 24.0)),
                     ),
                   );
                 }).toList(),
@@ -174,7 +170,7 @@ final class _InsightsPieWidgetState extends State<InsightsPieWidget> {
                         allMinds: widget.allMinds,
                         filterFunction: (mind) {
                           final bool periodMatch = selectedPeriod.filterMinds([mind]).isNotEmpty;
-                          final bool emojiMatch = selectedEmoji == null || mind.emoji == selectedEmoji;
+                          final bool emojiMatch = selectedEmoji == null || _topLevelEmojisOf(mind).contains(selectedEmoji);
                           return periodMatch && emojiMatch;
                         },
                         title: context.l10n.minds,
@@ -245,8 +241,13 @@ final class _InsightsPieWidgetState extends State<InsightsPieWidget> {
     final String? selectedEmoji = _selectedEmoji;
     return selectedPeriod.filterMinds(widget.allMinds).where((mind) {
       final bool periodMatch = selectedPeriod.filterMinds([mind]).isNotEmpty;
-      final bool emojiMatch = selectedEmoji == null || mind.emoji == selectedEmoji;
+      final bool emojiMatch = selectedEmoji == null || _topLevelEmojisOf(mind).contains(selectedEmoji);
       return periodMatch && emojiMatch;
     }).length;
+  }
+
+  Set<String> _topLevelEmojisOf(Mind mind) {
+    final EmotionState state = context.read<EmotionBloc>().state;
+    return state is EmotionsList ? state.topLevelEmojisOf(mind.emotionIds) : const {};
   }
 }

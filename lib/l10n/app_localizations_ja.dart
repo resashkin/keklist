@@ -9,6 +9,42 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get galleryIndex => 'ギャラリーのインデックス';
+
+  @override
+  String get galleryIndexNoAccess => '写真へのアクセスがありません';
+
+  @override
+  String get galleryIndexNotIndexed => 'まだインデックスされていません';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'インデックス中 $done / $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '写真とビデオ $count 件 · $time に更新';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'サムネイルキャッシュ: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'ギャラリーのインデックスを再構築しますか？';
+
+  @override
+  String get galleryIndexRebuildMessage => 'サムネイルを削除し、ライブラリを再スキャンします。';
+
+  @override
+  String get galleryIndexRebuild => '再構築';
+
+  @override
+  String get allEmotions => 'すべて…';
+
+  @override
   String get settings => '設定';
 
   @override
@@ -64,9 +100,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get showDigest => '...の要約を表示';
-
-  @override
-  String get showAll => 'すべて表示';
 
   @override
   String get translateToEnglish => '英語に翻訳';
@@ -163,9 +196,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dangerZone => '危険ゾーン';
 
   @override
-  String get editMind => 'メモを編集';
-
-  @override
   String get enterTokenHere => 'ここにトークンを入力';
 
   @override
@@ -232,16 +262,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get todayMinds => '今日のメモ';
 
   @override
-  String get randomMind => 'ランダムなメモ';
-
-  @override
   String get spectrum => 'スペクトラム';
 
   @override
   String get youDidNotCollectAnyEntriesYet => 'まだエントリーを収集していません';
-
-  @override
-  String get pleaseAuthenticateToShowContent => 'メモの内容を表示するには認証してください';
 
   @override
   String get areYouSure => 'よろしいですか？';
@@ -499,12 +523,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get audioRecordStopError => '録音を停止できませんでした。もう一度お試しください。';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

@@ -9,6 +9,42 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get galleryIndex => '图库索引';
+
+  @override
+  String get galleryIndexNoAccess => '无法访问照片';
+
+  @override
+  String get galleryIndexNotIndexed => '尚未建立索引';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return '正在索引 $done / $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count 张照片和视频 · 更新于 $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return '缩略图缓存：$size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => '要重建图库索引吗？';
+
+  @override
+  String get galleryIndexRebuildMessage => '缩略图将被清除，并重新扫描图库。';
+
+  @override
+  String get galleryIndexRebuild => '重建';
+
+  @override
+  String get allEmotions => '全部…';
+
+  @override
   String get settings => '设置';
 
   @override
@@ -64,9 +100,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get showDigest => '显示摘要...';
-
-  @override
-  String get showAll => '显示全部';
 
   @override
   String get translateToEnglish => '翻译为英文';
@@ -162,9 +195,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dangerZone => '危险区域';
 
   @override
-  String get editMind => '编辑笔记';
-
-  @override
   String get enterTokenHere => '在此输入令牌';
 
   @override
@@ -231,16 +261,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get todayMinds => '今天的笔记';
 
   @override
-  String get randomMind => '随机笔记';
-
-  @override
   String get spectrum => '光谱';
 
   @override
   String get youDidNotCollectAnyEntriesYet => '您还没有收集任何条目';
-
-  @override
-  String get pleaseAuthenticateToShowContent => '请进行身份验证以显示您的笔记内容';
 
   @override
   String get areYouSure => '您确定吗？';
@@ -496,12 +520,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get audioRecordStopError => '无法停止录制。请重试。';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

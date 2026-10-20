@@ -34,12 +34,6 @@ enum SettingsImportType { csv }
 
 final class SettingsExportAllMindsToCSV extends SettingsEvent {}
 
-final class SettingsChangeMindContentVisibility extends SettingsEvent {
-  final bool isVisible;
-
-  const SettingsChangeMindContentVisibility({required this.isVisible});
-}
-
 final class SettingsWhatsNewShown extends SettingsEvent {}
 
 final class SettingsUploadMindsFromCacheToServer extends SettingsEvent {}

@@ -8,7 +8,8 @@ part 'mind.g.dart';
 @JsonSerializable()
 final class Mind with EquatableMixin {
   final String id;
-  final String emoji;
+  @JsonKey(name: 'emoji')
+  final String? legacyEmoji;
   final String note; // TODO: rename to rawNote
   final int dayIndex;
   final DateTime creationDate;
@@ -26,7 +27,7 @@ final class Mind with EquatableMixin {
   Mind({
     required this.id,
     required this.note,
-    required this.emoji,
+    this.legacyEmoji,
     required this.dayIndex,
     required this.creationDate,
     required this.sortIndex,
@@ -41,7 +42,7 @@ final class Mind with EquatableMixin {
   @override
   List<Object?> get props => [
         id,
-        emoji,
+        legacyEmoji,
         note,
         sortIndex,
         dayIndex,
@@ -52,7 +53,7 @@ final class Mind with EquatableMixin {
 
   Map<String, dynamic> toShortJson() => {
         'uuid': id,
-        'emoji': emoji,
+        'emoji': legacyEmoji ?? '',
         'note': note,
         'day_index': dayIndex,
         'sort_index': sortIndex,
@@ -63,7 +64,7 @@ final class Mind with EquatableMixin {
   /// Ids are joined with `,` because the CSV field delimiter is `;`.
   List<String> toCSVEntry() => [
         id,
-        emoji,
+        legacyEmoji ?? '',
         note,
         dayIndex.toString(),
         sortIndex.toString(),
@@ -71,6 +72,21 @@ final class Mind with EquatableMixin {
         rootId?.toString() ?? "null",
         emotionIds.join(','),
       ];
+
+  /// Parses a [toCSVEntry] row; throws on malformed numeric or date columns.
+  factory Mind.fromCSVEntry(List<dynamic> row) {
+    final String legacyEmoji = row[1].toString().trim();
+    return Mind(
+      id: row[0].toString(),
+      legacyEmoji: legacyEmoji.isEmpty ? null : legacyEmoji,
+      note: row[2].toString(),
+      dayIndex: int.parse(row[3].toString()),
+      sortIndex: int.parse(row[4].toString()),
+      creationDate: DateTime.parse(row[5].toString()),
+      rootId: row[6].toString() == 'null' ? null : row[6].toString(),
+      emotionIds: emotionIdsFromCSVEntry(row),
+    );
+  }
 
   /// Parses the emotion id column of a [toCSVEntry] row, tolerating rows written
   /// before the column existed.
@@ -81,7 +97,6 @@ final class Mind with EquatableMixin {
 
   Mind copyWith({
     String? id,
-    String? emoji,
     String? note,
     int? dayIndex,
     DateTime? creationDate,
@@ -91,7 +106,7 @@ final class Mind with EquatableMixin {
   }) {
     return Mind(
       id: id ?? this.id,
-      emoji: emoji ?? this.emoji,
+      legacyEmoji: legacyEmoji,
       note: note ?? this.note,
       dayIndex: dayIndex ?? this.dayIndex,
       creationDate: creationDate ?? this.creationDate,
@@ -103,7 +118,7 @@ final class Mind with EquatableMixin {
 
   MindObject toObject() => MindObject()
     ..id = id
-    ..emoji = emoji
+    ..legacyEmoji = legacyEmoji
     ..note = note
     ..dayIndex = dayIndex
     ..creationDate = creationDate

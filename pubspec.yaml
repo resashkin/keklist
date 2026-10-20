@@ -58,7 +58,6 @@ dependencies:
   haptic_feedback: ^0.6.4+3
   provider: ^6.1.2
   collection: ^1.18.0
-  local_auth: ^3.0.1
   translator: ^1.0.0
   auto_size_text: ^3.0.0
   scrollview_observer: ^1.27.0

@@ -10,10 +10,9 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/bullete
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/audio/wave_progress_widget.dart';
 
 final class AudioTrackWidget extends StatefulWidget {
-  const AudioTrackWidget({super.key, required this.audio, required this.emoji});
+  const AudioTrackWidget({super.key, required this.audio});
 
   final MindNoteAudio audio;
-  final String emoji;
 
   @override
   State<AudioTrackWidget> createState() => _AudioTrackWidgetState();
@@ -120,7 +119,7 @@ final class _AudioTrackWidgetState extends State<AudioTrackWidget> {
         showDragHandle: true,
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
         constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.9),
-        builder: (BuildContext context) => FullScreenAudioPlayerScreen(audio: widget.audio, emoji: widget.emoji),
+        builder: (BuildContext context) => FullScreenAudioPlayerScreen(audio: widget.audio),
       ).then((_) {
         sendEventToBloc<AudioPlayerBloc>(AudioPlayerDispose());
       });
