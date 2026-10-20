@@ -791,9 +791,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get dayFeedShowMindText => 'Прикажи текст';
 
   @override
-  String get dayFeedShowAudioBadge => 'Прикажи ознаку звука';
-
-  @override
   String get dayFeedPhotoAccessHint =>
       'Дозволи приступ фотографијама да би овде видео фотографије и видео записе';
 
@@ -1633,9 +1630,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get dayFeedShowMindText => 'Prikaži tekst';
-
-  @override
-  String get dayFeedShowAudioBadge => 'Prikaži oznaku zvuka';
 
   @override
   String get dayFeedPhotoAccessHint =>

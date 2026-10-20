@@ -77,8 +77,7 @@ final class SettingsObject extends HiveObject {
   @HiveField(24, defaultValue: true)
   late bool isDayFeedMindTextVisible;
 
-  @HiveField(25, defaultValue: true)
-  late bool isDayFeedAudioBadgeVisible;
+  // @HiveField(25, defaultValue: true)
 
   @HiveField(26, defaultValue: <String>[])
   late List<String> hiddenSettingsItemIds;
@@ -119,7 +118,6 @@ final class SettingsObject extends HiveObject {
           columnCount: dayFeedColumnCount,
           mindCellSpan: dayFeedMindCellSpan,
           isMindTextVisible: isDayFeedMindTextVisible,
-          isAudioBadgeVisible: isDayFeedAudioBadgeVisible,
         ),
         hiddenSettingsItemIds: hiddenSettingsItemIds.toSet(),
         shakeDiscoveredScreenIds: shakeDiscoveredScreenIds.toSet(),

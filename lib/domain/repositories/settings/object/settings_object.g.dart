@@ -46,9 +46,6 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..isDayFeedMindTextVisible = fields[24] == null
           ? true
           : fields[24] as bool
-      ..isDayFeedAudioBadgeVisible = fields[25] == null
-          ? true
-          : fields[25] as bool
       ..hiddenSettingsItemIds = fields[26] == null
           ? []
           : (fields[26] as List).cast<String>()
@@ -69,7 +66,7 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(25)
+      ..writeByte(24)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)
@@ -108,8 +105,6 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..write(obj.dayFeedMindCellSpan)
       ..writeByte(24)
       ..write(obj.isDayFeedMindTextVisible)
-      ..writeByte(25)
-      ..write(obj.isDayFeedAudioBadgeVisible)
       ..writeByte(26)
       ..write(obj.hiddenSettingsItemIds)
       ..writeByte(27)

@@ -64,10 +64,7 @@ final class _InsightsEmotionDistributionCardState extends State<InsightsEmotionD
                 ],
               ),
             ),
-            SizedBox(
-              width: 32.0,
-              child: Text(InsightsFormat.number(context, share.count), textAlign: TextAlign.end),
-            ),
+            SizedBox(width: 32.0, child: Text(InsightsFormat.number(context, share.count), textAlign: TextAlign.end)),
             SizedBox(
               width: 32.0,
               child: share.children.isEmpty
@@ -91,6 +88,8 @@ final class _InsightsEmotionDistributionCardState extends State<InsightsEmotionD
 /// Stacked columns per segment, one color per top-level emotion.
 final class InsightsEmotionTrendCard extends StatelessWidget {
   static const double _chartHeight = 120.0;
+  static const double _axisHeight = 24.0;
+  static const double _maxColumnWidth = 36.0;
 
   final InsightsCardContext data;
 
@@ -116,13 +115,15 @@ final class InsightsEmotionTrendCard extends StatelessWidget {
               spacing: 8.0,
               children: [
                 SizedBox(
-                  height: _chartHeight + 18.0,
+                  height: _chartHeight + _axisHeight,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     spacing: 4.0,
                     children: [
                       for (final EmotionTrendBucket bucket in buckets)
-                        Expanded(child: _column(context, bucket, kind: kind, maxTotal: maxTotal, order: legendIds)),
+                        Expanded(
+                          child: _column(context, bucket, kind: kind, maxTotal: maxTotal, order: legendIds),
+                        ),
                     ],
                   ),
                 ),
@@ -167,14 +168,17 @@ final class InsightsEmotionTrendCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4.0),
-            child: Column(
-              children: [
-                for (final String id in order.reversed)
-                  if ((bucket.counts[id] ?? 0) > 0)
-                    Container(height: _chartHeight * bucket.counts[id]! / maxTotal, color: data.colorOf(id)),
-              ],
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: _maxColumnWidth),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(4.0),
+              child: Column(
+                children: [
+                  for (final String id in order.reversed)
+                    if ((bucket.counts[id] ?? 0) > 0)
+                      Container(height: _chartHeight * bucket.counts[id]! / maxTotal, color: data.colorOf(id)),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 4.0),
@@ -249,9 +253,7 @@ final class InsightsEmotionRhythmCard extends StatelessWidget {
     final EmotionRhythm rhythm = data.report.emotionRhythm;
     final int firstDay = data.report.period.firstDayOfWeek;
     final List<int> weekdays = [for (int i = 0; i < 7; i++) (firstDay - 1 + i) % 7 + 1];
-    final TextStyle? labelStyle = Theme.of(
-      context,
-    ).textTheme.labelSmall?.copyWith(color: Theme.of(context).hintColor);
+    final TextStyle? labelStyle = Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).hintColor);
     return InsightsCard(
       category: InsightsCategory.emotions,
       title: context.l10n.insightsEmotionRhythm,

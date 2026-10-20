@@ -1011,10 +1011,6 @@
     "@dayFeedShowMindText": {
         "description": "Unified day grid (All mode) label"
     },
-    "dayFeedShowAudioBadge": "Show audio badge",
-    "@dayFeedShowAudioBadge": {
-        "description": "Unified day grid (All mode) label"
-    },
     "dayFeedPhotoAccessHint": "Allow photo access to see your photos and videos here",
     "@dayFeedPhotoAccessHint": {
         "description": "Banner in the unified day grid when photo access is missing"

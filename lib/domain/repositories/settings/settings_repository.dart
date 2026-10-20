@@ -23,7 +23,6 @@ abstract class SettingsRepository {
     int? columnCount,
     int? mindCellSpan,
     bool? isMindTextVisible,
-    bool? isAudioBadgeVisible,
   });
   FutureOr<void> updateSettingsItemHidden(String id, {required bool isHidden});
   FutureOr<void> markShakeDiscovered(String screenId);
@@ -35,13 +34,11 @@ final class DayFeedSettings {
   final int columnCount;
   final int mindCellSpan;
   final bool isMindTextVisible;
-  final bool isAudioBadgeVisible;
 
   const DayFeedSettings({
     this.columnCount = 4,
     this.mindCellSpan = 1,
     this.isMindTextVisible = true,
-    this.isAudioBadgeVisible = true,
   });
 }
 
@@ -172,7 +169,6 @@ final class KeklistSettings {
     ..dayFeedColumnCount = dayFeed.columnCount
     ..dayFeedMindCellSpan = dayFeed.mindCellSpan
     ..isDayFeedMindTextVisible = dayFeed.isMindTextVisible
-    ..isDayFeedAudioBadgeVisible = dayFeed.isAudioBadgeVisible
     ..insightsWidgetOrder = insights.widgetOrder
     ..hiddenInsightsWidgetIds = insights.hiddenWidgetIds.toList()
     ..insightsPeriodIndex = insights.periodIndex

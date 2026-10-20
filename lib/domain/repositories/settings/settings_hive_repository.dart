@@ -116,14 +116,12 @@ final class SettingsHiveRepository implements SettingsRepository {
     int? columnCount,
     int? mindCellSpan,
     bool? isMindTextVisible,
-    bool? isAudioBadgeVisible,
   }) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     if (settingsObject == null) return;
     if (columnCount != null) settingsObject.dayFeedColumnCount = columnCount;
     if (mindCellSpan != null) settingsObject.dayFeedMindCellSpan = mindCellSpan;
     if (isMindTextVisible != null) settingsObject.isDayFeedMindTextVisible = isMindTextVisible;
-    if (isAudioBadgeVisible != null) settingsObject.isDayFeedAudioBadgeVisible = isAudioBadgeVisible;
     await settingsObject.save();
   }
 

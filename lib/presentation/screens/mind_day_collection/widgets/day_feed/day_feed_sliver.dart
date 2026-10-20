@@ -119,8 +119,6 @@ final class DayFeedSliver extends StatelessWidget {
         DayFeedMind() => DayFeedMindTile(
             item: item,
             isTextVisible: settings.isMindTextVisible,
-            isAudioBadgeVisible: settings.isAudioBadgeVisible,
-            isWide: span > 1,
             size: cellSize,
           ),
         DayFeedAsset() => DayFeedAssetTile(item: item),

@@ -765,9 +765,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dayFeedShowMindText => '显示文字';
 
   @override
-  String get dayFeedShowAudioBadge => '显示音频标记';
-
-  @override
   String get dayFeedPhotoAccessHint => '允许访问照片以在此查看你的照片和视频';
 
   @override
