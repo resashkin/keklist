@@ -9,6 +9,186 @@ class AppLocalizationsUz extends AppLocalizations {
   AppLocalizationsUz([String locale = 'uz']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Eng yorqin davr';
+
+  @override
+  String get insightsPeriodWeek => 'Hafta';
+
+  @override
+  String get insightsPeriodMonth => 'Oy';
+
+  @override
+  String get insightsPeriodYear => 'Yil';
+
+  @override
+  String get insightsPeriodAllTime => 'Butun davr';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return 'Oʻtgan haftaga nisbatan $delta';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return 'Oʻtgan oyga nisbatan $delta';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return 'Oʻtgan yilga nisbatan $delta';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Umumiy';
+
+  @override
+  String get insightsCategoryEmotions => 'Hissiyotlar';
+
+  @override
+  String get insightsCategoryActivity => 'Faollik';
+
+  @override
+  String get insightsCategoryMemories => 'Xotiralar';
+
+  @override
+  String get insightsCategoryMedia => 'Media';
+
+  @override
+  String get insightsCounters => 'Raqamlarda';
+
+  @override
+  String get insightsMinds => 'Yozuvlar';
+
+  @override
+  String get insightsActiveDays => 'Faol kunlar';
+
+  @override
+  String get insightsWords => 'Soʻzlar';
+
+  @override
+  String get insightsBrightestDay => 'Eng yorqin kun';
+
+  @override
+  String get insightsBrightestWeek => 'Eng yorqin hafta';
+
+  @override
+  String get insightsBrightestMonth => 'Eng yorqin oy';
+
+  @override
+  String get insightsBrightestYear => 'Eng yorqin yil';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'yozuv: $minds · hissiyot: $emotions · media: $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Hissiyotlar';
+
+  @override
+  String get insightsEmotionTrend => 'Hissiyotlar dinamikasi';
+
+  @override
+  String get insightsEmotionPairs => 'Birga uchraydigan hissiyotlar';
+
+  @override
+  String get insightsEmotionRhythm => 'Hissiy ritm';
+
+  @override
+  String get insightsByWeekday => 'Hafta kunlari boʻyicha';
+
+  @override
+  String get insightsByDayPart => 'Kun vaqti boʻyicha';
+
+  @override
+  String get insightsNight => 'Tun';
+
+  @override
+  String get insightsMorning => 'Ertalab';
+
+  @override
+  String get insightsAfternoon => 'Kunduzi';
+
+  @override
+  String get insightsEvening => 'Kechqurun';
+
+  @override
+  String get insightsStreak => 'Seriya';
+
+  @override
+  String get insightsStreakLabel => 'kun ketma-ket';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Rekord: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing =>
+      'Seriyani uzmaslik uchun bugun yozuv qoʻshing';
+
+  @override
+  String get insightsHeatmap => 'Faollik xaritasi';
+
+  @override
+  String get insightsActivityTime => 'Kun vaqti';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Koʻpincha $hour atrofida';
+  }
+
+  @override
+  String get insightsOnThisDay => 'Shu kuni';
+
+  @override
+  String get insightsMediaCounters => 'Media';
+
+  @override
+  String get insightsPhotos => 'Rasmlar';
+
+  @override
+  String get insightsVideos => 'Videolar';
+
+  @override
+  String get insightsVoiceNotes => 'Ovozli yozuvlar';
+
+  @override
+  String get insightsRoundVideos => 'Dumaloq videolar';
+
+  @override
+  String get insightsEmptyPeriod => 'Bu davrda hali yozuv yoʻq';
+
+  @override
+  String get insightsEmptyEmotions =>
+      'Buni koʻrish uchun yozuvlarga hissiyot belgilang';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Juftlarni koʻrish uchun yozuvga ikki hissiyot belgilang';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Oʻtgan yillarda bu kunda hali hech narsa yoʻq';
+
+  @override
+  String get insightsEmptyRoundVideos => 'Bu davrda dumaloq video yoʻq';
+
+  @override
+  String get insightsEmptyStreak =>
+      'Seriyani boshlash uchun bugun yozuv qoʻshing';
+
+  @override
+  String get insightsCustomize => 'Analitikani sozlash';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Kartochkalarni yoqing yoki oʻchiring, tartibini sudrab oʻzgartiring';
+
+  @override
+  String get insightsResetLayout => 'Tiklash';
+
+  @override
   String get activeTasks => 'Faol vazifalar';
 
   @override
@@ -260,13 +440,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get writeSomething => 'Biror narsa yozing...';
 
   @override
-  String get topMinds => 'Eng yaxshi fikrlar';
-
-  @override
   String get todayMinds => 'Bugungi fikrlar';
-
-  @override
-  String get spectrum => 'Spektr';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
@@ -319,11 +493,6 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'Bu kun uchun fikrlar yo\'q';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return '$period uchun fikrlarni ko\'rsatish';
-  }
 
   @override
   String get week => 'Hafta';

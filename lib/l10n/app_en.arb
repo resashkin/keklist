@@ -1,4 +1,240 @@
 {
+    "insightsBrightestPeriod": "Brightest period",
+    "@insightsBrightestPeriod": {
+        "description": "Analytics card name in the customize sheet"
+    },
+    "insightsPeriodWeek": "Week",
+    "@insightsPeriodWeek": {
+        "description": "Analytics screen"
+    },
+    "insightsPeriodMonth": "Month",
+    "@insightsPeriodMonth": {
+        "description": "Analytics screen"
+    },
+    "insightsPeriodYear": "Year",
+    "@insightsPeriodYear": {
+        "description": "Analytics screen"
+    },
+    "insightsPeriodAllTime": "All time",
+    "@insightsPeriodAllTime": {
+        "description": "Analytics screen"
+    },
+    "insightsVsLastWeek": "{delta} vs last week",
+    "@insightsVsLastWeek": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "delta": { "type": "String" }
+        }
+    },
+    "insightsVsLastMonth": "{delta} vs last month",
+    "@insightsVsLastMonth": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "delta": { "type": "String" }
+        }
+    },
+    "insightsVsLastYear": "{delta} vs last year",
+    "@insightsVsLastYear": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "delta": { "type": "String" }
+        }
+    },
+    "insightsCategorySummary": "Summary",
+    "@insightsCategorySummary": {
+        "description": "Analytics screen"
+    },
+    "insightsCategoryEmotions": "Emotions",
+    "@insightsCategoryEmotions": {
+        "description": "Analytics screen"
+    },
+    "insightsCategoryActivity": "Activity",
+    "@insightsCategoryActivity": {
+        "description": "Analytics screen"
+    },
+    "insightsCategoryMemories": "Memories",
+    "@insightsCategoryMemories": {
+        "description": "Analytics screen"
+    },
+    "insightsCategoryMedia": "Media",
+    "@insightsCategoryMedia": {
+        "description": "Analytics screen"
+    },
+    "insightsCounters": "In numbers",
+    "@insightsCounters": {
+        "description": "Analytics screen"
+    },
+    "insightsMinds": "Minds",
+    "@insightsMinds": {
+        "description": "Analytics screen"
+    },
+    "insightsActiveDays": "Active days",
+    "@insightsActiveDays": {
+        "description": "Analytics screen"
+    },
+    "insightsWords": "Words",
+    "@insightsWords": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestDay": "Brightest day",
+    "@insightsBrightestDay": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestWeek": "Brightest week",
+    "@insightsBrightestWeek": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestMonth": "Brightest month",
+    "@insightsBrightestMonth": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestYear": "Brightest year",
+    "@insightsBrightestYear": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestDetails": "{minds} minds · {emotions} emotions · {media} media",
+    "@insightsBrightestDetails": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "minds": { "type": "String" },
+            "emotions": { "type": "String" },
+            "media": { "type": "String" }
+        }
+    },
+    "insightsEmotionDistribution": "Emotions",
+    "@insightsEmotionDistribution": {
+        "description": "Analytics screen"
+    },
+    "insightsEmotionTrend": "Emotion trend",
+    "@insightsEmotionTrend": {
+        "description": "Analytics screen"
+    },
+    "insightsEmotionPairs": "Emotions together",
+    "@insightsEmotionPairs": {
+        "description": "Analytics screen"
+    },
+    "insightsEmotionRhythm": "Emotional rhythm",
+    "@insightsEmotionRhythm": {
+        "description": "Analytics screen"
+    },
+    "insightsByWeekday": "By weekday",
+    "@insightsByWeekday": {
+        "description": "Analytics screen"
+    },
+    "insightsByDayPart": "By time of day",
+    "@insightsByDayPart": {
+        "description": "Analytics screen"
+    },
+    "insightsNight": "Night",
+    "@insightsNight": {
+        "description": "Analytics screen"
+    },
+    "insightsMorning": "Morning",
+    "@insightsMorning": {
+        "description": "Analytics screen"
+    },
+    "insightsAfternoon": "Afternoon",
+    "@insightsAfternoon": {
+        "description": "Analytics screen"
+    },
+    "insightsEvening": "Evening",
+    "@insightsEvening": {
+        "description": "Analytics screen"
+    },
+    "insightsStreak": "Streak",
+    "@insightsStreak": {
+        "description": "Analytics screen"
+    },
+    "insightsStreakLabel": "days in a row",
+    "@insightsStreakLabel": {
+        "description": "Analytics screen"
+    },
+    "insightsLongestStreak": "Longest: {count}",
+    "@insightsLongestStreak": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "count": { "type": "String" }
+        }
+    },
+    "insightsStreakKeepGoing": "Add a mind today to keep it going",
+    "@insightsStreakKeepGoing": {
+        "description": "Analytics screen"
+    },
+    "insightsHeatmap": "Activity map",
+    "@insightsHeatmap": {
+        "description": "Analytics screen"
+    },
+    "insightsActivityTime": "Time of day",
+    "@insightsActivityTime": {
+        "description": "Analytics screen"
+    },
+    "insightsPeakHour": "Most active around {hour}",
+    "@insightsPeakHour": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "hour": { "type": "String" }
+        }
+    },
+    "insightsOnThisDay": "On this day",
+    "@insightsOnThisDay": {
+        "description": "Analytics screen"
+    },
+    "insightsMediaCounters": "Media",
+    "@insightsMediaCounters": {
+        "description": "Analytics screen"
+    },
+    "insightsPhotos": "Photos",
+    "@insightsPhotos": {
+        "description": "Analytics screen"
+    },
+    "insightsVideos": "Videos",
+    "@insightsVideos": {
+        "description": "Analytics screen"
+    },
+    "insightsVoiceNotes": "Voice notes",
+    "@insightsVoiceNotes": {
+        "description": "Analytics screen"
+    },
+    "insightsRoundVideos": "Round videos",
+    "@insightsRoundVideos": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyPeriod": "No minds in this period yet",
+    "@insightsEmptyPeriod": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyEmotions": "Tag minds with emotions to see this",
+    "@insightsEmptyEmotions": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyPairs": "Tag a mind with two emotions to see pairs",
+    "@insightsEmptyPairs": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyOnThisDay": "Nothing from this day in past years yet",
+    "@insightsEmptyOnThisDay": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyRoundVideos": "No round videos in this period",
+    "@insightsEmptyRoundVideos": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyStreak": "Add a mind today to start a streak",
+    "@insightsEmptyStreak": {
+        "description": "Analytics screen"
+    },
+    "insightsCustomize": "Customize analytics",
+    "@insightsCustomize": {
+        "description": "Analytics screen"
+    },
+    "insightsCustomizeDescription": "Turn cards on or off and drag to reorder",
+    "@insightsCustomizeDescription": {
+        "description": "Analytics screen"
+    },
+    "insightsResetLayout": "Reset",
+    "@insightsResetLayout": {
+        "description": "Analytics screen"
+    },
     "activeTasks": "Active tasks",
     "@activeTasks": {
         "description": "Settings section shown on top while a background job runs"
@@ -334,17 +570,9 @@
     "@writeSomething": {
         "description": "Write something hint"
     },
-    "topMinds": "Top minds",
-    "@topMinds": {
-        "description": "Top minds title"
-    },
     "todayMinds": "Today minds",
     "@todayMinds": {
         "description": "Today minds title"
-    },
-    "spectrum": "Spectrum",
-    "@spectrum": {
-        "description": "Spectrum title"
     },
     "youDidNotCollectAnyEntriesYet": "You did not collect any entries yet",
     "@youDidNotCollectAnyEntriesYet": {
@@ -409,15 +637,6 @@
     "noMindsForThisDay": "No minds for this day",
     "@noMindsForThisDay": {
         "description": "No minds for this day message"
-    },
-    "showMindsForPeriod": "Show minds for {period}",
-    "@showMindsForPeriod": {
-        "description": "Show minds for period message",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Week",
     "@week": {

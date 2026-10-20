@@ -42,6 +42,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateDayFeed>(_updateDayFeed);
     on<SettingsUpdateItemHidden>(_updateItemHidden);
     on<SettingsMarkShakeDiscovered>(_markShakeDiscovered);
+    on<SettingsUpdateInsights>(_updateInsights);
 
     _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
   }
@@ -229,6 +230,10 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _updateItemHidden(SettingsUpdateItemHidden event, Emitter<SettingsState> emit) async {
     await _repository.updateSettingsItemHidden(event.id, isHidden: event.isHidden);
+  }
+
+  FutureOr<void> _updateInsights(SettingsUpdateInsights event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(_repository.value.copyWith(insights: event.insights));
   }
 
   FutureOr<void> _markShakeDiscovered(SettingsMarkShakeDiscovered event, Emitter<SettingsState> emit) async {

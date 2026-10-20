@@ -9,6 +9,180 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => '最も充実した期間';
+
+  @override
+  String get insightsPeriodWeek => '週';
+
+  @override
+  String get insightsPeriodMonth => '月';
+
+  @override
+  String get insightsPeriodYear => '年';
+
+  @override
+  String get insightsPeriodAllTime => '全期間';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '先週比 $delta';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '先月比 $delta';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '昨年比 $delta';
+  }
+
+  @override
+  String get insightsCategorySummary => '概要';
+
+  @override
+  String get insightsCategoryEmotions => '感情';
+
+  @override
+  String get insightsCategoryActivity => 'アクティビティ';
+
+  @override
+  String get insightsCategoryMemories => '思い出';
+
+  @override
+  String get insightsCategoryMedia => 'メディア';
+
+  @override
+  String get insightsCounters => '数字で見る';
+
+  @override
+  String get insightsMinds => 'メモ';
+
+  @override
+  String get insightsActiveDays => '記録した日';
+
+  @override
+  String get insightsWords => '単語';
+
+  @override
+  String get insightsBrightestDay => '最も充実した日';
+
+  @override
+  String get insightsBrightestWeek => '最も充実した週';
+
+  @override
+  String get insightsBrightestMonth => '最も充実した月';
+
+  @override
+  String get insightsBrightestYear => '最も充実した年';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'メモ $minds · 感情 $emotions · メディア $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => '感情';
+
+  @override
+  String get insightsEmotionTrend => '感情の推移';
+
+  @override
+  String get insightsEmotionPairs => '一緒に現れる感情';
+
+  @override
+  String get insightsEmotionRhythm => '感情のリズム';
+
+  @override
+  String get insightsByWeekday => '曜日別';
+
+  @override
+  String get insightsByDayPart => '時間帯別';
+
+  @override
+  String get insightsNight => '夜';
+
+  @override
+  String get insightsMorning => '朝';
+
+  @override
+  String get insightsAfternoon => '昼';
+
+  @override
+  String get insightsEvening => '夕方';
+
+  @override
+  String get insightsStreak => '連続記録';
+
+  @override
+  String get insightsStreakLabel => '日連続';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return '最長: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing => '今日メモを追加して記録を続けましょう';
+
+  @override
+  String get insightsHeatmap => 'アクティビティマップ';
+
+  @override
+  String get insightsActivityTime => '時間帯';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return '$hour 頃が最も活発';
+  }
+
+  @override
+  String get insightsOnThisDay => 'この日';
+
+  @override
+  String get insightsMediaCounters => 'メディア';
+
+  @override
+  String get insightsPhotos => '写真';
+
+  @override
+  String get insightsVideos => 'ビデオ';
+
+  @override
+  String get insightsVoiceNotes => 'ボイスメモ';
+
+  @override
+  String get insightsRoundVideos => '丸いビデオ';
+
+  @override
+  String get insightsEmptyPeriod => 'この期間のメモはまだありません';
+
+  @override
+  String get insightsEmptyEmotions => 'メモに感情を付けると表示されます';
+
+  @override
+  String get insightsEmptyPairs => 'メモに感情を2つ付けるとペアが表示されます';
+
+  @override
+  String get insightsEmptyOnThisDay => '過去のこの日の記録はまだありません';
+
+  @override
+  String get insightsEmptyRoundVideos => 'この期間に丸いビデオはありません';
+
+  @override
+  String get insightsEmptyStreak => '今日メモを追加して連続記録を始めましょう';
+
+  @override
+  String get insightsCustomize => '分析をカスタマイズ';
+
+  @override
+  String get insightsCustomizeDescription => 'カードのオン・オフを切り替え、ドラッグで並べ替え';
+
+  @override
+  String get insightsResetLayout => 'リセット';
+
+  @override
   String get activeTasks => '実行中のタスク';
 
   @override
@@ -259,13 +433,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get writeSomething => '何か書いてください...';
 
   @override
-  String get topMinds => 'トップメモ';
-
-  @override
   String get todayMinds => '今日のメモ';
-
-  @override
-  String get spectrum => 'スペクトラム';
 
   @override
   String get youDidNotCollectAnyEntriesYet => 'まだエントリーを収集していません';
@@ -314,11 +482,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'この日のメモはありません';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return '$periodのメモを表示';
-  }
 
   @override
   String get week => '週';

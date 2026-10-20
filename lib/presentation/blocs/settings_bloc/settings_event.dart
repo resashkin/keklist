@@ -108,6 +108,11 @@ final class SettingsUpdateItemHidden extends SettingsEvent {
   const SettingsUpdateItemHidden({required this.id, required this.isHidden});
 }
 
+final class SettingsUpdateInsights extends SettingsEvent {
+  final InsightsSettings insights;
+  const SettingsUpdateInsights({required this.insights});
+}
+
 final class SettingsMarkShakeDiscovered extends SettingsEvent {
   final String screenId;
   const SettingsMarkShakeDiscovered({required this.screenId});
