@@ -430,34 +430,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get onboardingMind6 => 'Per creare una nuova nota, tocca \'Scrivi\'';
 
   @override
-  String get viewPhotos => 'Visualizza foto';
-
-  @override
   String get noPhotosForDay => 'Nessuna foto trovata per questo giorno';
-
-  @override
-  String get dateGallerySubtitle => 'File multimediali di questo giorno';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count file multimediali di questo giorno';
-  }
-
-  @override
-  String get sources => 'Sorgenti';
-
-  @override
-  String get sourcesMinds => 'Menti';
-
-  @override
-  String get sourcesMindsSubtitle => 'I tuoi pensieri e momenti';
-
-  @override
-  String get sourcesPhotoVideo => 'Foto e video';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Foto e video del dispositivo per questo giorno';
 
   @override
   String get sourcesMediaFolder => 'File multimediali';
@@ -468,12 +441,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'File multimediali';
-
-  @override
-  String get mediaFolderNoPath => 'Nessuna cartella selezionata';
-
-  @override
-  String get mediaFolderPickFolder => 'Seleziona cartella';
 
   @override
   String get licenses => 'Licenze';
@@ -496,10 +463,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get weatherSaveLocation => 'Salva posizione';
-
-  @override
-  String get weatherNoLocation =>
-      'Imposta la posizione nelle impostazioni meteo';
 
   @override
   String get weatherUseMyLocation => 'Usa la mia posizione';
@@ -525,21 +488,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Autorizzazione di localizzazione negata in modo permanente. Apertura impostazioni app.';
-
-  @override
-  String get weatherTemperature => 'Temperatura';
-
-  @override
-  String get weatherUvIndex => 'Indice UV';
-
-  @override
-  String get weatherHumidity => 'Umidità';
-
-  @override
-  String get weatherWindSpeed => 'Velocità del vento';
-
-  @override
-  String get weatherPrecipitation => 'Precipitazioni';
 
   @override
   String get audioRecordTitle => 'Registra audio';
@@ -638,12 +586,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Eliminare questa emozione? Verrà rimossa da tutte le menti che la usano.';
-
-  @override
-  String get dayFeedShowAll => 'Mostra tutto';
-
-  @override
-  String get dayFeedShowSources => 'Mostra fonti';
 
   @override
   String get dayFeedTileSettings => 'Impostazioni riquadri';

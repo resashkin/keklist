@@ -428,34 +428,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Чтобы создать новую заметку, нажмите \'Написать\'';
 
   @override
-  String get viewPhotos => 'Посмотреть фото';
-
-  @override
   String get noPhotosForDay => 'Нет фотографий за этот день';
-
-  @override
-  String get dateGallerySubtitle => 'Медиафайлы за этот день';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count медиафайлов за этот день';
-  }
-
-  @override
-  String get sources => 'Источники';
-
-  @override
-  String get sourcesMinds => 'Мысли';
-
-  @override
-  String get sourcesMindsSubtitle => 'Ваши мысли и моменты';
-
-  @override
-  String get sourcesPhotoVideo => 'Фото и видео';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Фотографии и видео устройства за этот день';
 
   @override
   String get sourcesMediaFolder => 'Медиафайлы';
@@ -465,12 +438,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'Медиафайлы';
-
-  @override
-  String get mediaFolderNoPath => 'Папка не выбрана';
-
-  @override
-  String get mediaFolderPickFolder => 'Выбрать папку';
 
   @override
   String get licenses => 'Лицензии';
@@ -492,9 +459,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get weatherSaveLocation => 'Сохранить местоположение';
-
-  @override
-  String get weatherNoLocation => 'Укажите местоположение в настройках погоды';
 
   @override
   String get weatherUseMyLocation => 'Использовать моё местоположение';
@@ -520,21 +484,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Доступ к геолокации заблокирован. Открываю настройки приложения.';
-
-  @override
-  String get weatherTemperature => 'Температура';
-
-  @override
-  String get weatherUvIndex => 'УФ-индекс';
-
-  @override
-  String get weatherHumidity => 'Влажность';
-
-  @override
-  String get weatherWindSpeed => 'Скорость ветра';
-
-  @override
-  String get weatherPrecipitation => 'Осадки';
 
   @override
   String get audioRecordTitle => 'Запись аудио';
@@ -633,12 +582,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Удалить эту эмоцию? Она будет удалена из всех минд, где используется.';
-
-  @override
-  String get dayFeedShowAll => 'Показать всё';
-
-  @override
-  String get dayFeedShowSources => 'Показать источники';
 
   @override
   String get dayFeedTileSettings => 'Настройки плиток';

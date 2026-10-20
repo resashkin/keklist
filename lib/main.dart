@@ -51,9 +51,6 @@ import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/cubits/used_emoji/used_emoji_cubit.dart';
 import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
 import 'package:keklist/presentation/cubits/weather/weather_cubit.dart';
-import 'package:keklist/presentation/screens/date_gallery/bloc/date_gallery_bloc.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_media_tile/day_folder_media_preview_cubit.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_media_tile/day_media_preview_cubit.dart';
 import 'package:keklist/di/containers.dart';
 
 import 'presentation/native/ios/watch/watch_communication_manager.dart';
@@ -382,9 +379,6 @@ const Map<Type, String> _kBlocEmojis = {
   UserProfileBloc: '👤',
   UsedEmojiCubit: '🎨',
   WeatherCubit: '🌤️',
-  DayMediaPreviewCubit: '🖼️',
-  DayFolderMediaPreviewCubit: '📁',
-  DateGalleryBloc: '🗓️',
 };
 
 // Stable fallback pool for BLoCs not explicitly mapped above.

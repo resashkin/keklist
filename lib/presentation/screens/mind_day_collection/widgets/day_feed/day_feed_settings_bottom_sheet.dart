@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
@@ -5,7 +7,16 @@ import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 
 final class DayFeedSettingsBottomSheet extends StatelessWidget {
-  const DayFeedSettingsBottomSheet({super.key});
+  final ValueChanged<bool> onWeatherToggled;
+  final VoidCallback onWeatherLocation;
+  final VoidCallback onMediaFolder;
+
+  const DayFeedSettingsBottomSheet({
+    super.key,
+    required this.onWeatherToggled,
+    required this.onWeatherLocation,
+    required this.onMediaFolder,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +24,18 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
       child: BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (_, current) => current is SettingsDataState,
         builder: (context, state) {
-          final DayFeedSettings settings =
-              state is SettingsDataState ? state.settings.dayFeed : const DayFeedSettings();
-          return _buildContent(context, settings);
+          final KeklistSettings? settings = state is SettingsDataState ? state.settings : null;
+          return _buildContent(
+            context,
+            settings?.dayFeed ?? const DayFeedSettings(),
+            isWeatherEnabled: settings?.isWeatherSourceEnabled ?? false,
+          );
         },
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, DayFeedSettings settings) {
+  Widget _buildContent(BuildContext context, DayFeedSettings settings, {required bool isWeatherEnabled}) {
     final ThemeData theme = Theme.of(context);
     void update(SettingsUpdateDayFeed event) => context.read<SettingsBloc>().add(event);
 
@@ -55,6 +69,32 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
           value: settings.isAudioBadgeVisible,
           onChanged: (value) => update(SettingsUpdateDayFeed(isAudioBadgeVisible: value)),
         ),
+        const Divider(),
+        SwitchListTile(
+          secondary: const Icon(Icons.cloud_outlined),
+          title: Row(
+            spacing: 6.0,
+            children: [Text(context.l10n.sourcesWeather), const _ProBadge()],
+          ),
+          subtitle: Text(context.l10n.sourcesWeatherSubtitle),
+          value: isWeatherEnabled,
+          onChanged: onWeatherToggled,
+        ),
+        if (isWeatherEnabled)
+          ListTile(
+            leading: const Icon(Icons.place_outlined),
+            title: Text(context.l10n.weatherSettings),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: onWeatherLocation,
+          ),
+        if (Platform.isAndroid)
+          ListTile(
+            leading: const Icon(Icons.folder_open),
+            title: Text(context.l10n.sourcesMediaFolder),
+            subtitle: Text(context.l10n.sourcesMediaFolderSubtitle),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: onMediaFolder,
+          ),
         const SafeArea(child: SizedBox(height: 8.0)),
       ],
     );
@@ -85,6 +125,27 @@ final class _SegmentedRow<T> extends StatelessWidget {
             onSelectionChanged: (selection) => onChanged(selection.first),
           ),
         ],
+      ),
+    );
+  }
+}
+
+final class _ProBadge extends StatelessWidget {
+  static const Color _gold = Color(0xFFFFB800);
+
+  const _ProBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: _gold, width: 1.2),
+        borderRadius: BorderRadius.circular(4.0),
+      ),
+      child: const Text(
+        'PRO',
+        style: TextStyle(fontSize: 9.0, fontWeight: FontWeight.bold, color: _gold, height: 1.2, letterSpacing: 0.5),
       ),
     );
   }

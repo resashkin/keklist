@@ -43,7 +43,6 @@ void main() {
         dataSchemaVersion: 0,
         hasSeenLazyOnboarding: false,
         isDebugMenuVisible: false,
-        isPhotoVideoSourceEnabled: false,
       ),
     );
   });
@@ -67,7 +66,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: true,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -96,7 +94,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -134,7 +131,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -179,7 +175,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -309,7 +304,6 @@ void main() {
         dataSchemaVersion: 0,
         hasSeenLazyOnboarding: false,
         isDebugMenuVisible: false,
-        isPhotoVideoSourceEnabled: false,
       );
 
       when(() => mockSettingsRepository.value).thenReturn(currentSettings);

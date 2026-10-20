@@ -17,12 +17,10 @@ abstract class SettingsRepository {
   FutureOr<void> updateShouldShowTitles(bool shouldShowTitles);
   FutureOr<void> updatePreviousAppVersion(String? previousAppVersion);
   FutureOr<void> updateLanguage(SupportedLanguage language);
-  FutureOr<void> updateIsPhotoVideoSourceEnabled(bool value);
   FutureOr<void> updateWeatherSettings({bool? isEnabled, double? latitude, double? longitude});
-  FutureOr<void> updateMediaFolderSource({bool? isEnabled, String? folderPath, bool? isRecursive});
+  FutureOr<void> updateMediaFolderSource({String? folderPath, bool? isRecursive});
   FutureOr<void> updateHasSeededEmotions(bool value);
   FutureOr<void> updateDayFeedSettings({
-    bool? isEnabled,
     int? columnCount,
     int? mindCellSpan,
     bool? isMindTextVisible,
@@ -35,14 +33,12 @@ abstract class SettingsRepository {
 final class DayFeedSettings {
   static const List<int> columnCountOptions = [3, 4, 5];
 
-  final bool isEnabled;
   final int columnCount;
   final int mindCellSpan;
   final bool isMindTextVisible;
   final bool isAudioBadgeVisible;
 
   const DayFeedSettings({
-    this.isEnabled = false,
     this.columnCount = 4,
     this.mindCellSpan = 1,
     this.isMindTextVisible = true,
@@ -61,11 +57,9 @@ final class KeklistSettings {
   final int dataSchemaVersion;
   final bool hasSeenLazyOnboarding;
   final bool isDebugMenuVisible;
-  final bool isPhotoVideoSourceEnabled;
   final bool isWeatherSourceEnabled;
   final double? weatherLatitude;
   final double? weatherLongitude;
-  final bool isMediaFolderSourceEnabled;
   final String? mediaFolderPath;
   final bool isMediaFolderRecursive;
 
@@ -88,11 +82,9 @@ final class KeklistSettings {
     required this.dataSchemaVersion,
     required this.hasSeenLazyOnboarding,
     required this.isDebugMenuVisible,
-    required this.isPhotoVideoSourceEnabled,
     this.isWeatherSourceEnabled = false,
     this.weatherLatitude,
     this.weatherLongitude,
-    this.isMediaFolderSourceEnabled = false,
     this.mediaFolderPath,
     this.isMediaFolderRecursive = false,
     this.hasSeededEmotions = false,
@@ -113,15 +105,12 @@ final class KeklistSettings {
     ..dataSchemaVersion = dataSchemaVersion
     ..hasSeenLazyOnboarding = hasSeenLazyOnboarding
     ..isDebugMenuVisible = isDebugMenuVisible
-    ..isPhotoVideoSourceEnabled = isPhotoVideoSourceEnabled
     ..isWeatherSourceEnabled = isWeatherSourceEnabled
     ..weatherLatitude = weatherLatitude
     ..weatherLongitude = weatherLongitude
-    ..isMediaFolderSourceEnabled = isMediaFolderSourceEnabled
     ..mediaFolderPath = mediaFolderPath
     ..isMediaFolderRecursive = isMediaFolderRecursive
     ..hasSeededEmotions = hasSeededEmotions
-    ..isDayFeedModeEnabled = dayFeed.isEnabled
     ..dayFeedColumnCount = dayFeed.columnCount
     ..dayFeedMindCellSpan = dayFeed.mindCellSpan
     ..isDayFeedMindTextVisible = dayFeed.isMindTextVisible
@@ -140,11 +129,9 @@ final class KeklistSettings {
         dataSchemaVersion: 0,
         hasSeenLazyOnboarding: false,
         isDebugMenuVisible: false,
-        isPhotoVideoSourceEnabled: false,
         isWeatherSourceEnabled: false,
         weatherLatitude: null,
         weatherLongitude: null,
-        isMediaFolderSourceEnabled: false,
         mediaFolderPath: null,
         isMediaFolderRecursive: false,
         hasSeededEmotions: false,

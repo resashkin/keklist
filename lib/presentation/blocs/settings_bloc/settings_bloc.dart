@@ -37,7 +37,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateShouldShowTitlesMode>(_updateShouldShowTitlesMode);
     on<SettingsChangeLanguage>(_changeLanguage);
     on<SettingsEnableDebugMenu>(_enableDebugMenu);
-    on<SettingsTogglePhotoVideoSource>(_togglePhotoVideoSource);
     on<SettingsToggleWeatherSource>(_toggleWeatherSource);
     on<SettingsUpdateWeatherLocation>(_updateWeatherLocation);
     on<SettingsUpdateMediaFolderSource>(_updateMediaFolderSource);
@@ -219,11 +218,9 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       dataSchemaVersion: currentSettings.dataSchemaVersion,
       hasSeenLazyOnboarding: currentSettings.hasSeenLazyOnboarding,
       isDebugMenuVisible: true,
-      isPhotoVideoSourceEnabled: currentSettings.isPhotoVideoSourceEnabled,
       isWeatherSourceEnabled: currentSettings.isWeatherSourceEnabled,
       weatherLatitude: currentSettings.weatherLatitude,
       weatherLongitude: currentSettings.weatherLongitude,
-      isMediaFolderSourceEnabled: currentSettings.isMediaFolderSourceEnabled,
       mediaFolderPath: currentSettings.mediaFolderPath,
       isMediaFolderRecursive: currentSettings.isMediaFolderRecursive,
       dayFeed: currentSettings.dayFeed,
@@ -231,10 +228,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       shakeDiscoveredScreenIds: currentSettings.shakeDiscoveredScreenIds,
     );
     await _repository.updateSettings(updatedSettings);
-  }
-
-  FutureOr<void> _togglePhotoVideoSource(SettingsTogglePhotoVideoSource event, Emitter<SettingsState> emit) async {
-    await _repository.updateIsPhotoVideoSourceEnabled(event.isEnabled);
   }
 
   FutureOr<void> _toggleWeatherSource(SettingsToggleWeatherSource event, Emitter<SettingsState> emit) async {
@@ -247,7 +240,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _updateMediaFolderSource(SettingsUpdateMediaFolderSource event, Emitter<SettingsState> emit) async {
     await _repository.updateMediaFolderSource(
-      isEnabled: event.isEnabled,
       folderPath: event.folderPath,
       isRecursive: event.isRecursive,
     );
@@ -255,7 +247,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _updateDayFeed(SettingsUpdateDayFeed event, Emitter<SettingsState> emit) async {
     await _repository.updateDayFeedSettings(
-      isEnabled: event.isEnabled,
       columnCount: event.columnCount,
       mindCellSpan: event.mindCellSpan,
       isMindTextVisible: event.isMindTextVisible,

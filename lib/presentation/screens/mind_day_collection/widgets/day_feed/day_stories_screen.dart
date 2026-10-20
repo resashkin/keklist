@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/native/android/media_folder_channel.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
-import 'package:keklist/presentation/screens/date_gallery/folder_media_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';

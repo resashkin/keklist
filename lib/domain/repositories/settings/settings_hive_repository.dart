@@ -100,13 +100,6 @@ final class SettingsHiveRepository implements SettingsRepository {
   }
 
   @override
-  FutureOr<void> updateIsPhotoVideoSourceEnabled(bool value) async {
-    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
-    settingsObject?.isPhotoVideoSourceEnabled = value;
-    await settingsObject?.save();
-  }
-
-  @override
   FutureOr<void> updateWeatherSettings({bool? isEnabled, double? latitude, double? longitude}) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     if (settingsObject == null) return;
@@ -117,10 +110,9 @@ final class SettingsHiveRepository implements SettingsRepository {
   }
 
   @override
-  FutureOr<void> updateMediaFolderSource({bool? isEnabled, String? folderPath, bool? isRecursive}) async {
+  FutureOr<void> updateMediaFolderSource({String? folderPath, bool? isRecursive}) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     if (settingsObject == null) return;
-    if (isEnabled != null) settingsObject.isMediaFolderSourceEnabled = isEnabled;
     if (folderPath != null) settingsObject.mediaFolderPath = folderPath;
     if (isRecursive != null) settingsObject.isMediaFolderRecursive = isRecursive;
     await settingsObject.save();
@@ -128,7 +120,6 @@ final class SettingsHiveRepository implements SettingsRepository {
 
   @override
   FutureOr<void> updateDayFeedSettings({
-    bool? isEnabled,
     int? columnCount,
     int? mindCellSpan,
     bool? isMindTextVisible,
@@ -136,7 +127,6 @@ final class SettingsHiveRepository implements SettingsRepository {
   }) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     if (settingsObject == null) return;
-    if (isEnabled != null) settingsObject.isDayFeedModeEnabled = isEnabled;
     if (columnCount != null) settingsObject.dayFeedColumnCount = columnCount;
     if (mindCellSpan != null) settingsObject.dayFeedMindCellSpan = mindCellSpan;
     if (isMindTextVisible != null) settingsObject.isDayFeedMindTextVisible = isMindTextVisible;

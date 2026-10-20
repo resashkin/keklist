@@ -429,34 +429,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get onboardingMind6 => 'Да креирате нову белешку, додирните \'Пиши\'';
 
   @override
-  String get viewPhotos => 'Погледај фотографије';
-
-  @override
   String get noPhotosForDay => 'Нема фотографија за овај дан';
-
-  @override
-  String get dateGallerySubtitle => 'Медиjске датотеке за овај дан';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count медијских датотека за овај дан';
-  }
-
-  @override
-  String get sources => 'Извори';
-
-  @override
-  String get sourcesMinds => 'Мисли';
-
-  @override
-  String get sourcesMindsSubtitle => 'Ваше мисли и тренуци';
-
-  @override
-  String get sourcesPhotoVideo => 'Фотографије и видео';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Фотографије и видео снимци уређаја за овај дан';
 
   @override
   String get sourcesMediaFolder => 'Медијске датотеке';
@@ -467,12 +440,6 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'Медијске датотеке';
-
-  @override
-  String get mediaFolderNoPath => 'Нема изабране фасцикле';
-
-  @override
-  String get mediaFolderPickFolder => 'Изабери фасциклу';
 
   @override
   String get licenses => 'Лиценце';
@@ -494,10 +461,6 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get weatherSaveLocation => 'Сачувај локацију';
-
-  @override
-  String get weatherNoLocation =>
-      'Поставите локацију у подешавањима временске прогнозе';
 
   @override
   String get weatherUseMyLocation => 'Користи моју локацију';
@@ -522,21 +485,6 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Дозвола за локацију је трајно одбијена. Отварање подешавања апликације.';
-
-  @override
-  String get weatherTemperature => 'Температура';
-
-  @override
-  String get weatherUvIndex => 'УВ индекс';
-
-  @override
-  String get weatherHumidity => 'Влажност';
-
-  @override
-  String get weatherWindSpeed => 'Брзина ветра';
-
-  @override
-  String get weatherPrecipitation => 'Падавине';
 
   @override
   String get audioRecordTitle => 'Сними аудио';
@@ -635,12 +583,6 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Обрисати ову емоцију? Биће уклоњена из свих мисли које је користе.';
-
-  @override
-  String get dayFeedShowAll => 'Прикажи све';
-
-  @override
-  String get dayFeedShowSources => 'Прикажи изворе';
 
   @override
   String get dayFeedTileSettings => 'Подешавања плочица';
@@ -1143,34 +1085,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get onboardingMind6 => 'Da kreirate novu belešku, dodirnite \'Piši\'';
 
   @override
-  String get viewPhotos => 'Pogledaj fotografije';
-
-  @override
   String get noPhotosForDay => 'Nema fotografija za ovaj dan';
-
-  @override
-  String get dateGallerySubtitle => 'Medijske datoteke za ovaj dan';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count medijskih datoteka za ovaj dan';
-  }
-
-  @override
-  String get sources => 'Izvori';
-
-  @override
-  String get sourcesMinds => 'Misli';
-
-  @override
-  String get sourcesMindsSubtitle => 'Vaše misli i trenuci';
-
-  @override
-  String get sourcesPhotoVideo => 'Fotografije i video';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Fotografije i video snimci uređaja za ovaj dan';
 
   @override
   String get sourcesMediaFolder => 'Medijske datoteke';
@@ -1181,12 +1096,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get mediaFolderSettings => 'Medijske datoteke';
-
-  @override
-  String get mediaFolderNoPath => 'Nema izabrane fascikle';
-
-  @override
-  String get mediaFolderPickFolder => 'Izaberi fasciklu';
 
   @override
   String get licenses => 'Licence';
@@ -1208,10 +1117,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get weatherSaveLocation => 'Sačuvaj lokaciju';
-
-  @override
-  String get weatherNoLocation =>
-      'Postavite lokaciju u podešavanjima vremenske prognoze';
 
   @override
   String get weatherUseMyLocation => 'Koristi moju lokaciju';
@@ -1236,21 +1141,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Dozvola za lokaciju je trajno odbijena. Otvaranje podešavanja aplikacije.';
-
-  @override
-  String get weatherTemperature => 'Temperatura';
-
-  @override
-  String get weatherUvIndex => 'UV indeks';
-
-  @override
-  String get weatherHumidity => 'Vlažnost';
-
-  @override
-  String get weatherWindSpeed => 'Brzina vetra';
-
-  @override
-  String get weatherPrecipitation => 'Padavine';
 
   @override
   String get audioRecordTitle => 'Snimi audio';
@@ -1349,12 +1239,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get deleteEmotionMessage =>
       'Obrisati ovu emociju? Biće uklonjena iz svih misli koje je koriste.';
-
-  @override
-  String get dayFeedShowAll => 'Prikaži sve';
-
-  @override
-  String get dayFeedShowSources => 'Prikaži izvore';
 
   @override
   String get dayFeedTileSettings => 'Podešavanja pločica';

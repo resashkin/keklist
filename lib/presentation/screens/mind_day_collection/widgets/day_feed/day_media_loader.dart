@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:keklist/native/android/media_folder_channel.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart' as kek_date;
-import 'package:keklist/presentation/screens/date_gallery/folder_media_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:photo_manager/photo_manager.dart';
 
