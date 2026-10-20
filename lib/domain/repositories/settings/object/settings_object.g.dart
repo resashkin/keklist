@@ -54,13 +54,22 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
           : (fields[26] as List).cast<String>()
       ..shakeDiscoveredScreenIds = fields[27] == null
           ? []
-          : (fields[27] as List).cast<String>();
+          : (fields[27] as List).cast<String>()
+      ..insightsWidgetOrder = fields[28] == null
+          ? []
+          : (fields[28] as List).cast<String>()
+      ..hiddenInsightsWidgetIds = fields[29] == null
+          ? []
+          : (fields[29] as List).cast<String>()
+      ..insightsPeriodIndex = fields[30] == null
+          ? 1
+          : (fields[30] as num).toInt();
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(22)
+      ..writeByte(25)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)
@@ -104,7 +113,13 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(26)
       ..write(obj.hiddenSettingsItemIds)
       ..writeByte(27)
-      ..write(obj.shakeDiscoveredScreenIds);
+      ..write(obj.shakeDiscoveredScreenIds)
+      ..writeByte(28)
+      ..write(obj.insightsWidgetOrder)
+      ..writeByte(29)
+      ..write(obj.hiddenInsightsWidgetIds)
+      ..writeByte(30)
+      ..write(obj.insightsPeriodIndex);
   }
 
   @override

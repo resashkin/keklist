@@ -9,6 +9,185 @@ class AppLocalizationsKy extends AppLocalizations {
   AppLocalizationsKy([String locale = 'ky']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Эң жаркын мезгил';
+
+  @override
+  String get insightsPeriodWeek => 'Апта';
+
+  @override
+  String get insightsPeriodMonth => 'Ай';
+
+  @override
+  String get insightsPeriodYear => 'Жыл';
+
+  @override
+  String get insightsPeriodAllTime => 'Бардык убакыт';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return 'Өткөн жумага салыштырмалуу $delta';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return 'Өткөн айга салыштырмалуу $delta';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return 'Өткөн жылга салыштырмалуу $delta';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Сереп';
+
+  @override
+  String get insightsCategoryEmotions => 'Эмоциялар';
+
+  @override
+  String get insightsCategoryActivity => 'Активдүүлүк';
+
+  @override
+  String get insightsCategoryMemories => 'Эскерүүлөр';
+
+  @override
+  String get insightsCategoryMedia => 'Медиа';
+
+  @override
+  String get insightsCounters => 'Сандар менен';
+
+  @override
+  String get insightsMinds => 'Жазуулар';
+
+  @override
+  String get insightsActiveDays => 'Активдүү күндөр';
+
+  @override
+  String get insightsWords => 'Сөздөр';
+
+  @override
+  String get insightsBrightestDay => 'Эң жаркын күн';
+
+  @override
+  String get insightsBrightestWeek => 'Эң жаркын жума';
+
+  @override
+  String get insightsBrightestMonth => 'Эң жаркын ай';
+
+  @override
+  String get insightsBrightestYear => 'Эң жаркын жыл';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'жазуу: $minds · эмоция: $emotions · медиа: $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Эмоциялар';
+
+  @override
+  String get insightsEmotionTrend => 'Эмоциялардын динамикасы';
+
+  @override
+  String get insightsEmotionPairs => 'Бирге кездешкен эмоциялар';
+
+  @override
+  String get insightsEmotionRhythm => 'Эмоционалдык ритм';
+
+  @override
+  String get insightsByWeekday => 'Жуманын күндөрү боюнча';
+
+  @override
+  String get insightsByDayPart => 'Суткалык убакыт боюнча';
+
+  @override
+  String get insightsNight => 'Түн';
+
+  @override
+  String get insightsMorning => 'Эртең менен';
+
+  @override
+  String get insightsAfternoon => 'Күндүз';
+
+  @override
+  String get insightsEvening => 'Кечинде';
+
+  @override
+  String get insightsStreak => 'Серия';
+
+  @override
+  String get insightsStreakLabel => 'күн катары менен';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Рекорд: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing =>
+      'Серияны үзбөө үчүн бүгүн жазуу кошуңуз';
+
+  @override
+  String get insightsHeatmap => 'Активдүүлүк картасы';
+
+  @override
+  String get insightsActivityTime => 'Суткалык убакыт';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Көбүнчө $hour чамасында';
+  }
+
+  @override
+  String get insightsOnThisDay => 'Ушул күнү';
+
+  @override
+  String get insightsMediaCounters => 'Медиа';
+
+  @override
+  String get insightsPhotos => 'Сүрөттөр';
+
+  @override
+  String get insightsVideos => 'Видеолор';
+
+  @override
+  String get insightsVoiceNotes => 'Үн жазуулары';
+
+  @override
+  String get insightsRoundVideos => 'Тегерек видеолор';
+
+  @override
+  String get insightsEmptyPeriod => 'Бул мезгилде азырынча жазуу жок';
+
+  @override
+  String get insightsEmptyEmotions =>
+      'Муну көрүү үчүн жазууларга эмоция белгилеңиз';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Жуптарды көрүү үчүн жазууга эки эмоция белгилеңиз';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Мурунку жылдары бул күнү азырынча эч нерсе жок';
+
+  @override
+  String get insightsEmptyRoundVideos => 'Бул мезгилде тегерек видео жок';
+
+  @override
+  String get insightsEmptyStreak => 'Серияны баштоо үчүн бүгүн жазуу кошуңуз';
+
+  @override
+  String get insightsCustomize => 'Аналитиканы ыңгайлаштыруу';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Карточкаларды күйгүзүп же өчүрүп, тартып тартибин өзгөртүңүз';
+
+  @override
+  String get insightsResetLayout => 'Баштапкы абалга';
+
+  @override
   String get activeTasks => 'Активдүү тапшырмалар';
 
   @override
@@ -260,13 +439,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get writeSomething => 'Бир нерсе жазыңыз...';
 
   @override
-  String get topMinds => 'Эң жакшы ойлор';
-
-  @override
   String get todayMinds => 'Бүгүнкү ойлор';
-
-  @override
-  String get spectrum => 'Спектр';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
@@ -319,11 +492,6 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'Бул күн үчүн ойлор жок';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return '$period үчүн ойлорду көрсөтүү';
-  }
 
   @override
   String get week => 'Жума';

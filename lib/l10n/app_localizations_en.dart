@@ -9,6 +9,182 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Brightest period';
+
+  @override
+  String get insightsPeriodWeek => 'Week';
+
+  @override
+  String get insightsPeriodMonth => 'Month';
+
+  @override
+  String get insightsPeriodYear => 'Year';
+
+  @override
+  String get insightsPeriodAllTime => 'All time';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '$delta vs last week';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '$delta vs last month';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '$delta vs last year';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Summary';
+
+  @override
+  String get insightsCategoryEmotions => 'Emotions';
+
+  @override
+  String get insightsCategoryActivity => 'Activity';
+
+  @override
+  String get insightsCategoryMemories => 'Memories';
+
+  @override
+  String get insightsCategoryMedia => 'Media';
+
+  @override
+  String get insightsCounters => 'In numbers';
+
+  @override
+  String get insightsMinds => 'Minds';
+
+  @override
+  String get insightsActiveDays => 'Active days';
+
+  @override
+  String get insightsWords => 'Words';
+
+  @override
+  String get insightsBrightestDay => 'Brightest day';
+
+  @override
+  String get insightsBrightestWeek => 'Brightest week';
+
+  @override
+  String get insightsBrightestMonth => 'Brightest month';
+
+  @override
+  String get insightsBrightestYear => 'Brightest year';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return '$minds minds · $emotions emotions · $media media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Emotions';
+
+  @override
+  String get insightsEmotionTrend => 'Emotion trend';
+
+  @override
+  String get insightsEmotionPairs => 'Emotions together';
+
+  @override
+  String get insightsEmotionRhythm => 'Emotional rhythm';
+
+  @override
+  String get insightsByWeekday => 'By weekday';
+
+  @override
+  String get insightsByDayPart => 'By time of day';
+
+  @override
+  String get insightsNight => 'Night';
+
+  @override
+  String get insightsMorning => 'Morning';
+
+  @override
+  String get insightsAfternoon => 'Afternoon';
+
+  @override
+  String get insightsEvening => 'Evening';
+
+  @override
+  String get insightsStreak => 'Streak';
+
+  @override
+  String get insightsStreakLabel => 'days in a row';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Longest: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing => 'Add a mind today to keep it going';
+
+  @override
+  String get insightsHeatmap => 'Activity map';
+
+  @override
+  String get insightsActivityTime => 'Time of day';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Most active around $hour';
+  }
+
+  @override
+  String get insightsOnThisDay => 'On this day';
+
+  @override
+  String get insightsMediaCounters => 'Media';
+
+  @override
+  String get insightsPhotos => 'Photos';
+
+  @override
+  String get insightsVideos => 'Videos';
+
+  @override
+  String get insightsVoiceNotes => 'Voice notes';
+
+  @override
+  String get insightsRoundVideos => 'Round videos';
+
+  @override
+  String get insightsEmptyPeriod => 'No minds in this period yet';
+
+  @override
+  String get insightsEmptyEmotions => 'Tag minds with emotions to see this';
+
+  @override
+  String get insightsEmptyPairs => 'Tag a mind with two emotions to see pairs';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Nothing from this day in past years yet';
+
+  @override
+  String get insightsEmptyRoundVideos => 'No round videos in this period';
+
+  @override
+  String get insightsEmptyStreak => 'Add a mind today to start a streak';
+
+  @override
+  String get insightsCustomize => 'Customize analytics';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Turn cards on or off and drag to reorder';
+
+  @override
+  String get insightsResetLayout => 'Reset';
+
+  @override
   String get activeTasks => 'Active tasks';
 
   @override
@@ -260,13 +436,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get writeSomething => 'Write something...';
 
   @override
-  String get topMinds => 'Top minds';
-
-  @override
   String get todayMinds => 'Today minds';
-
-  @override
-  String get spectrum => 'Spectrum';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
@@ -319,11 +489,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'No minds for this day';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return 'Show minds for $period';
-  }
 
   @override
   String get week => 'Week';

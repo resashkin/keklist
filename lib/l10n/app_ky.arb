@@ -1,4 +1,58 @@
 {
+    "insightsBrightestPeriod": "Эң жаркын мезгил",
+    "insightsPeriodWeek": "Апта",
+    "insightsPeriodMonth": "Ай",
+    "insightsPeriodYear": "Жыл",
+    "insightsPeriodAllTime": "Бардык убакыт",
+    "insightsVsLastWeek": "Өткөн жумага салыштырмалуу {delta}",
+    "insightsVsLastMonth": "Өткөн айга салыштырмалуу {delta}",
+    "insightsVsLastYear": "Өткөн жылга салыштырмалуу {delta}",
+    "insightsCategorySummary": "Сереп",
+    "insightsCategoryEmotions": "Эмоциялар",
+    "insightsCategoryActivity": "Активдүүлүк",
+    "insightsCategoryMemories": "Эскерүүлөр",
+    "insightsCategoryMedia": "Медиа",
+    "insightsCounters": "Сандар менен",
+    "insightsMinds": "Жазуулар",
+    "insightsActiveDays": "Активдүү күндөр",
+    "insightsWords": "Сөздөр",
+    "insightsBrightestDay": "Эң жаркын күн",
+    "insightsBrightestWeek": "Эң жаркын жума",
+    "insightsBrightestMonth": "Эң жаркын ай",
+    "insightsBrightestYear": "Эң жаркын жыл",
+    "insightsBrightestDetails": "жазуу: {minds} · эмоция: {emotions} · медиа: {media}",
+    "insightsEmotionDistribution": "Эмоциялар",
+    "insightsEmotionTrend": "Эмоциялардын динамикасы",
+    "insightsEmotionPairs": "Бирге кездешкен эмоциялар",
+    "insightsEmotionRhythm": "Эмоционалдык ритм",
+    "insightsByWeekday": "Жуманын күндөрү боюнча",
+    "insightsByDayPart": "Суткалык убакыт боюнча",
+    "insightsNight": "Түн",
+    "insightsMorning": "Эртең менен",
+    "insightsAfternoon": "Күндүз",
+    "insightsEvening": "Кечинде",
+    "insightsStreak": "Серия",
+    "insightsStreakLabel": "күн катары менен",
+    "insightsLongestStreak": "Рекорд: {count}",
+    "insightsStreakKeepGoing": "Серияны үзбөө үчүн бүгүн жазуу кошуңуз",
+    "insightsHeatmap": "Активдүүлүк картасы",
+    "insightsActivityTime": "Суткалык убакыт",
+    "insightsPeakHour": "Көбүнчө {hour} чамасында",
+    "insightsOnThisDay": "Ушул күнү",
+    "insightsMediaCounters": "Медиа",
+    "insightsPhotos": "Сүрөттөр",
+    "insightsVideos": "Видеолор",
+    "insightsVoiceNotes": "Үн жазуулары",
+    "insightsRoundVideos": "Тегерек видеолор",
+    "insightsEmptyPeriod": "Бул мезгилде азырынча жазуу жок",
+    "insightsEmptyEmotions": "Муну көрүү үчүн жазууларга эмоция белгилеңиз",
+    "insightsEmptyPairs": "Жуптарды көрүү үчүн жазууга эки эмоция белгилеңиз",
+    "insightsEmptyOnThisDay": "Мурунку жылдары бул күнү азырынча эч нерсе жок",
+    "insightsEmptyRoundVideos": "Бул мезгилде тегерек видео жок",
+    "insightsEmptyStreak": "Серияны баштоо үчүн бүгүн жазуу кошуңуз",
+    "insightsCustomize": "Аналитиканы ыңгайлаштыруу",
+    "insightsCustomizeDescription": "Карточкаларды күйгүзүп же өчүрүп, тартып тартибин өзгөртүңүз",
+    "insightsResetLayout": "Баштапкы абалга",
     "activeTasks": "Активдүү тапшырмалар",
     "galleryIndex": "Галерея индекси",
     "galleryIndexNoAccess": "Сүрөттөргө уруксат жок",
@@ -266,17 +320,9 @@
     "@writeSomething": {
         "description": "Бир нерсе жазуу көрсөткүчү"
     },
-    "topMinds": "Эң жакшы ойлор",
-    "@topMinds": {
-        "description": "Эң жакшы ойлор аталышы"
-    },
     "todayMinds": "Бүгүнкү ойлор",
     "@todayMinds": {
         "description": "Бүгүнкү ойлор аталышы"
-    },
-    "spectrum": "Спектр",
-    "@spectrum": {
-        "description": "Спектр аталышы"
     },
     "youDidNotCollectAnyEntriesYet": "Сиз али эч кандай жазма чогулткан жоксуз",
     "@youDidNotCollectAnyEntriesYet": {
@@ -341,15 +387,6 @@
     "noMindsForThisDay": "Бул күн үчүн ойлор жок",
     "@noMindsForThisDay": {
         "description": "Бул күн үчүн ойлор жок билдирүүсү"
-    },
-    "showMindsForPeriod": "{period} үчүн ойлорду көрсөтүү",
-    "@showMindsForPeriod": {
-        "description": "Мезгил үчүн ойлорду көрсөтүү билдирүүсү",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Жума",
     "password": "Сырсөз",

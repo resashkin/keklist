@@ -9,6 +9,184 @@ class AppLocalizationsSr extends AppLocalizations {
   AppLocalizationsSr([String locale = 'sr']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Најупечатљивији период';
+
+  @override
+  String get insightsPeriodWeek => 'Недеља';
+
+  @override
+  String get insightsPeriodMonth => 'Месец';
+
+  @override
+  String get insightsPeriodYear => 'Година';
+
+  @override
+  String get insightsPeriodAllTime => 'Све време';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '$delta у односу на прошлу недељу';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '$delta у односу на прошли месец';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '$delta у односу на прошлу годину';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Преглед';
+
+  @override
+  String get insightsCategoryEmotions => 'Емоције';
+
+  @override
+  String get insightsCategoryActivity => 'Активност';
+
+  @override
+  String get insightsCategoryMemories => 'Успомене';
+
+  @override
+  String get insightsCategoryMedia => 'Медији';
+
+  @override
+  String get insightsCounters => 'У бројкама';
+
+  @override
+  String get insightsMinds => 'Белешке';
+
+  @override
+  String get insightsActiveDays => 'Активни дани';
+
+  @override
+  String get insightsWords => 'Речи';
+
+  @override
+  String get insightsBrightestDay => 'Најупечатљивији дан';
+
+  @override
+  String get insightsBrightestWeek => 'Најупечатљивија недеља';
+
+  @override
+  String get insightsBrightestMonth => 'Најупечатљивији месец';
+
+  @override
+  String get insightsBrightestYear => 'Најупечатљивија година';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'белешки: $minds · емоција: $emotions · медија: $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Емоције';
+
+  @override
+  String get insightsEmotionTrend => 'Ток емоција';
+
+  @override
+  String get insightsEmotionPairs => 'Емоције заједно';
+
+  @override
+  String get insightsEmotionRhythm => 'Емоционални ритам';
+
+  @override
+  String get insightsByWeekday => 'По данима у недељи';
+
+  @override
+  String get insightsByDayPart => 'По добу дана';
+
+  @override
+  String get insightsNight => 'Ноћ';
+
+  @override
+  String get insightsMorning => 'Јутро';
+
+  @override
+  String get insightsAfternoon => 'Поподне';
+
+  @override
+  String get insightsEvening => 'Вече';
+
+  @override
+  String get insightsStreak => 'Низ';
+
+  @override
+  String get insightsStreakLabel => 'дана заредом';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Рекорд: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing => 'Додај белешку данас да наставиш низ';
+
+  @override
+  String get insightsHeatmap => 'Мапа активности';
+
+  @override
+  String get insightsActivityTime => 'Доба дана';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Најактивнији око $hour';
+  }
+
+  @override
+  String get insightsOnThisDay => 'На данашњи дан';
+
+  @override
+  String get insightsMediaCounters => 'Медији';
+
+  @override
+  String get insightsPhotos => 'Фотографије';
+
+  @override
+  String get insightsVideos => 'Видео записи';
+
+  @override
+  String get insightsVoiceNotes => 'Гласовне белешке';
+
+  @override
+  String get insightsRoundVideos => 'Округли видео записи';
+
+  @override
+  String get insightsEmptyPeriod => 'У овом периоду још нема белешки';
+
+  @override
+  String get insightsEmptyEmotions => 'Означи белешке емоцијама да видиш ово';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Означи белешку са две емоције да видиш парове';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Још ништа са овог дана из претходних година';
+
+  @override
+  String get insightsEmptyRoundVideos =>
+      'Нема округлих видео записа у овом периоду';
+
+  @override
+  String get insightsEmptyStreak => 'Додај белешку данас да започнеш низ';
+
+  @override
+  String get insightsCustomize => 'Прилагоди аналитику';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Укључи или искључи картице и превуци их за редослед';
+
+  @override
+  String get insightsResetLayout => 'Ресетуј';
+
+  @override
   String get activeTasks => 'Активни задаци';
 
   @override
@@ -260,13 +438,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get writeSomething => 'Напиши нешто...';
 
   @override
-  String get topMinds => 'Топ белешке';
-
-  @override
   String get todayMinds => 'Данашње белешке';
-
-  @override
-  String get spectrum => 'Спектар';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
@@ -319,11 +491,6 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'Нема белешки за овај дан';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return 'Прикажи белешке за $period';
-  }
 
   @override
   String get week => 'Недеља';
@@ -687,6 +854,184 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   AppLocalizationsSrLatn() : super('sr_Latn');
 
   @override
+  String get insightsBrightestPeriod => 'Najupečatljiviji period';
+
+  @override
+  String get insightsPeriodWeek => 'Nedelja';
+
+  @override
+  String get insightsPeriodMonth => 'Mesec';
+
+  @override
+  String get insightsPeriodYear => 'Godina';
+
+  @override
+  String get insightsPeriodAllTime => 'Sve vreme';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '$delta u odnosu na prošlu nedelju';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '$delta u odnosu na prošli mesec';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '$delta u odnosu na prošlu godinu';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Pregled';
+
+  @override
+  String get insightsCategoryEmotions => 'Emocije';
+
+  @override
+  String get insightsCategoryActivity => 'Aktivnost';
+
+  @override
+  String get insightsCategoryMemories => 'Uspomene';
+
+  @override
+  String get insightsCategoryMedia => 'Mediji';
+
+  @override
+  String get insightsCounters => 'U brojkama';
+
+  @override
+  String get insightsMinds => 'Beleške';
+
+  @override
+  String get insightsActiveDays => 'Aktivni dani';
+
+  @override
+  String get insightsWords => 'Reči';
+
+  @override
+  String get insightsBrightestDay => 'Najupečatljiviji dan';
+
+  @override
+  String get insightsBrightestWeek => 'Najupečatljivija nedelja';
+
+  @override
+  String get insightsBrightestMonth => 'Najupečatljiviji mesec';
+
+  @override
+  String get insightsBrightestYear => 'Najupečatljivija godina';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'beleški: $minds · emocija: $emotions · medija: $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Emocije';
+
+  @override
+  String get insightsEmotionTrend => 'Tok emocija';
+
+  @override
+  String get insightsEmotionPairs => 'Emocije zajedno';
+
+  @override
+  String get insightsEmotionRhythm => 'Emocionalni ritam';
+
+  @override
+  String get insightsByWeekday => 'Po danima u nedelji';
+
+  @override
+  String get insightsByDayPart => 'Po dobu dana';
+
+  @override
+  String get insightsNight => 'Noć';
+
+  @override
+  String get insightsMorning => 'Jutro';
+
+  @override
+  String get insightsAfternoon => 'Popodne';
+
+  @override
+  String get insightsEvening => 'Veče';
+
+  @override
+  String get insightsStreak => 'Niz';
+
+  @override
+  String get insightsStreakLabel => 'dana zaredom';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Rekord: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing => 'Dodaj belešku danas da nastaviš niz';
+
+  @override
+  String get insightsHeatmap => 'Mapa aktivnosti';
+
+  @override
+  String get insightsActivityTime => 'Doba dana';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Najaktivniji oko $hour';
+  }
+
+  @override
+  String get insightsOnThisDay => 'Na današnji dan';
+
+  @override
+  String get insightsMediaCounters => 'Mediji';
+
+  @override
+  String get insightsPhotos => 'Fotografije';
+
+  @override
+  String get insightsVideos => 'Video zapisi';
+
+  @override
+  String get insightsVoiceNotes => 'Glasovne beleške';
+
+  @override
+  String get insightsRoundVideos => 'Okrugli video zapisi';
+
+  @override
+  String get insightsEmptyPeriod => 'U ovom periodu još nema beleški';
+
+  @override
+  String get insightsEmptyEmotions => 'Označi beleške emocijama da vidiš ovo';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Označi belešku sa dve emocije da vidiš parove';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Još ništa sa ovog dana iz prethodnih godina';
+
+  @override
+  String get insightsEmptyRoundVideos =>
+      'Nema okruglih video zapisa u ovom periodu';
+
+  @override
+  String get insightsEmptyStreak => 'Dodaj belešku danas da započneš niz';
+
+  @override
+  String get insightsCustomize => 'Prilagodi analitiku';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Uključi ili isključi kartice i prevuci ih za redosled';
+
+  @override
+  String get insightsResetLayout => 'Resetuj';
+
+  @override
   String get activeTasks => 'Aktivni zadaci';
 
   @override
@@ -938,13 +1283,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get writeSomething => 'Napiši nešto...';
 
   @override
-  String get topMinds => 'Najbolji umovi';
-
-  @override
   String get todayMinds => 'Današnji umovi';
-
-  @override
-  String get spectrum => 'Spektar';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
@@ -997,11 +1336,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get noMindsForThisDay => 'Nema uma za ovaj dan';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return 'Prikaži umove za $period';
-  }
 
   @override
   String get week => 'Nedelja';

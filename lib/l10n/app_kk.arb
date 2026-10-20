@@ -1,4 +1,58 @@
 {
+    "insightsBrightestPeriod": "Ең жарқын кезең",
+    "insightsPeriodWeek": "Апта",
+    "insightsPeriodMonth": "Ай",
+    "insightsPeriodYear": "Жыл",
+    "insightsPeriodAllTime": "Барлық уақыт",
+    "insightsVsLastWeek": "Өткен аптамен салыстырғанда {delta}",
+    "insightsVsLastMonth": "Өткен аймен салыстырғанда {delta}",
+    "insightsVsLastYear": "Өткен жылмен салыстырғанда {delta}",
+    "insightsCategorySummary": "Шолу",
+    "insightsCategoryEmotions": "Эмоциялар",
+    "insightsCategoryActivity": "Белсенділік",
+    "insightsCategoryMemories": "Естеліктер",
+    "insightsCategoryMedia": "Медиа",
+    "insightsCounters": "Сандармен",
+    "insightsMinds": "Жазбалар",
+    "insightsActiveDays": "Белсенді күндер",
+    "insightsWords": "Сөздер",
+    "insightsBrightestDay": "Ең жарқын күн",
+    "insightsBrightestWeek": "Ең жарқын апта",
+    "insightsBrightestMonth": "Ең жарқын ай",
+    "insightsBrightestYear": "Ең жарқын жыл",
+    "insightsBrightestDetails": "жазба: {minds} · эмоция: {emotions} · медиа: {media}",
+    "insightsEmotionDistribution": "Эмоциялар",
+    "insightsEmotionTrend": "Эмоциялар динамикасы",
+    "insightsEmotionPairs": "Бірге кездесетін эмоциялар",
+    "insightsEmotionRhythm": "Эмоциялық ырғақ",
+    "insightsByWeekday": "Апта күндері бойынша",
+    "insightsByDayPart": "Тәулік уақыты бойынша",
+    "insightsNight": "Түн",
+    "insightsMorning": "Таң",
+    "insightsAfternoon": "Күндіз",
+    "insightsEvening": "Кеш",
+    "insightsStreak": "Серия",
+    "insightsStreakLabel": "күн қатарынан",
+    "insightsLongestStreak": "Рекорд: {count}",
+    "insightsStreakKeepGoing": "Серияны үзбеу үшін бүгін жазба қосыңыз",
+    "insightsHeatmap": "Белсенділік картасы",
+    "insightsActivityTime": "Тәулік уақыты",
+    "insightsPeakHour": "Көбіне {hour} шамасында",
+    "insightsOnThisDay": "Осы күні",
+    "insightsMediaCounters": "Медиа",
+    "insightsPhotos": "Фото",
+    "insightsVideos": "Бейне",
+    "insightsVoiceNotes": "Дауыстық жазбалар",
+    "insightsRoundVideos": "Дөңгелек бейнелер",
+    "insightsEmptyPeriod": "Бұл кезеңде әзірге жазба жоқ",
+    "insightsEmptyEmotions": "Мұны көру үшін жазбаларға эмоция белгілеңіз",
+    "insightsEmptyPairs": "Жұптарды көру үшін жазбаға екі эмоция белгілеңіз",
+    "insightsEmptyOnThisDay": "Өткен жылдары бұл күні әзірге ештеңе жоқ",
+    "insightsEmptyRoundVideos": "Бұл кезеңде дөңгелек бейне жоқ",
+    "insightsEmptyStreak": "Серияны бастау үшін бүгін жазба қосыңыз",
+    "insightsCustomize": "Аналитиканы баптау",
+    "insightsCustomizeDescription": "Карточкаларды қосыңыз не өшіріңіз, ретін сүйреп өзгертіңіз",
+    "insightsResetLayout": "Қалпына келтіру",
     "activeTasks": "Белсенді тапсырмалар",
     "galleryIndex": "Галерея индексі",
     "galleryIndexNoAccess": "Фотоға рұқсат жоқ",
@@ -266,17 +320,9 @@
     "@writeSomething": {
         "description": "Бір нәрсе жазу көрсеткіші"
     },
-    "topMinds": "Ең жақсы ойлар",
-    "@topMinds": {
-        "description": "Ең жақсы ойлар атауы"
-    },
     "todayMinds": "Бүгінгі ойлар",
     "@todayMinds": {
         "description": "Бүгінгі ойлар атауы"
-    },
-    "spectrum": "Спектр",
-    "@spectrum": {
-        "description": "Спектр атауы"
     },
     "youDidNotCollectAnyEntriesYet": "Сіз әлі ешқандай жазба жинаған жоқсыз",
     "@youDidNotCollectAnyEntriesYet": {
@@ -341,15 +387,6 @@
     "noMindsForThisDay": "Бұл күн үшін ойлар жоқ",
     "@noMindsForThisDay": {
         "description": "Бұл күн үшін ойлар жоқ хабарламасы"
-    },
-    "showMindsForPeriod": "{period} үшін ойларды көрсету",
-    "@showMindsForPeriod": {
-        "description": "Кезең үшін ойларды көрсету хабарламасы",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Апта",
     "password": "Құпия сөз",

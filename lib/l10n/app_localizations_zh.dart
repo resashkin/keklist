@@ -9,6 +9,180 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => '最精彩的时段';
+
+  @override
+  String get insightsPeriodWeek => '周';
+
+  @override
+  String get insightsPeriodMonth => '月';
+
+  @override
+  String get insightsPeriodYear => '年';
+
+  @override
+  String get insightsPeriodAllTime => '全部';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '较上周 $delta';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '较上月 $delta';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '较去年 $delta';
+  }
+
+  @override
+  String get insightsCategorySummary => '概览';
+
+  @override
+  String get insightsCategoryEmotions => '情绪';
+
+  @override
+  String get insightsCategoryActivity => '活跃度';
+
+  @override
+  String get insightsCategoryMemories => '回忆';
+
+  @override
+  String get insightsCategoryMedia => '媒体';
+
+  @override
+  String get insightsCounters => '数据一览';
+
+  @override
+  String get insightsMinds => '笔记';
+
+  @override
+  String get insightsActiveDays => '活跃天数';
+
+  @override
+  String get insightsWords => '字数';
+
+  @override
+  String get insightsBrightestDay => '最精彩的一天';
+
+  @override
+  String get insightsBrightestWeek => '最精彩的一周';
+
+  @override
+  String get insightsBrightestMonth => '最精彩的一个月';
+
+  @override
+  String get insightsBrightestYear => '最精彩的一年';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return '笔记 $minds · 情绪 $emotions · 媒体 $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => '情绪';
+
+  @override
+  String get insightsEmotionTrend => '情绪趋势';
+
+  @override
+  String get insightsEmotionPairs => '同时出现的情绪';
+
+  @override
+  String get insightsEmotionRhythm => '情绪节律';
+
+  @override
+  String get insightsByWeekday => '按星期';
+
+  @override
+  String get insightsByDayPart => '按时段';
+
+  @override
+  String get insightsNight => '夜间';
+
+  @override
+  String get insightsMorning => '上午';
+
+  @override
+  String get insightsAfternoon => '下午';
+
+  @override
+  String get insightsEvening => '晚上';
+
+  @override
+  String get insightsStreak => '连续记录';
+
+  @override
+  String get insightsStreakLabel => '天连续';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return '最长：$count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing => '今天添加一条笔记以保持连续';
+
+  @override
+  String get insightsHeatmap => '活跃度地图';
+
+  @override
+  String get insightsActivityTime => '时段';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return '最常在 $hour 左右';
+  }
+
+  @override
+  String get insightsOnThisDay => '历史上的今天';
+
+  @override
+  String get insightsMediaCounters => '媒体';
+
+  @override
+  String get insightsPhotos => '照片';
+
+  @override
+  String get insightsVideos => '视频';
+
+  @override
+  String get insightsVoiceNotes => '语音笔记';
+
+  @override
+  String get insightsRoundVideos => '圆形视频';
+
+  @override
+  String get insightsEmptyPeriod => '此期间还没有笔记';
+
+  @override
+  String get insightsEmptyEmotions => '为笔记标记情绪后即可查看';
+
+  @override
+  String get insightsEmptyPairs => '为一条笔记标记两种情绪即可查看组合';
+
+  @override
+  String get insightsEmptyOnThisDay => '往年的今天还没有记录';
+
+  @override
+  String get insightsEmptyRoundVideos => '此期间没有圆形视频';
+
+  @override
+  String get insightsEmptyStreak => '今天添加一条笔记开始连续记录';
+
+  @override
+  String get insightsCustomize => '自定义分析';
+
+  @override
+  String get insightsCustomizeDescription => '开关卡片，拖动以重新排序';
+
+  @override
+  String get insightsResetLayout => '重置';
+
+  @override
   String get activeTasks => '进行中的任务';
 
   @override
@@ -258,13 +432,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get writeSomething => '写点什么...';
 
   @override
-  String get topMinds => '热门笔记';
-
-  @override
   String get todayMinds => '今天的笔记';
-
-  @override
-  String get spectrum => '光谱';
 
   @override
   String get youDidNotCollectAnyEntriesYet => '您还没有收集任何条目';
@@ -313,11 +481,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => '这一天没有笔记';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return '显示$period的笔记';
-  }
 
   @override
   String get week => '周';

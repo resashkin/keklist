@@ -1,4 +1,58 @@
 {
+    "insightsBrightestPeriod": "Najupečatljiviji period",
+    "insightsPeriodWeek": "Nedelja",
+    "insightsPeriodMonth": "Mesec",
+    "insightsPeriodYear": "Godina",
+    "insightsPeriodAllTime": "Sve vreme",
+    "insightsVsLastWeek": "{delta} u odnosu na prošlu nedelju",
+    "insightsVsLastMonth": "{delta} u odnosu na prošli mesec",
+    "insightsVsLastYear": "{delta} u odnosu na prošlu godinu",
+    "insightsCategorySummary": "Pregled",
+    "insightsCategoryEmotions": "Emocije",
+    "insightsCategoryActivity": "Aktivnost",
+    "insightsCategoryMemories": "Uspomene",
+    "insightsCategoryMedia": "Mediji",
+    "insightsCounters": "U brojkama",
+    "insightsMinds": "Beleške",
+    "insightsActiveDays": "Aktivni dani",
+    "insightsWords": "Reči",
+    "insightsBrightestDay": "Najupečatljiviji dan",
+    "insightsBrightestWeek": "Najupečatljivija nedelja",
+    "insightsBrightestMonth": "Najupečatljiviji mesec",
+    "insightsBrightestYear": "Najupečatljivija godina",
+    "insightsBrightestDetails": "beleški: {minds} · emocija: {emotions} · medija: {media}",
+    "insightsEmotionDistribution": "Emocije",
+    "insightsEmotionTrend": "Tok emocija",
+    "insightsEmotionPairs": "Emocije zajedno",
+    "insightsEmotionRhythm": "Emocionalni ritam",
+    "insightsByWeekday": "Po danima u nedelji",
+    "insightsByDayPart": "Po dobu dana",
+    "insightsNight": "Noć",
+    "insightsMorning": "Jutro",
+    "insightsAfternoon": "Popodne",
+    "insightsEvening": "Veče",
+    "insightsStreak": "Niz",
+    "insightsStreakLabel": "dana zaredom",
+    "insightsLongestStreak": "Rekord: {count}",
+    "insightsStreakKeepGoing": "Dodaj belešku danas da nastaviš niz",
+    "insightsHeatmap": "Mapa aktivnosti",
+    "insightsActivityTime": "Doba dana",
+    "insightsPeakHour": "Najaktivniji oko {hour}",
+    "insightsOnThisDay": "Na današnji dan",
+    "insightsMediaCounters": "Mediji",
+    "insightsPhotos": "Fotografije",
+    "insightsVideos": "Video zapisi",
+    "insightsVoiceNotes": "Glasovne beleške",
+    "insightsRoundVideos": "Okrugli video zapisi",
+    "insightsEmptyPeriod": "U ovom periodu još nema beleški",
+    "insightsEmptyEmotions": "Označi beleške emocijama da vidiš ovo",
+    "insightsEmptyPairs": "Označi belešku sa dve emocije da vidiš parove",
+    "insightsEmptyOnThisDay": "Još ništa sa ovog dana iz prethodnih godina",
+    "insightsEmptyRoundVideos": "Nema okruglih video zapisa u ovom periodu",
+    "insightsEmptyStreak": "Dodaj belešku danas da započneš niz",
+    "insightsCustomize": "Prilagodi analitiku",
+    "insightsCustomizeDescription": "Uključi ili isključi kartice i prevuci ih za redosled",
+    "insightsResetLayout": "Resetuj",
     "activeTasks": "Aktivni zadaci",
     "galleryIndex": "Indeks galerije",
     "galleryIndexNoAccess": "Nema pristupa Fotografijama",
@@ -264,17 +318,9 @@
     "@writeSomething": {
         "description": "Savet za pisanje nečega"
     },
-    "topMinds": "Najbolji umovi",
-    "@topMinds": {
-        "description": "Naslov najboljih umova"
-    },
     "todayMinds": "Današnji umovi",
     "@todayMinds": {
         "description": "Naslov današnjih umova"
-    },
-    "spectrum": "Spektar",
-    "@spectrum": {
-        "description": "Naslov spektra"
     },
     "youDidNotCollectAnyEntriesYet": "Još uvek niste prikupili nijedan unos",
     "@youDidNotCollectAnyEntriesYet": {
@@ -339,15 +385,6 @@
     "noMindsForThisDay": "Nema uma za ovaj dan",
     "@noMindsForThisDay": {
         "description": "Poruka nema uma za ovaj dan"
-    },
-    "showMindsForPeriod": "Prikaži umove za {period}",
-    "@showMindsForPeriod": {
-        "description": "Poruka prikazivanja umova za period",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Nedelja",
     "password": "Lozinka",

@@ -1,4 +1,58 @@
 {
+    "insightsBrightestPeriod": "Periodo más intenso",
+    "insightsPeriodWeek": "Semana",
+    "insightsPeriodMonth": "Mes",
+    "insightsPeriodYear": "Año",
+    "insightsPeriodAllTime": "Todo",
+    "insightsVsLastWeek": "{delta} vs. la semana pasada",
+    "insightsVsLastMonth": "{delta} vs. el mes pasado",
+    "insightsVsLastYear": "{delta} vs. el año pasado",
+    "insightsCategorySummary": "Resumen",
+    "insightsCategoryEmotions": "Emociones",
+    "insightsCategoryActivity": "Actividad",
+    "insightsCategoryMemories": "Recuerdos",
+    "insightsCategoryMedia": "Multimedia",
+    "insightsCounters": "En números",
+    "insightsMinds": "Notas",
+    "insightsActiveDays": "Días activos",
+    "insightsWords": "Palabras",
+    "insightsBrightestDay": "Día más intenso",
+    "insightsBrightestWeek": "Semana más intensa",
+    "insightsBrightestMonth": "Mes más intenso",
+    "insightsBrightestYear": "Año más intenso",
+    "insightsBrightestDetails": "{minds} notas · {emotions} emociones · {media} multimedia",
+    "insightsEmotionDistribution": "Emociones",
+    "insightsEmotionTrend": "Tendencia de emociones",
+    "insightsEmotionPairs": "Emociones juntas",
+    "insightsEmotionRhythm": "Ritmo emocional",
+    "insightsByWeekday": "Por día de la semana",
+    "insightsByDayPart": "Por momento del día",
+    "insightsNight": "Noche",
+    "insightsMorning": "Mañana",
+    "insightsAfternoon": "Tarde",
+    "insightsEvening": "Atardecer",
+    "insightsStreak": "Racha",
+    "insightsStreakLabel": "días seguidos",
+    "insightsLongestStreak": "Récord: {count}",
+    "insightsStreakKeepGoing": "Añade una nota hoy para mantenerla",
+    "insightsHeatmap": "Mapa de actividad",
+    "insightsActivityTime": "Momento del día",
+    "insightsPeakHour": "Más activo hacia las {hour}",
+    "insightsOnThisDay": "Tal día como hoy",
+    "insightsMediaCounters": "Multimedia",
+    "insightsPhotos": "Fotos",
+    "insightsVideos": "Vídeos",
+    "insightsVoiceNotes": "Notas de voz",
+    "insightsRoundVideos": "Vídeos redondos",
+    "insightsEmptyPeriod": "Aún no hay notas en este periodo",
+    "insightsEmptyEmotions": "Etiqueta notas con emociones para ver esto",
+    "insightsEmptyPairs": "Etiqueta una nota con dos emociones para ver pares",
+    "insightsEmptyOnThisDay": "Aún no hay nada de este día en años anteriores",
+    "insightsEmptyRoundVideos": "No hay vídeos redondos en este periodo",
+    "insightsEmptyStreak": "Añade una nota hoy para empezar una racha",
+    "insightsCustomize": "Personalizar análisis",
+    "insightsCustomizeDescription": "Activa o desactiva tarjetas y arrástralas para ordenarlas",
+    "insightsResetLayout": "Restablecer",
     "activeTasks": "Tareas activas",
     "galleryIndex": "Índice de la galería",
     "galleryIndexNoAccess": "Sin acceso a Fotos",
@@ -266,17 +320,9 @@
     "@writeSomething": {
         "description": "Sugerencia escribe algo"
     },
-    "topMinds": "Mentes principales",
-    "@topMinds": {
-        "description": "Título de mentes principales"
-    },
     "todayMinds": "Mentes de hoy",
     "@todayMinds": {
         "description": "Título de mentes de hoy"
-    },
-    "spectrum": "Espectro",
-    "@spectrum": {
-        "description": "Título de espectro"
     },
     "youDidNotCollectAnyEntriesYet": "Aún no has recopilado ninguna entrada",
     "@youDidNotCollectAnyEntriesYet": {
@@ -341,15 +387,6 @@
     "noMindsForThisDay": "No hay mentes para este día",
     "@noMindsForThisDay": {
         "description": "Mensaje no hay mentes para este día"
-    },
-    "showMindsForPeriod": "Mostrar mentes para {period}",
-    "@showMindsForPeriod": {
-        "description": "Mensaje mostrar mentes para período",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Semana",
     "password": "Contraseña",

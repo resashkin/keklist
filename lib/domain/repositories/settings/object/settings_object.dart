@@ -86,6 +86,15 @@ final class SettingsObject extends HiveObject {
   @HiveField(27, defaultValue: <String>[])
   late List<String> shakeDiscoveredScreenIds;
 
+  @HiveField(28, defaultValue: <String>[])
+  late List<String> insightsWidgetOrder;
+
+  @HiveField(29, defaultValue: <String>[])
+  late List<String> hiddenInsightsWidgetIds;
+
+  @HiveField(30, defaultValue: 1)
+  late int insightsPeriodIndex;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -114,5 +123,10 @@ final class SettingsObject extends HiveObject {
         ),
         hiddenSettingsItemIds: hiddenSettingsItemIds.toSet(),
         shakeDiscoveredScreenIds: shakeDiscoveredScreenIds.toSet(),
+        insights: InsightsSettings(
+          widgetOrder: insightsWidgetOrder,
+          hiddenWidgetIds: hiddenInsightsWidgetIds.toSet(),
+          periodIndex: insightsPeriodIndex,
+        ),
       );
 }

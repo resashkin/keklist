@@ -1,4 +1,58 @@
 {
+    "insightsBrightestPeriod": "Eng yorqin davr",
+    "insightsPeriodWeek": "Hafta",
+    "insightsPeriodMonth": "Oy",
+    "insightsPeriodYear": "Yil",
+    "insightsPeriodAllTime": "Butun davr",
+    "insightsVsLastWeek": "Oʻtgan haftaga nisbatan {delta}",
+    "insightsVsLastMonth": "Oʻtgan oyga nisbatan {delta}",
+    "insightsVsLastYear": "Oʻtgan yilga nisbatan {delta}",
+    "insightsCategorySummary": "Umumiy",
+    "insightsCategoryEmotions": "Hissiyotlar",
+    "insightsCategoryActivity": "Faollik",
+    "insightsCategoryMemories": "Xotiralar",
+    "insightsCategoryMedia": "Media",
+    "insightsCounters": "Raqamlarda",
+    "insightsMinds": "Yozuvlar",
+    "insightsActiveDays": "Faol kunlar",
+    "insightsWords": "Soʻzlar",
+    "insightsBrightestDay": "Eng yorqin kun",
+    "insightsBrightestWeek": "Eng yorqin hafta",
+    "insightsBrightestMonth": "Eng yorqin oy",
+    "insightsBrightestYear": "Eng yorqin yil",
+    "insightsBrightestDetails": "yozuv: {minds} · hissiyot: {emotions} · media: {media}",
+    "insightsEmotionDistribution": "Hissiyotlar",
+    "insightsEmotionTrend": "Hissiyotlar dinamikasi",
+    "insightsEmotionPairs": "Birga uchraydigan hissiyotlar",
+    "insightsEmotionRhythm": "Hissiy ritm",
+    "insightsByWeekday": "Hafta kunlari boʻyicha",
+    "insightsByDayPart": "Kun vaqti boʻyicha",
+    "insightsNight": "Tun",
+    "insightsMorning": "Ertalab",
+    "insightsAfternoon": "Kunduzi",
+    "insightsEvening": "Kechqurun",
+    "insightsStreak": "Seriya",
+    "insightsStreakLabel": "kun ketma-ket",
+    "insightsLongestStreak": "Rekord: {count}",
+    "insightsStreakKeepGoing": "Seriyani uzmaslik uchun bugun yozuv qoʻshing",
+    "insightsHeatmap": "Faollik xaritasi",
+    "insightsActivityTime": "Kun vaqti",
+    "insightsPeakHour": "Koʻpincha {hour} atrofida",
+    "insightsOnThisDay": "Shu kuni",
+    "insightsMediaCounters": "Media",
+    "insightsPhotos": "Rasmlar",
+    "insightsVideos": "Videolar",
+    "insightsVoiceNotes": "Ovozli yozuvlar",
+    "insightsRoundVideos": "Dumaloq videolar",
+    "insightsEmptyPeriod": "Bu davrda hali yozuv yoʻq",
+    "insightsEmptyEmotions": "Buni koʻrish uchun yozuvlarga hissiyot belgilang",
+    "insightsEmptyPairs": "Juftlarni koʻrish uchun yozuvga ikki hissiyot belgilang",
+    "insightsEmptyOnThisDay": "Oʻtgan yillarda bu kunda hali hech narsa yoʻq",
+    "insightsEmptyRoundVideos": "Bu davrda dumaloq video yoʻq",
+    "insightsEmptyStreak": "Seriyani boshlash uchun bugun yozuv qoʻshing",
+    "insightsCustomize": "Analitikani sozlash",
+    "insightsCustomizeDescription": "Kartochkalarni yoqing yoki oʻchiring, tartibini sudrab oʻzgartiring",
+    "insightsResetLayout": "Tiklash",
     "activeTasks": "Faol vazifalar",
     "galleryIndex": "Galereya indeksi",
     "galleryIndexNoAccess": "Rasmlarga ruxsat yoʻq",
@@ -266,17 +320,9 @@
     "@writeSomething": {
         "description": "Biror narsa yozish ko'rsatkichi"
     },
-    "topMinds": "Eng yaxshi fikrlar",
-    "@topMinds": {
-        "description": "Eng yaxshi fikrlar sarlavhasi"
-    },
     "todayMinds": "Bugungi fikrlar",
     "@todayMinds": {
         "description": "Bugungi fikrlar sarlavhasi"
-    },
-    "spectrum": "Spektr",
-    "@spectrum": {
-        "description": "Spektr sarlavhasi"
     },
     "youDidNotCollectAnyEntriesYet": "Siz hali hech qanday yozuv yig'ganingiz yo'q",
     "@youDidNotCollectAnyEntriesYet": {
@@ -341,15 +387,6 @@
     "noMindsForThisDay": "Bu kun uchun fikrlar yo'q",
     "@noMindsForThisDay": {
         "description": "Bu kun uchun fikrlar yo'q xabari"
-    },
-    "showMindsForPeriod": "{period} uchun fikrlarni ko'rsatish",
-    "@showMindsForPeriod": {
-        "description": "Davr uchun fikrlarni ko'rsatish xabari",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Hafta",
     "password": "Parol",

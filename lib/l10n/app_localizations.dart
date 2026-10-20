@@ -117,6 +117,330 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// Analytics card name in the customize sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest period'**
+  String get insightsBrightestPeriod;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get insightsPeriodWeek;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get insightsPeriodMonth;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get insightsPeriodYear;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get insightsPeriodAllTime;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'{delta} vs last week'**
+  String insightsVsLastWeek(String delta);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'{delta} vs last month'**
+  String insightsVsLastMonth(String delta);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'{delta} vs last year'**
+  String insightsVsLastYear(String delta);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get insightsCategorySummary;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions'**
+  String get insightsCategoryEmotions;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get insightsCategoryActivity;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Memories'**
+  String get insightsCategoryMemories;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Media'**
+  String get insightsCategoryMedia;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'In numbers'**
+  String get insightsCounters;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Minds'**
+  String get insightsMinds;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Active days'**
+  String get insightsActiveDays;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Words'**
+  String get insightsWords;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest day'**
+  String get insightsBrightestDay;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest week'**
+  String get insightsBrightestWeek;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest month'**
+  String get insightsBrightestMonth;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest year'**
+  String get insightsBrightestYear;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'{minds} minds · {emotions} emotions · {media} media'**
+  String insightsBrightestDetails(String minds, String emotions, String media);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions'**
+  String get insightsEmotionDistribution;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotion trend'**
+  String get insightsEmotionTrend;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions together'**
+  String get insightsEmotionPairs;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotional rhythm'**
+  String get insightsEmotionRhythm;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'By weekday'**
+  String get insightsByWeekday;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'By time of day'**
+  String get insightsByDayPart;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Night'**
+  String get insightsNight;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get insightsMorning;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon'**
+  String get insightsAfternoon;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get insightsEvening;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get insightsStreak;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'days in a row'**
+  String get insightsStreakLabel;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Longest: {count}'**
+  String insightsLongestStreak(String count);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add a mind today to keep it going'**
+  String get insightsStreakKeepGoing;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Activity map'**
+  String get insightsHeatmap;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Time of day'**
+  String get insightsActivityTime;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Most active around {hour}'**
+  String insightsPeakHour(String hour);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'On this day'**
+  String get insightsOnThisDay;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Media'**
+  String get insightsMediaCounters;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get insightsPhotos;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Videos'**
+  String get insightsVideos;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Voice notes'**
+  String get insightsVoiceNotes;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Round videos'**
+  String get insightsRoundVideos;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'No minds in this period yet'**
+  String get insightsEmptyPeriod;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tag minds with emotions to see this'**
+  String get insightsEmptyEmotions;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tag a mind with two emotions to see pairs'**
+  String get insightsEmptyPairs;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing from this day in past years yet'**
+  String get insightsEmptyOnThisDay;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'No round videos in this period'**
+  String get insightsEmptyRoundVideos;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add a mind today to start a streak'**
+  String get insightsEmptyStreak;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Customize analytics'**
+  String get insightsCustomize;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Turn cards on or off and drag to reorder'**
+  String get insightsCustomizeDescription;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get insightsResetLayout;
+
   /// Settings section shown on top while a background job runs
   ///
   /// In en, this message translates to:
@@ -603,23 +927,11 @@ abstract class AppLocalizations {
   /// **'Write something...'**
   String get writeSomething;
 
-  /// Top minds title
-  ///
-  /// In en, this message translates to:
-  /// **'Top minds'**
-  String get topMinds;
-
   /// Today minds title
   ///
   /// In en, this message translates to:
   /// **'Today minds'**
   String get todayMinds;
-
-  /// Spectrum title
-  ///
-  /// In en, this message translates to:
-  /// **'Spectrum'**
-  String get spectrum;
 
   /// No entries collected message
   ///
@@ -716,12 +1028,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No minds for this day'**
   String get noMindsForThisDay;
-
-  /// Show minds for period message
-  ///
-  /// In en, this message translates to:
-  /// **'Show minds for {period}'**
-  String showMindsForPeriod(String period);
 
   /// Week label
   ///

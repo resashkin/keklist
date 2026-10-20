@@ -45,6 +45,22 @@ final class DayFeedSettings {
   });
 }
 
+/// Analytics screen layout: widget order (unknown ids ignored), hidden widgets and the period.
+final class InsightsSettings {
+  final List<String> widgetOrder;
+  final Set<String> hiddenWidgetIds;
+  final int periodIndex;
+
+  const InsightsSettings({this.widgetOrder = const [], this.hiddenWidgetIds = const {}, this.periodIndex = 1});
+
+  InsightsSettings copyWith({List<String>? widgetOrder, Set<String>? hiddenWidgetIds, int? periodIndex}) =>
+      InsightsSettings(
+        widgetOrder: widgetOrder ?? this.widgetOrder,
+        hiddenWidgetIds: hiddenWidgetIds ?? this.hiddenWidgetIds,
+        periodIndex: periodIndex ?? this.periodIndex,
+      );
+}
+
 final class KeklistSettings {
   final String? previousAppVersion;
   final KeklistThemeMode themePreference;
@@ -66,6 +82,7 @@ final class KeklistSettings {
   final bool hasSeededEmotions;
 
   final DayFeedSettings dayFeed;
+  final InsightsSettings insights;
   final Set<String> hiddenSettingsItemIds;
   final Set<String> shakeDiscoveredScreenIds;
 
@@ -86,6 +103,7 @@ final class KeklistSettings {
     this.isMediaFolderRecursive = false,
     this.hasSeededEmotions = false,
     this.dayFeed = const DayFeedSettings(),
+    this.insights = const InsightsSettings(),
     this.hiddenSettingsItemIds = const {},
     this.shakeDiscoveredScreenIds = const {},
   });
@@ -107,6 +125,7 @@ final class KeklistSettings {
     bool? isMediaFolderRecursive,
     bool? hasSeededEmotions,
     DayFeedSettings? dayFeed,
+    InsightsSettings? insights,
     Set<String>? hiddenSettingsItemIds,
     Set<String>? shakeDiscoveredScreenIds,
   }) {
@@ -127,6 +146,7 @@ final class KeklistSettings {
       isMediaFolderRecursive: isMediaFolderRecursive ?? this.isMediaFolderRecursive,
       hasSeededEmotions: hasSeededEmotions ?? this.hasSeededEmotions,
       dayFeed: dayFeed ?? this.dayFeed,
+      insights: insights ?? this.insights,
       hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
       shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
     );
@@ -153,6 +173,9 @@ final class KeklistSettings {
     ..dayFeedMindCellSpan = dayFeed.mindCellSpan
     ..isDayFeedMindTextVisible = dayFeed.isMindTextVisible
     ..isDayFeedAudioBadgeVisible = dayFeed.isAudioBadgeVisible
+    ..insightsWidgetOrder = insights.widgetOrder
+    ..hiddenInsightsWidgetIds = insights.hiddenWidgetIds.toList()
+    ..insightsPeriodIndex = insights.periodIndex
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 

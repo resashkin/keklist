@@ -9,6 +9,185 @@ class AppLocalizationsIt extends AppLocalizations {
   AppLocalizationsIt([String locale = 'it']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Periodo più intenso';
+
+  @override
+  String get insightsPeriodWeek => 'Settimana';
+
+  @override
+  String get insightsPeriodMonth => 'Mese';
+
+  @override
+  String get insightsPeriodYear => 'Anno';
+
+  @override
+  String get insightsPeriodAllTime => 'Sempre';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '$delta rispetto alla settimana scorsa';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '$delta rispetto al mese scorso';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '$delta rispetto all\'anno scorso';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Riepilogo';
+
+  @override
+  String get insightsCategoryEmotions => 'Emozioni';
+
+  @override
+  String get insightsCategoryActivity => 'Attività';
+
+  @override
+  String get insightsCategoryMemories => 'Ricordi';
+
+  @override
+  String get insightsCategoryMedia => 'Media';
+
+  @override
+  String get insightsCounters => 'In numeri';
+
+  @override
+  String get insightsMinds => 'Note';
+
+  @override
+  String get insightsActiveDays => 'Giorni attivi';
+
+  @override
+  String get insightsWords => 'Parole';
+
+  @override
+  String get insightsBrightestDay => 'Giorno più intenso';
+
+  @override
+  String get insightsBrightestWeek => 'Settimana più intensa';
+
+  @override
+  String get insightsBrightestMonth => 'Mese più intenso';
+
+  @override
+  String get insightsBrightestYear => 'Anno più intenso';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return '$minds note · $emotions emozioni · $media media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Emozioni';
+
+  @override
+  String get insightsEmotionTrend => 'Andamento delle emozioni';
+
+  @override
+  String get insightsEmotionPairs => 'Emozioni insieme';
+
+  @override
+  String get insightsEmotionRhythm => 'Ritmo emotivo';
+
+  @override
+  String get insightsByWeekday => 'Per giorno della settimana';
+
+  @override
+  String get insightsByDayPart => 'Per momento della giornata';
+
+  @override
+  String get insightsNight => 'Notte';
+
+  @override
+  String get insightsMorning => 'Mattina';
+
+  @override
+  String get insightsAfternoon => 'Pomeriggio';
+
+  @override
+  String get insightsEvening => 'Sera';
+
+  @override
+  String get insightsStreak => 'Serie';
+
+  @override
+  String get insightsStreakLabel => 'giorni di fila';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Record: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing => 'Aggiungi una nota oggi per continuare';
+
+  @override
+  String get insightsHeatmap => 'Mappa dell\'attività';
+
+  @override
+  String get insightsActivityTime => 'Momento della giornata';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Più attivo verso le $hour';
+  }
+
+  @override
+  String get insightsOnThisDay => 'In questo giorno';
+
+  @override
+  String get insightsMediaCounters => 'Media';
+
+  @override
+  String get insightsPhotos => 'Foto';
+
+  @override
+  String get insightsVideos => 'Video';
+
+  @override
+  String get insightsVoiceNotes => 'Note vocali';
+
+  @override
+  String get insightsRoundVideos => 'Video circolari';
+
+  @override
+  String get insightsEmptyPeriod => 'Ancora nessuna nota in questo periodo';
+
+  @override
+  String get insightsEmptyEmotions => 'Tagga le note con emozioni per vederlo';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Tagga una nota con due emozioni per vedere le coppie';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Ancora niente di questo giorno negli anni passati';
+
+  @override
+  String get insightsEmptyRoundVideos =>
+      'Nessun video circolare in questo periodo';
+
+  @override
+  String get insightsEmptyStreak =>
+      'Aggiungi una nota oggi per iniziare una serie';
+
+  @override
+  String get insightsCustomize => 'Personalizza analisi';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Attiva o disattiva le schede e trascinale per riordinarle';
+
+  @override
+  String get insightsResetLayout => 'Ripristina';
+
+  @override
   String get activeTasks => 'Attività in corso';
 
   @override
@@ -261,13 +440,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get writeSomething => 'Scrivi qualcosa...';
 
   @override
-  String get topMinds => 'Menti principali';
-
-  @override
   String get todayMinds => 'Menti di oggi';
-
-  @override
-  String get spectrum => 'Spettro';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
@@ -321,11 +494,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'Nessuna mente per questo giorno';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return 'Mostra menti per $period';
-  }
 
   @override
   String get week => 'Settimana';

@@ -11,6 +11,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 abstract final class ShakeScreenIds {
   static const String day = 'day';
   static const String settings = 'settings';
+  static const String insights = 'insights';
 }
 
 mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {

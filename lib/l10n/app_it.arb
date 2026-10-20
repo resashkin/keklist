@@ -1,4 +1,58 @@
 {
+    "insightsBrightestPeriod": "Periodo più intenso",
+    "insightsPeriodWeek": "Settimana",
+    "insightsPeriodMonth": "Mese",
+    "insightsPeriodYear": "Anno",
+    "insightsPeriodAllTime": "Sempre",
+    "insightsVsLastWeek": "{delta} rispetto alla settimana scorsa",
+    "insightsVsLastMonth": "{delta} rispetto al mese scorso",
+    "insightsVsLastYear": "{delta} rispetto all'anno scorso",
+    "insightsCategorySummary": "Riepilogo",
+    "insightsCategoryEmotions": "Emozioni",
+    "insightsCategoryActivity": "Attività",
+    "insightsCategoryMemories": "Ricordi",
+    "insightsCategoryMedia": "Media",
+    "insightsCounters": "In numeri",
+    "insightsMinds": "Note",
+    "insightsActiveDays": "Giorni attivi",
+    "insightsWords": "Parole",
+    "insightsBrightestDay": "Giorno più intenso",
+    "insightsBrightestWeek": "Settimana più intensa",
+    "insightsBrightestMonth": "Mese più intenso",
+    "insightsBrightestYear": "Anno più intenso",
+    "insightsBrightestDetails": "{minds} note · {emotions} emozioni · {media} media",
+    "insightsEmotionDistribution": "Emozioni",
+    "insightsEmotionTrend": "Andamento delle emozioni",
+    "insightsEmotionPairs": "Emozioni insieme",
+    "insightsEmotionRhythm": "Ritmo emotivo",
+    "insightsByWeekday": "Per giorno della settimana",
+    "insightsByDayPart": "Per momento della giornata",
+    "insightsNight": "Notte",
+    "insightsMorning": "Mattina",
+    "insightsAfternoon": "Pomeriggio",
+    "insightsEvening": "Sera",
+    "insightsStreak": "Serie",
+    "insightsStreakLabel": "giorni di fila",
+    "insightsLongestStreak": "Record: {count}",
+    "insightsStreakKeepGoing": "Aggiungi una nota oggi per continuare",
+    "insightsHeatmap": "Mappa dell'attività",
+    "insightsActivityTime": "Momento della giornata",
+    "insightsPeakHour": "Più attivo verso le {hour}",
+    "insightsOnThisDay": "In questo giorno",
+    "insightsMediaCounters": "Media",
+    "insightsPhotos": "Foto",
+    "insightsVideos": "Video",
+    "insightsVoiceNotes": "Note vocali",
+    "insightsRoundVideos": "Video circolari",
+    "insightsEmptyPeriod": "Ancora nessuna nota in questo periodo",
+    "insightsEmptyEmotions": "Tagga le note con emozioni per vederlo",
+    "insightsEmptyPairs": "Tagga una nota con due emozioni per vedere le coppie",
+    "insightsEmptyOnThisDay": "Ancora niente di questo giorno negli anni passati",
+    "insightsEmptyRoundVideos": "Nessun video circolare in questo periodo",
+    "insightsEmptyStreak": "Aggiungi una nota oggi per iniziare una serie",
+    "insightsCustomize": "Personalizza analisi",
+    "insightsCustomizeDescription": "Attiva o disattiva le schede e trascinale per riordinarle",
+    "insightsResetLayout": "Ripristina",
     "activeTasks": "Attività in corso",
     "galleryIndex": "Indice della galleria",
     "galleryIndexNoAccess": "Nessun accesso a Foto",
@@ -266,17 +320,9 @@
     "@writeSomething": {
         "description": "Suggerimento scrivi qualcosa"
     },
-    "topMinds": "Menti principali",
-    "@topMinds": {
-        "description": "Titolo menti principali"
-    },
     "todayMinds": "Menti di oggi",
     "@todayMinds": {
         "description": "Titolo menti di oggi"
-    },
-    "spectrum": "Spettro",
-    "@spectrum": {
-        "description": "Titolo spettro"
     },
     "youDidNotCollectAnyEntriesYet": "Non hai ancora raccolto nessuna voce",
     "@youDidNotCollectAnyEntriesYet": {
@@ -341,15 +387,6 @@
     "noMindsForThisDay": "Nessuna mente per questo giorno",
     "@noMindsForThisDay": {
         "description": "Messaggio nessuna mente per questo giorno"
-    },
-    "showMindsForPeriod": "Mostra menti per {period}",
-    "@showMindsForPeriod": {
-        "description": "Messaggio mostra menti per periodo",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Settimana",
     "password": "Password",

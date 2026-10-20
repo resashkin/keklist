@@ -79,4 +79,23 @@ void main() {
       expect(updated.dataSchemaVersion, 3);
     });
   });
+
+  group('SettingsUpdateInsights', () {
+    test('stores the insights layout and keeps every other field', () async {
+      const InsightsSettings insights = InsightsSettings(
+        widgetOrder: ['streak', 'counters'],
+        hiddenWidgetIds: {'heatmap'},
+        periodIndex: 2,
+      );
+      bloc.add(const SettingsUpdateInsights(insights: insights));
+      await Future.delayed(const Duration(milliseconds: 50));
+
+      final updated =
+          verify(() => mockSettingsRepository.updateSettings(captureAny())).captured.single as KeklistSettings;
+      expect(updated.insights, same(insights));
+      expect(updated.dayFeed, same(currentSettings.dayFeed));
+      expect(updated.hiddenSettingsItemIds, {'weather'});
+      expect(updated.userName, 'kek');
+    });
+  });
 }

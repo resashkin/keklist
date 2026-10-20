@@ -32,11 +32,15 @@ final class DayStoriesScreen extends StatefulWidget {
   final int initialIndex;
   final Future<void> Function(Mind mind) onOpenMind;
 
+  /// Stories from several days (analytics) show the date next to the time.
+  final bool showsDate;
+
   const DayStoriesScreen({
     super.key,
     required this.items,
     required this.initialIndex,
     required this.onOpenMind,
+    this.showsDate = false,
   });
 
   @override
@@ -307,7 +311,9 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
   }
 
   Widget _buildHeader(BuildContext context) {
-    final String time = DateFormat.Hm(Localizations.localeOf(context).toString()).format(_currentItem.timestamp.toLocal());
+    final String locale = Localizations.localeOf(context).toString();
+    final DateFormat format = widget.showsDate ? DateFormat.yMMMd(locale).add_Hm() : DateFormat.Hm(locale);
+    final String time = format.format(_currentItem.timestamp.toLocal());
     final DayFeedItem item = _currentItem;
     final bool isVideo = (item is DayFeedAsset && item.isVideo) ||
         (item is DayFeedFolderMedia && item.isVideo) ||

@@ -9,6 +9,186 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Самый яркий период';
+
+  @override
+  String get insightsPeriodWeek => 'Неделя';
+
+  @override
+  String get insightsPeriodMonth => 'Месяц';
+
+  @override
+  String get insightsPeriodYear => 'Год';
+
+  @override
+  String get insightsPeriodAllTime => 'Всё время';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '$delta к прошлой неделе';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '$delta к прошлому месяцу';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '$delta к прошлому году';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Сводка';
+
+  @override
+  String get insightsCategoryEmotions => 'Эмоции';
+
+  @override
+  String get insightsCategoryActivity => 'Активность';
+
+  @override
+  String get insightsCategoryMemories => 'Воспоминания';
+
+  @override
+  String get insightsCategoryMedia => 'Медиа';
+
+  @override
+  String get insightsCounters => 'В цифрах';
+
+  @override
+  String get insightsMinds => 'Заметки';
+
+  @override
+  String get insightsActiveDays => 'Активные дни';
+
+  @override
+  String get insightsWords => 'Слова';
+
+  @override
+  String get insightsBrightestDay => 'Самый яркий день';
+
+  @override
+  String get insightsBrightestWeek => 'Самая яркая неделя';
+
+  @override
+  String get insightsBrightestMonth => 'Самый яркий месяц';
+
+  @override
+  String get insightsBrightestYear => 'Самый яркий год';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'заметок: $minds · эмоций: $emotions · медиа: $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Эмоции';
+
+  @override
+  String get insightsEmotionTrend => 'Динамика эмоций';
+
+  @override
+  String get insightsEmotionPairs => 'Эмоции вместе';
+
+  @override
+  String get insightsEmotionRhythm => 'Эмоциональный ритм';
+
+  @override
+  String get insightsByWeekday => 'По дням недели';
+
+  @override
+  String get insightsByDayPart => 'По времени суток';
+
+  @override
+  String get insightsNight => 'Ночь';
+
+  @override
+  String get insightsMorning => 'Утро';
+
+  @override
+  String get insightsAfternoon => 'День';
+
+  @override
+  String get insightsEvening => 'Вечер';
+
+  @override
+  String get insightsStreak => 'Серия';
+
+  @override
+  String get insightsStreakLabel => 'дней подряд';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Рекорд: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing =>
+      'Добавьте заметку сегодня, чтобы не прервать серию';
+
+  @override
+  String get insightsHeatmap => 'Карта активности';
+
+  @override
+  String get insightsActivityTime => 'Время суток';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Чаще всего около $hour';
+  }
+
+  @override
+  String get insightsOnThisDay => 'В этот день';
+
+  @override
+  String get insightsMediaCounters => 'Медиа';
+
+  @override
+  String get insightsPhotos => 'Фото';
+
+  @override
+  String get insightsVideos => 'Видео';
+
+  @override
+  String get insightsVoiceNotes => 'Голосовые';
+
+  @override
+  String get insightsRoundVideos => 'Кружочки';
+
+  @override
+  String get insightsEmptyPeriod => 'В этом периоде пока нет заметок';
+
+  @override
+  String get insightsEmptyEmotions =>
+      'Отмечайте эмоции в заметках, чтобы увидеть это';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Отметьте в заметке две эмоции, чтобы увидеть пары';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'В прошлые годы в этот день пока ничего нет';
+
+  @override
+  String get insightsEmptyRoundVideos => 'В этом периоде нет кружочков';
+
+  @override
+  String get insightsEmptyStreak =>
+      'Добавьте заметку сегодня, чтобы начать серию';
+
+  @override
+  String get insightsCustomize => 'Настроить аналитику';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Включайте и выключайте карточки, перетаскивайте для порядка';
+
+  @override
+  String get insightsResetLayout => 'Сбросить';
+
+  @override
   String get activeTasks => 'Активные задачи';
 
   @override
@@ -260,13 +440,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get writeSomething => 'Напишите что-нибудь...';
 
   @override
-  String get topMinds => 'Топ заметок';
-
-  @override
   String get todayMinds => 'Сегодняшние заметки';
-
-  @override
-  String get spectrum => 'Спектр';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
@@ -319,11 +493,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'Нет заметок за этот день';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return 'Показать заметки за $period';
-  }
 
   @override
   String get week => 'Неделя';
