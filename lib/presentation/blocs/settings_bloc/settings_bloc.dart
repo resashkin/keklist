@@ -207,26 +207,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _enableDebugMenu(SettingsEnableDebugMenu event, Emitter<SettingsState> emit) async {
     final currentSettings = _repository.value;
-    final updatedSettings = KeklistSettings(
-      isMindContentVisible: currentSettings.isMindContentVisible,
-      previousAppVersion: currentSettings.previousAppVersion,
-      themePreference: currentSettings.themePreference,
-      interfaceStyle: currentSettings.interfaceStyle,
-      shouldShowTitles: currentSettings.shouldShowTitles,
-      userName: currentSettings.userName,
-      language: currentSettings.language,
-      dataSchemaVersion: currentSettings.dataSchemaVersion,
-      hasSeenLazyOnboarding: currentSettings.hasSeenLazyOnboarding,
-      isDebugMenuVisible: true,
-      isWeatherSourceEnabled: currentSettings.isWeatherSourceEnabled,
-      weatherLatitude: currentSettings.weatherLatitude,
-      weatherLongitude: currentSettings.weatherLongitude,
-      mediaFolderPath: currentSettings.mediaFolderPath,
-      isMediaFolderRecursive: currentSettings.isMediaFolderRecursive,
-      dayFeed: currentSettings.dayFeed,
-      hiddenSettingsItemIds: currentSettings.hiddenSettingsItemIds,
-      shakeDiscoveredScreenIds: currentSettings.shakeDiscoveredScreenIds,
-    );
+    final updatedSettings = currentSettings.copyWith(isDebugMenuVisible: true);
     await _repository.updateSettings(updatedSettings);
   }
 

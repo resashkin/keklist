@@ -118,21 +118,7 @@ final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingS
 
   Future<void> _onMarkAsSeen(LazyOnboardingMarkAsSeen event, Emitter<LazyOnboardingState> emit) async {
     final currentSettings = _settingsRepository.value;
-    final updatedSettings = KeklistSettings(
-      isMindContentVisible: currentSettings.isMindContentVisible,
-      previousAppVersion: currentSettings.previousAppVersion,
-      themePreference: currentSettings.themePreference,
-      interfaceStyle: currentSettings.interfaceStyle,
-      shouldShowTitles: currentSettings.shouldShowTitles,
-      userName: currentSettings.userName,
-      language: currentSettings.language,
-      dataSchemaVersion: currentSettings.dataSchemaVersion,
-      hasSeenLazyOnboarding: true,
-      isDebugMenuVisible: currentSettings.isDebugMenuVisible,
-      dayFeed: currentSettings.dayFeed,
-      hiddenSettingsItemIds: currentSettings.hiddenSettingsItemIds,
-      shakeDiscoveredScreenIds: currentSettings.shakeDiscoveredScreenIds,
-    );
+    final updatedSettings = currentSettings.copyWith(hasSeenLazyOnboarding: true);
 
     await _settingsRepository.updateSettings(updatedSettings);
   }
@@ -151,21 +137,7 @@ final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingS
 
     // Reset the flag in settings
     final currentSettings = _settingsRepository.value;
-    final updatedSettings = KeklistSettings(
-      isMindContentVisible: currentSettings.isMindContentVisible,
-      previousAppVersion: currentSettings.previousAppVersion,
-      themePreference: currentSettings.themePreference,
-      interfaceStyle: currentSettings.interfaceStyle,
-      shouldShowTitles: currentSettings.shouldShowTitles,
-      userName: currentSettings.userName,
-      language: currentSettings.language,
-      dataSchemaVersion: currentSettings.dataSchemaVersion,
-      hasSeenLazyOnboarding: false,
-      isDebugMenuVisible: currentSettings.isDebugMenuVisible,
-      dayFeed: currentSettings.dayFeed,
-      hiddenSettingsItemIds: currentSettings.hiddenSettingsItemIds,
-      shakeDiscoveredScreenIds: currentSettings.shakeDiscoveredScreenIds,
-    );
+    final updatedSettings = currentSettings.copyWith(hasSeenLazyOnboarding: false);
 
     await _settingsRepository.updateSettings(updatedSettings);
 

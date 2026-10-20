@@ -93,6 +93,50 @@ final class KeklistSettings {
     this.shakeDiscoveredScreenIds = const {},
   });
 
+  KeklistSettings copyWith({
+    bool? isMindContentVisible,
+    String? previousAppVersion,
+    KeklistThemeMode? themePreference,
+    KeklistInterfaceStyle? interfaceStyle,
+    bool? shouldShowTitles,
+    String? userName,
+    SupportedLanguage? language,
+    int? dataSchemaVersion,
+    bool? hasSeenLazyOnboarding,
+    bool? isDebugMenuVisible,
+    bool? isWeatherSourceEnabled,
+    double? weatherLatitude,
+    double? weatherLongitude,
+    String? mediaFolderPath,
+    bool? isMediaFolderRecursive,
+    bool? hasSeededEmotions,
+    DayFeedSettings? dayFeed,
+    Set<String>? hiddenSettingsItemIds,
+    Set<String>? shakeDiscoveredScreenIds,
+  }) {
+    return KeklistSettings(
+      isMindContentVisible: isMindContentVisible ?? this.isMindContentVisible,
+      previousAppVersion: previousAppVersion ?? this.previousAppVersion,
+      themePreference: themePreference ?? this.themePreference,
+      interfaceStyle: interfaceStyle ?? this.interfaceStyle,
+      shouldShowTitles: shouldShowTitles ?? this.shouldShowTitles,
+      userName: userName ?? this.userName,
+      language: language ?? this.language,
+      dataSchemaVersion: dataSchemaVersion ?? this.dataSchemaVersion,
+      hasSeenLazyOnboarding: hasSeenLazyOnboarding ?? this.hasSeenLazyOnboarding,
+      isDebugMenuVisible: isDebugMenuVisible ?? this.isDebugMenuVisible,
+      isWeatherSourceEnabled: isWeatherSourceEnabled ?? this.isWeatherSourceEnabled,
+      weatherLatitude: weatherLatitude ?? this.weatherLatitude,
+      weatherLongitude: weatherLongitude ?? this.weatherLongitude,
+      mediaFolderPath: mediaFolderPath ?? this.mediaFolderPath,
+      isMediaFolderRecursive: isMediaFolderRecursive ?? this.isMediaFolderRecursive,
+      hasSeededEmotions: hasSeededEmotions ?? this.hasSeededEmotions,
+      dayFeed: dayFeed ?? this.dayFeed,
+      hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
+      shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
+    );
+  }
+
   SettingsObject toObject() => SettingsObject()
     ..isMindContentVisible = isMindContentVisible
     ..previousAppVersion = previousAppVersion
