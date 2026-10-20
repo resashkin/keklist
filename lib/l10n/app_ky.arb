@@ -1,4 +1,14 @@
 {
+    "galleryIndex": "Галерея индекси",
+    "galleryIndexNoAccess": "Сүрөттөргө уруксат жок",
+    "galleryIndexNotIndexed": "Азырынча индекстелген жок",
+    "galleryIndexIndexing": "Индекстөө {done} / {total}",
+    "galleryIndexReady": "{count} сүрөт жана видео · жаңыртылды {time}",
+    "galleryIndexThumbnails": "Миниатюралар кеши: {size}",
+    "galleryIndexRebuildTitle": "Галерея индексин кайра түзөбүзбү?",
+    "galleryIndexRebuildMessage": "Миниатюралар өчүрүлүп, медиатека кайра текшерилет.",
+    "galleryIndexRebuild": "Кайра түзүү",
+    "allEmotions": "Баары…",
     "settings": "Сөздүктөр",
     "@settings": {
         "description": "Сөздүктөр таб белгиси"
@@ -62,10 +72,6 @@
     "showDigest": "... үчүн жыйынтык көрсөтүү",
     "@showDigest": {
         "description": "Жыйынтык көрсөтүү аракети"
-    },
-    "showAll": "Баарын көрсөтүү",
-    "@showAll": {
-        "description": "Баарын көрсөтүү аракети"
     },
     "translateToEnglish": "Англис тилине которуу",
     "@translateToEnglish": {
@@ -179,10 +185,6 @@
     "@dangerZone": {
         "description": "Кооптуу зона бөлүмүнүн аталышы"
     },
-    "editMind": "Ойду түзөтүү",
-    "@editMind": {
-        "description": "Ойду түзөтүү диалогунун аталышы"
-    },
     "enterTokenHere": "Токенди бул жерге киргизиңиз",
     "@enterTokenHere": {
         "description": "Токен киргизүү көрсөткүчү"
@@ -271,10 +273,6 @@
     "@todayMinds": {
         "description": "Бүгүнкү ойлор аталышы"
     },
-    "randomMind": "Туш келди ой",
-    "@randomMind": {
-        "description": "Туш келди ой аталышы"
-    },
     "spectrum": "Спектр",
     "@spectrum": {
         "description": "Спектр аталышы"
@@ -282,10 +280,6 @@
     "youDidNotCollectAnyEntriesYet": "Сиз али эч кандай жазма чогулткан жоксуз",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Эч кандай жазма чогултталбаган билдирүүсү"
-    },
-    "pleaseAuthenticateToShowContent": "Ойдуңуздун мазмунун көрсөтүү үчүн аутентификациядан өтүңүз",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Аутентификация талап кылынган билдирүү"
     },
     "areYouSure": "Ишенимиңиз келип турабы?",
     "@areYouSure": {
@@ -424,8 +418,6 @@
     "audioRecordPermissionError": "Аудио жаздыруу үчүн микрофон уруксаты керек.",
     "audioRecordStartError": "Жаздырууну баштоо мүмкүн болмоду. Кайталап аракет кылыңыз.",
     "audioRecordStopError": "Жаздырууну токтотуу мүмкүн болмоду. Кайталап аракет кылыңыз.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Сиз PRO колдонуучусуз. Кийинки {price} төлөм {date} болот.",
     "emotions": "Эмоциялар",
     "archived": "Архив",

@@ -108,14 +108,6 @@ final class KeklistConstants {
   static String sourceCodeURL = 'https://github.com/resashkin/keklist_flutter';
   static String featureSuggestionsURL = 'https://insigh.to/b/keklist';
   static String newsTelegramChannelURL = 'https://t.me/keklistlog';
-  static Iterable<String> defaultEmojiesToPick = [
-    '😔',
-    '🙁',
-    '🙂',
-    '☺️',
-    '🤩',
-  ];
-
   static List<TabModel> availableTabModels = [
     TabModel(type: TabType.calendar),
     TabModel(type: TabType.insights),

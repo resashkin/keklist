@@ -1,16 +1,13 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_pie_widget.dart';
-import 'package:keklist/presentation/screens/insights/widgets/insights_random_mind_widget.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_top_chart.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_collection_empty_day_widget.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 
@@ -81,13 +78,6 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> {
                       crossAxisCellCount: crossAxisCellCount,
                       child: InsightsTopChartWidget(allMinds: _minds),
                     ),
-                    StaggeredGridTile.fit(
-                      crossAxisCellCount: crossAxisCellCount,
-                      child: InsightsRandomMindWidget(
-                        allMinds: _minds.where((m) => m.rootId == null).toList(),
-                        onTapToMind: (mind) => _showDayCollectionScreen(groupDayIndex: mind.dayIndex),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -96,11 +86,5 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> {
         ),
       ),
     );
-  }
-
-  void _showDayCollectionScreen({required int groupDayIndex}) {
-    Navigator.of(
-      context,
-    ).push(SwipeablePageRoute(builder: (context) => MindDayCollectionScreen(initialDayIndex: groupDayIndex)));
   }
 }

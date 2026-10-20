@@ -18,7 +18,7 @@ class MindObjectAdapter extends TypeAdapter<MindObject> {
     };
     return MindObject()
       ..id = fields[0] as String
-      ..emoji = fields[1] as String
+      ..legacyEmoji = fields[1] as String?
       ..note = fields[2] as String
       ..dayIndex = (fields[3] as num).toInt()
       ..creationDate = fields[4] as DateTime
@@ -36,7 +36,7 @@ class MindObjectAdapter extends TypeAdapter<MindObject> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.emoji)
+      ..write(obj.legacyEmoji)
       ..writeByte(2)
       ..write(obj.note)
       ..writeByte(3)

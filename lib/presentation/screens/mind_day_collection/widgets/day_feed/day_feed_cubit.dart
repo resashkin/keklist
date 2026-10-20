@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_media_loader.dart';
@@ -17,13 +18,16 @@ final class DayFeedState {
 }
 
 final class DayFeedCubit extends Cubit<DayFeedState> {
+  final GalleryIndexer? _galleryIndexer;
   List<DayFeedItem> _minds = const [];
   List<DayFeedItem> _media = const [];
   bool _isMediaLoading = true;
   DayFeedMediaIssue? _mediaIssue;
   int _mediaRequestId = 0;
 
-  DayFeedCubit() : super(const DayFeedState(items: [], isMediaLoading: true));
+  DayFeedCubit({GalleryIndexer? galleryIndexer})
+    : _galleryIndexer = galleryIndexer,
+      super(const DayFeedState(items: [], isMediaLoading: true));
 
   void setMinds({required int dayIndex, required Iterable<Mind> allMinds}) {
     _minds = DayFeedLayout.mindItemsForDay(dayIndex: dayIndex, allMinds: allMinds);
@@ -56,7 +60,8 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
   Future<(List<DayFeedItem>, DayFeedMediaIssue?)> _loadPhotoMedia(int dayIndex, bool requestAccess) async {
     final bool hasAccess = await DayMediaLoader.hasPhotoAccess(requestIfNeeded: requestAccess);
     if (!hasAccess) return (const <DayFeedItem>[], DayFeedMediaIssue.photoAccessDenied);
-    return (await DayMediaLoader.loadPhotoAssets(dayIndex), null);
+    if (requestAccess) _galleryIndexer?.sync();
+    return (await DayMediaLoader.loadPhotoAssets(dayIndex, indexer: _galleryIndexer), null);
   }
 
   Future<(List<DayFeedItem>, DayFeedMediaIssue?)> _loadFolderMedia(

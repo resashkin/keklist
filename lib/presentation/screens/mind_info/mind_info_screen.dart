@@ -1,7 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
@@ -9,10 +8,8 @@ import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart'
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/overscroll_listener.dart';
-import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
 import 'package:keklist/presentation/screens/actions/action_model.dart';
 import 'package:keklist/presentation/screens/actions/actions_screen.dart';
-import 'package:keklist/presentation/screens/mind_one_emoji_collection/mind_one_emoji_collection.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/messaged_list/mind_message_widget.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
@@ -21,7 +18,6 @@ import 'package:keklist/presentation/core/dispose_bag.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/presentation/core/widgets/creator_bottom_bar/mind_creator_bottom_bar.dart';
-import 'package:keklist/presentation/screens/mind_picker/mind_picker_screen.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:translator/translator.dart';
@@ -43,7 +39,6 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
   bool _creatorPanelHasFocus = false;
   Mind? _editableMind;
   bool _isAudioRecordButtonVisible = true;
-  late String _selectedEmoji = _rootMind.emoji;
   final ScrollController _scrollController = ScrollController();
 
   Mind get _rootMind =>
@@ -110,13 +105,10 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
       appBar: AppBar(
         title: Text(context.l10n.mind),
         actions: [
-          SensitiveWidget(
-            mode: SensitiveMode.blurredAndNonTappable,
-            child: IconButton(
+          IconButton(
               onPressed: () => _showActions(mind: _rootMind),
               icon: const Icon(Icons.more_vert),
             ),
-          ),
         ],
       ),
       body: Stack(
@@ -174,14 +166,6 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
                     onRecordVideo: _isAudioRecordButtonVisible
                         ? () => _createReflectionWithMedia(MediaRecording.recordVideo)
                         : null,
-                    selectedEmoji: _selectedEmoji,
-                    onTapEmoji: () {
-                      _showEmojiPickerScreen(
-                        onSelect: (String emoji) {
-                          setState(() => _selectedEmoji = emoji);
-                        },
-                      );
-                    },
                     doneTitle: 'Save', // TODO: localize and translate
                     onTapCancelEdit: () {
                       _resetMindCreator();
@@ -211,7 +195,6 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
       MindCreate(
         dayIndex: _rootMind.dayIndex,
         mindContent: [media],
-        emoji: _selectedEmoji,
         rootId: _rootMind.id,
       ),
     );
@@ -228,7 +211,6 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
         MindCreate(
           dayIndex: _rootMind.dayIndex,
           mindContent: content.pieces,
-          emoji: _selectedEmoji,
           rootId: _rootMind.id,
         ),
       );
@@ -241,7 +223,7 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
         ...keptMedia,
         if (text.isNotEmpty) MindNoteText(keptMedia.isEmpty ? text : '\n$text'),
       ]);
-      final Mind mindForEdit = _editableMind!.copyWith(note: edited.toRawNoteString(), emoji: _selectedEmoji);
+      final Mind mindForEdit = _editableMind!.copyWith(note: edited.toRawNoteString());
       sendEventToBloc<MindBloc>(MindEdit(mind: mindForEdit));
     }
     _resetMindCreator();
@@ -257,13 +239,6 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
 
   void _hideKeyboard() {
     FocusScope.of(context).requestFocus(FocusNode());
-  }
-
-  void _showEmojiPickerScreen({required Function(String) onSelect}) async {
-    await showCupertinoModalBottomSheet(
-      context: context,
-      builder: (context) => MindPickerScreen(onSelect: onSelect),
-    );
   }
 
   void _showActions({required Mind mind}) {
@@ -282,7 +257,6 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
               ActionModel.custom(title: context.l10n.removeMedia, icon: const Icon(Icons.hide_image_outlined)),
               () => sendEventToBloc<MindBloc>(MindRemoveMedia(mind: mind)),
             ),
-          (ActionModel.showAll(context), () => _showAllMinds(mind)),
           (ActionModel.delete(context), () => _removeMind(mind)),
         ],
       ),
@@ -298,20 +272,9 @@ final class _MindInfoScreenState extends KekWidgetState<MindInfoScreen> {
   }
 
   void _editMind(Mind mind) {
-    setState(() {
-      _editableMind = mind;
-      _selectedEmoji = mind.emoji;
-    });
+    setState(() => _editableMind = mind);
     _createMindEditingController.text = mind.plainNote.trim();
     _mindCreatorFocusNode.requestFocus();
-  }
-
-  void _showAllMinds(Mind mind) {
-    Navigator.of(context).push(
-      SwipeablePageRoute(
-        builder: (_) => MindOneEmojiCollectionScreen(emoji: mind.emoji, allMinds: _allMinds),
-      ),
-    );
   }
 
   void _removeMind(Mind mind) {

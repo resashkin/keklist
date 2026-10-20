@@ -38,7 +38,7 @@ void main() {
     // Register fallback values for any() matchers
     registerFallbackValue(Mind(
       id: 'test',
-      emoji: '😀',
+      legacyEmoji: '😀',
       note: 'test',
       dayIndex: 0,
       creationDate: DateTime.now(),
@@ -80,7 +80,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test note 1',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -89,7 +89,7 @@ void main() {
         ),
         Mind(
           id: '2',
-          emoji: '😎',
+          legacyEmoji: '😎',
           note: 'Test note 2',
           dayIndex: 101,
           creationDate: DateTime(2024, 1, 2),
@@ -138,7 +138,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test note without audio',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -166,7 +166,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test note',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -198,7 +198,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test <kekaudio path="audio/test_audio.m4a" duration="5.5"/>',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -226,7 +226,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test <kekaudio path="audio/missing.m4a" duration="5.5"/>',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -255,7 +255,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -362,7 +362,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -393,7 +393,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -424,7 +424,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -453,7 +453,7 @@ void main() {
       final minds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -497,7 +497,7 @@ void main() {
       final originalMinds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test note 1',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),
@@ -506,7 +506,7 @@ void main() {
         ),
         Mind(
           id: '2',
-          emoji: '😎',
+          legacyEmoji: '😎',
           note: 'Test note 2',
           dayIndex: 101,
           creationDate: DateTime(2024, 1, 2),
@@ -536,7 +536,7 @@ void main() {
       expect(importedMinds, isNotNull);
       expect(importedMinds!.length, 2);
       expect(importedMinds![0].id, '1');
-      expect(importedMinds![0].emoji, '😀');
+      expect(importedMinds![0].legacyEmoji, '😀');
       expect(importedMinds![0].note, 'Test note 1');
       expect(importedMinds![1].id, '2');
       expect(importedMinds![1].rootId, '1');
@@ -547,7 +547,7 @@ void main() {
       final originalMinds = [
         Mind(
           id: '1',
-          emoji: '😀',
+          legacyEmoji: '😀',
           note: 'Test note',
           dayIndex: 100,
           creationDate: DateTime(2024, 1, 1),

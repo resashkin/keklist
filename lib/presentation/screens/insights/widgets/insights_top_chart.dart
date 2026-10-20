@@ -1,9 +1,10 @@
 import 'dart:collection';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/widgets/rounded_container.dart';
-import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -17,16 +18,15 @@ class InsightsTopChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HashMap<String, int> data = allMinds.map((mind) {
-      return mind.emoji;
-    }).fold(HashMap<String, int>(), (HashMap<String, int> map, emoji) {
-      if (map.containsKey(emoji)) {
-        map[emoji] = map[emoji]! + 1;
-      } else {
-        map[emoji] = 1;
+    final EmotionState emotionState = context.watch<EmotionBloc>().state;
+    final HashMap<String, int> data = HashMap<String, int>();
+    if (emotionState is EmotionsList) {
+      for (final Mind mind in allMinds) {
+        for (final String emoji in emotionState.topLevelEmojisOf(mind.emotionIds)) {
+          data[emoji] = (data[emoji] ?? 0) + 1;
+        }
       }
-      return map;
-    });
+    }
     final List<_MindData> chartData = data.entries
         .map(
           (entry) => _MindData(entry.key, entry.value),
@@ -48,8 +48,7 @@ class InsightsTopChartWidget extends StatelessWidget {
                 ),
               ),
             ),
-            SensitiveWidget(
-              child: SfCartesianChart(
+            SfCartesianChart(
                 primaryYAxis: const CategoryAxis(
                   isVisible: false,
                   labelStyle: TextStyle(fontSize: 16.0),
@@ -70,7 +69,6 @@ class InsightsTopChartWidget extends StatelessWidget {
                   )
                 ],
               ),
-            ),
           ],
         ),
       ),

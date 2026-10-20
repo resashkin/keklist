@@ -101,7 +101,6 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
       id: const Uuid().v4(),
       dayIndex: event.dayIndex,
       note: content.toRawNoteString(),
-      emoji: event.emoji,
       creationDate: DateTime.now().toUtc(),
       sortIndex: sortIndex,
       rootId: event.rootId,

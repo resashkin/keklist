@@ -21,7 +21,6 @@ KeklistSettings _settings({
   required bool hasSeededEmotions,
 }) =>
     KeklistSettings(
-      isMindContentVisible: true,
       previousAppVersion: null,
       themePreference: KeklistThemeMode.system,
       interfaceStyle: KeklistInterfaceStyle.liquidGlass,

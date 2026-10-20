@@ -148,7 +148,6 @@ final class _DebugMenuScreenState extends KekWidgetState<DebugMenuScreen> {
 
   String _getDebugMenuItemTitle(DebugMenuType type) => switch (type) {
         DebugMenuType.translation => 'Translate Content',
-        DebugMenuType.sensitiveContent => 'Sensitive Content',
         DebugMenuType.simulatePro => 'Simulate Pro Subscription',
         DebugMenuType.useProductionRevenueCat => 'Use Production RevenueCat',
         DebugMenuType.enableBlocLogs => 'Enable BLoC Logs',
@@ -157,8 +156,6 @@ final class _DebugMenuScreenState extends KekWidgetState<DebugMenuScreen> {
   String _getDebugMenuItemDescription(DebugMenuType type) => switch (type) {
         DebugMenuType.translation =>
           'Showing/Hiding Translate action, that just opens Alert with translation on English.',
-        DebugMenuType.sensitiveContent =>
-          'Showing/Hiding Eye button that allows to hide content for users when you showing phone to others.',
         DebugMenuType.simulatePro =>
           'Forces isPro=true in MembershipBloc, bypassing RevenueCat. Password required to enable.',
         DebugMenuType.useProductionRevenueCat =>

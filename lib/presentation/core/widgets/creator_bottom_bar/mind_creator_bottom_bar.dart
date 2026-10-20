@@ -5,14 +5,11 @@ import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/helpers/platform_utils.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
-import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
 
 final class MindCreatorBottomBar extends StatefulWidget {
   final Mind? editableMind;
   final TextEditingController textEditingController;
   final FocusNode focusNode;
-  final String? selectedEmoji;
-  final VoidCallback onTapEmoji;
   final String doneTitle;
   final String placeholder;
   final VoidCallback onTapCancelEdit;
@@ -24,10 +21,8 @@ final class MindCreatorBottomBar extends StatefulWidget {
     super.key,
     required this.textEditingController,
     required this.focusNode,
-    required this.selectedEmoji,
     required this.doneTitle,
     required this.onDone,
-    required this.onTapEmoji,
     required this.placeholder,
     this.editableMind,
     required this.onTapCancelEdit,
@@ -52,21 +47,17 @@ final class _MindCreatorBottomBarState extends State<MindCreatorBottomBar> {
               _EditableMindInfoWidget(
                 editableMind: widget.editableMind!,
                 onTapCancelEdit: widget.onTapCancelEdit,
-                onTapEmoji: widget.onTapEmoji,
               ),
               const _HorizontalSeparator(),
             ],
             const SizedBox(height: 8.0),
             _TextFieldWidget(
-              onSearchEmoji: widget.onTapEmoji,
               placeholder: widget.placeholder,
               focusNode: widget.focusNode,
               textEditingController: widget.textEditingController,
               doneTitle: widget.doneTitle.toUpperCase(),
               onDone: () {
-                widget.onDone(
-                  CreateMindData(emoji: widget.selectedEmoji ?? '', text: widget.textEditingController.text),
-                );
+                widget.onDone(CreateMindData(text: widget.textEditingController.text));
               },
               onRecordAudio: widget.onRecordAudio,
               onRecordVideo: widget.onRecordVideo,
@@ -81,10 +72,9 @@ final class _MindCreatorBottomBarState extends State<MindCreatorBottomBar> {
 
 final class _EditableMindInfoWidget extends StatelessWidget {
   final Mind editableMind;
-  final Function() onTapEmoji;
   final Function() onTapCancelEdit;
 
-  const _EditableMindInfoWidget({required this.editableMind, required this.onTapEmoji, required this.onTapCancelEdit});
+  const _EditableMindInfoWidget({required this.editableMind, required this.onTapCancelEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +113,6 @@ final class _HorizontalSeparator extends StatelessWidget {
 final class _TextFieldWidget extends StatelessWidget {
   const _TextFieldWidget({
     required this.placeholder,
-    required this.onSearchEmoji,
     required this.focusNode,
     required this.textEditingController,
     required this.doneTitle,
@@ -132,7 +121,6 @@ final class _TextFieldWidget extends StatelessWidget {
     required this.onRecordVideo,
   });
 
-  final VoidCallback onSearchEmoji;
   final FocusNode focusNode;
   final TextEditingController textEditingController;
   final String placeholder;
@@ -166,9 +154,7 @@ final class _TextFieldWidget extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(12.0),
                 border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12.0))),
                 hintText: placeholder,
-                suffixIcon: SensitiveWidget(
-                  mode: SensitiveMode.blurredAndNonTappable,
-                  child: TextButton(
+                suffixIcon: TextButton(
                     style: ButtonStyle(
                       splashFactory: NoSplash.splashFactory,
                       foregroundColor: WidgetStateProperty.all(Colors.blueAccent),
@@ -176,7 +162,6 @@ final class _TextFieldWidget extends StatelessWidget {
                     onPressed: onDone,
                     child: Text(doneTitle, style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
-                ),
               ),
             ),
           ),
@@ -197,7 +182,6 @@ final class _TextFieldWidget extends StatelessWidget {
 
 final class CreateMindData {
   final String text;
-  final String emoji;
 
-  const CreateMindData({required this.text, required this.emoji});
+  const CreateMindData({required this.text});
 }

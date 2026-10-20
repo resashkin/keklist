@@ -35,10 +35,10 @@ A mind (root or reflection) can carry **one** voice message **or** one Telegram-
   - A still is captured right before recording starts and saved as the thumbnail.
 - `MindCreatorScreen`: the toggle is the text field's suffix. An attached recording shows above the text with a delete button. Closing without saving deletes the recording. The saved note is `media tag` + `\n` + text.
 - MindInfo comment bar (`MindCreatorBottomBar`): the same toggle (`onRecordAudio` / `onRecordVideo`). Recording creates the reflection immediately.
-- Editing keeps the mind's media and only changes text and emoji. "Remove media" is a separate action.
+- Editing keeps the mind's media and only changes the text. "Remove media" is a separate action.
 - Display:
   - `RoundVideoThumbnail` (static circle) and `RoundVideoMessage` (tap to play or pause, with a progress ring).
-  - Used in the root mind card (`MindMessageWidget`, which now also shows root audio), reflection bubbles (`MindBulletWidget`) and the All-mode grid tile (round thumbnail plus emoji badge).
+  - Used in the root mind card (`MindMessageWidget`, which now also shows root audio), reflection bubbles (`MindBulletWidget`) and the All-mode grid tile (round thumbnail plus emotion-emoji badge).
 - Stories: video minds play in a circle and audio minds play their audio. Each story lasts as long as its media and follows the same mute and volume-button rule as other videos.
 
 ## How It Works

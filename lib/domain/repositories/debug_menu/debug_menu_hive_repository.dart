@@ -40,7 +40,6 @@ final class DebugMenuHiveRepository implements DebugMenuRepository {
 
   bool _getDefaultValueForFlag(DebugMenuType flagType) => switch (flagType) {
         DebugMenuType.translation => false,
-        DebugMenuType.sensitiveContent => false,
         DebugMenuType.simulatePro => false,
         DebugMenuType.useProductionRevenueCat => false,
         DebugMenuType.enableBlocLogs => false,

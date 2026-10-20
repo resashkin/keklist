@@ -1,21 +1,15 @@
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:keklist/domain/constants.dart';
-import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
-import 'package:uuid/uuid.dart';
 
 final class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> with DisposeBag {
   final SettingsRepository _settingsRepository;
-  final MindRepository _mindRepository;
 
   UserProfileBloc({
     required SettingsRepository settingsRepository,
-    required MindRepository mindRepository,
   })  : _settingsRepository = settingsRepository,
-        _mindRepository = mindRepository,
         super(
           UserProfileState(
             nickname: '',
@@ -24,7 +18,6 @@ final class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> wit
         ) {
     on<UserProfileGet>(_getUserProfile);
     on<UserProfileUpdateNickName>(_updateNickName);
-    on<UserProfileAddFolderMind>(_addFolderMind);
 
     _settingsRepository.stream
         .map((settings) => settings.userName)
@@ -67,29 +60,6 @@ final class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> wit
     );
   }
 
-  Future<void> _addFolderMind(
-    UserProfileAddFolderMind event,
-    Emitter<UserProfileState> emit,
-  ) async {
-    final Mind mind = await _mindRepository.createMind(
-      mind: Mind(
-        id: const Uuid().v4(),
-        dayIndex: 0,
-        note: event.note,
-        emoji: event.emoji,
-        creationDate: DateTime.now().toUtc(),
-        sortIndex: 0,
-        rootId: null,
-      ),
-    );
-    emit(
-      UserProfileState(
-        nickname: state.nickname,
-        folders: state.folders.concat([mind]),
-      ),
-    );
-  }
-
   // Private functions
 
   // Future<List<String>> _getSuggestionEmojies() async {
@@ -113,13 +83,6 @@ abstract class UserProfileEvent {}
 
 final class UserProfileGet extends UserProfileEvent {
   UserProfileGet();
-}
-
-final class UserProfileAddFolderMind extends UserProfileEvent {
-  final String emoji;
-  final String note;
-
-  UserProfileAddFolderMind({required this.emoji, required this.note});
 }
 
 final class UserProfileUpdateNickName extends UserProfileEvent {

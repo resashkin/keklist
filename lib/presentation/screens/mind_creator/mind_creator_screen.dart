@@ -1,36 +1,26 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/domain/repositories/mind/mind_repository.dart';
+import 'package:keklist/domain/services/emotions/frequent_emotions.dart';
+import 'package:keklist/domain/services/entities/emotion.dart';
 
 import 'package:material_ui/material_ui.dart';
-import 'package:keklist/presentation/blocs/mind_creator_bloc/mind_creator_bloc.dart';
-import 'package:keklist/presentation/core/dispose_bag.dart';
-import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
+import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
-import 'package:keklist/presentation/screens/mind_picker/mind_picker_screen.dart';
+import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
+import 'package:keklist/presentation/screens/emotions/widgets/emotion_chip.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 final class MindCreatorScreen extends StatefulWidget {
-  final Function(String text, String emoji) onDone;
-  final String? initialText;
-  final String? initialEmoji;
+  final Function(String text, List<String> emotionIds) onDone;
   final String? hintText;
-  final bool shouldSuggestEmoji;
 
-  const MindCreatorScreen({
-    super.key,
-    required this.onDone,
-    this.initialText,
-    this.initialEmoji,
-    this.hintText,
-    this.shouldSuggestEmoji = false,
-  });
+  const MindCreatorScreen({super.key, required this.onDone, this.hintText});
 
   @override
   State<MindCreatorScreen> createState() => _MindCreatorScreenState();
@@ -38,44 +28,8 @@ final class MindCreatorScreen extends StatefulWidget {
 
 final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
   final TextEditingController _textEditingController = TextEditingController();
-  String _selectedEmoji = '🙂';
+  final List<String> _selectedEmotionIds = [];
   BaseMindNotePiece? _attachedMedia;
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (widget.initialEmoji != null) {
-        setState(() {
-          _selectedEmoji = widget.initialEmoji!;
-        });
-      }
-
-      if (widget.initialText != null) {
-        _textEditingController.text = widget.initialText!;
-      }
-
-      if (widget.shouldSuggestEmoji) {
-        subscribeToBloc<MindCreatorBloc>(
-          onNewState: (state) {
-            if (state.suggestions.isEmpty) {
-              return;
-            }
-            setState(() {
-              _selectedEmoji = state.suggestions.first;
-            });
-          },
-        )?.disposed(by: this);
-      }
-
-      if (widget.shouldSuggestEmoji) {
-        _textEditingController.addListener(() {
-          sendEventToBloc<MindCreatorBloc>(MindCreatorGetSuggestions(text: _textEditingController.text));
-        });
-      }
-    });
-  }
 
   @override
   void dispose() {
@@ -100,7 +54,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-              widget.onDone(_composeNote(), _selectedEmoji);
+              widget.onDone(_composeNote(), List.of(_selectedEmotionIds));
             },
             child: Text(context.l10n.save, style: const TextStyle(fontSize: 16.0, color: Colors.blueAccent)),
           ),
@@ -108,51 +62,8 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            GestureDetector(
-              onTap: () {
-                _showEmojiPickerScreen(
-                  onSelect: (emoji) {
-                    setState(() {
-                      _selectedEmoji = emoji;
-                    });
-                  },
-                );
-              },
-              child: SizedBox(
-                width: 120,
-                height: 120,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
-                  children: [
-                    // Stroke effect - smooth circular outline
-                    ..._buildStrokeEmojis(
-                      _selectedEmoji,
-                      strokeColor: Theme.of(context).colorScheme.onSurface,
-                      strokeWidth: 4.0,
-                    ),
-                    // Main emoji
-                    Text(_selectedEmoji, style: const TextStyle(fontSize: 64.0)),
-                    // Edit icon
-                    Positioned(
-                      right: 18,
-                      bottom: 18,
-                      child: Container(
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Theme.of(context).scaffoldBackgroundColor, width: 1.5),
-                        ),
-                        child: Icon(Icons.edit, size: 12, color: Theme.of(context).colorScheme.onPrimary),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16.0),
             if (_attachedMedia case final BaseMindNotePiece media)
               _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
             TextField(
@@ -174,8 +85,27 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
                     : null,
               ),
             ),
+            _CreatorEmotionsRow(
+              selectedIds: _selectedEmotionIds,
+              onToggle: (id) => setState(
+                () => _selectedEmotionIds.contains(id) ? _selectedEmotionIds.remove(id) : _selectedEmotionIds.add(id),
+              ),
+              onOpenAll: _openMarkingSheet,
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _openMarkingSheet() {
+    EmotionMarkingSheet.show(
+      context: context,
+      initialSelectedIds: _selectedEmotionIds.toSet(),
+      onSelectionChanged: (ids) => setState(
+        () => _selectedEmotionIds
+          ..clear()
+          ..addAll(ids),
       ),
     );
   }
@@ -206,37 +136,46 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
       if (text.isNotEmpty) MindNoteText(media == null ? text : '\n$text'),
     ]).toRawNoteString();
   }
+}
 
-  void _showEmojiPickerScreen({required Function(String) onSelect}) async {
-    await showCupertinoModalBottomSheet(
-      context: context,
-      builder: (context) => MindPickerScreen(onSelect: onSelect, suggestions: []),
-    );
-  }
+final class _CreatorEmotionsRow extends StatelessWidget {
+  final List<String> selectedIds;
+  final ValueChanged<String> onToggle;
+  final VoidCallback onOpenAll;
 
-  List<Widget> _buildStrokeEmojis(String emoji, {required Color strokeColor, required double strokeWidth}) {
-    const double fontSize = 64.0;
-    final List<Widget> strokeEmojis = [];
+  const _CreatorEmotionsRow({required this.selectedIds, required this.onToggle, required this.onOpenAll});
 
-    // 16 directional offsets in a circle for smooth stroke effect
-    const int directions = 16;
-    for (int i = 0; i < directions; i++) {
-      final double angle = (i * 2 * pi) / directions;
-      final double dx = strokeWidth * cos(angle);
-      final double dy = strokeWidth * sin(angle);
-
-      strokeEmojis.add(
-        Transform.translate(
-          offset: Offset(dx, dy),
-          child: ColorFiltered(
-            colorFilter: ColorFilter.mode(strokeColor, BlendMode.srcIn),
-            child: Text(emoji, style: const TextStyle(fontSize: fontSize)),
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<EmotionBloc, EmotionState>(
+      builder: (context, state) {
+        if (state is! EmotionsList) return const SizedBox.shrink();
+        final List<Emotion> frequent = FrequentEmotions.pick(
+          minds: context.read<MindRepository>().values,
+          activeEmotions: state.activeEmotions,
+          fallback: state.rootEmotions,
+        );
+        final List<Emotion> selected = selectedIds.map(state.byId).whereType<Emotion>().toList();
+        final List<Emotion> chips = [...frequent, ...selected.where((emotion) => !frequent.contains(emotion))];
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+          child: Wrap(
+            spacing: 8.0,
+            runSpacing: 8.0,
+            children: [
+              for (final Emotion emotion in chips)
+                EmotionChip(
+                  emojis: [emotion.emoji],
+                  label: emotion.title,
+                  selected: selectedIds.contains(emotion.id),
+                  onTap: () => onToggle(emotion.id),
+                ),
+              EmotionAddChip(label: context.l10n.allEmotions, onTap: onOpenAll),
+            ],
           ),
-        ),
-      );
-    }
-
-    return strokeEmojis;
+        );
+      },
+    );
   }
 }
 

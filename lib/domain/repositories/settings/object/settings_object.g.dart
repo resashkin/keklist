@@ -17,7 +17,6 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SettingsObject()
-      ..isMindContentVisible = fields[0] == null ? true : fields[0] as bool
       ..previousAppVersion = fields[1] as String?
       ..isDarkMode = fields[3] == null ? true : fields[3] as bool
       ..shouldShowTitles = fields[5] == null ? true : fields[5] as bool
@@ -61,9 +60,7 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(23)
-      ..writeByte(0)
-      ..write(obj.isMindContentVisible)
+      ..writeByte(22)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)

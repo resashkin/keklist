@@ -1,14 +1,13 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
+import 'package:keklist/presentation/core/widgets/mind_emotion_emojis.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_thumbnail.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
-import 'package:photo_manager/photo_manager.dart';
-import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 const double _kTileRadius = 8.0;
-const int _kThumbnailLogicalSize = 200;
 
 final class DayFeedMindTile extends StatelessWidget {
   final DayFeedMind item;
@@ -47,7 +46,14 @@ final class DayFeedMindTile extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(item.mind.emoji, style: TextStyle(fontSize: size * (showText ? 0.32 : 0.5))),
+                  MindEmotionEmojis(
+                    mind: item.mind,
+                    fontSize: size * (showText ? 0.18 : 0.3),
+                    maxCount: 3,
+                    placeholder: showText
+                        ? const SizedBox.shrink()
+                        : Icon(Icons.notes, size: size * 0.3, color: theme.disabledColor),
+                  ),
                   if (showText)
                     Flexible(
                       child: Text(
@@ -80,7 +86,7 @@ extension on DayFeedMindTile {
         child: Stack(
           children: [
             Center(child: RoundVideoThumbnail(video: video, size: size * 0.92, showsPlayIcon: false)),
-            Positioned(bottom: 2, right: 2, child: Text(item.mind.emoji, style: TextStyle(fontSize: size * 0.22))),
+            Positioned(bottom: 2, right: 2, child: MindEmotionEmojis(mind: item.mind, fontSize: size * 0.16, maxCount: 2)),
             if (item.reflectionCount > 0)
               Positioned(top: 4, right: 4, child: _CountBadge(count: item.reflectionCount)),
           ],
@@ -97,17 +103,16 @@ final class DayFeedAssetTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int thumbnailSize = (_kThumbnailLogicalSize * MediaQuery.devicePixelRatioOf(context)).round();
     return ClipRRect(
       borderRadius: BorderRadius.circular(_kTileRadius),
       child: Stack(
         fit: StackFit.expand,
         children: [
-          AssetEntityImage(
-            item.asset,
-            isOriginal: false,
-            thumbnailSize: ThumbnailSize.square(thumbnailSize),
+          Image(
+            image: CachedAssetThumbnailProvider(item.asset),
             fit: BoxFit.cover,
+            gaplessPlayback: true,
+            errorBuilder: (context, _, _) => ColoredBox(color: Theme.of(context).cardColor),
           ),
           if (item.isVideo) Positioned(bottom: 4, right: 4, child: _VideoBadge(seconds: item.asset.duration)),
         ],

@@ -9,6 +9,43 @@ class AppLocalizationsKy extends AppLocalizations {
   AppLocalizationsKy([String locale = 'ky']) : super(locale);
 
   @override
+  String get galleryIndex => 'Галерея индекси';
+
+  @override
+  String get galleryIndexNoAccess => 'Сүрөттөргө уруксат жок';
+
+  @override
+  String get galleryIndexNotIndexed => 'Азырынча индекстелген жок';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Индекстөө $done / $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count сүрөт жана видео · жаңыртылды $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Миниатюралар кеши: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Галерея индексин кайра түзөбүзбү?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Миниатюралар өчүрүлүп, медиатека кайра текшерилет.';
+
+  @override
+  String get galleryIndexRebuild => 'Кайра түзүү';
+
+  @override
+  String get allEmotions => 'Баары…';
+
+  @override
   String get settings => 'Сөздүктөр';
 
   @override
@@ -64,9 +101,6 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get showDigest => '... үчүн жыйынтык көрсөтүү';
-
-  @override
-  String get showAll => 'Баарын көрсөтүү';
 
   @override
   String get translateToEnglish => 'Англис тилине которуу';
@@ -163,9 +197,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get dangerZone => 'Кооптуу зона';
 
   @override
-  String get editMind => 'Ойду түзөтүү';
-
-  @override
   String get enterTokenHere => 'Токенди бул жерге киргизиңиз';
 
   @override
@@ -232,18 +263,11 @@ class AppLocalizationsKy extends AppLocalizations {
   String get todayMinds => 'Бүгүнкү ойлор';
 
   @override
-  String get randomMind => 'Туш келди ой';
-
-  @override
   String get spectrum => 'Спектр';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Сиз али эч кандай жазма чогулткан жоксуз';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Ойдуңуздун мазмунун көрсөтүү үчүн аутентификациядан өтүңүз';
 
   @override
   String get areYouSure => 'Ишенимиңиз келип турабы?';
@@ -517,12 +541,6 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'Жаздырууну токтотуу мүмкүн болмоду. Кайталап аракет кылыңыз.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

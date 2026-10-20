@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
+import 'package:keklist/domain/services/media_index/photo_library_gallery_source.dart';
 import 'package:keklist/native/android/media_folder_channel.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart' as kek_date;
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
@@ -18,31 +20,16 @@ final class DayMediaLoader {
     return permission.hasAccess;
   }
 
-  static Future<List<DayFeedAsset>> loadPhotoAssets(int dayIndex) async {
-    final (DateTime startOfDay, DateTime endOfDay) = _dayBounds(dayIndex);
-    final List<AssetPathEntity> paths = await PhotoManager.getAssetPathList(
-      type: RequestType.common,
-      filterOption: FilterOptionGroup(
-        imageOption: const FilterOption(sizeConstraint: SizeConstraint(ignoreSize: true)),
-        videoOption: const FilterOption(sizeConstraint: SizeConstraint(ignoreSize: true)),
-        createTimeCond: DateTimeCond(min: startOfDay, max: endOfDay),
-      ),
+  /// Skips the library query for days the index knows are empty, and feeds every
+  /// live result back into it.
+  static Future<List<DayFeedAsset>> loadPhotoAssets(int dayIndex, {GalleryIndexer? indexer}) async {
+    if (indexer?.isKnownEmpty(dayIndex) ?? false) return const [];
+    final AssetPathEntity? path = await PhotoLibraryGallerySource.allPath(
+      PhotoLibraryGallerySource.filter(createTimeCond: PhotoLibraryGallerySource.dayCond(dayIndex)),
     );
-
-    // The same asset shows up in several albums (Recents, Favorites, ...).
-    final Map<String, AssetEntity> assetsById = {};
-    for (final AssetPathEntity path in paths) {
-      final int count = await path.assetCountAsync;
-      if (count == 0) continue;
-      for (final AssetEntity asset in await path.getAssetListRange(start: 0, end: count)) {
-        assetsById[asset.id] = asset;
-      }
-    }
-
-    return assetsById.values
-        .where((asset) => _isWithin(asset.createDateTime, startOfDay, endOfDay))
-        .map(DayFeedAsset.new)
-        .toList();
+    final List<AssetEntity> assets = await PhotoLibraryGallerySource.allAssets(path);
+    await indexer?.refreshDay(dayIndex, assets.map(PhotoLibraryGallerySource.infoOf));
+    return assets.map(DayFeedAsset.new).toList();
   }
 
   static Future<List<DayFeedFolderMedia>> loadFolderMedia(

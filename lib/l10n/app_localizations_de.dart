@@ -9,6 +9,43 @@ class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
   @override
+  String get galleryIndex => 'Galerie-Index';
+
+  @override
+  String get galleryIndexNoAccess => 'Kein Zugriff auf Fotos';
+
+  @override
+  String get galleryIndexNotIndexed => 'Noch nicht indexiert';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Indexiere $done von $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count Fotos und Videos · aktualisiert $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Miniaturen-Cache: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Galerie-Index neu aufbauen?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Miniaturen werden gelöscht und die Mediathek neu durchsucht.';
+
+  @override
+  String get galleryIndexRebuild => 'Neu aufbauen';
+
+  @override
+  String get allEmotions => 'Alle…';
+
+  @override
   String get settings => 'Einstellungen';
 
   @override
@@ -64,9 +101,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get showDigest => 'Zusammenfassung anzeigen für ...';
-
-  @override
-  String get showAll => 'Alle anzeigen';
 
   @override
   String get translateToEnglish => 'Ins Englische übersetzen';
@@ -163,9 +197,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dangerZone => 'Gefahrenzone';
 
   @override
-  String get editMind => 'Notiz bearbeiten';
-
-  @override
   String get enterTokenHere => 'Token hier eingeben';
 
   @override
@@ -233,18 +264,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get todayMinds => 'Heutige Notizen';
 
   @override
-  String get randomMind => 'Zufällige Notiz';
-
-  @override
   String get spectrum => 'Spektrum';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Sie haben noch keine Einträge gesammelt';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Bitte authentifizieren Sie sich, um den Inhalt Ihrer Notiz anzuzeigen';
 
   @override
   String get areYouSure => 'Sind Sie sicher?';
@@ -521,12 +545,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'Aufnahme konnte nicht gestoppt werden. Bitte versuche es erneut.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

@@ -9,6 +9,43 @@ class AppLocalizationsSr extends AppLocalizations {
   AppLocalizationsSr([String locale = 'sr']) : super(locale);
 
   @override
+  String get galleryIndex => 'Индекс галерије';
+
+  @override
+  String get galleryIndexNoAccess => 'Нема приступа Фотографијама';
+
+  @override
+  String get galleryIndexNotIndexed => 'Још није индексирано';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Индексирање $done од $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count фотографија и видео записа · ажурирано $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Кеш сличица: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Поново изградити индекс галерије?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Сличице ће бити обрисане, а библиотека поново скенирана.';
+
+  @override
+  String get galleryIndexRebuild => 'Поново изгради';
+
+  @override
+  String get allEmotions => 'Све…';
+
+  @override
   String get settings => 'Подешавања';
 
   @override
@@ -64,9 +101,6 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get showDigest => 'Прикажи сажетак за ...';
-
-  @override
-  String get showAll => 'Прикажи све';
 
   @override
   String get translateToEnglish => 'Преведи на енглески';
@@ -163,9 +197,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get dangerZone => 'Опасна зона';
 
   @override
-  String get editMind => 'Уреди белешку';
-
-  @override
   String get enterTokenHere => 'Унесите токен овде';
 
   @override
@@ -232,18 +263,11 @@ class AppLocalizationsSr extends AppLocalizations {
   String get todayMinds => 'Данашње белешке';
 
   @override
-  String get randomMind => 'Случајна белешка';
-
-  @override
   String get spectrum => 'Спектар';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Још увек ниси прикупио ниједан унос';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Молим те аутентификуј се да би приказао садржај твоје белешке';
 
   @override
   String get areYouSure => 'Да ли сте сигурни?';
@@ -517,12 +541,6 @@ class AppLocalizationsSr extends AppLocalizations {
       'Није могуће зауставити снимање. Покушајте поново.';
 
   @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
-
-  @override
   String proUserFooter(String price, String date) {
     return 'Ви сте PRO корисник. Следећа уплата $price биће $date.';
   }
@@ -666,6 +684,43 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   AppLocalizationsSrLatn() : super('sr_Latn');
 
   @override
+  String get galleryIndex => 'Indeks galerije';
+
+  @override
+  String get galleryIndexNoAccess => 'Nema pristupa Fotografijama';
+
+  @override
+  String get galleryIndexNotIndexed => 'Još nije indeksirano';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Indeksiranje $done od $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count fotografija i video zapisa · ažurirano $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Keš sličica: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Ponovo izgraditi indeks galerije?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Sličice će biti obrisane, a biblioteka ponovo skenirana.';
+
+  @override
+  String get galleryIndexRebuild => 'Ponovo izgradi';
+
+  @override
+  String get allEmotions => 'Sve…';
+
+  @override
   String get settings => 'Podešavanja';
 
   @override
@@ -721,9 +776,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get showDigest => 'Prikaži sažetak za ...';
-
-  @override
-  String get showAll => 'Prikaži sve';
 
   @override
   String get translateToEnglish => 'Prevedi na engleski';
@@ -820,9 +872,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get dangerZone => 'Zona opasnosti';
 
   @override
-  String get editMind => 'Uredi um';
-
-  @override
   String get enterTokenHere => 'Unesite token ovde';
 
   @override
@@ -889,18 +938,11 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get todayMinds => 'Današnji umovi';
 
   @override
-  String get randomMind => 'Slučajni um';
-
-  @override
   String get spectrum => 'Spektar';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Još uvek niste prikupili nijedan unos';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Molimo autentifikujte se da biste videli sadržaj svog uma';
 
   @override
   String get areYouSure => 'Da li ste sigurni?';
@@ -1171,12 +1213,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get audioRecordStopError =>
       'Nije moguće zaustaviti snimanje. Pokušajte ponovo.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {

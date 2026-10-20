@@ -1,4 +1,14 @@
 {
+    "galleryIndex": "Галерея индексі",
+    "galleryIndexNoAccess": "Фотоға рұқсат жоқ",
+    "galleryIndexNotIndexed": "Әлі индекстелмеген",
+    "galleryIndexIndexing": "Индекстеу {done} / {total}",
+    "galleryIndexReady": "{count} фото және бейне · жаңартылды {time}",
+    "galleryIndexThumbnails": "Миниатюралар кеші: {size}",
+    "galleryIndexRebuildTitle": "Галерея индексін қайта құру керек пе?",
+    "galleryIndexRebuildMessage": "Миниатюралар өшіріліп, медиатека қайта сканерленеді.",
+    "galleryIndexRebuild": "Қайта құру",
+    "allEmotions": "Барлығы…",
     "settings": "Баптаулар",
     "@settings": {
         "description": "Баптаулар таб белгісі"
@@ -62,10 +72,6 @@
     "showDigest": "... үшін қорытынды көрсету",
     "@showDigest": {
         "description": "Қорытынды көрсету әрекеті"
-    },
-    "showAll": "Бәрін көрсету",
-    "@showAll": {
-        "description": "Бәрін көрсету әрекеті"
     },
     "translateToEnglish": "Ағылшын тіліне аудару",
     "@translateToEnglish": {
@@ -179,10 +185,6 @@
     "@dangerZone": {
         "description": "Қауіпті аймақ бөлімінің атауы"
     },
-    "editMind": "Ойды өңдеу",
-    "@editMind": {
-        "description": "Ойды өңдеу диалогының атауы"
-    },
     "enterTokenHere": "Токенді осы жерге енгізіңіз",
     "@enterTokenHere": {
         "description": "Токен енгізу көрсеткіші"
@@ -271,10 +273,6 @@
     "@todayMinds": {
         "description": "Бүгінгі ойлар атауы"
     },
-    "randomMind": "Кездейсоқ ой",
-    "@randomMind": {
-        "description": "Кездейсоқ ой атауы"
-    },
     "spectrum": "Спектр",
     "@spectrum": {
         "description": "Спектр атауы"
@@ -282,10 +280,6 @@
     "youDidNotCollectAnyEntriesYet": "Сіз әлі ешқандай жазба жинаған жоқсыз",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Ешқандай жазба жинақталмаған хабарламасы"
-    },
-    "pleaseAuthenticateToShowContent": "Ойыңыздың мазмұнын көрсету үшін аутентификациядан өтіңіз",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Аутентификация талап етілген хабарлама"
     },
     "areYouSure": "Сенімдісіз бе?",
     "@areYouSure": {
@@ -424,8 +418,6 @@
     "audioRecordPermissionError": "Аудио жазу үшін микрофон рұқсаты қажет.",
     "audioRecordStartError": "Жазуды бастау мүмкін болмады. Қайталап көріңіз.",
     "audioRecordStopError": "Жазуды тоқтату мүмкін болмады. Қайталап көріңіз.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Сіз PRO қолданушысысыз. Келесі {price} төлем {date} күні болады.",
     "emotions": "Эмоциялар",
     "archived": "Мұрағат",

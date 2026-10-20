@@ -81,8 +81,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSFaceIDUsageDescription</key>
-	<string>For showing/hiding sensetive data for other users by current user</string>
 	<key>NSCameraUsageDescription</key>
 	<string>keklist uses the camera to record round video messages and to attach photos or videos to entries</string>
 	<key>NSPhotoLibraryUsageDescription</key>

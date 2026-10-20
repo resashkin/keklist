@@ -25,7 +25,6 @@ final class _SkeletonCell extends _DayFeedCell {
 final class DayFeedSliver extends StatelessWidget {
   final DayFeedState state;
   final DayFeedSettings settings;
-  final bool isMindTextHidden;
   final ValueChanged<int> onOpenItem;
   final ValueChanged<DayFeedMediaIssue> onResolveMediaIssue;
 
@@ -33,7 +32,6 @@ final class DayFeedSliver extends StatelessWidget {
     super.key,
     required this.state,
     required this.settings,
-    required this.isMindTextHidden,
     required this.onOpenItem,
     required this.onResolveMediaIssue,
   });
@@ -120,7 +118,7 @@ final class DayFeedSliver extends StatelessWidget {
   Widget _buildItemTile(DayFeedItem item, double cellSize, int span) => switch (item) {
         DayFeedMind() => DayFeedMindTile(
             item: item,
-            isTextVisible: settings.isMindTextVisible && !isMindTextHidden,
+            isTextVisible: settings.isMindTextVisible,
             isAudioBadgeVisible: settings.isAudioBadgeVisible,
             isWide: span > 1,
             size: cellSize,

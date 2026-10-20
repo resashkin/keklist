@@ -66,7 +66,7 @@ void main() {
     final minds = [
       Mind(
         id: '1',
-        emoji: '😀',
+        legacyEmoji: '😀',
         note: 'Test note without audio',
         dayIndex: 100,
         creationDate: DateTime(2024, 1, 1),
@@ -75,7 +75,7 @@ void main() {
       ),
       Mind(
         id: '2',
-        emoji: '😎',
+        legacyEmoji: '😎',
         note: 'Another test note',
         dayIndex: 101,
         creationDate: DateTime(2024, 1, 2),
@@ -143,7 +143,7 @@ void main() {
     final minds = [
       Mind(
         id: '1',
-        emoji: '😀',
+        legacyEmoji: '😀',
         note: 'Test <kekaudio path="audio/test_audio.m4a" duration="5.5"/>',
         dayIndex: 100,
         creationDate: DateTime(2024, 1, 1),
@@ -219,7 +219,7 @@ void main() {
     final minds = [
       Mind(
         id: '1',
-        emoji: '😀',
+        legacyEmoji: '😀',
         note: 'Test note',
         dayIndex: 100,
         creationDate: DateTime(2024, 1, 1),

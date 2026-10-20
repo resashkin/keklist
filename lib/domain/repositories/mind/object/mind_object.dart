@@ -8,8 +8,8 @@ class MindObject extends HiveObject {
   @HiveField(0)
   late String id;
 
-  @HiveField(1)
-  late String emoji;
+  @HiveField(1, defaultValue: null)
+  late String? legacyEmoji;
 
   @HiveField(2)
   late String note;
@@ -36,7 +36,7 @@ class MindObject extends HiveObject {
 
   Mind toMind() => Mind(
         id: id,
-        emoji: emoji,
+        legacyEmoji: legacyEmoji,
         note: note,
         dayIndex: dayIndex,
         creationDate: creationDate,

@@ -193,7 +193,7 @@ void main() {
   group('Mind note helpers', () {
     Mind buildMind(String note) => Mind(
           id: '1',
-          emoji: '🙂',
+          legacyEmoji: '🙂',
           note: note,
           dayIndex: 0,
           creationDate: DateTime(2024),

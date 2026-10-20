@@ -53,13 +53,6 @@ final class SettingsHiveRepository implements SettingsRepository {
   }
 
   @override
-  FutureOr<void> updateMindContentVisibility(bool isVisible) async {
-    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
-    settingsObject?.isMindContentVisible = isVisible;
-    await settingsObject?.save();
-  }
-
-  @override
   FutureOr<void> updateLanguage(SupportedLanguage language) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     settingsObject?.language = language.code;

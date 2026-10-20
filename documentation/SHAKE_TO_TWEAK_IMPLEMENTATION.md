@@ -45,7 +45,7 @@ The "+ Write" button label (`create` l10n key) is now "+ Create" in all language
   - `SettingsScreen` builds its sections as models once, renders `visibleExcept(hidden)`, and passes the full list to the customize sheet.
   - A section is hidden when its own id is hidden or when all of its rows are hidden.
   - Conditional rows (`pro` vs `proStatus`, `debugMenu`) appear in the sheet only when they would appear on the screen.
-- Day screen: the AppBar `tune` icon, the "Sources" text button and the Sources/All toggle are gone. Only the sensitive-content eye stays.
+- Day screen: the AppBar `tune` icon, the "Sources" text button and the Sources/All toggle are gone. The sensitive-content eye was removed later with the hide-content feature.
 
 ## How It Works
 

@@ -8,8 +8,7 @@ part 'settings_object.g.dart';
 
 @HiveType(typeId: 0)
 final class SettingsObject extends HiveObject {
-  @HiveField(0, defaultValue: true)
-  late bool isMindContentVisible;
+  // @HiveField(0, defaultValue: true)
 
   @HiveField(1, defaultValue: null)
   late String? previousAppVersion;
@@ -90,7 +89,6 @@ final class SettingsObject extends HiveObject {
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
-        isMindContentVisible: isMindContentVisible,
         previousAppVersion: previousAppVersion,
         shouldShowTitles: shouldShowTitles,
         themePreference: themePreferenceIndex < 0

@@ -10,7 +10,6 @@ final class MindGetList extends MindEvent {}
 
 final class MindCreate extends MindEvent {
   final int dayIndex;
-  final String emoji;
   final String? rootId;
   final List<BaseMindNotePiece> mindContent;
   final List<String> emotionIds;
@@ -18,14 +17,13 @@ final class MindCreate extends MindEvent {
   MindCreate({
     required this.dayIndex,
     required List<BaseMindNotePiece> mindContent,
-    required this.emoji,
     required this.rootId,
     List<String> emotionIds = const [],
   })  : mindContent = List<BaseMindNotePiece>.unmodifiable(mindContent),
         emotionIds = List<String>.unmodifiable(emotionIds);
 
   @override
-  List<Object?> get props => [dayIndex, mindContent, emoji, rootId, emotionIds];
+  List<Object?> get props => [dayIndex, mindContent, rootId, emotionIds];
 }
 
 /// Replace the set of emotions tagged on a mind (used by the marking sheet —
