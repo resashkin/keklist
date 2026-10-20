@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
 import 'package:keklist/presentation/core/widgets/mind_emotion_emojis.dart';
+import 'package:keklist/presentation/core/widgets/mind_emotion_texture.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_thumbnail.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
@@ -47,38 +48,30 @@ final class DayFeedMindTile extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
+            if (mediaCircle != null || showText) MindEmotionTexture(mind: item.mind, emojiSize: size * 0.2),
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: mediaCircle != null
                   ? Center(child: mediaCircle)
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        MindEmotionEmojis(
-                          mind: item.mind,
-                          fontSize: size * (showText ? 0.18 : 0.3),
-                          maxCount: 3,
-                          placeholder: showText
-                              ? const SizedBox.shrink()
-                              : Icon(Icons.notes, size: size * 0.3, color: theme.disabledColor),
-                        ),
-                        if (showText)
-                          Expanded(
-                            child: Center(
-                              child: AutoSizeText(
-                                text,
-                                textAlign: TextAlign.center,
-                                minFontSize: _kMinTextSize,
-                                maxFontSize: _kMaxTextSize,
-                                style: theme.textTheme.bodySmall?.copyWith(fontSize: _kMaxTextSize, height: 1.2),
-                              ),
-                            ),
-                          ),
-                      ],
+                  : showText
+                  ? Center(
+                      child: AutoSizeText(
+                        text,
+                        textAlign: TextAlign.center,
+                        minFontSize: _kMinTextSize,
+                        maxFontSize: _kMaxTextSize,
+                        style: theme.textTheme.bodySmall?.copyWith(fontSize: _kMaxTextSize, height: 1.2),
+                      ),
+                    )
+                  : Center(
+                      child: MindEmotionEmojis(
+                        mind: item.mind,
+                        fontSize: size * 0.3,
+                        maxCount: 3,
+                        placeholder: Icon(Icons.notes, size: size * 0.3, color: theme.disabledColor),
+                      ),
                     ),
             ),
-            if (mediaCircle != null)
-              Positioned(top: 4, left: 4, child: MindEmotionEmojis(mind: item.mind, fontSize: size * 0.13, maxCount: 2)),
             if (mediaCircle != null && mediaDuration != null)
               Positioned(bottom: 4, right: 4, child: _VideoBadge(seconds: mediaDuration.inSeconds)),
           ],
