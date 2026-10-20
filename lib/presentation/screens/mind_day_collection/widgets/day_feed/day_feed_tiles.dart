@@ -74,14 +74,18 @@ final class DayFeedMindTile extends StatelessWidget {
 
 extension on DayFeedMindTile {
   Widget _buildVideoTile(MindNoteVideo video) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Center(child: RoundVideoThumbnail(video: video, size: size * 0.92, showsPlayIcon: false)),
-        Positioned(bottom: 2, right: 2, child: Text(item.mind.emoji, style: TextStyle(fontSize: size * 0.22))),
-        if (item.reflectionCount > 0)
-          Positioned(top: 4, right: 4, child: _CountBadge(count: item.reflectionCount)),
-      ],
+    return Center(
+      child: SizedBox.square(
+        dimension: size,
+        child: Stack(
+          children: [
+            Center(child: RoundVideoThumbnail(video: video, size: size * 0.92, showsPlayIcon: false)),
+            Positioned(bottom: 2, right: 2, child: Text(item.mind.emoji, style: TextStyle(fontSize: size * 0.22))),
+            if (item.reflectionCount > 0)
+              Positioned(top: 4, right: 4, child: _CountBadge(count: item.reflectionCount)),
+          ],
+        ),
+      ),
     );
   }
 }
