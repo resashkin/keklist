@@ -4,16 +4,13 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
-import 'package:gap/gap.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_creator_bloc/mind_creator_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
-import 'package:keklist/presentation/core/widgets/mind_widget.dart';
 import 'package:keklist/presentation/core/widgets/overscroll_listener.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
@@ -41,7 +38,6 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_med
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_media_tile/day_folder_media_preview_cubit.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_media_tile/day_folder_media_tile_widget.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/media_folder_settings_bottom_sheet/media_folder_settings_bottom_sheet.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/photo_video_settings_bottom_sheet/photo_video_settings_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/sources_bottom_sheet/sources_bottom_sheet.dart';
 import 'package:keklist/domain/services/weather/weather_api_service.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/weather_settings_bottom_sheet/weather_settings_bottom_sheet.dart';
@@ -556,13 +552,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     );
   }
 
-  void _showPhotoVideoSettings() {
-    showBarModalBottomSheet(
-      context: context,
-      builder: (_) => const PhotoVideoSettingsBottomSheet(),
-    );
-  }
-
   void _showMediaFolderSettings() {
     showBarModalBottomSheet(
       context: context,
@@ -743,39 +732,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
           );
         },
       ),
-    );
-  }
-}
-
-
-final class _MindInteractiveZeroCase extends StatelessWidget {
-  final String title;
-  final Iterable<String> suggestions;
-  final ValueChanged<String> onEmojiTap;
-
-  const _MindInteractiveZeroCase({required this.suggestions, required this.onEmojiTap, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        const Gap(32.0),
-        if (suggestions.isNotEmpty) Text(title),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 8.0,
-          children: suggestions
-              .map(
-                (emoji) => GestureDetector(
-                  child: MindWidget.justEmoji(emoji: emoji).animate().fadeIn(),
-                  onTap: () => onEmojiTap(emoji),
-                ),
-              )
-              .toList(),
-        ),
-        const Gap(32.0),
-      ],
     );
   }
 }

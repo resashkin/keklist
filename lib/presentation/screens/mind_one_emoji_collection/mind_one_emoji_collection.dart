@@ -22,42 +22,22 @@ final class MindOneEmojiCollectionScreen extends StatefulWidget {
   const MindOneEmojiCollectionScreen({super.key, required this.emoji, required this.allMinds});
 
   @override
-  // ignore: no_logic_in_create_state
-  State<MindOneEmojiCollectionScreen> createState() =>
-      _MindOneEmojiCollectionScreenState(emoji: emoji, allMinds: allMinds.sortedByProperty((e) => e.dayIndex).toList());
+  State<MindOneEmojiCollectionScreen> createState() => _MindOneEmojiCollectionScreenState();
 }
 
 final class _MindOneEmojiCollectionScreenState extends State<MindOneEmojiCollectionScreen> with DisposeBag {
-  final String emoji;
-  final List<Mind> allMinds;
+  late final List<Mind> allMinds = widget.allMinds.sortedByProperty((e) => e.dayIndex).toList();
 
   List<Mind> get emojiMinds =>
-      MindUtils.findMindsByEmoji(emoji: emoji, allMinds: allMinds).sortedByProperty((e) => e.dayIndex);
-
-  final TextEditingController _createMindEditingController = TextEditingController(text: null);
-  final FocusNode _mindCreatorFocusNode = FocusNode();
-  bool _hasFocus = false;
-  Mind? _editableMind;
+      MindUtils.findMindsByEmoji(emoji: widget.emoji, allMinds: allMinds).sortedByProperty((e) => e.dayIndex);
 
   final ScrollController _scrollController = ScrollController();
-
-  _MindOneEmojiCollectionScreenState({required this.emoji, required this.allMinds});
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _mindCreatorFocusNode.addListener(() {
-        if (_hasFocus == _mindCreatorFocusNode.hasFocus) {
-          return;
-        }
-        setState(() {
-          _hasFocus = _mindCreatorFocusNode.hasFocus;
-        });
-      });
-
-      // Скролим вниз сразу.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
     });
 
@@ -77,27 +57,16 @@ final class _MindOneEmojiCollectionScreenState extends State<MindOneEmojiCollect
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(emoji)),
-      body: Stack(
-        children: [
-          GestureDetector(
-            onPanDown: (_) {
-              if (_mindCreatorFocusNode.hasFocus) {
-                _hideKeyboard();
-              }
-            },
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.only(bottom: 150),
-              controller: _scrollController,
-              child: MindMonologListWidget(
-                minds: emojiMinds,
-                onTap: _showMindInfo,
-                onOptions: _showActions,
-                mindIdsToChildren: null,
-              ),
-            ),
-          ),
-        ],
+      appBar: AppBar(title: Text(widget.emoji)),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 150),
+        controller: _scrollController,
+        child: MindMonologListWidget(
+          minds: emojiMinds,
+          onTap: _showMindInfo,
+          onOptions: _showActions,
+          mindIdsToChildren: null,
+        ),
       ),
     );
   }
@@ -105,20 +74,8 @@ final class _MindOneEmojiCollectionScreenState extends State<MindOneEmojiCollect
   @override
   void dispose() {
     cancelSubscriptions();
-
+    _scrollController.dispose();
     super.dispose();
-  }
-
-  void _resetMindCreator() {
-    setState(() {
-      _editableMind = null;
-      _createMindEditingController.text = '';
-      _hideKeyboard();
-    });
-  }
-
-  void _hideKeyboard() {
-    FocusScope.of(context).requestFocus(FocusNode());
   }
 
   void _showActions(Mind mind) {
@@ -126,17 +83,7 @@ final class _MindOneEmojiCollectionScreenState extends State<MindOneEmojiCollect
       context: context,
       builder: (context) => ActionsScreen(
         actions: [
-          (
-            ActionModel.edit(context),
-            () {
-              setState(() {
-                _editableMind = mind;
-                // _selectedEmoji = mind.emoji;
-              });
-              _createMindEditingController.text = mind.note;
-              _mindCreatorFocusNode.requestFocus();
-            },
-          ),
+          (ActionModel.edit(context), () => _showMindInfo(mind)),
           (
             ActionModel.switchDay(context),
             () async {

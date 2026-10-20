@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
@@ -90,8 +91,8 @@ void main() {
     expect(exportResult, isA<ExportSuccess>());
     final exportFile = (exportResult as ExportSuccess).file;
 
-    print('Exported ZIP file: ${exportFile.path}');
-    print('File size: ${await exportFile.length()} bytes');
+    debugPrint('Exported ZIP file: ${exportFile.path}');
+    debugPrint('File size: ${await exportFile.length()} bytes');
 
     // Try to extract using native unzip command
     final extractDir = Directory('${tempDir.path}/extracted');
@@ -103,9 +104,9 @@ void main() {
       workingDirectory: tempDir.path,
     );
 
-    print('unzip test stdout: ${unzipResult.stdout}');
-    print('unzip test stderr: ${unzipResult.stderr}');
-    print('unzip test exit code: ${unzipResult.exitCode}');
+    debugPrint('unzip test stdout: ${unzipResult.stdout}');
+    debugPrint('unzip test stderr: ${unzipResult.stderr}');
+    debugPrint('unzip test exit code: ${unzipResult.exitCode}');
 
     // Assert - unzip should succeed (exit code 0)
     expect(unzipResult.exitCode, 0, reason: 'Native unzip command should succeed');
@@ -117,9 +118,9 @@ void main() {
       workingDirectory: tempDir.path,
     );
 
-    print('unzip extract stdout: ${extractResult.stdout}');
-    print('unzip extract stderr: ${extractResult.stderr}');
-    print('unzip extract exit code: ${extractResult.exitCode}');
+    debugPrint('unzip extract stdout: ${extractResult.stdout}');
+    debugPrint('unzip extract stderr: ${extractResult.stderr}');
+    debugPrint('unzip extract exit code: ${extractResult.exitCode}');
 
     expect(extractResult.exitCode, 0, reason: 'Native unzip extraction should succeed');
 
@@ -160,8 +161,8 @@ void main() {
     expect(exportResult, isA<ExportSuccess>());
     final exportFile = (exportResult as ExportSuccess).file;
 
-    print('Exported ZIP file: ${exportFile.path}');
-    print('File size: ${await exportFile.length()} bytes');
+    debugPrint('Exported ZIP file: ${exportFile.path}');
+    debugPrint('File size: ${await exportFile.length()} bytes');
 
     // Try to extract using native unzip command
     final extractDir = Directory('${tempDir.path}/extracted');
@@ -173,9 +174,9 @@ void main() {
       workingDirectory: tempDir.path,
     );
 
-    print('unzip test stdout: ${unzipResult.stdout}');
-    print('unzip test stderr: ${unzipResult.stderr}');
-    print('unzip test exit code: ${unzipResult.exitCode}');
+    debugPrint('unzip test stdout: ${unzipResult.stdout}');
+    debugPrint('unzip test stderr: ${unzipResult.stderr}');
+    debugPrint('unzip test exit code: ${unzipResult.exitCode}');
 
     // Assert - unzip should succeed (exit code 0)
     expect(unzipResult.exitCode, 0, reason: 'Native unzip command should succeed');
@@ -187,9 +188,9 @@ void main() {
       workingDirectory: tempDir.path,
     );
 
-    print('unzip extract stdout: ${extractResult.stdout}');
-    print('unzip extract stderr: ${extractResult.stderr}');
-    print('unzip extract exit code: ${extractResult.exitCode}');
+    debugPrint('unzip extract stdout: ${extractResult.stdout}');
+    debugPrint('unzip extract stderr: ${extractResult.stderr}');
+    debugPrint('unzip extract exit code: ${extractResult.exitCode}');
 
     expect(extractResult.exitCode, 0, reason: 'Native unzip extraction should succeed');
 
@@ -234,7 +235,7 @@ void main() {
     expect(exportResult, isA<ExportSuccess>());
     final exportFile = (exportResult as ExportSuccess).file;
 
-    print('Exported ZIP file for ditto: ${exportFile.path}');
+    debugPrint('Exported ZIP file for ditto: ${exportFile.path}');
 
     // Try to extract using ditto (macOS Archive Utility backend)
     final extractDir = Directory('${tempDir.path}/ditto_extracted');
@@ -245,9 +246,9 @@ void main() {
       ['-x', '-k', exportFile.path, extractDir.path],
     );
 
-    print('ditto stdout: ${dittoResult.stdout}');
-    print('ditto stderr: ${dittoResult.stderr}');
-    print('ditto exit code: ${dittoResult.exitCode}');
+    debugPrint('ditto stdout: ${dittoResult.stdout}');
+    debugPrint('ditto stderr: ${dittoResult.stderr}');
+    debugPrint('ditto exit code: ${dittoResult.exitCode}');
 
     // Assert
     expect(dittoResult.exitCode, 0, reason: 'ditto (Archive Utility) should succeed');
