@@ -1,6 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:keklist/presentation/screens/date_gallery/folder_media_thumbnail.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_thumbnail.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';

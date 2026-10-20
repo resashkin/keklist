@@ -31,7 +31,6 @@ KeklistSettings _settings({
       dataSchemaVersion: 3,
       hasSeenLazyOnboarding: false,
       isDebugMenuVisible: false,
-      isPhotoVideoSourceEnabled: false,
       hasSeededEmotions: hasSeededEmotions,
     );
 

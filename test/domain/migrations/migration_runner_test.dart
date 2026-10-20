@@ -63,7 +63,6 @@ void main() {
         dataSchemaVersion: 0,
         hasSeenLazyOnboarding: false,
         isDebugMenuVisible: false,
-        isPhotoVideoSourceEnabled: false,
       ),
     );
     registerFallbackValue(KeklistThemeMode.system);
@@ -84,7 +83,6 @@ void main() {
           dataSchemaVersion: 3,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -107,7 +105,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -128,7 +125,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 

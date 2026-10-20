@@ -428,34 +428,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingMind6 => 'To create new note tap \'Write\'';
 
   @override
-  String get viewPhotos => 'View Photos';
-
-  @override
   String get noPhotosForDay => 'No photos found for this day';
-
-  @override
-  String get dateGallerySubtitle => 'Media files for this day';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count media files for this day';
-  }
-
-  @override
-  String get sources => 'Sources';
-
-  @override
-  String get sourcesMinds => 'Minds';
-
-  @override
-  String get sourcesMindsSubtitle => 'Your thoughts and moments';
-
-  @override
-  String get sourcesPhotoVideo => 'Photo & video';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Device photos and videos for this day';
 
   @override
   String get sourcesMediaFolder => 'Media Files';
@@ -466,12 +439,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'Media Files';
-
-  @override
-  String get mediaFolderNoPath => 'No folder selected';
-
-  @override
-  String get mediaFolderPickFolder => 'Pick Folder';
 
   @override
   String get licenses => 'Licenses';
@@ -493,10 +460,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get weatherSaveLocation => 'Save location';
-
-  @override
-  String get weatherNoLocation =>
-      'Set location in weather settings to see weather';
 
   @override
   String get weatherUseMyLocation => 'Use my location';
@@ -521,21 +484,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Location permission is permanently denied. Opening app settings.';
-
-  @override
-  String get weatherTemperature => 'Temperature';
-
-  @override
-  String get weatherUvIndex => 'UV Index';
-
-  @override
-  String get weatherHumidity => 'Humidity';
-
-  @override
-  String get weatherWindSpeed => 'Wind Speed';
-
-  @override
-  String get weatherPrecipitation => 'Precipitation';
 
   @override
   String get audioRecordTitle => 'Record audio';
@@ -633,12 +581,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Delete this emotion? It will be removed from any minds using it.';
-
-  @override
-  String get dayFeedShowAll => 'Show all';
-
-  @override
-  String get dayFeedShowSources => 'Show sources';
 
   @override
   String get dayFeedTileSettings => 'Tile settings';

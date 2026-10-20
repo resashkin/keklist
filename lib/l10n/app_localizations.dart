@@ -927,59 +927,11 @@ abstract class AppLocalizations {
   /// **'To create new note tap \'Write\''**
   String get onboardingMind6;
 
-  /// Button text to open gallery for Mind day
-  ///
-  /// In en, this message translates to:
-  /// **'View Photos'**
-  String get viewPhotos;
-
   /// Empty state message when day has no photos
   ///
   /// In en, this message translates to:
   /// **'No photos found for this day'**
   String get noPhotosForDay;
-
-  /// Date gallery screen subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Media files for this day'**
-  String get dateGallerySubtitle;
-
-  /// Subtitle showing count of media files for the day
-  ///
-  /// In en, this message translates to:
-  /// **'{count} media files for this day'**
-  String dayMediaFilesCount(int count);
-
-  /// Sources section title
-  ///
-  /// In en, this message translates to:
-  /// **'Sources'**
-  String get sources;
-
-  /// Minds source item title
-  ///
-  /// In en, this message translates to:
-  /// **'Minds'**
-  String get sourcesMinds;
-
-  /// Minds source item subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Your thoughts and moments'**
-  String get sourcesMindsSubtitle;
-
-  /// Photo and video source item title
-  ///
-  /// In en, this message translates to:
-  /// **'Photo & video'**
-  String get sourcesPhotoVideo;
-
-  /// Photo and video source item subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Device photos and videos for this day'**
-  String get sourcesPhotoVideoSubtitle;
 
   /// Media files source item title
   ///
@@ -998,18 +950,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Media Files'**
   String get mediaFolderSettings;
-
-  /// Message when no media folder is selected
-  ///
-  /// In en, this message translates to:
-  /// **'No folder selected'**
-  String get mediaFolderNoPath;
-
-  /// Button to pick a media folder
-  ///
-  /// In en, this message translates to:
-  /// **'Pick Folder'**
-  String get mediaFolderPickFolder;
 
   /// Licenses menu item
   ///
@@ -1053,12 +993,6 @@ abstract class AppLocalizations {
   /// **'Save location'**
   String get weatherSaveLocation;
 
-  /// Message shown when weather location is not configured
-  ///
-  /// In en, this message translates to:
-  /// **'Set location in weather settings to see weather'**
-  String get weatherNoLocation;
-
   /// Button to detect GPS location automatically
   ///
   /// In en, this message translates to:
@@ -1100,36 +1034,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location permission is permanently denied. Opening app settings.'**
   String get weatherLocationPermissionPermanentlyDenied;
-
-  /// Temperature parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'Temperature'**
-  String get weatherTemperature;
-
-  /// UV Index parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'UV Index'**
-  String get weatherUvIndex;
-
-  /// Humidity parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'Humidity'**
-  String get weatherHumidity;
-
-  /// Wind Speed parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'Wind Speed'**
-  String get weatherWindSpeed;
-
-  /// Precipitation parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'Precipitation'**
-  String get weatherPrecipitation;
 
   /// Title of the audio recorder bottom sheet
   ///
@@ -1310,18 +1214,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete this emotion? It will be removed from any minds using it.'**
   String get deleteEmotionMessage;
-
-  /// Day screen action that switches to the unified grid of minds and media
-  ///
-  /// In en, this message translates to:
-  /// **'Show all'**
-  String get dayFeedShowAll;
-
-  /// Day screen action that switches back to the source tiles
-  ///
-  /// In en, this message translates to:
-  /// **'Show sources'**
-  String get dayFeedShowSources;
 
   /// Unified day grid (All mode) label
   ///

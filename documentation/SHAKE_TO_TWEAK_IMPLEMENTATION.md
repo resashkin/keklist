@@ -8,7 +8,7 @@ Screens using it:
 
 | Screen | Shake / long-press title opens |
 |---|---|
-| Day (`MindDayCollectionScreen`) | `DayFeedSettingsBottomSheet` in All mode, `SourcesBottomSheet` in Sources mode |
+| Day (`MindDayCollectionScreen`) | `DayFeedSettingsBottomSheet` (tiles, weather, Android media folder) |
 | Settings (`SettingsScreen`) | `SettingsCustomizeBottomSheet`: checkboxes for every section and row |
 
 Until the user has used the gesture once on a screen, a "Shake to customize" toast with a shaking-phone icon appears on that screen, at most once per app launch.
@@ -45,7 +45,7 @@ The "+ Write" button label (`create` l10n key) is now "+ Create" in all language
   - `SettingsScreen` builds its sections as models once, renders `visibleExcept(hidden)`, and passes the full list to the customize sheet.
   - A section is hidden when its own id is hidden or when all of its rows are hidden.
   - Conditional rows (`pro` vs `proStatus`, `debugMenu`) appear in the sheet only when they would appear on the screen.
-- Day screen: the AppBar `tune` icon and the "Sources" text button are gone. The Sources/All toggle and the sensitive-content eye stay.
+- Day screen: the AppBar `tune` icon, the "Sources" text button and the Sources/All toggle are gone. Only the sensitive-content eye stays.
 
 ## How It Works
 

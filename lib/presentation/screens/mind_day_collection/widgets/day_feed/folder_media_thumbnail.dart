@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:keklist/native/android/media_folder_channel.dart';
-import 'package:keklist/presentation/screens/date_gallery/folder_media_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
 
 final class FolderMediaThumbnail extends StatefulWidget {
   final FolderMediaItem item;

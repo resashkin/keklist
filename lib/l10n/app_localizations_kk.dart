@@ -429,34 +429,7 @@ class AppLocalizationsKk extends AppLocalizations {
       'Жаңа жазба жасау үшін \'Жазу\' түймесін басыңыз';
 
   @override
-  String get viewPhotos => 'Фотосуреттерді қарау';
-
-  @override
   String get noPhotosForDay => 'Бұл күнге фотосуреттер табылмады';
-
-  @override
-  String get dateGallerySubtitle => 'Осы күнгі медиафайлдар';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count медиафайл осы күнге';
-  }
-
-  @override
-  String get sources => 'Дереккөздер';
-
-  @override
-  String get sourcesMinds => 'Ойлар';
-
-  @override
-  String get sourcesMindsSubtitle => 'Сіздің ойларыңыз бен сәттеріңіз';
-
-  @override
-  String get sourcesPhotoVideo => 'Фото және бейне';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Осы күнгі құрылғының фотолары мен бейнелері';
 
   @override
   String get sourcesMediaFolder => 'Медиа файлдар';
@@ -466,12 +439,6 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'Медиа файлдар';
-
-  @override
-  String get mediaFolderNoPath => 'Бума таңдалмаған';
-
-  @override
-  String get mediaFolderPickFolder => 'Буманы таңдау';
 
   @override
   String get licenses => 'Лицензиялар';
@@ -494,9 +461,6 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get weatherSaveLocation => 'Орынды сақтау';
-
-  @override
-  String get weatherNoLocation => 'Ауа райын көру үшін орынды орнатыңыз';
 
   @override
   String get weatherUseMyLocation => 'Менің орнымды пайдалану';
@@ -522,21 +486,6 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Геолокацияға рұқсат тұрақты түрде берілмеді. Қолданба параметрлері ашылуда.';
-
-  @override
-  String get weatherTemperature => 'Температура';
-
-  @override
-  String get weatherUvIndex => 'УК-индекс';
-
-  @override
-  String get weatherHumidity => 'Ылғалдылық';
-
-  @override
-  String get weatherWindSpeed => 'Жел жылдамдығы';
-
-  @override
-  String get weatherPrecipitation => 'Жауын-шашын';
 
   @override
   String get audioRecordTitle => 'Аудио жазу';
@@ -635,12 +584,6 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Бұл эмоцияны жою керек пе? Ол оны пайдаланатын барлық майндтардан жойылады.';
-
-  @override
-  String get dayFeedShowAll => 'Барлығын көрсету';
-
-  @override
-  String get dayFeedShowSources => 'Дереккөздерді көрсету';
 
   @override
   String get dayFeedTileSettings => 'Тақта баптаулары';

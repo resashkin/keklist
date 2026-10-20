@@ -544,46 +544,9 @@
     "@onboardingMind6": {
         "description": "Instruction to create new note"
     },
-    "viewPhotos": "View Photos",
-    "@viewPhotos": {
-        "description": "Button text to open gallery for Mind day"
-    },
     "noPhotosForDay": "No photos found for this day",
     "@noPhotosForDay": {
         "description": "Empty state message when day has no photos"
-    },
-    "dateGallerySubtitle": "Media files for this day",
-    "@dateGallerySubtitle": {
-        "description": "Date gallery screen subtitle"
-    },
-    "dayMediaFilesCount": "{count} media files for this day",
-    "@dayMediaFilesCount": {
-        "description": "Subtitle showing count of media files for the day",
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sources": "Sources",
-    "@sources": {
-        "description": "Sources section title"
-    },
-    "sourcesMinds": "Minds",
-    "@sourcesMinds": {
-        "description": "Minds source item title"
-    },
-    "sourcesMindsSubtitle": "Your thoughts and moments",
-    "@sourcesMindsSubtitle": {
-        "description": "Minds source item subtitle"
-    },
-    "sourcesPhotoVideo": "Photo & video",
-    "@sourcesPhotoVideo": {
-        "description": "Photo and video source item title"
-    },
-    "sourcesPhotoVideoSubtitle": "Device photos and videos for this day",
-    "@sourcesPhotoVideoSubtitle": {
-        "description": "Photo and video source item subtitle"
     },
     "sourcesMediaFolder": "Media Files",
     "@sourcesMediaFolder": {
@@ -596,14 +559,6 @@
     "mediaFolderSettings": "Media Files",
     "@mediaFolderSettings": {
         "description": "Media files settings bottom sheet title"
-    },
-    "mediaFolderNoPath": "No folder selected",
-    "@mediaFolderNoPath": {
-        "description": "Message when no media folder is selected"
-    },
-    "mediaFolderPickFolder": "Pick Folder",
-    "@mediaFolderPickFolder": {
-        "description": "Button to pick a media folder"
     },
     "licenses": "Licenses",
     "@licenses": {
@@ -633,10 +588,6 @@
     "@weatherSaveLocation": {
         "description": "Save location button"
     },
-    "weatherNoLocation": "Set location in weather settings to see weather",
-    "@weatherNoLocation": {
-        "description": "Message shown when weather location is not configured"
-    },
     "weatherUseMyLocation": "Use my location",
     "@weatherUseMyLocation": {
         "description": "Button to detect GPS location automatically"
@@ -664,26 +615,6 @@
     "weatherLocationPermissionPermanentlyDenied": "Location permission is permanently denied. Opening app settings.",
     "@weatherLocationPermissionPermanentlyDenied": {
         "description": "Error when location permission is permanently denied"
-    },
-    "weatherTemperature": "Temperature",
-    "@weatherTemperature": {
-        "description": "Temperature parameter label"
-    },
-    "weatherUvIndex": "UV Index",
-    "@weatherUvIndex": {
-        "description": "UV Index parameter label"
-    },
-    "weatherHumidity": "Humidity",
-    "@weatherHumidity": {
-        "description": "Humidity parameter label"
-    },
-    "weatherWindSpeed": "Wind Speed",
-    "@weatherWindSpeed": {
-        "description": "Wind Speed parameter label"
-    },
-    "weatherPrecipitation": "Precipitation",
-    "@weatherPrecipitation": {
-        "description": "Precipitation parameter label"
     },
     "audioRecordTitle": "Record audio",
     "@audioRecordTitle": {
@@ -805,14 +736,6 @@
     "deleteEmotionMessage": "Delete this emotion? It will be removed from any minds using it.",
     "@deleteEmotionMessage": {
         "description": "Confirmation when permanently deleting an emotion"
-    },
-    "dayFeedShowAll": "Show all",
-    "@dayFeedShowAll": {
-        "description": "Day screen action that switches to the unified grid of minds and media"
-    },
-    "dayFeedShowSources": "Show sources",
-    "@dayFeedShowSources": {
-        "description": "Day screen action that switches back to the source tiles"
     },
     "dayFeedTileSettings": "Tile settings",
     "@dayFeedTileSettings": {

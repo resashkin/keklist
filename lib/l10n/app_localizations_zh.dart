@@ -416,33 +416,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingMind6 => '要创建新笔记，请点击\'写入\'';
 
   @override
-  String get viewPhotos => '查看照片';
-
-  @override
   String get noPhotosForDay => '未找到当天的照片';
-
-  @override
-  String get dateGallerySubtitle => '本日的媒体文件';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count个媒体文件';
-  }
-
-  @override
-  String get sources => '来源';
-
-  @override
-  String get sourcesMinds => '想法';
-
-  @override
-  String get sourcesMindsSubtitle => '你的想法和时刻';
-
-  @override
-  String get sourcesPhotoVideo => '照片和视频';
-
-  @override
-  String get sourcesPhotoVideoSubtitle => '本日设备的照片和视频';
 
   @override
   String get sourcesMediaFolder => '媒体文件';
@@ -452,12 +426,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => '媒体文件';
-
-  @override
-  String get mediaFolderNoPath => '未选择文件夹';
-
-  @override
-  String get mediaFolderPickFolder => '选择文件夹';
 
   @override
   String get licenses => '许可证';
@@ -481,9 +449,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get weatherSaveLocation => '保存位置';
 
   @override
-  String get weatherNoLocation => '请在天气设置中设置位置';
-
-  @override
   String get weatherUseMyLocation => '使用我的位置';
 
   @override
@@ -504,21 +469,6 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       '位置权限被永久拒绝，正在打开应用设置。';
-
-  @override
-  String get weatherTemperature => '温度';
-
-  @override
-  String get weatherUvIndex => '紫外线指数';
-
-  @override
-  String get weatherHumidity => '湿度';
-
-  @override
-  String get weatherWindSpeed => '风速';
-
-  @override
-  String get weatherPrecipitation => '降水量';
 
   @override
   String get audioRecordTitle => '录制音频';
@@ -611,12 +561,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage => '删除此情绪？它将从所有使用它的 mind 中移除。';
-
-  @override
-  String get dayFeedShowAll => '显示全部';
-
-  @override
-  String get dayFeedShowSources => '显示来源';
 
   @override
   String get dayFeedTileSettings => '磁贴设置';

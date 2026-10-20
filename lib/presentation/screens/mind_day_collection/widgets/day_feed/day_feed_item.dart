@@ -1,5 +1,5 @@
 import 'package:keklist/domain/services/entities/mind.dart';
-import 'package:keklist/presentation/screens/date_gallery/folder_media_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 sealed class DayFeedItem {

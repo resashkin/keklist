@@ -78,11 +78,6 @@ final class SettingsEnableDebugMenu extends SettingsEvent {
   const SettingsEnableDebugMenu();
 }
 
-final class SettingsTogglePhotoVideoSource extends SettingsEvent {
-  final bool isEnabled;
-  const SettingsTogglePhotoVideoSource({required this.isEnabled});
-}
-
 final class SettingsToggleWeatherSource extends SettingsEvent {
   final bool isEnabled;
   const SettingsToggleWeatherSource({required this.isEnabled});
@@ -95,20 +90,17 @@ final class SettingsUpdateWeatherLocation extends SettingsEvent {
 }
 
 final class SettingsUpdateMediaFolderSource extends SettingsEvent {
-  final bool? isEnabled;
   final String? folderPath;
   final bool? isRecursive;
-  const SettingsUpdateMediaFolderSource({this.isEnabled, this.folderPath, this.isRecursive});
+  const SettingsUpdateMediaFolderSource({this.folderPath, this.isRecursive});
 }
 
 final class SettingsUpdateDayFeed extends SettingsEvent {
-  final bool? isEnabled;
   final int? columnCount;
   final int? mindCellSpan;
   final bool? isMindTextVisible;
   final bool? isAudioBadgeVisible;
   const SettingsUpdateDayFeed({
-    this.isEnabled,
     this.columnCount,
     this.mindCellSpan,
     this.isMindTextVisible,

@@ -419,33 +419,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get onboardingMind6 => '新しいメモを作成するには、\'書く\'をタップしてください';
 
   @override
-  String get viewPhotos => '写真を見る';
-
-  @override
   String get noPhotosForDay => 'この日の写真が見つかりません';
-
-  @override
-  String get dateGallerySubtitle => 'この日のメディアファイル';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count件のメディアファイル';
-  }
-
-  @override
-  String get sources => 'ソース';
-
-  @override
-  String get sourcesMinds => 'マインド';
-
-  @override
-  String get sourcesMindsSubtitle => 'あなたの思考と瞬間';
-
-  @override
-  String get sourcesPhotoVideo => '写真・動画';
-
-  @override
-  String get sourcesPhotoVideoSubtitle => 'この日のデバイスの写真と動画';
 
   @override
   String get sourcesMediaFolder => 'メディアファイル';
@@ -455,12 +429,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'メディアファイル';
-
-  @override
-  String get mediaFolderNoPath => 'フォルダが選択されていません';
-
-  @override
-  String get mediaFolderPickFolder => 'フォルダを選択';
 
   @override
   String get licenses => 'ライセンス';
@@ -484,9 +452,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get weatherSaveLocation => '場所を保存';
 
   @override
-  String get weatherNoLocation => '天気設定で場所を設定してください';
-
-  @override
   String get weatherUseMyLocation => '現在地を使用';
 
   @override
@@ -507,21 +472,6 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       '位置情報の許可が恒久的に拒否されています。アプリ設定を開きます。';
-
-  @override
-  String get weatherTemperature => '気温';
-
-  @override
-  String get weatherUvIndex => 'UV指数';
-
-  @override
-  String get weatherHumidity => '湿度';
-
-  @override
-  String get weatherWindSpeed => '風速';
-
-  @override
-  String get weatherPrecipitation => '降水量';
 
   @override
   String get audioRecordTitle => '音声を録音';
@@ -615,12 +565,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage => 'この感情を削除しますか？使用しているすべてのマインドから削除されます。';
-
-  @override
-  String get dayFeedShowAll => 'すべて表示';
-
-  @override
-  String get dayFeedShowSources => 'ソースを表示';
 
   @override
   String get dayFeedTileSettings => 'タイル設定';

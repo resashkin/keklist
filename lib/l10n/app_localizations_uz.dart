@@ -430,34 +430,7 @@ class AppLocalizationsUz extends AppLocalizations {
       'Yangi yozuv yaratish uchun \'Yozish\' tugmasini bosing';
 
   @override
-  String get viewPhotos => 'Rasmlarni ko\'rish';
-
-  @override
   String get noPhotosForDay => 'Bu kun uchun rasmlar topilmadi';
-
-  @override
-  String get dateGallerySubtitle => 'Ushbu kunning media fayllari';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count ta media fayl shu kun uchun';
-  }
-
-  @override
-  String get sources => 'Manbalar';
-
-  @override
-  String get sourcesMinds => 'Fikrlar';
-
-  @override
-  String get sourcesMindsSubtitle => 'Sizning fikr va lahzalaringiz';
-
-  @override
-  String get sourcesPhotoVideo => 'Foto va video';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Ushbu kun uchun qurilma foto va videolari';
 
   @override
   String get sourcesMediaFolder => 'Media fayllar';
@@ -468,12 +441,6 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'Media fayllar';
-
-  @override
-  String get mediaFolderNoPath => 'Papka tanlanmagan';
-
-  @override
-  String get mediaFolderPickFolder => 'Papkani tanlash';
 
   @override
   String get licenses => 'Litsenziyalar';
@@ -498,10 +465,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get weatherSaveLocation => 'Joylashuvni saqlash';
 
   @override
-  String get weatherNoLocation =>
-      'Ob-havoni ko\'rish uchun joylashuvni sozlang';
-
-  @override
   String get weatherUseMyLocation => 'Mening joylashuvimdan foydalanish';
 
   @override
@@ -524,21 +487,6 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Joylashuv ruxsati doimiy ravishda rad etildi. Ilova sozlamalari ochilmoqda.';
-
-  @override
-  String get weatherTemperature => 'Harorat';
-
-  @override
-  String get weatherUvIndex => 'UV indeks';
-
-  @override
-  String get weatherHumidity => 'Namlik';
-
-  @override
-  String get weatherWindSpeed => 'Shamol tezligi';
-
-  @override
-  String get weatherPrecipitation => 'Yog\'ingarchilik';
 
   @override
   String get audioRecordTitle => 'Audio yozish';
@@ -637,12 +585,6 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Bu hissiyotni o\'chirasizmi? U undan foydalanadigan barcha maindlardan olib tashlanadi.';
-
-  @override
-  String get dayFeedShowAll => 'Hammasini ko‘rsatish';
-
-  @override
-  String get dayFeedShowSources => 'Manbalarni ko‘rsatish';
 
   @override
   String get dayFeedTileSettings => 'Plitka sozlamalari';
