@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/domain/constants.dart';
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/domain/services/export_import/models/import_result.dart';
@@ -141,18 +142,31 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
       appBar: AppBar(
         title: GestureDetector(onTap: _handleAppBarTap, onLongPress: requestTweak, child: Text(context.l10n.settings)),
       ),
-      body: SettingsListView(
-        children: [
-          for (final SettingsSectionModel section in _buildSections(context).visibleExcept(_hiddenItemIds)) ...[
-            SettingsSectionHeader(section.title.toUpperCase()),
-            SettingsSectionCard(children: [for (final SettingsRowModel row in section.rows) row.tile]),
+      body: StreamBuilder<GalleryIndexProgress>(
+        stream: context.read<GalleryIndexer>().progress,
+        builder: (context, snapshot) => SettingsListView(
+          children: [
+            for (final SettingsSectionModel section in _buildSections(
+              context,
+              isIndexing: snapshot.data?.status == GalleryIndexStatus.indexing,
+            ).visibleExcept(_hiddenItemIds)) ...[
+              SettingsSectionHeader(section.title.toUpperCase()),
+              SettingsSectionCard(children: [for (final SettingsRowModel row in section.rows) row.tile]),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
 
-  List<SettingsSectionModel> _buildSections(BuildContext context) => [
+  /// Running jobs get their own section on top while they run; it is never customizable.
+  List<SettingsSectionModel> _buildSections(BuildContext context, {bool isIndexing = false}) => [
+    if (isIndexing)
+      SettingsSectionModel(
+        id: SettingsItemIds.activeTasksSection,
+        title: context.l10n.activeTasks,
+        rows: [_galleryIndexRow(context)],
+      ),
     SettingsSectionModel(
       id: SettingsItemIds.userDataSection,
       title: context.l10n.userData,
@@ -171,12 +185,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
           hasChevron: false,
           onTap: () => _handleImport(),
         ),
-        if (GalleryIndexTile.isAvailable(context))
-          SettingsRowModel(
-            id: SettingsItemIds.galleryIndex,
-            title: context.l10n.galleryIndex,
-            tile: const GalleryIndexTile(),
-          ),
+        if (!isIndexing && GalleryIndexTile.isAvailable(context)) _galleryIndexRow(context),
       ],
     ),
     SettingsSectionModel(
@@ -293,6 +302,12 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
       ],
     ),
   ];
+
+  SettingsRowModel _galleryIndexRow(BuildContext context) => SettingsRowModel(
+    id: SettingsItemIds.galleryIndex,
+    title: context.l10n.galleryIndex,
+    tile: const GalleryIndexTile(),
+  );
 
   SettingsRowModel _navigationRow({
     required String id,

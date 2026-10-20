@@ -9,6 +9,9 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
+  String get activeTasks => 'Tareas activas';
+
+  @override
   String get galleryIndex => 'Índice de la galería';
 
   @override

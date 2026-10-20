@@ -9,6 +9,9 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get activeTasks => '进行中的任务';
+
+  @override
   String get galleryIndex => '图库索引';
 
   @override

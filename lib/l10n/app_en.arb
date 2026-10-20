@@ -1,4 +1,8 @@
 {
+    "activeTasks": "Active tasks",
+    "@activeTasks": {
+        "description": "Settings section shown on top while a background job runs"
+    },
     "galleryIndex": "Gallery index",
     "@galleryIndex": {
         "description": "Settings row for the photo library index"

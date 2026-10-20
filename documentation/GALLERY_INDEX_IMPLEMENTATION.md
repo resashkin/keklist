@@ -29,7 +29,7 @@ Phase 2 of the main-emoji/analytics work. The index is also the data source for 
 - `GalleryThumbnailCache`: 240 px JPEG (quality 70) per asset in `<app support>/gallery_thumbnails`, named by asset id and modification second, so edited photos get a fresh file.
 - `CachedAssetThumbnailProvider`: an `ImageProvider` over the cache, equal per asset version, so Flutter's memory cache dedupes it too. Used by `DayFeedAssetTile`.
 - Stories show the cached thumbnail immediately and fade the original in on top.
-- Settings → User data → "Gallery index" (`GalleryIndexTile`): status, a progress bar while indexing, the thumbnail cache size. Tap → confirm → clear thumbnails and rebuild. Hidden where the index is unsupported. The row can be hidden through the settings customize sheet like any other.
+- Settings → "Gallery index" (`GalleryIndexTile`): status, a progress bar while indexing, the thumbnail cache size. While a scan runs the row moves into an "Active tasks" section at the very top (shown only then, not customizable); otherwise it lives under User data. Tap → confirm → clear thumbnails and rebuild. Hidden where the index is unsupported. The row can be hidden through the settings customize sheet like any other.
 
 ## How It Works
 1. App starts → `sync()`. No access → status `noAccess`, nothing else happens.

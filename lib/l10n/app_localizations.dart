@@ -117,6 +117,12 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// Settings section shown on top while a background job runs
+  ///
+  /// In en, this message translates to:
+  /// **'Active tasks'**
+  String get activeTasks;
+
   /// Settings row for the photo library index
   ///
   /// In en, this message translates to:

@@ -9,6 +9,9 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get activeTasks => '実行中のタスク';
+
+  @override
   String get galleryIndex => 'ギャラリーのインデックス';
 
   @override

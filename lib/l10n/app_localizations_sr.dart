@@ -9,6 +9,9 @@ class AppLocalizationsSr extends AppLocalizations {
   AppLocalizationsSr([String locale = 'sr']) : super(locale);
 
   @override
+  String get activeTasks => 'Активни задаци';
+
+  @override
   String get galleryIndex => 'Индекс галерије';
 
   @override
@@ -682,6 +685,9 @@ class AppLocalizationsSr extends AppLocalizations {
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
 class AppLocalizationsSrLatn extends AppLocalizationsSr {
   AppLocalizationsSrLatn() : super('sr_Latn');
+
+  @override
+  String get activeTasks => 'Aktivni zadaci';
 
   @override
   String get galleryIndex => 'Indeks galerije';

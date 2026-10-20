@@ -1,4 +1,5 @@
 {
+    "activeTasks": "実行中のタスク",
     "galleryIndex": "ギャラリーのインデックス",
     "galleryIndexNoAccess": "写真へのアクセスがありません",
     "galleryIndexNotIndexed": "まだインデックスされていません",
