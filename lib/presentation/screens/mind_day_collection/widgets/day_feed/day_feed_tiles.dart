@@ -84,6 +84,15 @@ final class DayFeedMindTile extends StatelessWidget {
             ),
             if (mediaCircle != null && mediaDuration != null)
               Positioned(bottom: 4, right: 4, child: _VideoBadge(seconds: mediaDuration.inSeconds)),
+            // Minds matter more than gallery media, so they are framed to stand out next to photos.
+            IgnorePointer(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(_kTileRadius),
+                  border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.25), width: 1.5),
+                ),
+              ),
+            ),
           ],
         ),
       ),
