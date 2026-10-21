@@ -497,5 +497,9 @@
     "shakeToCustomize": "Баптау үшін сілкіңіз",
     "shakeToCustomizeHint": "немесе тақырыпты басып тұрыңыз",
     "customizeSettings": "Баптауларды реттеу",
-    "customizeSettingsDescription": "Белгісі алынған бөлімдер мен жолдар баптаулар экранында жасырылады."
+    "customizeSettingsDescription": "Белгісі алынған бөлімдер мен жолдар баптаулар экранында жасырылады.",
+    "calendarSettings": "Күнтізбе баптаулары",
+    "calendarShowMedia": "Фото мен бейнені көрсету",
+    "calendarWeekTitles": "Апта тақырыптары",
+    "calendarHideEmptyDays": "Бос күндерді жасыру"
 }

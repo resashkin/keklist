@@ -94,6 +94,18 @@ final class SettingsObject extends HiveObject {
   @HiveField(30, defaultValue: 1)
   late int insightsPeriodIndex;
 
+  @HiveField(31, defaultValue: 4)
+  late int calendarColumnCount;
+
+  @HiveField(32, defaultValue: true)
+  late bool isCalendarMindTextVisible;
+
+  @HiveField(33, defaultValue: true)
+  late bool isCalendarMediaVisible;
+
+  @HiveField(34, defaultValue: false)
+  late bool calendarHidesEmptyDays;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -125,6 +137,12 @@ final class SettingsObject extends HiveObject {
           widgetOrder: insightsWidgetOrder,
           hiddenWidgetIds: hiddenInsightsWidgetIds.toSet(),
           periodIndex: insightsPeriodIndex,
+        ),
+        calendar: CalendarSettings(
+          columnCount: calendarColumnCount,
+          isMindTextVisible: isCalendarMindTextVisible,
+          isMediaVisible: isCalendarMediaVisible,
+          hidesEmptyDays: calendarHidesEmptyDays,
         ),
       );
 }

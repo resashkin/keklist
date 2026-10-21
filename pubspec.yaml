@@ -58,7 +58,6 @@ dependencies:
   collection: ^1.18.0
   translator: ^1.0.0
   auto_size_text: ^3.0.0
-  scrollview_observer: ^1.27.0
   streaming_shared_preferences: ^2.0.0
   json_serializable: ^6.13.1
   json_annotation: ^4.12.0

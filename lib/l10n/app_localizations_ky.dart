@@ -846,4 +846,16 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Белгиси алынган бөлүмдөр жана саптар жөндөөлөр экранында жашырылат.';
+
+  @override
+  String get calendarSettings => 'Календардын жөндөөлөрү';
+
+  @override
+  String get calendarShowMedia => 'Сүрөт жана видеолорду көрсөтүү';
+
+  @override
+  String get calendarWeekTitles => 'Жуманын аталыштары';
+
+  @override
+  String get calendarHideEmptyDays => 'Бош күндөрдү жашыруу';
 }

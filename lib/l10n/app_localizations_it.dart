@@ -851,4 +851,16 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Le sezioni e le righe deselezionate vengono nascoste nelle Impostazioni.';
+
+  @override
+  String get calendarSettings => 'Impostazioni calendario';
+
+  @override
+  String get calendarShowMedia => 'Mostra foto e video';
+
+  @override
+  String get calendarWeekTitles => 'Titoli delle settimane';
+
+  @override
+  String get calendarHideEmptyDays => 'Nascondi giorni vuoti';
 }

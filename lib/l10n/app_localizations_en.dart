@@ -840,4 +840,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Unchecked sections and rows are hidden from the Settings screen.';
+
+  @override
+  String get calendarSettings => 'Calendar settings';
+
+  @override
+  String get calendarShowMedia => 'Show photos and videos';
+
+  @override
+  String get calendarWeekTitles => 'Week titles';
+
+  @override
+  String get calendarHideEmptyDays => 'Hide empty days';
 }

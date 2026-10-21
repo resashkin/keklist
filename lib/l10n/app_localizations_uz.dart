@@ -847,4 +847,16 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Belgisi olib tashlangan bo‘lim va qatorlar Sozlamalar ekranida yashiriladi.';
+
+  @override
+  String get calendarSettings => 'Kalendar sozlamalari';
+
+  @override
+  String get calendarShowMedia => 'Foto va videolarni ko‘rsatish';
+
+  @override
+  String get calendarWeekTitles => 'Hafta sarlavhalari';
+
+  @override
+  String get calendarHideEmptyDays => 'Bo‘sh kunlarni yashirish';
 }

@@ -111,6 +111,11 @@ final class SettingsUpdateInsights extends SettingsEvent {
   const SettingsUpdateInsights({required this.insights});
 }
 
+final class SettingsUpdateCalendar extends SettingsEvent {
+  final CalendarSettings calendar;
+  const SettingsUpdateCalendar({required this.calendar});
+}
+
 final class SettingsMarkShakeDiscovered extends SettingsEvent {
   final String screenId;
   const SettingsMarkShakeDiscovered({required this.screenId});

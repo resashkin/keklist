@@ -20,9 +20,7 @@ class MediaDayIndexObjectAdapter extends TypeAdapter<MediaDayIndexObject> {
       ..dayIndex = (fields[0] as num).toInt()
       ..photoCount = (fields[1] as num).toInt()
       ..videoCount = (fields[2] as num).toInt()
-      ..previewIds = fields[3] == null
-          ? []
-          : (fields[3] as List).cast<String>();
+      ..assetRecords = fields[4] == null ? '' : fields[4] as String;
   }
 
   @override
@@ -35,8 +33,8 @@ class MediaDayIndexObjectAdapter extends TypeAdapter<MediaDayIndexObject> {
       ..write(obj.photoCount)
       ..writeByte(2)
       ..write(obj.videoCount)
-      ..writeByte(3)
-      ..write(obj.previewIds);
+      ..writeByte(4)
+      ..write(obj.assetRecords);
   }
 
   @override

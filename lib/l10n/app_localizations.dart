@@ -1688,6 +1688,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unchecked sections and rows are hidden from the Settings screen.'**
   String get customizeSettingsDescription;
+
+  /// Calendar shake sheet title
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar settings'**
+  String get calendarSettings;
+
+  /// Calendar setting: show gallery media in day grids
+  ///
+  /// In en, this message translates to:
+  /// **'Show photos and videos'**
+  String get calendarShowMedia;
+
+  /// Calendar setting: show week number headers
+  ///
+  /// In en, this message translates to:
+  /// **'Week titles'**
+  String get calendarWeekTitles;
+
+  /// Calendar setting: hide days without minds or media
+  ///
+  /// In en, this message translates to:
+  /// **'Hide empty days'**
+  String get calendarHideEmptyDays;
 }
 
 class _AppLocalizationsDelegate

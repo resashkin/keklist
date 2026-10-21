@@ -1,7 +1,7 @@
 import 'package:keklist/domain/services/media_index/media_day_index.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 
-/// Folds assets into per-day [MediaDayIndex] entries; previews keep the newest ids.
+/// Folds assets into per-day [MediaDayIndex] entries; duplicates by id count once.
 final class MediaDayIndexBuilder {
   final Map<int, List<GalleryAssetInfo>> _assetsByDay = {};
 
@@ -19,14 +19,14 @@ final class MediaDayIndexBuilder {
     final List<GalleryAssetInfo>? assets = _assetsByDay[dayIndex];
     if (assets == null || assets.isEmpty) return null;
     final Map<String, GalleryAssetInfo> unique = {for (final GalleryAssetInfo asset in assets) asset.id: asset};
-    final List<GalleryAssetInfo> newestFirst = unique.values.toList()
-      ..sort((a, b) => b.createDate.compareTo(a.createDate));
-    final int videoCount = newestFirst.where((asset) => asset.isVideo).length;
+    final List<GalleryAssetInfo> oldestFirst = unique.values.toList()
+      ..sort((a, b) => a.createDate.compareTo(b.createDate));
+    final int videoCount = oldestFirst.where((asset) => asset.isVideo).length;
     return MediaDayIndex(
       dayIndex: dayIndex,
-      photoCount: newestFirst.length - videoCount,
+      photoCount: oldestFirst.length - videoCount,
       videoCount: videoCount,
-      previewIds: newestFirst.take(MediaDayIndex.maxPreviewIds).map((asset) => asset.id).toList(),
+      assets: oldestFirst,
     );
   }
 }

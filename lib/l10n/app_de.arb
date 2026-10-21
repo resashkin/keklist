@@ -260,5 +260,9 @@
     "shakeToCustomize": "Schütteln zum Anpassen",
     "shakeToCustomizeHint": "oder Titel lange drücken",
     "customizeSettings": "Einstellungen anpassen",
-    "customizeSettingsDescription": "Abgewählte Bereiche und Zeilen werden in den Einstellungen ausgeblendet."
+    "customizeSettingsDescription": "Abgewählte Bereiche und Zeilen werden in den Einstellungen ausgeblendet.",
+    "calendarSettings": "Kalendereinstellungen",
+    "calendarShowMedia": "Fotos und Videos anzeigen",
+    "calendarWeekTitles": "Wochentitel",
+    "calendarHideEmptyDays": "Leere Tage ausblenden"
 }

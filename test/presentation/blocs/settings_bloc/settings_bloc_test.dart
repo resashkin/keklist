@@ -98,4 +98,18 @@ void main() {
       expect(updated.userName, 'kek');
     });
   });
+
+  group('SettingsUpdateCalendar', () {
+    test('stores the calendar settings and keeps every other field', () async {
+      const CalendarSettings calendar = CalendarSettings(columnCount: 5, isMediaVisible: false, hidesEmptyDays: true);
+      bloc.add(const SettingsUpdateCalendar(calendar: calendar));
+      await Future.delayed(const Duration(milliseconds: 50));
+
+      final updated =
+          verify(() => mockSettingsRepository.updateSettings(captureAny())).captured.single as KeklistSettings;
+      expect(updated.calendar, same(calendar));
+      expect(updated.insights, same(currentSettings.insights));
+      expect(updated.userName, 'kek');
+    });
+  });
 }

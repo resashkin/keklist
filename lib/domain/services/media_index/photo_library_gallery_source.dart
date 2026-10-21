@@ -38,8 +38,26 @@ final class PhotoLibraryGallerySource implements GallerySource {
     return count == 0 ? const [] : path.getAssetListRange(start: 0, end: count);
   }
 
-  static GalleryAssetInfo infoOf(AssetEntity asset) =>
-      GalleryAssetInfo(id: asset.id, createDate: asset.createDateTime, isVideo: asset.type == AssetType.video);
+  static GalleryAssetInfo infoOf(AssetEntity asset) => GalleryAssetInfo(
+    id: asset.id,
+    createDate: asset.createDateTime,
+    modifiedDate: asset.modifiedDateTime,
+    isVideo: asset.type == AssetType.video,
+    width: asset.width,
+    height: asset.height,
+    durationSeconds: asset.duration,
+  );
+
+  /// Rebuilds a usable entity from the index, so thumbnails and stories work without a library query.
+  static AssetEntity entityOf(GalleryAssetInfo info) => AssetEntity(
+    id: info.id,
+    typeInt: (info.isVideo ? AssetType.video : AssetType.image).index,
+    width: info.width,
+    height: info.height,
+    duration: info.durationSeconds,
+    createDateSecond: info.createDate.millisecondsSinceEpoch ~/ 1000,
+    modifiedDateSecond: info.modifiedDate.millisecondsSinceEpoch ~/ 1000,
+  );
 
   @override
   bool get isSupported => Platform.isIOS;

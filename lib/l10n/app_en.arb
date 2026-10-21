@@ -23,21 +23,27 @@
     "@insightsVsLastWeek": {
         "description": "Analytics screen",
         "placeholders": {
-            "delta": { "type": "String" }
+            "delta": {
+                "type": "String"
+            }
         }
     },
     "insightsVsLastMonth": "{delta} vs last month",
     "@insightsVsLastMonth": {
         "description": "Analytics screen",
         "placeholders": {
-            "delta": { "type": "String" }
+            "delta": {
+                "type": "String"
+            }
         }
     },
     "insightsVsLastYear": "{delta} vs last year",
     "@insightsVsLastYear": {
         "description": "Analytics screen",
         "placeholders": {
-            "delta": { "type": "String" }
+            "delta": {
+                "type": "String"
+            }
         }
     },
     "insightsCategorySummary": "Summary",
@@ -96,9 +102,15 @@
     "@insightsBrightestDetails": {
         "description": "Analytics screen",
         "placeholders": {
-            "minds": { "type": "String" },
-            "emotions": { "type": "String" },
-            "media": { "type": "String" }
+            "minds": {
+                "type": "String"
+            },
+            "emotions": {
+                "type": "String"
+            },
+            "media": {
+                "type": "String"
+            }
         }
     },
     "insightsEmotionDistribution": "Emotions",
@@ -153,7 +165,9 @@
     "@insightsLongestStreak": {
         "description": "Analytics screen",
         "placeholders": {
-            "count": { "type": "String" }
+            "count": {
+                "type": "String"
+            }
         }
     },
     "insightsStreakKeepGoing": "Add a mind today to keep it going",
@@ -172,7 +186,9 @@
     "@insightsPeakHour": {
         "description": "Analytics screen",
         "placeholders": {
-            "hour": { "type": "String" }
+            "hour": {
+                "type": "String"
+            }
         }
     },
     "insightsOnThisDay": "On this day",
@@ -255,23 +271,33 @@
     "@galleryIndexIndexing": {
         "description": "Gallery index subtitle while scanning",
         "placeholders": {
-            "done": { "type": "String" },
-            "total": { "type": "String" }
+            "done": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
         }
     },
     "galleryIndexReady": "{count} photos and videos · updated {time}",
     "@galleryIndexReady": {
         "description": "Gallery index subtitle after a scan",
         "placeholders": {
-            "count": { "type": "String" },
-            "time": { "type": "String" }
+            "count": {
+                "type": "String"
+            },
+            "time": {
+                "type": "String"
+            }
         }
     },
     "galleryIndexThumbnails": "Thumbnail cache: {size}",
     "@galleryIndexThumbnails": {
         "description": "Size of the on-disk thumbnail cache",
         "placeholders": {
-            "size": { "type": "String" }
+            "size": {
+                "type": "String"
+            }
         }
     },
     "galleryIndexRebuildTitle": "Rebuild the gallery index?",
@@ -914,8 +940,12 @@
     "@proUserFooter": {
         "description": "Footer in APPLICATION settings section when user has active PRO subscription",
         "placeholders": {
-            "price": { "type": "String" },
-            "date": { "type": "String" }
+            "price": {
+                "type": "String"
+            },
+            "date": {
+                "type": "String"
+            }
         }
     },
     "emotions": "Emotions",
@@ -1078,5 +1108,21 @@
     "customizeSettingsDescription": "Unchecked sections and rows are hidden from the Settings screen.",
     "@customizeSettingsDescription": {
         "description": "Shake-to-customize: customizeSettingsDescription"
+    },
+    "calendarSettings": "Calendar settings",
+    "@calendarSettings": {
+        "description": "Calendar shake sheet title"
+    },
+    "calendarShowMedia": "Show photos and videos",
+    "@calendarShowMedia": {
+        "description": "Calendar setting: show gallery media in day grids"
+    },
+    "calendarWeekTitles": "Week titles",
+    "@calendarWeekTitles": {
+        "description": "Calendar setting: show week number headers"
+    },
+    "calendarHideEmptyDays": "Hide empty days",
+    "@calendarHideEmptyDays": {
+        "description": "Calendar setting: hide days without minds or media"
     }
 }

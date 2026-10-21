@@ -8,12 +8,16 @@ Phase 2 of the main-emoji/analytics work. The index is also the data source for 
 ## Implementation Details
 
 ### 1. Domain Layer
-- `MediaDayIndex` (`lib/domain/services/media_index/media_day_index.dart`): `dayIndex`, `photoCount`, `videoCount`, `previewIds` (the 8 newest asset ids). `MediaIndexMeta`: `isComplete`, `libraryCount`, `lastScanDate`.
+- `MediaDayIndex` (`lib/domain/services/media_index/media_day_index.dart`): `dayIndex`, `photoCount`, `videoCount`, `assets` (every asset of the day, oldest first). `MediaIndexMeta`: `isComplete`, `libraryCount`, `lastScanDate`.
+- `GalleryAssetInfo` keeps what a tile needs: id, create/modify dates, video flag, size, duration. `PhotoLibraryGallerySource.entityOf` turns it back into an `AssetEntity`, so the calendar shows thumbnails and stories without querying Photos.
 - `MediaDayIndexBuilder`: folds `GalleryAssetInfo` into per-day entries; duplicates by id are counted once.
 - `MediaIndexRepository` / `MediaIndexHiveRepository`:
   - `media_day_index_box` (typed, `MediaDayIndexObject`, typeId 5), keyed by `dayIndex`;
   - `media_index_meta_box` (untyped) for the meta.
   - Both encrypted like the other boxes.
+  - A day's assets are stored as one string (`assetRecords`, field 4; field 3 with preview ids is retired) and decoded only when that day is read. Thousands of small Hive objects made box opening slow.
+  - The boxes open in the background (`ready`); until then the index reads as empty, so app start never waits for it.
+  - `formatVersion` in the meta box: an index written in an older format counts as incomplete, so the next `sync()` rebuilds it.
 - `GallerySource` abstracts the library; `PhotoLibraryGallerySource` reads only the "All" album with `photo_manager`, so an asset that is in several albums is seen once.
 - `GalleryIndexer` (singleton in `MainContainer`, also provided via `RepositoryProvider`):
   - `sync()` — first time a full paged scan (500 per page); afterwards only the days of assets modified since the last scan are recounted.
@@ -54,3 +58,4 @@ Phase 2 of the main-emoji/analytics work. The index is also the data source for 
 - An old-dated photo imported after the last scan stays hidden on its (known-empty) day until the next `sync()` (next launch or resume).
 - The thumbnail folder grows with the photos you actually look at (~15 KB each); "Rebuild" clears it.
 - An interrupted full scan leaves `isComplete == false`, so the next `sync()` starts over.
+- Startup: the gallery index box is no longer part of "Opening database..."; the calendar and the day screen pick the index up when `sync()` finishes.
