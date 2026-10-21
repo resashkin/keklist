@@ -497,5 +497,9 @@
     "shakeToCustomize": "Agita para personalizar",
     "shakeToCustomizeHint": "o mantén pulsado el título",
     "customizeSettings": "Personalizar ajustes",
-    "customizeSettingsDescription": "Las secciones y filas desmarcadas se ocultan en Ajustes."
+    "customizeSettingsDescription": "Las secciones y filas desmarcadas se ocultan en Ajustes.",
+    "calendarSettings": "Ajustes del calendario",
+    "calendarShowMedia": "Mostrar fotos y vídeos",
+    "calendarWeekTitles": "Títulos de semana",
+    "calendarHideEmptyDays": "Ocultar días vacíos"
 }

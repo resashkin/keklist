@@ -60,13 +60,23 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
           : (fields[29] as List).cast<String>()
       ..insightsPeriodIndex = fields[30] == null
           ? 1
-          : (fields[30] as num).toInt();
+          : (fields[30] as num).toInt()
+      ..calendarColumnCount = fields[31] == null
+          ? 4
+          : (fields[31] as num).toInt()
+      ..isCalendarMindTextVisible = fields[32] == null
+          ? true
+          : fields[32] as bool
+      ..isCalendarMediaVisible = fields[33] == null ? true : fields[33] as bool
+      ..calendarHidesEmptyDays = fields[34] == null
+          ? false
+          : fields[34] as bool;
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(24)
+      ..writeByte(28)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)
@@ -114,7 +124,15 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(29)
       ..write(obj.hiddenInsightsWidgetIds)
       ..writeByte(30)
-      ..write(obj.insightsPeriodIndex);
+      ..write(obj.insightsPeriodIndex)
+      ..writeByte(31)
+      ..write(obj.calendarColumnCount)
+      ..writeByte(32)
+      ..write(obj.isCalendarMindTextVisible)
+      ..writeByte(33)
+      ..write(obj.isCalendarMediaVisible)
+      ..writeByte(34)
+      ..write(obj.calendarHidesEmptyDays);
   }
 
   @override

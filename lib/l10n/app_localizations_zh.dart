@@ -814,4 +814,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get customizeSettingsDescription => '取消勾选的分区和行将在设置页面中隐藏。';
+
+  @override
+  String get calendarSettings => '日历设置';
+
+  @override
+  String get calendarShowMedia => '显示照片和视频';
+
+  @override
+  String get calendarWeekTitles => '周标题';
+
+  @override
+  String get calendarHideEmptyDays => '隐藏空白日';
 }

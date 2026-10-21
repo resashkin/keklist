@@ -97,7 +97,7 @@ final class _AppRootState extends State<_AppRoot> {
 
     _stepNotifier.value = 'Finishing up...';
     final streamingPrefs = await StreamingSharedPreferences.instance;
-    final injector = MainContainer(streamingSharedPreferences: streamingPrefs).initialize(Injector());
+    final injector = MainContainer(streamingSharedPreferences: streamingPrefs, hiveCipher: cipher).initialize(Injector());
 
     _enableDebugBLOCLogs(injector);
 
@@ -256,8 +256,6 @@ Future<void> _initHive(HiveAesCipher cipher) async {
   await Hive.openBox<DebugMenuObject>(HiveConstants.debugMenuBoxName, encryptionCipher: cipher);
   await Hive.openBox<WeatherCacheObject>(HiveConstants.weatherCacheBoxName, encryptionCipher: cipher);
   await Hive.openBox(HiveConstants.blocLogSettingsBoxName);
-  await Hive.openBox<MediaDayIndexObject>(HiveConstants.mediaDayIndexBoxName, encryptionCipher: cipher);
-  await Hive.openBox(HiveConstants.mediaIndexMetaBoxName, encryptionCipher: cipher);
 
   final Box<EmotionObject> emotionBox =
       await Hive.openBox<EmotionObject>(HiveConstants.emotionBoxName, encryptionCipher: cipher);

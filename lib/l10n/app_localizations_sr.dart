@@ -844,6 +844,18 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Неозначени одељци и редови се скривају са екрана подешавања.';
+
+  @override
+  String get calendarSettings => 'Подешавања календара';
+
+  @override
+  String get calendarShowMedia => 'Прикажи фотографије и видео записе';
+
+  @override
+  String get calendarWeekTitles => 'Наслови недеља';
+
+  @override
+  String get calendarHideEmptyDays => 'Сакриј празне дане';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1685,4 +1697,16 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get customizeSettingsDescription =>
       'Neoznačeni odeljci i redovi se skrivaju sa ekrana podešavanja.';
+
+  @override
+  String get calendarSettings => 'Podešavanja kalendara';
+
+  @override
+  String get calendarShowMedia => 'Prikaži fotografije i video zapise';
+
+  @override
+  String get calendarWeekTitles => 'Naslovi nedelja';
+
+  @override
+  String get calendarHideEmptyDays => 'Sakrij prazne dane';
 }

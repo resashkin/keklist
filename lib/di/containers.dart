@@ -34,9 +34,11 @@ import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.da
 
 final class MainContainer {
   final StreamingSharedPreferences _streamingSharedPreferences;
+  final HiveAesCipher _hiveCipher;
 
-  MainContainer({required StreamingSharedPreferences streamingSharedPreferences})
-      : _streamingSharedPreferences = streamingSharedPreferences;
+  MainContainer({required StreamingSharedPreferences streamingSharedPreferences, required HiveAesCipher hiveCipher})
+      : _streamingSharedPreferences = streamingSharedPreferences,
+        _hiveCipher = hiveCipher;
 
   Injector initialize(Injector injector) {
     injector.map<MindSearcherCubit>(
@@ -63,8 +65,8 @@ final class MainContainer {
     injector.map<GalleryIndexer>(
       (_) => GalleryIndexer(
         repository: MediaIndexHiveRepository(
-          daysBox: Hive.box<MediaDayIndexObject>(HiveConstants.mediaDayIndexBoxName),
-          metaBox: Hive.box(HiveConstants.mediaIndexMetaBoxName),
+          daysBox: Hive.openBox<MediaDayIndexObject>(HiveConstants.mediaDayIndexBoxName, encryptionCipher: _hiveCipher),
+          metaBox: Hive.openBox(HiveConstants.mediaIndexMetaBoxName, encryptionCipher: _hiveCipher),
         ),
         source: const PhotoLibraryGallerySource(),
       ),

@@ -4,7 +4,7 @@ final class _MindCollectionAppBar extends StatelessWidget {
   final VoidCallback onSearch;
   final VoidCallback onTitle;
   final VoidCallback onCalendar;
-  final VoidCallback onCalendarLongTap;
+  final VoidCallback onTitleLongPress;
   final VoidCallback? onSettings;
   final VoidCallback? onInsights;
 
@@ -12,7 +12,7 @@ final class _MindCollectionAppBar extends StatelessWidget {
     required this.onSearch,
     required this.onTitle,
     required this.onCalendar,
-    required this.onCalendarLongTap,
+    required this.onTitleLongPress,
     required this.onSettings,
     required this.onInsights,
   });
@@ -25,6 +25,7 @@ final class _MindCollectionAppBar extends StatelessWidget {
       actions: _makeAppBarActions(),
       title: GestureDetector(
         onTap: onTitle,
+        onLongPress: onTitleLongPress,
         child: Row(children: [
           const Icon(Icons.calendar_view_week),
           const Gap(8.0),
@@ -50,7 +51,6 @@ final class _MindCollectionAppBar extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.calendar_month),
           onPressed: onCalendar,
-          onLongPress: onCalendarLongTap,
         ),
         IconButton(icon: const Icon(Icons.search), onPressed: onSearch),
       ];

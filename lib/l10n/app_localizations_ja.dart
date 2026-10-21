@@ -818,4 +818,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get customizeSettingsDescription => 'チェックを外したセクションと項目は設定画面に表示されません。';
+
+  @override
+  String get calendarSettings => 'カレンダー設定';
+
+  @override
+  String get calendarShowMedia => '写真とビデオを表示';
+
+  @override
+  String get calendarWeekTitles => '週のタイトル';
+
+  @override
+  String get calendarHideEmptyDays => '空の日を隠す';
 }

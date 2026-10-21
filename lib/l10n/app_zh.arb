@@ -260,5 +260,9 @@
     "shakeToCustomize": "摇一摇进行自定义",
     "shakeToCustomizeHint": "或长按标题",
     "customizeSettings": "自定义设置",
-    "customizeSettingsDescription": "取消勾选的分区和行将在设置页面中隐藏。"
+    "customizeSettingsDescription": "取消勾选的分区和行将在设置页面中隐藏。",
+    "calendarSettings": "日历设置",
+    "calendarShowMedia": "显示照片和视频",
+    "calendarWeekTitles": "周标题",
+    "calendarHideEmptyDays": "隐藏空白日"
 }

@@ -852,4 +852,16 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Abgewählte Bereiche und Zeilen werden in den Einstellungen ausgeblendet.';
+
+  @override
+  String get calendarSettings => 'Kalendereinstellungen';
+
+  @override
+  String get calendarShowMedia => 'Fotos und Videos anzeigen';
+
+  @override
+  String get calendarWeekTitles => 'Wochentitel';
+
+  @override
+  String get calendarHideEmptyDays => 'Leere Tage ausblenden';
 }

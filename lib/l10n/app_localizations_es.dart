@@ -851,4 +851,16 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Las secciones y filas desmarcadas se ocultan en Ajustes.';
+
+  @override
+  String get calendarSettings => 'Ajustes del calendario';
+
+  @override
+  String get calendarShowMedia => 'Mostrar fotos y vídeos';
+
+  @override
+  String get calendarWeekTitles => 'Títulos de semana';
+
+  @override
+  String get calendarHideEmptyDays => 'Ocultar días vacíos';
 }

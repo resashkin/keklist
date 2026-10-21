@@ -13,6 +13,22 @@ const double _kTileRadius = 8.0;
 const double _kMinTextSize = 7.0;
 const double _kMaxTextSize = 14.0;
 
+/// The tile of any feed item, shared by the day screen and the calendar.
+final class DayFeedItemTile extends StatelessWidget {
+  final DayFeedItem item;
+  final bool isMindTextVisible;
+  final double size;
+
+  const DayFeedItemTile({super.key, required this.item, required this.isMindTextVisible, required this.size});
+
+  @override
+  Widget build(BuildContext context) => switch (item) {
+    DayFeedMind mind => DayFeedMindTile(item: mind, isTextVisible: isMindTextVisible, size: size),
+    DayFeedAsset asset => DayFeedAssetTile(item: asset),
+    DayFeedFolderMedia media => DayFeedFolderMediaTile(item: media),
+  };
+}
+
 final class DayFeedMindTile extends StatelessWidget {
   final DayFeedMind item;
   final bool isTextVisible;

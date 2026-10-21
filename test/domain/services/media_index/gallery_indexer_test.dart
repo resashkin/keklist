@@ -11,6 +11,9 @@ final class _MemoryRepository implements MediaIndexRepository {
   MediaIndexMeta stored = MediaIndexMeta.empty;
 
   @override
+  Future<void> get ready => Future.value();
+
+  @override
   MediaIndexMeta get meta => stored;
 
   @override
@@ -18,6 +21,9 @@ final class _MemoryRepository implements MediaIndexRepository {
 
   @override
   Iterable<MediaDayIndex> get entries => days.values;
+
+  @override
+  Iterable<int> get dayIndexes => days.keys;
 
   @override
   void replaceAll({required Iterable<MediaDayIndex> entries, required MediaIndexMeta meta}) {
@@ -87,7 +93,7 @@ void main() {
     indexer = GalleryIndexer(repository: repository, source: source);
   });
 
-  test('builder counts photos and videos per day and keeps the newest previews', () {
+  test('builder counts photos and videos per day and keeps every asset oldest first', () {
     final MediaDayIndexBuilder builder = MediaDayIndexBuilder()
       ..addAll([
         for (int i = 0; i < 10; i++)
@@ -98,8 +104,7 @@ void main() {
     final MediaDayIndex day = builder.buildDay(_day(monday))!;
     expect(day.photoCount, 10);
     expect(day.videoCount, 1);
-    expect(day.previewIds.length, MediaDayIndex.maxPreviewIds);
-    expect(day.previewIds.first, 'v');
+    expect(day.assets.map((asset) => asset.id), [for (int i = 0; i < 10; i++) 'p$i', 'v']);
   });
 
   test('first sync scans the whole library', () async {

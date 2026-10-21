@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:keklist/presentation/core/widgets/dotted_divider.dart';
-import 'package:collection/collection.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:gap/gap.dart';
 import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
@@ -20,19 +19,14 @@ import 'package:keklist/presentation/screens/actions/action_model.dart';
 import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/digest/mind_universal_list_screen.dart';
 import 'package:keklist/presentation/screens/insights/insights_screen.dart';
-import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_collection_empty_day_widget.dart';
-import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_month_collection_widget.dart';
-import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_row_widget.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_search_result_widget.dart';
 import 'package:keklist/presentation/screens/mind_info/mind_info_screen.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
 import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
-import 'package:keklist/presentation/core/widgets/rounded_container.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
-import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
@@ -40,8 +34,16 @@ import 'package:material_ui/material_ui.dart' hide DateUtils;
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
-import 'package:scrollview_observer/scrollview_observer.dart';
 import 'package:keklist/domain/period.dart';
+import 'package:keklist/domain/repositories/settings/settings_repository.dart';
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
+import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
+import 'package:keklist/presentation/screens/mind_collection/calendar_day_feed.dart';
+import 'package:keklist/presentation/screens/mind_collection/local_widgets/calendar_settings_bottom_sheet.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_grid.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
 part 'local_widgets/search_app_bar/search_app_bar.dart';
 part 'local_widgets/app_bar/mind_collection_app_bar.dart';
 part 'local_widgets/body/mind_collection_body.dart';
@@ -53,26 +55,29 @@ final class MindCollectionScreen extends StatefulWidget {
   State<MindCollectionScreen> createState() => _MindCollectionScreenState();
 }
 
-final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScreen> {
+final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScreen> with ShakeToTweakMixin {
   final ItemScrollController _itemScrollController = ItemScrollController();
   final ItemPositionsListener _itemPositionsListener = ItemPositionsListener.create();
 
-  final ScrollController _monthGridScrollController = ScrollController();
-  late final GridObserverController _monthGridObserverController = GridObserverController(
-    controller: _monthGridScrollController,
-  );
-
   Iterable<Mind> _minds = [];
-  Map<int, Iterable<Mind>> _mindsByDayIndex = {};
+  CalendarDayFeed _feed = CalendarDayFeed(minds: const [], indexer: null, includesMedia: false);
+  List<int>? _dayIndexes;
   SettingsDataState? _settingsDataState;
   MindSearching? _searchingMindState;
   bool _isSettingsVisible = true;
   bool _isInsightsVisible = true;
-  bool _isMonthView = false;
   final bool _isDemoMode = false;
   bool _hasShownOnboardingDialog = false;
 
   bool get _shouldShowTitles => _settingsDataState?.settings.shouldShowTitles ?? true;
+  CalendarSettings get _calendarSettings => _settingsDataState?.settings.calendar ?? const CalendarSettings();
+  GalleryIndexer get _indexer => context.read<GalleryIndexer>();
+
+  @override
+  String get shakeScreenId => ShakeScreenIds.calendar;
+
+  @override
+  void onShakeToTweak() => showBarModalBottomSheet(context: context, builder: (_) => const CalendarSettingsBottomSheet());
 
   // NOTE: Состояние SearchBar.
   final TextEditingController _searchTextController = TextEditingController(text: null);
@@ -99,7 +104,12 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
       subscribeToBloc<SettingsBloc>(onNewState: (state) {
         switch (state) {
           case SettingsDataState settingsDataState:
-            _settingsDataState = settingsDataState;
+            final bool hidesEmptyDaysBefore = _calendarSettings.hidesEmptyDays;
+            setState(() => _settingsDataState = settingsDataState);
+            _rebuildFeed();
+            if (hidesEmptyDaysBefore != _calendarSettings.hidesEmptyDays) {
+              WidgetsBinding.instance.addPostFrameCallback((_) => _jumpToNow());
+            }
           case SettingsShowWhatsNew _:
             _showWhatsNew();
             sendEventToBloc<SettingsBloc>(SettingsWhatsNewShown());
@@ -109,11 +119,8 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
       subscribeToBloc<MindBloc>(
         onNewState: (state) async {
           if (state is MindList) {
-            setState(() {
-              _minds = state.values;
-              _mindsByDayIndex =
-                  state.values.where((element) => element.rootId == null).groupListsBy((element) => element.dayIndex);
-            });
+            _minds = state.values;
+            _rebuildFeed();
             if (DeviceUtils.safeGetPlatform() == SupportedPlatform.iOS) {
               sendEventToBloc<MindBloc>(MindUpdateMobileWidgets());
             }
@@ -165,6 +172,11 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
         }
       })?.disposed(by: this);
 
+      _indexer.progress
+          .where((progress) => progress.status == GalleryIndexStatus.ready)
+          .listen((_) => _rebuildFeed())
+          .disposed(by: this);
+
       // Auth removed - no authentication required
       sendEventToBloc<SettingsBloc>(SettingsGet());
       sendEventToBloc<MindBloc>(MindGetList());
@@ -192,24 +204,24 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
               onCalendar: () => _showCalendarActions(),
               onSettings: _isSettingsVisible ? (() => _showSettings()) : null,
               onInsights: _isInsightsVisible ? (() => _showInsights()) : null,
-              onCalendarLongTap: () => setState(() => _isMonthView = !_isMonthView),
+              onTitleLongPress: requestTweak,
             ),
           ),
         ),
       ),
       body: _MindCollectionBody(
-        mindsByDayIndex: _mindsByDayIndex,
         isSearching: _isSearching,
         searchResults: _searchResults,
         hideKeyboard: _hideKeyboard,
         onTapToDay: (dayIndex) => _showDayCollectionScreen(groupDayIndex: dayIndex),
+        onOpenItem: _openDayStories,
+        feed: _feed,
+        settings: _calendarSettings,
+        showsWeekTitles: _shouldShowTitles,
+        dayIndexes: _dayIndexes,
+        todayIndex: _getNowDayIndex(),
         itemScrollController: _itemScrollController,
         itemPositionsListener: _itemPositionsListener,
-        getNowDayIndex: _getNowDayIndex,
-        shouldShowTitles: _shouldShowTitles,
-        isMonthView: _isMonthView,
-        monthGridScrollController: _monthGridScrollController,
-        monthGridObserverController: _monthGridObserverController,
       ),
       resizeToAvoidBottomInset: false,
     );
@@ -235,32 +247,58 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     );
   }
 
+  void _rebuildFeed() {
+    if (!mounted) return;
+    final CalendarSettings settings = _calendarSettings;
+    final CalendarDayFeed feed = CalendarDayFeed(
+      minds: _minds,
+      indexer: _indexer,
+      includesMedia: settings.isMediaVisible,
+    );
+    setState(() {
+      _feed = feed;
+      _dayIndexes = settings.hidesEmptyDays ? feed.nonEmptyDayIndexes(alwaysIncluded: _getNowDayIndex()) : null;
+    });
+  }
+
+  /// List position of [dayIndex]; with empty days hidden, the nearest shown day not after it.
+  int _positionOf(int dayIndex) {
+    final List<int>? days = _dayIndexes;
+    if (days == null) return dayIndex;
+    final int firstAfter = days.indexWhere((day) => day > dayIndex);
+    return firstAfter == -1 ? days.length - 1 : (firstAfter - 1).clamp(0, days.length - 1);
+  }
+
   void _jumpToNow() {
-    if (_isDemoMode) {
+    if (_isDemoMode || !_itemScrollController.isAttached) {
       return;
     }
-
-    if (_itemScrollController.isAttached) {
-      _itemScrollController.jumpTo(index: _getNowDayIndex());
-    }
-    _monthGridObserverController.jumpTo(index: _getNowDayIndex());
+    _itemScrollController.jumpTo(index: _positionOf(_getNowDayIndex()));
   }
 
   Future<void> _scrollToNow() => _scrollToDayIndex(_getNowDayIndex());
 
-  Future<void> _scrollToDayIndex(int dayIndex) async {
-    if (_isMonthView) {
-      await _monthGridObserverController.animateTo(
-        index: _getNowDayIndex(),
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.linear,
-      );
-    } else {
-      await _itemScrollController.scrollTo(
-        index: dayIndex,
-        duration: const Duration(milliseconds: 200),
-      );
-    }
+  Future<void> _scrollToDayIndex(int dayIndex) => _itemScrollController.scrollTo(
+    index: _positionOf(dayIndex),
+    duration: const Duration(milliseconds: 200),
+  );
+
+  void _openDayStories(int dayIndex, int initialIndex) {
+    final List<DayFeedItem> items = _feed.itemsOf(dayIndex);
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        fullscreenDialog: true,
+        pageBuilder: (_, _, _) => DayStoriesScreen(
+          items: items,
+          initialIndex: initialIndex,
+          onOpenMind: (mind) => Navigator.of(context).push(
+            SwipeablePageRoute(builder: (_) => MindInfoScreen(rootMind: mind, allMinds: _minds)),
+          ),
+        ),
+        transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
+      ),
+    );
   }
 
   void _hideKeyboard() => FocusScope.of(context).requestFocus(FocusNode());

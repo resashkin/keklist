@@ -497,5 +497,9 @@
     "shakeToCustomize": "Protresite za prilagođavanje",
     "shakeToCustomizeHint": "ili dugo pritisnite naslov",
     "customizeSettings": "Prilagodi podešavanja",
-    "customizeSettingsDescription": "Neoznačeni odeljci i redovi se skrivaju sa ekrana podešavanja."
+    "customizeSettingsDescription": "Neoznačeni odeljci i redovi se skrivaju sa ekrana podešavanja.",
+    "calendarSettings": "Podešavanja kalendara",
+    "calendarShowMedia": "Prikaži fotografije i video zapise",
+    "calendarWeekTitles": "Naslovi nedelja",
+    "calendarHideEmptyDays": "Sakrij prazne dane"
 }

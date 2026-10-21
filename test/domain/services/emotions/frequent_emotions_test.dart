@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:keklist/domain/services/emotions/day_emotion_summary.dart';
 import 'package:keklist/domain/services/emotions/frequent_emotions.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
@@ -46,26 +45,6 @@ void main() {
         limit: 2,
       );
       expect(picked, [a, b]);
-    });
-  });
-
-  group('DayEmotionSummary', () {
-    final Map<String, Emotion> byId = {'joy': _emotion('joy', emoji: '😄'), 'sad': _emotion('sad', emoji: '😢')};
-
-    test('lists unique emojis of root minds and marks untagged ones', () {
-      final summary = DayEmotionSummary.of(
-        [_mind(['joy']), _mind(['joy', 'sad']), _mind([]), _mind(['sad'], rootId: 'x')],
-        (id) => byId[id],
-      );
-      expect(summary.emojis, ['😄', '😢']);
-      expect(summary.hasUntaggedMinds, true);
-      expect(summary.text, '😄 😢 ${DayEmotionSummary.untaggedMark}');
-    });
-
-    test('treats unresolvable emotion ids as untagged', () {
-      final summary = DayEmotionSummary.of([_mind(['gone'])], (id) => byId[id]);
-      expect(summary.emojis, isEmpty);
-      expect(summary.text, DayEmotionSummary.untaggedMark);
     });
   });
 }

@@ -846,4 +846,16 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Белгісі алынған бөлімдер мен жолдар баптаулар экранында жасырылады.';
+
+  @override
+  String get calendarSettings => 'Күнтізбе баптаулары';
+
+  @override
+  String get calendarShowMedia => 'Фото мен бейнені көрсету';
+
+  @override
+  String get calendarWeekTitles => 'Апта тақырыптары';
+
+  @override
+  String get calendarHideEmptyDays => 'Бос күндерді жасыру';
 }

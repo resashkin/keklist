@@ -4,6 +4,8 @@ import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 
 final class DayFeedLayout {
+  static const double cellSpacing = 4.0;
+  static const double horizontalPadding = 8.0;
   static const Duration photoStoryDuration = Duration(seconds: 5);
   static const Duration mindStoryBaseDuration = Duration(seconds: 3);
   static const Duration mindStoryPerCharacter = Duration(milliseconds: 60);

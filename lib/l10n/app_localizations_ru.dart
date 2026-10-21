@@ -845,4 +845,16 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get customizeSettingsDescription =>
       'Снятые разделы и пункты скрываются с экрана настроек.';
+
+  @override
+  String get calendarSettings => 'Настройки календаря';
+
+  @override
+  String get calendarShowMedia => 'Показывать фото и видео';
+
+  @override
+  String get calendarWeekTitles => 'Заголовки недель';
+
+  @override
+  String get calendarHideEmptyDays => 'Скрывать пустые дни';
 }

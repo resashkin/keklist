@@ -45,13 +45,16 @@ final class GalleryIndexer {
           libraryCount: repository.meta.libraryCount,
           lastScanDate: repository.meta.lastScanDate,
         ),
-      );
+      ) {
+    _repository.ready.then((_) => _emit(currentProgress.status));
+  }
 
   Stream<GalleryIndexProgress> get progress => _progress.stream;
   GalleryIndexProgress get currentProgress => _progress.value;
 
   MediaDayIndex? entryFor(int dayIndex) => _repository.entryFor(dayIndex);
   Iterable<MediaDayIndex> get entries => _repository.entries;
+  Iterable<int> get dayIndexes => _repository.dayIndexes;
 
   /// True when the index can vouch that [dayIndex] has no library media, so the
   /// day screen may skip the live query. Days on or after the last scan are never trusted.
@@ -72,6 +75,7 @@ final class GalleryIndexer {
 
   /// Fresh result of a live day query from the day screen; keeps the index honest.
   Future<void> refreshDay(int dayIndex, Iterable<GalleryAssetInfo> assets) async {
+    await _repository.ready;
     final MediaIndexMeta meta = _repository.meta;
     if (!meta.isComplete || _running != null) return;
     final int before = _repository.entryFor(dayIndex)?.totalCount ?? 0;
@@ -87,6 +91,7 @@ final class GalleryIndexer {
 
   Future<void> _sync({required bool forceFull}) async {
     if (!_source.isSupported) return;
+    await _repository.ready;
     if (!await _source.hasAccess()) {
       _emit(GalleryIndexStatus.noAccess);
       return;

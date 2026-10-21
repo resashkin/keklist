@@ -12,6 +12,7 @@ abstract final class ShakeScreenIds {
   static const String day = 'day';
   static const String settings = 'settings';
   static const String insights = 'insights';
+  static const String calendar = 'calendar';
 }
 
 mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {

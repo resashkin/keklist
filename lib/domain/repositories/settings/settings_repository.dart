@@ -42,6 +42,29 @@ final class DayFeedSettings {
   });
 }
 
+/// Calendar day grids; week titles stay in `KeklistSettings.shouldShowTitles`.
+final class CalendarSettings {
+  final int columnCount;
+  final bool isMindTextVisible;
+  final bool isMediaVisible;
+  final bool hidesEmptyDays;
+
+  const CalendarSettings({
+    this.columnCount = 4,
+    this.isMindTextVisible = true,
+    this.isMediaVisible = true,
+    this.hidesEmptyDays = false,
+  });
+
+  CalendarSettings copyWith({int? columnCount, bool? isMindTextVisible, bool? isMediaVisible, bool? hidesEmptyDays}) =>
+      CalendarSettings(
+        columnCount: columnCount ?? this.columnCount,
+        isMindTextVisible: isMindTextVisible ?? this.isMindTextVisible,
+        isMediaVisible: isMediaVisible ?? this.isMediaVisible,
+        hidesEmptyDays: hidesEmptyDays ?? this.hidesEmptyDays,
+      );
+}
+
 /// Analytics screen layout: widget order (unknown ids ignored), hidden widgets and the period.
 final class InsightsSettings {
   final List<String> widgetOrder;
@@ -80,6 +103,7 @@ final class KeklistSettings {
 
   final DayFeedSettings dayFeed;
   final InsightsSettings insights;
+  final CalendarSettings calendar;
   final Set<String> hiddenSettingsItemIds;
   final Set<String> shakeDiscoveredScreenIds;
 
@@ -101,6 +125,7 @@ final class KeklistSettings {
     this.hasSeededEmotions = false,
     this.dayFeed = const DayFeedSettings(),
     this.insights = const InsightsSettings(),
+    this.calendar = const CalendarSettings(),
     this.hiddenSettingsItemIds = const {},
     this.shakeDiscoveredScreenIds = const {},
   });
@@ -123,6 +148,7 @@ final class KeklistSettings {
     bool? hasSeededEmotions,
     DayFeedSettings? dayFeed,
     InsightsSettings? insights,
+    CalendarSettings? calendar,
     Set<String>? hiddenSettingsItemIds,
     Set<String>? shakeDiscoveredScreenIds,
   }) {
@@ -144,6 +170,7 @@ final class KeklistSettings {
       hasSeededEmotions: hasSeededEmotions ?? this.hasSeededEmotions,
       dayFeed: dayFeed ?? this.dayFeed,
       insights: insights ?? this.insights,
+      calendar: calendar ?? this.calendar,
       hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
       shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
     );
@@ -172,6 +199,10 @@ final class KeklistSettings {
     ..insightsWidgetOrder = insights.widgetOrder
     ..hiddenInsightsWidgetIds = insights.hiddenWidgetIds.toList()
     ..insightsPeriodIndex = insights.periodIndex
+    ..calendarColumnCount = calendar.columnCount
+    ..isCalendarMindTextVisible = calendar.isMindTextVisible
+    ..isCalendarMediaVisible = calendar.isMediaVisible
+    ..calendarHidesEmptyDays = calendar.hidesEmptyDays
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 

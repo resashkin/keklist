@@ -6,8 +6,8 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tiles.dart';
 
-const double _kCellSpacing = 4.0;
-const double _kHorizontalPadding = 8.0;
+const double _kCellSpacing = DayFeedLayout.cellSpacing;
+const double _kHorizontalPadding = DayFeedLayout.horizontalPadding;
 
 sealed class _DayFeedCell {
   const _DayFeedCell();
@@ -104,25 +104,19 @@ final class DayFeedSliver extends StatelessWidget {
   Widget _buildCell(_DayFeedCell cell, double cellSize) {
     final int span = _spanOf(cell);
     final double width = cellSize * span + _kCellSpacing * (span - 1);
-    return SizedBox(width: width, height: cellSize, child: _buildCellContent(cell, cellSize, span));
+    return SizedBox(width: width, height: cellSize, child: _buildCellContent(cell, cellSize));
   }
 
-  Widget _buildCellContent(_DayFeedCell cell, double cellSize, int span) => switch (cell) {
+  Widget _buildCellContent(_DayFeedCell cell, double cellSize) => switch (cell) {
         _SkeletonCell() => const DayFeedSkeletonTile(),
         _ItemCell(:final itemIndex) => GestureDetector(
             onTap: () => onOpenItem(itemIndex),
-            child: _buildItemTile(state.items[itemIndex], cellSize, span),
+            child: DayFeedItemTile(
+              item: state.items[itemIndex],
+              isMindTextVisible: settings.isMindTextVisible,
+              size: cellSize,
+            ),
           ),
-      };
-
-  Widget _buildItemTile(DayFeedItem item, double cellSize, int span) => switch (item) {
-        DayFeedMind() => DayFeedMindTile(
-            item: item,
-            isTextVisible: settings.isMindTextVisible,
-            size: cellSize,
-          ),
-        DayFeedAsset() => DayFeedAssetTile(item: item),
-        DayFeedFolderMedia() => DayFeedFolderMediaTile(item: item),
       };
 }
 
