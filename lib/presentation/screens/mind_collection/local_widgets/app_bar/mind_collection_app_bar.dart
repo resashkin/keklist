@@ -19,39 +19,21 @@ final class _MindCollectionAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return GlassAppBar(
       centerTitle: true,
-      automaticallyImplyLeading: true,
-      actions: _makeAppBarActions(),
-      title: GestureDetector(
-        onTap: onTitle,
-        onLongPress: onTitleLongPress,
-        child: Row(children: [
-          const Icon(Icons.calendar_view_week),
-          const Gap(8.0),
-          Text(context.l10n.calendar),
-        ]),
+      onTitleTap: onTitle,
+      onTitleLongPress: onTitleLongPress,
+      title: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 8.0,
+        children: [const Icon(Icons.calendar_view_week, size: 20.0), Text(context.l10n.calendar)],
       ),
+      actions: [
+        if (onInsights != null) GlassBarAction(icon: Icons.insights, onPressed: onInsights),
+        if (onSettings != null) GlassBarAction(icon: Icons.settings, onPressed: onSettings),
+        GlassBarAction(icon: Icons.calendar_month, onPressed: onCalendar),
+        GlassBarAction(icon: Icons.search, onPressed: onSearch),
+      ],
     );
   }
-
-  List<Widget>? _makeAppBarActions() => [
-        if (onInsights != null) ...{
-          IconButton(
-            icon: const Icon(Icons.insights),
-            onPressed: onInsights,
-          ),
-        },
-        if (onSettings != null) ...{
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: onSettings,
-          ),
-        },
-        IconButton(
-          icon: const Icon(Icons.calendar_month),
-          onPressed: onCalendar,
-        ),
-        IconButton(icon: const Icon(Icons.search), onPressed: onSearch),
-      ];
 }

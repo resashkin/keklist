@@ -40,3 +40,8 @@ The calendar tab showed each day as a row of emotion emojis, plus a month grid o
 - Media comes only from the gallery index (iOS). On Android, or before the first index build, the calendar shows minds only.
 - A photo taken after the last sync appears after the next `sync()` (launch or resume).
 - Days with many photos are tall; that is intended (no row limit).
+
+## Headers, Viewer & Pinch
+Days are headed by a centered `CalendarDayPill` and weeks by `CalendarWeekHeader`, both with ▶ to play stories.
+Tiles open `DayItemViewerScreen`; pinching changes the column count (2–7). See
+`DAY_ITEM_VIEWER_AND_GLASS_BAR_IMPLEMENTATION.md`.

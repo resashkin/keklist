@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -139,8 +140,12 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: GestureDetector(onTap: _handleAppBarTap, onLongPress: requestTweak, child: Text(context.l10n.settings)),
+      extendBodyBehindAppBar: true,
+      appBar: GlassAppBar(
+        centerTitle: true,
+        onTitleTap: _handleAppBarTap,
+        onTitleLongPress: requestTweak,
+        title: Text(context.l10n.settings),
       ),
       body: StreamBuilder<GalleryIndexProgress>(
         stream: context.read<GalleryIndexer>().progress,

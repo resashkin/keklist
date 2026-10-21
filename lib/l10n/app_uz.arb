@@ -500,5 +500,7 @@
     "customizeSettingsDescription": "Belgisi olib tashlangan bo‘lim va qatorlar Sozlamalar ekranida yashiriladi.",
     "calendarSettings": "Kalendar sozlamalari",
     "calendarShowMedia": "Foto va videolarni ko‘rsatish",
-    "calendarWeekTitles": "Hafta sarlavhalari"
+    "calendarWeekTitles": "Hafta sarlavhalari",
+    "calendarNoActivity": "Faollik yo‘q",
+    "calendarPlayStories": "Hikoyalarni ko‘rish"
 }

@@ -500,5 +500,7 @@
     "customizeSettingsDescription": "Le sezioni e le righe deselezionate vengono nascoste nelle Impostazioni.",
     "calendarSettings": "Impostazioni calendario",
     "calendarShowMedia": "Mostra foto e video",
-    "calendarWeekTitles": "Titoli delle settimane"
+    "calendarWeekTitles": "Titoli delle settimane",
+    "calendarNoActivity": "Nessuna attività",
+    "calendarPlayStories": "Guarda le storie"
 }

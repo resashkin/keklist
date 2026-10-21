@@ -827,4 +827,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => '週のタイトル';
+
+  @override
+  String get calendarNoActivity => 'アクティビティなし';
+
+  @override
+  String get calendarPlayStories => 'ストーリーを再生';
 }

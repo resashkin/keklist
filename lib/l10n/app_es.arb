@@ -500,5 +500,7 @@
     "customizeSettingsDescription": "Las secciones y filas desmarcadas se ocultan en Ajustes.",
     "calendarSettings": "Ajustes del calendario",
     "calendarShowMedia": "Mostrar fotos y vídeos",
-    "calendarWeekTitles": "Títulos de semana"
+    "calendarWeekTitles": "Títulos de semana",
+    "calendarNoActivity": "Sin actividad",
+    "calendarPlayStories": "Ver historias"
 }

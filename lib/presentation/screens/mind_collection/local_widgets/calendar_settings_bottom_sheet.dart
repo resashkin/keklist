@@ -1,3 +1,5 @@
+import 'package:keklist/presentation/core/widgets/column_count_row.dart';
+import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
@@ -27,7 +29,10 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
 
   Widget _buildContent(BuildContext context, CalendarSettings calendar, {required bool showsWeekTitles}) {
     final ThemeData theme = Theme.of(context);
-    void update(CalendarSettings value) => context.read<SettingsBloc>().add(SettingsUpdateCalendar(calendar: value));
+    void update(CalendarSettings value) {
+      tweakChangeHaptic();
+      context.read<SettingsBloc>().add(SettingsUpdateCalendar(calendar: value));
+    }
 
     return SafeArea(
       top: false,
@@ -39,22 +44,10 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             child: Text(context.l10n.calendarSettings, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
-            child: Row(
-              children: [
-                Expanded(child: Text(context.l10n.dayFeedColumns, style: theme.textTheme.bodyLarge)),
-                SegmentedButton<int>(
-                  showSelectedIcon: false,
-                  segments: [
-                    for (final int count in DayFeedSettings.columnCountOptions)
-                      ButtonSegment<int>(value: count, label: Text('$count')),
-                  ],
-                  selected: {calendar.columnCount},
-                  onSelectionChanged: (selection) => update(calendar.copyWith(columnCount: selection.first)),
-                ),
-              ],
-            ),
+          ColumnCountRow(
+            title: context.l10n.dayFeedColumns,
+            selected: calendar.columnCount,
+            onChanged: (count) => update(calendar.copyWith(columnCount: count)),
           ),
           SwitchListTile(
             title: Text(context.l10n.dayFeedShowMindText),
@@ -69,7 +62,10 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
           SwitchListTile(
             title: Text(context.l10n.calendarWeekTitles),
             value: showsWeekTitles,
-            onChanged: (value) => context.read<SettingsBloc>().add(SettingsUpdateShouldShowTitlesMode(value: value)),
+            onChanged: (value) {
+              tweakChangeHaptic();
+              context.read<SettingsBloc>().add(SettingsUpdateShouldShowTitlesMode(value: value));
+            },
           ),
           const SizedBox(height: 8.0),
         ],

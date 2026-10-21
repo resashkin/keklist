@@ -1706,6 +1706,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Week titles'**
   String get calendarWeekTitles;
+
+  /// Calendar: subtitle of a day without minds or media
+  ///
+  /// In en, this message translates to:
+  /// **'No activity'**
+  String get calendarNoActivity;
+
+  /// Calendar: play the stories of a day or a week
+  ///
+  /// In en, this message translates to:
+  /// **'Play stories'**
+  String get calendarPlayStories;
 }
 
 class _AppLocalizationsDelegate

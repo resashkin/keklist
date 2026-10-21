@@ -861,4 +861,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Wochentitel';
+
+  @override
+  String get calendarNoActivity => 'Keine Aktivität';
+
+  @override
+  String get calendarPlayStories => 'Storys abspielen';
 }
