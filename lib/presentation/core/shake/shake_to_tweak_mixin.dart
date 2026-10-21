@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
@@ -35,8 +36,8 @@ mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // TickerMode is false for hidden IndexedStack tabs and routes covered by an opaque route.
-    final bool isActive = TickerMode.valuesOf(context).enabled;
+    // Hidden IndexedStack tabs only report Visibility.of == false; covered routes turn TickerMode off.
+    final bool isActive = TickerMode.valuesOf(context).enabled && Visibility.of(context);
     if (isActive == _isScreenActive) return;
     _isScreenActive = isActive;
     isActive ? _activate() : _deactivate();
@@ -52,6 +53,7 @@ mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
     _hideHint();
     _hintShownThisLaunch.add(shakeScreenId);
     sendEventToBloc<SettingsBloc>(SettingsMarkShakeDiscovered(screenId: shakeScreenId));
+    Haptics.vibrate(HapticsType.medium);
     onShakeToTweak();
   }
 

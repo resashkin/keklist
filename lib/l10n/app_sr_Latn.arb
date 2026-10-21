@@ -500,5 +500,7 @@
     "customizeSettingsDescription": "Neoznačeni odeljci i redovi se skrivaju sa ekrana podešavanja.",
     "calendarSettings": "Podešavanja kalendara",
     "calendarShowMedia": "Prikaži fotografije i video zapise",
-    "calendarWeekTitles": "Naslovi nedelja"
+    "calendarWeekTitles": "Naslovi nedelja",
+    "calendarNoActivity": "Nema aktivnosti",
+    "calendarPlayStories": "Pusti priče"
 }

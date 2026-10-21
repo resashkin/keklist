@@ -823,4 +823,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => '周标题';
+
+  @override
+  String get calendarNoActivity => '无活动';
+
+  @override
+  String get calendarPlayStories => '播放故事';
 }

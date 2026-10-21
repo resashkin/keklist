@@ -1,3 +1,6 @@
+import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
+import 'package:keklist/presentation/core/widgets/pinch_columns_detector.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
@@ -154,23 +157,35 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     final String yearSuffix = dayDate.year == DateTime.now().year ? '' : ' ${dayDate.year}';
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: GestureDetector(
-          onTap: () async {
-            final int? selectedDayIndex = await _showDateSwitcherToNewDay();
-            if (selectedDayIndex == null) return;
-            _switchToDayIndex(selectedDayIndex);
-          },
-          onLongPress: requestTweak,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('$formattedDay$yearSuffix', style: const TextStyle(fontSize: 16.0, fontWeight: .w500)),
-              Text(
-                DateFormatters.formatWeekday(dayDate, locale),
-                style: const TextStyle(fontSize: 14.0, fontWeight: .w300),
-              ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: BlocBuilder<DayFeedCubit, DayFeedState>(
+          bloc: _dayFeedCubit,
+          builder: (context, state) => GlassAppBar(
+            centerTitle: true,
+            onTitleTap: () async {
+              final int? selectedDayIndex = await _showDateSwitcherToNewDay();
+              if (selectedDayIndex == null) return;
+              _switchToDayIndex(selectedDayIndex);
+            },
+            onTitleLongPress: requestTweak,
+            title: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('$formattedDay$yearSuffix', style: const TextStyle(fontSize: 15.0, fontWeight: .w600)),
+                Text(
+                  DateFormatters.formatWeekday(dayDate, locale),
+                  style: const TextStyle(fontSize: 12.0, fontWeight: .w400),
+                ),
+              ],
+            ),
+            actions: [
+              if (state.items.isNotEmpty)
+                GlassBarAction(
+                  icon: Icons.play_arrow_rounded,
+                  tooltip: context.l10n.calendarPlayStories,
+                  onPressed: () => _openDayStories(state, 0),
+                ),
             ],
           ),
         ),
@@ -257,6 +272,14 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   }
 
   Widget _buildDayFeedBody() {
+    return PinchColumnsDetector(
+      columnCount: _dayFeedSettings.columnCount,
+      onChanged: (count) => sendEventToBloc<SettingsBloc>(SettingsUpdateDayFeed(columnCount: count)),
+      child: _buildDayFeedScrollView(),
+    );
+  }
+
+  Widget _buildDayFeedScrollView() {
     return CustomScrollView(
       physics: FlutterConstants.mobileOverscrollPhysics,
       controller: _scrollController,
@@ -266,7 +289,12 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
           builder: (context, state) => DayFeedSliver(
             state: state,
             settings: _dayFeedSettings,
-            onOpenItem: (index) => _openDayStories(state, index),
+            onOpenItem: (index) => DayItemViewerScreen.show(
+              context,
+              items: state.items,
+              initialIndex: index,
+              onOpenMind: _showMindInfo,
+            ),
             onResolveMediaIssue: (issue) => _resolveDayFeedMediaIssue(issue),
           ),
         ),

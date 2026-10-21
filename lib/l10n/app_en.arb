@@ -1120,5 +1120,13 @@
     "calendarWeekTitles": "Week titles",
     "@calendarWeekTitles": {
         "description": "Calendar setting: show week number headers"
+    },
+    "calendarNoActivity": "No activity",
+    "calendarPlayStories": "Play stories",
+    "@calendarNoActivity": {
+        "description": "Calendar: subtitle of a day without minds or media"
+    },
+    "@calendarPlayStories": {
+        "description": "Calendar: play the stories of a day or a week"
     }
 }

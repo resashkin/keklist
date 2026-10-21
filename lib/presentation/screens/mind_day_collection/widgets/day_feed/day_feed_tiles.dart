@@ -12,6 +12,8 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 const double _kTileRadius = 8.0;
 const double _kMinTextSize = 7.0;
 const double _kMaxTextSize = 14.0;
+const double _kTextLineHeight = 1.2;
+const double _kTextPadding = 8.0;
 
 /// The tile of any feed item, shared by the day screen and the calendar.
 final class DayFeedItemTile extends StatelessWidget {
@@ -66,19 +68,11 @@ final class DayFeedMindTile extends StatelessWidget {
           children: [
             if (mediaCircle != null || showText) MindEmotionTexture(mind: item.mind, emojiSize: size * 0.2),
             Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: EdgeInsets.all(mediaCircle != null ? 4.0 : _kTextPadding),
               child: mediaCircle != null
                   ? Center(child: mediaCircle)
                   : showText
-                  ? Center(
-                      child: AutoSizeText(
-                        text,
-                        textAlign: TextAlign.center,
-                        minFontSize: _kMinTextSize,
-                        maxFontSize: _kMaxTextSize,
-                        style: theme.textTheme.bodySmall?.copyWith(fontSize: _kMaxTextSize, height: 1.2),
-                      ),
-                    )
+                  ? _FittedTileText(text: text, style: theme.textTheme.bodySmall)
                   : Center(
                       child: MindEmotionEmojis(
                         mind: item.mind,
@@ -93,6 +87,35 @@ final class DayFeedMindTile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Shrinks the text down to the minimum size, then ends the last line that fits with "…".
+final class _FittedTileText extends StatelessWidget {
+  final String text;
+  final TextStyle? style;
+
+  const _FittedTileText({required this.text, required this.style});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double minLineHeight = _kMinTextSize * _kTextLineHeight * MediaQuery.textScalerOf(context).scale(1.0);
+        final int maxLines = (constraints.maxHeight / minLineHeight).floor().clamp(1, 1000);
+        return Center(
+          child: AutoSizeText(
+            text,
+            textAlign: TextAlign.center,
+            minFontSize: _kMinTextSize,
+            maxFontSize: _kMaxTextSize,
+            maxLines: maxLines,
+            overflow: TextOverflow.ellipsis,
+            style: style?.copyWith(fontSize: _kMaxTextSize, height: _kTextLineHeight),
+          ),
+        );
+      },
     );
   }
 }

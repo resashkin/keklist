@@ -854,4 +854,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Заголовки недель';
+
+  @override
+  String get calendarNoActivity => 'Нет активности';
+
+  @override
+  String get calendarPlayStories => 'Смотреть истории';
 }

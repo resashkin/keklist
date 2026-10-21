@@ -29,7 +29,9 @@ abstract class SettingsRepository {
 }
 
 final class DayFeedSettings {
-  static const List<int> columnCountOptions = [3, 4, 5];
+  static const int minColumnCount = 2;
+  static const int maxColumnCount = 7;
+  static const List<int> columnCountOptions = [2, 3, 4, 5, 6, 7];
 
   final int columnCount;
   final int mindCellSpan;

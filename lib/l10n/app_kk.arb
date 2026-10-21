@@ -500,5 +500,7 @@
     "customizeSettingsDescription": "Белгісі алынған бөлімдер мен жолдар баптаулар экранында жасырылады.",
     "calendarSettings": "Күнтізбе баптаулары",
     "calendarShowMedia": "Фото мен бейнені көрсету",
-    "calendarWeekTitles": "Апта тақырыптары"
+    "calendarWeekTitles": "Апта тақырыптары",
+    "calendarNoActivity": "Белсенділік жоқ",
+    "calendarPlayStories": "Тарихтарды көру"
 }

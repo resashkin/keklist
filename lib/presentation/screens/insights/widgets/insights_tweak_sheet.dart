@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -26,7 +27,10 @@ final class InsightsTweakSheet extends StatelessWidget {
   Widget _buildContent(BuildContext context, InsightsSettings insights) {
     final ThemeData theme = Theme.of(context);
     final List<InsightsWidgetId> order = InsightsWidgetId.ordered(insights.widgetOrder);
-    void save(InsightsSettings updated) => context.read<SettingsBloc>().add(SettingsUpdateInsights(insights: updated));
+    void save(InsightsSettings updated) {
+      tweakChangeHaptic();
+      context.read<SettingsBloc>().add(SettingsUpdateInsights(insights: updated));
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,

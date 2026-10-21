@@ -18,6 +18,7 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
+import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/screens/insights/insights_widget_id.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_activity_cards.dart';
@@ -30,7 +31,7 @@ import 'package:keklist/presentation/screens/insights/widgets/insights_tweak_she
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_collection_empty_day_widget.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/screens/mind_info/mind_info_screen.dart';
 
 /// Analytics: one period for the whole screen, calm cards in a user-defined order.
@@ -90,9 +91,8 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
     final GalleryIndexer indexer = context.read<GalleryIndexer>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: GestureDetector(onLongPress: requestTweak, child: Text(context.l10n.insights)),
-      ),
+      extendBodyBehindAppBar: true,
+      appBar: GlassAppBar(centerTitle: true, onTitleLongPress: requestTweak, title: Text(context.l10n.insights)),
       body: _minds.isEmpty
           ? MindCollectionEmptyStateWidget.noInsights(context: context)
           : StreamBuilder<GalleryIndexProgress>(
@@ -135,7 +135,10 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
     ).where((id) => !insights.hiddenWidgetIds.contains(id.name)).toList();
 
     return ListView(
-      padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom + 96.0),
+      padding: EdgeInsets.only(
+        top: MediaQuery.paddingOf(context).top,
+        bottom: MediaQuery.paddingOf(context).bottom + 96.0,
+      ),
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
@@ -204,22 +207,12 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
       for (final Mind mind in mindIds.map((id) => byId[id]).whereType<Mind>())
         DayFeedMind(mind: mind, reflectionCount: reflectionCounts[mind.id] ?? 0),
     ];
-    if (items.isEmpty) return;
-    Navigator.of(context).push(
-      PageRouteBuilder(
-        opaque: false,
-        fullscreenDialog: true,
-        pageBuilder: (_, _, _) => DayStoriesScreen(
-          items: items,
-          initialIndex: initialIndex.clamp(0, items.length - 1),
-          showsDate: true,
-          onOpenMind: (mind) => Navigator.of(context).push(
-            SwipeablePageRoute(
-              builder: (_) => MindInfoScreen(rootMind: byId[mind.rootId] ?? mind, allMinds: _minds),
-            ),
-          ),
-        ),
-        transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
+    DayItemViewerScreen.show(
+      context,
+      items: items,
+      initialIndex: initialIndex,
+      onOpenMind: (mind) => Navigator.of(context).push(
+        SwipeablePageRoute(builder: (_) => MindInfoScreen(rootMind: byId[mind.rootId] ?? mind, allMinds: _minds)),
       ),
     );
   }

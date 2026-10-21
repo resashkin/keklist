@@ -855,4 +855,10 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Жуманын аталыштары';
+
+  @override
+  String get calendarNoActivity => 'Активдүүлүк жок';
+
+  @override
+  String get calendarPlayStories => 'Окуяларды көрүү';
 }

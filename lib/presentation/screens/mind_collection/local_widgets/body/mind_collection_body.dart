@@ -6,8 +6,10 @@ final class _MindCollectionBody extends StatelessWidget {
   final VoidCallback hideKeyboard;
   final ValueChanged<int> onTapToDay;
   final void Function(int dayIndex, int itemIndex) onOpenItem;
+  final ValueChanged<List<int>> onPlay;
   final CalendarDayFeed feed;
   final CalendarSettings settings;
+  final ValueChanged<int> onColumnCountChanged;
   final bool showsWeekTitles;
   final int todayIndex;
   final ItemScrollController itemScrollController;
@@ -19,8 +21,10 @@ final class _MindCollectionBody extends StatelessWidget {
     required this.hideKeyboard,
     required this.onTapToDay,
     required this.onOpenItem,
+    required this.onPlay,
     required this.feed,
     required this.settings,
+    required this.onColumnCountChanged,
     required this.showsWeekTitles,
     required this.todayIndex,
     required this.itemScrollController,
@@ -40,25 +44,34 @@ final class _MindCollectionBody extends StatelessWidget {
         },
       );
     }
-    return GestureDetector(
-      onPanDown: (_) => hideKeyboard(),
-      child: ScrollablePositionedList.builder(
-        padding: EdgeInsets.only(top: 8.0, bottom: MediaQuery.paddingOf(context).bottom + 96.0),
-        itemCount: _allDaysCount,
-        itemScrollController: itemScrollController,
-        itemPositionsListener: itemPositionsListener,
-        itemBuilder: (context, dayIndex) => _buildDay(context, dayIndex),
+    return PinchColumnsDetector(
+      columnCount: settings.columnCount,
+      onChanged: onColumnCountChanged,
+      child: GestureDetector(
+        onPanDown: (_) => hideKeyboard(),
+        child: ScrollablePositionedList.builder(
+          padding: EdgeInsets.only(
+            top: MediaQuery.paddingOf(context).top + 8.0,
+            bottom: MediaQuery.paddingOf(context).bottom + 96.0,
+          ),
+          itemCount: _allDaysCount,
+          itemScrollController: itemScrollController,
+          itemPositionsListener: itemPositionsListener,
+          itemBuilder: (context, dayIndex) => _buildDay(context, dayIndex),
+        ),
       ),
     );
   }
 
+  static const int _daysInWeek = 7;
+
   Widget _buildDay(BuildContext context, int dayIndex) {
-    final ThemeData theme = Theme.of(context);
     final DateTime date = DateUtils.getDateFromDayIndex(dayIndex);
     final int weekNumber = _getWeekNumber(date);
     final bool startsWeek = weekNumber != _getWeekNumber(DateUtils.getDateFromDayIndex(dayIndex - 1));
-    final bool isToday = dayIndex == todayIndex;
     final List<DayFeedItem> items = feed.itemsOf(dayIndex);
+    final List<int> weekDays = [for (int offset = 0; offset < _daysInWeek; offset++) dayIndex + offset];
+    final bool hasWeekItems = weekDays.any((day) => feed.itemsOf(day).isNotEmpty);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: DayFeedLayout.horizontalPadding),
@@ -67,32 +80,17 @@ final class _MindCollectionBody extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (showsWeekTitles && startsWeek)
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 4.0),
-              child: Text(
-                '${context.l10n.week} #$weekNumber',
-                textAlign: TextAlign.center,
-                style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-              ),
-            ),
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
+            CalendarWeekHeader(weekNumber: weekNumber, onPlay: hasWeekItems ? () => onPlay(weekDays) : null),
+          CalendarDayPill(
+            date: date,
+            isToday: dayIndex == todayIndex,
+            isEmpty: items.isEmpty,
             onTap: () => onTapToDay(dayIndex),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                DateFormatters.formatFullDate(date, Localizations.localeOf(context)),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-                  color: isToday ? theme.colorScheme.primary : null,
-                ),
-              ),
-            ),
+            onPlay: items.isEmpty ? null : () => onPlay([dayIndex]),
           ),
           if (items.isNotEmpty)
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(top: 2.0, bottom: 8.0),
               child: DayFeedGrid(
                 items: items,
                 columnCount: settings.columnCount,

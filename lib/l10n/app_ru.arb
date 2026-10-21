@@ -263,5 +263,7 @@
     "customizeSettingsDescription": "Снятые разделы и пункты скрываются с экрана настроек.",
     "calendarSettings": "Настройки календаря",
     "calendarShowMedia": "Показывать фото и видео",
-    "calendarWeekTitles": "Заголовки недель"
+    "calendarWeekTitles": "Заголовки недель",
+    "calendarNoActivity": "Нет активности",
+    "calendarPlayStories": "Смотреть истории"
 }

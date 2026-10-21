@@ -1,9 +1,10 @@
+import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
+import 'package:keklist/presentation/core/widgets/pinch_columns_detector.dart';
 import 'dart:async';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
-import 'package:gap/gap.dart';
 import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_bloc.dart';
@@ -39,10 +40,12 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/screens/mind_collection/calendar_day_feed.dart';
+import 'package:keklist/presentation/screens/mind_collection/local_widgets/calendar_day_header.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/calendar_settings_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_grid.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
 part 'local_widgets/search_app_bar/search_app_bar.dart';
 part 'local_widgets/app_bar/mind_collection_app_bar.dart';
@@ -182,6 +185,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: !_isSearching,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: BoolWidget(
@@ -209,9 +213,12 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
         searchResults: _searchResults,
         hideKeyboard: _hideKeyboard,
         onTapToDay: (dayIndex) => _showDayCollectionScreen(groupDayIndex: dayIndex),
-        onOpenItem: _openDayStories,
+        onOpenItem: _openDayItem,
+        onPlay: _playStories,
         feed: _feed,
         settings: _calendarSettings,
+        onColumnCountChanged: (count) =>
+            sendEventToBloc<SettingsBloc>(SettingsUpdateCalendar(calendar: _calendarSettings.copyWith(columnCount: count))),
         showsWeekTitles: _shouldShowTitles,
         todayIndex: _getNowDayIndex(),
         itemScrollController: _itemScrollController,
@@ -255,28 +262,46 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     if (_isDemoMode || !_itemScrollController.isAttached) {
       return;
     }
-    _itemScrollController.jumpTo(index: _getNowDayIndex());
+    _itemScrollController.jumpTo(index: _getNowDayIndex(), alignment: _belowBarAlignment);
   }
 
   Future<void> _scrollToNow() => _scrollToDayIndex(_getNowDayIndex());
 
+  /// Scroll targets land just below the floating bar instead of under it.
+  double get _belowBarAlignment {
+    final MediaQueryData media = MediaQuery.of(context);
+    return ((media.padding.top + kToolbarHeight) / media.size.height).clamp(0.0, 0.5);
+  }
+
   Future<void> _scrollToDayIndex(int dayIndex) => _itemScrollController.scrollTo(
     index: dayIndex,
+    alignment: _belowBarAlignment,
     duration: const Duration(milliseconds: 200),
   );
 
-  void _openDayStories(int dayIndex, int initialIndex) {
-    final List<DayFeedItem> items = _feed.itemsOf(dayIndex);
+  Future<void> _openMind(Mind mind) => Navigator.of(context).push(
+    SwipeablePageRoute(builder: (_) => MindInfoScreen(rootMind: mind, allMinds: _minds)),
+  );
+
+  void _openDayItem(int dayIndex, int initialIndex) => DayItemViewerScreen.show(
+    context,
+    items: _feed.itemsOf(dayIndex),
+    initialIndex: initialIndex,
+    onOpenMind: _openMind,
+  );
+
+  void _playStories(List<int> dayIndexes) {
+    final List<DayFeedItem> items = [for (final int dayIndex in dayIndexes) ..._feed.itemsOf(dayIndex)];
+    if (items.isEmpty) return;
     Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
         fullscreenDialog: true,
         pageBuilder: (_, _, _) => DayStoriesScreen(
           items: items,
-          initialIndex: initialIndex,
-          onOpenMind: (mind) => Navigator.of(context).push(
-            SwipeablePageRoute(builder: (_) => MindInfoScreen(rootMind: mind, allMinds: _minds)),
-          ),
+          initialIndex: 0,
+          showsDate: dayIndexes.length > 1,
+          onOpenMind: _openMind,
         ),
         transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
       ),

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
-import 'package:keklist/presentation/core/widgets/mind_emotion_emojis.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
 import 'package:flutter_volume_controller/flutter_volume_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
@@ -260,7 +260,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
   Widget build(BuildContext context) {
     final double dismissProgress = (_dragOffsetY.clamp(0.0, 350.0)) / 350.0;
     return Scaffold(
-      backgroundColor: Colors.black.withValues(alpha: 1.0 - dismissProgress),
+      backgroundColor: storyColorsOf(context).background.withValues(alpha: 1.0 - dismissProgress),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTapUp: _onTapUp,
@@ -285,6 +285,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
   }
 
   Widget _buildProgressBars() {
+    final Color foreground = storyColorsOf(context).foreground;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
       child: AnimatedBuilder(
@@ -299,8 +300,8 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
                   child: LinearProgressIndicator(
                     minHeight: 2.5,
                     value: index < _index ? 1.0 : (index == _index ? _progress.value : 0.0),
-                    backgroundColor: Colors.white24,
-                    valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                    backgroundColor: foreground.withValues(alpha: 0.25),
+                    valueColor: AlwaysStoppedAnimation<Color>(foreground),
                   ),
                 ),
               ),
@@ -318,19 +319,20 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     final bool isVideo = (item is DayFeedAsset && item.isVideo) ||
         (item is DayFeedFolderMedia && item.isVideo) ||
         (item is DayFeedMind && item.mind.noteContent.hasMedia);
+    final Color foreground = storyColorsOf(context).foreground;
     return Row(
       children: [
         const SizedBox(width: 16.0),
-        Text(time, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+        Text(time, style: TextStyle(color: foreground, fontWeight: FontWeight.w600)),
         const Spacer(),
         if (isVideo)
           IconButton(
-            color: Colors.white,
+            color: foreground,
             tooltip: _isMutedForSession ? context.l10n.dayFeedUnmute : context.l10n.dayFeedMute,
             icon: Icon(_isMutedForSession ? Icons.volume_off : Icons.volume_up),
             onPressed: () => _setMuted(!_isMutedForSession),
           ),
-        IconButton(color: Colors.white, icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
+        IconButton(color: foreground, icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
       ],
     );
   }
@@ -377,53 +379,23 @@ final class _MindStory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String text = item.mind.plainNote.trim();
     final VideoPlayerController? video = roundVideo;
-    final bool hasVideo = item.mind.noteContent.hasVideo;
     return Center(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (hasVideo)
-              SizedBox.square(
-                dimension: _kStoryRoundVideoSize,
-                child: video != null && video.value.isInitialized
-                    ? Stack(
-                        fit: StackFit.expand,
-                        children: [RoundVideoSurface(controller: video), RoundVideoProgressRing(controller: video)],
-                      )
-                    : const _Loading(),
-              ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: MindEmotionEmojis(mind: item.mind, fontSize: hasVideo ? 32.0 : 48.0),
-            ),
-            if (text.isNotEmpty) ...[
-              const SizedBox(height: 24.0),
-              Text(text, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 20.0)),
-            ],
-            if (item.reflectionCount > 0 || item.mind.noteContent.hasAudio) ...[
-              const SizedBox(height: 16.0),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 12.0,
-                children: [
-                  if (item.mind.noteContent.hasAudio) const Icon(Icons.graphic_eq, color: Colors.white70),
-                  if (item.reflectionCount > 0)
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      spacing: 4.0,
-                      children: [
-                        const Icon(Icons.forum_outlined, color: Colors.white70, size: 20.0),
-                        Text('${item.reflectionCount}', style: const TextStyle(color: Colors.white70)),
-                      ],
-                    ),
-                ],
-              ),
-            ],
-          ],
+        padding: const EdgeInsets.all(24.0),
+        child: MindStoryDetails(
+          mind: item.mind,
+          media: item.mind.noteContent.hasVideo
+              ? SizedBox.square(
+                  dimension: _kStoryRoundVideoSize,
+                  child: video != null && video.value.isInitialized
+                      ? Stack(
+                          fit: StackFit.expand,
+                          children: [RoundVideoSurface(controller: video), RoundVideoProgressRing(controller: video)],
+                        )
+                      : const _Loading(),
+                )
+              : null,
         ),
       ),
     );
@@ -450,7 +422,7 @@ final class _SafPhotoState extends State<_SafPhoto> {
         final Uint8List? bytes = snapshot.data;
         if (bytes != null) return Image.memory(bytes, fit: BoxFit.contain);
         if (snapshot.connectionState == ConnectionState.done) {
-          return const Center(child: Icon(Icons.broken_image_outlined, color: Colors.white54, size: 48));
+          return Center(child: Icon(Icons.broken_image_outlined, color: storyColorsOf(context).foreground, size: 48));
         }
         return const _Loading();
       },
@@ -462,5 +434,6 @@ final class _Loading extends StatelessWidget {
   const _Loading();
 
   @override
-  Widget build(BuildContext context) => const Center(child: CircularProgressIndicator(color: Colors.white));
+  Widget build(BuildContext context) =>
+      Center(child: CircularProgressIndicator(color: storyColorsOf(context).foreground));
 }

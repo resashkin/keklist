@@ -263,5 +263,7 @@
     "customizeSettingsDescription": "Неозначени одељци и редови се скривају са екрана подешавања.",
     "calendarSettings": "Подешавања календара",
     "calendarShowMedia": "Прикажи фотографије и видео записе",
-    "calendarWeekTitles": "Наслови недеља"
+    "calendarWeekTitles": "Наслови недеља",
+    "calendarNoActivity": "Нема активности",
+    "calendarPlayStories": "Пусти приче"
 }

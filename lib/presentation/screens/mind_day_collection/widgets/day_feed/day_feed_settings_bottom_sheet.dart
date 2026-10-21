@@ -1,3 +1,5 @@
+import 'package:keklist/presentation/core/widgets/column_count_row.dart';
+import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
@@ -37,7 +39,10 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
 
   Widget _buildContent(BuildContext context, DayFeedSettings settings, {required bool isWeatherEnabled}) {
     final ThemeData theme = Theme.of(context);
-    void update(SettingsUpdateDayFeed event) => context.read<SettingsBloc>().add(event);
+    void update(SettingsUpdateDayFeed event) {
+      tweakChangeHaptic();
+      context.read<SettingsBloc>().add(event);
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -47,9 +52,8 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           child: Text(context.l10n.dayFeedTileSettings, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
         ),
-        _SegmentedRow<int>(
+        ColumnCountRow(
           title: context.l10n.dayFeedColumns,
-          options: {for (final int count in DayFeedSettings.columnCountOptions) count: '$count'},
           selected: settings.columnCount,
           onChanged: (count) => update(SettingsUpdateDayFeed(columnCount: count)),
         ),
@@ -73,7 +77,10 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
           ),
           subtitle: Text(context.l10n.sourcesWeatherSubtitle),
           value: isWeatherEnabled,
-          onChanged: onWeatherToggled,
+          onChanged: (value) {
+            tweakChangeHaptic();
+            onWeatherToggled(value);
+          },
         ),
         if (isWeatherEnabled)
           ListTile(

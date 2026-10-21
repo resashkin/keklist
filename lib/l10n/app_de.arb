@@ -263,5 +263,7 @@
     "customizeSettingsDescription": "Abgewählte Bereiche und Zeilen werden in den Einstellungen ausgeblendet.",
     "calendarSettings": "Kalendereinstellungen",
     "calendarShowMedia": "Fotos und Videos anzeigen",
-    "calendarWeekTitles": "Wochentitel"
+    "calendarWeekTitles": "Wochentitel",
+    "calendarNoActivity": "Keine Aktivität",
+    "calendarPlayStories": "Storys abspielen"
 }

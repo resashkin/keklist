@@ -96,3 +96,8 @@ The "+ Write" button label (`create` l10n key) is now "+ Create" in all language
 - Ids are stored as strings, so removing a row from code leaves a harmless stale id in `hiddenSettingsItemIds`.
 - If `SettingsBloc` is not in `SettingsDataState` when the toast timer fires (e.g. mid-export), the toast is skipped and retried on the next visit to the screen.
 - The accelerometer stream's errors (no sensor, web without motion permission) are ignored; the long-press fallback keeps working.
+
+## Hidden Tabs & Haptics
+- `isActive` requires both `TickerMode.valuesOf(context).enabled` and `Visibility.of(context)`: in Flutter 3.47
+  `IndexedStack` hides children via a visibility scope without disabling tickers, so every tab used to answer a shake.
+- A shake triggers a medium haptic; every change in tweak sheets triggers `tweakChangeHaptic()` (selection).
