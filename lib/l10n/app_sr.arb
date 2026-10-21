@@ -263,6 +263,5 @@
     "customizeSettingsDescription": "Неозначени одељци и редови се скривају са екрана подешавања.",
     "calendarSettings": "Подешавања календара",
     "calendarShowMedia": "Прикажи фотографије и видео записе",
-    "calendarWeekTitles": "Наслови недеља",
-    "calendarHideEmptyDays": "Сакриј празне дане"
+    "calendarWeekTitles": "Наслови недеља"
 }

@@ -823,7 +823,4 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => '周标题';
-
-  @override
-  String get calendarHideEmptyDays => '隐藏空白日';
 }

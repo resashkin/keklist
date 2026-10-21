@@ -101,7 +101,7 @@ void main() {
 
   group('SettingsUpdateCalendar', () {
     test('stores the calendar settings and keeps every other field', () async {
-      const CalendarSettings calendar = CalendarSettings(columnCount: 5, isMediaVisible: false, hidesEmptyDays: true);
+      const CalendarSettings calendar = CalendarSettings(columnCount: 5, isMediaVisible: false);
       bloc.add(const SettingsUpdateCalendar(calendar: calendar));
       await Future.delayed(const Duration(milliseconds: 50));
 

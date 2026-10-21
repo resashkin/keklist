@@ -500,6 +500,5 @@
     "customizeSettingsDescription": "Белгиси алынган бөлүмдөр жана саптар жөндөөлөр экранында жашырылат.",
     "calendarSettings": "Календардын жөндөөлөрү",
     "calendarShowMedia": "Сүрөт жана видеолорду көрсөтүү",
-    "calendarWeekTitles": "Жуманын аталыштары",
-    "calendarHideEmptyDays": "Бош күндөрдү жашыруу"
+    "calendarWeekTitles": "Жуманын аталыштары"
 }

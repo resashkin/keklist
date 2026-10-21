@@ -849,7 +849,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Week titles';
-
-  @override
-  String get calendarHideEmptyDays => 'Hide empty days';
 }

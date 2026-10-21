@@ -854,7 +854,4 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Заголовки недель';
-
-  @override
-  String get calendarHideEmptyDays => 'Скрывать пустые дни';
 }

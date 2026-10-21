@@ -54,7 +54,6 @@ final class GalleryIndexer {
 
   MediaDayIndex? entryFor(int dayIndex) => _repository.entryFor(dayIndex);
   Iterable<MediaDayIndex> get entries => _repository.entries;
-  Iterable<int> get dayIndexes => _repository.dayIndexes;
 
   /// True when the index can vouch that [dayIndex] has no library media, so the
   /// day screen may skip the live query. Days on or after the last scan are never trusted.

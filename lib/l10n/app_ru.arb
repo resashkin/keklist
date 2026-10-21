@@ -263,6 +263,5 @@
     "customizeSettingsDescription": "Снятые разделы и пункты скрываются с экрана настроек.",
     "calendarSettings": "Настройки календаря",
     "calendarShowMedia": "Показывать фото и видео",
-    "calendarWeekTitles": "Заголовки недель",
-    "calendarHideEmptyDays": "Скрывать пустые дни"
+    "calendarWeekTitles": "Заголовки недель"
 }

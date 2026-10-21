@@ -47,22 +47,18 @@ final class CalendarSettings {
   final int columnCount;
   final bool isMindTextVisible;
   final bool isMediaVisible;
-  final bool hidesEmptyDays;
 
   const CalendarSettings({
     this.columnCount = 4,
     this.isMindTextVisible = true,
     this.isMediaVisible = true,
-    this.hidesEmptyDays = false,
   });
 
-  CalendarSettings copyWith({int? columnCount, bool? isMindTextVisible, bool? isMediaVisible, bool? hidesEmptyDays}) =>
-      CalendarSettings(
-        columnCount: columnCount ?? this.columnCount,
-        isMindTextVisible: isMindTextVisible ?? this.isMindTextVisible,
-        isMediaVisible: isMediaVisible ?? this.isMediaVisible,
-        hidesEmptyDays: hidesEmptyDays ?? this.hidesEmptyDays,
-      );
+  CalendarSettings copyWith({int? columnCount, bool? isMindTextVisible, bool? isMediaVisible}) => CalendarSettings(
+    columnCount: columnCount ?? this.columnCount,
+    isMindTextVisible: isMindTextVisible ?? this.isMindTextVisible,
+    isMediaVisible: isMediaVisible ?? this.isMediaVisible,
+  );
 }
 
 /// Analytics screen layout: widget order (unknown ids ignored), hidden widgets and the period.
@@ -202,7 +198,6 @@ final class KeklistSettings {
     ..calendarColumnCount = calendar.columnCount
     ..isCalendarMindTextVisible = calendar.isMindTextVisible
     ..isCalendarMediaVisible = calendar.isMediaVisible
-    ..calendarHidesEmptyDays = calendar.hidesEmptyDays
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 

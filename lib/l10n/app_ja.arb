@@ -263,6 +263,5 @@
     "customizeSettingsDescription": "チェックを外したセクションと項目は設定画面に表示されません。",
     "calendarSettings": "カレンダー設定",
     "calendarShowMedia": "写真とビデオを表示",
-    "calendarWeekTitles": "週のタイトル",
-    "calendarHideEmptyDays": "空の日を隠す"
+    "calendarWeekTitles": "週のタイトル"
 }

@@ -1120,9 +1120,5 @@
     "calendarWeekTitles": "Week titles",
     "@calendarWeekTitles": {
         "description": "Calendar setting: show week number headers"
-    },
-    "calendarHideEmptyDays": "Hide empty days",
-    "@calendarHideEmptyDays": {
-        "description": "Calendar setting: hide days without minds or media"
     }
 }

@@ -8,7 +8,6 @@ abstract class MediaIndexRepository {
   MediaIndexMeta get meta;
   MediaDayIndex? entryFor(int dayIndex);
   Iterable<MediaDayIndex> get entries;
-  Iterable<int> get dayIndexes;
   FutureOr<void> replaceAll({required Iterable<MediaDayIndex> entries, required MediaIndexMeta meta});
   FutureOr<void> putDays({required Iterable<MediaDayIndex> entries, required Iterable<int> emptyDayIndexes});
   FutureOr<void> updateMeta(MediaIndexMeta meta);

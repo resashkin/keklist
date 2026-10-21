@@ -23,9 +23,6 @@ final class _MemoryRepository implements MediaIndexRepository {
   Iterable<MediaDayIndex> get entries => days.values;
 
   @override
-  Iterable<int> get dayIndexes => days.keys;
-
-  @override
   void replaceAll({required Iterable<MediaDayIndex> entries, required MediaIndexMeta meta}) {
     days
       ..clear()

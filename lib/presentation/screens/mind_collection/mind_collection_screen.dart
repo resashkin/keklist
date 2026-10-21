@@ -61,7 +61,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
 
   Iterable<Mind> _minds = [];
   CalendarDayFeed _feed = CalendarDayFeed(minds: const [], indexer: null, includesMedia: false);
-  List<int>? _dayIndexes;
   SettingsDataState? _settingsDataState;
   MindSearching? _searchingMindState;
   bool _isSettingsVisible = true;
@@ -104,12 +103,8 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
       subscribeToBloc<SettingsBloc>(onNewState: (state) {
         switch (state) {
           case SettingsDataState settingsDataState:
-            final bool hidesEmptyDaysBefore = _calendarSettings.hidesEmptyDays;
             setState(() => _settingsDataState = settingsDataState);
             _rebuildFeed();
-            if (hidesEmptyDaysBefore != _calendarSettings.hidesEmptyDays) {
-              WidgetsBinding.instance.addPostFrameCallback((_) => _jumpToNow());
-            }
           case SettingsShowWhatsNew _:
             _showWhatsNew();
             sendEventToBloc<SettingsBloc>(SettingsWhatsNewShown());
@@ -218,7 +213,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
         feed: _feed,
         settings: _calendarSettings,
         showsWeekTitles: _shouldShowTitles,
-        dayIndexes: _dayIndexes,
         todayIndex: _getNowDayIndex(),
         itemScrollController: _itemScrollController,
         itemPositionsListener: _itemPositionsListener,
@@ -249,37 +243,25 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
 
   void _rebuildFeed() {
     if (!mounted) return;
-    final CalendarSettings settings = _calendarSettings;
     final CalendarDayFeed feed = CalendarDayFeed(
       minds: _minds,
       indexer: _indexer,
-      includesMedia: settings.isMediaVisible,
+      includesMedia: _calendarSettings.isMediaVisible,
     );
-    setState(() {
-      _feed = feed;
-      _dayIndexes = settings.hidesEmptyDays ? feed.nonEmptyDayIndexes(alwaysIncluded: _getNowDayIndex()) : null;
-    });
-  }
-
-  /// List position of [dayIndex]; with empty days hidden, the nearest shown day not after it.
-  int _positionOf(int dayIndex) {
-    final List<int>? days = _dayIndexes;
-    if (days == null) return dayIndex;
-    final int firstAfter = days.indexWhere((day) => day > dayIndex);
-    return firstAfter == -1 ? days.length - 1 : (firstAfter - 1).clamp(0, days.length - 1);
+    setState(() => _feed = feed);
   }
 
   void _jumpToNow() {
     if (_isDemoMode || !_itemScrollController.isAttached) {
       return;
     }
-    _itemScrollController.jumpTo(index: _positionOf(_getNowDayIndex()));
+    _itemScrollController.jumpTo(index: _getNowDayIndex());
   }
 
   Future<void> _scrollToNow() => _scrollToDayIndex(_getNowDayIndex());
 
   Future<void> _scrollToDayIndex(int dayIndex) => _itemScrollController.scrollTo(
-    index: _positionOf(dayIndex),
+    index: dayIndex,
     duration: const Duration(milliseconds: 200),
   );
 

@@ -37,10 +37,4 @@ final class CalendarDayFeed {
     );
   });
 
-  /// Days with anything to show, ascending; [alwaysIncluded] (today) is kept so the list has an anchor.
-  List<int> nonEmptyDayIndexes({required int alwaysIncluded}) {
-    final Set<int> days = {..._mindsByDay.keys, alwaysIncluded};
-    if (includesMedia) days.addAll(_indexer?.dayIndexes ?? const []);
-    return days.toList()..sort();
-  }
 }
