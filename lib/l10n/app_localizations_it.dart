@@ -860,7 +860,4 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Titoli delle settimane';
-
-  @override
-  String get calendarHideEmptyDays => 'Nascondi giorni vuoti';
 }

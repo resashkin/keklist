@@ -855,7 +855,4 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Жуманын аталыштары';
-
-  @override
-  String get calendarHideEmptyDays => 'Бош күндөрдү жашыруу';
 }

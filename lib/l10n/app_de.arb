@@ -263,6 +263,5 @@
     "customizeSettingsDescription": "Abgewählte Bereiche und Zeilen werden in den Einstellungen ausgeblendet.",
     "calendarSettings": "Kalendereinstellungen",
     "calendarShowMedia": "Fotos und Videos anzeigen",
-    "calendarWeekTitles": "Wochentitel",
-    "calendarHideEmptyDays": "Leere Tage ausblenden"
+    "calendarWeekTitles": "Wochentitel"
 }

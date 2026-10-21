@@ -52,9 +52,6 @@ final class MediaIndexHiveRepository implements MediaIndexRepository {
   Iterable<MediaDayIndex> get entries => _isOpen ? _daysBox.values.map((object) => object.toEntry()) : const [];
 
   @override
-  Iterable<int> get dayIndexes => _isOpen ? _daysBox.keys.cast<int>() : const [];
-
-  @override
   Future<void> replaceAll({required Iterable<MediaDayIndex> entries, required MediaIndexMeta meta}) async {
     await ready;
     await _daysBox.clear();

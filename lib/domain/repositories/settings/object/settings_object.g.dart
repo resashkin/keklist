@@ -67,16 +67,13 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..isCalendarMindTextVisible = fields[32] == null
           ? true
           : fields[32] as bool
-      ..isCalendarMediaVisible = fields[33] == null ? true : fields[33] as bool
-      ..calendarHidesEmptyDays = fields[34] == null
-          ? false
-          : fields[34] as bool;
+      ..isCalendarMediaVisible = fields[33] == null ? true : fields[33] as bool;
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(28)
+      ..writeByte(27)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)
@@ -130,9 +127,7 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(32)
       ..write(obj.isCalendarMindTextVisible)
       ..writeByte(33)
-      ..write(obj.isCalendarMediaVisible)
-      ..writeByte(34)
-      ..write(obj.calendarHidesEmptyDays);
+      ..write(obj.isCalendarMediaVisible);
   }
 
   @override

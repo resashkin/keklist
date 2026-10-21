@@ -861,7 +861,4 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Wochentitel';
-
-  @override
-  String get calendarHideEmptyDays => 'Leere Tage ausblenden';
 }

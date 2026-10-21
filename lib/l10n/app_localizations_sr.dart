@@ -853,9 +853,6 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Наслови недеља';
-
-  @override
-  String get calendarHideEmptyDays => 'Сакриј празне дане';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1706,7 +1703,4 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get calendarWeekTitles => 'Naslovi nedelja';
-
-  @override
-  String get calendarHideEmptyDays => 'Sakrij prazne dane';
 }

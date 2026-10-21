@@ -856,7 +856,4 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => 'Hafta sarlavhalari';
-
-  @override
-  String get calendarHideEmptyDays => 'Bo‘sh kunlarni yashirish';
 }

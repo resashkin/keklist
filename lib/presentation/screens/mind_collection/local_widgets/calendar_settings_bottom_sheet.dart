@@ -71,11 +71,6 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
             value: showsWeekTitles,
             onChanged: (value) => context.read<SettingsBloc>().add(SettingsUpdateShouldShowTitlesMode(value: value)),
           ),
-          SwitchListTile(
-            title: Text(context.l10n.calendarHideEmptyDays),
-            value: calendar.hidesEmptyDays,
-            onChanged: (value) => update(calendar.copyWith(hidesEmptyDays: value)),
-          ),
           const SizedBox(height: 8.0),
         ],
       ),

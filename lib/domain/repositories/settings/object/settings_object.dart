@@ -103,9 +103,6 @@ final class SettingsObject extends HiveObject {
   @HiveField(33, defaultValue: true)
   late bool isCalendarMediaVisible;
 
-  @HiveField(34, defaultValue: false)
-  late bool calendarHidesEmptyDays;
-
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -142,7 +139,6 @@ final class SettingsObject extends HiveObject {
           columnCount: calendarColumnCount,
           isMindTextVisible: isCalendarMindTextVisible,
           isMediaVisible: isCalendarMediaVisible,
-          hidesEmptyDays: calendarHidesEmptyDays,
         ),
       );
 }

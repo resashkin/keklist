@@ -25,9 +25,6 @@ final class _Repository implements MediaIndexRepository {
   Iterable<MediaDayIndex> get entries => days.values;
 
   @override
-  Iterable<int> get dayIndexes => days.keys;
-
-  @override
   void replaceAll({required Iterable<MediaDayIndex> entries, required MediaIndexMeta meta}) {}
 
   @override
@@ -111,14 +108,4 @@ void main() {
     expect(feed.itemsOf(12), isEmpty);
   });
 
-  test('non-empty days include media-only days and today', () {
-    expect(
-      CalendarDayFeed(minds: minds, indexer: indexer, includesMedia: true).nonEmptyDayIndexes(alwaysIncluded: 20),
-      [10, 11, 12, 20],
-    );
-    expect(
-      CalendarDayFeed(minds: minds, indexer: indexer, includesMedia: false).nonEmptyDayIndexes(alwaysIncluded: 20),
-      [10, 11, 20],
-    );
-  });
 }

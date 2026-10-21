@@ -1706,12 +1706,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Week titles'**
   String get calendarWeekTitles;
-
-  /// Calendar setting: hide days without minds or media
-  ///
-  /// In en, this message translates to:
-  /// **'Hide empty days'**
-  String get calendarHideEmptyDays;
 }
 
 class _AppLocalizationsDelegate

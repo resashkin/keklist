@@ -827,7 +827,4 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get calendarWeekTitles => '週のタイトル';
-
-  @override
-  String get calendarHideEmptyDays => '空の日を隠す';
 }
