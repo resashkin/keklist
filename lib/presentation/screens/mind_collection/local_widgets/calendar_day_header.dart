@@ -2,8 +2,8 @@ import 'package:intl/intl.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// The tappable date of a calendar day, centered: a rounded pill with a chevron and, when the day
-/// has anything, a ▶ segment that plays its stories.
+/// The tappable date of a calendar day, centered: a rounded pill with a chevron, a separate round ▶
+/// that plays its stories, and a quiet "No activity" caption below on empty days.
 final class CalendarDayPill extends StatelessWidget {
   final DateTime date;
   final bool isToday;
@@ -30,53 +30,61 @@ final class CalendarDayPill extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
-      child: Center(
-        child: Material(
-          color: background,
-          shape: const StadiumBorder(),
-          clipBehavior: Clip.antiAlias,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+      child: Column(
+        spacing: 4.0,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 8.0,
             children: [
-              InkWell(
-                onTap: onTap,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(16.0, 6.0, onPlay == null ? 10.0 : 6.0, 6.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 2.0,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            title,
-                            style: theme.textTheme.titleSmall?.copyWith(color: foreground, fontWeight: FontWeight.w600),
-                          ),
-                          if (isEmpty)
-                            Text(
-                              context.l10n.calendarNoActivity,
-                              style: theme.textTheme.labelSmall?.copyWith(color: foreground.withValues(alpha: 0.6)),
-                            ),
-                        ],
-                      ),
-                      Icon(Icons.chevron_right, size: 20.0, color: foreground.withValues(alpha: 0.7)),
-                    ],
+              Material(
+                color: background,
+                shape: const StadiumBorder(),
+                clipBehavior: Clip.antiAlias,
+                child: InkWell(
+                  onTap: onTap,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16.0, 6.0, 10.0, 6.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: 2.0,
+                      children: [
+                        Text(
+                          title,
+                          style: theme.textTheme.titleSmall?.copyWith(color: foreground, fontWeight: FontWeight.w600),
+                        ),
+                        Icon(Icons.chevron_right, size: 20.0, color: foreground.withValues(alpha: 0.7)),
+                      ],
+                    ),
                   ),
                 ),
               ),
-              if (onPlay != null) ...[
-                Container(width: 1.0, height: 20.0, color: foreground.withValues(alpha: 0.2)),
-                InkWell(
-                  onTap: onPlay,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 6.0, 12.0, 6.0),
-                    child: Icon(Icons.play_arrow_rounded, size: 22.0, color: foreground),
+              if (onPlay != null)
+                Material(
+                  color: background,
+                  shape: const CircleBorder(),
+                  clipBehavior: Clip.antiAlias,
+                  child: InkWell(
+                    onTap: onPlay,
+                    child: Padding(
+                      padding: const EdgeInsets.all(7.0),
+                      child: Icon(
+                        Icons.play_arrow_rounded,
+                        size: 22.0,
+                        color: foreground,
+                        semanticLabel: context.l10n.calendarPlayStories,
+                      ),
+                    ),
                   ),
                 ),
-              ],
             ],
           ),
-        ),
+          if (isEmpty)
+            Text(
+              context.l10n.calendarNoActivity,
+              style: theme.textTheme.labelSmall?.copyWith(color: colors.onSurface.withValues(alpha: 0.45)),
+            ),
+        ],
       ),
     );
   }
