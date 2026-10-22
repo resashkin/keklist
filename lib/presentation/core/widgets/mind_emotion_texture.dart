@@ -25,7 +25,8 @@ final class MindEmotionTexture extends StatelessWidget {
         return IgnorePointer(
           child: ExcludeSemantics(
             child: Opacity(
-              opacity: opacity,
+              // Light backgrounds make the pattern louder than the text on top of it.
+              opacity: Theme.of(context).brightness == Brightness.light ? opacity * 0.5 : opacity,
               child: LayoutBuilder(builder: (context, constraints) => _buildPattern(emojis, constraints.biggest)),
             ),
           ),

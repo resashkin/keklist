@@ -16,7 +16,6 @@ import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/core/widgets/creator_bottom_bar/mind_creator_bottom_bar.dart';
-import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture.dart';
@@ -32,10 +31,10 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/story_texture_tweak_sheet.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:translator/translator.dart';
 import 'package:video_player/video_player.dart';
 import 'package:keklist/presentation/core/helpers/media_sources.dart';
+import 'package:keklist/presentation/core/widgets/gallery/gallery_media.dart';
 
 const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
@@ -462,12 +461,12 @@ final class _ViewerPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image(
-            image: CachedAssetThumbnailProvider(asset),
+            image: GalleryMedia.thumbnail(asset),
             fit: BoxFit.contain,
             errorBuilder: (_, _, _) => const _Loading(),
           ),
           Image(
-            image: AssetEntityImageProvider(asset, isOriginal: true),
+            image: GalleryMedia.original(asset),
             fit: BoxFit.contain,
             frameBuilder: (_, child, frame, wasSynchronouslyLoaded) => AnimatedOpacity(
               opacity: frame == null && !wasSynchronouslyLoaded ? 0.0 : 1.0,
@@ -719,9 +718,7 @@ final class _VideoPageState extends State<_VideoPage> {
 
   Future<void> _load() async {
     final VideoPlayerController? controller = switch (widget.item) {
-      DayFeedAsset(:final asset) => await asset.file.then(
-        (file) => file == null ? null : VideoPlayerController.file(file),
-      ),
+      DayFeedAsset(:final asset) => await GalleryMedia.videoController(asset),
       DayFeedFolderMedia(item: FolderFileItem(:final file)) => VideoPlayerController.file(file),
       DayFeedFolderMedia(item: FolderSafItem(:final uri)) => VideoPlayerController.contentUri(uri),
       _ => null,

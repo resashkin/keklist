@@ -16,6 +16,9 @@ import 'package:keklist/presentation/screens/mind_collection/mind_collection_scr
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
 
+/// Wider screens get the tabs as a rail on the left, like a desktop app.
+const double _kRailMinWidth = 800.0;
+
 final class TabsContainerScreen extends StatefulWidget {
   const TabsContainerScreen({super.key});
 
@@ -29,6 +32,7 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
   final List<Widget> _bodyWidgets = [];
   List<TabType> _tabTypes = [];
   bool _useLiquidGlass = false;
+  bool _isWide = false;
   final GlobalKey<MindDayCollectionScreenState> _todayKey = GlobalKey();
 
   @override
@@ -91,27 +95,62 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
   bool get _isTabBarVisible => _items.length >= 2;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    extendBody: _useLiquidGlass,
-    body: IndexedStack(index: _selectedTabIndex, children: _bodyWidgets),
-    bottomNavigationBar: BoolWidget(
-      condition: _isTabBarVisible,
-      trueChild: AdaptiveBottomNavigationBar(
-        items: List.of(_isTabBarVisible ? _items : _getFakeItems()),
-        tabTypes: _tabTypes,
-        useLiquidGlass: _useLiquidGlass,
-        selectedIndex: _selectedTabIndex,
-        onTap: (tabIndex) {
-          if (tabIndex == _selectedTabIndex && tabIndex < _tabTypes.length && _tabTypes[tabIndex] == TabType.today) {
-            _todayKey.currentState?.goToToday();
-          } else {
-            sendEventToBloc<TabsContainerBloc>(TabsContainerChangeSelectedTab(selectedIndex: tabIndex));
-          }
-        },
+  Widget build(BuildContext context) {
+    final bool isWide = _isTabBarVisible && MediaQuery.sizeOf(context).width >= _kRailMinWidth;
+    if (isWide != _isWide) {
+      _isWide = isWide;
+      // The Today FAB offset depends on whether a bottom bar overlaps the body.
+      _bodyWidgets
+        ..clear()
+        ..addAll(_tabTypes.map(_bodyWidgetByType));
+    }
+    final Widget body = IndexedStack(index: _selectedTabIndex, children: _bodyWidgets);
+    if (isWide) {
+      return Scaffold(
+        body: Row(
+          children: [
+            SafeArea(
+              right: false,
+              child: NavigationRail(
+                selectedIndex: _selectedTabIndex,
+                onDestinationSelected: _onTap,
+                labelType: NavigationRailLabelType.all,
+                destinations: [
+                  for (final BottomNavigationBarItem item in _items)
+                    NavigationRailDestination(icon: item.icon, label: Text(item.label ?? '')),
+                ],
+              ),
+            ),
+            const VerticalDivider(width: 1, thickness: 1),
+            Expanded(child: body),
+          ],
+        ),
+      );
+    }
+    return Scaffold(
+      extendBody: _useLiquidGlass,
+      body: body,
+      bottomNavigationBar: BoolWidget(
+        condition: _isTabBarVisible,
+        trueChild: AdaptiveBottomNavigationBar(
+          items: List.of(_isTabBarVisible ? _items : _getFakeItems()),
+          tabTypes: _tabTypes,
+          useLiquidGlass: _useLiquidGlass,
+          selectedIndex: _selectedTabIndex,
+          onTap: _onTap,
+        ),
+        falseChild: SizedBox.shrink(),
       ),
-      falseChild: SizedBox.shrink(),
-    ),
-  );
+    );
+  }
+
+  void _onTap(int tabIndex) {
+    if (tabIndex == _selectedTabIndex && tabIndex < _tabTypes.length && _tabTypes[tabIndex] == TabType.today) {
+      _todayKey.currentState?.goToToday();
+    } else {
+      sendEventToBloc<TabsContainerBloc>(TabsContainerChangeSelectedTab(selectedIndex: tabIndex));
+    }
+  }
 
   List<BottomNavigationBarItem> _getFakeItems() => [
     BottomNavigationBarItem(icon: TabType.calendar.materialIcon, label: TabType.calendar.localizedLabel(context)),
@@ -134,7 +173,7 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
           // overlaps the body via `extendBody`. In Material mode the solid nav
           // bar already reserves its space, so the extra offset would leave a
           // strange gap under the FAB.
-          fabBottomOffset: _useLiquidGlass && _isTabBarVisible ? kBottomNavigationBarHeight + 48.0 : 0.0,
+          fabBottomOffset: _useLiquidGlass && _isTabBarVisible && !_isWide ? kBottomNavigationBarHeight + 48.0 : 0.0,
         );
       case TabType.debugMenu:
         return const SizedBox.shrink();

@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
+import 'package:keklist/domain/services/media_index/media_day_index.dart';
+import 'package:keklist/domain/services/media_index/photo_library_gallery_source.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_media_loader.dart';
@@ -48,7 +50,7 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
     _emit();
 
     final (List<DayFeedItem> media, DayFeedMediaIssue? issue) = kIsPhoneWeb
-        ? (const <DayFeedItem>[], null)
+        ? await _loadPhoneMedia(dayIndex)
         : Platform.isAndroid
         ? await _loadFolderMedia(dayIndex, folderPath, isFolderRecursive)
         : await _loadPhotoMedia(dayIndex, requestPhotoAccess);
@@ -58,6 +60,16 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
     _mediaIssue = issue;
     _isMediaLoading = false;
     _emit();
+  }
+
+  // The phone answers with its photo library on iOS and its media folder on Android.
+  Future<(List<DayFeedItem>, DayFeedMediaIssue?)> _loadPhoneMedia(int dayIndex) async {
+    final List<GalleryAssetInfo> assets =
+        await _galleryIndexer?.assetsOfDay(dayIndex).catchError((_) => <GalleryAssetInfo>[]) ?? const [];
+    return (
+      [for (final GalleryAssetInfo asset in assets) DayFeedAsset(PhotoLibraryGallerySource.entityOf(asset))],
+      null,
+    );
   }
 
   Future<(List<DayFeedItem>, DayFeedMediaIssue?)> _loadPhotoMedia(int dayIndex, bool requestAccess) async {

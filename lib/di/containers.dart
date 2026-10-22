@@ -29,6 +29,7 @@ import 'package:keklist/domain/services/export_import/export_import_service.dart
 import 'package:keklist/domain/services/phone_web/emotion_api_repository.dart';
 import 'package:keklist/domain/services/phone_web/mind_api_repository.dart';
 import 'package:keklist/domain/services/phone_web/phone_api.dart';
+import 'package:keklist/domain/services/phone_web/phone_gallery.dart';
 import 'package:keklist/domain/services/phone_web/phone_settings_repository.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/domain/services/phone_web/web_file_repository.dart';
@@ -43,13 +44,11 @@ final class MainContainer {
   final HiveAesCipher _hiveCipher;
 
   MainContainer({required StreamingSharedPreferences streamingSharedPreferences, required HiveAesCipher hiveCipher})
-      : _streamingSharedPreferences = streamingSharedPreferences,
-        _hiveCipher = hiveCipher;
+    : _streamingSharedPreferences = streamingSharedPreferences,
+      _hiveCipher = hiveCipher;
 
   Injector initialize(Injector injector) {
-    injector.map<MindSearcherCubit>(
-      (injector) => MindSearcherCubit(repository: injector.get<MindRepository>()),
-    );
+    injector.map<MindSearcherCubit>((injector) => MindSearcherCubit(repository: injector.get<MindRepository>()));
     if (kIsPhoneWeb) {
       _mapPhoneRepositories(injector);
     } else {
@@ -63,10 +62,7 @@ final class MainContainer {
       injector.map<SettingsRepository>(
         (injector) => SettingsHiveRepository(box: Hive.box<SettingsObject>(HiveConstants.settingsBoxName)),
       );
-      injector.map<AppFileRepository>(
-        (_) => const AppFileRepository(),
-        isSingleton: true,
-      );
+      injector.map<AppFileRepository>((_) => const AppFileRepository(), isSingleton: true);
     }
     injector.map<DebugMenuRepository>(
       (injector) => DebugMenuHiveRepository(box: Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName)),
@@ -76,16 +72,21 @@ final class MainContainer {
       (injector) => BlocLogSettingsHiveRepository(box: Hive.box(HiveConstants.blocLogSettingsBoxName)),
       isSingleton: true,
     );
-    injector.map<GalleryIndexer>(
-      (_) => GalleryIndexer(
-        repository: MediaIndexHiveRepository(
-          daysBox: Hive.openBox<MediaDayIndexObject>(HiveConstants.mediaDayIndexBoxName, encryptionCipher: _hiveCipher),
-          metaBox: Hive.openBox(HiveConstants.mediaIndexMetaBoxName, encryptionCipher: _hiveCipher),
+    if (!kIsPhoneWeb) {
+      injector.map<GalleryIndexer>(
+        (_) => GalleryIndexer(
+          repository: MediaIndexHiveRepository(
+            daysBox: Hive.openBox<MediaDayIndexObject>(
+              HiveConstants.mediaDayIndexBoxName,
+              encryptionCipher: _hiveCipher,
+            ),
+            metaBox: Hive.openBox(HiveConstants.mediaIndexMetaBoxName, encryptionCipher: _hiveCipher),
+          ),
+          source: const PhotoLibraryGallerySource(),
         ),
-        source: const PhotoLibraryGallerySource(),
-      ),
-      isSingleton: true,
-    );
+        isSingleton: true,
+      );
+    }
     injector.map<ExportImportService>(
       (injector) => ExportImportService(
         mindRepository: injector.get<MindRepository>(),
@@ -108,10 +109,7 @@ final class MainContainer {
     // are registered here as singletons so sendEventTo can fall back to DI
     // when the originating widget's State has unmounted.
     injector.map<SettingsBloc>(
-      (i) => SettingsBloc(
-        repository: i.get<SettingsRepository>(),
-        exportImportService: i.get<ExportImportService>(),
-      ),
+      (i) => SettingsBloc(repository: i.get<SettingsRepository>(), exportImportService: i.get<ExportImportService>()),
       isSingleton: true,
     );
     injector.map<EmotionBloc>(
@@ -138,5 +136,15 @@ final class MainContainer {
       isSingleton: true,
     );
     injector.map<AppFileRepository>((_) => const WebFileRepository(), isSingleton: true);
+    final PhoneMediaIndexRepository galleryIndex = PhoneMediaIndexRepository(api: api);
+    final GalleryIndexer indexer = GalleryIndexer(
+      repository: galleryIndex,
+      source: PhoneGallerySource(api: api, index: galleryIndex),
+    );
+    api.events
+        .where((event) => event == 'gallery')
+        .asyncMap((_) => galleryIndex.reload())
+        .listen((_) => indexer.sync());
+    injector.map<GalleryIndexer>((_) => indexer, isSingleton: true);
   }
 }
