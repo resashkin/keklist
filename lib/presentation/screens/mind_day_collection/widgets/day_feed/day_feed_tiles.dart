@@ -1,5 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
 import 'package:keklist/presentation/core/widgets/mind_emotion_emojis.dart';
 import 'package:keklist/presentation/core/widgets/mind_emotion_texture.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -8,6 +7,7 @@ import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/tile_text_fitting.dart';
+import 'package:keklist/presentation/core/widgets/gallery/gallery_media.dart';
 
 const double _kTileRadius = 8.0;
 const double _kMinTextSize = 7.0;
@@ -67,7 +67,12 @@ final class DayFeedMindTile extends StatelessWidget {
               child: mediaCircle != null
                   ? Center(child: mediaCircle)
                   : showText
-                  ? _FittedTileText(text: text, style: theme.textTheme.bodySmall)
+                  ? _FittedTileText(
+                      text: text,
+                      style: theme.brightness == Brightness.light
+                          ? theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600)
+                          : theme.textTheme.bodySmall,
+                    )
                   : Center(
                       child: MindEmotionEmojis(
                         mind: item.mind,
@@ -159,7 +164,7 @@ final class DayFeedAssetTile extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image(
-            image: CachedAssetThumbnailProvider(item.asset),
+            image: GalleryMedia.thumbnail(item.asset),
             fit: BoxFit.cover,
             gaplessPlayback: true,
             errorBuilder: (context, _, _) => ColoredBox(color: Theme.of(context).cardColor),

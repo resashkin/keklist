@@ -11,9 +11,11 @@ import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
+import 'package:keklist/domain/services/web_server/gallery_routes.dart';
 import 'package:keklist/domain/services/web_server/login_page.dart';
 import 'package:keklist/domain/services/web_server/name_announcer.dart';
 import 'package:keklist/domain/services/web_server/web_access.dart';
+import 'package:keklist/domain/services/web_server/serve_file.dart';
 import 'package:keklist/domain/services/web_server/web_bundle.dart';
 
 sealed class WebServerState {
@@ -70,8 +72,10 @@ final class KeklistWebServer extends ChangeNotifier {
     required EmotionRepository emotionRepository,
     required SettingsRepository settingsRepository,
     required AppFileRepository fileRepository,
+    GalleryRoutes? gallery,
     NameAnnouncer? announcer,
   }) : _minds = mindRepository,
+       _gallery = gallery,
        _emotions = emotionRepository,
        _settings = settingsRepository,
        _files = fileRepository,
@@ -82,6 +86,7 @@ final class KeklistWebServer extends ChangeNotifier {
   final EmotionRepository _emotions;
   final SettingsRepository _settings;
   final AppFileRepository _files;
+  final GalleryRoutes? _gallery;
   final NameAnnouncer? _announcer;
 
   static const _cookie = 'keklist_session';
@@ -113,6 +118,7 @@ final class KeklistWebServer extends ChangeNotifier {
     _changes.addAll([
       _minds.stream.skip(1).listen((_) => _broadcast('minds')),
       _emotions.stream.skip(1).listen((_) => _broadcast('emotions')),
+      ?_gallery?.changes.listen((_) => _broadcast('gallery')),
       _settings.stream
           .map((settings) => (settings.userName, settings.avatar))
           .distinct()
@@ -255,7 +261,7 @@ final class KeklistWebServer extends ChangeNotifier {
       final String path = request.uri.path;
       if (path == '/login') return await _login(request);
       if (!access.hasSession(_sessionToken(request))) {
-        if (path.startsWith('/api/') || path.startsWith('/files/')) {
+        if (path.startsWith('/api/') || path.startsWith('/files/') || path.startsWith('/gallery/')) {
           return _text(response, HttpStatus.unauthorized, 'Enter the PIN');
         }
         return _redirect(response, '/login');
@@ -270,6 +276,16 @@ final class KeklistWebServer extends ChangeNotifier {
           return await _collection(request, read: _emotionsJson, write: _writeEmotions);
         case '/api/profile':
           return await _profile(request);
+        case '/api/gallery':
+          return _gallery == null ? _json(response, null) : _json(response, _gallery.indexJson());
+        case '/api/gallery/day':
+          final int? day = int.tryParse(request.uri.queryParameters['day'] ?? '');
+          if (_gallery == null || day == null) return _json(response, const []);
+          return _json(response, await _gallery.dayJson(day));
+        case '/gallery/thumb':
+          return _gallery == null ? _text(response, HttpStatus.notFound, 'Not found') : await _gallery.thumbnail(request);
+        case '/gallery/full':
+          return _gallery == null ? _text(response, HttpStatus.notFound, 'Not found') : await _gallery.original(request);
       }
       if (path.startsWith('/files/')) return await _file(request);
       return _static(request);
@@ -483,35 +499,7 @@ final class KeklistWebServer extends ChangeNotifier {
     }
     final File file = File(await _files.resolveAbsolutePath(segments.join('/')));
     if (!await file.exists()) return _text(response, HttpStatus.notFound, 'Not found');
-    final int length = await file.length();
-    response.headers
-      ..contentType = ContentType.parse(WebFile.contentTypeOf(file.path))
-      ..set(HttpHeaders.acceptRangesHeader, 'bytes')
-      ..set(HttpHeaders.cacheControlHeader, 'private, max-age=31536000, immutable');
-    int start = 0;
-    int end = length - 1;
-    final RegExpMatch? range = RegExp(
-      r'^bytes=(\d*)-(\d*)$',
-    ).firstMatch(request.headers.value(HttpHeaders.rangeHeader) ?? '');
-    if (range != null && length > 0) {
-      final int? from = int.tryParse(range[1]!);
-      final int? to = int.tryParse(range[2]!);
-      if (from == null && to != null) {
-        start = (length - to).clamp(0, length - 1);
-      } else if (from != null) {
-        start = from;
-        if (to != null) end = to.clamp(from, length - 1);
-      }
-      if (start >= length) {
-        response.headers.set(HttpHeaders.contentRangeHeader, 'bytes */$length');
-        return _text(response, HttpStatus.requestedRangeNotSatisfiable, 'Bad range');
-      }
-      response
-        ..statusCode = HttpStatus.partialContent
-        ..headers.set(HttpHeaders.contentRangeHeader, 'bytes $start-$end/$length');
-    }
-    response.contentLength = length == 0 ? 0 : end - start + 1;
-    if (request.method == 'GET' && length > 0) await response.addStream(file.openRead(start, end + 1));
+    await serveFile(request, file, contentType: WebFile.contentTypeOf(file.path));
   }
 
   void _static(HttpRequest request) {

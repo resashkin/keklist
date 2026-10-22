@@ -55,6 +55,7 @@ import 'package:keklist/presentation/cubits/weather/weather_cubit.dart';
 import 'package:keklist/di/containers.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/domain/services/web_server/bonjour_announcer.dart';
+import 'package:keklist/domain/services/web_server/gallery_routes.dart';
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
 import 'package:keklist/domain/services/web_server/mdns_responder.dart';
 import 'package:keklist/domain/services/web_server/web_access.dart';
@@ -302,6 +303,7 @@ Future<KeklistWebServer> _startWebServer(Injector injector) async {
     emotionRepository: injector.get<EmotionRepository>(),
     settingsRepository: injector.get<SettingsRepository>(),
     fileRepository: injector.get<AppFileRepository>(),
+    gallery: GalleryRoutes(indexer: injector.get<GalleryIndexer>(), settings: injector.get<SettingsRepository>()),
     announcer: switch (defaultTargetPlatform) {
       TargetPlatform.android => MdnsResponder('keklist.local'),
       TargetPlatform.iOS => BonjourAnnouncer(),

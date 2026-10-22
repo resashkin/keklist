@@ -52,6 +52,10 @@ final class GalleryIndexer {
   Stream<GalleryIndexProgress> get progress => _progress.stream;
   GalleryIndexProgress get currentProgress => _progress.value;
 
+  MediaIndexMeta get meta => _repository.meta;
+
+  /// A live query of one day, for when the index may be stale.
+  Future<List<GalleryAssetInfo>> assetsOfDay(int dayIndex) => _source.assetsOfDay(dayIndex);
   MediaDayIndex? entryFor(int dayIndex) => _repository.entryFor(dayIndex);
   Iterable<MediaDayIndex> get entries => _repository.entries;
 

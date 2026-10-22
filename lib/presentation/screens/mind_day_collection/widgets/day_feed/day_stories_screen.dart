@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
 import 'package:flutter_volume_controller/flutter_volume_controller.dart';
 import 'package:keklist/native/android/media_folder_channel.dart';
@@ -12,7 +11,6 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
-import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
@@ -27,6 +25,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/story_texture_tweak_sheet.dart';
 import 'package:keklist/presentation/core/helpers/media_sources.dart';
+import 'package:keklist/presentation/core/widgets/gallery/gallery_media.dart';
 
 const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
@@ -36,6 +35,7 @@ const double _kStoryRoundVideoSize = 280.0;
 const double _kStoryAudioCircleSize = 220.0;
 const double _kFadeDistance = 320.0;
 const double _kHeaderSpace = 96.0;
+const double _kWideStoriesMinWidth = 800.0;
 
 final class DayStoriesScreen extends StatefulWidget {
   final List<DayFeedItem> items;
@@ -157,8 +157,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
   Future<VideoPlayerController?> _createVideoController(DayFeedItem item) async {
     switch (item) {
       case DayFeedAsset(:final asset):
-        final File? file = await asset.file;
-        return file == null ? null : VideoPlayerController.file(file);
+        return GalleryMedia.videoController(asset);
       case DayFeedFolderMedia(item: FolderFileItem(:final file)):
         return VideoPlayerController.file(file);
       case DayFeedFolderMedia(item: FolderSafItem(:final uri)):
@@ -253,9 +252,8 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
     if (mounted) _resume();
   }
 
-  void _onTapUp(TapUpDetails details) {
-    final double width = MediaQuery.sizeOf(context).width;
-    final double x = details.globalPosition.dx;
+  void _onTapUp(TapUpDetails details, double width) {
+    final double x = details.localPosition.dx;
     if (x < width / 3) {
       _goPrevious();
       return;
@@ -267,6 +265,8 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
     }
     _goNext();
   }
+
+  void _togglePause() => _isPaused ? _resume() : _pause();
 
   void _onVerticalDragEnd(DragEndDetails details) {
     final double velocity = details.primaryVelocity ?? 0.0;
@@ -282,11 +282,12 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
   @override
   Widget build(BuildContext context) {
     final double dismissProgress = (_dragOffsetY.clamp(0.0, _kFadeDistance)) / _kFadeDistance;
-    return Scaffold(
-      backgroundColor: storyColorsOf(context).background.withValues(alpha: 1.0 - dismissProgress),
-      body: GestureDetector(
+    final Size screen = MediaQuery.sizeOf(context);
+    final bool isWide = screen.width >= _kWideStoriesMinWidth;
+    final Widget story = LayoutBuilder(
+      builder: (context, constraints) => GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTapUp: _onTapUp,
+        onTapUp: (details) => _onTapUp(details, constraints.maxWidth),
         onLongPressStart: (_) => _pause(),
         onLongPressEnd: (_) => _resume(),
         onVerticalDragUpdate: (details) => setState(() => _dragOffsetY += details.delta.dy),
@@ -295,7 +296,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
           opacity: 1.0 - dismissProgress * 0.85,
           child: Transform.translate(
             offset: Offset(0.0, _dragOffsetY.clamp(0.0, double.infinity)),
-            // Content fills the screen so a mind's texture runs behind the progress bars and the header.
+            // Content fills the story so a mind's texture runs behind the progress bars and the header.
             child: Stack(
               children: [
                 Positioned.fill(child: _buildContent(context)),
@@ -314,7 +315,63 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
         ),
       ),
     );
+    return CallbackShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.arrowLeft): _goPrevious,
+        const SingleActivator(LogicalKeyboardKey.arrowRight): _goNext,
+        const SingleActivator(LogicalKeyboardKey.space): _togglePause,
+        const SingleActivator(LogicalKeyboardKey.escape): () => Navigator.of(context).pop(),
+      },
+      child: Focus(
+        autofocus: true,
+        child: isWide
+            ? _buildWide(context, story, screen, dismissProgress)
+            : Scaffold(
+                backgroundColor: storyColorsOf(context).background.withValues(alpha: 1.0 - dismissProgress),
+                body: story,
+              ),
+      ),
+    );
   }
+
+  /// On a desktop the story is a phone-shaped card in the middle, like Instagram on the web.
+  Widget _buildWide(BuildContext context, Widget story, Size screen, double dismissProgress) {
+    final double height = screen.height - 32.0;
+    final double width = height * 9.0 / 16.0;
+    return Scaffold(
+      backgroundColor: Colors.black.withValues(alpha: 0.9 * (1.0 - dismissProgress)),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: GestureDetector(behavior: HitTestBehavior.opaque, onTap: () => Navigator.of(context).pop()),
+          ),
+          Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 16.0,
+              children: [
+                _arrow(Icons.chevron_left_rounded, _index > 0 ? _goPrevious : null),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: ColoredBox(
+                    color: storyColorsOf(context).background,
+                    child: SizedBox(width: width, height: height, child: story),
+                  ),
+                ),
+                _arrow(Icons.chevron_right_rounded, _goNext),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _arrow(IconData icon, VoidCallback? onPressed) => IconButton.filled(
+    style: IconButton.styleFrom(backgroundColor: Colors.white24, foregroundColor: Colors.white),
+    icon: Icon(icon),
+    onPressed: onPressed,
+  );
 
   Widget _buildProgressBars() {
     final Color foreground = storyColorsOf(context).foreground;
@@ -413,12 +470,12 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
         fit: StackFit.expand,
         children: [
           Image(
-            image: CachedAssetThumbnailProvider(asset),
+            image: GalleryMedia.thumbnail(asset),
             fit: BoxFit.contain,
             errorBuilder: (_, _, _) => const _Loading(),
           ),
           Image(
-            image: AssetEntityImageProvider(asset, isOriginal: true),
+            image: GalleryMedia.original(asset),
             fit: BoxFit.contain,
             frameBuilder: (_, child, frame, wasSynchronouslyLoaded) => AnimatedOpacity(
               opacity: frame == null && !wasSynchronouslyLoaded ? 0.0 : 1.0,
