@@ -118,7 +118,7 @@ final class MindStoryDetails extends StatelessWidget {
 
 TextStyle mindStoryTextStyle(Color foreground) => TextStyle(color: foreground, fontSize: 20.0, height: 1.3);
 
-/// The mind's emotions grouped as overlapping emojis in one pill; with [onTap] it opens the emotion picker and
+/// The mind's emotions as a row of emojis in one pill; with [onTap] it opens the emotion picker and
 /// a pale "☺ +" stands in when there are none.
 final class MindEmotionsPill extends StatelessWidget {
   final Mind mind;
@@ -127,7 +127,6 @@ final class MindEmotionsPill extends StatelessWidget {
   const MindEmotionsPill({super.key, required this.mind, this.onTap});
 
   static const double _emojiSize = 24.0;
-  static const double _overlap = 8.0;
 
   @override
   Widget build(BuildContext context) {
@@ -156,18 +155,13 @@ final class MindEmotionsPill extends StatelessWidget {
                       Icon(Icons.add_rounded, size: 18.0, color: foreground.withValues(alpha: 0.4)),
                     ],
                   )
-                : SizedBox(
-                    height: _emojiSize + 4.0,
-                    width: _emojiSize + (emotions.length - 1) * (_emojiSize - _overlap),
-                    child: Stack(
-                      children: [
-                        for (int index = 0; index < emotions.length; index++)
-                          Positioned(
-                            left: index * (_emojiSize - _overlap),
-                            child: Text(emotions[index].emoji, style: const TextStyle(fontSize: _emojiSize)),
-                          ),
-                      ],
-                    ),
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 2.0,
+                    children: [
+                      for (final Emotion emotion in emotions)
+                        Text(emotion.emoji, style: const TextStyle(fontSize: _emojiSize, height: 1.15)),
+                    ],
                   ),
           ),
         );
