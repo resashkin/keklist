@@ -264,6 +264,13 @@
     "calendarSettings": "Подешавања календара",
     "calendarShowMedia": "Прикажи фотографије и видео записе",
     "calendarWeekTitles": "Наслови недеља",
-    "calendarNoActivity": "Нема активности",
-    "calendarPlayStories": "Пусти приче"
+    "calendarPlayStories": "Пусти приче",
+    "storyBackgroundTweak": "Позадина прича",
+    "storyAnimationOff": "Искључено",
+    "storyAnimationPulse": "Пулс",
+    "storyAnimationWave": "Талас",
+    "storyAnimationEqualizer": "Еквилајзер",
+    "storyAnimationDrift": "Дрифт",
+    "storyAnimationGlow": "Сјај",
+    "viewerCommentHint": "Коментар…"
 }

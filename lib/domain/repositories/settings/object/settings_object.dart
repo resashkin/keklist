@@ -103,6 +103,10 @@ final class SettingsObject extends HiveObject {
   @HiveField(33, defaultValue: true)
   late bool isCalendarMediaVisible;
 
+  // @HiveField(34) held the removed "hide empty days" flag; never reuse it.
+  @HiveField(35, defaultValue: 1)
+  late int storyTextureAnimationIndex;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -140,5 +144,7 @@ final class SettingsObject extends HiveObject {
           isMindTextVisible: isCalendarMindTextVisible,
           isMediaVisible: isCalendarMediaVisible,
         ),
+        storyTextureAnimation: StoryTextureAnimation.values.elementAtOrNull(storyTextureAnimationIndex) ??
+            StoryTextureAnimation.pulse,
       );
 }

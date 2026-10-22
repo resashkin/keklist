@@ -264,6 +264,13 @@
     "calendarSettings": "Kalendereinstellungen",
     "calendarShowMedia": "Fotos und Videos anzeigen",
     "calendarWeekTitles": "Wochentitel",
-    "calendarNoActivity": "Keine Aktivität",
-    "calendarPlayStories": "Storys abspielen"
+    "calendarPlayStories": "Storys abspielen",
+    "storyBackgroundTweak": "Story-Hintergrund",
+    "storyAnimationOff": "Aus",
+    "storyAnimationPulse": "Puls",
+    "storyAnimationWave": "Welle",
+    "storyAnimationEqualizer": "Equalizer",
+    "storyAnimationDrift": "Treiben",
+    "storyAnimationGlow": "Leuchten",
+    "viewerCommentHint": "Kommentar…"
 }

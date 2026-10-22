@@ -1707,17 +1707,59 @@ abstract class AppLocalizations {
   /// **'Week titles'**
   String get calendarWeekTitles;
 
-  /// Calendar: subtitle of a day without minds or media
-  ///
-  /// In en, this message translates to:
-  /// **'No activity'**
-  String get calendarNoActivity;
-
   /// Calendar: play the stories of a day or a week
   ///
   /// In en, this message translates to:
   /// **'Play stories'**
   String get calendarPlayStories;
+
+  /// Story/viewer shake sheet title
+  ///
+  /// In en, this message translates to:
+  /// **'Story background'**
+  String get storyBackgroundTweak;
+
+  /// Texture animation: none
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get storyAnimationOff;
+
+  /// Texture animation: emojis grow with loudness
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse'**
+  String get storyAnimationPulse;
+
+  /// Texture animation: rows sway like a wave
+  ///
+  /// In en, this message translates to:
+  /// **'Wave'**
+  String get storyAnimationWave;
+
+  /// Texture animation: columns bounce like bars
+  ///
+  /// In en, this message translates to:
+  /// **'Equalizer'**
+  String get storyAnimationEqualizer;
+
+  /// Texture animation: texture slides, faster when louder
+  ///
+  /// In en, this message translates to:
+  /// **'Drift'**
+  String get storyAnimationDrift;
+
+  /// Texture animation: opacity and blur follow loudness
+  ///
+  /// In en, this message translates to:
+  /// **'Glow'**
+  String get storyAnimationGlow;
+
+  /// Viewer: placeholder of the comment field
+  ///
+  /// In en, this message translates to:
+  /// **'Comment…'**
+  String get viewerCommentHint;
 }
 
 class _AppLocalizationsDelegate

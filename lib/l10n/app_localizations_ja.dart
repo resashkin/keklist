@@ -829,8 +829,29 @@ class AppLocalizationsJa extends AppLocalizations {
   String get calendarWeekTitles => '週のタイトル';
 
   @override
-  String get calendarNoActivity => 'アクティビティなし';
+  String get calendarPlayStories => 'ストーリーを再生';
 
   @override
-  String get calendarPlayStories => 'ストーリーを再生';
+  String get storyBackgroundTweak => 'ストーリーの背景';
+
+  @override
+  String get storyAnimationOff => 'オフ';
+
+  @override
+  String get storyAnimationPulse => 'パルス';
+
+  @override
+  String get storyAnimationWave => 'ウェーブ';
+
+  @override
+  String get storyAnimationEqualizer => 'イコライザー';
+
+  @override
+  String get storyAnimationDrift => 'ドリフト';
+
+  @override
+  String get storyAnimationGlow => 'グロー';
+
+  @override
+  String get viewerCommentHint => 'コメント…';
 }

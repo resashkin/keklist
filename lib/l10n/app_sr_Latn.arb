@@ -501,6 +501,13 @@
     "calendarSettings": "Podešavanja kalendara",
     "calendarShowMedia": "Prikaži fotografije i video zapise",
     "calendarWeekTitles": "Naslovi nedelja",
-    "calendarNoActivity": "Nema aktivnosti",
-    "calendarPlayStories": "Pusti priče"
+    "calendarPlayStories": "Pusti priče",
+    "storyBackgroundTweak": "Pozadina priča",
+    "storyAnimationOff": "Isključeno",
+    "storyAnimationPulse": "Puls",
+    "storyAnimationWave": "Talas",
+    "storyAnimationEqualizer": "Ekvilajzer",
+    "storyAnimationDrift": "Drift",
+    "storyAnimationGlow": "Sjaj",
+    "viewerCommentHint": "Komentar…"
 }

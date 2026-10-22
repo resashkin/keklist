@@ -264,6 +264,13 @@
     "calendarSettings": "日历设置",
     "calendarShowMedia": "显示照片和视频",
     "calendarWeekTitles": "周标题",
-    "calendarNoActivity": "无活动",
-    "calendarPlayStories": "播放故事"
+    "calendarPlayStories": "播放故事",
+    "storyBackgroundTweak": "故事背景",
+    "storyAnimationOff": "关闭",
+    "storyAnimationPulse": "脉动",
+    "storyAnimationWave": "波浪",
+    "storyAnimationEqualizer": "均衡器",
+    "storyAnimationDrift": "漂移",
+    "storyAnimationGlow": "光晕",
+    "viewerCommentHint": "评论…"
 }

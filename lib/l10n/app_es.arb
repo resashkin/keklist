@@ -501,6 +501,13 @@
     "calendarSettings": "Ajustes del calendario",
     "calendarShowMedia": "Mostrar fotos y vídeos",
     "calendarWeekTitles": "Títulos de semana",
-    "calendarNoActivity": "Sin actividad",
-    "calendarPlayStories": "Ver historias"
+    "calendarPlayStories": "Ver historias",
+    "storyBackgroundTweak": "Fondo de historias",
+    "storyAnimationOff": "Desactivado",
+    "storyAnimationPulse": "Pulso",
+    "storyAnimationWave": "Ola",
+    "storyAnimationEqualizer": "Ecualizador",
+    "storyAnimationDrift": "Deriva",
+    "storyAnimationGlow": "Brillo",
+    "viewerCommentHint": "Comentario…"
 }

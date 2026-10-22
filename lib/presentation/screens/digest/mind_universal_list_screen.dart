@@ -3,7 +3,6 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:translator/translator.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
@@ -21,7 +20,7 @@ import 'package:keklist/presentation/screens/actions/action_model.dart';
 import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_collection_empty_day_widget.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/messaged_list/mind_message_widget.dart';
-import 'package:keklist/presentation/screens/mind_info/mind_info_screen.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 
 enum MindUniversalListTitleType {
   text,
@@ -300,13 +299,7 @@ final class _MindUniversalListScreenState extends KekWidgetState<MindUniversalLi
     await showOkAlertDialog(context: context, message: translation.text);
   }
 
-  void _editMind(Mind mind) {
-    Navigator.of(context).push(
-      SwipeablePageRoute(
-        builder: (_) => MindInfoScreen(rootMind: mind, allMinds: _allMinds),
-      ),
-    );
-  }
+  void _editMind(Mind mind) => DayItemViewerScreen.showMind(context, mind);
 
   void _switchDay(Mind mind) async {
     final int? switchedDay = await _showDateSwitcherToNewDay();

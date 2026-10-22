@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
 import 'package:keklist/presentation/core/widgets/mind_emotion_emojis.dart';
@@ -8,6 +7,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/tile_text_fitting.dart';
 
 const double _kTileRadius = 8.0;
 const double _kMinTextSize = 7.0;
@@ -36,12 +36,7 @@ final class DayFeedMindTile extends StatelessWidget {
   final bool isTextVisible;
   final double size;
 
-  const DayFeedMindTile({
-    super.key,
-    required this.item,
-    required this.isTextVisible,
-    required this.size,
-  });
+  const DayFeedMindTile({super.key, required this.item, required this.isTextVisible, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +95,7 @@ final class DayFeedMindTile extends StatelessWidget {
   }
 }
 
-/// Shrinks the text down to the minimum size, then ends the last line that fits with "…".
+/// Shrinks the text until whole words fit, then ends the last line that fits with "…".
 final class _FittedTileText extends StatelessWidget {
   final String text;
   final TextStyle? style;
@@ -109,19 +104,26 @@ final class _FittedTileText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextScaler textScaler = MediaQuery.textScalerOf(context);
+    final TextStyle baseStyle = (style ?? const TextStyle()).copyWith(height: _kTextLineHeight);
     return LayoutBuilder(
       builder: (context, constraints) {
-        final double minLineHeight = _kMinTextSize * _kTextLineHeight * MediaQuery.textScalerOf(context).scale(1.0);
-        final int maxLines = (constraints.maxHeight / minLineHeight).floor().clamp(1, 1000);
+        final fitted = fitTileText(
+          text: text,
+          style: baseStyle,
+          box: constraints.biggest,
+          minFontSize: _kMinTextSize,
+          maxFontSize: _kMaxTextSize,
+          textScaler: textScaler,
+        );
+        final double lineHeight = textScaler.scale(fitted.fontSize) * _kTextLineHeight;
         return Center(
-          child: AutoSizeText(
-            text,
+          child: Text(
+            fitted.text,
             textAlign: TextAlign.center,
-            minFontSize: _kMinTextSize,
-            maxFontSize: _kMaxTextSize,
-            maxLines: maxLines,
+            maxLines: (constraints.maxHeight / lineHeight).floor().clamp(1, 1000),
             overflow: TextOverflow.ellipsis,
-            style: style?.copyWith(fontSize: _kMaxTextSize, height: _kTextLineHeight),
+            style: baseStyle.copyWith(fontSize: fitted.fontSize),
           ),
         );
       },

@@ -4,7 +4,6 @@ import 'package:keklist/presentation/core/widgets/pinch_columns_detector.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
-import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
@@ -19,7 +18,6 @@ import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
 import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
-import 'package:keklist/presentation/screens/mind_info/mind_info_screen.dart';
 import 'package:keklist/presentation/core/widgets/kek_floating_button.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
@@ -293,7 +291,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
               context,
               items: state.items,
               initialIndex: index,
-              onOpenMind: _showMindInfo,
             ),
             onResolveMediaIssue: (issue) => _resolveDayFeedMediaIssue(issue),
           ),
@@ -331,14 +328,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
 
     final int dayIndex = DateUtils.getDayIndex(from: selectedDateTime);
     return dayIndex;
-  }
-
-  Future<void> _showMindInfo(Mind mind) {
-    return Navigator.of(context).push(
-      SwipeablePageRoute(
-        builder: (_) => MindInfoScreen(rootMind: mind, allMinds: allMinds),
-      ),
-    );
   }
 
   void _showMediaFolderSettings() {
@@ -472,7 +461,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
         pageBuilder: (_, _, _) => DayStoriesScreen(
           items: state.items,
           initialIndex: initialIndex,
-          onOpenMind: (mind) => _showMindInfo(mind),
         ),
         transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
       ),

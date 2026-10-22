@@ -1121,12 +1121,40 @@
     "@calendarWeekTitles": {
         "description": "Calendar setting: show week number headers"
     },
-    "calendarNoActivity": "No activity",
     "calendarPlayStories": "Play stories",
-    "@calendarNoActivity": {
-        "description": "Calendar: subtitle of a day without minds or media"
-    },
     "@calendarPlayStories": {
         "description": "Calendar: play the stories of a day or a week"
+    },
+    "storyBackgroundTweak": "Story background",
+    "@storyBackgroundTweak": {
+        "description": "Story/viewer shake sheet title"
+    },
+    "storyAnimationOff": "Off",
+    "@storyAnimationOff": {
+        "description": "Texture animation: none"
+    },
+    "storyAnimationPulse": "Pulse",
+    "@storyAnimationPulse": {
+        "description": "Texture animation: emojis grow with loudness"
+    },
+    "storyAnimationWave": "Wave",
+    "@storyAnimationWave": {
+        "description": "Texture animation: rows sway like a wave"
+    },
+    "storyAnimationEqualizer": "Equalizer",
+    "@storyAnimationEqualizer": {
+        "description": "Texture animation: columns bounce like bars"
+    },
+    "storyAnimationDrift": "Drift",
+    "@storyAnimationDrift": {
+        "description": "Texture animation: texture slides, faster when louder"
+    },
+    "storyAnimationGlow": "Glow",
+    "@storyAnimationGlow": {
+        "description": "Texture animation: opacity and blur follow loudness"
+    },
+    "viewerCommentHint": "Comment…",
+    "@viewerCommentHint": {
+        "description": "Viewer: placeholder of the comment field"
     }
 }

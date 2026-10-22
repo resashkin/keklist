@@ -855,10 +855,31 @@ class AppLocalizationsSr extends AppLocalizations {
   String get calendarWeekTitles => 'Наслови недеља';
 
   @override
-  String get calendarNoActivity => 'Нема активности';
+  String get calendarPlayStories => 'Пусти приче';
 
   @override
-  String get calendarPlayStories => 'Пусти приче';
+  String get storyBackgroundTweak => 'Позадина прича';
+
+  @override
+  String get storyAnimationOff => 'Искључено';
+
+  @override
+  String get storyAnimationPulse => 'Пулс';
+
+  @override
+  String get storyAnimationWave => 'Талас';
+
+  @override
+  String get storyAnimationEqualizer => 'Еквилајзер';
+
+  @override
+  String get storyAnimationDrift => 'Дрифт';
+
+  @override
+  String get storyAnimationGlow => 'Сјај';
+
+  @override
+  String get viewerCommentHint => 'Коментар…';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1711,8 +1732,29 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get calendarWeekTitles => 'Naslovi nedelja';
 
   @override
-  String get calendarNoActivity => 'Nema aktivnosti';
+  String get calendarPlayStories => 'Pusti priče';
 
   @override
-  String get calendarPlayStories => 'Pusti priče';
+  String get storyBackgroundTweak => 'Pozadina priča';
+
+  @override
+  String get storyAnimationOff => 'Isključeno';
+
+  @override
+  String get storyAnimationPulse => 'Puls';
+
+  @override
+  String get storyAnimationWave => 'Talas';
+
+  @override
+  String get storyAnimationEqualizer => 'Ekvilajzer';
+
+  @override
+  String get storyAnimationDrift => 'Drift';
+
+  @override
+  String get storyAnimationGlow => 'Sjaj';
+
+  @override
+  String get viewerCommentHint => 'Komentar…';
 }

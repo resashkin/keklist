@@ -501,6 +501,13 @@
     "calendarSettings": "Kalendar sozlamalari",
     "calendarShowMedia": "Foto va videolarni ko‘rsatish",
     "calendarWeekTitles": "Hafta sarlavhalari",
-    "calendarNoActivity": "Faollik yo‘q",
-    "calendarPlayStories": "Hikoyalarni ko‘rish"
+    "calendarPlayStories": "Hikoyalarni ko‘rish",
+    "storyBackgroundTweak": "Hikoyalar foni",
+    "storyAnimationOff": "O‘chiq",
+    "storyAnimationPulse": "Puls",
+    "storyAnimationWave": "To‘lqin",
+    "storyAnimationEqualizer": "Ekvalayzer",
+    "storyAnimationDrift": "Drift",
+    "storyAnimationGlow": "Yorqinlik",
+    "viewerCommentHint": "Izoh…"
 }

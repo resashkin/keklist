@@ -264,6 +264,13 @@
     "calendarSettings": "Настройки календаря",
     "calendarShowMedia": "Показывать фото и видео",
     "calendarWeekTitles": "Заголовки недель",
-    "calendarNoActivity": "Нет активности",
-    "calendarPlayStories": "Смотреть истории"
+    "calendarPlayStories": "Смотреть истории",
+    "storyBackgroundTweak": "Фон историй",
+    "storyAnimationOff": "Выкл",
+    "storyAnimationPulse": "Пульс",
+    "storyAnimationWave": "Волна",
+    "storyAnimationEqualizer": "Эквалайзер",
+    "storyAnimationDrift": "Дрейф",
+    "storyAnimationGlow": "Свечение",
+    "viewerCommentHint": "Комментарий…"
 }

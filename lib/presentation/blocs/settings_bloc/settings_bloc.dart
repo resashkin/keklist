@@ -44,6 +44,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsMarkShakeDiscovered>(_markShakeDiscovered);
     on<SettingsUpdateInsights>(_updateInsights);
     on<SettingsUpdateCalendar>(_updateCalendar);
+    on<SettingsUpdateStoryTextureAnimation>(_updateStoryTextureAnimation);
 
     _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
   }
@@ -238,6 +239,13 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _updateCalendar(SettingsUpdateCalendar event, Emitter<SettingsState> emit) async {
     await _repository.updateSettings(_repository.value.copyWith(calendar: event.calendar));
+  }
+
+  FutureOr<void> _updateStoryTextureAnimation(
+    SettingsUpdateStoryTextureAnimation event,
+    Emitter<SettingsState> emit,
+  ) async {
+    await _repository.updateSettings(_repository.value.copyWith(storyTextureAnimation: event.animation));
   }
 
   FutureOr<void> _markShakeDiscovered(SettingsMarkShakeDiscovered event, Emitter<SettingsState> emit) async {

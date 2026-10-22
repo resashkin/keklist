@@ -14,6 +14,7 @@ abstract final class ShakeScreenIds {
   static const String settings = 'settings';
   static const String insights = 'insights';
   static const String calendar = 'calendar';
+  static const String story = 'story';
 }
 
 mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
@@ -36,8 +37,9 @@ mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Hidden IndexedStack tabs only report Visibility.of == false; covered routes turn TickerMode off.
-    final bool isActive = TickerMode.valuesOf(context).enabled && Visibility.of(context);
+    // Hidden IndexedStack tabs only report Visibility.of == false; see-through routes on top only flip isCurrent.
+    final bool isActive =
+        TickerMode.valuesOf(context).enabled && Visibility.of(context) && (ModalRoute.of(context)?.isCurrent ?? true);
     if (isActive == _isScreenActive) return;
     _isScreenActive = isActive;
     isActive ? _activate() : _deactivate();
