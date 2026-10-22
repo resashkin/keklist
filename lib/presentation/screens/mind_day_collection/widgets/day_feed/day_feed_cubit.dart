@@ -6,6 +6,7 @@ import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_media_loader.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 
 enum DayFeedMediaIssue { photoAccessDenied, folderNotChosen }
 
@@ -46,7 +47,9 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
     _isMediaLoading = true;
     _emit();
 
-    final (List<DayFeedItem> media, DayFeedMediaIssue? issue) = Platform.isAndroid
+    final (List<DayFeedItem> media, DayFeedMediaIssue? issue) = kIsPhoneWeb
+        ? (const <DayFeedItem>[], null)
+        : Platform.isAndroid
         ? await _loadFolderMedia(dayIndex, folderPath, isFolderRecursive)
         : await _loadPhotoMedia(dayIndex, requestPhotoAccess);
 

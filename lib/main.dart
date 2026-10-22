@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as developer;
 
@@ -52,6 +53,11 @@ import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
 import 'package:keklist/presentation/cubits/weather/weather_cubit.dart';
 import 'package:keklist/di/containers.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:keklist/domain/services/web_server/bonjour_announcer.dart';
+import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
+import 'package:keklist/domain/services/web_server/mdns_responder.dart';
+import 'package:keklist/domain/services/web_server/web_access.dart';
 
 
 // TODO: fix or exclude home_widget for android only
@@ -110,9 +116,10 @@ final class _AppRootState extends State<_AppRoot> {
             _ => dotenv.env['REVENUE_CAT_TEST_API_KEY']!,
           }
         : dotenv.env['REVENUE_CAT_TEST_API_KEY']!;
-    await Purchases.configure(PurchasesConfiguration(revenueCatApiKey));
+    if (!kIsPhoneWeb) await Purchases.configure(PurchasesConfiguration(revenueCatApiKey));
 
-    final app = _getApplication(injector);
+    final KeklistWebServer? webServer = kIsWeb ? null : await _startWebServer(injector);
+    final app = _getApplication(injector, webServer);
     setState(() => _app = app);
     _startGalleryIndexing(injector.get<GalleryIndexer>());
   }
@@ -260,7 +267,8 @@ Future<void> _initHive(HiveAesCipher cipher) async {
   final Box<EmotionObject> emotionBox =
       await Hive.openBox<EmotionObject>(HiveConstants.emotionBoxName, encryptionCipher: cipher);
 
-  await _runMigrations(settingsBox, mindBox, emotionBox);
+  // The phone migrates its own data; the web version only shows it.
+  if (!kIsPhoneWeb) await _runMigrations(settingsBox, mindBox, emotionBox);
 }
 
 Future<void> _runMigrations(
@@ -285,8 +293,28 @@ Future<void> _runMigrations(
 // App widget tree
 // ---------------------------------------------------------------------------
 
-Widget _getApplication(Injector mainInjector) => MultiProvider(
+/// The phone serves the web version to browsers in its Wi-Fi once a PIN is set. Android answers for keklist.local
+/// itself; an iPhone goes by its own Bonjour name.
+Future<KeklistWebServer> _startWebServer(Injector injector) async {
+  final KeklistWebServer server = KeklistWebServer(
+    access: await WebAccess.load(),
+    mindRepository: injector.get<MindRepository>(),
+    emotionRepository: injector.get<EmotionRepository>(),
+    settingsRepository: injector.get<SettingsRepository>(),
+    fileRepository: injector.get<AppFileRepository>(),
+    announcer: switch (defaultTargetPlatform) {
+      TargetPlatform.android => MdnsResponder('keklist.local'),
+      TargetPlatform.iOS => BonjourAnnouncer(),
+      _ => null,
+    },
+  );
+  unawaited(server.start());
+  return server;
+}
+
+Widget _getApplication(Injector mainInjector, KeklistWebServer? webServer) => MultiProvider(
   providers: [
+    if (webServer != null) ChangeNotifierProvider<KeklistWebServer>.value(value: webServer),
     RepositoryProvider(create: (context) => mainInjector.get<MindRepository>()),
     RepositoryProvider(create: (context) => mainInjector.get<AppFileRepository>()),
     RepositoryProvider(create: (context) => mainInjector.get<WeatherRepository>()),

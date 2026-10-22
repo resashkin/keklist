@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
+import 'package:keklist/presentation/core/helpers/media_sources.dart';
 
 /// The name and avatar shown in the insights header; both stay on this device.
 final class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> with DisposeBag {
@@ -13,7 +14,7 @@ final class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> wit
   UserProfileBloc({required SettingsRepository settingsRepository, required AppFileRepository fileRepository})
     : _settingsRepository = settingsRepository,
       _fileRepository = fileRepository,
-      super(const UserProfileState(nickname: null, avatarEmoji: null, avatarImage: null)) {
+      super(const UserProfileState(nickname: null, avatarEmoji: null, avatarImagePath: null)) {
     on<UserProfileGet>(_getUserProfile);
     on<UserProfileUpdateNickName>(_updateNickName);
     on<UserProfileUpdateAvatar>(_updateAvatar);
@@ -34,12 +35,12 @@ final class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> wit
   Future<void> _getUserProfile(UserProfileGet event, Emitter<UserProfileState> emit) async {
     final KeklistSettings settings = _settingsRepository.value;
     final String? imagePath = settings.avatar.imagePath;
-    final File? image = imagePath == null ? null : File(await _fileRepository.resolveAbsolutePath(imagePath));
+    final String? image = imagePath == null ? null : await _fileRepository.resolveAbsolutePath(imagePath);
     emit(
       UserProfileState(
         nickname: settings.userName,
         avatarEmoji: settings.avatar.emoji,
-        avatarImage: image != null && image.existsSync() ? image : null,
+        avatarImagePath: image != null && (isRemoteMediaPath(image) || File(image).existsSync()) ? image : null,
       ),
     );
   }
@@ -76,7 +77,8 @@ final class UserProfileUpdateAvatar extends UserProfileEvent {
 final class UserProfileState {
   final String? nickname;
   final String? avatarEmoji;
-  final File? avatarImage;
+  /// A local file, or a URL in the web version.
+  final String? avatarImagePath;
 
-  const UserProfileState({required this.nickname, required this.avatarEmoji, required this.avatarImage});
+  const UserProfileState({required this.nickname, required this.avatarEmoji, required this.avatarImagePath});
 }

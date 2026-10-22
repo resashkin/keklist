@@ -1802,6 +1802,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Letter'**
   String get profileInitial;
+
+  /// No description provided for @webVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Web version'**
+  String get webVersion;
+
+  /// No description provided for @webVersionAddressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in a browser on a computer in the same Wi-Fi; keep keklist open'**
+  String get webVersionAddressHint;
+
+  /// No description provided for @webVersionCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Address copied'**
+  String get webVersionCopied;
+
+  /// No description provided for @webVersionNeedsPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a PIN to open keklist in a browser on a computer in the same Wi-Fi.'**
+  String get webVersionNeedsPin;
+
+  /// No description provided for @webVersionStarting.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting…'**
+  String get webVersionStarting;
+
+  /// No description provided for @webVersionNoWifi.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to Wi-Fi to open keklist in a browser.'**
+  String get webVersionNoWifi;
+
+  /// No description provided for @webVersionNoBundle.
+  ///
+  /// In en, this message translates to:
+  /// **'This build doesn\'t include the web version.'**
+  String get webVersionNoBundle;
+
+  /// No description provided for @webVersionPin.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN'**
+  String get webVersionPin;
+
+  /// No description provided for @webVersionPinSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Each browser asks for it once in 30 days'**
+  String get webVersionPinSet;
+
+  /// No description provided for @webVersionPinNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get webVersionPinNotSet;
+
+  /// No description provided for @webVersionPinHint.
+  ///
+  /// In en, this message translates to:
+  /// **'4–8 digits'**
+  String get webVersionPinHint;
+
+  /// No description provided for @webVersionRemovePin.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove PIN'**
+  String get webVersionRemovePin;
+
+  /// No description provided for @webVersionPort.
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get webVersionPort;
 }
 
 class _AppLocalizationsDelegate

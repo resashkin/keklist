@@ -15,6 +15,7 @@ import 'package:keklist/presentation/screens/emotions/widgets/emotion_chip.dart'
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 
 final class MindCreatorScreen extends StatefulWidget {
   final Function(String text, List<String> emotionIds) onDone;
@@ -77,7 +78,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
                 contentPadding: const EdgeInsets.all(12.0),
                 border: InputBorder.none,
                 hintText: widget.hintText ?? context.l10n.writeSomething,
-                suffixIcon: _attachedMedia == null
+                suffixIcon: _attachedMedia == null && !kIsPhoneWeb
                     ? MediaRecordToggleButton(
                         onRecordAudio: () => _attach(MediaRecording.recordAudio),
                         onRecordVideo: () => _attach(MediaRecording.recordVideo),

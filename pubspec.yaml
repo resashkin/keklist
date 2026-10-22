@@ -78,6 +78,7 @@ dependencies:
   camera: ^0.12.1
   sensors_plus: ^7.1.1
   image_picker: ^1.2.4
+  web: ^1.1.1
 dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
@@ -93,5 +94,8 @@ flutter:
   uses-material-design: true
   assets:
     - dotenv
+    # The web version, served by the phone apps; see scripts/build_web_bundle.sh.
+    - path: assets/web/
+      platforms: [android, ios]
     # - assets/auth_icons/
     # - assets/steganograph_image/

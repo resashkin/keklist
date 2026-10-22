@@ -5,6 +5,7 @@ import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/helpers/platform_utils.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 
 final class MindCreatorBottomBar extends StatefulWidget {
   final Mind? editableMind;
@@ -167,7 +168,7 @@ final class _TextFieldWidget extends StatelessWidget {
           ),
         ),
         BoolWidget(
-          condition: onRecordAudio != null && onRecordVideo != null,
+          condition: onRecordAudio != null && onRecordVideo != null && !kIsPhoneWeb,
           trueChild: MediaRecordToggleButton(
             onRecordAudio: () => onRecordAudio?.call(),
             onRecordVideo: () => onRecordVideo?.call(),

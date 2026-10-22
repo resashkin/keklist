@@ -28,6 +28,7 @@ final class SoundEnvelope {
       _cache.putIfAbsent(absolutePath, () => _extract(absolutePath).catchError((_) => null));
 
   static Future<SoundEnvelope?> _extract(String absolutePath) async {
+    if (absolutePath.startsWith('http')) return null;
     final File source = File(absolutePath);
     if (!await source.exists()) return null;
     final File waveformFile = File('$absolutePath.waveform');

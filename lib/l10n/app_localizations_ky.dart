@@ -910,4 +910,46 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get profileInitial => 'Тамга';
+
+  @override
+  String get webVersion => 'Веб-версия';
+
+  @override
+  String get webVersionAddressHint =>
+      'Ошол эле Wi‑Fi\'дагы компьютердин браузеринде ачыңыз; keklist ачык турушу керек';
+
+  @override
+  String get webVersionCopied => 'Дарек көчүрүлдү';
+
+  @override
+  String get webVersionNeedsPin =>
+      'keklist\'ти ошол эле Wi‑Fi\'дагы компьютердин браузеринде ачуу үчүн PIN коюңуз.';
+
+  @override
+  String get webVersionStarting => 'Иштетилүүдө…';
+
+  @override
+  String get webVersionNoWifi =>
+      'keklist\'ти браузерде ачуу үчүн Wi‑Fi\'га туташыңыз.';
+
+  @override
+  String get webVersionNoBundle => 'Бул курамада веб-версия жок.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => 'Ар бир браузер аны 30 күндө бир жолу сурайт';
+
+  @override
+  String get webVersionPinNotSet => 'Коюлган эмес';
+
+  @override
+  String get webVersionPinHint => '4–8 сан';
+
+  @override
+  String get webVersionRemovePin => 'PIN\'ди өчүрүү';
+
+  @override
+  String get webVersionPort => 'Порт';
 }

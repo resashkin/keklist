@@ -2,6 +2,7 @@ import 'package:keklist/presentation/core/widgets/column_count_row.dart';
 import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
@@ -89,7 +90,7 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: onWeatherLocation,
           ),
-        if (Platform.isAndroid)
+        if (!kIsWeb && Platform.isAndroid)
           ListTile(
             leading: const Icon(Icons.folder_open),
             title: Text(context.l10n.sourcesMediaFolder),

@@ -279,5 +279,18 @@
     "profileName": "名前",
     "profilePhoto": "写真",
     "profileEmoji": "絵文字",
-    "profileInitial": "頭文字"
+    "profileInitial": "頭文字",
+    "webVersion": "Web版",
+    "webVersionAddressHint": "同じWi‑Fiのパソコンのブラウザで開きます。keklistは開いたままにしてください",
+    "webVersionCopied": "アドレスをコピーしました",
+    "webVersionNeedsPin": "PINを設定すると、同じWi‑Fiのパソコンのブラウザでkeklistを開けます。",
+    "webVersionStarting": "起動中…",
+    "webVersionNoWifi": "ブラウザでkeklistを開くにはWi‑Fiに接続してください。",
+    "webVersionNoBundle": "このビルドにはWeb版が含まれていません。",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "各ブラウザで30日に1回入力します",
+    "webVersionPinNotSet": "未設定",
+    "webVersionPinHint": "4〜8桁",
+    "webVersionRemovePin": "PINを削除",
+    "webVersionPort": "ポート"
 }

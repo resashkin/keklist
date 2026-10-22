@@ -507,5 +507,18 @@
     "profileName": "Аты",
     "profilePhoto": "Сүрөт",
     "profileEmoji": "Эмодзи",
-    "profileInitial": "Тамга"
+    "profileInitial": "Тамга",
+    "webVersion": "Веб-версия",
+    "webVersionAddressHint": "Ошол эле Wi‑Fi'дагы компьютердин браузеринде ачыңыз; keklist ачык турушу керек",
+    "webVersionCopied": "Дарек көчүрүлдү",
+    "webVersionNeedsPin": "keklist'ти ошол эле Wi‑Fi'дагы компьютердин браузеринде ачуу үчүн PIN коюңуз.",
+    "webVersionStarting": "Иштетилүүдө…",
+    "webVersionNoWifi": "keklist'ти браузерде ачуу үчүн Wi‑Fi'га туташыңыз.",
+    "webVersionNoBundle": "Бул курамада веб-версия жок.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Ар бир браузер аны 30 күндө бир жолу сурайт",
+    "webVersionPinNotSet": "Коюлган эмес",
+    "webVersionPinHint": "4–8 сан",
+    "webVersionRemovePin": "PIN'ди өчүрүү",
+    "webVersionPort": "Порт"
 }

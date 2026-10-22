@@ -910,4 +910,46 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get profileInitial => 'Әріп';
+
+  @override
+  String get webVersion => 'Веб-нұсқа';
+
+  @override
+  String get webVersionAddressHint =>
+      'Сол Wi‑Fi желісіндегі компьютер браузерінде ашыңыз; keklist ашық тұруы керек';
+
+  @override
+  String get webVersionCopied => 'Мекенжай көшірілді';
+
+  @override
+  String get webVersionNeedsPin =>
+      'keklist-ті сол Wi‑Fi желісіндегі компьютер браузерінде ашу үшін PIN орнатыңыз.';
+
+  @override
+  String get webVersionStarting => 'Іске қосылуда…';
+
+  @override
+  String get webVersionNoWifi =>
+      'keklist-ті браузерде ашу үшін Wi‑Fi-ға қосылыңыз.';
+
+  @override
+  String get webVersionNoBundle => 'Бұл құрастыруда веб-нұсқа жоқ.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => 'Әр браузер оны 30 күнде бір рет сұрайды';
+
+  @override
+  String get webVersionPinNotSet => 'Орнатылмаған';
+
+  @override
+  String get webVersionPinHint => '4–8 сан';
+
+  @override
+  String get webVersionRemovePin => 'PIN-ді жою';
+
+  @override
+  String get webVersionPort => 'Порт';
 }

@@ -916,4 +916,46 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get profileInitial => 'Letra';
+
+  @override
+  String get webVersion => 'Versión web';
+
+  @override
+  String get webVersionAddressHint =>
+      'Ábrela en el navegador de un ordenador en la misma Wi‑Fi; mantén keklist abierto';
+
+  @override
+  String get webVersionCopied => 'Dirección copiada';
+
+  @override
+  String get webVersionNeedsPin =>
+      'Define un PIN para abrir keklist en el navegador de un ordenador en la misma Wi‑Fi.';
+
+  @override
+  String get webVersionStarting => 'Iniciando…';
+
+  @override
+  String get webVersionNoWifi =>
+      'Conéctate a una Wi‑Fi para abrir keklist en un navegador.';
+
+  @override
+  String get webVersionNoBundle => 'Esta versión no incluye la versión web.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => 'Cada navegador lo pide una vez cada 30 días';
+
+  @override
+  String get webVersionPinNotSet => 'Sin definir';
+
+  @override
+  String get webVersionPinHint => '4–8 dígitos';
+
+  @override
+  String get webVersionRemovePin => 'Eliminar PIN';
+
+  @override
+  String get webVersionPort => 'Puerto';
 }

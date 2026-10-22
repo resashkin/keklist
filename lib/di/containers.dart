@@ -26,6 +26,12 @@ import 'package:keklist/domain/repositories/weather/object/weather_cache_object.
 import 'package:keklist/domain/repositories/weather/weather_hive_repository.dart';
 import 'package:keklist/domain/repositories/weather/weather_repository.dart';
 import 'package:keklist/domain/services/export_import/export_import_service.dart';
+import 'package:keklist/domain/services/phone_web/emotion_api_repository.dart';
+import 'package:keklist/domain/services/phone_web/mind_api_repository.dart';
+import 'package:keklist/domain/services/phone_web/phone_api.dart';
+import 'package:keklist/domain/services/phone_web/phone_settings_repository.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:keklist/domain/services/phone_web/web_file_repository.dart';
 import 'package:keklist/domain/services/weather/weather_api_service.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
@@ -44,16 +50,24 @@ final class MainContainer {
     injector.map<MindSearcherCubit>(
       (injector) => MindSearcherCubit(repository: injector.get<MindRepository>()),
     );
-    injector.map<MindRepository>(
-      (injector) => MindHiveRepository(box: Hive.box<MindObject>(HiveConstants.mindBoxName)),
-    );
-    injector.map<EmotionRepository>(
-      (injector) => EmotionHiveRepository(box: Hive.box<EmotionObject>(HiveConstants.emotionBoxName)),
-      isSingleton: true,
-    );
-    injector.map<SettingsRepository>(
-      (injector) => SettingsHiveRepository(box: Hive.box<SettingsObject>(HiveConstants.settingsBoxName)),
-    );
+    if (kIsPhoneWeb) {
+      _mapPhoneRepositories(injector);
+    } else {
+      injector.map<MindRepository>(
+        (injector) => MindHiveRepository(box: Hive.box<MindObject>(HiveConstants.mindBoxName)),
+      );
+      injector.map<EmotionRepository>(
+        (injector) => EmotionHiveRepository(box: Hive.box<EmotionObject>(HiveConstants.emotionBoxName)),
+        isSingleton: true,
+      );
+      injector.map<SettingsRepository>(
+        (injector) => SettingsHiveRepository(box: Hive.box<SettingsObject>(HiveConstants.settingsBoxName)),
+      );
+      injector.map<AppFileRepository>(
+        (_) => const AppFileRepository(),
+        isSingleton: true,
+      );
+    }
     injector.map<DebugMenuRepository>(
       (injector) => DebugMenuHiveRepository(box: Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName)),
       isSingleton: true,
@@ -70,10 +84,6 @@ final class MainContainer {
         ),
         source: const PhotoLibraryGallerySource(),
       ),
-      isSingleton: true,
-    );
-    injector.map<AppFileRepository>(
-      (_) => const AppFileRepository(),
       isSingleton: true,
     );
     injector.map<ExportImportService>(
@@ -113,5 +123,20 @@ final class MainContainer {
       isSingleton: true,
     );
     return injector;
+  }
+
+  /// The web version served by the phone reads and writes the phone's data; only UI settings stay in the browser.
+  void _mapPhoneRepositories(Injector injector) {
+    final PhoneApi api = PhoneApi();
+    injector.map<MindRepository>((_) => MindApiRepository(api: api), isSingleton: true);
+    injector.map<EmotionRepository>((_) => EmotionApiRepository(api: api), isSingleton: true);
+    injector.map<SettingsRepository>(
+      (_) => PhoneSettingsRepository(
+        local: SettingsHiveRepository(box: Hive.box<SettingsObject>(HiveConstants.settingsBoxName)),
+        api: api,
+      ),
+      isSingleton: true,
+    );
+    injector.map<AppFileRepository>((_) => const WebFileRepository(), isSingleton: true);
   }
 }

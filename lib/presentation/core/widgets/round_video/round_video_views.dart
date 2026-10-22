@@ -1,10 +1,10 @@
-import 'dart:io';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:video_player/video_player.dart';
+import 'package:keklist/presentation/core/helpers/media_sources.dart';
 
 final class RoundVideoThumbnail extends StatelessWidget {
   final MindNoteVideo video;
@@ -28,8 +28,8 @@ final class RoundVideoThumbnail extends StatelessWidget {
               builder: (context, snapshot) {
                 final String? path = snapshot.data;
                 if (path == null) return const SizedBox.shrink();
-                return Image.file(
-                  File(path),
+                return imageFor(
+                  path,
                   fit: BoxFit.cover,
                   errorBuilder: (_, _, _) => const Icon(Icons.videocam_outlined, color: Colors.white54),
                 );
@@ -71,7 +71,7 @@ final class _RoundVideoMessageState extends State<RoundVideoMessage> {
 
   Future<void> _start() async {
     final String path = await context.read<AppFileRepository>().resolveAbsolutePath(widget.video.appRelativePath);
-    final VideoPlayerController controller = VideoPlayerController.file(File(path));
+    final VideoPlayerController controller = videoControllerFor(path);
     await controller.initialize();
     if (!mounted) {
       await controller.dispose();

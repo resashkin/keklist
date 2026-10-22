@@ -910,6 +910,48 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get profileInitial => 'Слово';
+
+  @override
+  String get webVersion => 'Веб верзија';
+
+  @override
+  String get webVersionAddressHint =>
+      'Отворите у прегледачу рачунара на истој Wi‑Fi мрежи; keklist мора остати отворен';
+
+  @override
+  String get webVersionCopied => 'Адреса је копирана';
+
+  @override
+  String get webVersionNeedsPin =>
+      'Поставите PIN да бисте отворили keklist у прегледачу рачунара на истој Wi‑Fi мрежи.';
+
+  @override
+  String get webVersionStarting => 'Покретање…';
+
+  @override
+  String get webVersionNoWifi =>
+      'Повежите се на Wi‑Fi да бисте отворили keklist у прегледачу.';
+
+  @override
+  String get webVersionNoBundle => 'Ова верзија не садржи веб верзију.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => 'Сваки прегледач га тражи једном у 30 дана';
+
+  @override
+  String get webVersionPinNotSet => 'Није постављен';
+
+  @override
+  String get webVersionPinHint => '4–8 цифара';
+
+  @override
+  String get webVersionRemovePin => 'Уклони PIN';
+
+  @override
+  String get webVersionPort => 'Порт';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1817,4 +1859,46 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get profileInitial => 'Slovo';
+
+  @override
+  String get webVersion => 'Veb verzija';
+
+  @override
+  String get webVersionAddressHint =>
+      'Otvorite u pregledaču računara na istoj Wi‑Fi mreži; keklist mora ostati otvoren';
+
+  @override
+  String get webVersionCopied => 'Adresa je kopirana';
+
+  @override
+  String get webVersionNeedsPin =>
+      'Postavite PIN da biste otvorili keklist u pregledaču računara na istoj Wi‑Fi mreži.';
+
+  @override
+  String get webVersionStarting => 'Pokretanje…';
+
+  @override
+  String get webVersionNoWifi =>
+      'Povežite se na Wi‑Fi da biste otvorili keklist u pregledaču.';
+
+  @override
+  String get webVersionNoBundle => 'Ova verzija ne sadrži veb verziju.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => 'Svaki pregledač ga traži jednom u 30 dana';
+
+  @override
+  String get webVersionPinNotSet => 'Nije postavljen';
+
+  @override
+  String get webVersionPinHint => '4–8 cifara';
+
+  @override
+  String get webVersionRemovePin => 'Ukloni PIN';
+
+  @override
+  String get webVersionPort => 'Port';
 }
