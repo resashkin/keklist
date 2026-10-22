@@ -37,6 +37,9 @@ final class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
       GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
       registerInterfaceStyleChannel(with: engineBridge.pluginRegistry)
+      if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "BonjourPlugin") {
+          BonjourPlugin.register(with: registrar)
+      }
 
       // MARK: Registation method channel
 //      flutterMethodChannel.setMethodCallHandler { [weak self] call, result in

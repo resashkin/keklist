@@ -279,5 +279,18 @@
     "profileName": "Имя",
     "profilePhoto": "Фото",
     "profileEmoji": "Эмодзи",
-    "profileInitial": "Буква"
+    "profileInitial": "Буква",
+    "webVersion": "Веб-версия",
+    "webVersionAddressHint": "Откройте в браузере компьютера в той же Wi‑Fi; keklist должен быть открыт",
+    "webVersionCopied": "Адрес скопирован",
+    "webVersionNeedsPin": "Задайте PIN, чтобы открыть keklist в браузере компьютера в той же Wi‑Fi.",
+    "webVersionStarting": "Запуск…",
+    "webVersionNoWifi": "Подключитесь к Wi‑Fi, чтобы открыть keklist в браузере.",
+    "webVersionNoBundle": "В эту сборку не входит веб-версия.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Каждый браузер спрашивает его раз в 30 дней",
+    "webVersionPinNotSet": "Не задан",
+    "webVersionPinHint": "4–8 цифр",
+    "webVersionRemovePin": "Удалить PIN",
+    "webVersionPort": "Порт"
 }

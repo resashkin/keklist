@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 abstract final class SettingsItemIds {
   static const String activeTasksSection = 'section.activeTasks';
   static const String userDataSection = 'section.userData';
+  static const String webVersionSection = 'section.webVersion';
   static const String applicationSection = 'section.application';
   static const String appearanceSection = 'section.appearance';
   static const String aboutSection = 'section.about';
@@ -26,6 +27,9 @@ abstract final class SettingsItemIds {
   static const String privacyPolicy = 'row.privacyPolicy';
   static const String licenses = 'row.licenses';
   static const String clearOnDeviceData = 'row.clearOnDeviceData';
+  static const String webVersionAddress = 'row.webVersionAddress';
+  static const String webVersionPin = 'row.webVersionPin';
+  static const String webVersionPort = 'row.webVersionPort';
 }
 
 final class SettingsRowModel {

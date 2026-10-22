@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
@@ -25,6 +26,7 @@ import 'package:keklist/presentation/core/widgets/sound/sound_spectrum_ring.dart
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_audio_circle.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/story_texture_tweak_sheet.dart';
+import 'package:keklist/presentation/core/helpers/media_sources.dart';
 
 const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
@@ -92,7 +94,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
   }
 
   void _listenToVolumeButtons() {
-    if (!Platform.isIOS && !Platform.isAndroid) return;
+    if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) return;
     _volumeSubscription = FlutterVolumeController.addListener(
       (_) => _setMuted(false),
       category: AudioSessionCategory.playback,
@@ -163,7 +165,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
         return VideoPlayerController.contentUri(uri);
       case DayFeedMind():
         final String? path = await _mindVideoPath(item);
-        return path == null ? null : VideoPlayerController.file(File(path));
+        return path == null ? null : videoControllerFor(path);
     }
   }
 
@@ -178,7 +180,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
     final int requestedIndex = _index;
     final String path = await context.read<AppFileRepository>().resolveAbsolutePath(audio.appRelativeAbsoulutePath);
     final AudioPlayer player = AudioPlayer();
-    final Duration? loadedDuration = await player.setFilePath(path).catchError((_) => null);
+    final Duration? loadedDuration = await setAudioSource(player, path).catchError((_) => null);
     if (!mounted || requestedIndex != _index) {
       await player.dispose();
       return;

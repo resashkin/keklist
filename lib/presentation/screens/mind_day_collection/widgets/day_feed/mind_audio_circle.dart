@@ -11,6 +11,7 @@ import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_spectrum_ring.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/helpers/media_sources.dart';
 
 /// The color of the mind's first emotion, or a neutral grey; fills its audio circle and tints its spectrum.
 Color mindAccentColorOf(BuildContext context, Mind mind) => context.select<EmotionBloc, Color>((bloc) {
@@ -55,7 +56,7 @@ final class _MindAudioCircleState extends State<MindAudioCircle> {
     final String path = await context.read<AppFileRepository>().resolveAbsolutePath(
       widget.audio.appRelativeAbsoulutePath,
     );
-    final Duration? loaded = await _player.setFilePath(path).catchError((_) => null);
+    final Duration? loaded = await setAudioSource(_player, path).catchError((_) => null);
     if (!mounted) return;
     if (loaded != null) setState(() => _duration = loaded);
     // The scope lives on the same page as this player, so it is never cleared.

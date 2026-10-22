@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 part 'membership_event.dart';
@@ -37,7 +38,8 @@ final class MembershipBloc extends Bloc<MembershipEvent, MembershipState> {
             ?.value ??
         false;
 
-    if (isSimulating) {
+    // The web version opens only from the user's own phone and has no store, so it shows no paywall.
+    if (isSimulating || kIsPhoneWeb) {
       emit(MembershipDataState(
         isPro: true,
         nextRenewalDate: DateTime.now().add(const Duration(days: 30)),

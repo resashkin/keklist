@@ -882,4 +882,44 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get profileInitial => '頭文字';
+
+  @override
+  String get webVersion => 'Web版';
+
+  @override
+  String get webVersionAddressHint =>
+      '同じWi‑Fiのパソコンのブラウザで開きます。keklistは開いたままにしてください';
+
+  @override
+  String get webVersionCopied => 'アドレスをコピーしました';
+
+  @override
+  String get webVersionNeedsPin => 'PINを設定すると、同じWi‑Fiのパソコンのブラウザでkeklistを開けます。';
+
+  @override
+  String get webVersionStarting => '起動中…';
+
+  @override
+  String get webVersionNoWifi => 'ブラウザでkeklistを開くにはWi‑Fiに接続してください。';
+
+  @override
+  String get webVersionNoBundle => 'このビルドにはWeb版が含まれていません。';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => '各ブラウザで30日に1回入力します';
+
+  @override
+  String get webVersionPinNotSet => '未設定';
+
+  @override
+  String get webVersionPinHint => '4〜8桁';
+
+  @override
+  String get webVersionRemovePin => 'PINを削除';
+
+  @override
+  String get webVersionPort => 'ポート';
 }

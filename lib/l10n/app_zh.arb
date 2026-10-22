@@ -279,5 +279,18 @@
     "profileName": "名字",
     "profilePhoto": "照片",
     "profileEmoji": "表情",
-    "profileInitial": "字母"
+    "profileInitial": "字母",
+    "webVersion": "网页版",
+    "webVersionAddressHint": "在同一 Wi‑Fi 下的电脑浏览器中打开；请保持 keklist 打开",
+    "webVersionCopied": "地址已复制",
+    "webVersionNeedsPin": "设置 PIN 后即可在同一 Wi‑Fi 下的电脑浏览器中打开 keklist。",
+    "webVersionStarting": "正在启动…",
+    "webVersionNoWifi": "连接 Wi‑Fi 后即可在浏览器中打开 keklist。",
+    "webVersionNoBundle": "此版本不包含网页版。",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "每个浏览器每 30 天询问一次",
+    "webVersionPinNotSet": "未设置",
+    "webVersionPinHint": "4–8 位数字",
+    "webVersionRemovePin": "删除 PIN",
+    "webVersionPort": "端口"
 }

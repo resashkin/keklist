@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:keklist/domain/services/media_index/gallery_source.dart';
 import 'package:keklist/domain/services/media_index/media_day_index.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
@@ -60,7 +62,7 @@ final class PhotoLibraryGallerySource implements GallerySource {
   );
 
   @override
-  bool get isSupported => Platform.isIOS;
+  bool get isSupported => !kIsWeb && Platform.isIOS;
 
   @override
   Future<bool> hasAccess() async =>

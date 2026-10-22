@@ -507,5 +507,18 @@
     "profileName": "Nome",
     "profilePhoto": "Foto",
     "profileEmoji": "Emoji",
-    "profileInitial": "Lettera"
+    "profileInitial": "Lettera",
+    "webVersion": "Versione web",
+    "webVersionAddressHint": "Aprila nel browser di un computer sulla stessa Wi‑Fi; tieni keklist aperto",
+    "webVersionCopied": "Indirizzo copiato",
+    "webVersionNeedsPin": "Imposta un PIN per aprire keklist nel browser di un computer sulla stessa Wi‑Fi.",
+    "webVersionStarting": "Avvio…",
+    "webVersionNoWifi": "Connettiti a una Wi‑Fi per aprire keklist in un browser.",
+    "webVersionNoBundle": "Questa build non include la versione web.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Ogni browser lo chiede una volta ogni 30 giorni",
+    "webVersionPinNotSet": "Non impostato",
+    "webVersionPinHint": "4–8 cifre",
+    "webVersionRemovePin": "Rimuovi PIN",
+    "webVersionPort": "Porta"
 }

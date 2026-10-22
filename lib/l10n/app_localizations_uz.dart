@@ -911,4 +911,47 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get profileInitial => 'Harf';
+
+  @override
+  String get webVersion => 'Veb-versiya';
+
+  @override
+  String get webVersionAddressHint =>
+      'Xuddi shu Wi‑Fi\'dagi kompyuter brauzerida oching; keklist ochiq turishi kerak';
+
+  @override
+  String get webVersionCopied => 'Manzil nusxalandi';
+
+  @override
+  String get webVersionNeedsPin =>
+      'keklist\'ni xuddi shu Wi‑Fi\'dagi kompyuter brauzerida ochish uchun PIN o‘rnating.';
+
+  @override
+  String get webVersionStarting => 'Ishga tushmoqda…';
+
+  @override
+  String get webVersionNoWifi =>
+      'keklist\'ni brauzerda ochish uchun Wi‑Fi\'ga ulaning.';
+
+  @override
+  String get webVersionNoBundle => 'Bu yig‘mada veb-versiya yo‘q.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet =>
+      'Har bir brauzer uni 30 kunda bir marta so‘raydi';
+
+  @override
+  String get webVersionPinNotSet => 'O‘rnatilmagan';
+
+  @override
+  String get webVersionPinHint => '4–8 raqam';
+
+  @override
+  String get webVersionRemovePin => 'PIN\'ni o‘chirish';
+
+  @override
+  String get webVersionPort => 'Port';
 }

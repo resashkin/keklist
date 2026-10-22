@@ -507,5 +507,18 @@
     "profileName": "Ism",
     "profilePhoto": "Rasm",
     "profileEmoji": "Emoji",
-    "profileInitial": "Harf"
+    "profileInitial": "Harf",
+    "webVersion": "Veb-versiya",
+    "webVersionAddressHint": "Xuddi shu Wi‑Fi'dagi kompyuter brauzerida oching; keklist ochiq turishi kerak",
+    "webVersionCopied": "Manzil nusxalandi",
+    "webVersionNeedsPin": "keklist'ni xuddi shu Wi‑Fi'dagi kompyuter brauzerida ochish uchun PIN o‘rnating.",
+    "webVersionStarting": "Ishga tushmoqda…",
+    "webVersionNoWifi": "keklist'ni brauzerda ochish uchun Wi‑Fi'ga ulaning.",
+    "webVersionNoBundle": "Bu yig‘mada veb-versiya yo‘q.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Har bir brauzer uni 30 kunda bir marta so‘raydi",
+    "webVersionPinNotSet": "O‘rnatilmagan",
+    "webVersionPinHint": "4–8 raqam",
+    "webVersionRemovePin": "PIN'ni o‘chirish",
+    "webVersionPort": "Port"
 }

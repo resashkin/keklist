@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/presentation/blocs/user_profile_bloc/user_profile_bloc.dart';
+import 'package:keklist/presentation/core/helpers/media_sources.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emoji_picker_screen.dart';
@@ -63,7 +65,7 @@ final class UserAvatarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colors = Theme.of(context).colorScheme;
-    final File? image = profile.avatarImage;
+    final String? image = profile.avatarImagePath;
     final String? emoji = profile.avatarEmoji;
     final String initial = (profile.nickname?.trim().characters.firstOrNull ?? '?').toUpperCase();
     return Container(
@@ -73,7 +75,7 @@ final class UserAvatarView extends StatelessWidget {
       decoration: BoxDecoration(shape: BoxShape.circle, color: colors.onSurface.withValues(alpha: 0.1)),
       alignment: Alignment.center,
       child: image != null
-          ? Image.file(image, width: size, height: size, fit: BoxFit.cover, gaplessPlayback: true)
+          ? imageFor(image, width: size, height: size, fit: BoxFit.cover)
           : Text(
               emoji ?? initial,
               style: TextStyle(
@@ -133,17 +135,19 @@ final class _ProfileEditSheetState extends State<ProfileEditSheet> {
                 spacing: 8.0,
                 alignment: WrapAlignment.center,
                 children: [
-                  ActionChip(
-                    avatar: const Icon(Icons.photo_outlined),
-                    label: Text(context.l10n.profilePhoto),
-                    onPressed: _pickPhoto,
-                  ),
+                  // The web version can't upload photos to the phone.
+                  if (!kIsPhoneWeb)
+                    ActionChip(
+                      avatar: const Icon(Icons.photo_outlined),
+                      label: Text(context.l10n.profilePhoto),
+                      onPressed: _pickPhoto,
+                    ),
                   ActionChip(
                     avatar: const Icon(Icons.emoji_emotions_outlined),
                     label: Text(context.l10n.profileEmoji),
                     onPressed: _pickEmoji,
                   ),
-                  if (profile.avatarImage != null || profile.avatarEmoji != null)
+                  if (profile.avatarImagePath != null || profile.avatarEmoji != null)
                     ActionChip(
                       avatar: const Icon(Icons.text_fields_rounded),
                       label: Text(context.l10n.profileInitial),

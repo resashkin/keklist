@@ -912,4 +912,46 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileInitial => 'Буква';
+
+  @override
+  String get webVersion => 'Веб-версия';
+
+  @override
+  String get webVersionAddressHint =>
+      'Откройте в браузере компьютера в той же Wi‑Fi; keklist должен быть открыт';
+
+  @override
+  String get webVersionCopied => 'Адрес скопирован';
+
+  @override
+  String get webVersionNeedsPin =>
+      'Задайте PIN, чтобы открыть keklist в браузере компьютера в той же Wi‑Fi.';
+
+  @override
+  String get webVersionStarting => 'Запуск…';
+
+  @override
+  String get webVersionNoWifi =>
+      'Подключитесь к Wi‑Fi, чтобы открыть keklist в браузере.';
+
+  @override
+  String get webVersionNoBundle => 'В эту сборку не входит веб-версия.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => 'Каждый браузер спрашивает его раз в 30 дней';
+
+  @override
+  String get webVersionPinNotSet => 'Не задан';
+
+  @override
+  String get webVersionPinHint => '4–8 цифр';
+
+  @override
+  String get webVersionRemovePin => 'Удалить PIN';
+
+  @override
+  String get webVersionPort => 'Порт';
 }

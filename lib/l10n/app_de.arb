@@ -279,5 +279,18 @@
     "profileName": "Name",
     "profilePhoto": "Foto",
     "profileEmoji": "Emoji",
-    "profileInitial": "Buchstabe"
+    "profileInitial": "Buchstabe",
+    "webVersion": "Webversion",
+    "webVersionAddressHint": "Im Browser eines Computers im selben WLAN öffnen; keklist muss offen bleiben",
+    "webVersionCopied": "Adresse kopiert",
+    "webVersionNeedsPin": "Lege eine PIN fest, um keklist im Browser eines Computers im selben WLAN zu öffnen.",
+    "webVersionStarting": "Wird gestartet…",
+    "webVersionNoWifi": "Verbinde dich mit einem WLAN, um keklist im Browser zu öffnen.",
+    "webVersionNoBundle": "Dieser Build enthält keine Webversion.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Jeder Browser fragt alle 30 Tage einmal danach",
+    "webVersionPinNotSet": "Nicht festgelegt",
+    "webVersionPinHint": "4–8 Ziffern",
+    "webVersionRemovePin": "PIN entfernen",
+    "webVersionPort": "Port"
 }

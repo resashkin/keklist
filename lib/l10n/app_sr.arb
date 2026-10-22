@@ -279,5 +279,18 @@
     "profileName": "Име",
     "profilePhoto": "Фотографија",
     "profileEmoji": "Емоџи",
-    "profileInitial": "Слово"
+    "profileInitial": "Слово",
+    "webVersion": "Веб верзија",
+    "webVersionAddressHint": "Отворите у прегледачу рачунара на истој Wi‑Fi мрежи; keklist мора остати отворен",
+    "webVersionCopied": "Адреса је копирана",
+    "webVersionNeedsPin": "Поставите PIN да бисте отворили keklist у прегледачу рачунара на истој Wi‑Fi мрежи.",
+    "webVersionStarting": "Покретање…",
+    "webVersionNoWifi": "Повежите се на Wi‑Fi да бисте отворили keklist у прегледачу.",
+    "webVersionNoBundle": "Ова верзија не садржи веб верзију.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Сваки прегледач га тражи једном у 30 дана",
+    "webVersionPinNotSet": "Није постављен",
+    "webVersionPinHint": "4–8 цифара",
+    "webVersionRemovePin": "Уклони PIN",
+    "webVersionPort": "Порт"
 }

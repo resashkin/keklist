@@ -878,4 +878,43 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get profileInitial => '字母';
+
+  @override
+  String get webVersion => '网页版';
+
+  @override
+  String get webVersionAddressHint => '在同一 Wi‑Fi 下的电脑浏览器中打开；请保持 keklist 打开';
+
+  @override
+  String get webVersionCopied => '地址已复制';
+
+  @override
+  String get webVersionNeedsPin => '设置 PIN 后即可在同一 Wi‑Fi 下的电脑浏览器中打开 keklist。';
+
+  @override
+  String get webVersionStarting => '正在启动…';
+
+  @override
+  String get webVersionNoWifi => '连接 Wi‑Fi 后即可在浏览器中打开 keklist。';
+
+  @override
+  String get webVersionNoBundle => '此版本不包含网页版。';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => '每个浏览器每 30 天询问一次';
+
+  @override
+  String get webVersionPinNotSet => '未设置';
+
+  @override
+  String get webVersionPinHint => '4–8 位数字';
+
+  @override
+  String get webVersionRemovePin => '删除 PIN';
+
+  @override
+  String get webVersionPort => '端口';
 }

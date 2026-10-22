@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:file_picker/file_picker.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,9 @@ import 'package:keklist/presentation/screens/debug_menu/debug_menu_screen.dart';
 import 'package:keklist/presentation/screens/language_picker/language_picker_screen.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/screens/settings/settings_layout.dart';
+import 'package:keklist/presentation/screens/settings/widgets/web_version_rows.dart';
+import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/presentation/screens/settings/widgets/gallery_index_tile.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/settings/widgets/settings_customize_bottom_sheet.dart';
@@ -172,27 +176,36 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
         title: context.l10n.activeTasks,
         rows: [_galleryIndexRow(context)],
       ),
-    SettingsSectionModel(
-      id: SettingsItemIds.userDataSection,
-      title: context.l10n.userData,
-      rows: [
-        _navigationRow(
-          id: SettingsItemIds.exportData,
-          title: context.l10n.exportData,
-          leading: const Icon(Icons.upload, color: Colors.redAccent),
-          hasChevron: false,
-          onTap: () => _handleExport(),
-        ),
-        _navigationRow(
-          id: SettingsItemIds.importData,
-          title: context.l10n.importData,
-          leading: const Icon(Icons.download, color: Colors.greenAccent),
-          hasChevron: false,
-          onTap: () => _handleImport(),
-        ),
-        if (!isIndexing && GalleryIndexTile.isAvailable(context)) _galleryIndexRow(context),
-      ],
-    ),
+    // Export, import and wiping belong to the phone that owns the data.
+    if (!kIsPhoneWeb)
+      SettingsSectionModel(
+        id: SettingsItemIds.userDataSection,
+        title: context.l10n.userData,
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.exportData,
+            title: context.l10n.exportData,
+            leading: const Icon(Icons.upload, color: Colors.redAccent),
+            hasChevron: false,
+            onTap: () => _handleExport(),
+          ),
+          _navigationRow(
+            id: SettingsItemIds.importData,
+            title: context.l10n.importData,
+            leading: const Icon(Icons.download, color: Colors.greenAccent),
+            hasChevron: false,
+            onTap: () => _handleImport(),
+          ),
+          if (!isIndexing && GalleryIndexTile.isAvailable(context)) _galleryIndexRow(context),
+        ],
+      ),
+    // Only the phone serves the web version.
+    if (!kIsWeb)
+      SettingsSectionModel(
+        id: SettingsItemIds.webVersionSection,
+        title: context.l10n.webVersion,
+        rows: webVersionRows(context, context.watch<KeklistWebServer>()),
+      ),
     SettingsSectionModel(
       id: SettingsItemIds.applicationSection,
       title: 'Application', // TODO: localize
@@ -228,7 +241,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
           leading: const Icon(Icons.feedback, color: Colors.blueGrey),
           onTap: () async => await _openEmailFeedbackForm(),
         ),
-        if (_isPro)
+        if (_isPro && !kIsPhoneWeb)
           SettingsRowModel(id: SettingsItemIds.proStatus, title: 'keklist PRO', tile: _buildProFooterTile(context)),
       ],
     ),
@@ -293,19 +306,20 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
         ),
       ],
     ),
-    SettingsSectionModel(
-      id: SettingsItemIds.dangerZoneSection,
-      title: context.l10n.dangerZone,
-      rows: [
-        _navigationRow(
-          id: SettingsItemIds.clearOnDeviceData,
-          title: context.l10n.clearOnDeviceData,
-          leading: const Icon(Icons.delete_outline, color: Colors.red),
-          hasChevron: false,
-          onTap: () async => await _clearCache(),
-        ),
-      ],
-    ),
+    if (!kIsPhoneWeb)
+      SettingsSectionModel(
+        id: SettingsItemIds.dangerZoneSection,
+        title: context.l10n.dangerZone,
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.clearOnDeviceData,
+            title: context.l10n.clearOnDeviceData,
+            leading: const Icon(Icons.delete_outline, color: Colors.red),
+            hasChevron: false,
+            onTap: () async => await _clearCache(),
+          ),
+        ],
+      ),
   ];
 
   SettingsRowModel _galleryIndexRow(BuildContext context) => SettingsRowModel(

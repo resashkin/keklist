@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math' as math;
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
@@ -36,6 +35,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:translator/translator.dart';
 import 'package:video_player/video_player.dart';
+import 'package:keklist/presentation/core/helpers/media_sources.dart';
 
 const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
@@ -648,7 +648,7 @@ final class _RoundVideoPlayerState extends State<_RoundVideoPlayer> {
 
   Future<void> _load() async {
     final String path = await context.read<AppFileRepository>().resolveAbsolutePath(widget.video.appRelativePath);
-    final VideoPlayerController controller = VideoPlayerController.file(File(path));
+    final VideoPlayerController controller = videoControllerFor(path);
     await controller.initialize();
     if (!mounted) {
       await controller.dispose();
