@@ -32,7 +32,6 @@ import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
-import 'package:keklist/presentation/screens/mind_info/mind_info_screen.dart';
 
 /// Analytics: one period for the whole screen, calm cards in a user-defined order.
 /// See `documentation/INSIGHTS_REDESIGN_IMPLEMENTATION.md`.
@@ -211,9 +210,6 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
       context,
       items: items,
       initialIndex: initialIndex,
-      onOpenMind: (mind) => Navigator.of(context).push(
-        SwipeablePageRoute(builder: (_) => MindInfoScreen(rootMind: byId[mind.rootId] ?? mind, allMinds: _minds)),
-      ),
     );
   }
 

@@ -501,6 +501,13 @@
     "calendarSettings": "Календардын жөндөөлөрү",
     "calendarShowMedia": "Сүрөт жана видеолорду көрсөтүү",
     "calendarWeekTitles": "Жуманын аталыштары",
-    "calendarNoActivity": "Активдүүлүк жок",
-    "calendarPlayStories": "Окуяларды көрүү"
+    "calendarPlayStories": "Окуяларды көрүү",
+    "storyBackgroundTweak": "Окуялардын фону",
+    "storyAnimationOff": "Өчүк",
+    "storyAnimationPulse": "Пульс",
+    "storyAnimationWave": "Толкун",
+    "storyAnimationEqualizer": "Эквалайзер",
+    "storyAnimationDrift": "Дрейф",
+    "storyAnimationGlow": "Жаркыроо",
+    "viewerCommentHint": "Комментарий…"
 }

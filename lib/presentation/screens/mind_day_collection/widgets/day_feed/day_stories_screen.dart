@@ -6,8 +6,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/gallery/cached_asset_thumbnail_provider.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
 import 'package:flutter_volume_controller/flutter_volume_controller.dart';
-import 'package:intl/intl.dart';
-import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/native/android/media_folder_channel.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
@@ -19,7 +17,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
+import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture.dart';
+import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/story_texture_tweak_sheet.dart';
 
 const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
@@ -30,24 +33,14 @@ const double _kStoryRoundVideoSize = 280.0;
 final class DayStoriesScreen extends StatefulWidget {
   final List<DayFeedItem> items;
   final int initialIndex;
-  final Future<void> Function(Mind mind) onOpenMind;
-
-  /// Stories from several days (analytics) show the date next to the time.
-  final bool showsDate;
-
-  const DayStoriesScreen({
-    super.key,
-    required this.items,
-    required this.initialIndex,
-    required this.onOpenMind,
-    this.showsDate = false,
-  });
+  const DayStoriesScreen({super.key, required this.items, required this.initialIndex});
 
   @override
   State<DayStoriesScreen> createState() => _DayStoriesScreenState();
 }
 
-final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTickerProviderStateMixin {
+final class _DayStoriesScreenState extends State<DayStoriesScreen>
+    with SingleTickerProviderStateMixin, ShakeToTweakMixin {
   // Remembered for the app session, like Instagram.
   static bool _isMutedForSession = true;
 
@@ -61,6 +54,17 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
   StreamSubscription<double>? _volumeSubscription;
   bool _isPaused = false;
   double _dragOffsetY = 0.0;
+  final ValueNotifier<SoundPlayback?> _sound = ValueNotifier(null);
+
+  @override
+  String get shakeScreenId => ShakeScreenIds.story;
+
+  @override
+  Future<void> onShakeToTweak() async {
+    _pause();
+    await StoryTextureTweakSheet.show(context);
+    if (mounted) _resume();
+  }
 
   DayFeedItem get _currentItem => widget.items[_index];
 
@@ -78,6 +82,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     _videoController?.dispose();
     _audioPlayer?.dispose();
     _progress.dispose();
+    _sound.dispose();
     super.dispose();
   }
 
@@ -94,6 +99,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     _progress
       ..stop()
       ..value = 0.0;
+    _sound.value = null;
     await _disposeVideo();
     await _disposeAudio();
 
@@ -132,6 +138,10 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     }
     await controller.setVolume(_isMutedForSession ? 0.0 : 1.0);
     setState(() => _videoController = controller);
+    final String? soundPath = await _mindVideoPath(item);
+    if (soundPath != null && mounted && requestedIndex == _index) {
+      _sound.value = SoundPlayback.video(controller).withEnvelopeOf(soundPath);
+    }
     final Duration duration = controller.value.duration;
     _startProgress(duration > Duration.zero ? duration : _kVideoFallbackDuration);
     if (!_isPaused) await controller.play();
@@ -146,12 +156,17 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
         return VideoPlayerController.file(file);
       case DayFeedFolderMedia(item: FolderSafItem(:final uri)):
         return VideoPlayerController.contentUri(uri);
-      case DayFeedMind(:final mind):
-        final MindNoteVideo? video = mind.noteContent.videoPieces.firstOrNull;
-        if (video == null) return null;
-        final String path = await context.read<AppFileRepository>().resolveAbsolutePath(video.appRelativePath);
-        return VideoPlayerController.file(File(path));
+      case DayFeedMind():
+        final String? path = await _mindVideoPath(item);
+        return path == null ? null : VideoPlayerController.file(File(path));
     }
+  }
+
+  Future<String?> _mindVideoPath(DayFeedItem item) async {
+    if (item is! DayFeedMind) return null;
+    final MindNoteVideo? video = item.mind.noteContent.videoPieces.firstOrNull;
+    if (video == null) return null;
+    return context.read<AppFileRepository>().resolveAbsolutePath(video.appRelativePath);
   }
 
   Future<void> _playAudio(MindNoteAudio audio, {required Duration fallback}) async {
@@ -165,6 +180,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     }
     await player.setVolume(_isMutedForSession ? 0.0 : 1.0);
     _audioPlayer = player;
+    _sound.value = SoundPlayback.audio(player).withEnvelopeOf(path);
     final Duration duration = loadedDuration ?? audio.duration ?? fallback;
     _startProgress(duration > Duration.zero ? duration : fallback);
     if (!_isPaused) unawaited(player.play());
@@ -224,9 +240,9 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     setState(() {});
   }
 
-  Future<void> _openMind(Mind mind) async {
+  Future<void> _openInViewer() async {
     _pause();
-    await widget.onOpenMind(mind);
+    await DayItemViewerScreen.show(context, items: widget.items, initialIndex: _index);
     if (mounted) _resume();
   }
 
@@ -239,7 +255,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     }
     final DayFeedItem item = _currentItem;
     if (x < width * 2 / 3 && item is DayFeedMind) {
-      _openMind(item.mind);
+      _openInViewer();
       return;
     }
     _goNext();
@@ -252,7 +268,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
       Navigator.of(context).pop();
       return;
     }
-    if (_dragOffsetY < _kOpenMindDragDistance && item is DayFeedMind) _openMind(item.mind);
+    if (_dragOffsetY < _kOpenMindDragDistance && item is DayFeedMind) _openInViewer();
     setState(() => _dragOffsetY = 0.0);
   }
 
@@ -312,28 +328,44 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
   }
 
   Widget _buildHeader(BuildContext context) {
-    final String locale = Localizations.localeOf(context).toString();
-    final DateFormat format = widget.showsDate ? DateFormat.yMMMd(locale).add_Hm() : DateFormat.Hm(locale);
-    final String time = format.format(_currentItem.timestamp.toLocal());
     final DayFeedItem item = _currentItem;
-    final bool isVideo = (item is DayFeedAsset && item.isVideo) ||
+    final bool isVideo =
+        (item is DayFeedAsset && item.isVideo) ||
         (item is DayFeedFolderMedia && item.isVideo) ||
         (item is DayFeedMind && item.mind.noteContent.hasMedia);
     final Color foreground = storyColorsOf(context).foreground;
-    return Row(
-      children: [
-        const SizedBox(width: 16.0),
-        Text(time, style: TextStyle(color: foreground, fontWeight: FontWeight.w600)),
-        const Spacer(),
-        if (isVideo)
-          IconButton(
-            color: foreground,
-            tooltip: _isMutedForSession ? context.l10n.dayFeedUnmute : context.l10n.dayFeedMute,
-            icon: Icon(_isMutedForSession ? Icons.volume_off : Icons.volume_up),
-            onPressed: () => _setMuted(!_isMutedForSession),
+    return SizedBox(
+      height: 48.0,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Padding(
+            // Symmetric so the pill stays centered past the buttons on the right.
+            padding: EdgeInsets.symmetric(horizontal: (isVideo ? 2 : 1) * 48.0 + 4.0),
+            child: StoryDatePill(date: item.timestamp),
           ),
-        IconButton(color: foreground, icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
-      ],
+          Align(
+            alignment: Alignment.centerRight,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (isVideo)
+                  IconButton(
+                    color: foreground,
+                    tooltip: _isMutedForSession ? context.l10n.dayFeedUnmute : context.l10n.dayFeedMute,
+                    icon: Icon(_isMutedForSession ? Icons.volume_off : Icons.volume_up),
+                    onPressed: () => _setMuted(!_isMutedForSession),
+                  ),
+                IconButton(
+                  color: foreground,
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -341,31 +373,50 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen> with SingleTi
     final DayFeedItem item = _currentItem;
     final VideoPlayerController? video = _videoController;
     if (item is DayFeedMind) {
-      return _MindStory(item: item, roundVideo: video);
+      return SoundPlaybackScope(
+        notifier: _sound,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            AnimatedEmotionTexture(mind: item.mind, color: storyColorsOf(context).foreground),
+            _MindStory(item: item, roundVideo: video),
+          ],
+        ),
+      );
     }
     if (video != null && video.value.isInitialized) {
-      return Center(child: AspectRatio(aspectRatio: video.value.aspectRatio, child: VideoPlayer(video)));
+      return Center(
+        child: AspectRatio(aspectRatio: video.value.aspectRatio, child: VideoPlayer(video)),
+      );
     }
     return switch (item) {
       DayFeedMind() => _MindStory(item: item),
       DayFeedAsset(isVideo: true) || DayFeedFolderMedia(isVideo: true) => const _Loading(),
       DayFeedAsset(:final asset) => Stack(
-          key: ValueKey(item.id),
-          fit: StackFit.expand,
-          children: [
-            Image(image: CachedAssetThumbnailProvider(asset), fit: BoxFit.contain, errorBuilder: (_, _, _) => const _Loading()),
-            Image(
-              image: AssetEntityImageProvider(asset, isOriginal: true),
-              fit: BoxFit.contain,
-              frameBuilder: (_, child, frame, wasSynchronouslyLoaded) => AnimatedOpacity(
-                opacity: frame == null && !wasSynchronouslyLoaded ? 0.0 : 1.0,
-                duration: const Duration(milliseconds: 200),
-                child: child,
-              ),
+        key: ValueKey(item.id),
+        fit: StackFit.expand,
+        children: [
+          Image(
+            image: CachedAssetThumbnailProvider(asset),
+            fit: BoxFit.contain,
+            errorBuilder: (_, _, _) => const _Loading(),
+          ),
+          Image(
+            image: AssetEntityImageProvider(asset, isOriginal: true),
+            fit: BoxFit.contain,
+            frameBuilder: (_, child, frame, wasSynchronouslyLoaded) => AnimatedOpacity(
+              opacity: frame == null && !wasSynchronouslyLoaded ? 0.0 : 1.0,
+              duration: const Duration(milliseconds: 200),
+              child: child,
             ),
-          ],
-        ),
-      DayFeedFolderMedia(item: FolderFileItem(:final file)) => Image.file(file, key: ValueKey(item.id), fit: BoxFit.contain),
+          ),
+        ],
+      ),
+      DayFeedFolderMedia(item: FolderFileItem(:final file)) => Image.file(
+        file,
+        key: ValueKey(item.id),
+        fit: BoxFit.contain,
+      ),
       DayFeedFolderMedia(item: final FolderSafItem safItem) => _SafPhoto(key: ValueKey(item.id), item: safItem),
     };
   }
@@ -391,7 +442,10 @@ final class _MindStory extends StatelessWidget {
                   child: video != null && video.value.isInitialized
                       ? Stack(
                           fit: StackFit.expand,
-                          children: [RoundVideoSurface(controller: video), RoundVideoProgressRing(controller: video)],
+                          children: [
+                            RoundVideoSurface(controller: video),
+                            RoundVideoProgressRing(controller: video),
+                          ],
                         )
                       : const _Loading(),
                 )

@@ -9,6 +9,8 @@ import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
+import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Black on dark theme, white on light, with the matching text color; shared by stories and the viewer.
@@ -17,7 +19,34 @@ import 'package:material_ui/material_ui.dart';
     ? (background: Colors.black, foreground: Colors.white)
     : (background: Colors.white, foreground: Colors.black);
 
+/// "Wednesday, Oct 21 · 14:05" in a soft pill at the top of a story or viewer page.
+final class StoryDatePill extends StatelessWidget {
+  final DateTime date;
+
+  const StoryDatePill({super.key, required this.date});
+
+  @override
+  Widget build(BuildContext context) {
+    final Color foreground = storyColorsOf(context).foreground;
+    final String locale = Localizations.localeOf(context).toString();
+    final DateTime local = date.toLocal();
+    final String weekday = toBeginningOfSentenceCase(DateFormat.EEEE(locale).format(local));
+    final String title = '$weekday, ${DateFormat.MMMd(locale).format(local)} · ${DateFormat.Hm(locale).format(local)}';
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 7.0),
+      decoration: ShapeDecoration(shape: const StadiumBorder(), color: foreground.withValues(alpha: 0.1)),
+      child: Text(
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(color: foreground, fontWeight: FontWeight.w600, fontSize: 14.0),
+      ),
+    );
+  }
+}
+
 /// Everything about a mind in a story or the viewer: emotions with their path, text, audio, comments.
+/// The viewer passes the edit callbacks; stories leave them null and stay read-only.
 final class MindStoryDetails extends StatelessWidget {
   final Mind mind;
 
@@ -27,7 +56,24 @@ final class MindStoryDetails extends StatelessWidget {
   /// Stories play the audio themselves; the viewer shows a player.
   final bool showsAudioPlayer;
 
-  const MindStoryDetails({super.key, required this.mind, this.media, this.showsAudioPlayer = false});
+  final VoidCallback? onTapText;
+
+  /// Replaces the text while it is being edited.
+  final Widget? textEditor;
+
+  final VoidCallback? onEditEmotions;
+  final ValueChanged<Mind>? onLongPressReflection;
+
+  const MindStoryDetails({
+    super.key,
+    required this.mind,
+    this.media,
+    this.showsAudioPlayer = false,
+    this.onTapText,
+    this.textEditor,
+    this.onEditEmotions,
+    this.onLongPressReflection,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +85,36 @@ final class MindStoryDetails extends StatelessWidget {
       spacing: 20.0,
       children: [
         ?media,
-        MindEmotionChips(mind: mind),
-        if (text.isNotEmpty)
-          Text(text, textAlign: TextAlign.center, style: TextStyle(color: foreground, fontSize: 20.0, height: 1.3)),
+        MindEmotionChips(mind: mind, onTap: onEditEmotions),
+        if (textEditor != null)
+          textEditor!
+        else if (text.isNotEmpty)
+          GestureDetector(
+            onTap: onTapText,
+            child: Text(text, textAlign: TextAlign.center, style: mindStoryTextStyle(foreground)),
+          ),
         if (audio != null)
           showsAudioPlayer
               ? MindAudioPlayerView(audio: audio)
               : Icon(Icons.graphic_eq, color: foreground.withValues(alpha: 0.7)),
-        MindReflectionsList(mind: mind),
+        MindReflectionsList(mind: mind, onLongPress: onLongPressReflection),
       ],
     );
   }
 }
 
-/// "😄 Joy › Delight" for every emotion of the mind.
+TextStyle mindStoryTextStyle(Color foreground) => TextStyle(color: foreground, fontSize: 20.0, height: 1.3);
+
+/// "😄 Joy › Delight" for every emotion of the mind; with [onTap] the chips edit them and a "＋" chip is added.
 final class MindEmotionChips extends StatelessWidget {
   final Mind mind;
+  final VoidCallback? onTap;
 
-  const MindEmotionChips({super.key, required this.mind});
+  const MindEmotionChips({super.key, required this.mind, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    if (mind.emotionIds.isEmpty) return const SizedBox.shrink();
+    if (mind.emotionIds.isEmpty && onTap == null) return const SizedBox.shrink();
     final Color foreground = storyColorsOf(context).foreground;
     return BlocBuilder<EmotionBloc, EmotionState>(
       builder: (context, state) {
@@ -72,29 +126,39 @@ final class MindEmotionChips extends StatelessWidget {
           runSpacing: 8.0,
           children: [
             for (final Emotion emotion in emotions)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
-                decoration: BoxDecoration(
-                  color: foreground.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: Text(
-                  '${emotion.emoji} ${[...state.ancestorsOf(emotion), emotion].map((e) => e.title).join(' › ')}',
-                  style: TextStyle(color: foreground, fontSize: 15.0),
-                ),
+              _chip(
+                foreground,
+                '${emotion.emoji} ${[...state.ancestorsOf(emotion), emotion].map((e) => e.title).join(' › ')}',
               ),
+            if (onTap != null) _chip(foreground, '＋ ${context.l10n.addEmotion}', isFaint: true),
           ],
         );
       },
     );
   }
+
+  Widget _chip(Color foreground, String title, {bool isFaint = false}) => GestureDetector(
+    onTap: onTap,
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+      decoration: BoxDecoration(
+        color: foreground.withValues(alpha: isFaint ? 0.05 : 0.1),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Text(
+        title,
+        style: TextStyle(color: foreground.withValues(alpha: isFaint ? 0.6 : 1.0), fontSize: 15.0),
+      ),
+    ),
+  );
 }
 
 /// The mind's reflections, oldest first: time, emotions and full text of each.
 final class MindReflectionsList extends StatelessWidget {
   final Mind mind;
+  final ValueChanged<Mind>? onLongPress;
 
-  const MindReflectionsList({super.key, required this.mind});
+  const MindReflectionsList({super.key, required this.mind, this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
@@ -112,25 +176,38 @@ final class MindReflectionsList extends StatelessWidget {
           spacing: 10.0,
           children: [
             for (final Mind reflection in reflections)
-              Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: foreground.withValues(alpha: 0.07),
-                  borderRadius: BorderRadius.circular(14.0),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 6.0,
-                  children: [
-                    Text(
-                      DateFormat.yMMMd(locale).add_Hm().format(reflection.creationDate.toLocal()),
-                      style: TextStyle(color: foreground.withValues(alpha: 0.55), fontSize: 12.0),
-                    ),
-                    if (reflection.emotionIds.isNotEmpty)
-                      Align(alignment: Alignment.centerLeft, child: MindEmotionChips(mind: reflection)),
-                    if (reflection.plainNote.trim().isNotEmpty)
-                      Text(reflection.plainNote.trim(), style: TextStyle(color: foreground, fontSize: 16.0)),
-                  ],
+              GestureDetector(
+                onLongPress: onLongPress == null ? null : () => onLongPress!(reflection),
+                child: Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    // Opaque so the emotion texture never runs through the comment.
+                    color: Color.alphaBlend(foreground.withValues(alpha: 0.07), storyColorsOf(context).background),
+                    borderRadius: BorderRadius.circular(14.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 6.0,
+                    children: [
+                      Text(
+                        DateFormat.yMMMd(locale).add_Hm().format(reflection.creationDate.toLocal()),
+                        style: TextStyle(color: foreground.withValues(alpha: 0.55), fontSize: 12.0),
+                      ),
+                      if (reflection.emotionIds.isNotEmpty)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: MindEmotionChips(mind: reflection),
+                        ),
+                      if (reflection.plainNote.trim().isNotEmpty)
+                        Text(reflection.plainNote.trim(), style: TextStyle(color: foreground, fontSize: 16.0)),
+                      if (reflection.noteContent.hasMedia)
+                        Icon(
+                          reflection.noteContent.hasVideo ? Icons.videocam_outlined : Icons.graphic_eq,
+                          size: 18.0,
+                          color: foreground.withValues(alpha: 0.55),
+                        ),
+                    ],
+                  ),
                 ),
               ),
           ],
@@ -166,7 +243,10 @@ final class _MindAudioPlayerViewState extends State<MindAudioPlayerView> {
       widget.audio.appRelativeAbsoulutePath,
     );
     final Duration? loaded = await _player.setFilePath(path).catchError((_) => null);
-    if (mounted && loaded != null) setState(() => _duration = loaded);
+    if (!mounted) return;
+    if (loaded != null) setState(() => _duration = loaded);
+    // The scope lives on the same page as this player, so it is never cleared.
+    SoundPlaybackScope.maybeOf(context)?.value = SoundPlayback.audio(_player).withEnvelopeOf(path);
   }
 
   @override

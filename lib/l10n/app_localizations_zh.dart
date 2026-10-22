@@ -825,8 +825,29 @@ class AppLocalizationsZh extends AppLocalizations {
   String get calendarWeekTitles => '周标题';
 
   @override
-  String get calendarNoActivity => '无活动';
+  String get calendarPlayStories => '播放故事';
 
   @override
-  String get calendarPlayStories => '播放故事';
+  String get storyBackgroundTweak => '故事背景';
+
+  @override
+  String get storyAnimationOff => '关闭';
+
+  @override
+  String get storyAnimationPulse => '脉动';
+
+  @override
+  String get storyAnimationWave => '波浪';
+
+  @override
+  String get storyAnimationEqualizer => '均衡器';
+
+  @override
+  String get storyAnimationDrift => '漂移';
+
+  @override
+  String get storyAnimationGlow => '光晕';
+
+  @override
+  String get viewerCommentHint => '评论…';
 }

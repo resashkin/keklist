@@ -856,8 +856,29 @@ class AppLocalizationsRu extends AppLocalizations {
   String get calendarWeekTitles => 'Заголовки недель';
 
   @override
-  String get calendarNoActivity => 'Нет активности';
+  String get calendarPlayStories => 'Смотреть истории';
 
   @override
-  String get calendarPlayStories => 'Смотреть истории';
+  String get storyBackgroundTweak => 'Фон историй';
+
+  @override
+  String get storyAnimationOff => 'Выкл';
+
+  @override
+  String get storyAnimationPulse => 'Пульс';
+
+  @override
+  String get storyAnimationWave => 'Волна';
+
+  @override
+  String get storyAnimationEqualizer => 'Эквалайзер';
+
+  @override
+  String get storyAnimationDrift => 'Дрейф';
+
+  @override
+  String get storyAnimationGlow => 'Свечение';
+
+  @override
+  String get viewerCommentHint => 'Комментарий…';
 }

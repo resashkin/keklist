@@ -264,6 +264,13 @@
     "calendarSettings": "カレンダー設定",
     "calendarShowMedia": "写真とビデオを表示",
     "calendarWeekTitles": "週のタイトル",
-    "calendarNoActivity": "アクティビティなし",
-    "calendarPlayStories": "ストーリーを再生"
+    "calendarPlayStories": "ストーリーを再生",
+    "storyBackgroundTweak": "ストーリーの背景",
+    "storyAnimationOff": "オフ",
+    "storyAnimationPulse": "パルス",
+    "storyAnimationWave": "ウェーブ",
+    "storyAnimationEqualizer": "イコライザー",
+    "storyAnimationDrift": "ドリフト",
+    "storyAnimationGlow": "グロー",
+    "viewerCommentHint": "コメント…"
 }

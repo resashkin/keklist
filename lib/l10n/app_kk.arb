@@ -501,6 +501,13 @@
     "calendarSettings": "Күнтізбе баптаулары",
     "calendarShowMedia": "Фото мен бейнені көрсету",
     "calendarWeekTitles": "Апта тақырыптары",
-    "calendarNoActivity": "Белсенділік жоқ",
-    "calendarPlayStories": "Тарихтарды көру"
+    "calendarPlayStories": "Тарихтарды көру",
+    "storyBackgroundTweak": "Оқиғалар фоны",
+    "storyAnimationOff": "Өшірулі",
+    "storyAnimationPulse": "Пульс",
+    "storyAnimationWave": "Толқын",
+    "storyAnimationEqualizer": "Эквалайзер",
+    "storyAnimationDrift": "Дрейф",
+    "storyAnimationGlow": "Жарқыл",
+    "viewerCommentHint": "Пікір…"
 }

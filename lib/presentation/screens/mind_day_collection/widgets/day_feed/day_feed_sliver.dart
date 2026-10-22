@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_cubit.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_empty_state.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tiles.dart';
@@ -72,16 +73,7 @@ final class DayFeedSliver extends StatelessWidget {
             },
           ),
           if (isEmpty)
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Text(
-                  context.l10n.noMindsForThisDay,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
-                ),
-              ),
-            ),
+            const SliverToBoxAdapter(child: DayEmptyState()),
         ],
       ),
     );

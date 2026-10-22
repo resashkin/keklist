@@ -116,6 +116,11 @@ final class SettingsUpdateCalendar extends SettingsEvent {
   const SettingsUpdateCalendar({required this.calendar});
 }
 
+final class SettingsUpdateStoryTextureAnimation extends SettingsEvent {
+  final StoryTextureAnimation animation;
+  const SettingsUpdateStoryTextureAnimation({required this.animation});
+}
+
 final class SettingsMarkShakeDiscovered extends SettingsEvent {
   final String screenId;
   const SettingsMarkShakeDiscovered({required this.screenId});

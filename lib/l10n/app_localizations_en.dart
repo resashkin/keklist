@@ -851,8 +851,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get calendarWeekTitles => 'Week titles';
 
   @override
-  String get calendarNoActivity => 'No activity';
+  String get calendarPlayStories => 'Play stories';
 
   @override
-  String get calendarPlayStories => 'Play stories';
+  String get storyBackgroundTweak => 'Story background';
+
+  @override
+  String get storyAnimationOff => 'Off';
+
+  @override
+  String get storyAnimationPulse => 'Pulse';
+
+  @override
+  String get storyAnimationWave => 'Wave';
+
+  @override
+  String get storyAnimationEqualizer => 'Equalizer';
+
+  @override
+  String get storyAnimationDrift => 'Drift';
+
+  @override
+  String get storyAnimationGlow => 'Glow';
+
+  @override
+  String get viewerCommentHint => 'Comment…';
 }

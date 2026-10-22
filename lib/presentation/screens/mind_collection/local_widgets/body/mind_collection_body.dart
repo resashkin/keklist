@@ -84,7 +84,7 @@ final class _MindCollectionBody extends StatelessWidget {
           CalendarDayPill(
             date: date,
             isToday: dayIndex == todayIndex,
-            isEmpty: items.isEmpty,
+            items: items,
             onTap: () => onTapToDay(dayIndex),
             onPlay: items.isEmpty ? null : () => onPlay([dayIndex]),
           ),

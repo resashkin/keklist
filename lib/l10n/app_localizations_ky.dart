@@ -857,8 +857,29 @@ class AppLocalizationsKy extends AppLocalizations {
   String get calendarWeekTitles => 'Жуманын аталыштары';
 
   @override
-  String get calendarNoActivity => 'Активдүүлүк жок';
+  String get calendarPlayStories => 'Окуяларды көрүү';
 
   @override
-  String get calendarPlayStories => 'Окуяларды көрүү';
+  String get storyBackgroundTweak => 'Окуялардын фону';
+
+  @override
+  String get storyAnimationOff => 'Өчүк';
+
+  @override
+  String get storyAnimationPulse => 'Пульс';
+
+  @override
+  String get storyAnimationWave => 'Толкун';
+
+  @override
+  String get storyAnimationEqualizer => 'Эквалайзер';
+
+  @override
+  String get storyAnimationDrift => 'Дрейф';
+
+  @override
+  String get storyAnimationGlow => 'Жаркыроо';
+
+  @override
+  String get viewerCommentHint => 'Комментарий…';
 }

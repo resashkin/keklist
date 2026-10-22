@@ -858,8 +858,29 @@ class AppLocalizationsUz extends AppLocalizations {
   String get calendarWeekTitles => 'Hafta sarlavhalari';
 
   @override
-  String get calendarNoActivity => 'Faollik yo‘q';
+  String get calendarPlayStories => 'Hikoyalarni ko‘rish';
 
   @override
-  String get calendarPlayStories => 'Hikoyalarni ko‘rish';
+  String get storyBackgroundTweak => 'Hikoyalar foni';
+
+  @override
+  String get storyAnimationOff => 'O‘chiq';
+
+  @override
+  String get storyAnimationPulse => 'Puls';
+
+  @override
+  String get storyAnimationWave => 'To‘lqin';
+
+  @override
+  String get storyAnimationEqualizer => 'Ekvalayzer';
+
+  @override
+  String get storyAnimationDrift => 'Drift';
+
+  @override
+  String get storyAnimationGlow => 'Yorqinlik';
+
+  @override
+  String get viewerCommentHint => 'Izoh…';
 }

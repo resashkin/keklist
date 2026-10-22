@@ -63,6 +63,9 @@ final class CalendarSettings {
   );
 }
 
+/// How the emotion texture behind a story or viewer page moves with the playing audio/video sound.
+enum StoryTextureAnimation { off, pulse, wave, equalizer, drift, glow }
+
 /// Analytics screen layout: widget order (unknown ids ignored), hidden widgets and the period.
 final class InsightsSettings {
   final List<String> widgetOrder;
@@ -102,6 +105,7 @@ final class KeklistSettings {
   final DayFeedSettings dayFeed;
   final InsightsSettings insights;
   final CalendarSettings calendar;
+  final StoryTextureAnimation storyTextureAnimation;
   final Set<String> hiddenSettingsItemIds;
   final Set<String> shakeDiscoveredScreenIds;
 
@@ -124,6 +128,7 @@ final class KeklistSettings {
     this.dayFeed = const DayFeedSettings(),
     this.insights = const InsightsSettings(),
     this.calendar = const CalendarSettings(),
+    this.storyTextureAnimation = StoryTextureAnimation.pulse,
     this.hiddenSettingsItemIds = const {},
     this.shakeDiscoveredScreenIds = const {},
   });
@@ -147,6 +152,7 @@ final class KeklistSettings {
     DayFeedSettings? dayFeed,
     InsightsSettings? insights,
     CalendarSettings? calendar,
+    StoryTextureAnimation? storyTextureAnimation,
     Set<String>? hiddenSettingsItemIds,
     Set<String>? shakeDiscoveredScreenIds,
   }) {
@@ -169,6 +175,7 @@ final class KeklistSettings {
       dayFeed: dayFeed ?? this.dayFeed,
       insights: insights ?? this.insights,
       calendar: calendar ?? this.calendar,
+      storyTextureAnimation: storyTextureAnimation ?? this.storyTextureAnimation,
       hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
       shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
     );
@@ -200,6 +207,7 @@ final class KeklistSettings {
     ..calendarColumnCount = calendar.columnCount
     ..isCalendarMindTextVisible = calendar.isMindTextVisible
     ..isCalendarMediaVisible = calendar.isMediaVisible
+    ..storyTextureAnimationIndex = storyTextureAnimation.index
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 

@@ -21,7 +21,6 @@ import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/digest/mind_universal_list_screen.dart';
 import 'package:keklist/presentation/screens/insights/insights_screen.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_search_result_widget.dart';
-import 'package:keklist/presentation/screens/mind_info/mind_info_screen.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
 import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
@@ -279,15 +278,10 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     duration: const Duration(milliseconds: 200),
   );
 
-  Future<void> _openMind(Mind mind) => Navigator.of(context).push(
-    SwipeablePageRoute(builder: (_) => MindInfoScreen(rootMind: mind, allMinds: _minds)),
-  );
-
   void _openDayItem(int dayIndex, int initialIndex) => DayItemViewerScreen.show(
     context,
     items: _feed.itemsOf(dayIndex),
     initialIndex: initialIndex,
-    onOpenMind: _openMind,
   );
 
   void _playStories(List<int> dayIndexes) {
@@ -300,8 +294,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
         pageBuilder: (_, _, _) => DayStoriesScreen(
           items: items,
           initialIndex: 0,
-          showsDate: dayIndexes.length > 1,
-          onOpenMind: _openMind,
         ),
         transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
       ),
@@ -512,14 +504,5 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     WidgetsBinding.instance.addPostFrameCallback((_) async => _jumpToNow());
   }
 
-  void _showMindInfo(Mind mind) {
-    Navigator.of(context).push(
-      SwipeablePageRoute(
-        builder: (_) => MindInfoScreen(
-          rootMind: mind,
-          allMinds: _minds,
-        ),
-      ),
-    );
-  }
+  void _showMindInfo(Mind mind) => DayItemViewerScreen.showMind(context, mind);
 }
