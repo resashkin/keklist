@@ -207,21 +207,38 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
           ),
         ),
       ),
-      body: _MindCollectionBody(
-        isSearching: _isSearching,
-        searchResults: _searchResults,
-        hideKeyboard: _hideKeyboard,
-        onTapToDay: (dayIndex) => _showDayCollectionScreen(groupDayIndex: dayIndex),
-        onOpenItem: _openDayItem,
-        onPlay: _playStories,
-        feed: _feed,
-        settings: _calendarSettings,
-        onColumnCountChanged: (count) =>
-            sendEventToBloc<SettingsBloc>(SettingsUpdateCalendar(calendar: _calendarSettings.copyWith(columnCount: count))),
-        showsWeekTitles: _shouldShowTitles,
-        todayIndex: _getNowDayIndex(),
-        itemScrollController: _itemScrollController,
-        itemPositionsListener: _itemPositionsListener,
+      body: Stack(
+        children: [
+          _MindCollectionBody(
+            isSearching: _isSearching,
+            searchResults: _searchResults,
+            hideKeyboard: _hideKeyboard,
+            onTapToDay: (dayIndex) => _showDayCollectionScreen(groupDayIndex: dayIndex),
+            onOpenItem: _openDayItem,
+            onPlay: _playStories,
+            feed: _feed,
+            settings: _calendarSettings,
+            onColumnCountChanged: (count) =>
+                sendEventToBloc<SettingsBloc>(SettingsUpdateCalendar(calendar: _calendarSettings.copyWith(columnCount: count))),
+            showsWeekTitles: _shouldShowTitles,
+            todayIndex: _getNowDayIndex(),
+            itemScrollController: _itemScrollController,
+            itemPositionsListener: _itemPositionsListener,
+          ),
+          if (!_isSearching)
+            Positioned(
+              left: 0.0,
+              right: 0.0,
+              bottom: MediaQuery.paddingOf(context).bottom + 12.0,
+              child: Center(
+                child: _CurrentWeekBubble(
+                  itemPositionsListener: _itemPositionsListener,
+                  todayIndex: _getNowDayIndex(),
+                  onTap: _scrollToNow,
+                ),
+              ),
+            ),
+        ],
       ),
       resizeToAvoidBottomInset: false,
     );

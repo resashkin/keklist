@@ -19,6 +19,7 @@ import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
+import 'package:keklist/presentation/core/widgets/glass_segmented_switcher.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/screens/insights/insights_widget_id.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_activity_cards.dart';
@@ -26,10 +27,12 @@ import 'package:keklist/presentation/screens/insights/widgets/insights_card.dart
 import 'package:keklist/presentation/screens/insights/widgets/insights_emotion_cards.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_format.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_memory_media_cards.dart';
+import 'package:keklist/presentation/screens/insights/widgets/insights_profile_header.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_summary_cards.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_tweak_sheet.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_collection_empty_day_widget.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
+import 'package:keklist/presentation/core/helpers/emotion_colors.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 
@@ -43,18 +46,6 @@ final class InsightsScreen extends StatefulWidget {
 }
 
 final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with ShakeToTweakMixin {
-  // Top-level emotions take these in their order; the first five suit the starter set.
-  static const List<Color> _emotionPalette = [
-    Color(0xFFFF6B6B),
-    Color(0xFF9B8CFF),
-    Color(0xFF5AC8FA),
-    Color(0xFFFFCC4D),
-    Color(0xFFFF7EB6),
-    Color(0xFF4CD9A6),
-    Color(0xFFFF9F45),
-    Color(0xFF8E9AAF),
-  ];
-
   final List<Mind> _minds = [];
 
   @override
@@ -93,7 +84,13 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
       extendBodyBehindAppBar: true,
       appBar: GlassAppBar(centerTitle: true, onTitleLongPress: requestTweak, title: Text(context.l10n.insights)),
       body: _minds.isEmpty
-          ? MindCollectionEmptyStateWidget.noInsights(context: context)
+          ? ListView(
+              padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
+              children: [
+                const InsightsProfileHeader(mindfulDays: 0),
+                MindCollectionEmptyStateWidget.noInsights(context: context),
+              ],
+            )
           : StreamBuilder<GalleryIndexProgress>(
               stream: indexer.progress,
               builder: (context, _) => _buildBody(context, insights, emotions, indexer),
@@ -124,7 +121,7 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
       report: report,
       emotionById: {for (final Emotion emotion in emotions) emotion.id: emotion},
       mindById: {for (final Mind mind in _minds) mind.id: mind},
-      emotionColors: _emotionColors(emotions),
+      emotionColors: emotionColorsOf(emotions),
       openMinds: _openMinds,
       openDay: _openDay,
       hasLibraryIndex: indexer.currentProgress.status != GalleryIndexStatus.unsupported,
@@ -139,20 +136,15 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
         bottom: MediaQuery.paddingOf(context).bottom + 96.0,
       ),
       children: [
+        InsightsProfileHeader(mindfulDays: _mindfulDays),
         Padding(
           padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-          child: SegmentedButton<InsightsPeriodKind>(
-            showSelectedIcon: false,
-            segments: [
-              for (final InsightsPeriodKind value in InsightsPeriodKind.values)
-                ButtonSegment(
-                  value: value,
-                  label: FittedBox(fit: BoxFit.scaleDown, child: Text(InsightsFormat.periodTitle(context, value))),
-                ),
-            ],
-            selected: {kind},
-            onSelectionChanged: (selection) => sendEventToBloc<SettingsBloc>(
-              SettingsUpdateInsights(insights: insights.copyWith(periodIndex: selection.single.index)),
+          child: GlassSegmentedSwitcher<InsightsPeriodKind>(
+            values: InsightsPeriodKind.values,
+            selected: kind,
+            labelOf: (value) => InsightsFormat.periodTitle(context, value),
+            onChanged: (value) => sendEventToBloc<SettingsBloc>(
+              SettingsUpdateInsights(insights: insights.copyWith(periodIndex: value.index)),
             ),
           ),
         ),
@@ -160,6 +152,8 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
       ],
     );
   }
+
+  int get _mindfulDays => _minds.map((mind) => mind.dayIndex).toSet().length;
 
   Widget _buildCard(InsightsWidgetId id, InsightsCardContext data) => switch (id) {
     InsightsWidgetId.counters => InsightsCountersCard(data: data),
@@ -177,24 +171,6 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
   };
 
   /// Each top-level emotion gets a palette color; nested ones inherit their root's.
-  Map<String, Color> _emotionColors(List<Emotion> emotions) {
-    final List<Emotion> roots = emotions.where((emotion) => emotion.parentId == null).toList()
-      ..sort((a, b) => a.orderIndex.compareTo(b.orderIndex));
-    final Map<String, Color> colors = {
-      for (int i = 0; i < roots.length; i++) roots[i].id: _emotionPalette[i % _emotionPalette.length],
-    };
-    final Map<String, Emotion> byId = {for (final Emotion emotion in emotions) emotion.id: emotion};
-    for (final Emotion emotion in emotions) {
-      Emotion current = emotion;
-      final Set<String> seen = {};
-      while (current.parentId != null && seen.add(current.id) && byId[current.parentId] != null) {
-        current = byId[current.parentId]!;
-      }
-      colors.putIfAbsent(emotion.id, () => colors[current.id] ?? _emotionPalette.last);
-    }
-    return colors;
-  }
-
   void _openMinds(List<String> mindIds, {int initialIndex = 0}) {
     final Map<String, Mind> byId = {for (final Mind mind in _minds) mind.id: mind};
     final Map<String, int> reflectionCounts = {};

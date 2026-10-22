@@ -307,7 +307,8 @@ Widget _getApplication(Injector mainInjector) => MultiProvider(
       BlocProvider(
         create: (context) => UserProfileBloc(
           settingsRepository: mainInjector.get<SettingsRepository>(),
-        ),
+          fileRepository: mainInjector.get<AppFileRepository>(),
+        )..add(UserProfileGet()),
       ),
       BlocProvider(create: (context) => DebugMenuBloc(repository: mainInjector.get<DebugMenuRepository>())),
       BlocProvider(

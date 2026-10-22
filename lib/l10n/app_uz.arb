@@ -272,14 +272,6 @@
     "@send": {
         "description": "Yuborish tugmasi"
     },
-    "updateYourNickname": "Niknamingizni yangilash",
-    "@updateYourNickname": {
-        "description": "Niknamingizni yangilash dialogi sarlavhasi"
-    },
-    "yourNickname": "Sizning niknamingiz",
-    "@yourNickname": {
-        "description": "Nikname kiritish ko'rsatkichi"
-    },
     "create": "Yaratish",
     "@create": {
         "description": "Yaratish tugmasi"
@@ -371,10 +363,6 @@
     "settingsDescription": "Barcha sozlamalar ekrani (qorong'u rejim, sinxronlash va boshqalar)",
     "@settingsDescription": {
         "description": "Sozlamalar tab tavsifi"
-    },
-    "profileDescription": "Profilingiz bilan ekran",
-    "@profileDescription": {
-        "description": "Profil tab tavsifi"
     },
     "todayDescription": "Faqat bugungi fikrlar",
     "@todayDescription": {
@@ -509,5 +497,15 @@
     "storyAnimationEqualizer": "Ekvalayzer",
     "storyAnimationDrift": "Drift",
     "storyAnimationGlow": "Yorqinlik",
-    "viewerCommentHint": "Izoh…"
+    "viewerCommentHint": "Izoh…",
+    "calendarToCurrentWeek": "Joriy haftaga",
+    "storyDateLines": "Sana qatorlari",
+    "storyTextureTitle": "Tekstura",
+    "storySpectrum": "Tovush spektri",
+    "storySensitivity": "Sezgirlik",
+    "profileMindfulDays": "{count, plural, other{Ongli {count} kun}}",
+    "profileName": "Ism",
+    "profilePhoto": "Rasm",
+    "profileEmoji": "Emoji",
+    "profileInitial": "Harf"
 }

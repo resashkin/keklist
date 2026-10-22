@@ -396,12 +396,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get send => '发送';
 
   @override
-  String get updateYourNickname => '更新您的昵称';
-
-  @override
-  String get yourNickname => '您的昵称';
-
-  @override
   String get create => '创建';
 
   @override
@@ -469,9 +463,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsDescription => '包含所有设置的屏幕（深色模式、同步等）';
-
-  @override
-  String get profileDescription => '您的个人资料屏幕';
 
   @override
   String get todayDescription => '仅今天的笔记';
@@ -850,4 +841,41 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get viewerCommentHint => '评论…';
+
+  @override
+  String get calendarToCurrentWeek => '回到本周';
+
+  @override
+  String get storyDateLines => '日期行数';
+
+  @override
+  String get storyTextureTitle => '纹理';
+
+  @override
+  String get storySpectrum => '声音频谱';
+
+  @override
+  String get storySensitivity => '灵敏度';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '用心记录 $count 天',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => '名字';
+
+  @override
+  String get profilePhoto => '照片';
+
+  @override
+  String get profileEmoji => '表情';
+
+  @override
+  String get profileInitial => '字母';
 }

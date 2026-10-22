@@ -70,13 +70,22 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..isCalendarMediaVisible = fields[33] == null ? true : fields[33] as bool
       ..storyTextureAnimationIndex = fields[35] == null
           ? 1
-          : (fields[35] as num).toInt();
+          : (fields[35] as num).toInt()
+      ..storyDateLayoutIndex = fields[36] == null
+          ? 1
+          : (fields[36] as num).toInt()
+      ..isStorySpectrumVisible = fields[37] == null ? true : fields[37] as bool
+      ..storySensitivity = fields[38] == null
+          ? 1.0
+          : (fields[38] as num).toDouble()
+      ..avatarEmoji = fields[39] as String?
+      ..avatarImagePath = fields[40] as String?;
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(28)
+      ..writeByte(33)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)
@@ -132,7 +141,17 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(33)
       ..write(obj.isCalendarMediaVisible)
       ..writeByte(35)
-      ..write(obj.storyTextureAnimationIndex);
+      ..write(obj.storyTextureAnimationIndex)
+      ..writeByte(36)
+      ..write(obj.storyDateLayoutIndex)
+      ..writeByte(37)
+      ..write(obj.isStorySpectrumVisible)
+      ..writeByte(38)
+      ..write(obj.storySensitivity)
+      ..writeByte(39)
+      ..write(obj.avatarEmoji)
+      ..writeByte(40)
+      ..write(obj.avatarImagePath);
   }
 
   @override

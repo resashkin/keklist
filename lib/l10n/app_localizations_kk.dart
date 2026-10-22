@@ -404,12 +404,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get send => 'ЖІБЕРУ';
 
   @override
-  String get updateYourNickname => 'Никнейміңізді жаңарту';
-
-  @override
-  String get yourNickname => 'Сіздің никнейміңіз';
-
-  @override
   String get create => 'Жасау';
 
   @override
@@ -480,9 +474,6 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get settingsDescription =>
       'Барлық баптаулар экраны (қараңғы режим, синхрондау және т.б.)';
-
-  @override
-  String get profileDescription => 'Профиліңізбен экран';
 
   @override
   String get todayDescription => 'Тек бүгінгі ойлар';
@@ -882,4 +873,41 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get viewerCommentHint => 'Пікір…';
+
+  @override
+  String get calendarToCurrentWeek => 'Ағымдағы аптаға';
+
+  @override
+  String get storyDateLines => 'Күн жолдары';
+
+  @override
+  String get storyTextureTitle => 'Текстура';
+
+  @override
+  String get storySpectrum => 'Дыбыс спектрі';
+
+  @override
+  String get storySensitivity => 'Сезімталдық';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Саналы $count күн',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Аты';
+
+  @override
+  String get profilePhoto => 'Фото';
+
+  @override
+  String get profileEmoji => 'Эмодзи';
+
+  @override
+  String get profileInitial => 'Әріп';
 }

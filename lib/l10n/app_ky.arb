@@ -272,14 +272,6 @@
     "@send": {
         "description": "Жөнөтүү баскычы"
     },
-    "updateYourNickname": "Никнэмиңизди жаңылоо",
-    "@updateYourNickname": {
-        "description": "Никнэмиңизди жаңылоо диалогунун аталышы"
-    },
-    "yourNickname": "Сиздин никнэмиңиз",
-    "@yourNickname": {
-        "description": "Никнэм киргизүү көрсөткүчү"
-    },
     "create": "Түзүү",
     "@create": {
         "description": "Жаратуу баскычы"
@@ -371,10 +363,6 @@
     "settingsDescription": "Бардык жөндөөлөр экраны (караңгы режим, синхрондоштуруу жана башкалар)",
     "@settingsDescription": {
         "description": "Сөздүктөр таб сүрөттөмөсү"
-    },
-    "profileDescription": "Профилиңиз менен экран",
-    "@profileDescription": {
-        "description": "Профиль таб сүрөттөмөсү"
     },
     "todayDescription": "Анткени бүгүнкү ойлор",
     "@todayDescription": {
@@ -509,5 +497,15 @@
     "storyAnimationEqualizer": "Эквалайзер",
     "storyAnimationDrift": "Дрейф",
     "storyAnimationGlow": "Жаркыроо",
-    "viewerCommentHint": "Комментарий…"
+    "viewerCommentHint": "Комментарий…",
+    "calendarToCurrentWeek": "Учурдагы жумага",
+    "storyDateLines": "Дата саптары",
+    "storyTextureTitle": "Текстура",
+    "storySpectrum": "Үн спектри",
+    "storySensitivity": "Сезгичтик",
+    "profileMindfulDays": "{count, plural, other{Аң-сезимдүү {count} күн}}",
+    "profileName": "Аты",
+    "profilePhoto": "Сүрөт",
+    "profileEmoji": "Эмодзи",
+    "profileInitial": "Тамга"
 }

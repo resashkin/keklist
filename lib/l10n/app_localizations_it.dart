@@ -404,12 +404,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get send => 'INVIA';
 
   @override
-  String get updateYourNickname => 'Aggiorna il tuo nickname';
-
-  @override
-  String get yourNickname => 'Il tuo nickname';
-
-  @override
   String get create => 'Crea';
 
   @override
@@ -481,9 +475,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get settingsDescription =>
       'Schermata con tutte le impostazioni (modalità scura, sincronizzazione e altro)';
-
-  @override
-  String get profileDescription => 'Schermata con il tuo profilo';
 
   @override
   String get todayDescription => 'Solo menti di oggi';
@@ -887,4 +878,42 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get viewerCommentHint => 'Commento…';
+
+  @override
+  String get calendarToCurrentWeek => 'Alla settimana corrente';
+
+  @override
+  String get storyDateLines => 'Righe della data';
+
+  @override
+  String get storyTextureTitle => 'Texture';
+
+  @override
+  String get storySpectrum => 'Spettro del suono';
+
+  @override
+  String get storySensitivity => 'Sensibilità';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Consapevole da $count giorni',
+      one: 'Consapevole da $count giorno',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Nome';
+
+  @override
+  String get profilePhoto => 'Foto';
+
+  @override
+  String get profileEmoji => 'Emoji';
+
+  @override
+  String get profileInitial => 'Lettera';
 }

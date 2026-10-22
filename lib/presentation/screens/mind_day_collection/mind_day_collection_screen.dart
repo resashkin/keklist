@@ -43,7 +43,7 @@ const double _kFloatingButtonClearance = 96.0;
 final class MindDayCollectionScreen extends StatefulWidget {
   final int initialDayIndex;
 
-  /// Extra bottom offset for the floating "To now" button so it clears an
+  /// Extra bottom offset for the floating "Create" button so it clears an
   /// overlaying tab bar. Pass the tab bar height when hosted inside the tab
   /// container; leave 0 for standalone (pushed) usage with no tab bar.
   final double fabBottomOffset;
@@ -244,27 +244,13 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   }
 
   Widget _buildFloatingButtons() {
-    final bool isToday = dayIndex == DateUtils.getTodayIndex();
     return Padding(
       padding: EdgeInsets.only(bottom: widget.fabBottomOffset),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 12.0,
-        children: [
-          KekFloatingButton(
-              onPressed: () => _showMindCreator(),
-              label: context.l10n.create,
-              fallbackIcon: Icons.add,
-              sfSymbol: 'plus',
-            ),
-          if (!isToday)
-            KekFloatingButton(
-              onPressed: () => goToToday(),
-              label: 'To now',
-              fallbackIcon: dayIndex < DateUtils.getTodayIndex() ? Icons.arrow_downward : Icons.arrow_upward,
-              sfSymbol: dayIndex < DateUtils.getTodayIndex() ? 'arrow.down' : 'arrow.up',
-            ),
-        ],
+      child: KekFloatingButton(
+        onPressed: () => _showMindCreator(),
+        label: context.l10n.create,
+        fallbackIcon: Icons.add,
+        sfSymbol: 'plus',
       ),
     );
   }

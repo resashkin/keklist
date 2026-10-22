@@ -548,14 +548,6 @@
     "@send": {
         "description": "Send button"
     },
-    "updateYourNickname": "Update your nickname",
-    "@updateYourNickname": {
-        "description": "Update nickname dialog title"
-    },
-    "yourNickname": "Your nickname",
-    "@yourNickname": {
-        "description": "Nickname input hint"
-    },
     "create": "Create",
     "@create": {
         "description": "Create button"
@@ -647,10 +639,6 @@
     "settingsDescription": "Screen with all settings (dark mode, sync and etc.)",
     "@settingsDescription": {
         "description": "Settings tab description"
-    },
-    "profileDescription": "Screen with your profile",
-    "@profileDescription": {
-        "description": "Profile tab description"
     },
     "todayDescription": "Only today minds",
     "@todayDescription": {
@@ -1156,5 +1144,38 @@
     "viewerCommentHint": "Comment…",
     "@viewerCommentHint": {
         "description": "Viewer: placeholder of the comment field"
-    }
+    },
+    "calendarToCurrentWeek": "To current week",
+    "@calendarToCurrentWeek": {
+        "description": "Calendar: bubble that scrolls back to the current week"
+    },
+    "storyDateLines": "Date lines",
+    "@storyDateLines": {
+        "description": "Story tweak: how many lines the date header takes"
+    },
+    "storyTextureTitle": "Texture",
+    "@storyTextureTitle": {
+        "description": "Story tweak: texture animation section"
+    },
+    "storySpectrum": "Sound spectrum",
+    "@storySpectrum": {
+        "description": "Story tweak: rays around audio/video circles"
+    },
+    "storySensitivity": "Sensitivity",
+    "@storySensitivity": {
+        "description": "Story tweak: how strongly visuals react to loudness"
+    },
+    "profileMindfulDays": "{count, plural, one{Mindful for {count} day} other{Mindful for {count} days}}",
+    "@profileMindfulDays": {
+        "description": "Insights header: number of days with at least one mind",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "profileName": "Name",
+    "profilePhoto": "Photo",
+    "profileEmoji": "Emoji",
+    "profileInitial": "Letter"
 }

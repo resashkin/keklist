@@ -397,12 +397,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get send => '送信';
 
   @override
-  String get updateYourNickname => 'ニックネームを更新';
-
-  @override
-  String get yourNickname => 'あなたのニックネーム';
-
-  @override
   String get create => '作成';
 
   @override
@@ -470,9 +464,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsDescription => 'すべての設定の画面（ダークモード、同期など）';
-
-  @override
-  String get profileDescription => 'あなたのプロフィールの画面';
 
   @override
   String get todayDescription => '今日のメモのみ';
@@ -854,4 +845,41 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get viewerCommentHint => 'コメント…';
+
+  @override
+  String get calendarToCurrentWeek => '今週へ';
+
+  @override
+  String get storyDateLines => '日付の行数';
+
+  @override
+  String get storyTextureTitle => 'テクスチャ';
+
+  @override
+  String get storySpectrum => '音のスペクトラム';
+
+  @override
+  String get storySensitivity => '感度';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '意識した日 $count日',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => '名前';
+
+  @override
+  String get profilePhoto => '写真';
+
+  @override
+  String get profileEmoji => '絵文字';
+
+  @override
+  String get profileInitial => '頭文字';
 }

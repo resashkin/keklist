@@ -272,14 +272,6 @@
     "@send": {
         "description": "Botón enviar"
     },
-    "updateYourNickname": "Actualizar tu apodo",
-    "@updateYourNickname": {
-        "description": "Título de diálogo actualizar apodo"
-    },
-    "yourNickname": "Tu apodo",
-    "@yourNickname": {
-        "description": "Sugerencia de entrada de apodo"
-    },
     "create": "Crear",
     "@create": {
         "description": "Botón crear"
@@ -371,10 +363,6 @@
     "settingsDescription": "Pantalla con toda la configuración (modo oscuro, sincronización, etc.)",
     "@settingsDescription": {
         "description": "Descripción de pestaña configuración"
-    },
-    "profileDescription": "Pantalla con tu perfil",
-    "@profileDescription": {
-        "description": "Descripción de pestaña perfil"
     },
     "todayDescription": "Solo mentes de hoy",
     "@todayDescription": {
@@ -509,5 +497,15 @@
     "storyAnimationEqualizer": "Ecualizador",
     "storyAnimationDrift": "Deriva",
     "storyAnimationGlow": "Brillo",
-    "viewerCommentHint": "Comentario…"
+    "viewerCommentHint": "Comentario…",
+    "calendarToCurrentWeek": "A la semana actual",
+    "storyDateLines": "Líneas de fecha",
+    "storyTextureTitle": "Textura",
+    "storySpectrum": "Espectro de sonido",
+    "storySensitivity": "Sensibilidad",
+    "profileMindfulDays": "{count, plural, one{Consciente {count} día} other{Consciente {count} días}}",
+    "profileName": "Nombre",
+    "profilePhoto": "Foto",
+    "profileEmoji": "Emoji",
+    "profileInitial": "Letra"
 }

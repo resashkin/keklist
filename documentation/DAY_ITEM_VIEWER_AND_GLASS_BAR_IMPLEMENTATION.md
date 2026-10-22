@@ -8,25 +8,29 @@ Every tab uses a transparent top bar with frosted "glass" bubbles, title centere
 ## Implementation Details
 ### Viewer — `day_feed/day_item_viewer_screen.dart`
 - `DayItemViewerScreen.show(context, items, initialIndex, onOpenMind)` — `PageView` over `DayFeedItem`s.
-- Header: ⋯ (minds: edit, translate in debug, remove media, delete), a centered `StoryDatePill`, ✕.
+- Header: ⋯ (minds: edit, translate in debug, remove media, delete), a centered `StoryDateHeader`, ✕.
   Page dots, or "n / N" above 12 items. `DayItemViewerScreen.showMind` opens a single mind.
 - Minds are read live from `MindBloc` by id, so edits show at once.
 - Tap the text → inline `TextField` with Cancel / Save (`MindEdit`, audio/video pieces kept).
-- Tap an emotion chip or "＋ Add emotion" → `EmotionMarkingSheet` (`MindSetEmotions`).
+- Tap the emotion pill under the content → `EmotionMarkingSheet` (`MindSetEmotions`); a mind without emotions shows a pale "☺︎ ＋" pill.
 - `MindCreatorBottomBar` at the bottom adds text, audio or video comments; long-press a comment → Edit / Remove media /
   Delete sheet; Edit loads it into the bar.
-- Pulling a page down past its top closes the viewer (negative pixels on bouncing physics, overscroll on clamping).
-- Pages: mind details (with audio player), round video, video (looping, tap to pause), photo
+- Pulling a page down past its top (80pt) closes the viewer; the page fades (up to 85%) and slides with the pull.
+- The emotion texture fills the whole screen; the header and comment bar float over it.
+- Pages: mind details (audio as `MindAudioCircle`), round video (inside `SoundSpectrumRing`), video (looping, tap to pause), photo
   (`InteractiveViewer`, cached thumbnail then original), SAF photo via `MediaFolderChannel.getDocumentContent`.
 - Dismiss by dragging down or overscrolling at the top.
 
 ### Mind details — `day_feed/mind_story_details.dart`
-- `StoryDatePill`: "Wednesday, Oct 21 · 14:05" in a stadium, used by stories and the viewer.
+- `StoryDateHeader`: "21 October · Wednesday · 14:05" on 1, 2 (default) or 3 lines (`StoryDateLayout`, Hive field 36);
+  the first line is larger. `storyDateLines` builds the lines and is unit-tested.
 - Edit hooks (`onTapText`, `textEditor`, `onEditEmotions`, `onLongPressReflection`) are null in stories, which stay
   read-only; tapping the middle of a mind story (or swiping up) opens the viewer at that item.
 - `storyColorsOf(context)`: black background on dark theme, white on light; used by stories and viewer.
-- `MindStoryDetails`: emotion chips ("😄 Root › Child" via `EmotionsList.ancestorsOf`), text, audio, reflections.
-- `MindAudioPlayerView`: just_audio play/pause, seek slider, elapsed / total.
+- `MindStoryDetails`: content first (media, then text), then `MindEmotionsPill` (overlapping emojis), then reflections.
+- `MindEmotionChips` ("😄 Root › Child") stays for reflections, read-only.
+- `MindAudioCircle` (`day_feed/mind_audio_circle.dart`): a circle filled with the first emotion's color, ▶/⏸ in the
+  center, a progress ring and a horizontal seek bar under it. In stories it only shows the story's own player.
 
 ### Calendar headers — `mind_collection/local_widgets/calendar_day_header.dart`
 - `CalendarDayPill`: centered stadium pill — date, "No activity" caption on empty days, chevron, and a ▶ segment
@@ -52,6 +56,10 @@ Every tab uses a transparent top bar with frosted "glass" bubbles, title centere
 - Animations (`StoryTextureAnimation`, Hive field 35 — field 34 held the removed "hide empty days" flag): Off, Pulse,
   Wave, Equalizer, Drift, Glow. Picked in `StoryTextureTweakSheet`, opened by shaking stories or the viewer.
   `textureCellMotion` holds the per-cell math and is unit-tested.
+- `SoundSpectrumRing`: 56 rays around audio and round-video circles, length from the loudness envelope plus per-ray
+  variation (`spectrumRayLength`, unit-tested; not a real FFT). Loud sound reaches past the circle.
+- The tweak sheet also holds date lines, a spectrum switch (field 37) and one sensitivity slider 0.5–3× (field 38)
+  that scales both the texture and the rays; all four live in `StorySettings`.
 
 ### Calendar day pill
 - Full date, counters (✎ minds · 📷 photos · 🎥 videos, zeros hidden), chevron; min 200 wide, 48 high; ▶ is a separate

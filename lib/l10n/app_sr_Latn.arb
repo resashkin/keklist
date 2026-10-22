@@ -270,14 +270,6 @@
     "@send": {
         "description": "Dugme pošalji"
     },
-    "updateYourNickname": "Ažuriraj svoj nadimak",
-    "@updateYourNickname": {
-        "description": "Naslov dijaloga ažuriranja nadimka"
-    },
-    "yourNickname": "Tvoj nadimak",
-    "@yourNickname": {
-        "description": "Savet za unos nadimka"
-    },
     "create": "Napravi",
     "@create": {
         "description": "Dugme kreiraj"
@@ -369,10 +361,6 @@
     "settingsDescription": "Ekran sa svim podešavanjima (tamni režim, sinhronizacija i sl.)",
     "@settingsDescription": {
         "description": "Opis taba podešavanja"
-    },
-    "profileDescription": "Ekran sa vašim profilom",
-    "@profileDescription": {
-        "description": "Opis taba profila"
     },
     "todayDescription": "Samo današnji umovi",
     "@todayDescription": {
@@ -509,5 +497,15 @@
     "storyAnimationEqualizer": "Ekvilajzer",
     "storyAnimationDrift": "Drift",
     "storyAnimationGlow": "Sjaj",
-    "viewerCommentHint": "Komentar…"
+    "viewerCommentHint": "Komentar…",
+    "calendarToCurrentWeek": "Na tekuću nedelju",
+    "storyDateLines": "Redovi datuma",
+    "storyTextureTitle": "Tekstura",
+    "storySpectrum": "Spektar zvuka",
+    "storySensitivity": "Osetljivost",
+    "profileMindfulDays": "{count, plural, one{Svesno {count} dan} few{Svesno {count} dana} other{Svesno {count} dana}}",
+    "profileName": "Ime",
+    "profilePhoto": "Fotografija",
+    "profileEmoji": "Emodži",
+    "profileInitial": "Slovo"
 }
