@@ -272,14 +272,6 @@
     "@send": {
         "description": "Pulsante invia"
     },
-    "updateYourNickname": "Aggiorna il tuo nickname",
-    "@updateYourNickname": {
-        "description": "Titolo dialogo aggiorna nickname"
-    },
-    "yourNickname": "Il tuo nickname",
-    "@yourNickname": {
-        "description": "Suggerimento input nickname"
-    },
     "create": "Crea",
     "@create": {
         "description": "Pulsante crea"
@@ -371,10 +363,6 @@
     "settingsDescription": "Schermata con tutte le impostazioni (modalità scura, sincronizzazione e altro)",
     "@settingsDescription": {
         "description": "Descrizione tab impostazioni"
-    },
-    "profileDescription": "Schermata con il tuo profilo",
-    "@profileDescription": {
-        "description": "Descrizione tab profilo"
     },
     "todayDescription": "Solo menti di oggi",
     "@todayDescription": {
@@ -509,5 +497,15 @@
     "storyAnimationEqualizer": "Equalizzatore",
     "storyAnimationDrift": "Deriva",
     "storyAnimationGlow": "Bagliore",
-    "viewerCommentHint": "Commento…"
+    "viewerCommentHint": "Commento…",
+    "calendarToCurrentWeek": "Alla settimana corrente",
+    "storyDateLines": "Righe della data",
+    "storyTextureTitle": "Texture",
+    "storySpectrum": "Spettro del suono",
+    "storySensitivity": "Sensibilità",
+    "profileMindfulDays": "{count, plural, one{Consapevole da {count} giorno} other{Consapevole da {count} giorni}}",
+    "profileName": "Nome",
+    "profilePhoto": "Foto",
+    "profileEmoji": "Emoji",
+    "profileInitial": "Lettera"
 }

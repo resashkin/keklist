@@ -404,12 +404,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get send => 'ОТПРАВИТЬ';
 
   @override
-  String get updateYourNickname => 'Обновите ваш никнейм';
-
-  @override
-  String get yourNickname => 'Ваш никнейм';
-
-  @override
   String get create => 'Создать';
 
   @override
@@ -480,9 +474,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get settingsDescription =>
       'Экран со всеми настройками (темный режим, синхронизация и т.д.)';
-
-  @override
-  String get profileDescription => 'Экран с вашим профилем';
 
   @override
   String get todayDescription => 'Только сегодняшние заметки';
@@ -881,4 +872,44 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get viewerCommentHint => 'Комментарий…';
+
+  @override
+  String get calendarToCurrentWeek => 'К текущей неделе';
+
+  @override
+  String get storyDateLines => 'Строки даты';
+
+  @override
+  String get storyTextureTitle => 'Текстура';
+
+  @override
+  String get storySpectrum => 'Спектр звука';
+
+  @override
+  String get storySensitivity => 'Чувствительность';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Осознанно $count дня',
+      many: 'Осознанно $count дней',
+      few: 'Осознанно $count дня',
+      one: 'Осознанно $count день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Имя';
+
+  @override
+  String get profilePhoto => 'Фото';
+
+  @override
+  String get profileEmoji => 'Эмодзи';
+
+  @override
+  String get profileInitial => 'Буква';
 }

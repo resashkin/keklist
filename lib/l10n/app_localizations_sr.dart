@@ -402,12 +402,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get send => 'ПОШАЉИ';
 
   @override
-  String get updateYourNickname => 'Ажурирај свој надимак';
-
-  @override
-  String get yourNickname => 'Твој надимак';
-
-  @override
   String get create => 'Направи';
 
   @override
@@ -478,9 +472,6 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get settingsDescription =>
       'Екран са свим подешавањима (тамни режим, синхронизација итд.)';
-
-  @override
-  String get profileDescription => 'Екран са твојим профилом';
 
   @override
   String get todayDescription => 'Само данашње белешке';
@@ -880,6 +871,45 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get viewerCommentHint => 'Коментар…';
+
+  @override
+  String get calendarToCurrentWeek => 'На текућу недељу';
+
+  @override
+  String get storyDateLines => 'Редови датума';
+
+  @override
+  String get storyTextureTitle => 'Текстура';
+
+  @override
+  String get storySpectrum => 'Спектар звука';
+
+  @override
+  String get storySensitivity => 'Осетљивост';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Свесно $count дана',
+      few: 'Свесно $count дана',
+      one: 'Свесно $count дан',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Име';
+
+  @override
+  String get profilePhoto => 'Фотографија';
+
+  @override
+  String get profileEmoji => 'Емоџи';
+
+  @override
+  String get profileInitial => 'Слово';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1280,12 +1310,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get send => 'POŠALJI';
 
   @override
-  String get updateYourNickname => 'Ažuriraj svoj nadimak';
-
-  @override
-  String get yourNickname => 'Tvoj nadimak';
-
-  @override
   String get create => 'Napravi';
 
   @override
@@ -1356,9 +1380,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get settingsDescription =>
       'Ekran sa svim podešavanjima (tamni režim, sinhronizacija i sl.)';
-
-  @override
-  String get profileDescription => 'Ekran sa vašim profilom';
 
   @override
   String get todayDescription => 'Samo današnji umovi';
@@ -1757,4 +1778,43 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get viewerCommentHint => 'Komentar…';
+
+  @override
+  String get calendarToCurrentWeek => 'Na tekuću nedelju';
+
+  @override
+  String get storyDateLines => 'Redovi datuma';
+
+  @override
+  String get storyTextureTitle => 'Tekstura';
+
+  @override
+  String get storySpectrum => 'Spektar zvuka';
+
+  @override
+  String get storySensitivity => 'Osetljivost';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Svesno $count dana',
+      few: 'Svesno $count dana',
+      one: 'Svesno $count dan',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Ime';
+
+  @override
+  String get profilePhoto => 'Fotografija';
+
+  @override
+  String get profileEmoji => 'Emodži';
+
+  @override
+  String get profileInitial => 'Slovo';
 }

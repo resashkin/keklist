@@ -36,6 +36,7 @@ final class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
 
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
       GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
+      registerInterfaceStyleChannel(with: engineBridge.pluginRegistry)
 
       // MARK: Registation method channel
 //      flutterMethodChannel.setMethodCallHandler { [weak self] call, result in
@@ -56,6 +57,32 @@ final class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
 //            )
 //      }
   }
+}
+
+extension AppDelegate {
+
+    /// Pins every window to the Flutter theme's brightness so native views (the liquid glass tab bar)
+    /// never fall back to the device appearance.
+    func registerInterfaceStyleChannel(with registry: FlutterPluginRegistry) {
+        guard let registrar = registry.registrar(forPlugin: "KeklistInterfaceStyle") else { return }
+        let channel = FlutterMethodChannel(name: "com.sashkyn.keklist/interface_style", binaryMessenger: registrar.messenger())
+        channel.setMethodCallHandler { call, result in
+            guard call.method == "setInterfaceStyle" else {
+                result(FlutterMethodNotImplemented)
+                return
+            }
+            let style: UIUserInterfaceStyle
+            switch call.arguments as? String {
+            case "dark": style = .dark
+            case "light": style = .light
+            default: style = .unspecified
+            }
+            for case let scene as UIWindowScene in UIApplication.shared.connectedScenes {
+                scene.windows.forEach { $0.overrideUserInterfaceStyle = style }
+            }
+            result(nil)
+        }
+    }
 }
 
 extension AppDelegate: WCSessionDelegate {

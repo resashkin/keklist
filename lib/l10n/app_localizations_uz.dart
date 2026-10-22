@@ -404,12 +404,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get send => 'YUBORISH';
 
   @override
-  String get updateYourNickname => 'Niknamingizni yangilash';
-
-  @override
-  String get yourNickname => 'Sizning niknamingiz';
-
-  @override
   String get create => 'Yaratish';
 
   @override
@@ -480,9 +474,6 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get settingsDescription =>
       'Barcha sozlamalar ekrani (qorong\'u rejim, sinxronlash va boshqalar)';
-
-  @override
-  String get profileDescription => 'Profilingiz bilan ekran';
 
   @override
   String get todayDescription => 'Faqat bugungi fikrlar';
@@ -883,4 +874,41 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get viewerCommentHint => 'Izoh…';
+
+  @override
+  String get calendarToCurrentWeek => 'Joriy haftaga';
+
+  @override
+  String get storyDateLines => 'Sana qatorlari';
+
+  @override
+  String get storyTextureTitle => 'Tekstura';
+
+  @override
+  String get storySpectrum => 'Tovush spektri';
+
+  @override
+  String get storySensitivity => 'Sezgirlik';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Ongli $count kun',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Ism';
+
+  @override
+  String get profilePhoto => 'Rasm';
+
+  @override
+  String get profileEmoji => 'Emoji';
+
+  @override
+  String get profileInitial => 'Harf';
 }

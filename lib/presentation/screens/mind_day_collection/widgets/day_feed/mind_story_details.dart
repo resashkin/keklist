@@ -1,16 +1,11 @@
-import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
-import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
-import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
-import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
+import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Black on dark theme, white on light, with the matching text color; shared by stories and the viewer.
@@ -19,42 +14,66 @@ import 'package:material_ui/material_ui.dart';
     ? (background: Colors.black, foreground: Colors.white)
     : (background: Colors.white, foreground: Colors.black);
 
-/// "Wednesday, Oct 21 · 14:05" in a soft pill at the top of a story or viewer page.
-final class StoryDatePill extends StatelessWidget {
+/// The lines of a story date header: "21 October", "Wednesday", "07:14", grouped by [layout].
+List<String> storyDateLines(DateTime date, {required String locale, required StoryDateLayout layout}) {
+  final DateTime local = date.toLocal();
+  final String day = DateFormat.MMMMd(locale).format(local);
+  final String weekday = toBeginningOfSentenceCase(DateFormat.EEEE(locale).format(local));
+  final String time = DateFormat.Hm(locale).format(local);
+  return switch (layout) {
+    StoryDateLayout.oneLine => ['$day · $weekday · $time'],
+    StoryDateLayout.twoLines => [day, '$weekday · $time'],
+    StoryDateLayout.threeLines => [day, weekday, time],
+  };
+}
+
+/// The date at the top of a story or viewer page, in a soft pill; how many lines it takes is a story tweak.
+final class StoryDateHeader extends StatelessWidget {
   final DateTime date;
 
-  const StoryDatePill({super.key, required this.date});
+  const StoryDateHeader({super.key, required this.date});
 
   @override
   Widget build(BuildContext context) {
     final Color foreground = storyColorsOf(context).foreground;
-    final String locale = Localizations.localeOf(context).toString();
-    final DateTime local = date.toLocal();
-    final String weekday = toBeginningOfSentenceCase(DateFormat.EEEE(locale).format(local));
-    final String title = '$weekday, ${DateFormat.MMMd(locale).format(local)} · ${DateFormat.Hm(locale).format(local)}';
+    final List<String> lines = storyDateLines(
+      date,
+      locale: Localizations.localeOf(context).toString(),
+      layout: context.watchStorySettings().dateLayout,
+    );
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 7.0),
-      decoration: ShapeDecoration(shape: const StadiumBorder(), color: foreground.withValues(alpha: 0.1)),
-      child: Text(
-        title,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(color: foreground, fontWeight: FontWeight.w600, fontSize: 14.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(lines.length == 1 ? 20.0 : 16.0),
+        color: foreground.withValues(alpha: 0.1),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (int index = 0; index < lines.length; index++)
+            Text(
+              lines[index],
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: index == 0 ? foreground : foreground.withValues(alpha: 0.65),
+                fontWeight: index == 0 ? FontWeight.w700 : FontWeight.w500,
+                fontSize: index == 0 && lines.length > 1 ? 16.0 : 13.0,
+              ),
+            ),
+        ],
       ),
     );
   }
 }
 
-/// Everything about a mind in a story or the viewer: emotions with their path, text, audio, comments.
-/// The viewer passes the edit callbacks; stories leave them null and stay read-only.
+/// Everything about a mind in a story or the viewer, content first: its circle (video or audio), the text,
+/// the emotions pill and the comments. The viewer passes the edit callbacks; stories leave them null.
 final class MindStoryDetails extends StatelessWidget {
   final Mind mind;
 
-  /// Shown above the emotions, e.g. the round video.
+  /// The round video or audio circle.
   final Widget? media;
-
-  /// Stories play the audio themselves; the viewer shows a player.
-  final bool showsAudioPlayer;
 
   final VoidCallback? onTapText;
 
@@ -68,7 +87,6 @@ final class MindStoryDetails extends StatelessWidget {
     super.key,
     required this.mind,
     this.media,
-    this.showsAudioPlayer = false,
     this.onTapText,
     this.textEditor,
     this.onEditEmotions,
@@ -79,13 +97,11 @@ final class MindStoryDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color foreground = storyColorsOf(context).foreground;
     final String text = mind.plainNote.trim();
-    final MindNoteAudio? audio = mind.noteContent.audioPieces.firstOrNull;
     return Column(
       mainAxisSize: MainAxisSize.min,
       spacing: 20.0,
       children: [
         ?media,
-        MindEmotionChips(mind: mind, onTap: onEditEmotions),
         if (textEditor != null)
           textEditor!
         else if (text.isNotEmpty)
@@ -93,10 +109,7 @@ final class MindStoryDetails extends StatelessWidget {
             onTap: onTapText,
             child: Text(text, textAlign: TextAlign.center, style: mindStoryTextStyle(foreground)),
           ),
-        if (audio != null)
-          showsAudioPlayer
-              ? MindAudioPlayerView(audio: audio)
-              : Icon(Icons.graphic_eq, color: foreground.withValues(alpha: 0.7)),
+        MindEmotionsPill(mind: mind, onTap: onEditEmotions),
         MindReflectionsList(mind: mind, onLongPress: onLongPressReflection),
       ],
     );
@@ -105,52 +118,99 @@ final class MindStoryDetails extends StatelessWidget {
 
 TextStyle mindStoryTextStyle(Color foreground) => TextStyle(color: foreground, fontSize: 20.0, height: 1.3);
 
-/// "😄 Joy › Delight" for every emotion of the mind; with [onTap] the chips edit them and a "＋" chip is added.
-final class MindEmotionChips extends StatelessWidget {
+/// The mind's emotions grouped as overlapping emojis in one pill; with [onTap] it opens the emotion picker and
+/// a pale "☺ +" stands in when there are none.
+final class MindEmotionsPill extends StatelessWidget {
   final Mind mind;
   final VoidCallback? onTap;
 
-  const MindEmotionChips({super.key, required this.mind, this.onTap});
+  const MindEmotionsPill({super.key, required this.mind, this.onTap});
+
+  static const double _emojiSize = 24.0;
+  static const double _overlap = 8.0;
 
   @override
   Widget build(BuildContext context) {
-    if (mind.emotionIds.isEmpty && onTap == null) return const SizedBox.shrink();
+    final Color foreground = storyColorsOf(context).foreground;
+    final Color background = storyColorsOf(context).background;
+    return BlocBuilder<EmotionBloc, EmotionState>(
+      builder: (context, state) {
+        final List<Emotion> emotions = state is EmotionsList
+            ? mind.emotionIds.map(state.byId).whereType<Emotion>().toList()
+            : const [];
+        if (emotions.isEmpty && onTap == null) return const SizedBox.shrink();
+        return GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+            decoration: ShapeDecoration(
+              shape: const StadiumBorder(),
+              color: Color.alphaBlend(foreground.withValues(alpha: emotions.isEmpty ? 0.05 : 0.1), background),
+            ),
+            child: emotions.isEmpty
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 4.0,
+                    children: [
+                      Icon(Icons.sentiment_satisfied_alt_outlined, size: 22.0, color: foreground.withValues(alpha: 0.4)),
+                      Icon(Icons.add_rounded, size: 18.0, color: foreground.withValues(alpha: 0.4)),
+                    ],
+                  )
+                : SizedBox(
+                    height: _emojiSize + 4.0,
+                    width: _emojiSize + (emotions.length - 1) * (_emojiSize - _overlap),
+                    child: Stack(
+                      children: [
+                        for (int index = 0; index < emotions.length; index++)
+                          Positioned(
+                            left: index * (_emojiSize - _overlap),
+                            child: Text(emotions[index].emoji, style: const TextStyle(fontSize: _emojiSize)),
+                          ),
+                      ],
+                    ),
+                  ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// "😄 Joy › Delight" for every emotion of a comment.
+final class MindEmotionChips extends StatelessWidget {
+  final Mind mind;
+
+  const MindEmotionChips({super.key, required this.mind});
+
+  @override
+  Widget build(BuildContext context) {
+    if (mind.emotionIds.isEmpty) return const SizedBox.shrink();
     final Color foreground = storyColorsOf(context).foreground;
     return BlocBuilder<EmotionBloc, EmotionState>(
       builder: (context, state) {
         if (state is! EmotionsList) return const SizedBox.shrink();
         final List<Emotion> emotions = mind.emotionIds.map(state.byId).whereType<Emotion>().toList();
         return Wrap(
-          alignment: WrapAlignment.center,
           spacing: 8.0,
           runSpacing: 8.0,
           children: [
             for (final Emotion emotion in emotions)
-              _chip(
-                foreground,
-                '${emotion.emoji} ${[...state.ancestorsOf(emotion), emotion].map((e) => e.title).join(' › ')}',
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                decoration: BoxDecoration(
+                  color: foreground.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Text(
+                  '${emotion.emoji} ${[...state.ancestorsOf(emotion), emotion].map((e) => e.title).join(' › ')}',
+                  style: TextStyle(color: foreground, fontSize: 15.0),
+                ),
               ),
-            if (onTap != null) _chip(foreground, '＋ ${context.l10n.addEmotion}', isFaint: true),
           ],
         );
       },
     );
   }
-
-  Widget _chip(Color foreground, String title, {bool isFaint = false}) => GestureDetector(
-    onTap: onTap,
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
-      decoration: BoxDecoration(
-        color: foreground.withValues(alpha: isFaint ? 0.05 : 0.1),
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Text(
-        title,
-        style: TextStyle(color: foreground.withValues(alpha: isFaint ? 0.6 : 1.0), fontSize: 15.0),
-      ),
-    ),
-  );
 }
 
 /// The mind's reflections, oldest first: time, emotions and full text of each.
@@ -193,11 +253,7 @@ final class MindReflectionsList extends StatelessWidget {
                         DateFormat.yMMMd(locale).add_Hm().format(reflection.creationDate.toLocal()),
                         style: TextStyle(color: foreground.withValues(alpha: 0.55), fontSize: 12.0),
                       ),
-                      if (reflection.emotionIds.isNotEmpty)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: MindEmotionChips(mind: reflection),
-                        ),
+                      if (reflection.emotionIds.isNotEmpty) MindEmotionChips(mind: reflection),
                       if (reflection.plainNote.trim().isNotEmpty)
                         Text(reflection.plainNote.trim(), style: TextStyle(color: foreground, fontSize: 16.0)),
                       if (reflection.noteContent.hasMedia)
@@ -215,115 +271,4 @@ final class MindReflectionsList extends StatelessWidget {
       },
     );
   }
-}
-
-/// Play/pause, a seekable progress bar and the elapsed / total time of a voice note.
-final class MindAudioPlayerView extends StatefulWidget {
-  final MindNoteAudio audio;
-
-  const MindAudioPlayerView({super.key, required this.audio});
-
-  @override
-  State<MindAudioPlayerView> createState() => _MindAudioPlayerViewState();
-}
-
-final class _MindAudioPlayerViewState extends State<MindAudioPlayerView> {
-  final AudioPlayer _player = AudioPlayer();
-  Duration? _duration;
-
-  @override
-  void initState() {
-    super.initState();
-    _duration = widget.audio.duration;
-    unawaited(_load());
-  }
-
-  Future<void> _load() async {
-    final String path = await context.read<AppFileRepository>().resolveAbsolutePath(
-      widget.audio.appRelativeAbsoulutePath,
-    );
-    final Duration? loaded = await _player.setFilePath(path).catchError((_) => null);
-    if (!mounted) return;
-    if (loaded != null) setState(() => _duration = loaded);
-    // The scope lives on the same page as this player, so it is never cleared.
-    SoundPlaybackScope.maybeOf(context)?.value = SoundPlayback.audio(_player).withEnvelopeOf(path);
-  }
-
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final Color foreground = storyColorsOf(context).foreground;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(4.0, 4.0, 16.0, 4.0),
-      decoration: BoxDecoration(color: foreground.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(28.0)),
-      child: StreamBuilder<PlayerState>(
-        stream: _player.playerStateStream,
-        builder: (context, snapshot) {
-          final PlayerState? playerState = snapshot.data;
-          final bool isPlaying =
-              (playerState?.playing ?? false) && playerState?.processingState != ProcessingState.completed;
-          return Row(
-            children: [
-              IconButton(
-                color: foreground,
-                icon: Icon(isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded, size: 32.0),
-                onPressed: () => _toggle(playerState),
-              ),
-              Expanded(
-                child: StreamBuilder<Duration>(
-                  stream: _player.positionStream,
-                  builder: (context, positionSnapshot) {
-                    final Duration total = _duration ?? Duration.zero;
-                    final Duration position = positionSnapshot.data ?? Duration.zero;
-                    final double max = total.inMilliseconds.toDouble().clamp(1.0, double.infinity);
-                    return Row(
-                      spacing: 8.0,
-                      children: [
-                        Expanded(
-                          child: SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                              activeTrackColor: foreground,
-                              inactiveTrackColor: foreground.withValues(alpha: 0.2),
-                              thumbColor: foreground,
-                              overlayShape: SliderComponentShape.noOverlay,
-                            ),
-                            child: Slider(
-                              value: position.inMilliseconds.toDouble().clamp(0.0, max),
-                              max: max,
-                              onChanged: (value) => _player.seek(Duration(milliseconds: value.round())),
-                            ),
-                          ),
-                        ),
-                        Text(
-                          '${_format(position)} / ${_format(total)}',
-                          style: TextStyle(color: foreground.withValues(alpha: 0.7), fontSize: 12.0),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  Future<void> _toggle(PlayerState? state) async {
-    if (state?.processingState == ProcessingState.completed) {
-      await _player.seek(Duration.zero);
-      unawaited(_player.play());
-      return;
-    }
-    (state?.playing ?? false) ? await _player.pause() : unawaited(_player.play());
-  }
-
-  static String _format(Duration duration) =>
-      '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
 }

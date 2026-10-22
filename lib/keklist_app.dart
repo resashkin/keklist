@@ -10,6 +10,7 @@ import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/screens/tabs_container/tabs_container_screen.dart';
 import 'package:keklist/l10n/app_localizations.dart';
 import 'package:keklist/domain/services/language_manager.dart';
+import 'package:keklist/native/ios/interface_style_channel.dart';
 
 final class KeklistApp extends StatefulWidget {
   const KeklistApp({super.key});
@@ -38,6 +39,8 @@ final class KeklistAppState extends KekWidgetState<KeklistApp> {
     )?.disposed(by: this);
   }
 
+  static final TransitionBuilder _easyLoadingBuilder = EasyLoading.init();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,7 +62,10 @@ final class KeklistAppState extends KekWidgetState<KeklistApp> {
         cupertino_ui.GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      builder: EasyLoading.init(),
+      builder: (context, child) {
+        InterfaceStyleChannel.sync(Theme.of(context).brightness);
+        return _easyLoadingBuilder(context, child);
+      },
     );
   }
 }

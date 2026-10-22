@@ -45,3 +45,8 @@ The calendar tab showed each day as a row of emotion emojis, plus a month grid o
 Days are headed by a centered `CalendarDayPill` and weeks by `CalendarWeekHeader`, both with ▶ to play stories.
 Tiles open `DayItemViewerScreen`; pinching changes the column count (2–7). See
 `DAY_ITEM_VIEWER_AND_GLASS_BAR_IMPLEMENTATION.md`.
+
+## Today & Current Week
+- Today is wrapped in `_TodayFrame` (2pt primary border, light tint); the today pill keeps its fill.
+- `_CurrentWeekBubble`: a glass "↑/↓ To current week" bubble above the tab bar, shown while no day of the current week
+  is on screen; it scrolls to today. The old "To now" button of the day screen is gone.

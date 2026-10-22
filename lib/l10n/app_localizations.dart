@@ -855,18 +855,6 @@ abstract class AppLocalizations {
   /// **'SEND'**
   String get send;
 
-  /// Update nickname dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Update your nickname'**
-  String get updateYourNickname;
-
-  /// Nickname input hint
-  ///
-  /// In en, this message translates to:
-  /// **'Your nickname'**
-  String get yourNickname;
-
   /// Create button
   ///
   /// In en, this message translates to:
@@ -1004,12 +992,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Screen with all settings (dark mode, sync and etc.)'**
   String get settingsDescription;
-
-  /// Profile tab description
-  ///
-  /// In en, this message translates to:
-  /// **'Screen with your profile'**
-  String get profileDescription;
 
   /// Today tab description
   ///
@@ -1760,6 +1742,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Comment…'**
   String get viewerCommentHint;
+
+  /// Calendar: bubble that scrolls back to the current week
+  ///
+  /// In en, this message translates to:
+  /// **'To current week'**
+  String get calendarToCurrentWeek;
+
+  /// Story tweak: how many lines the date header takes
+  ///
+  /// In en, this message translates to:
+  /// **'Date lines'**
+  String get storyDateLines;
+
+  /// Story tweak: texture animation section
+  ///
+  /// In en, this message translates to:
+  /// **'Texture'**
+  String get storyTextureTitle;
+
+  /// Story tweak: rays around audio/video circles
+  ///
+  /// In en, this message translates to:
+  /// **'Sound spectrum'**
+  String get storySpectrum;
+
+  /// Story tweak: how strongly visuals react to loudness
+  ///
+  /// In en, this message translates to:
+  /// **'Sensitivity'**
+  String get storySensitivity;
+
+  /// Insights header: number of days with at least one mind
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{Mindful for {count} day} other{Mindful for {count} days}}'**
+  String profileMindfulDays(int count);
+
+  /// No description provided for @profileName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profileName;
+
+  /// No description provided for @profilePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get profilePhoto;
+
+  /// No description provided for @profileEmoji.
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji'**
+  String get profileEmoji;
+
+  /// No description provided for @profileInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'Letter'**
+  String get profileInitial;
 }
 
 class _AppLocalizationsDelegate

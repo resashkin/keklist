@@ -15,7 +15,6 @@ import 'package:keklist/presentation/screens/insights/insights_screen.dart';
 import 'package:keklist/presentation/screens/mind_collection/mind_collection_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
-import 'package:keklist/presentation/screens/user_profile/user_profile_screen.dart';
 
 final class TabsContainerScreen extends StatefulWidget {
   const TabsContainerScreen({super.key});
@@ -125,8 +124,6 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
         return MindCollectionScreen();
       case TabType.insights:
         return InsightsScreen();
-      case TabType.profile:
-        return UserProfileScreen();
       case TabType.settings:
         return SettingsScreen();
       case TabType.today:

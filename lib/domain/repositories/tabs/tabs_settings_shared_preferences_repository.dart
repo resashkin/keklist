@@ -23,15 +23,22 @@ final class TabsSettingsSharedPreferencesRepository extends TabsSettingsReposito
           'tabs_settings',
           defaultValue: KeklistConstants.defaultTabSettings,
           adapter: JsonAdapter<TabsSettings>(
-            deserializer: (jsonObject) {
-              final Map<String, dynamic> json = (jsonObject as Map<String, dynamic>);
-              return TabsSettings.fromJson(json);
-            },
+            deserializer: (jsonObject) => TabsSettings.fromJson(_withoutRemovedTabs(jsonObject as Map<String, dynamic>)),
           ),
         ) {
     _behaviorSubject.addStream(
       _tabsSettingsPreferences.asBroadcastStream().whereNotNull().debounceTime(const Duration(milliseconds: 10)),
     );
+  }
+
+  /// Tabs dropped from [TabType] (like the old Profile) would fail to decode, so they are skipped.
+  static Map<String, dynamic> _withoutRemovedTabs(Map<String, dynamic> json) {
+    final Set<String> knownTypes = TabType.values.map((type) => type.name).toSet();
+    final List<dynamic> tabs = (json['selectedTabModels'] as List<dynamic>? ?? [])
+        .where((tab) => tab is Map && knownTypes.contains(tab['type']))
+        .toList();
+    final int defaultIndex = (json['defaultSelectedTabIndex'] as int? ?? 0).clamp(0, tabs.isEmpty ? 0 : tabs.length - 1);
+    return {...json, 'selectedTabModels': tabs, 'defaultSelectedTabIndex': defaultIndex};
   }
 
   @override

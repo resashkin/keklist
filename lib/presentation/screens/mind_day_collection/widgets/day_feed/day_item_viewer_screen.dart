@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -21,6 +22,8 @@ import 'package:keklist/presentation/core/widgets/round_video/media_recording.da
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
+import 'package:keklist/presentation/core/widgets/sound/sound_spectrum_ring.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_audio_circle.dart';
 import 'package:keklist/presentation/screens/actions/action_model.dart';
 import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
@@ -38,6 +41,10 @@ const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
 const double _kDismissOverscroll = 80.0;
 const double _kRoundVideoSize = 260.0;
+const double _kAudioCircleSize = 200.0;
+const double _kFadeDistance = 320.0;
+const double _kHeaderSpace = 88.0;
+const double _kCommentBarSpace = 84.0;
 
 /// A calm look at one tile at a time: swipe between the day's items, no progress bars, no timer.
 /// Minds are edited right here: tap the text, the emotions, comment below, ⋯ for the rest. Swipe down or ✕ closes it.
@@ -73,6 +80,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
   late final PageController _pageController = PageController(initialPage: widget.initialIndex);
   late int _index = widget.initialIndex;
   double _dragOffsetY = 0.0;
+  double _scrollPull = 0.0;
   bool _isClosing = false;
 
   final TextEditingController _textController = TextEditingController();
@@ -110,11 +118,20 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
     return state is MindList ? state.values.firstWhereOrNull((mind) => mind.id == id) : null;
   }
 
+  /// How far the page is pulled down, by a drag or by overscrolling a mind past its top.
+  double get _pullDistance => math.max(_dragOffsetY, _scrollPull);
+
   @override
   Widget build(BuildContext context) {
     final (:background, :foreground) = storyColorsOf(context);
-    final double dismissProgress = _dragOffsetY.clamp(0.0, 350.0) / 350.0;
+    final double dismissProgress = _pullDistance.clamp(0.0, _kFadeDistance) / _kFadeDistance;
     final DayFeedItem item = _currentItem;
+    final EdgeInsets safe = MediaQuery.paddingOf(context);
+    // Pages fill the whole screen so the texture runs behind the header and the comment bar.
+    final EdgeInsets contentInsets = EdgeInsets.only(
+      top: safe.top + _kHeaderSpace,
+      bottom: safe.bottom + (item is DayFeedMind ? _kCommentBarSpace : 0.0) + (widget.items.length > 1 ? 34.0 : 0.0),
+    );
     return Scaffold(
       backgroundColor: background.withValues(alpha: 1.0 - dismissProgress),
       body: NotificationListener<ScrollNotification>(
@@ -123,13 +140,13 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
           onVerticalDragUpdate: (details) =>
               setState(() => _dragOffsetY = (_dragOffsetY + details.delta.dy).clamp(0.0, double.infinity)),
           onVerticalDragEnd: _onVerticalDragEnd,
-          child: Transform.translate(
-            offset: Offset(0.0, _dragOffsetY),
-            child: SafeArea(
-              child: Column(
+          child: Opacity(
+            opacity: 1.0 - dismissProgress * 0.85,
+            child: Transform.translate(
+              offset: Offset(0.0, _dragOffsetY),
+              child: Stack(
                 children: [
-                  _buildHeader(context, foreground),
-                  Expanded(
+                  Positioned.fill(
                     child: PageView.builder(
                       controller: _pageController,
                       itemCount: widget.items.length,
@@ -138,11 +155,28 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
                         _editingMindId = null;
                         _resetComment();
                       }),
-                      itemBuilder: (context, index) => _buildPage(widget.items[index], isCurrent: index == _index),
+                      itemBuilder: (context, index) =>
+                          _buildPage(widget.items[index], isCurrent: index == _index, insets: contentInsets),
                     ),
                   ),
-                  if (widget.items.length > 1) _buildPageDots(foreground),
-                  if (item is DayFeedMind) _buildCommentBar(item.mind),
+                  Positioned(
+                    top: 0.0,
+                    left: 0.0,
+                    right: 0.0,
+                    child: SafeArea(bottom: false, child: _buildHeader(context, foreground)),
+                  ),
+                  Positioned(
+                    left: 0.0,
+                    right: 0.0,
+                    bottom: 0.0,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (widget.items.length > 1) _buildPageDots(foreground),
+                        if (item is DayFeedMind) _buildCommentBar(item.mind) else SizedBox(height: safe.bottom),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -152,11 +186,12 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
     );
   }
 
-  Widget _buildPage(DayFeedItem item, {required bool isCurrent}) => switch (item) {
+  Widget _buildPage(DayFeedItem item, {required bool isCurrent, required EdgeInsets insets}) => switch (item) {
     DayFeedMind(:final mind) => _MindPage(
       key: ValueKey(item.id),
       initialMind: mind,
       isCurrent: isCurrent,
+      insets: insets,
       isEditing: _editingMindId == mind.id,
       textController: _textController,
       onStartEditing: _startEditing,
@@ -170,8 +205,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
 
   Widget _buildHeader(BuildContext context, Color foreground) {
     final DayFeedItem item = _currentItem;
-    return SizedBox(
-      height: 48.0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -186,7 +221,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
             ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 52.0),
-            child: StoryDatePill(date: item.timestamp),
+            child: StoryDateHeader(date: item.timestamp),
           ),
           Align(
             alignment: Alignment.centerRight,
@@ -229,16 +264,21 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
 
   Widget _buildCommentBar(Mind root) {
     final bool hasText = _commentController.text.trim().isNotEmpty;
-    return MindCreatorBottomBar(
-      editableMind: _editableComment,
-      focusNode: _commentFocusNode,
-      textEditingController: _commentController,
-      placeholder: context.l10n.viewerCommentHint,
-      doneTitle: context.l10n.save,
-      onDone: (data) => _saveComment(root, data.text),
-      onTapCancelEdit: () => setState(_resetComment),
-      onRecordAudio: hasText ? null : () => _recordComment(root, MediaRecording.recordAudio),
-      onRecordVideo: hasText ? null : () => _recordComment(root, MediaRecording.recordVideo),
+    final ThemeData theme = Theme.of(context);
+    return Theme(
+      // See-through so the mind's texture continues under the comment field.
+      data: theme.copyWith(scaffoldBackgroundColor: Colors.transparent),
+      child: MindCreatorBottomBar(
+        editableMind: _editableComment,
+        focusNode: _commentFocusNode,
+        textEditingController: _commentController,
+        placeholder: context.l10n.viewerCommentHint,
+        doneTitle: context.l10n.save,
+        onDone: (data) => _saveComment(root, data.text),
+        onTapCancelEdit: () => setState(_resetComment),
+        onRecordAudio: hasText ? null : () => _recordComment(root, MediaRecording.recordAudio),
+        onRecordVideo: hasText ? null : () => _recordComment(root, MediaRecording.recordVideo),
+      ),
     );
   }
 
@@ -375,22 +415,27 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
     Navigator.of(context).maybePop();
   }
 
-  /// Pulling a page down past its top closes the viewer: bouncing scroll views report it as negative pixels,
-  /// clamping ones as overscroll.
+  /// Pulling a mind down past its top fades the viewer with the finger and closes it on release past the
+  /// threshold: bouncing scroll views report the pull as negative pixels, clamping ones as overscroll.
   bool _onScroll(ScrollNotification notification) {
     if (notification.metrics.axis != Axis.vertical) return false;
-    final bool isDragging = switch (notification) {
-      ScrollUpdateNotification(:final dragDetails) => dragDetails != null,
-      OverscrollNotification(:final dragDetails) => dragDetails != null,
-      _ => false,
-    };
-    if (!isDragging) return false;
-    final double pulled = switch (notification) {
-      OverscrollNotification(:final overscroll) when overscroll < 0 => _kDismissOverscroll,
-      _ => notification.metrics.minScrollExtent - notification.metrics.pixels,
-    };
-    if (pulled >= _kDismissOverscroll) _close();
+    switch (notification) {
+      case ScrollUpdateNotification(dragDetails: _?):
+        _setScrollPull(notification.metrics.minScrollExtent - notification.metrics.pixels);
+      case OverscrollNotification(dragDetails: _?, :final overscroll) when overscroll < 0:
+        _setScrollPull(_scrollPull - overscroll);
+      case ScrollUpdateNotification() || ScrollEndNotification():
+        if (_scrollPull >= _kDismissOverscroll) _close();
+        _setScrollPull(0.0);
+      default:
+        break;
+    }
     return false;
+  }
+
+  void _setScrollPull(double value) {
+    final double pull = math.max(0.0, value);
+    if (pull != _scrollPull) setState(() => _scrollPull = pull);
   }
 
   void _onVerticalDragEnd(DragEndDetails details) {
@@ -444,6 +489,7 @@ final class _ViewerPage extends StatelessWidget {
 final class _MindPage extends StatefulWidget {
   final Mind initialMind;
   final bool isCurrent;
+  final EdgeInsets insets;
   final bool isEditing;
   final TextEditingController textController;
   final ValueChanged<Mind> onStartEditing;
@@ -456,6 +502,7 @@ final class _MindPage extends StatefulWidget {
     super.key,
     required this.initialMind,
     required this.isCurrent,
+    required this.insets,
     required this.isEditing,
     required this.textController,
     required this.onStartEditing,
@@ -488,6 +535,8 @@ final class _MindPageState extends State<_MindPage> {
         widget.initialMind;
     final Color foreground = storyColorsOf(context).foreground;
     final MindNoteVideo? video = mind.noteContent.videoPieces.firstOrNull;
+    final MindNoteAudio? audio = mind.noteContent.audioPieces.firstOrNull;
+    final Color accent = mindAccentColorOf(context, mind);
     return SoundPlaybackScope(
       notifier: _sound,
       child: Stack(
@@ -498,20 +547,30 @@ final class _MindPageState extends State<_MindPage> {
             builder: (context, constraints) => SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.fromLTRB(24.0, 16.0, 24.0, 32.0),
+              padding: EdgeInsets.fromLTRB(24.0, widget.insets.top + 8.0, 24.0, widget.insets.bottom + 24.0),
               child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight - 48.0),
+                constraints: BoxConstraints(minHeight: constraints.maxHeight - widget.insets.vertical - 32.0),
                 child: Center(
                   child: MindStoryDetails(
                     mind: mind,
-                    showsAudioPlayer: true,
-                    media: video == null
-                        ? null
-                        : _RoundVideoPlayer(
-                            key: ValueKey(video.appRelativePath),
-                            video: video,
-                            isCurrent: widget.isCurrent,
-                          ),
+                    media: video != null
+                        ? SoundSpectrumRing(
+                            diameter: _kRoundVideoSize,
+                            color: accent,
+                            child: _RoundVideoPlayer(
+                              key: ValueKey(video.appRelativePath),
+                              video: video,
+                              isCurrent: widget.isCurrent,
+                            ),
+                          )
+                        : audio != null
+                        ? MindAudioCircle(
+                            key: ValueKey(audio.appRelativeAbsoulutePath),
+                            audio: audio,
+                            color: accent,
+                            diameter: _kAudioCircleSize,
+                          )
+                        : null,
                     onTapText: () => widget.onStartEditing(mind),
                     textEditor: widget.isEditing ? _buildEditor(mind, foreground) : null,
                     onEditEmotions: () => widget.onEditEmotions(mind),

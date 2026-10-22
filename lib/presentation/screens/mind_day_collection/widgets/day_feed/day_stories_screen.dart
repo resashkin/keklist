@@ -21,6 +21,8 @@ import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
+import 'package:keklist/presentation/core/widgets/sound/sound_spectrum_ring.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_audio_circle.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/story_texture_tweak_sheet.dart';
 
@@ -29,6 +31,9 @@ const double _kDismissDragVelocity = 700.0;
 const double _kOpenMindDragDistance = -80.0;
 const Duration _kVideoFallbackDuration = Duration(seconds: 5);
 const double _kStoryRoundVideoSize = 280.0;
+const double _kStoryAudioCircleSize = 220.0;
+const double _kFadeDistance = 320.0;
+const double _kHeaderSpace = 96.0;
 
 final class DayStoriesScreen extends StatefulWidget {
   final List<DayFeedItem> items;
@@ -179,7 +184,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
       return;
     }
     await player.setVolume(_isMutedForSession ? 0.0 : 1.0);
-    _audioPlayer = player;
+    setState(() => _audioPlayer = player);
     _sound.value = SoundPlayback.audio(player).withEnvelopeOf(path);
     final Duration duration = loadedDuration ?? audio.duration ?? fallback;
     _startProgress(duration > Duration.zero ? duration : fallback);
@@ -274,7 +279,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
 
   @override
   Widget build(BuildContext context) {
-    final double dismissProgress = (_dragOffsetY.clamp(0.0, 350.0)) / 350.0;
+    final double dismissProgress = (_dragOffsetY.clamp(0.0, _kFadeDistance)) / _kFadeDistance;
     return Scaffold(
       backgroundColor: storyColorsOf(context).background.withValues(alpha: 1.0 - dismissProgress),
       body: GestureDetector(
@@ -284,14 +289,23 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
         onLongPressEnd: (_) => _resume(),
         onVerticalDragUpdate: (details) => setState(() => _dragOffsetY += details.delta.dy),
         onVerticalDragEnd: _onVerticalDragEnd,
-        child: Transform.translate(
-          offset: Offset(0.0, _dragOffsetY.clamp(0.0, double.infinity)),
-          child: SafeArea(
-            child: Column(
+        child: Opacity(
+          opacity: 1.0 - dismissProgress * 0.85,
+          child: Transform.translate(
+            offset: Offset(0.0, _dragOffsetY.clamp(0.0, double.infinity)),
+            // Content fills the screen so a mind's texture runs behind the progress bars and the header.
+            child: Stack(
               children: [
-                _buildProgressBars(),
-                _buildHeader(context),
-                Expanded(child: _buildContent(context)),
+                Positioned.fill(child: _buildContent(context)),
+                Positioned(
+                  top: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: SafeArea(
+                    bottom: false,
+                    child: Column(children: [_buildProgressBars(), _buildHeader(context)]),
+                  ),
+                ),
               ],
             ),
           ),
@@ -334,15 +348,15 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
         (item is DayFeedFolderMedia && item.isVideo) ||
         (item is DayFeedMind && item.mind.noteContent.hasMedia);
     final Color foreground = storyColorsOf(context).foreground;
-    return SizedBox(
-      height: 48.0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Stack(
         alignment: Alignment.center,
         children: [
           Padding(
             // Symmetric so the pill stays centered past the buttons on the right.
             padding: EdgeInsets.symmetric(horizontal: (isVideo ? 2 : 1) * 48.0 + 4.0),
-            child: StoryDatePill(date: item.timestamp),
+            child: StoryDateHeader(date: item.timestamp),
           ),
           Align(
             alignment: Alignment.centerRight,
@@ -379,7 +393,7 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
           fit: StackFit.expand,
           children: [
             AnimatedEmotionTexture(mind: item.mind, color: storyColorsOf(context).foreground),
-            _MindStory(item: item, roundVideo: video),
+            _MindStory(item: item, roundVideo: video, audioPlayer: _audioPlayer),
           ],
         ),
       );
@@ -425,20 +439,26 @@ final class _DayStoriesScreenState extends State<DayStoriesScreen>
 final class _MindStory extends StatelessWidget {
   final DayFeedMind item;
   final VideoPlayerController? roundVideo;
+  final AudioPlayer? audioPlayer;
 
-  const _MindStory({required this.item, this.roundVideo});
+  const _MindStory({required this.item, this.roundVideo, this.audioPlayer});
 
   @override
   Widget build(BuildContext context) {
     final VideoPlayerController? video = roundVideo;
+    final MindNoteAudio? audio = item.mind.noteContent.audioPieces.firstOrNull;
+    final AudioPlayer? player = audioPlayer;
+    final Color accent = mindAccentColorOf(context, item.mind);
+    final EdgeInsets safe = MediaQuery.paddingOf(context);
     return Center(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.fromLTRB(24.0, safe.top + _kHeaderSpace, 24.0, safe.bottom + 24.0),
         child: MindStoryDetails(
           mind: item.mind,
           media: item.mind.noteContent.hasVideo
-              ? SizedBox.square(
-                  dimension: _kStoryRoundVideoSize,
+              ? SoundSpectrumRing(
+                  diameter: _kStoryRoundVideoSize,
+                  color: accent,
                   child: video != null && video.value.isInitialized
                       ? Stack(
                           fit: StackFit.expand,
@@ -449,6 +469,8 @@ final class _MindStory extends StatelessWidget {
                         )
                       : const _Loading(),
                 )
+              : audio != null && player != null
+              ? MindAudioCircle(audio: audio, color: accent, diameter: _kStoryAudioCircleSize, player: player)
               : null,
         ),
       ),

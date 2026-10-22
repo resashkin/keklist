@@ -111,7 +111,6 @@ final class KeklistConstants {
   static List<TabModel> availableTabModels = [
     TabModel(type: TabType.calendar),
     TabModel(type: TabType.insights),
-    //TabModel(type: TabType.profile),
     TabModel(type: TabType.settings),
     TabModel(type: TabType.today),
   ];

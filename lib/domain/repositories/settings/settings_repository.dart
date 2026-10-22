@@ -10,6 +10,7 @@ abstract class SettingsRepository {
   KeklistSettings get value;
   Stream<KeklistSettings> get stream;
   FutureOr<void> updateUserName(String string);
+  FutureOr<void> updateUserAvatar(UserAvatar avatar);
   FutureOr<void> updateSettings(KeklistSettings settings);
   FutureOr<void> updateThemePreference(KeklistThemeMode themeMode);
   FutureOr<void> updateInterfaceStyle(KeklistInterfaceStyle style);
@@ -66,6 +67,40 @@ final class CalendarSettings {
 /// How the emotion texture behind a story or viewer page moves with the playing audio/video sound.
 enum StoryTextureAnimation { off, pulse, wave, equalizer, drift, glow }
 
+/// The date header of a story or viewer page: "21 October · Wednesday · 07:14" on one, two or three lines.
+enum StoryDateLayout { oneLine, twoLines, threeLines }
+
+/// Stories and viewer tweaks: texture animation, date header, sound spectrum around circles and how strongly
+/// both react to loudness.
+final class StorySettings {
+  static const double minSensitivity = 0.5;
+  static const double maxSensitivity = 3.0;
+
+  final StoryTextureAnimation textureAnimation;
+  final StoryDateLayout dateLayout;
+  final bool isSpectrumVisible;
+  final double sensitivity;
+
+  const StorySettings({
+    this.textureAnimation = StoryTextureAnimation.pulse,
+    this.dateLayout = StoryDateLayout.twoLines,
+    this.isSpectrumVisible = true,
+    this.sensitivity = 1.0,
+  });
+
+  StorySettings copyWith({
+    StoryTextureAnimation? textureAnimation,
+    StoryDateLayout? dateLayout,
+    bool? isSpectrumVisible,
+    double? sensitivity,
+  }) => StorySettings(
+    textureAnimation: textureAnimation ?? this.textureAnimation,
+    dateLayout: dateLayout ?? this.dateLayout,
+    isSpectrumVisible: isSpectrumVisible ?? this.isSpectrumVisible,
+    sensitivity: (sensitivity ?? this.sensitivity).clamp(minSensitivity, maxSensitivity),
+  );
+}
+
 /// Analytics screen layout: widget order (unknown ids ignored), hidden widgets and the period.
 final class InsightsSettings {
   final List<String> widgetOrder;
@@ -80,6 +115,20 @@ final class InsightsSettings {
         hiddenWidgetIds: hiddenWidgetIds ?? this.hiddenWidgetIds,
         periodIndex: periodIndex ?? this.periodIndex,
       );
+}
+
+/// The profile picture kept only on this device: a photo in the app folder, an emoji, or neither (the name's initial).
+final class UserAvatar {
+  final String? emoji;
+  final String? imagePath;
+
+  const UserAvatar({this.emoji, this.imagePath});
+
+  @override
+  bool operator ==(Object other) => other is UserAvatar && other.emoji == emoji && other.imagePath == imagePath;
+
+  @override
+  int get hashCode => Object.hash(emoji, imagePath);
 }
 
 final class KeklistSettings {
@@ -105,7 +154,8 @@ final class KeklistSettings {
   final DayFeedSettings dayFeed;
   final InsightsSettings insights;
   final CalendarSettings calendar;
-  final StoryTextureAnimation storyTextureAnimation;
+  final StorySettings story;
+  final UserAvatar avatar;
   final Set<String> hiddenSettingsItemIds;
   final Set<String> shakeDiscoveredScreenIds;
 
@@ -128,7 +178,8 @@ final class KeklistSettings {
     this.dayFeed = const DayFeedSettings(),
     this.insights = const InsightsSettings(),
     this.calendar = const CalendarSettings(),
-    this.storyTextureAnimation = StoryTextureAnimation.pulse,
+    this.story = const StorySettings(),
+    this.avatar = const UserAvatar(),
     this.hiddenSettingsItemIds = const {},
     this.shakeDiscoveredScreenIds = const {},
   });
@@ -152,7 +203,8 @@ final class KeklistSettings {
     DayFeedSettings? dayFeed,
     InsightsSettings? insights,
     CalendarSettings? calendar,
-    StoryTextureAnimation? storyTextureAnimation,
+    StorySettings? story,
+    UserAvatar? avatar,
     Set<String>? hiddenSettingsItemIds,
     Set<String>? shakeDiscoveredScreenIds,
   }) {
@@ -175,7 +227,8 @@ final class KeklistSettings {
       dayFeed: dayFeed ?? this.dayFeed,
       insights: insights ?? this.insights,
       calendar: calendar ?? this.calendar,
-      storyTextureAnimation: storyTextureAnimation ?? this.storyTextureAnimation,
+      story: story ?? this.story,
+      avatar: avatar ?? this.avatar,
       hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
       shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
     );
@@ -207,7 +260,12 @@ final class KeklistSettings {
     ..calendarColumnCount = calendar.columnCount
     ..isCalendarMindTextVisible = calendar.isMindTextVisible
     ..isCalendarMediaVisible = calendar.isMediaVisible
-    ..storyTextureAnimationIndex = storyTextureAnimation.index
+    ..storyTextureAnimationIndex = story.textureAnimation.index
+    ..storyDateLayoutIndex = story.dateLayout.index
+    ..isStorySpectrumVisible = story.isSpectrumVisible
+    ..storySensitivity = story.sensitivity
+    ..avatarEmoji = avatar.emoji
+    ..avatarImagePath = avatar.imagePath
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 

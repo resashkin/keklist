@@ -7,7 +7,7 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
-import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
+import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -84,11 +84,9 @@ final class _AnimatedEmotionTextureState extends State<AnimatedEmotionTexture> w
   @override
   Widget build(BuildContext context) {
     if (widget.mind.emotionIds.isEmpty) return const SizedBox.shrink();
-    final StoryTextureAnimation animation = context.select<SettingsBloc, StoryTextureAnimation>(
-      (bloc) => bloc.state is SettingsDataState
-          ? (bloc.state as SettingsDataState).settings.storyTextureAnimation
-          : StoryTextureAnimation.pulse,
-    );
+    final StorySettings story = context.watchStorySettings();
+    _motion.sensitivity = story.sensitivity;
+    final StoryTextureAnimation animation = story.textureAnimation;
     return BlocBuilder<EmotionBloc, EmotionState>(
       builder: (context, state) {
         if (state is! EmotionsList) return const SizedBox.shrink();
@@ -120,10 +118,11 @@ final class _TextureMotion extends ChangeNotifier {
   double level = 0.0;
   double time = 0.0;
   double drift = 0.0;
+  double sensitivity = 1.0;
 
   void advance({required double dt, required double target}) {
     final double previous = level;
-    level += (target - level) * _kLevelSmoothing;
+    level += ((target * sensitivity).clamp(0.0, 1.0) - level) * _kLevelSmoothing;
     if (level < 0.001 && previous < 0.001) return;
     time += dt;
     drift += dt * (_kDriftBaseSpeed + _kDriftLoudSpeed * level);

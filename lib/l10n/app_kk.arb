@@ -272,14 +272,6 @@
     "@send": {
         "description": "Жіберу батырмасы"
     },
-    "updateYourNickname": "Никнейміңізді жаңарту",
-    "@updateYourNickname": {
-        "description": "Никнейміңізді жаңарту диалогының атауы"
-    },
-    "yourNickname": "Сіздің никнейміңіз",
-    "@yourNickname": {
-        "description": "Никнейм енгізу көрсеткіші"
-    },
     "create": "Жасау",
     "@create": {
         "description": "Жасау батырмасы"
@@ -371,10 +363,6 @@
     "settingsDescription": "Барлық баптаулар экраны (қараңғы режим, синхрондау және т.б.)",
     "@settingsDescription": {
         "description": "Баптаулар таб сипаттамасы"
-    },
-    "profileDescription": "Профиліңізбен экран",
-    "@profileDescription": {
-        "description": "Профиль таб сипаттамасы"
     },
     "todayDescription": "Тек бүгінгі ойлар",
     "@todayDescription": {
@@ -509,5 +497,15 @@
     "storyAnimationEqualizer": "Эквалайзер",
     "storyAnimationDrift": "Дрейф",
     "storyAnimationGlow": "Жарқыл",
-    "viewerCommentHint": "Пікір…"
+    "viewerCommentHint": "Пікір…",
+    "calendarToCurrentWeek": "Ағымдағы аптаға",
+    "storyDateLines": "Күн жолдары",
+    "storyTextureTitle": "Текстура",
+    "storySpectrum": "Дыбыс спектрі",
+    "storySensitivity": "Сезімталдық",
+    "profileMindfulDays": "{count, plural, other{Саналы {count} күн}}",
+    "profileName": "Аты",
+    "profilePhoto": "Фото",
+    "profileEmoji": "Эмодзи",
+    "profileInitial": "Әріп"
 }

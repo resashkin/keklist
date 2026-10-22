@@ -30,7 +30,6 @@ const _$TabTypeEnumMap = {
   TabType.calendar: 'calendar',
   TabType.insights: 'insights',
   TabType.settings: 'settings',
-  TabType.profile: 'profile',
   TabType.today: 'today',
   TabType.debugMenu: 'debugMenu',
 };

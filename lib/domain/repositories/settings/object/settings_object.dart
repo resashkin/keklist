@@ -107,6 +107,21 @@ final class SettingsObject extends HiveObject {
   @HiveField(35, defaultValue: 1)
   late int storyTextureAnimationIndex;
 
+  @HiveField(36, defaultValue: 1)
+  late int storyDateLayoutIndex;
+
+  @HiveField(37, defaultValue: true)
+  late bool isStorySpectrumVisible;
+
+  @HiveField(38, defaultValue: 1.0)
+  late double storySensitivity;
+
+  @HiveField(39)
+  late String? avatarEmoji;
+
+  @HiveField(40)
+  late String? avatarImagePath;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -144,7 +159,13 @@ final class SettingsObject extends HiveObject {
           isMindTextVisible: isCalendarMindTextVisible,
           isMediaVisible: isCalendarMediaVisible,
         ),
-        storyTextureAnimation: StoryTextureAnimation.values.elementAtOrNull(storyTextureAnimationIndex) ??
-            StoryTextureAnimation.pulse,
+        story: StorySettings(
+          textureAnimation:
+              StoryTextureAnimation.values.elementAtOrNull(storyTextureAnimationIndex) ?? StoryTextureAnimation.pulse,
+          dateLayout: StoryDateLayout.values.elementAtOrNull(storyDateLayoutIndex) ?? StoryDateLayout.twoLines,
+          isSpectrumVisible: isStorySpectrumVisible,
+          sensitivity: storySensitivity,
+        ),
+        avatar: UserAvatar(emoji: avatarEmoji, imagePath: avatarImagePath),
       );
 }
