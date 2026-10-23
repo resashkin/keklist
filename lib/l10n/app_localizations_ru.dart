@@ -423,9 +423,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get minds => 'Заметки';
 
   @override
-  String get searchForYourNotes => 'Поиск ваших заметок';
-
-  @override
   String get searchYourEmoji => 'Поиск вашего эмодзи...';
 
   @override
@@ -966,9 +963,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get aiYesterday => 'Вчера';
 
   @override
-  String get aiSessions => 'Сессии';
-
-  @override
   String get aiNoSessions => 'Сессий пока нет';
 
   @override
@@ -1175,4 +1169,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String insightsWeekNumber(String number) {
     return 'Неделя $number';
   }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши записи прямо на телефоне.';
 }

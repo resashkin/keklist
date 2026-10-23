@@ -891,12 +891,6 @@ abstract class AppLocalizations {
   /// **'Minds'**
   String get minds;
 
-  /// Search notes hint
-  ///
-  /// In en, this message translates to:
-  /// **'Search for your notes'**
-  String get searchForYourNotes;
-
   /// Search emoji hint
   ///
   /// In en, this message translates to:
@@ -1896,12 +1890,6 @@ abstract class AppLocalizations {
   /// AI tab
   ///
   /// In en, this message translates to:
-  /// **'Sessions'**
-  String get aiSessions;
-
-  /// AI tab
-  ///
-  /// In en, this message translates to:
   /// **'No sessions yet'**
   String get aiNoSessions;
 
@@ -2282,6 +2270,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Week {number}'**
   String insightsWeekNumber(String number);
+
+  /// Hint under the empty list of chat sessions
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about your week, a worry or a good day: the chat reads your records right on the phone.'**
+  String get aiNoSessionsHint;
 }
 
 class _AppLocalizationsDelegate

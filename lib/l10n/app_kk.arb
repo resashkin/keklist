@@ -299,10 +299,6 @@
     "@minds": {
         "description": "Ойлар атауы"
     },
-    "searchForYourNotes": "Жазбаларыңызды іздеу",
-    "@searchForYourNotes": {
-        "description": "Жазбаларды іздеу көрсеткіші"
-    },
     "searchYourEmoji": "Эмоджиңізді іздеу...",
     "@searchYourEmoji": {
         "description": "Эмоджи іздеу көрсеткіші"
@@ -523,7 +519,6 @@
     "aiPrivacyNote": "Тек телефонда жұмыс істейді: жазбалар құрылғыдан шықпайды.",
     "aiDisclaimer": "Бұл медициналық қызмет емес. Қауіп төнсе, шұғыл қызметтерге хабарласыңыз.",
     "aiYesterday": "Кеше",
-    "aiSessions": "Сессиялар",
     "aiNoSessions": "Әзірге сессия жоқ",
     "aiNewSession": "Жаңа сессия",
     "aiChooseRole": "Рөлді таңдаңыз",
@@ -587,5 +582,6 @@
     "insightsYearAgo": "Бір жыл бұрын",
     "insightsTwoYearsAgo": "Екі жыл бұрын",
     "insightsVoiceAndVideos": "Дауыс және дөңгелек бейнелер",
-    "insightsWeekNumber": "{number}-апта"
+    "insightsWeekNumber": "{number}-апта",
+    "aiNoSessionsHint": "Аптаңыз, мазасыздық не жақсы күн туралы сұраңыз: чат жазбаларыңызды телефонның өзінде оқиды."
 }

@@ -424,9 +424,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get minds => 'Notizen';
 
   @override
-  String get searchForYourNotes => 'Suchen Sie nach Ihren Notizen';
-
-  @override
   String get searchYourEmoji => 'Suchen Sie nach Ihrem Emoji...';
 
   @override
@@ -972,9 +969,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aiYesterday => 'Gestern';
 
   @override
-  String get aiSessions => 'Sitzungen';
-
-  @override
   String get aiNoSessions => 'Noch keine Sitzungen';
 
   @override
@@ -1181,4 +1175,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String insightsWeekNumber(String number) {
     return 'Woche $number';
   }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Frag nach deiner Woche, einer Sorge oder einem guten Tag: Der Chat liest deine Einträge direkt auf dem Handy.';
 }

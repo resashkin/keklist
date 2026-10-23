@@ -572,10 +572,6 @@
     "@minds": {
         "description": "Minds title"
     },
-    "searchForYourNotes": "Search for your notes",
-    "@searchForYourNotes": {
-        "description": "Search notes hint"
-    },
     "searchYourEmoji": "Search your emoji...",
     "@searchYourEmoji": {
         "description": "Search emoji hint"
@@ -1202,10 +1198,6 @@
     "@aiYesterday": {
         "description": "AI tab"
     },
-    "aiSessions": "Sessions",
-    "@aiSessions": {
-        "description": "AI tab"
-    },
     "aiNoSessions": "No sessions yet",
     "@aiNoSessions": {
         "description": "AI tab"
@@ -1481,5 +1473,9 @@
                 "type": "String"
             }
         }
+    },
+    "aiNoSessionsHint": "Ask about your week, a worry or a good day: the chat reads your records right on the phone.",
+    "@aiNoSessionsHint": {
+        "description": "Hint under the empty list of chat sessions"
     }
 }

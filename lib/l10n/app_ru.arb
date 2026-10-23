@@ -169,7 +169,6 @@
     "passwordsDoNotMatch": "Пароли не совпадают",
     "reenterPassword": "Введите пароль повторно",
     "retry": "Повторить",
-    "searchForYourNotes": "Поиск ваших заметок",
     "searchYourEmoji": "Поиск вашего эмодзи...",
     "selectPeriod": "Выберите период ...",
     "send": "ОТПРАВИТЬ",
@@ -295,7 +294,6 @@
     "aiPrivacyNote": "Работает только на телефоне: записи не покидают устройство.",
     "aiDisclaimer": "Это не медицинская помощь. Если вы в опасности, обратитесь в экстренные службы.",
     "aiYesterday": "Вчера",
-    "aiSessions": "Сессии",
     "aiNoSessions": "Сессий пока нет",
     "aiNewSession": "Новая сессия",
     "aiChooseRole": "Выберите роль",
@@ -359,5 +357,6 @@
     "insightsYearAgo": "Год назад",
     "insightsTwoYearsAgo": "2 года назад",
     "insightsVoiceAndVideos": "Голосовые и кружки",
-    "insightsWeekNumber": "Неделя {number}"
+    "insightsWeekNumber": "Неделя {number}",
+    "aiNoSessionsHint": "Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши записи прямо на телефоне."
 }

@@ -299,10 +299,6 @@
     "@minds": {
         "description": "Ойлор аталышы"
     },
-    "searchForYourNotes": "Эскертмелериңизди издөө",
-    "@searchForYourNotes": {
-        "description": "Эскертмелерди издөө көрсөткүчү"
-    },
     "searchYourEmoji": "Эмоджиңизди издөө...",
     "@searchYourEmoji": {
         "description": "Эмоджи издөө көрсөткүчү"
@@ -523,7 +519,6 @@
     "aiPrivacyNote": "Телефондо гана иштейт: жазуулар түзмөктөн чыкпайт.",
     "aiDisclaimer": "Бул медициналык кызмат эмес. Коркунучта болсоңуз, тез жардам кызматына кайрылыңыз.",
     "aiYesterday": "Кечээ",
-    "aiSessions": "Сессиялар",
     "aiNoSessions": "Азырынча сессия жок",
     "aiNewSession": "Жаңы сессия",
     "aiChooseRole": "Ролду тандаңыз",
@@ -587,5 +582,6 @@
     "insightsYearAgo": "Бир жыл мурун",
     "insightsTwoYearsAgo": "Эки жыл мурун",
     "insightsVoiceAndVideos": "Үн жана тегерек видеолор",
-    "insightsWeekNumber": "{number}-жума"
+    "insightsWeekNumber": "{number}-жума",
+    "aiNoSessionsHint": "Жумаңыз, тынчсыздануу же жакшы күн жөнүндө сураңыз: чат жазууларыңызды телефондун өзүндө окуйт."
 }

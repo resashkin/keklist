@@ -169,7 +169,6 @@
     "passwordsDoNotMatch": "密码不匹配",
     "reenterPassword": "重新输入密码",
     "retry": "重试",
-    "searchForYourNotes": "搜索您的笔记",
     "searchYourEmoji": "搜索您的表情符号...",
     "selectPeriod": "选择期间...",
     "send": "发送",
@@ -295,7 +294,6 @@
     "aiPrivacyNote": "仅在手机上运行：你的记录不会离开设备。",
     "aiDisclaimer": "这不是医疗服务。如果你处于危险中，请联系紧急服务。",
     "aiYesterday": "昨天",
-    "aiSessions": "会话",
     "aiNoSessions": "还没有会话",
     "aiNewSession": "新会话",
     "aiChooseRole": "选择角色",
@@ -359,5 +357,6 @@
     "insightsYearAgo": "一年前",
     "insightsTwoYearsAgo": "两年前",
     "insightsVoiceAndVideos": "语音和圆形视频",
-    "insightsWeekNumber": "第{number}周"
+    "insightsWeekNumber": "第{number}周",
+    "aiNoSessionsHint": "问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的记录。"
 }

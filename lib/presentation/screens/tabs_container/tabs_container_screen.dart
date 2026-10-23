@@ -71,7 +71,7 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
         if (next != _useLiquidGlass) {
           setState(() {
             _useLiquidGlass = next;
-            // Rebuild cached body children so the Today tab's fabBottomOffset tracks the new value.
+            // Rebuild cached body children so the Today and Chat tabs' fabBottomOffset tracks the new value.
             final Iterable<Widget> bodyWidgets = _tabTypes.map(_bodyWidgetByType);
             _bodyWidgets
               ..clear()
@@ -81,6 +81,9 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
       },
     )?.disposed(by: this);
   }
+
+  double get _fabBottomOffset =>
+      _useLiquidGlass && _isTabBarVisible && !_isWide ? kBottomNavigationBarHeight + 48.0 : 0.0;
 
   bool _readUseLiquidGlass(SettingsState state) {
     if (state is! SettingsDataState) return _useLiquidGlass;
@@ -181,10 +184,10 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
           // overlaps the body via `extendBody`. In Material mode the solid nav
           // bar already reserves its space, so the extra offset would leave a
           // strange gap under the FAB.
-          fabBottomOffset: _useLiquidGlass && _isTabBarVisible && !_isWide ? kBottomNavigationBarHeight + 48.0 : 0.0,
+          fabBottomOffset: _fabBottomOffset,
         );
       case TabType.ai:
-        return const AiScreen();
+        return AiScreen(fabBottomOffset: _fabBottomOffset);
       case TabType.debugMenu:
         return const SizedBox.shrink();
     }

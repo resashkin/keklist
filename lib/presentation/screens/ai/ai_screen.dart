@@ -6,6 +6,7 @@ import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_bl
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_state.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
+import 'package:keklist/presentation/core/widgets/kek_floating_button.dart';
 import 'package:keklist/presentation/screens/ai/ai_chat_screen.dart';
 import 'package:keklist/presentation/screens/ai/ai_format.dart';
 import 'package:keklist/presentation/screens/ai/ai_models_screen.dart';
@@ -14,9 +15,11 @@ import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 
-/// The chat tab: previous sessions; a tap opens the chat.
+/// The chat tab: previous sessions; a tap opens the chat, the floating button starts a new one.
 final class AiScreen extends StatefulWidget {
-  const AiScreen({super.key});
+  const AiScreen({super.key, this.fabBottomOffset = 0.0});
+
+  final double fabBottomOffset;
 
   @override
   State<AiScreen> createState() => _AiScreenState();
@@ -101,46 +104,43 @@ final class _AiScreenState extends State<AiScreen> {
               ),
           ],
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: backend.modelName == null
+            ? null
+            : Padding(
+                padding: EdgeInsets.only(bottom: widget.fabBottomOffset),
+                child: KekFloatingButton(
+                  onPressed: () => _newSession(backend),
+                  label: context.l10n.aiNewSession,
+                  fallbackIcon: Icons.add_comment_rounded,
+                  sfSymbol: 'plus.bubble',
+                ),
+              ),
         body: Align(
           alignment: Alignment.topCenter,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: _maxWidth),
-            child: ListView(
-              padding: EdgeInsets.only(
-                top: MediaQuery.paddingOf(context).top + 64.0,
-                bottom: MediaQuery.paddingOf(context).bottom + 120.0,
-              ),
+            child: Column(
               children: [
+                SizedBox(height: MediaQuery.paddingOf(context).top + 64.0),
                 if (backend.modelName == null) _NoModelCard(canManage: backend.canManage),
-                _SectionTitle(
-                  context.l10n.aiSessions,
-                  action: backend.modelName == null
-                      ? null
-                      : FilledButton.tonalIcon(
-                          onPressed: () => _newSession(backend),
-                          icon: const Icon(Icons.add_comment_rounded, size: 18.0),
-                          label: Text(context.l10n.aiNewSession),
+                Expanded(
+                  child: backend.sessions.isEmpty
+                      ? const _NoSessions()
+                      : ListView(
+                          padding: EdgeInsets.only(
+                            bottom: MediaQuery.paddingOf(context).bottom + widget.fabBottomOffset + 96.0,
+                          ),
+                          children: [
+                            for (final AiSession session in backend.sessions)
+                              _SessionTile(
+                                session: session,
+                                persona: backend.personaOf(session),
+                                onTap: () => AiChatScreen.open(context, sessionId: session.id),
+                                onDelete: () => _deleteSession(backend, session),
+                              ),
+                          ],
                         ),
-                ),
-                if (backend.sessions.isEmpty)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    child: Text(context.l10n.aiNoSessions, style: TextStyle(color: Theme.of(context).hintColor)),
-                  ),
-                for (final AiSession session in backend.sessions)
-                  _SessionTile(
-                    session: session,
-                    persona: backend.personaOf(session),
-                    onTap: () => AiChatScreen.open(context, sessionId: session.id),
-                    onDelete: () => _deleteSession(backend, session),
-                  ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 0.0),
-                  child: Text(
-                    '${context.l10n.aiPrivacyNote}\n${context.l10n.aiDisclaimer}',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor),
-                  ),
                 ),
               ],
             ),
@@ -151,24 +151,38 @@ final class _AiScreenState extends State<AiScreen> {
   }
 }
 
-final class _SectionTitle extends StatelessWidget {
-  const _SectionTitle(this.title, {this.action});
-
-  final String title;
-  final Widget? action;
+/// Centered while there are no sessions, with the reminder that this isn't a medical service.
+final class _NoSessions extends StatelessWidget {
+  const _NoSessions();
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-    child: Row(
-      children: [
-        Expanded(
-          child: Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 8.0,
+          children: [
+            Icon(Icons.forum_outlined, size: 48.0, color: theme.hintColor),
+            Text(context.l10n.aiNoSessions, style: theme.textTheme.titleMedium, textAlign: TextAlign.center),
+            Text(
+              context.l10n.aiNoSessionsHint,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyMedium?.copyWith(color: theme.hintColor),
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              context.l10n.aiDisclaimer,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodySmall?.copyWith(color: theme.hintColor.withValues(alpha: 0.7)),
+            ),
+          ],
         ),
-        ?action,
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }
 
 final class _NoModelCard extends StatelessWidget {

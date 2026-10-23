@@ -299,10 +299,6 @@
     "@minds": {
         "description": "Fikrlar sarlavhasi"
     },
-    "searchForYourNotes": "Eslatmalaringizni qidiring",
-    "@searchForYourNotes": {
-        "description": "Eslatmalarni qidirish ko'rsatkichi"
-    },
     "searchYourEmoji": "Emojingizni qidiring...",
     "@searchYourEmoji": {
         "description": "Emoji qidirish ko'rsatkichi"
@@ -523,7 +519,6 @@
     "aiPrivacyNote": "Faqat telefonda ishlaydi: yozuvlaringiz qurilmadan chiqmaydi.",
     "aiDisclaimer": "Bu tibbiy xizmat emas. Xavf ostida bo'lsangiz, favqulodda xizmatlarga murojaat qiling.",
     "aiYesterday": "Kecha",
-    "aiSessions": "Sessiyalar",
     "aiNoSessions": "Hozircha sessiyalar yo'q",
     "aiNewSession": "Yangi sessiya",
     "aiChooseRole": "Rolni tanlang",
@@ -587,5 +582,6 @@
     "insightsYearAgo": "Bir yil oldin",
     "insightsTwoYearsAgo": "Ikki yil oldin",
     "insightsVoiceAndVideos": "Ovoz va dumaloq videolar",
-    "insightsWeekNumber": "{number}-hafta"
+    "insightsWeekNumber": "{number}-hafta",
+    "aiNoSessionsHint": "Haftangiz, tashvish yoki yaxshi kun haqida so‘rang: chat yozuvlaringizni telefonning o‘zida o‘qiydi."
 }

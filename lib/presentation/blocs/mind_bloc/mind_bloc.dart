@@ -9,8 +9,6 @@ import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -20,16 +18,11 @@ part 'mind_event.dart';
 part 'mind_state.dart';
 
 final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
-  late final MindSearcherCubit _searcherCubit;
   late final MindRepository _mindRepository;
   late final AppFileRepository _fileRepository;
 
-  MindBloc({
-    required MindSearcherCubit mindSearcherCubit,
-    required MindRepository mindRepository,
-    required AppFileRepository fileRepository,
-  }) : super(MindList(values: const [])) {
-    _searcherCubit = mindSearcherCubit;
+  MindBloc({required MindRepository mindRepository, required AppFileRepository fileRepository})
+    : super(MindList(values: const [])) {
     _mindRepository = mindRepository;
     _fileRepository = fileRepository;
     on<MindGetList>(_getMinds);
@@ -40,12 +33,6 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     on<MindClearCache>(_clearCache);
     on<MindEdit>(_editMind);
     on<MindRemoveMedia>(_removeMedia);
-    on<MindStartSearch>(_startSearch);
-    on<MindStopSearch>(_stopSearch);
-    on<MindEnterSearchText>(
-      _enterTextSearch,
-      transformer: (events, mapper) => events.debounceTime(const Duration(milliseconds: 300)).asyncExpand(mapper),
-    );
     on<MindInternalGetListFromCache>((_, emit) => _emitMindList(emit));
     _mindRepository.stream.listen((event) => add(MindInternalGetListFromCache())).disposed(by: this);
   }
@@ -79,10 +66,7 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
           sanitizedPieces.add(
             trimmedPath == audioPiece.appRelativeAbsoulutePath
                 ? audioPiece
-                : MindNoteAudio(
-                    appRelativeAbsoulutePath: trimmedPath,
-                    durationSeconds: audioPiece.durationSeconds,
-                  ),
+                : MindNoteAudio(appRelativeAbsoulutePath: trimmedPath, durationSeconds: audioPiece.durationSeconds),
           );
         },
         video: (MindNoteVideo videoPiece) {
@@ -117,10 +101,7 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
 
   Future<void> _deleteMind(MindDelete event, Emitter<MindState> emit) async {
     // Collect all minds to be deleted (main mind + child minds with rootId)
-    final mindsToDelete = <Mind>[
-      event.mind,
-      ..._mindRepository.values.where((mind) => mind.rootId == event.mind.id),
-    ];
+    final mindsToDelete = <Mind>[event.mind, ..._mindRepository.values.where((mind) => mind.rootId == event.mind.id)];
 
     // Collect all audio files from all minds to be deleted
     final audioFilesToDelete = <String>{};
@@ -147,19 +128,6 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     await _mindRepository.deleteMindsWhere((mind) => mind.rootId == event.mind.id);
     // Then delete the main mind
     await _mindRepository.deleteMind(mindId: event.mind.id);
-  }
-
-  FutureOr<void> _startSearch(MindStartSearch event, emit) async {
-    emit(MindSearching(enabled: true, allValues: _mindRepository.values, resultValues: const []));
-  }
-
-  FutureOr<void> _stopSearch(MindStopSearch event, emit) async {
-    emit(MindSearching(enabled: false, allValues: _mindRepository.values, resultValues: const []));
-  }
-
-  FutureOr<void> _enterTextSearch(MindEnterSearchText event, Emitter<MindState> emit) async {
-    final List<Mind> filteredMinds = await _searcherCubit.searchMindList(event.text);
-    emit(MindSearching(enabled: true, allValues: _mindRepository.values, resultValues: filteredMinds));
   }
 
   Future<List<Mind>> _findMindsByDayIndex(int index) async {

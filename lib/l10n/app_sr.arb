@@ -169,7 +169,6 @@
     "passwordsDoNotMatch": "Лозинке се не подударају",
     "reenterPassword": "Поново унеси лозинку",
     "retry": "Покушај поново",
-    "searchForYourNotes": "Претражи своје белешке",
     "searchYourEmoji": "Претражи свој емоџи...",
     "selectPeriod": "Изабери период ...",
     "send": "ПОШАЉИ",
@@ -295,7 +294,6 @@
     "aiPrivacyNote": "Ради само на телефону: записи никада не напуштају уређај.",
     "aiDisclaimer": "Ово није медицинска услуга. Ако сте у опасности, обратите се хитним службама.",
     "aiYesterday": "Јуче",
-    "aiSessions": "Сесије",
     "aiNoSessions": "Још нема сесија",
     "aiNewSession": "Нова сесија",
     "aiChooseRole": "Изаберите улогу",
@@ -359,5 +357,6 @@
     "insightsYearAgo": "Пре годину дана",
     "insightsTwoYearsAgo": "Пре две године",
     "insightsVoiceAndVideos": "Глас и округли видеи",
-    "insightsWeekNumber": "Недеља {number}"
+    "insightsWeekNumber": "Недеља {number}",
+    "aiNoSessionsHint": "Питајте о својој недељи, бризи или лепом дану: чет чита ваше записе директно на телефону."
 }

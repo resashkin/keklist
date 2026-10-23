@@ -423,9 +423,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get minds => 'Fikrlar';
 
   @override
-  String get searchForYourNotes => 'Eslatmalaringizni qidiring';
-
-  @override
   String get searchYourEmoji => 'Emojingizni qidiring...';
 
   @override
@@ -966,9 +963,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get aiYesterday => 'Kecha';
 
   @override
-  String get aiSessions => 'Sessiyalar';
-
-  @override
   String get aiNoSessions => 'Hozircha sessiyalar yo\'q';
 
   @override
@@ -1175,4 +1169,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String insightsWeekNumber(String number) {
     return '$number-hafta';
   }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Haftangiz, tashvish yoki yaxshi kun haqida so‘rang: chat yozuvlaringizni telefonning o‘zida o‘qiydi.';
 }

@@ -1,9 +1,6 @@
 part of '../../mind_collection_screen.dart';
 
 final class _MindCollectionBody extends StatelessWidget {
-  final bool isSearching;
-  final List<Mind> searchResults;
-  final VoidCallback hideKeyboard;
   final ValueChanged<int> onTapToDay;
   final void Function(int dayIndex, int itemIndex) onOpenItem;
   final ValueChanged<List<int>> onPlay;
@@ -16,9 +13,6 @@ final class _MindCollectionBody extends StatelessWidget {
   final ItemPositionsListener itemPositionsListener;
 
   const _MindCollectionBody({
-    required this.isSearching,
-    required this.searchResults,
-    required this.hideKeyboard,
     required this.onTapToDay,
     required this.onOpenItem,
     required this.onPlay,
@@ -35,30 +29,18 @@ final class _MindCollectionBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isSearching) {
-      return MindSearchResultListWidget(
-        results: searchResults,
-        onTapToMind: (mind) => () {
-          hideKeyboard();
-          onTapToDay(mind.dayIndex);
-        },
-      );
-    }
     return PinchColumnsDetector(
       columnCount: settings.columnCount,
       onChanged: onColumnCountChanged,
-      child: GestureDetector(
-        onPanDown: (_) => hideKeyboard(),
-        child: ScrollablePositionedList.builder(
-          padding: EdgeInsets.only(
-            top: MediaQuery.paddingOf(context).top + 8.0,
-            bottom: MediaQuery.paddingOf(context).bottom + 96.0,
-          ),
-          itemCount: _allDaysCount,
-          itemScrollController: itemScrollController,
-          itemPositionsListener: itemPositionsListener,
-          itemBuilder: (context, dayIndex) => _buildDay(context, dayIndex),
+      child: ScrollablePositionedList.builder(
+        padding: EdgeInsets.only(
+          top: MediaQuery.paddingOf(context).top + 8.0,
+          bottom: MediaQuery.paddingOf(context).bottom + 96.0,
         ),
+        itemCount: _allDaysCount,
+        itemScrollController: itemScrollController,
+        itemPositionsListener: itemPositionsListener,
+        itemBuilder: (context, dayIndex) => _buildDay(context, dayIndex),
       ),
     );
   }

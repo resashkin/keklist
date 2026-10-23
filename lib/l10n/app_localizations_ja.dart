@@ -415,9 +415,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get minds => 'メモ';
 
   @override
-  String get searchForYourNotes => 'メモを検索';
-
-  @override
   String get searchYourEmoji => '絵文字を検索...';
 
   @override
@@ -930,9 +927,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aiYesterday => '昨日';
 
   @override
-  String get aiSessions => 'セッション';
-
-  @override
   String get aiNoSessions => 'まだセッションはありません';
 
   @override
@@ -1131,4 +1125,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String insightsWeekNumber(String number) {
     return '第$number週';
   }
+
+  @override
+  String get aiNoSessionsHint =>
+      '今週のこと、心配ごと、良かった日について聞いてみましょう。チャットはスマホの中で記録を読みます。';
 }

@@ -1,7 +1,6 @@
 part of '../../mind_collection_screen.dart';
 
 final class _MindCollectionAppBar extends StatelessWidget {
-  final VoidCallback onSearch;
   final VoidCallback onTitle;
   final VoidCallback onCalendar;
   final VoidCallback onTitleLongPress;
@@ -9,7 +8,6 @@ final class _MindCollectionAppBar extends StatelessWidget {
   final VoidCallback? onInsights;
 
   const _MindCollectionAppBar({
-    required this.onSearch,
     required this.onTitle,
     required this.onCalendar,
     required this.onTitleLongPress,
@@ -32,7 +30,6 @@ final class _MindCollectionAppBar extends StatelessWidget {
         if (onInsights != null) GlassBarAction(icon: Icons.insights, onPressed: onInsights),
         if (onSettings != null) GlassBarAction(icon: Icons.settings, onPressed: onSettings),
         GlassBarAction(icon: Icons.calendar_month, onPressed: onCalendar),
-        GlassBarAction(icon: Icons.search, onPressed: onSearch),
       ],
     );
   }

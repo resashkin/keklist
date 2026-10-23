@@ -414,9 +414,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get minds => '笔记';
 
   @override
-  String get searchForYourNotes => '搜索您的笔记';
-
-  @override
   String get searchYourEmoji => '搜索您的表情符号...';
 
   @override
@@ -925,9 +922,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiYesterday => '昨天';
 
   @override
-  String get aiSessions => '会话';
-
-  @override
   String get aiNoSessions => '还没有会话';
 
   @override
@@ -1126,4 +1120,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String insightsWeekNumber(String number) {
     return '第$number周';
   }
+
+  @override
+  String get aiNoSessionsHint => '问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的记录。';
 }

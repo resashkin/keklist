@@ -46,7 +46,7 @@ final class ShakeHintToast extends StatelessWidget {
           ),
         ),
       ),
-    ).animate().fadeIn(duration: 250.ms).slideY(begin: -0.4, end: 0, curve: Curves.easeOutBack);
+    ).animate().fadeIn(duration: 250.ms).slideY(begin: 0.4, end: 0, curve: Curves.easeOutBack);
   }
 }
 

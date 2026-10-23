@@ -169,7 +169,6 @@
     "passwordsDoNotMatch": "Passwörter stimmen nicht überein",
     "reenterPassword": "Passwort erneut eingeben",
     "retry": "Wiederholen",
-    "searchForYourNotes": "Suchen Sie nach Ihren Notizen",
     "searchYourEmoji": "Suchen Sie nach Ihrem Emoji...",
     "selectPeriod": "Zeitraum auswählen ...",
     "send": "SENDEN",
@@ -295,7 +294,6 @@
     "aiPrivacyNote": "Läuft nur auf deinem Handy: deine Einträge verlassen das Gerät nie.",
     "aiDisclaimer": "Kein medizinischer Dienst. Wenn du in Gefahr bist, wende dich an den Notruf.",
     "aiYesterday": "Gestern",
-    "aiSessions": "Sitzungen",
     "aiNoSessions": "Noch keine Sitzungen",
     "aiNewSession": "Neue Sitzung",
     "aiChooseRole": "Wähle eine Rolle",
@@ -359,5 +357,6 @@
     "insightsYearAgo": "Vor einem Jahr",
     "insightsTwoYearsAgo": "Vor zwei Jahren",
     "insightsVoiceAndVideos": "Sprachnotizen und runde Videos",
-    "insightsWeekNumber": "Woche {number}"
+    "insightsWeekNumber": "Woche {number}",
+    "aiNoSessionsHint": "Frag nach deiner Woche, einer Sorge oder einem guten Tag: Der Chat liest deine Einträge direkt auf dem Handy."
 }

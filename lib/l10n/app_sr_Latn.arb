@@ -297,10 +297,6 @@
     "@minds": {
         "description": "Naslov umova"
     },
-    "searchForYourNotes": "Pretraži svoje beleške",
-    "@searchForYourNotes": {
-        "description": "Savet za pretragu beleški"
-    },
     "searchYourEmoji": "Pretraži svoj emoji...",
     "@searchYourEmoji": {
         "description": "Savet za pretragu emoji-ja"
@@ -523,7 +519,6 @@
     "aiPrivacyNote": "Radi samo na telefonu: zapisi nikada ne napuštaju uređaj.",
     "aiDisclaimer": "Ovo nije medicinska usluga. Ako ste u opasnosti, obratite se hitnim službama.",
     "aiYesterday": "Juče",
-    "aiSessions": "Sesije",
     "aiNoSessions": "Još nema sesija",
     "aiNewSession": "Nova sesija",
     "aiChooseRole": "Izaberite ulogu",
@@ -587,5 +582,6 @@
     "insightsYearAgo": "Pre godinu dana",
     "insightsTwoYearsAgo": "Pre dve godine",
     "insightsVoiceAndVideos": "Glas i okrugli videi",
-    "insightsWeekNumber": "Nedelja {number}"
+    "insightsWeekNumber": "Nedelja {number}",
+    "aiNoSessionsHint": "Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše zapise direktno na telefonu."
 }
