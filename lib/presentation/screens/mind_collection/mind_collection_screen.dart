@@ -44,7 +44,6 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 part 'local_widgets/app_bar/mind_collection_app_bar.dart';
 part 'local_widgets/body/mind_collection_body.dart';
@@ -270,15 +269,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
 
   void _playStories(List<int> dayIndexes) {
     final List<DayFeedItem> items = [for (final int dayIndex in dayIndexes) ..._feed.itemsOf(dayIndex)];
-    if (items.isEmpty) return;
-    Navigator.of(context).push(
-      PageRouteBuilder(
-        opaque: false,
-        fullscreenDialog: true,
-        pageBuilder: (_, _, _) => DayStoriesScreen(items: items, initialIndex: 0),
-        transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
-      ),
-    );
+    DayItemViewerScreen.show(context, items: items, initialIndex: 0, autoplay: true);
   }
 
   int _getNowDayIndex() => DateUtils.getDayIndex(from: DateTime.now());

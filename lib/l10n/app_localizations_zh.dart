@@ -756,12 +756,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dayFeedChooseFolder => '选择';
 
   @override
-  String get dayFeedMute => '静音';
-
-  @override
-  String get dayFeedUnmute => '取消静音';
-
-  @override
   String get holdToRecordAudio => '按住录制语音消息';
 
   @override

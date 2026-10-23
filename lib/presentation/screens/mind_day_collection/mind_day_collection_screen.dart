@@ -32,7 +32,6 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_cubit.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_settings_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_sliver.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_weather_backdrop.dart';
 import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -439,19 +438,8 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     }
   }
 
-  void _openDayStories(DayFeedState state, int initialIndex) {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-        opaque: false,
-        fullscreenDialog: true,
-        pageBuilder: (_, _, _) => DayStoriesScreen(
-          items: state.items,
-          initialIndex: initialIndex,
-        ),
-        transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
-      ),
-    );
-  }
+  void _openDayStories(DayFeedState state, int initialIndex) =>
+      DayItemViewerScreen.show(context, items: state.items, initialIndex: initialIndex, autoplay: true);
 
   void _vibrate() {
     Haptics.vibrate(HapticsType.heavy);

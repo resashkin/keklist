@@ -241,8 +241,6 @@
     "dayFeedAllowAccess": "允许",
     "dayFeedFolderHint": "选择媒体文件夹以在此查看你的照片和视频",
     "dayFeedChooseFolder": "选择",
-    "dayFeedMute": "静音",
-    "dayFeedUnmute": "取消静音",
     "holdToRecordAudio": "按住录制语音消息",
     "holdToRecordVideo": "按住录制视频消息",
     "roundVideoRecordError": "无法录制视频",

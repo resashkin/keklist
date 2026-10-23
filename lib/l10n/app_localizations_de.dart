@@ -793,12 +793,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dayFeedChooseFolder => 'Wählen';
 
   @override
-  String get dayFeedMute => 'Stummschalten';
-
-  @override
-  String get dayFeedUnmute => 'Ton an';
-
-  @override
   String get holdToRecordAudio => 'Gedrückt halten für eine Sprachnachricht';
 
   @override

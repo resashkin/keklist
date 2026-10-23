@@ -74,7 +74,6 @@ dependencies:
   native_liquid_glass: ^0.2.10
   material_ui: any
   cupertino_ui: any
-  flutter_volume_controller: ^2.0.2
   camera: ^0.12.1
   sensors_plus: ^7.1.1
   image_picker: ^1.2.4

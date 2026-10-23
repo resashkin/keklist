@@ -29,7 +29,17 @@ final class MindAudioCircle extends StatefulWidget {
   final double diameter;
   final AudioPlayer? player;
 
-  const MindAudioCircle({super.key, required this.audio, required this.color, required this.diameter, this.player});
+  /// Plays its own player from outside, e.g. while ▶ runs through the stories.
+  final bool isPlaying;
+
+  const MindAudioCircle({
+    super.key,
+    required this.audio,
+    required this.color,
+    required this.diameter,
+    this.player,
+    this.isPlaying = false,
+  });
 
   @override
   State<MindAudioCircle> createState() => _MindAudioCircleState();
@@ -61,6 +71,14 @@ final class _MindAudioCircleState extends State<MindAudioCircle> {
     if (loaded != null) setState(() => _duration = loaded);
     // The scope lives on the same page as this player, so it is never cleared.
     SoundPlaybackScope.maybeOf(context)?.value = SoundPlayback.audio(_player).withEnvelopeOf(path);
+    if (widget.isPlaying) unawaited(_player.play());
+  }
+
+  @override
+  void didUpdateWidget(MindAudioCircle oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!_isInteractive || widget.isPlaying == oldWidget.isPlaying) return;
+    widget.isPlaying ? unawaited(_player.play()) : unawaited(_player.pause());
   }
 
   @override

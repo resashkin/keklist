@@ -241,8 +241,6 @@
     "dayFeedAllowAccess": "Дозволи",
     "dayFeedFolderHint": "Изабери медијску фасциклу да би овде видео фотографије и видео записе",
     "dayFeedChooseFolder": "Изабери",
-    "dayFeedMute": "Искључи звук",
-    "dayFeedUnmute": "Укључи звук",
     "holdToRecordAudio": "Држи за гласовну поруку",
     "holdToRecordVideo": "Држи за видео поруку",
     "roundVideoRecordError": "Снимање видеа није успело",

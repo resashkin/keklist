@@ -781,12 +781,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dayFeedChooseFolder => 'Choose';
 
   @override
-  String get dayFeedMute => 'Mute';
-
-  @override
-  String get dayFeedUnmute => 'Unmute';
-
-  @override
   String get holdToRecordAudio => 'Hold to record a voice message';
 
   @override

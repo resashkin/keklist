@@ -788,12 +788,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get dayFeedChooseFolder => 'Таңдау';
 
   @override
-  String get dayFeedMute => 'Дыбысты өшіру';
-
-  @override
-  String get dayFeedUnmute => 'Дыбысты қосу';
-
-  @override
   String get holdToRecordAudio => 'Дауыстық хабар жазу үшін басып тұрыңыз';
 
   @override

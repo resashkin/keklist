@@ -466,8 +466,6 @@
     "dayFeedAllowAccess": "Уруксат берүү",
     "dayFeedFolderHint": "Бул жерде сүрөт жана видеолорду көрүү үчүн медиа папканы тандаңыз",
     "dayFeedChooseFolder": "Тандоо",
-    "dayFeedMute": "Үнүн өчүрүү",
-    "dayFeedUnmute": "Үнүн күйгүзүү",
     "holdToRecordAudio": "Үн билдирүү жазуу үчүн басып туруңуз",
     "holdToRecordVideo": "Видео билдирүү жазуу үчүн басып туруңуз",
     "roundVideoRecordError": "Видеону жазуу мүмкүн болбоду",

@@ -784,12 +784,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get dayFeedChooseFolder => 'Изабери';
 
   @override
-  String get dayFeedMute => 'Искључи звук';
-
-  @override
-  String get dayFeedUnmute => 'Укључи звук';
-
-  @override
   String get holdToRecordAudio => 'Држи за гласовну поруку';
 
   @override
@@ -1948,12 +1942,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get dayFeedChooseFolder => 'Izaberi';
-
-  @override
-  String get dayFeedMute => 'Isključi zvuk';
-
-  @override
-  String get dayFeedUnmute => 'Uključi zvuk';
 
   @override
   String get holdToRecordAudio => 'Drži za glasovnu poruku';

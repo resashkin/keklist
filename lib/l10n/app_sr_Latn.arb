@@ -466,8 +466,6 @@
     "dayFeedAllowAccess": "Dozvoli",
     "dayFeedFolderHint": "Izaberi medijsku fasciklu da bi ovde video fotografije i video zapise",
     "dayFeedChooseFolder": "Izaberi",
-    "dayFeedMute": "Isključi zvuk",
-    "dayFeedUnmute": "Uključi zvuk",
     "holdToRecordAudio": "Drži za glasovnu poruku",
     "holdToRecordVideo": "Drži za video poruku",
     "roundVideoRecordError": "Snimanje videa nije uspelo",

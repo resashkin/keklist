@@ -1032,14 +1032,6 @@
     "@dayFeedChooseFolder": {
         "description": "Unified day grid (All mode) label"
     },
-    "dayFeedMute": "Mute",
-    "@dayFeedMute": {
-        "description": "Unified day grid (All mode) label"
-    },
-    "dayFeedUnmute": "Unmute",
-    "@dayFeedUnmute": {
-        "description": "Unified day grid (All mode) label"
-    },
     "holdToRecordAudio": "Hold to record a voice message",
     "@holdToRecordAudio": {
         "description": "Audio/video mind recording"
