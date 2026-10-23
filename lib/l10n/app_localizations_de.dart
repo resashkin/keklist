@@ -360,7 +360,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile => 'Profil';
 
   @override
-  String get insights => 'Einblicke';
+  String get insights => 'Profil';
 
   @override
   String get calendar => 'Kalender';
@@ -468,7 +468,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get calendarDescription => 'Hauptbildschirm mit Kalender der Einträge';
 
   @override
-  String get insightsDescription => 'Statistiken aller Ihrer Einträge';
+  String get insightsDescription => 'Du und die Statistik deiner Einträge';
 
   @override
   String get settingsDescription =>

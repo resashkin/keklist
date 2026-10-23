@@ -26,6 +26,7 @@ import 'package:keklist/presentation/screens/insights/widgets/insights_card.dart
 import 'package:keklist/presentation/screens/insights/widgets/insights_emotion_cards.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_format.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_memory_media_cards.dart';
+import 'package:keklist/presentation/blocs/user_profile_bloc/user_profile_bloc.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_profile_header.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_summary_cards.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_tweak_sheet.dart';
@@ -82,7 +83,14 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: GlassAppBar(centerTitle: true, onTitleLongPress: requestTweak, title: Text(context.l10n.insights)),
+      appBar: GlassAppBar(
+        centerTitle: true,
+        onTitleLongPress: requestTweak,
+        title: Text(switch (context.watch<UserProfileBloc>().state.nickname?.trim()) {
+          final String name when name.isNotEmpty => name,
+          _ => context.l10n.insights,
+        }),
+      ),
       body: _minds.isEmpty
           ? ListView(
               padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),

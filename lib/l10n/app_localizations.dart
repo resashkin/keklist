@@ -768,7 +768,7 @@ abstract class AppLocalizations {
   /// Insights screen title
   ///
   /// In en, this message translates to:
-  /// **'Insights'**
+  /// **'Profile'**
   String get insights;
 
   /// Calendar title
@@ -978,7 +978,7 @@ abstract class AppLocalizations {
   /// Insights tab description
   ///
   /// In en, this message translates to:
-  /// **'Statistics all yours entries'**
+  /// **'You and the statistics of your entries'**
   String get insightsDescription;
 
   /// Settings tab description

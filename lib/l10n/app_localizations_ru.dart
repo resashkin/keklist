@@ -360,7 +360,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile => 'Профиль';
 
   @override
-  String get insights => 'Аналитика';
+  String get insights => 'Профиль';
 
   @override
   String get calendar => 'Календарь';
@@ -467,7 +467,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get calendarDescription => 'Главный экран с календарем записей';
 
   @override
-  String get insightsDescription => 'Статистика всех ваших записей';
+  String get insightsDescription => 'Вы и статистика ваших записей';
 
   @override
   String get settingsDescription =>

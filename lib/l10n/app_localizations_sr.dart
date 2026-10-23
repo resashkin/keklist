@@ -357,7 +357,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get profile => 'Профил';
 
   @override
-  String get insights => 'Увиди';
+  String get insights => 'Профил';
 
   @override
   String get calendar => 'Календар';
@@ -464,7 +464,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get calendarDescription => 'Главни екран са календаром уноса';
 
   @override
-  String get insightsDescription => 'Статистика свих твојих уноса';
+  String get insightsDescription => 'Ви и статистика ваших записа';
 
   @override
   String get settingsDescription =>
@@ -1529,7 +1529,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get profile => 'Profil';
 
   @override
-  String get insights => 'Uvid';
+  String get insights => 'Profil';
 
   @override
   String get calendar => 'Kalendar';
@@ -1636,7 +1636,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get calendarDescription => 'Glavni ekran sa kalendarom unosa';
 
   @override
-  String get insightsDescription => 'Statistike svih vaših unosa';
+  String get insightsDescription => 'Vi i statistika vaših zapisa';
 
   @override
   String get settingsDescription =>

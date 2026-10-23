@@ -215,7 +215,7 @@
     "@profile": {
         "description": "Etichetta tab profilo"
     },
-    "insights": "Approfondimenti",
+    "insights": "Profilo",
     "@insights": {
         "description": "Etichetta tab approfondimenti"
     },
@@ -355,7 +355,7 @@
     "@calendarDescription": {
         "description": "Descrizione tab calendario"
     },
-    "insightsDescription": "Statistiche di tutte le tue voci",
+    "insightsDescription": "Tu e le statistiche delle tue note",
     "@insightsDescription": {
         "description": "Descrizione tab approfondimenti"
     },

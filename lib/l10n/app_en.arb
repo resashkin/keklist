@@ -488,7 +488,7 @@
     "@profile": {
         "description": "Profile screen title"
     },
-    "insights": "Insights",
+    "insights": "Profile",
     "@insights": {
         "description": "Insights screen title"
     },
@@ -628,7 +628,7 @@
     "@calendarDescription": {
         "description": "Calendar tab description"
     },
-    "insightsDescription": "Statistics all yours entries",
+    "insightsDescription": "You and the statistics of your entries",
     "@insightsDescription": {
         "description": "Insights tab description"
     },

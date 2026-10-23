@@ -215,7 +215,7 @@
     "@profile": {
         "description": "Profil tab yorlig'i"
     },
-    "insights": "Tahlil",
+    "insights": "Profil",
     "@insights": {
         "description": "Tahlil tab yorlig'i"
     },
@@ -355,7 +355,7 @@
     "@calendarDescription": {
         "description": "Taqvim tab tavsifi"
     },
-    "insightsDescription": "Barcha yozuvlaringiz statistikasi",
+    "insightsDescription": "Siz va yozuvlaringiz statistikasi",
     "@insightsDescription": {
         "description": "Tahlil tab tavsifi"
     },

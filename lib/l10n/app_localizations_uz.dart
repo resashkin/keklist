@@ -360,7 +360,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get profile => 'Profil';
 
   @override
-  String get insights => 'Tahlil';
+  String get insights => 'Profil';
 
   @override
   String get calendar => 'Taqvim';
@@ -467,7 +467,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get calendarDescription => 'Yozuvlar taqvimi bilan asosiy ekran';
 
   @override
-  String get insightsDescription => 'Barcha yozuvlaringiz statistikasi';
+  String get insightsDescription => 'Siz va yozuvlaringiz statistikasi';
 
   @override
   String get settingsDescription =>

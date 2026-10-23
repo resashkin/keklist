@@ -75,7 +75,7 @@ enum TabType implements Equatable {
 
   Icon get materialIcon => switch (this) {
         TabType.calendar => Icon(Icons.calendar_month),
-        TabType.insights => Icon(Icons.insights),
+        TabType.insights => Icon(Icons.person_rounded),
         TabType.settings => Icon(Icons.settings),
         TabType.today => Icon(Icons.today),
         TabType.ai => Icon(Icons.auto_awesome),
@@ -84,7 +84,7 @@ enum TabType implements Equatable {
 
   String get sfSymbolName => switch (this) {
         TabType.calendar => 'calendar',
-        TabType.insights => 'chart.bar.fill',
+        TabType.insights => 'person.crop.circle.fill',
         TabType.settings => 'gearshape',
         TabType.today => 'sun.max',
         TabType.ai => 'sparkles',
