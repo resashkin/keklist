@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math' as math;
+
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/services/ai/ai_backend.dart';
@@ -71,6 +74,13 @@ final class _AiChatScreenState extends State<AiChatScreen> {
     });
   }
 
+  void _followReveal() {
+    if (!_scroll.hasClients || _scroll.position.extentAfter > 80.0) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scroll.hasClients) _scroll.jumpTo(_scroll.position.maxScrollExtent);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final AiBackend backend = context.watch<AiBackend>();
@@ -99,8 +109,17 @@ final class _AiChatScreenState extends State<AiChatScreen> {
                   padding: EdgeInsets.fromLTRB(12.0, MediaQuery.paddingOf(context).top + 64.0, 12.0, 12.0),
                   children: [
                     if (session.messages.isEmpty) _Starters(onSend: (text) => _send(backend, text), enabled: !isBusy),
-                    for (final AiMessage message in session.messages) _Bubble(message: message),
-                    if (streaming != null) _StreamingBubble(text: streaming.text),
+                    for (final (int index, AiMessage message) in session.messages.indexed)
+                      message.role == AiRole.user
+                          ? _Bubble(key: ValueKey<int>(index), message: message)
+                          : _ReplyBubble(key: ValueKey<int>(index), text: message.text, onGrow: _followReveal),
+                    if (streaming != null)
+                      _ReplyBubble(
+                        key: ValueKey<int>(session.messages.length),
+                        text: streaming.text,
+                        isWriting: true,
+                        onGrow: _followReveal,
+                      ),
                     if (backend.lastError != null && streaming == null && lastReply == null)
                       _ErrorNote(error: backend.lastError!, canManage: backend.canManage),
                     if (lastReply != null && !isBusy)
@@ -131,7 +150,7 @@ final class _AiChatScreenState extends State<AiChatScreen> {
 }
 
 final class _Bubble extends StatelessWidget {
-  const _Bubble({required this.message});
+  const _Bubble({super.key, required this.message});
 
   final AiMessage message;
 
@@ -195,14 +214,83 @@ final class _ErrorNote extends StatelessWidget {
   }
 }
 
-final class _StreamingBubble extends StatelessWidget {
-  const _StreamingBubble({required this.text});
+/// An answer shown word by word as it is written; the same bubble keeps revealing after it was saved.
+final class _ReplyBubble extends StatefulWidget {
+  const _ReplyBubble({super.key, required this.text, required this.onGrow, this.isWriting = false});
 
   final String text;
+  final bool isWriting;
+  final VoidCallback onGrow;
+
+  @override
+  State<_ReplyBubble> createState() => _ReplyBubbleState();
+}
+
+final class _ReplyBubbleState extends State<_ReplyBubble> {
+  static const Duration _wordPace = Duration(milliseconds: 30);
+  static const int _comfortableBacklog = 8;
+
+  late int _shown = widget.isWriting ? 0 : widget.text.length;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _revealIfBehind();
+  }
+
+  @override
+  void didUpdateWidget(_ReplyBubble oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _shown = _shown.clamp(0, widget.text.length);
+    _revealIfBehind();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _revealIfBehind() {
+    if (_shown >= widget.text.length || _timer != null) return;
+    _timer = Timer.periodic(_wordPace, (_) => _revealNext());
+  }
+
+  void _revealNext() {
+    final String text = widget.text;
+    final int backlog = _wordsIn(text.substring(_shown));
+    final int step = backlog <= _comfortableBacklog ? 1 : (backlog / _comfortableBacklog).ceil();
+    int next = _shown;
+    for (int word = 0; word < step && next < text.length; word++) {
+      next = _endOfWord(text, next);
+    }
+    setState(() => _shown = next);
+    widget.onGrow();
+    if (_shown >= text.length) {
+      _timer?.cancel();
+      _timer = null;
+    }
+  }
+
+  static int _wordsIn(String text) => RegExp(r'\S+').allMatches(text).length;
+
+  static int _endOfWord(String text, int from) {
+    int index = from;
+    while (index < text.length && text[index].trim().isEmpty) {
+      index++;
+    }
+    while (index < text.length && text[index].trim().isNotEmpty) {
+      index++;
+    }
+    return index;
+  }
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme colors = Theme.of(context).colorScheme;
+    final bool isDone = !widget.isWriting && _shown >= widget.text.length;
+    const TextStyle style = TextStyle(height: 1.35);
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
@@ -210,19 +298,62 @@ final class _StreamingBubble extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
         constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width * 0.8),
         decoration: BoxDecoration(color: colors.surfaceContainerHighest, borderRadius: BorderRadius.circular(18.0)),
-        child: text.isEmpty
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 8.0,
-                children: [
-                  const SizedBox.square(dimension: 14.0, child: CircularProgressIndicator(strokeWidth: 2.0)),
-                  Text(context.l10n.aiThinking, style: TextStyle(color: Theme.of(context).hintColor)),
-                ],
-              )
-            : Text(text, style: const TextStyle(height: 1.35)),
+        child: switch ((_shown, isDone)) {
+          (0, _) when widget.isWriting => _TypingDots(color: Theme.of(context).hintColor),
+          (_, true) => SelectableText(widget.text, style: style.copyWith(color: colors.onSurface)),
+          _ => Text(widget.text.substring(0, _shown), style: style.copyWith(color: colors.onSurface)),
+        },
       ),
     );
   }
+}
+
+/// Three dots bouncing in turn while the model hasn't written anything yet.
+final class _TypingDots extends StatefulWidget {
+  const _TypingDots({required this.color});
+
+  final Color color;
+
+  @override
+  State<_TypingDots> createState() => _TypingDotsState();
+}
+
+final class _TypingDotsState extends State<_TypingDots> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1100),
+  )..repeat();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    height: 20.0,
+    child: AnimatedBuilder(
+      animation: _controller,
+      builder: (context, _) => Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 5.0,
+        children: [
+          for (int dot = 0; dot < 3; dot++)
+            Transform.translate(
+              offset: Offset(0.0, -5.0 * _bounce((_controller.value - dot * 0.15) % 1.0)),
+              child: Container(
+                width: 7.0,
+                height: 7.0,
+                decoration: BoxDecoration(color: widget.color, shape: BoxShape.circle),
+              ),
+            ),
+        ],
+      ),
+    ),
+  );
+
+  static double _bounce(double phase) => phase < 0.4 ? math.sin(phase / 0.4 * math.pi) : 0.0;
 }
 
 final class _Starters extends StatelessWidget {

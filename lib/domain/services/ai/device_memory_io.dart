@@ -22,6 +22,38 @@ abstract final class DeviceMemory {
     null => null,
   };
 
+  /// What this app may still allocate before the system stops it; null where the system doesn't say.
+  static int? get availableBytes {
+    if (kIsWeb) return null;
+    return switch (defaultTargetPlatform) {
+      TargetPlatform.iOS => _procAvailableMemory(),
+      TargetPlatform.android || TargetPlatform.linux => _procMemAvailable(),
+      _ => null,
+    };
+  }
+
+  static int? _procAvailableMemory() {
+    try {
+      final int available = DynamicLibrary.process().lookupFunction<Size Function(), int Function()>(
+        'os_proc_available_memory',
+      )();
+      return available > 0 ? available : null;
+    } on Object {
+      return null;
+    }
+  }
+
+  static int? _procMemAvailable() {
+    try {
+      final RegExpMatch? match = RegExp(
+        r'MemAvailable:\s+(\d+) kB',
+      ).firstMatch(File('/proc/meminfo').readAsStringSync());
+      return match == null ? null : int.parse(match.group(1)!) * 1024;
+    } on Object {
+      return null;
+    }
+  }
+
   static int? _procMemTotal() {
     try {
       final RegExpMatch? match = RegExp(r'MemTotal:\s+(\d+) kB').firstMatch(File('/proc/meminfo').readAsStringSync());

@@ -1992,12 +1992,6 @@ abstract class AppLocalizations {
   /// AI tab
   ///
   /// In en, this message translates to:
-  /// **'Thinking…'**
-  String get aiThinking;
-
-  /// AI tab
-  ///
-  /// In en, this message translates to:
   /// **'Stop'**
   String get aiStop;
 

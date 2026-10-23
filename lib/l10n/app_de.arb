@@ -311,7 +311,6 @@
     "aiActionWeekSummary": "Wochenzusammenfassung",
     "aiWeekSummaryPrompt": "Fasse meine letzten 7 Tage zusammen: was passiert ist, wie ich mich gefühlt habe, was herausstach.",
     "aiSavedAsMind": "In Heute gespeichert",
-    "aiThinking": "Denke nach…",
     "aiStop": "Stopp",
     "aiNoModelTitle": "Wähle ein Modell",
     "aiNoModelMessage": "Lade ein Modell herunter, um zu starten. Es läuft auf deinem Handy, offline.",

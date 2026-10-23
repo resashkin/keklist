@@ -311,7 +311,6 @@
     "aiActionWeekSummary": "本周总结",
     "aiWeekSummaryPrompt": "总结我最近 7 天：发生了什么、我感受如何、什么最突出。",
     "aiSavedAsMind": "已保存到今天",
-    "aiThinking": "思考中…",
     "aiStop": "停止",
     "aiNoModelTitle": "选择模型",
     "aiNoModelMessage": "下载一个模型即可开始。它在手机上离线运行。",

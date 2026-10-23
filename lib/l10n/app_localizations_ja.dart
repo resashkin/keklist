@@ -978,9 +978,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aiSavedAsMind => '今日に保存しました';
 
   @override
-  String get aiThinking => '考え中…';
-
-  @override
   String get aiStop => '停止';
 
   @override

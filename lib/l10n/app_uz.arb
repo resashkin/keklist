@@ -539,7 +539,6 @@
     "aiActionWeekSummary": "Hafta xulosasi",
     "aiWeekSummaryPrompt": "Oxirgi 7 kunimni xulosa qil: nima bo'ldi, nimani his qildim, nima ajralib turdi.",
     "aiSavedAsMind": "Bugunga saqlandi",
-    "aiThinking": "O'ylayapman…",
     "aiStop": "To'xtatish",
     "aiNoModelTitle": "Modelni tanlang",
     "aiNoModelMessage": "Boshlash uchun modelni yuklab oling. U telefonda, internetsiz ishlaydi.",

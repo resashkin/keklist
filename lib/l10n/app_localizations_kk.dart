@@ -1013,9 +1013,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get aiSavedAsMind => 'Бүгінге сақталды';
 
   @override
-  String get aiThinking => 'Ойланып жатырмын…';
-
-  @override
   String get aiStop => 'Тоқтату';
 
   @override

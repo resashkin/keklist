@@ -1015,9 +1015,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get aiSavedAsMind => 'Сохранено в сегодня';
 
   @override
-  String get aiThinking => 'Думаю…';
-
-  @override
   String get aiStop => 'Стоп';
 
   @override

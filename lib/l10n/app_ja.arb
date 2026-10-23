@@ -311,7 +311,6 @@
     "aiActionWeekSummary": "週のまとめ",
     "aiWeekSummaryPrompt": "直近7日間をまとめて：何があったか、どう感じたか、何が印象的だったか。",
     "aiSavedAsMind": "今日に保存しました",
-    "aiThinking": "考え中…",
     "aiStop": "停止",
     "aiNoModelTitle": "モデルを選ぶ",
     "aiNoModelMessage": "始めるにはモデルをダウンロードしてください。スマホ上でオフラインで動作します。",

@@ -973,9 +973,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiSavedAsMind => '已保存到今天';
 
   @override
-  String get aiThinking => '思考中…';
-
-  @override
   String get aiStop => '停止';
 
   @override

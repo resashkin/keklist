@@ -539,7 +539,6 @@
     "aiActionWeekSummary": "Sažetak nedelje",
     "aiWeekSummaryPrompt": "Sažmi mojih poslednjih 7 dana: šta se desilo, kako sam se osećao, šta se istaklo.",
     "aiSavedAsMind": "Sačuvano u današnji dan",
-    "aiThinking": "Razmišljam…",
     "aiStop": "Zaustavi",
     "aiNoModelTitle": "Izaberite model",
     "aiNoModelMessage": "Preuzmite model da biste počeli. Radi na telefonu, bez interneta.",
