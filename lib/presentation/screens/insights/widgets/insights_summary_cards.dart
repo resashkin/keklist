@@ -76,7 +76,12 @@ final class InsightsBrightestCard extends StatelessWidget {
         spacing: 4.0,
         children: [
           Text(
-            InsightsFormat.segment(context, kind, brightest.range),
+            InsightsFormat.segment(
+              context,
+              kind,
+              brightest.range,
+              firstDayOfWeek: data.report.period.firstDayOfWeek,
+            ),
             style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
           ),
           Text(

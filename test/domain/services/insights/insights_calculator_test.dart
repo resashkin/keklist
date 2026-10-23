@@ -170,11 +170,31 @@ void main() {
     expect(broken.streak.current, 0);
   });
 
-  test('on this day finds the same date in earlier years', () {
-    final Mind lastYear = _mind(_day(2025, 10, 20));
-    final InsightsReport report = _report(InsightsPeriodKind.week, [lastYear, _mind(_day(2024, 10, 21))]);
-    expect(report.onThisDay.single.yearsAgo, 1);
-    expect(report.onThisDay.single.mindIds, [lastYear.id]);
+  test('memories look a week, a month, half a year, one and two years back', () {
+    final DateTime today = InsightsPeriod.calendarDateOf(_today);
+    int back(int months) => _day(today.year, today.month - months, today.day);
+    final Mind week = _mind(_today - 7);
+    final Mind month = _mind(back(1));
+    final Mind halfYear = _mind(back(6));
+    final Mind year = _mind(back(12));
+    final Mind twoYears = _mind(back(24));
+    final InsightsReport report = _report(InsightsPeriodKind.week, [
+      week,
+      month,
+      halfYear,
+      year,
+      twoYears,
+      _mind(back(36)),
+      _mind(_today - 8),
+    ]);
+    expect(report.onThisDay.map((group) => group.point), MemoryPoint.values);
+    expect(report.onThisDay.map((group) => group.mindIds.single), [
+      week.id,
+      month.id,
+      halfYear.id,
+      year.id,
+      twoYears.id,
+    ]);
   });
 
   test('media sums library items of the period and lists round videos', () {

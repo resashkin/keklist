@@ -12,7 +12,7 @@ Phase 3 of the main-emoji work; media counts come from the gallery index (`GALLE
   - `current` runs from the period start (the week starts on the locale's first day) to today.
   - `previous` is the same elapsed span of the previous period: Oct 1–20 compares with Sep 1–20. All time has none.
   - `segments` are one level below: week → days, month → weeks (clipped to the month), year → months, all time → years.
-  - `heatmapRange` is the period itself, or the last 52 weeks for Year / All time.
+  - `heatmapRange` is the whole week or calendar month (days still ahead included, drawn faded), or the last 52 weeks for Year / All time. Week and month draw a compact calendar of fixed 28pt cells with weekday letters.
   - `calendarDateOf` reads calendar fields from a UTC date, so results don't depend on the device time zone.
 - `InsightsCalculator` (pure) → `InsightsReport`:
   - **Counters**: root minds, active days, words (reflections included), each with the delta.
@@ -23,8 +23,8 @@ Phase 3 of the main-emoji work; media counts come from the gallery index (`GALLE
   - **Rhythm**: the dominant top-level emotion per weekday and per part of the day (night < 6, morning < 12, afternoon < 18, evening), with mind ids for taps.
   - **Streak**: consecutive days with a root mind. It ends today, or yesterday while today is still empty, so a streak survives until today is over. Longest streak is over all time.
   - **Heatmap**: root minds per day. **Minds by hour**: 24 buckets.
-  - **On this day**: the same date in earlier years (29 Feb is skipped in other years).
-  - **Media**: library photos/videos in the period, minds with audio, minds with round video (newest 12 for the feed).
+  - **Back then** (`onThisDay`): `MemoryPoint` a week, a month, half a year, a year and two years ago; a date missing in a shorter month falls on its last day. Empty points are left out.
+  - **Media**: library photos/videos in the period, minds with audio, minds with round video; `voiceMindIds` holds the newest 12 minds with a voice note or round video for the "Voice and round videos" strip (audio as a mic circle in the mind's emotion color).
 
 ### 2. Settings
 - `InsightsSettings` on `KeklistSettings`: `widgetOrder` (Hive field 28), `hiddenWidgetIds` (29), `periodIndex` (30, default Month).
@@ -34,10 +34,10 @@ Phase 3 of the main-emoji work; media counts come from the gallery index (`GALLE
 - `InsightsWidgetId` — the 12 cards with category and default order. `ordered()` keeps the saved order, drops unknown ids and appends new cards.
 - `InsightsCard` — rounded `surfaceContainerHigh` card with a small colored category header, an optional period label and a chevron when tappable. `InsightsEmptyHint` is the compact one-line empty state every card falls back to.
 - Cards:
-  - `insights_summary_cards.dart`: counters, brightest segment.
+  - `insights_summary_cards.dart`: counters, brightest segment. Its label carries the year, and for a week the week number (`InsightsFormat.weekOfYear`: ISO 8601 for Monday weeks, otherwise week 1 holds January 1).
   - `insights_emotion_cards.dart`: distribution with drill-down, trend, pairs, rhythm.
   - `insights_activity_cards.dart`: streak, heatmap, time of day.
-  - `insights_memory_media_cards.dart`: on this day, media counters, round videos.
+  - `insights_memory_media_cards.dart`: back then, media counters, voice and round videos.
 - Charts are plain widgets (bars, stacked columns, grids). `fl_chart` and `syncfusion_flutter_charts` were removed.
 - Colors: top-level emotions take a fixed palette in `orderIndex` order; nested emotions inherit their root's color.
 - Taps open `DayStoriesScreen` with the matching minds (`showsDate: true` puts the date in the header); "open" in a story goes to the root mind's `MindInfoScreen`. Heatmap cells open that day; the streak card opens today.

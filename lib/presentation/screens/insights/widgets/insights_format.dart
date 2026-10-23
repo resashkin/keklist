@@ -1,8 +1,9 @@
 import 'package:intl/intl.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:material_ui/material_ui.dart' hide DateUtils;
 import 'package:keklist/domain/services/insights/insights_period.dart';
 import 'package:keklist/domain/services/insights/insights_report.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/helpers/date_utils.dart';
 
 abstract final class InsightsFormat {
   static String _locale(BuildContext context) => Localizations.localeOf(context).toString();
@@ -15,17 +16,34 @@ abstract final class InsightsFormat {
 
   static String signed(BuildContext context, int value) => value > 0 ? '+${number(context, value)}' : number(context, value);
 
-  /// "Tue, Oct 20" / "Oct 5 – 11" / "October" / "2025", by the period's segment size.
-  static String segment(BuildContext context, InsightsPeriodKind kind, DayRange range) {
+  /// "Tue, Oct 20, 2026" / "Week 42 · Oct 12 – Oct 18, 2026" / "October 2026" / "2025", by the segment size.
+  static String segment(BuildContext context, InsightsPeriodKind kind, DayRange range, {required int firstDayOfWeek}) {
     final String locale = _locale(context);
     final DateTime start = dateOf(range.start);
     return switch (kind) {
-      InsightsPeriodKind.week => DateFormat.MMMEd(locale).format(start),
+      InsightsPeriodKind.week => DateFormat.yMMMEd(locale).format(start),
       InsightsPeriodKind.month =>
-        '${DateFormat.MMMd(locale).format(start)} – ${DateFormat.MMMd(locale).format(dateOf(range.end - 1))}',
-      InsightsPeriodKind.year => DateFormat.LLLL(locale).format(start),
+        '${context.l10n.insightsWeekNumber('${weekOfYear(range.start, firstDayOfWeek)}')} · '
+            '${DateFormat.MMMd(locale).format(start)} – ${DateFormat.yMMMd(locale).format(dateOf(range.end - 1))}',
+      InsightsPeriodKind.year => DateFormat('LLLL y', locale).format(start),
       InsightsPeriodKind.allTime => DateFormat.y(locale).format(start),
     };
+  }
+
+  /// ISO 8601 weeks when weeks start on Monday; otherwise week 1 is the one with January 1.
+  static int weekOfYear(int dayIndex, int firstDayOfWeek) {
+    final int weekStart = InsightsPeriod.weekStart(dayIndex, firstDayOfWeek);
+    if (firstDayOfWeek == DateTime.monday) {
+      final DateTime thursday = dateOf(weekStart + 3);
+      final int january1 = DateUtils.getDayIndex(from: DateTime.utc(thursday.year, 1, 1));
+      return (weekStart + 3 - january1) ~/ 7 + 1;
+    }
+    final int year = dateOf(weekStart + 6).year;
+    final int firstWeek = InsightsPeriod.weekStart(
+      DateUtils.getDayIndex(from: DateTime.utc(year, 1, 1)),
+      firstDayOfWeek,
+    );
+    return (weekStart - firstWeek) ~/ 7 + 1;
   }
 
   /// Short axis label under a trend column.

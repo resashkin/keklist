@@ -38,7 +38,7 @@
     "insightsHeatmap": "アクティビティマップ",
     "insightsActivityTime": "時間帯",
     "insightsPeakHour": "{hour} 頃が最も活発",
-    "insightsOnThisDay": "この日",
+    "insightsOnThisDay": "あの頃",
     "insightsMediaCounters": "メディア",
     "insightsPhotos": "写真",
     "insightsVideos": "ビデオ",
@@ -47,8 +47,8 @@
     "insightsEmptyPeriod": "この期間のメモはまだありません",
     "insightsEmptyEmotions": "メモに感情を付けると表示されます",
     "insightsEmptyPairs": "メモに感情を2つ付けるとペアが表示されます",
-    "insightsEmptyOnThisDay": "過去のこの日の記録はまだありません",
-    "insightsEmptyRoundVideos": "この期間に丸いビデオはありません",
+    "insightsEmptyOnThisDay": "1週間前、1か月前、半年前、1年前の記録はまだありません",
+    "insightsEmptyRoundVideos": "この期間のボイスメモや丸い動画はありません",
     "insightsEmptyStreak": "今日メモを追加して連続記録を始めましょう",
     "insightsCustomize": "分析をカスタマイズ",
     "insightsCustomizeDescription": "カードのオン・オフを切り替え、ドラッグで並べ替え",
@@ -355,5 +355,12 @@
     "creatorEmotionsTitle": "感情",
     "creatorEmotionsAfterSave": "保存後に尋ねる",
     "creatorEmotionsButton": "キーボードの上のボタン",
-    "creatorEmotionsNever": "尋ねない"
+    "creatorEmotionsNever": "尋ねない",
+    "insightsWeekAgo": "1週間前",
+    "insightsMonthAgo": "1か月前",
+    "insightsHalfYearAgo": "半年前",
+    "insightsYearAgo": "1年前",
+    "insightsTwoYearsAgo": "2年前",
+    "insightsVoiceAndVideos": "ボイスと丸い動画",
+    "insightsWeekNumber": "第{number}週"
 }

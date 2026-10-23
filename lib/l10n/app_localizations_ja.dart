@@ -138,7 +138,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get insightsOnThisDay => 'この日';
+  String get insightsOnThisDay => 'あの頃';
 
   @override
   String get insightsMediaCounters => 'メディア';
@@ -165,10 +165,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get insightsEmptyPairs => 'メモに感情を2つ付けるとペアが表示されます';
 
   @override
-  String get insightsEmptyOnThisDay => '過去のこの日の記録はまだありません';
+  String get insightsEmptyOnThisDay => '1週間前、1か月前、半年前、1年前の記録はまだありません';
 
   @override
-  String get insightsEmptyRoundVideos => 'この期間に丸いビデオはありません';
+  String get insightsEmptyRoundVideos => 'この期間のボイスメモや丸い動画はありません';
 
   @override
   String get insightsEmptyStreak => '今日メモを追加して連続記録を始めましょう';
@@ -1117,4 +1117,27 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get creatorEmotionsNever => '尋ねない';
+
+  @override
+  String get insightsWeekAgo => '1週間前';
+
+  @override
+  String get insightsMonthAgo => '1か月前';
+
+  @override
+  String get insightsHalfYearAgo => '半年前';
+
+  @override
+  String get insightsYearAgo => '1年前';
+
+  @override
+  String get insightsTwoYearsAgo => '2年前';
+
+  @override
+  String get insightsVoiceAndVideos => 'ボイスと丸い動画';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return '第$number週';
+  }
 }

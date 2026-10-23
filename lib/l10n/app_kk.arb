@@ -38,7 +38,7 @@
     "insightsHeatmap": "Белсенділік картасы",
     "insightsActivityTime": "Тәулік уақыты",
     "insightsPeakHour": "Көбіне {hour} шамасында",
-    "insightsOnThisDay": "Осы күні",
+    "insightsOnThisDay": "Сол кезде",
     "insightsMediaCounters": "Медиа",
     "insightsPhotos": "Фото",
     "insightsVideos": "Бейне",
@@ -47,8 +47,8 @@
     "insightsEmptyPeriod": "Бұл кезеңде әзірге жазба жоқ",
     "insightsEmptyEmotions": "Мұны көру үшін жазбаларға эмоция белгілеңіз",
     "insightsEmptyPairs": "Жұптарды көру үшін жазбаға екі эмоция белгілеңіз",
-    "insightsEmptyOnThisDay": "Өткен жылдары бұл күні әзірге ештеңе жоқ",
-    "insightsEmptyRoundVideos": "Бұл кезеңде дөңгелек бейне жоқ",
+    "insightsEmptyOnThisDay": "Бір апта, ай, жарты жыл және бір жыл бұрын әзірге ештеңе жоқ",
+    "insightsEmptyRoundVideos": "Бұл кезеңде дауыстық жазбалар мен дөңгелек бейнелер жоқ",
     "insightsEmptyStreak": "Серияны бастау үшін бүгін жазба қосыңыз",
     "insightsCustomize": "Аналитиканы баптау",
     "insightsCustomizeDescription": "Карточкаларды қосыңыз не өшіріңіз, ретін сүйреп өзгертіңіз",
@@ -583,5 +583,12 @@
     "creatorEmotionsTitle": "Эмоциялар",
     "creatorEmotionsAfterSave": "Сақтағаннан кейін сұрау",
     "creatorEmotionsButton": "Пернетақта үстіндегі түйме",
-    "creatorEmotionsNever": "Сұрамау"
+    "creatorEmotionsNever": "Сұрамау",
+    "insightsWeekAgo": "Бір апта бұрын",
+    "insightsMonthAgo": "Бір ай бұрын",
+    "insightsHalfYearAgo": "Жарты жыл бұрын",
+    "insightsYearAgo": "Бір жыл бұрын",
+    "insightsTwoYearsAgo": "Екі жыл бұрын",
+    "insightsVoiceAndVideos": "Дауыс және дөңгелек бейнелер",
+    "insightsWeekNumber": "{number}-апта"
 }

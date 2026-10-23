@@ -138,7 +138,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get insightsOnThisDay => '历史上的今天';
+  String get insightsOnThisDay => '那时';
 
   @override
   String get insightsMediaCounters => '媒体';
@@ -165,10 +165,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsEmptyPairs => '为一条笔记标记两种情绪即可查看组合';
 
   @override
-  String get insightsEmptyOnThisDay => '往年的今天还没有记录';
+  String get insightsEmptyOnThisDay => '一周、一个月、半年和一年前还没有记录';
 
   @override
-  String get insightsEmptyRoundVideos => '此期间没有圆形视频';
+  String get insightsEmptyRoundVideos => '此期间没有语音或圆形视频';
 
   @override
   String get insightsEmptyStreak => '今天添加一条笔记开始连续记录';
@@ -1112,4 +1112,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get creatorEmotionsNever => '不询问';
+
+  @override
+  String get insightsWeekAgo => '一周前';
+
+  @override
+  String get insightsMonthAgo => '一个月前';
+
+  @override
+  String get insightsHalfYearAgo => '半年前';
+
+  @override
+  String get insightsYearAgo => '一年前';
+
+  @override
+  String get insightsTwoYearsAgo => '两年前';
+
+  @override
+  String get insightsVoiceAndVideos => '语音和圆形视频';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return '第$number周';
+  }
 }

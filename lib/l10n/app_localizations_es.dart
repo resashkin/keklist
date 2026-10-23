@@ -138,7 +138,7 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get insightsOnThisDay => 'Tal día como hoy';
+  String get insightsOnThisDay => 'En aquel entonces';
 
   @override
   String get insightsMediaCounters => 'Multimedia';
@@ -168,11 +168,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get insightsEmptyOnThisDay =>
-      'Aún no hay nada de este día en años anteriores';
+      'Aún no hay nada de hace una semana, un mes, medio año o un año';
 
   @override
   String get insightsEmptyRoundVideos =>
-      'No hay vídeos redondos en este periodo';
+      'No hay notas de voz ni videos redondos en este período';
 
   @override
   String get insightsEmptyStreak => 'Añade una nota hoy para empezar una racha';
@@ -1163,4 +1163,27 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get creatorEmotionsNever => 'No preguntar';
+
+  @override
+  String get insightsWeekAgo => 'Hace una semana';
+
+  @override
+  String get insightsMonthAgo => 'Hace un mes';
+
+  @override
+  String get insightsHalfYearAgo => 'Hace medio año';
+
+  @override
+  String get insightsYearAgo => 'Hace un año';
+
+  @override
+  String get insightsTwoYearsAgo => 'Hace dos años';
+
+  @override
+  String get insightsVoiceAndVideos => 'Voz y videos redondos';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return 'Semana $number';
+  }
 }

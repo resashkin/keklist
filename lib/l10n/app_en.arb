@@ -191,7 +191,7 @@
             }
         }
     },
-    "insightsOnThisDay": "On this day",
+    "insightsOnThisDay": "Back then",
     "@insightsOnThisDay": {
         "description": "Analytics screen"
     },
@@ -227,11 +227,11 @@
     "@insightsEmptyPairs": {
         "description": "Analytics screen"
     },
-    "insightsEmptyOnThisDay": "Nothing from this day in past years yet",
+    "insightsEmptyOnThisDay": "Nothing from a week, a month, half a year or a year ago yet",
     "@insightsEmptyOnThisDay": {
         "description": "Analytics screen"
     },
-    "insightsEmptyRoundVideos": "No round videos in this period",
+    "insightsEmptyRoundVideos": "No voice notes or round videos in this period",
     "@insightsEmptyRoundVideos": {
         "description": "Analytics screen"
     },
@@ -1457,5 +1457,38 @@
     "creatorEmotionsNever": "Don't ask",
     "@creatorEmotionsNever": {
         "description": "Mind creator tweak: don't ask for emotions"
+    },
+    "insightsWeekAgo": "A week ago",
+    "@insightsWeekAgo": {
+        "description": "Insights memories: a week ago"
+    },
+    "insightsMonthAgo": "A month ago",
+    "@insightsMonthAgo": {
+        "description": "Insights memories: a month ago"
+    },
+    "insightsHalfYearAgo": "Half a year ago",
+    "@insightsHalfYearAgo": {
+        "description": "Insights memories: half a year ago"
+    },
+    "insightsYearAgo": "A year ago",
+    "@insightsYearAgo": {
+        "description": "Insights memories: a year ago"
+    },
+    "insightsTwoYearsAgo": "Two years ago",
+    "@insightsTwoYearsAgo": {
+        "description": "Insights memories: two years ago"
+    },
+    "insightsVoiceAndVideos": "Voice and round videos",
+    "@insightsVoiceAndVideos": {
+        "description": "Insights card: voice notes and round videos"
+    },
+    "insightsWeekNumber": "Week {number}",
+    "@insightsWeekNumber": {
+        "description": "Insights brightest week: week number of the year",
+        "placeholders": {
+            "number": {
+                "type": "String"
+            }
+        }
     }
 }

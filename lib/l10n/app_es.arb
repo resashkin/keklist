@@ -38,7 +38,7 @@
     "insightsHeatmap": "Mapa de actividad",
     "insightsActivityTime": "Momento del día",
     "insightsPeakHour": "Más activo hacia las {hour}",
-    "insightsOnThisDay": "Tal día como hoy",
+    "insightsOnThisDay": "En aquel entonces",
     "insightsMediaCounters": "Multimedia",
     "insightsPhotos": "Fotos",
     "insightsVideos": "Vídeos",
@@ -47,8 +47,8 @@
     "insightsEmptyPeriod": "Aún no hay notas en este periodo",
     "insightsEmptyEmotions": "Etiqueta notas con emociones para ver esto",
     "insightsEmptyPairs": "Etiqueta una nota con dos emociones para ver pares",
-    "insightsEmptyOnThisDay": "Aún no hay nada de este día en años anteriores",
-    "insightsEmptyRoundVideos": "No hay vídeos redondos en este periodo",
+    "insightsEmptyOnThisDay": "Aún no hay nada de hace una semana, un mes, medio año o un año",
+    "insightsEmptyRoundVideos": "No hay notas de voz ni videos redondos en este período",
     "insightsEmptyStreak": "Añade una nota hoy para empezar una racha",
     "insightsCustomize": "Personalizar análisis",
     "insightsCustomizeDescription": "Activa o desactiva tarjetas y arrástralas para ordenarlas",
@@ -583,5 +583,12 @@
     "creatorEmotionsTitle": "Emociones",
     "creatorEmotionsAfterSave": "Preguntar al guardar",
     "creatorEmotionsButton": "Botón sobre el teclado",
-    "creatorEmotionsNever": "No preguntar"
+    "creatorEmotionsNever": "No preguntar",
+    "insightsWeekAgo": "Hace una semana",
+    "insightsMonthAgo": "Hace un mes",
+    "insightsHalfYearAgo": "Hace medio año",
+    "insightsYearAgo": "Hace un año",
+    "insightsTwoYearsAgo": "Hace dos años",
+    "insightsVoiceAndVideos": "Voz y videos redondos",
+    "insightsWeekNumber": "Semana {number}"
 }

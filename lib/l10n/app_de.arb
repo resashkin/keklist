@@ -38,7 +38,7 @@
     "insightsHeatmap": "Aktivitätskarte",
     "insightsActivityTime": "Tageszeit",
     "insightsPeakHour": "Am aktivsten gegen {hour}",
-    "insightsOnThisDay": "An diesem Tag",
+    "insightsOnThisDay": "Damals",
     "insightsMediaCounters": "Medien",
     "insightsPhotos": "Fotos",
     "insightsVideos": "Videos",
@@ -47,8 +47,8 @@
     "insightsEmptyPeriod": "Noch keine Notizen in diesem Zeitraum",
     "insightsEmptyEmotions": "Markiere Notizen mit Emotionen, um das zu sehen",
     "insightsEmptyPairs": "Markiere eine Notiz mit zwei Emotionen, um Paare zu sehen",
-    "insightsEmptyOnThisDay": "Noch nichts von diesem Tag aus früheren Jahren",
-    "insightsEmptyRoundVideos": "Keine Rundvideos in diesem Zeitraum",
+    "insightsEmptyOnThisDay": "Noch nichts von vor einer Woche, einem Monat, einem halben Jahr oder einem Jahr",
+    "insightsEmptyRoundVideos": "Keine Sprachnotizen oder runden Videos in diesem Zeitraum",
     "insightsEmptyStreak": "Füge heute eine Notiz hinzu, um eine Serie zu starten",
     "insightsCustomize": "Analysen anpassen",
     "insightsCustomizeDescription": "Karten ein- oder ausschalten und zum Sortieren ziehen",
@@ -355,5 +355,12 @@
     "creatorEmotionsTitle": "Emotionen",
     "creatorEmotionsAfterSave": "Nach dem Speichern fragen",
     "creatorEmotionsButton": "Taste über der Tastatur",
-    "creatorEmotionsNever": "Nicht fragen"
+    "creatorEmotionsNever": "Nicht fragen",
+    "insightsWeekAgo": "Vor einer Woche",
+    "insightsMonthAgo": "Vor einem Monat",
+    "insightsHalfYearAgo": "Vor einem halben Jahr",
+    "insightsYearAgo": "Vor einem Jahr",
+    "insightsTwoYearsAgo": "Vor zwei Jahren",
+    "insightsVoiceAndVideos": "Sprachnotizen und runde Videos",
+    "insightsWeekNumber": "Woche {number}"
 }

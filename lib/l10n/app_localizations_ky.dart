@@ -139,7 +139,7 @@ class AppLocalizationsKy extends AppLocalizations {
   }
 
   @override
-  String get insightsOnThisDay => 'Ушул күнү';
+  String get insightsOnThisDay => 'Ошол кезде';
 
   @override
   String get insightsMediaCounters => 'Медиа';
@@ -169,10 +169,11 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get insightsEmptyOnThisDay =>
-      'Мурунку жылдары бул күнү азырынча эч нерсе жок';
+      'Бир жума, ай, жарым жыл жана бир жыл мурун азырынча эч нерсе жок';
 
   @override
-  String get insightsEmptyRoundVideos => 'Бул мезгилде тегерек видео жок';
+  String get insightsEmptyRoundVideos =>
+      'Бул мезгилде үн жазуулар жана тегерек видеолор жок';
 
   @override
   String get insightsEmptyStreak => 'Серияны баштоо үчүн бүгүн жазуу кошуңуз';
@@ -1158,4 +1159,27 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get creatorEmotionsNever => 'Сурабоо';
+
+  @override
+  String get insightsWeekAgo => 'Бир жума мурун';
+
+  @override
+  String get insightsMonthAgo => 'Бир ай мурун';
+
+  @override
+  String get insightsHalfYearAgo => 'Жарым жыл мурун';
+
+  @override
+  String get insightsYearAgo => 'Бир жыл мурун';
+
+  @override
+  String get insightsTwoYearsAgo => 'Эки жыл мурун';
+
+  @override
+  String get insightsVoiceAndVideos => 'Үн жана тегерек видеолор';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return '$number-жума';
+  }
 }

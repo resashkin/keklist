@@ -38,7 +38,7 @@
     "insightsHeatmap": "Faollik xaritasi",
     "insightsActivityTime": "Kun vaqti",
     "insightsPeakHour": "Koʻpincha {hour} atrofida",
-    "insightsOnThisDay": "Shu kuni",
+    "insightsOnThisDay": "O‘sha paytda",
     "insightsMediaCounters": "Media",
     "insightsPhotos": "Rasmlar",
     "insightsVideos": "Videolar",
@@ -47,8 +47,8 @@
     "insightsEmptyPeriod": "Bu davrda hali yozuv yoʻq",
     "insightsEmptyEmotions": "Buni koʻrish uchun yozuvlarga hissiyot belgilang",
     "insightsEmptyPairs": "Juftlarni koʻrish uchun yozuvga ikki hissiyot belgilang",
-    "insightsEmptyOnThisDay": "Oʻtgan yillarda bu kunda hali hech narsa yoʻq",
-    "insightsEmptyRoundVideos": "Bu davrda dumaloq video yoʻq",
+    "insightsEmptyOnThisDay": "Bir hafta, oy, yarim yil va bir yil oldin hozircha hech narsa yo‘q",
+    "insightsEmptyRoundVideos": "Bu davrda ovozli yozuvlar va dumaloq videolar yo‘q",
     "insightsEmptyStreak": "Seriyani boshlash uchun bugun yozuv qoʻshing",
     "insightsCustomize": "Analitikani sozlash",
     "insightsCustomizeDescription": "Kartochkalarni yoqing yoki oʻchiring, tartibini sudrab oʻzgartiring",
@@ -583,5 +583,12 @@
     "creatorEmotionsTitle": "Hissiyotlar",
     "creatorEmotionsAfterSave": "Saqlagandan keyin so‘rash",
     "creatorEmotionsButton": "Klaviatura ustidagi tugma",
-    "creatorEmotionsNever": "So‘ramaslik"
+    "creatorEmotionsNever": "So‘ramaslik",
+    "insightsWeekAgo": "Bir hafta oldin",
+    "insightsMonthAgo": "Bir oy oldin",
+    "insightsHalfYearAgo": "Yarim yil oldin",
+    "insightsYearAgo": "Bir yil oldin",
+    "insightsTwoYearsAgo": "Ikki yil oldin",
+    "insightsVoiceAndVideos": "Ovoz va dumaloq videolar",
+    "insightsWeekNumber": "{number}-hafta"
 }
