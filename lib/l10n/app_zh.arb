@@ -224,8 +224,6 @@
     "newEmotion": "新建情绪",
     "editEmotion": "编辑情绪",
     "emotionNameHint": "名称",
-    "emotionPickHint": "点按标记",
-    "emotionDrillHint": "长按进入下级",
     "noEmotionsYet": "还没有情绪",
     "noArchivedEmotions": "没有已归档的情绪",
     "addEmotion": "添加情绪",

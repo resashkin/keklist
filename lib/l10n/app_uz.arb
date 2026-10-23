@@ -452,8 +452,6 @@
     "newEmotion": "Yangi hissiyot",
     "editEmotion": "Hissiyotni tahrirlash",
     "emotionNameHint": "Nomi",
-    "emotionPickHint": "Belgilash uchun bosing",
-    "emotionDrillHint": "chuqurlashish uchun bosib turing",
     "noEmotionsYet": "Hozircha hissiyotlar yo'q",
     "noArchivedEmotions": "Arxivlangan hissiyotlar yo'q",
     "addEmotion": "Hissiyot qo'shish",

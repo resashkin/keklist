@@ -452,8 +452,6 @@
     "newEmotion": "Nueva emoción",
     "editEmotion": "Editar emoción",
     "emotionNameHint": "Nombre",
-    "emotionPickHint": "Toca para etiquetar",
-    "emotionDrillHint": "mantén pulsado para profundizar",
     "noEmotionsYet": "Aún no hay emociones",
     "noArchivedEmotions": "No hay emociones archivadas",
     "addEmotion": "Añadir emoción",

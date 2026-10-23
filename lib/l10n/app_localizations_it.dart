@@ -750,12 +750,6 @@ class AppLocalizationsIt extends AppLocalizations {
       'Questa emozione è usata in alcune menti. Archiviala per mantenerla lì, o eliminala ovunque.';
 
   @override
-  String get emotionPickHint => 'Tocca per assegnare';
-
-  @override
-  String get emotionDrillHint => 'tieni premuto per approfondire';
-
-  @override
   String get noEmotionsYet => 'Ancora nessuna emozione';
 
   @override

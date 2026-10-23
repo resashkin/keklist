@@ -167,6 +167,20 @@ final class DayFeedAssetTile extends StatelessWidget {
             image: GalleryMedia.thumbnail(item.asset),
             fit: BoxFit.cover,
             gaplessPlayback: true,
+            // The tile keeps its place while the thumbnail loads, then fades it in.
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) => wasSynchronouslyLoaded
+                ? child
+                : Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      ColoredBox(color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.08)),
+                      AnimatedOpacity(
+                        opacity: frame == null ? 0.0 : 1.0,
+                        duration: const Duration(milliseconds: 200),
+                        child: child,
+                      ),
+                    ],
+                  ),
             errorBuilder: (context, _, _) => ColoredBox(color: Theme.of(context).cardColor),
           ),
           if (item.isVideo) Positioned(bottom: 4, right: 4, child: _VideoBadge(seconds: item.asset.duration)),

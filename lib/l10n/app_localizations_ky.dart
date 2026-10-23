@@ -749,12 +749,6 @@ class AppLocalizationsKy extends AppLocalizations {
       'Бул эмоция кээ бир майндтарда колдонулат. Аны ошол жерде сактоо үчүн архивдеңиз же бардык жерден өчүрүңүз.';
 
   @override
-  String get emotionPickHint => 'Белгилөө үчүн басыңыз';
-
-  @override
-  String get emotionDrillHint => 'тереңдөө үчүн кармап туруңуз';
-
-  @override
   String get noEmotionsYet => 'Азырынча эмоциялар жок';
 
   @override

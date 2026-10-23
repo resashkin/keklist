@@ -1497,18 +1497,6 @@ abstract class AppLocalizations {
   /// **'This emotion is used by some minds. Archive it to keep it there, or delete it everywhere.'**
   String get emotionInUseMessage;
 
-  /// Hint in the emotion marking sheet explaining tap vs long-press
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to tag'**
-  String get emotionPickHint;
-
-  /// No description provided for @emotionDrillHint.
-  ///
-  /// In en, this message translates to:
-  /// **'long-press to go deeper'**
-  String get emotionDrillHint;
-
   /// Empty state for the emotions list
   ///
   /// In en, this message translates to:
