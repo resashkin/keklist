@@ -581,5 +581,14 @@
     "insightsTwoYearsAgo": "Pre dve godine",
     "insightsVoiceAndVideos": "Glas i okrugli videi",
     "insightsWeekNumber": "Nedelja {number}",
-    "aiNoSessionsHint": "Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše zapise direktno na telefonu."
+    "aiNoSessionsHint": "Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše zapise direktno na telefonu.",
+    "showInGallery": "Prikaži u galeriji",
+    "tileEmojiMotion": "Kretanje emodžija",
+    "tileEmojiMotionDrift": "Plutanje",
+    "tileEmojiMotionFloat": "Njihanje",
+    "tileEmojiMotionStill": "Mirno",
+    "gridResizeAnimation": "Animacija štipanja",
+    "gridResizeFly": "Let",
+    "gridResizeZoom": "Zum",
+    "gridResizeCrossfade": "Pretapanje"
 }

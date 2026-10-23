@@ -1163,6 +1163,33 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get aiNoSessionsHint =>
       'Питајте о својој недељи, бризи или лепом дану: чет чита ваше записе директно на телефону.';
+
+  @override
+  String get showInGallery => 'Прикажи у галерији';
+
+  @override
+  String get tileEmojiMotion => 'Кретање емоџија';
+
+  @override
+  String get tileEmojiMotionDrift => 'Плутање';
+
+  @override
+  String get tileEmojiMotionFloat => 'Њихање';
+
+  @override
+  String get tileEmojiMotionStill => 'Мирно';
+
+  @override
+  String get gridResizeAnimation => 'Анимација штипања';
+
+  @override
+  String get gridResizeFly => 'Лет';
+
+  @override
+  String get gridResizeZoom => 'Зум';
+
+  @override
+  String get gridResizeCrossfade => 'Претапање';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2323,4 +2350,31 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get aiNoSessionsHint =>
       'Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše zapise direktno na telefonu.';
+
+  @override
+  String get showInGallery => 'Prikaži u galeriji';
+
+  @override
+  String get tileEmojiMotion => 'Kretanje emodžija';
+
+  @override
+  String get tileEmojiMotionDrift => 'Plutanje';
+
+  @override
+  String get tileEmojiMotionFloat => 'Njihanje';
+
+  @override
+  String get tileEmojiMotionStill => 'Mirno';
+
+  @override
+  String get gridResizeAnimation => 'Animacija štipanja';
+
+  @override
+  String get gridResizeFly => 'Let';
+
+  @override
+  String get gridResizeZoom => 'Zum';
+
+  @override
+  String get gridResizeCrossfade => 'Pretapanje';
 }

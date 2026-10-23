@@ -581,5 +581,14 @@
     "insightsTwoYearsAgo": "Ikki yil oldin",
     "insightsVoiceAndVideos": "Ovoz va dumaloq videolar",
     "insightsWeekNumber": "{number}-hafta",
-    "aiNoSessionsHint": "Haftangiz, tashvish yoki yaxshi kun haqida so‘rang: chat yozuvlaringizni telefonning o‘zida o‘qiydi."
+    "aiNoSessionsHint": "Haftangiz, tashvish yoki yaxshi kun haqida so‘rang: chat yozuvlaringizni telefonning o‘zida o‘qiydi.",
+    "showInGallery": "Galereyada ko‘rsatish",
+    "tileEmojiMotion": "Emoji harakati",
+    "tileEmojiMotionDrift": "Suzish",
+    "tileEmojiMotionFloat": "Tebranish",
+    "tileEmojiMotionStill": "Harakatsiz",
+    "gridResizeAnimation": "Chimdish animatsiyasi",
+    "gridResizeFly": "Uchish",
+    "gridResizeZoom": "Zum",
+    "gridResizeCrossfade": "Erish"
 }

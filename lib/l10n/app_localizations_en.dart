@@ -1160,4 +1160,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get aiNoSessionsHint =>
       'Ask about your week, a worry or a good day: the chat reads your records right on the phone.';
+
+  @override
+  String get showInGallery => 'Show in Gallery';
+
+  @override
+  String get tileEmojiMotion => 'Emoji motion';
+
+  @override
+  String get tileEmojiMotionDrift => 'Drift';
+
+  @override
+  String get tileEmojiMotionFloat => 'Float';
+
+  @override
+  String get tileEmojiMotionStill => 'Still';
+
+  @override
+  String get gridResizeAnimation => 'Pinch animation';
+
+  @override
+  String get gridResizeFly => 'Fly';
+
+  @override
+  String get gridResizeZoom => 'Zoom';
+
+  @override
+  String get gridResizeCrossfade => 'Fade';
 }

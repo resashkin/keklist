@@ -1123,4 +1123,31 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get aiNoSessionsHint =>
       '今週のこと、心配ごと、良かった日について聞いてみましょう。チャットはスマホの中で記録を読みます。';
+
+  @override
+  String get showInGallery => 'ギャラリーで表示';
+
+  @override
+  String get tileEmojiMotion => '絵文字の動き';
+
+  @override
+  String get tileEmojiMotionDrift => '漂流';
+
+  @override
+  String get tileEmojiMotionFloat => 'ゆらぎ';
+
+  @override
+  String get tileEmojiMotionStill => '静止';
+
+  @override
+  String get gridResizeAnimation => 'ピンチのアニメーション';
+
+  @override
+  String get gridResizeFly => '移動';
+
+  @override
+  String get gridResizeZoom => 'ズーム';
+
+  @override
+  String get gridResizeCrossfade => 'フェード';
 }

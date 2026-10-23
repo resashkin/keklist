@@ -581,5 +581,14 @@
     "insightsTwoYearsAgo": "Hace dos años",
     "insightsVoiceAndVideos": "Voz y videos redondos",
     "insightsWeekNumber": "Semana {number}",
-    "aiNoSessionsHint": "Pregunta por tu semana, una preocupación o un buen día: el chat lee tus notas en el propio teléfono."
+    "aiNoSessionsHint": "Pregunta por tu semana, una preocupación o un buen día: el chat lee tus notas en el propio teléfono.",
+    "showInGallery": "Mostrar en la galería",
+    "tileEmojiMotion": "Movimiento de emojis",
+    "tileEmojiMotionDrift": "Deriva",
+    "tileEmojiMotionFloat": "Flotar",
+    "tileEmojiMotionStill": "Quieto",
+    "gridResizeAnimation": "Animación al pellizcar",
+    "gridResizeFly": "Volar",
+    "gridResizeZoom": "Zoom",
+    "gridResizeCrossfade": "Fundido"
 }

@@ -121,6 +121,12 @@ final class SettingsUpdateStory extends SettingsEvent {
   const SettingsUpdateStory({required this.story});
 }
 
+final class SettingsUpdateTileMotion extends SettingsEvent {
+  final TileEmojiMotion? emojiMotion;
+  final GridResizeAnimation? resizeAnimation;
+  const SettingsUpdateTileMotion({this.emojiMotion, this.resizeAnimation});
+}
+
 final class SettingsUpdateMindEmotionsPrompt extends SettingsEvent {
   final MindEmotionsPrompt prompt;
   const SettingsUpdateMindEmotionsPrompt({required this.prompt});

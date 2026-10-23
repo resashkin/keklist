@@ -82,13 +82,19 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..avatarImagePath = fields[40] as String?
       ..mindEmotionsPromptIndex = fields[41] == null
           ? 0
-          : (fields[41] as num).toInt();
+          : (fields[41] as num).toInt()
+      ..tileEmojiMotionIndex = fields[42] == null
+          ? 0
+          : (fields[42] as num).toInt()
+      ..gridResizeAnimationIndex = fields[43] == null
+          ? 0
+          : (fields[43] as num).toInt();
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(34)
+      ..writeByte(36)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)
@@ -156,7 +162,11 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(40)
       ..write(obj.avatarImagePath)
       ..writeByte(41)
-      ..write(obj.mindEmotionsPromptIndex);
+      ..write(obj.mindEmotionsPromptIndex)
+      ..writeByte(42)
+      ..write(obj.tileEmojiMotionIndex)
+      ..writeByte(43)
+      ..write(obj.gridResizeAnimationIndex);
   }
 
   @override

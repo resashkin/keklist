@@ -32,6 +32,12 @@ abstract class SettingsRepository {
 /// How the mind creator asks for emotions; see `documentation/MIND_CREATOR_EMOTIONS.md`.
 enum MindEmotionsPrompt { afterSave, button, never }
 
+/// How the emojis of a mind tile move: a slow diagonal drift, a gentle sway in place, or not at all.
+enum TileEmojiMotion { drift, float, still }
+
+/// How a grid changes when a pinch changes its column count.
+enum GridResizeAnimation { fly, zoom, crossfade }
+
 final class DayFeedSettings {
   static const int minColumnCount = 2;
   static const int maxColumnCount = 7;
@@ -162,6 +168,8 @@ final class KeklistSettings {
   final Set<String> hiddenSettingsItemIds;
   final Set<String> shakeDiscoveredScreenIds;
   final MindEmotionsPrompt mindEmotionsPrompt;
+  final TileEmojiMotion tileEmojiMotion;
+  final GridResizeAnimation gridResizeAnimation;
 
   KeklistSettings({
     required this.previousAppVersion,
@@ -187,6 +195,8 @@ final class KeklistSettings {
     this.hiddenSettingsItemIds = const {},
     this.shakeDiscoveredScreenIds = const {},
     this.mindEmotionsPrompt = MindEmotionsPrompt.afterSave,
+    this.tileEmojiMotion = TileEmojiMotion.drift,
+    this.gridResizeAnimation = GridResizeAnimation.fly,
   });
 
   KeklistSettings copyWith({
@@ -213,6 +223,8 @@ final class KeklistSettings {
     Set<String>? hiddenSettingsItemIds,
     Set<String>? shakeDiscoveredScreenIds,
     MindEmotionsPrompt? mindEmotionsPrompt,
+    TileEmojiMotion? tileEmojiMotion,
+    GridResizeAnimation? gridResizeAnimation,
   }) {
     return KeklistSettings(
       previousAppVersion: previousAppVersion ?? this.previousAppVersion,
@@ -238,6 +250,8 @@ final class KeklistSettings {
       hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
       shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
       mindEmotionsPrompt: mindEmotionsPrompt ?? this.mindEmotionsPrompt,
+      tileEmojiMotion: tileEmojiMotion ?? this.tileEmojiMotion,
+      gridResizeAnimation: gridResizeAnimation ?? this.gridResizeAnimation,
     );
   }
 
@@ -274,6 +288,8 @@ final class KeklistSettings {
     ..avatarEmoji = avatar.emoji
     ..avatarImagePath = avatar.imagePath
     ..mindEmotionsPromptIndex = mindEmotionsPrompt.index
+    ..tileEmojiMotionIndex = tileEmojiMotion.index
+    ..gridResizeAnimationIndex = gridResizeAnimation.index
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 

@@ -1165,4 +1165,31 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get aiNoSessionsHint =>
       'Аптаңыз, мазасыздық не жақсы күн туралы сұраңыз: чат жазбаларыңызды телефонның өзінде оқиды.';
+
+  @override
+  String get showInGallery => 'Галереяда көрсету';
+
+  @override
+  String get tileEmojiMotion => 'Эмодзи қозғалысы';
+
+  @override
+  String get tileEmojiMotionDrift => 'Дрейф';
+
+  @override
+  String get tileEmojiMotionFloat => 'Тербелу';
+
+  @override
+  String get tileEmojiMotionStill => 'Қозғалыссыз';
+
+  @override
+  String get gridResizeAnimation => 'Шымшу анимациясы';
+
+  @override
+  String get gridResizeFly => 'Ұшу';
+
+  @override
+  String get gridResizeZoom => 'Зум';
+
+  @override
+  String get gridResizeCrossfade => 'Еру';
 }

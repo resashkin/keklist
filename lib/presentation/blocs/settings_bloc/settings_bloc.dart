@@ -46,6 +46,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateCalendar>(_updateCalendar);
     on<SettingsUpdateStory>(_updateStory);
     on<SettingsUpdateMindEmotionsPrompt>(_updateMindEmotionsPrompt);
+    on<SettingsUpdateTileMotion>(_updateTileMotion);
 
     _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
   }
@@ -240,6 +241,15 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _updateCalendar(SettingsUpdateCalendar event, Emitter<SettingsState> emit) async {
     await _repository.updateSettings(_repository.value.copyWith(calendar: event.calendar));
+  }
+
+  FutureOr<void> _updateTileMotion(SettingsUpdateTileMotion event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(
+      _repository.value.copyWith(
+        tileEmojiMotion: event.emojiMotion,
+        gridResizeAnimation: event.resizeAnimation,
+      ),
+    );
   }
 
   FutureOr<void> _updateMindEmotionsPrompt(SettingsUpdateMindEmotionsPrompt event, Emitter<SettingsState> emit) async {

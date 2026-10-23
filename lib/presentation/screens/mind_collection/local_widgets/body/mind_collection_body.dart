@@ -32,7 +32,8 @@ final class _MindCollectionBody extends StatelessWidget {
     return PinchColumnsDetector(
       columnCount: settings.columnCount,
       onChanged: onColumnCountChanged,
-      child: ScrollablePositionedList.builder(
+      builder: (_, isPinching) => ScrollablePositionedList.builder(
+          physics: isPinching ? const NeverScrollableScrollPhysics() : null,
         padding: EdgeInsets.only(
           top: MediaQuery.paddingOf(context).top + 8.0,
           bottom: MediaQuery.paddingOf(context).bottom + 96.0,

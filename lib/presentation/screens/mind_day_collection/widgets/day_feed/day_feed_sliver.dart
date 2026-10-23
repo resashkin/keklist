@@ -1,10 +1,12 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/widgets/resizable_tile_grid.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_cubit.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_empty_state.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tile_menu.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tiles.dart';
 
 const double _kCellSpacing = DayFeedLayout.cellSpacing;
@@ -40,10 +42,6 @@ final class DayFeedSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<_DayFeedCell> cells = _buildCells();
-    final List<List<int>> rows = DayFeedLayout.packIntoRows(
-      spans: cells.map(_spanOf).toList(),
-      columnCount: settings.columnCount,
-    );
     final DayFeedMediaIssue? mediaIssue = state.mediaIssue;
     final bool isEmpty = state.items.isEmpty && !state.isMediaLoading;
 
@@ -55,22 +53,22 @@ final class DayFeedSliver extends StatelessWidget {
             SliverToBoxAdapter(
               child: _MediaIssueBanner(issue: mediaIssue, onResolve: () => onResolveMediaIssue(mediaIssue)),
             ),
-          SliverLayoutBuilder(
-            builder: (context, constraints) {
-              final double cellSize = _cellSize(constraints.crossAxisExtent);
-              return SliverList.builder(
-                itemCount: rows.length,
-                itemBuilder: (context, rowIndex) => Padding(
-                  padding: const EdgeInsets.only(bottom: _kCellSpacing),
-                  child: Row(
-                    spacing: _kCellSpacing,
-                    children: rows[rowIndex]
-                        .map((cellIndex) => _buildCell(cells[cellIndex], cellSize))
-                        .toList(),
+          SliverToBoxAdapter(
+            child: ResizableTileGrid(
+              columnCount: settings.columnCount,
+              spacing: _kCellSpacing,
+              cells: [
+                for (final (int index, _DayFeedCell cell) in cells.indexed)
+                  (
+                    key: switch (cell) {
+                      _ItemCell(:final itemIndex) => ValueKey(state.items[itemIndex].id),
+                      _SkeletonCell() => ValueKey('skeleton-$index'),
+                    },
+                    span: _spanOf(cell),
+                    builder: (cellSize) => _buildCellContent(cell, cellSize),
                   ),
-                ),
-              );
-            },
+              ],
+            ),
           ),
           if (isEmpty)
             const SliverToBoxAdapter(child: DayEmptyState()),
@@ -90,23 +88,19 @@ final class DayFeedSliver extends StatelessWidget {
         _ => 1,
       };
 
-  double _cellSize(double rowWidth) =>
-      (rowWidth - _kCellSpacing * (settings.columnCount - 1)) / settings.columnCount;
 
-  Widget _buildCell(_DayFeedCell cell, double cellSize) {
-    final int span = _spanOf(cell);
-    final double width = cellSize * span + _kCellSpacing * (span - 1);
-    return SizedBox(width: width, height: cellSize, child: _buildCellContent(cell, cellSize));
-  }
 
   Widget _buildCellContent(_DayFeedCell cell, double cellSize) => switch (cell) {
         _SkeletonCell() => const DayFeedSkeletonTile(),
-        _ItemCell(:final itemIndex) => GestureDetector(
-            onTap: () => onOpenItem(itemIndex),
-            child: DayFeedItemTile(
-              item: state.items[itemIndex],
-              isMindTextVisible: settings.isMindTextVisible,
-              size: cellSize,
+        _ItemCell(:final itemIndex) => DayFeedTileMenu(
+            item: state.items[itemIndex],
+            child: GestureDetector(
+              onTap: () => onOpenItem(itemIndex),
+              child: DayFeedItemTile(
+                item: state.items[itemIndex],
+                isMindTextVisible: settings.isMindTextVisible,
+                size: cellSize,
+              ),
             ),
           ),
       };
