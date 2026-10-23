@@ -786,12 +786,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dayFeedChooseFolder => 'Выбрать';
 
   @override
-  String get dayFeedMute => 'Выключить звук';
-
-  @override
-  String get dayFeedUnmute => 'Включить звук';
-
-  @override
   String get holdToRecordAudio => 'Удерживайте, чтобы записать голосовое';
 
   @override

@@ -1569,18 +1569,6 @@ abstract class AppLocalizations {
   /// **'Choose'**
   String get dayFeedChooseFolder;
 
-  /// Unified day grid (All mode) label
-  ///
-  /// In en, this message translates to:
-  /// **'Mute'**
-  String get dayFeedMute;
-
-  /// Unified day grid (All mode) label
-  ///
-  /// In en, this message translates to:
-  /// **'Unmute'**
-  String get dayFeedUnmute;
-
   /// Audio/video mind recording
   ///
   /// In en, this message translates to:

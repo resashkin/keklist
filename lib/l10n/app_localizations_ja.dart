@@ -760,12 +760,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dayFeedChooseFolder => '選択';
 
   @override
-  String get dayFeedMute => 'ミュート';
-
-  @override
-  String get dayFeedUnmute => 'ミュート解除';
-
-  @override
   String get holdToRecordAudio => '長押しで音声メッセージを録音';
 
   @override

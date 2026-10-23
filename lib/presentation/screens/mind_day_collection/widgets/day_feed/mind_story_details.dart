@@ -67,8 +67,8 @@ final class StoryDateHeader extends StatelessWidget {
   }
 }
 
-/// Everything about a mind in a story or the viewer, content first: its circle (video or audio), the text,
-/// the emotions pill and the comments. The viewer passes the edit callbacks; stories leave them null.
+/// Everything about a mind in a story, content first: its circle (video or audio), the text and the comments.
+/// Its emotions are the texture behind it.
 final class MindStoryDetails extends StatelessWidget {
   final Mind mind;
 
@@ -76,7 +76,6 @@ final class MindStoryDetails extends StatelessWidget {
   final Widget? media;
 
   final VoidCallback? onTapText;
-  final VoidCallback? onEditEmotions;
   final ValueChanged<Mind>? onTapReflection;
   final ValueChanged<Mind>? onLongPressReflection;
 
@@ -85,7 +84,6 @@ final class MindStoryDetails extends StatelessWidget {
     required this.mind,
     this.media,
     this.onTapText,
-    this.onEditEmotions,
     this.onTapReflection,
     this.onLongPressReflection,
   });
@@ -104,7 +102,6 @@ final class MindStoryDetails extends StatelessWidget {
             onTap: onTapText,
             child: Text(text, textAlign: TextAlign.center, style: mindStoryTextStyle(foreground)),
           ),
-        MindEmotionsPill(mind: mind, onTap: onEditEmotions),
         MindReflectionsList(mind: mind, onTap: onTapReflection, onLongPress: onLongPressReflection),
       ],
     );
@@ -112,58 +109,6 @@ final class MindStoryDetails extends StatelessWidget {
 }
 
 TextStyle mindStoryTextStyle(Color foreground) => TextStyle(color: foreground, fontSize: 20.0, height: 1.3);
-
-/// The mind's emotions as a row of emojis in one pill; with [onTap] it opens the emotion picker and
-/// a pale "☺ +" stands in when there are none.
-final class MindEmotionsPill extends StatelessWidget {
-  final Mind mind;
-  final VoidCallback? onTap;
-
-  const MindEmotionsPill({super.key, required this.mind, this.onTap});
-
-  static const double _emojiSize = 24.0;
-
-  @override
-  Widget build(BuildContext context) {
-    final Color foreground = storyColorsOf(context).foreground;
-    final Color background = storyColorsOf(context).background;
-    return BlocBuilder<EmotionBloc, EmotionState>(
-      builder: (context, state) {
-        final List<Emotion> emotions = state is EmotionsList
-            ? mind.emotionIds.map(state.byId).whereType<Emotion>().toList()
-            : const [];
-        if (emotions.isEmpty && onTap == null) return const SizedBox.shrink();
-        return GestureDetector(
-          onTap: onTap,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-            decoration: ShapeDecoration(
-              shape: const StadiumBorder(),
-              color: Color.alphaBlend(foreground.withValues(alpha: emotions.isEmpty ? 0.05 : 0.1), background),
-            ),
-            child: emotions.isEmpty
-                ? Row(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 4.0,
-                    children: [
-                      Icon(Icons.sentiment_satisfied_alt_outlined, size: 22.0, color: foreground.withValues(alpha: 0.4)),
-                      Icon(Icons.add_rounded, size: 18.0, color: foreground.withValues(alpha: 0.4)),
-                    ],
-                  )
-                : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 2.0,
-                    children: [
-                      for (final Emotion emotion in emotions)
-                        Text(emotion.emoji, style: const TextStyle(fontSize: _emojiSize, height: 1.15)),
-                    ],
-                  ),
-          ),
-        );
-      },
-    );
-  }
-}
 
 /// "😄 Joy › Delight" for every emotion of a comment.
 final class MindEmotionChips extends StatelessWidget {

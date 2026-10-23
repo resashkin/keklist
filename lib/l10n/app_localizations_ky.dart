@@ -788,12 +788,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get dayFeedChooseFolder => 'Тандоо';
 
   @override
-  String get dayFeedMute => 'Үнүн өчүрүү';
-
-  @override
-  String get dayFeedUnmute => 'Үнүн күйгүзүү';
-
-  @override
   String get holdToRecordAudio => 'Үн билдирүү жазуу үчүн басып туруңуз';
 
   @override

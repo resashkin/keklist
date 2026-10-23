@@ -789,12 +789,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get dayFeedChooseFolder => 'Tanlash';
 
   @override
-  String get dayFeedMute => 'Ovozni o‘chirish';
-
-  @override
-  String get dayFeedUnmute => 'Ovozni yoqish';
-
-  @override
   String get holdToRecordAudio => 'Ovozli xabar yozish uchun bosib turing';
 
   @override

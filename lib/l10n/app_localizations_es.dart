@@ -790,12 +790,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dayFeedChooseFolder => 'Elegir';
 
   @override
-  String get dayFeedMute => 'Silenciar';
-
-  @override
-  String get dayFeedUnmute => 'Activar sonido';
-
-  @override
   String get holdToRecordAudio =>
       'Mantén pulsado para grabar un mensaje de voz';
 

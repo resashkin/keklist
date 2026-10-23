@@ -241,8 +241,6 @@
     "dayFeedAllowAccess": "Erlauben",
     "dayFeedFolderHint": "Wähle einen Medienordner, um hier deine Fotos und Videos zu sehen",
     "dayFeedChooseFolder": "Wählen",
-    "dayFeedMute": "Stummschalten",
-    "dayFeedUnmute": "Ton an",
     "holdToRecordAudio": "Gedrückt halten für eine Sprachnachricht",
     "holdToRecordVideo": "Gedrückt halten für eine Videonachricht",
     "roundVideoRecordError": "Video konnte nicht aufgenommen werden",

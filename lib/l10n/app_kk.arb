@@ -466,8 +466,6 @@
     "dayFeedAllowAccess": "Рұқсат ету",
     "dayFeedFolderHint": "Мұнда фото мен видеоны көру үшін медиа қалтасын таңдаңыз",
     "dayFeedChooseFolder": "Таңдау",
-    "dayFeedMute": "Дыбысты өшіру",
-    "dayFeedUnmute": "Дыбысты қосу",
     "holdToRecordAudio": "Дауыстық хабар жазу үшін басып тұрыңыз",
     "holdToRecordVideo": "Бейнехабар жазу үшін басып тұрыңыз",
     "roundVideoRecordError": "Бейнені жазу мүмкін болмады",

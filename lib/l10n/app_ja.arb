@@ -241,8 +241,6 @@
     "dayFeedAllowAccess": "許可",
     "dayFeedFolderHint": "ここに写真と動画を表示するにはメディアフォルダを選択してください",
     "dayFeedChooseFolder": "選択",
-    "dayFeedMute": "ミュート",
-    "dayFeedUnmute": "ミュート解除",
     "holdToRecordAudio": "長押しで音声メッセージを録音",
     "holdToRecordVideo": "長押しでビデオメッセージを録画",
     "roundVideoRecordError": "ビデオを録画できませんでした",
