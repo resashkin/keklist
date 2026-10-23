@@ -24,12 +24,7 @@ final class _AiHfSearchScreenState extends State<AiHfSearchScreen> {
   static const double _maxWidth = 700.0;
 
   /// "35B-A3B" also matches "3B": the largest size named in the repository decides.
-  static bool _fitsPhone(String repo) {
-    final Iterable<double> sizes = RegExp(
-      r'(?<![A-Za-z\d.])(\d+(?:\.\d+)?)[Bb](?![A-Za-z])',
-    ).allMatches(repo).map((match) => double.parse(match[1]!));
-    return sizes.isEmpty || sizes.reduce((a, b) => a > b ? a : b) <= 4;
-  }
+  static bool _fitsPhone(String repo) => (AiModelInfo.parameterBillions(repo) ?? 0) <= 4;
 
   final TextEditingController _query = TextEditingController();
   Timer? _debounce;
@@ -110,7 +105,7 @@ final class _AiHfSearchScreenState extends State<AiHfSearchScreen> {
             if (_error != null) Padding(padding: const EdgeInsets.all(16.0), child: Text(context.l10n.aiCatalogFailed)),
             for (final HfRepoInfo repo in _repos)
               ListTile(
-                title: Text(repo.id, maxLines: 2, overflow: TextOverflow.ellipsis),
+                title: AiNameWithBadges(name: repo.id, maxLines: 2, isWeak: AiModelInfo.isWeakName(repo.id)),
                 subtitle: Text('↓ ${AiFormat.count(repo.downloads)} · ♥ ${AiFormat.count(repo.likes)}'),
                 trailing: const Icon(Icons.chevron_right_rounded),
                 onTap: () => _HfFilesSheet.show(context, repo: repo.id),

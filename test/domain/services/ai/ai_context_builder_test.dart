@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:keklist/domain/services/ai/ai_context_builder.dart';
-import 'package:keklist/domain/services/ai/ai_entities.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 
@@ -27,11 +26,10 @@ void main() {
     creationDate: DateTime(2024),
   );
 
-  AiContextBuilder builder(List<Mind> minds, {Map<int, AiDaySummary> summaries = const {}, int budget = 6000}) =>
+  AiContextBuilder builder(List<Mind> minds, {int budget = 6000}) =>
       AiContextBuilder(
         minds: minds,
         emotions: {calm.id: calm},
-        summaries: summaries,
         todayIndex: today,
         budgetChars: budget,
       );
@@ -68,7 +66,6 @@ void main() {
         mind('d', today - 40, 'Lake', emotions: ['calm']),
       ],
       emotions: {calm.id: calm},
-      summaries: const {},
       todayIndex: today,
       recentDays: 1,
     ).build('When was I 😌? And yesterday?');
@@ -84,19 +81,12 @@ void main() {
     expect(block, contains('- 09:30 Main thought\n  - reflection: 09:30 Second look'));
   });
 
-  test('uses summaries for older days and respects the budget', () {
-    final AiContext context = builder(
-      [
-        mind('a', today, 'Today ' * 20),
-        mind('b', today - 5, 'Five days ago ' * 10),
-      ],
-      summaries: {
-        today - 5: AiDaySummary(dayIndex: today - 5, text: 'A quiet day.', sourceHash: '', createdAt: DateTime(2024)),
-      },
-      budget: 200,
-    ).build('hi');
+  test('respects the budget', () {
+    final AiContext context = builder([
+      mind('a', today, 'Today ' * 20),
+      mind('b', today - 1, 'Yesterday ' * 20),
+    ], budget: 200).build('hi');
     expect(context.dayIndexes, [today]);
-    expect(context.text, contains('A quiet day.'));
   });
 
   test('says when there are no records', () {

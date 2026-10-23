@@ -954,7 +954,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get webVersionPort => 'Порт';
 
   @override
-  String get aiTab => 'AI';
+  String get aiTab => 'Ћаскање';
 
   @override
   String get aiTabDescription =>
@@ -967,19 +967,6 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get aiDisclaimer =>
       'Ово није медицинска услуга. Ако сте у опасности, обратите се хитним службама.';
-
-  @override
-  String get aiDaySummaries => 'Сажеци дана';
-
-  @override
-  String get aiSummarize => 'Додирните за сажетак';
-
-  @override
-  String get aiSummaryOutdated =>
-      'Записи су промењени — додирните за ажурирање';
-
-  @override
-  String get aiRegenerate => 'Напиши поново';
 
   @override
   String get aiYesterday => 'Јуче';
@@ -1072,9 +1059,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get aiSearchModels => 'Претражи GGUF моделе';
 
   @override
-  String get aiFastest => 'Најбржи';
-
-  @override
   String get aiDownload => 'Преузми';
 
   @override
@@ -1151,6 +1135,19 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get aiDeleteRole => 'Обрисати улогу?';
+
+  @override
+  String get aiRecommended => 'Препоручено';
+
+  @override
+  String get aiLowQuality => 'Слаб квалитет';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Овај модел не стаје у меморију телефона. Изаберите мањи.';
+
+  @override
+  String get aiChooseAnotherModel => 'Изабери други модел';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2102,7 +2099,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get webVersionPort => 'Port';
 
   @override
-  String get aiTab => 'AI';
+  String get aiTab => 'Ćaskanje';
 
   @override
   String get aiTabDescription =>
@@ -2115,19 +2112,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get aiDisclaimer =>
       'Ovo nije medicinska usluga. Ako ste u opasnosti, obratite se hitnim službama.';
-
-  @override
-  String get aiDaySummaries => 'Sažeci dana';
-
-  @override
-  String get aiSummarize => 'Dodirnite za sažetak';
-
-  @override
-  String get aiSummaryOutdated =>
-      'Zapisi su promenjeni — dodirnite za ažuriranje';
-
-  @override
-  String get aiRegenerate => 'Napiši ponovo';
 
   @override
   String get aiYesterday => 'Juče';
@@ -2220,9 +2204,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get aiSearchModels => 'Pretraži GGUF modele';
 
   @override
-  String get aiFastest => 'Najbrži';
-
-  @override
   String get aiDownload => 'Preuzmi';
 
   @override
@@ -2299,4 +2280,17 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get aiDeleteRole => 'Obrisati ulogu?';
+
+  @override
+  String get aiRecommended => 'Preporučeno';
+
+  @override
+  String get aiLowQuality => 'Slab kvalitet';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Ovaj model ne staje u memoriju telefona. Izaberite manji.';
+
+  @override
+  String get aiChooseAnotherModel => 'Izaberi drugi model';
 }

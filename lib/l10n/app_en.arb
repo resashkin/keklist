@@ -1191,7 +1191,7 @@
     "webVersionPinHint": "4–8 digits",
     "webVersionRemovePin": "Remove PIN",
     "webVersionPort": "Port",
-    "aiTab": "AI",
+    "aiTab": "Chat",
     "@aiTab": {
         "description": "AI tab"
     },
@@ -1205,22 +1205,6 @@
     },
     "aiDisclaimer": "Not a medical service. If you are in danger, contact emergency services.",
     "@aiDisclaimer": {
-        "description": "AI tab"
-    },
-    "aiDaySummaries": "Day summaries",
-    "@aiDaySummaries": {
-        "description": "AI tab"
-    },
-    "aiSummarize": "Tap to summarize",
-    "@aiSummarize": {
-        "description": "AI tab"
-    },
-    "aiSummaryOutdated": "Records changed — tap to update",
-    "@aiSummaryOutdated": {
-        "description": "AI tab"
-    },
-    "aiRegenerate": "Write again",
-    "@aiRegenerate": {
         "description": "AI tab"
     },
     "aiYesterday": "Yesterday",
@@ -1339,10 +1323,6 @@
     "@aiSearchModels": {
         "description": "AI tab"
     },
-    "aiFastest": "Fastest",
-    "@aiFastest": {
-        "description": "AI tab"
-    },
     "aiDownload": "Download",
     "@aiDownload": {
         "description": "AI tab"
@@ -1449,5 +1429,21 @@
     "aiDeleteRole": "Delete the role?",
     "@aiDeleteRole": {
         "description": "AI tab"
+    },
+    "aiRecommended": "Recommended",
+    "@aiRecommended": {
+        "description": "AI models: badge on the recommended model"
+    },
+    "aiLowQuality": "Low quality",
+    "@aiLowQuality": {
+        "description": "AI models: badge on models under 1B parameters"
+    },
+    "aiModelDoesNotFit": "This model doesn't fit in your phone's memory. Choose a smaller one.",
+    "@aiModelDoesNotFit": {
+        "description": "AI chat: the model could not be loaded"
+    },
+    "aiChooseAnotherModel": "Choose another model",
+    "@aiChooseAnotherModel": {
+        "description": "AI chat: button that opens the models screen"
     }
 }

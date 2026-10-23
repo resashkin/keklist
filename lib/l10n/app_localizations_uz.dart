@@ -956,7 +956,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get webVersionPort => 'Port';
 
   @override
-  String get aiTab => 'AI';
+  String get aiTab => 'Chat';
 
   @override
   String get aiTabDescription =>
@@ -969,18 +969,6 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get aiDisclaimer =>
       'Bu tibbiy xizmat emas. Xavf ostida bo\'lsangiz, favqulodda xizmatlarga murojaat qiling.';
-
-  @override
-  String get aiDaySummaries => 'Kun xulosalari';
-
-  @override
-  String get aiSummarize => 'Xulosa qilish uchun bosing';
-
-  @override
-  String get aiSummaryOutdated => 'Yozuvlar o\'zgardi — yangilash uchun bosing';
-
-  @override
-  String get aiRegenerate => 'Qayta yozish';
 
   @override
   String get aiYesterday => 'Kecha';
@@ -1073,9 +1061,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get aiSearchModels => 'GGUF modellarini qidirish';
 
   @override
-  String get aiFastest => 'Eng tez';
-
-  @override
   String get aiDownload => 'Yuklab olish';
 
   @override
@@ -1153,4 +1138,17 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get aiDeleteRole => 'Rol o\'chirilsinmi?';
+
+  @override
+  String get aiRecommended => 'Tavsiya etiladi';
+
+  @override
+  String get aiLowQuality => 'Sifati past';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Bu model telefon xotirasiga sig‘maydi. Kichikroq modelni tanlang.';
+
+  @override
+  String get aiChooseAnotherModel => 'Boshqa model tanlash';
 }

@@ -954,7 +954,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get webVersionPort => 'Порт';
 
   @override
-  String get aiTab => 'AI';
+  String get aiTab => 'Чат';
 
   @override
   String get aiTabDescription =>
@@ -967,18 +967,6 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get aiDisclaimer =>
       'Бул медициналык кызмат эмес. Коркунучта болсоңуз, тез жардам кызматына кайрылыңыз.';
-
-  @override
-  String get aiDaySummaries => 'Күндүн жыйынтыктары';
-
-  @override
-  String get aiSummarize => 'Жыйынтык жасоо үчүн басыңыз';
-
-  @override
-  String get aiSummaryOutdated => 'Жазуулар өзгөрдү — жаңыртуу үчүн басыңыз';
-
-  @override
-  String get aiRegenerate => 'Кайра жазуу';
 
   @override
   String get aiYesterday => 'Кечээ';
@@ -1071,9 +1059,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get aiSearchModels => 'GGUF моделдерин издөө';
 
   @override
-  String get aiFastest => 'Эң тез';
-
-  @override
   String get aiDownload => 'Жүктөө';
 
   @override
@@ -1151,4 +1136,17 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get aiDeleteRole => 'Ролду өчүрөсүзбү?';
+
+  @override
+  String get aiRecommended => 'Сунушталат';
+
+  @override
+  String get aiLowQuality => 'Сапаты төмөн';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Бул модель телефондун эсине батпайт. Кичирээк моделди тандаңыз.';
+
+  @override
+  String get aiChooseAnotherModel => 'Башка модель тандоо';
 }

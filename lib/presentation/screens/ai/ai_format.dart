@@ -41,3 +41,33 @@ abstract final class AiFormat {
     },
   );
 }
+
+/// A model's name with small labels after it; weak models get a warning one.
+final class AiNameWithBadges extends StatelessWidget {
+  const AiNameWithBadges({super.key, required this.name, this.isWeak = false, this.badges = const [], this.maxLines = 1});
+
+  final String name;
+  final bool isWeak;
+  final List<String> badges;
+  final int maxLines;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colors = Theme.of(context).colorScheme;
+    Widget badge(String text, Color background, Color foreground) => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+      decoration: BoxDecoration(color: background, borderRadius: BorderRadius.circular(8.0)),
+      child: Text(text, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: foreground)),
+    );
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 4.0,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        Text(name, maxLines: maxLines, overflow: TextOverflow.ellipsis),
+        for (final String text in badges) badge(text, colors.primaryContainer, colors.onPrimaryContainer),
+        if (isWeak) badge(context.l10n.aiLowQuality, colors.errorContainer, colors.onErrorContainer),
+      ],
+    );
+  }
+}

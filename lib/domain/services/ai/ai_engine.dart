@@ -7,6 +7,16 @@ import 'package:llamadart/llamadart.dart';
 
 /// One model in memory at a time, one generation at a time. llamadart runs GGUF through llama.cpp and
 /// `.litertlm` through LiteRT-LM behind the same API; nothing here touches the network.
+/// The model file is fine but the phone can't load it, almost always for lack of memory.
+final class AiModelLoadException implements Exception {
+  const AiModelLoadException(this.model);
+
+  final AiModelInfo model;
+
+  @override
+  String toString() => 'AiModelLoadException: ${model.id}';
+}
+
 final class AiEngine {
   LlamaEngine? _engine;
   String? _loadedId;
@@ -22,12 +32,19 @@ final class AiEngine {
     _loadedId = null;
     final LlamaModel source = LlamaModel(ModelSource.path(path));
     try {
-      await engine.setModel(source, params: ModelParams(contextSize: model.contextSize));
-    } on LlamaUnsupportedException {
-      await engine.setModel(
-        source,
-        params: ModelParams(contextSize: model.contextSize, device: ComputeDevice.cpu),
-      );
+      try {
+        await engine.setModel(source, params: ModelParams(contextSize: model.contextSize));
+      } on LlamaUnsupportedException {
+        await engine.setModel(
+          source,
+          params: ModelParams(contextSize: model.contextSize, device: ComputeDevice.cpu),
+        );
+      }
+    } on LlamaModelFormatException {
+      rethrow;
+    } on LlamaException catch (error) {
+      debugPrint('AI engine: $error');
+      throw AiModelLoadException(model);
     }
     _loadedId = model.id;
   }

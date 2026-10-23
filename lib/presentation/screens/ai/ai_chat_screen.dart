@@ -7,6 +7,7 @@ import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
+import 'package:keklist/presentation/screens/ai/ai_models_screen.dart';
 import 'package:keklist/presentation/screens/ai/ai_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
@@ -101,10 +102,7 @@ final class _AiChatScreenState extends State<AiChatScreen> {
                     for (final AiMessage message in session.messages) _Bubble(message: message),
                     if (streaming != null) _StreamingBubble(text: streaming.text),
                     if (backend.lastError != null && streaming == null && lastReply == null)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(backend.lastError!, style: TextStyle(color: Theme.of(context).colorScheme.error)),
-                      ),
+                      _ErrorNote(error: backend.lastError!, canManage: backend.canManage),
                     if (lastReply != null && !isBusy)
                       _ReplyChips(
                         reply: lastReply,
@@ -157,6 +155,41 @@ final class _Bubble extends StatelessWidget {
             style: TextStyle(color: isUser ? colors.onPrimaryContainer : colors.onSurface, height: 1.35),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// A failed reply; a model that doesn't fit in memory gets a way to pick another one.
+final class _ErrorNote extends StatelessWidget {
+  const _ErrorNote({required this.error, required this.canManage});
+
+  final String error;
+  final bool canManage;
+
+  @override
+  Widget build(BuildContext context) {
+    final Color color = Theme.of(context).colorScheme.error;
+    if (error != AiBackend.modelDoesNotFit) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Text(error, style: TextStyle(color: color)),
+      );
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 8.0,
+        children: [
+          Text(context.l10n.aiModelDoesNotFit, style: TextStyle(color: color)),
+          if (canManage)
+            OutlinedButton.icon(
+              onPressed: () => AiModelsScreen.open(context),
+              icon: const Icon(Icons.memory_rounded, size: 18.0),
+              label: Text(context.l10n.aiChooseAnotherModel),
+            ),
+        ],
       ),
     );
   }

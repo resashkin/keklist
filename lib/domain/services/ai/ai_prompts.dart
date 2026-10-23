@@ -43,16 +43,6 @@ Rules:
   static String system({required AiPersona persona, required String language, required String context}) =>
       '${persona.prompt}\n\n${_rules.replaceAll('{language}', language)}\n\n$context';
 
-  /// Part of a summary's hash: bumping it rewrites summaries made with an older prompt.
-  static const int daySummaryVersion = 2;
-
-  /// Records first, then the task: small models follow an instruction that comes last.
-  static String daySummary({required String language, required String records}) =>
-      'Here are the user\'s diary records for one day:\n\n$records\n'
-      'Task: in $language, write 2 or 3 short sentences that summarize this day for the user, addressing them as '
-      '"you": what happened, how they felt, what stood out. Use only the records above. No advice, no list, '
-      'no questions.';
-
   /// Splits the reply from the suggestion line the rules ask for.
   static (String, List<String>) splitSuggestions(String reply) {
     final List<String> lines = reply.trimRight().split('\n');

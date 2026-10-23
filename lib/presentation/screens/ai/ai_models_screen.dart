@@ -71,7 +71,7 @@ final class _AiModelsScreenState extends State<AiModelsScreen> {
                       model.id == active?.id ? Icons.radio_button_checked : Icons.radio_button_unchecked,
                       color: model.id == active?.id ? Theme.of(context).colorScheme.primary : null,
                     ),
-                    title: Text(model.name),
+                    title: AiNameWithBadges(name: model.name, isWeak: model.isWeak),
                     subtitle: Text(_details(context, model)),
                     trailing: IconButton(
                       icon: const Icon(Icons.delete_outline_rounded),
@@ -178,12 +178,10 @@ final class _CatalogTile extends StatelessWidget {
     final bool isInstalled = store.isInstalled(model);
     final bool isDownloading = store.downloads.containsKey(model.id);
     return ListTile(
-      title: Row(
-        spacing: 8.0,
-        children: [
-          Flexible(child: Text(model.name, overflow: TextOverflow.ellipsis)),
-          if (isFastest) _Badge(text: context.l10n.aiFastest),
-        ],
+      title: AiNameWithBadges(
+        name: model.name,
+        isWeak: model.isWeak,
+        badges: [if (isFastest) context.l10n.aiRecommended],
       ),
       subtitle: Text(
         [
@@ -200,22 +198,6 @@ final class _CatalogTile extends StatelessWidget {
               icon: const Icon(Icons.download_rounded),
               onPressed: () => startAiDownload(context, store, model),
             ),
-    );
-  }
-}
-
-final class _Badge extends StatelessWidget {
-  const _Badge({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    final ColorScheme colors = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-      decoration: BoxDecoration(color: colors.primaryContainer, borderRadius: BorderRadius.circular(8.0)),
-      child: Text(text, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: colors.onPrimaryContainer)),
     );
   }
 }

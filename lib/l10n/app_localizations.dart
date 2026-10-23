@@ -1884,7 +1884,7 @@ abstract class AppLocalizations {
   /// AI tab
   ///
   /// In en, this message translates to:
-  /// **'AI'**
+  /// **'Chat'**
   String get aiTab;
 
   /// AI tab
@@ -1904,30 +1904,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not a medical service. If you are in danger, contact emergency services.'**
   String get aiDisclaimer;
-
-  /// AI tab
-  ///
-  /// In en, this message translates to:
-  /// **'Day summaries'**
-  String get aiDaySummaries;
-
-  /// AI tab
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to summarize'**
-  String get aiSummarize;
-
-  /// AI tab
-  ///
-  /// In en, this message translates to:
-  /// **'Records changed — tap to update'**
-  String get aiSummaryOutdated;
-
-  /// AI tab
-  ///
-  /// In en, this message translates to:
-  /// **'Write again'**
-  String get aiRegenerate;
 
   /// AI tab
   ///
@@ -2106,12 +2082,6 @@ abstract class AppLocalizations {
   /// AI tab
   ///
   /// In en, this message translates to:
-  /// **'Fastest'**
-  String get aiFastest;
-
-  /// AI tab
-  ///
-  /// In en, this message translates to:
   /// **'Download'**
   String get aiDownload;
 
@@ -2246,6 +2216,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete the role?'**
   String get aiDeleteRole;
+
+  /// AI models: badge on the recommended model
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get aiRecommended;
+
+  /// AI models: badge on models under 1B parameters
+  ///
+  /// In en, this message translates to:
+  /// **'Low quality'**
+  String get aiLowQuality;
+
+  /// AI chat: the model could not be loaded
+  ///
+  /// In en, this message translates to:
+  /// **'This model doesn\'t fit in your phone\'s memory. Choose a smaller one.'**
+  String get aiModelDoesNotFit;
+
+  /// AI chat: button that opens the models screen
+  ///
+  /// In en, this message translates to:
+  /// **'Choose another model'**
+  String get aiChooseAnotherModel;
 }
 
 class _AppLocalizationsDelegate

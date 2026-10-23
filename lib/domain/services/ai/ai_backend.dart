@@ -29,17 +29,12 @@ abstract class AiBackend extends ChangeNotifier {
 
   List<AiSession> get sessions;
   List<AiPersona> get personas;
-  Map<int, AiDaySummary> get summaries;
-
-  /// Days with records, newest first, that can get a summary.
-  List<int> get summaryDays;
-
-  /// Days whose records changed after their summary was written.
-  Set<int> get staleSummaryDays;
-
-  Set<int> get summarizingDays;
   AiStreamingReply? get streaming;
+
+  /// The last failure's text, or [modelDoesNotFit].
   String? get lastError;
+
+  static const String modelDoesNotFit = 'model-does-not-fit';
 
   AiSession? session(String id) => sessions.where((session) => session.id == id).firstOrNull;
 
@@ -53,10 +48,6 @@ abstract class AiBackend extends ChangeNotifier {
   Future<void> deleteSession(String id);
   Future<void> send(String sessionId, String text);
   void stop();
-  Future<void> summarizeDay(int dayIndex);
-
-  /// Lets summaries be written in the background while the tab is open and the phone charges.
-  void setAutoSummaries(bool enabled) {}
 
   Future<void> savePersona(AiPersona persona);
   Future<void> deletePersona(String id);
@@ -66,10 +57,6 @@ abstract class AiBackend extends ChangeNotifier {
     'modelName': modelName,
     'sessions': [for (final AiSession session in sessions) session.toJson()],
     'personas': [for (final AiPersona persona in personas) persona.toJson()],
-    'summaries': [for (final AiDaySummary summary in summaries.values) summary.toJson()],
-    'summaryDays': summaryDays,
-    'staleSummaryDays': staleSummaryDays.toList(),
-    'summarizingDays': summarizingDays.toList(),
     'streaming': streaming?.toJson(),
     'lastError': lastError,
   };

@@ -5,22 +5,20 @@ import 'package:keklist/domain/services/ai/ai_entities.dart';
 import 'package:keklist/domain/services/ai/ai_model_info.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// Sessions, own roles, day summaries and the downloaded models, as JSON in encrypted Hive boxes.
+/// Sessions, own roles and the downloaded models, as JSON in encrypted Hive boxes.
 /// None of it goes into the ZIP export.
 final class AiStorage {
   AiStorage({
     required Box<String> sessions,
     required Box<String> personas,
-    required Box<String> summaries,
     required Box<String> models,
   }) : _sessions = sessions,
        _personas = personas,
-       _summaries = summaries,
        _models = models;
 
   static const String sessionsBoxName = 'ai_sessions_box';
   static const String personasBoxName = 'ai_personas_box';
-  static const String summariesBoxName = 'ai_day_summaries_box';
+  static const String _retiredSummariesBoxName = 'ai_day_summaries_box';
   static const String modelsBoxName = 'ai_models_box';
 
   static const String _activeModelKey = '_active';
@@ -29,17 +27,19 @@ final class AiStorage {
 
   final Box<String> _sessions;
   final Box<String> _personas;
-  final Box<String> _summaries;
   final Box<String> _models;
 
-  static Future<AiStorage> open(HiveCipher cipher) async => AiStorage(
-    sessions: await Hive.openBox<String>(sessionsBoxName, encryptionCipher: cipher),
-    personas: await Hive.openBox<String>(personasBoxName, encryptionCipher: cipher),
-    summaries: await Hive.openBox<String>(summariesBoxName, encryptionCipher: cipher),
-    models: await Hive.openBox<String>(modelsBoxName, encryptionCipher: cipher),
-  );
+  static Future<AiStorage> open(HiveCipher cipher) async {
+    // Day summaries were dropped; their box from earlier builds is removed.
+    await Hive.deleteBoxFromDisk(_retiredSummariesBoxName);
+    return AiStorage(
+      sessions: await Hive.openBox<String>(sessionsBoxName, encryptionCipher: cipher),
+      personas: await Hive.openBox<String>(personasBoxName, encryptionCipher: cipher),
+      models: await Hive.openBox<String>(modelsBoxName, encryptionCipher: cipher),
+    );
+  }
 
-  Stream<void> get changes => MergeStream([_sessions.watch(), _personas.watch(), _summaries.watch()]);
+  Stream<void> get changes => MergeStream([_sessions.watch(), _personas.watch()]);
 
   List<AiSession> get sessions =>
       _sessions.values.map((value) => AiSession.fromJson(jsonDecode(value) as Map<String, dynamic>)).toList()
@@ -60,16 +60,6 @@ final class AiStorage {
   Future<void> putPersona(AiPersona persona) => _personas.put(persona.id, jsonEncode(persona.toJson()));
 
   Future<void> deletePersona(String id) => _personas.delete(id);
-
-  Map<int, AiDaySummary> get summaries => {
-    for (final String value in _summaries.values)
-      if (AiDaySummary.fromJson(jsonDecode(value) as Map<String, dynamic>) case final AiDaySummary summary)
-        summary.dayIndex: summary,
-  };
-
-  Future<void> putSummary(AiDaySummary summary) => _summaries.put('${summary.dayIndex}', jsonEncode(summary.toJson()));
-
-  Future<void> clearSummaries() => _summaries.clear();
 
   List<AiModelInfo> get installedModels => [
     for (final MapEntry<dynamic, String> entry in _models.toMap().entries)

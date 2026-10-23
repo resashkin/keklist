@@ -21,10 +21,6 @@ final class PhoneAiBackend extends AiBackend {
   String? _modelName;
   List<AiSession> _sessions = const [];
   List<AiPersona> _personas = const [];
-  Map<int, AiDaySummary> _summaries = const {};
-  List<int> _summaryDays = const [];
-  Set<int> _stale = const {};
-  Set<int> _summarizing = const {};
   AiStreamingReply? _streaming;
   String? _lastError;
 
@@ -39,18 +35,6 @@ final class PhoneAiBackend extends AiBackend {
 
   @override
   List<AiPersona> get personas => _personas;
-
-  @override
-  Map<int, AiDaySummary> get summaries => _summaries;
-
-  @override
-  List<int> get summaryDays => _summaryDays;
-
-  @override
-  Set<int> get staleSummaryDays => _stale;
-
-  @override
-  Set<int> get summarizingDays => _summarizing;
 
   @override
   AiStreamingReply? get streaming => _streaming;
@@ -69,14 +53,6 @@ final class PhoneAiBackend extends AiBackend {
       _personas = [
         for (final Object? item in json['personas'] as List<dynamic>) AiPersona.fromJson(item as Map<String, dynamic>),
       ];
-      _summaries = {
-        for (final Object? item in json['summaries'] as List<dynamic>)
-          if (AiDaySummary.fromJson(item as Map<String, dynamic>) case final AiDaySummary summary)
-            summary.dayIndex: summary,
-      };
-      _summaryDays = (json['summaryDays'] as List<dynamic>).cast<int>();
-      _stale = (json['staleSummaryDays'] as List<dynamic>).cast<int>().toSet();
-      _summarizing = (json['summarizingDays'] as List<dynamic>).cast<int>().toSet();
       _streaming = AiStreamingReply.fromJson(json['streaming']);
       _lastError = json['lastError'] as String?;
       notifyListeners();
@@ -114,13 +90,6 @@ final class PhoneAiBackend extends AiBackend {
 
   @override
   void stop() => _api.post('/api/ai/stop', const {}).ignore();
-
-  @override
-  Future<void> summarizeDay(int dayIndex) async {
-    _summarizing = {..._summarizing, dayIndex};
-    notifyListeners();
-    await _api.post('/api/ai/summarize', {'day': dayIndex});
-  }
 
   @override
   Future<void> savePersona(AiPersona persona) async {}

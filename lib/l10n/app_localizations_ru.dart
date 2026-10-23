@@ -956,7 +956,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get webVersionPort => 'Порт';
 
   @override
-  String get aiTab => 'AI';
+  String get aiTab => 'Чат';
 
   @override
   String get aiTabDescription =>
@@ -969,18 +969,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get aiDisclaimer =>
       'Это не медицинская помощь. Если вы в опасности, обратитесь в экстренные службы.';
-
-  @override
-  String get aiDaySummaries => 'Сводки дней';
-
-  @override
-  String get aiSummarize => 'Нажмите, чтобы составить сводку';
-
-  @override
-  String get aiSummaryOutdated => 'Записи изменились — нажмите, чтобы обновить';
-
-  @override
-  String get aiRegenerate => 'Написать заново';
 
   @override
   String get aiYesterday => 'Вчера';
@@ -1073,9 +1061,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get aiSearchModels => 'Поиск GGUF-моделей';
 
   @override
-  String get aiFastest => 'Быстрая';
-
-  @override
   String get aiDownload => 'Скачать';
 
   @override
@@ -1153,4 +1138,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get aiDeleteRole => 'Удалить роль?';
+
+  @override
+  String get aiRecommended => 'Рекомендуем';
+
+  @override
+  String get aiLowQuality => 'Слабое качество';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Эта модель не помещается в память телефона. Выберите модель поменьше.';
+
+  @override
+  String get aiChooseAnotherModel => 'Выбрать другую модель';
 }
