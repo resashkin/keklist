@@ -919,7 +919,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get webVersionPort => '端口';
 
   @override
-  String get aiTab => 'AI';
+  String get aiTab => '聊天';
 
   @override
   String get aiTabDescription => '与在手机上运行的 AI 聊聊你的记录';
@@ -929,18 +929,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aiDisclaimer => '这不是医疗服务。如果你处于危险中，请联系紧急服务。';
-
-  @override
-  String get aiDaySummaries => '每日总结';
-
-  @override
-  String get aiSummarize => '点按生成总结';
-
-  @override
-  String get aiSummaryOutdated => '记录已更改 — 点按更新';
-
-  @override
-  String get aiRegenerate => '重新生成';
 
   @override
   String get aiYesterday => '昨天';
@@ -1030,9 +1018,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiSearchModels => '搜索 GGUF 模型';
 
   @override
-  String get aiFastest => '最快';
-
-  @override
   String get aiDownload => '下载';
 
   @override
@@ -1106,4 +1091,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aiDeleteRole => '删除角色？';
+
+  @override
+  String get aiRecommended => '推荐';
+
+  @override
+  String get aiLowQuality => '质量较低';
+
+  @override
+  String get aiModelDoesNotFit => '此模型超出手机内存。请选择更小的模型。';
+
+  @override
+  String get aiChooseAnotherModel => '选择其他模型';
 }

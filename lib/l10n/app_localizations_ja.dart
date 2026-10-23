@@ -924,7 +924,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get webVersionPort => 'ポート';
 
   @override
-  String get aiTab => 'AI';
+  String get aiTab => 'チャット';
 
   @override
   String get aiTabDescription => 'スマホ上で動くAIと記録について話す';
@@ -934,18 +934,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get aiDisclaimer => '医療サービスではありません。危険な状況にある場合は緊急サービスに連絡してください。';
-
-  @override
-  String get aiDaySummaries => '日ごとのまとめ';
-
-  @override
-  String get aiSummarize => 'タップしてまとめる';
-
-  @override
-  String get aiSummaryOutdated => '記録が変わりました — タップして更新';
-
-  @override
-  String get aiRegenerate => '書き直す';
 
   @override
   String get aiYesterday => '昨日';
@@ -1035,9 +1023,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aiSearchModels => 'GGUFモデルを検索';
 
   @override
-  String get aiFastest => '最速';
-
-  @override
   String get aiDownload => 'ダウンロード';
 
   @override
@@ -1111,4 +1096,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get aiDeleteRole => '役割を削除しますか？';
+
+  @override
+  String get aiRecommended => 'おすすめ';
+
+  @override
+  String get aiLowQuality => '低品質';
+
+  @override
+  String get aiModelDoesNotFit => 'このモデルはスマートフォンのメモリに収まりません。もっと小さいモデルを選んでください。';
+
+  @override
+  String get aiChooseAnotherModel => '別のモデルを選ぶ';
 }

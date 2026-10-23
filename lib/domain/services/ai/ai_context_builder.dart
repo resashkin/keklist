@@ -1,4 +1,3 @@
-import 'package:keklist/domain/services/ai/ai_entities.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 
@@ -12,13 +11,12 @@ final class AiContext {
 }
 
 /// Picks the records a reply should see within a character budget: the latest days in full, the days that match
-/// the message by words, dates or emotions, then summaries of older days.
+/// the message by words, dates or emotions.
 /// See `documentation/AI_IMPLEMENTATION.md`.
 final class AiContextBuilder {
   const AiContextBuilder({
     required this.minds,
     required this.emotions,
-    required this.summaries,
     required this.todayIndex,
     this.budgetChars = 6000,
     this.recentDays = 3,
@@ -26,7 +24,6 @@ final class AiContextBuilder {
 
   final Iterable<Mind> minds;
   final Map<String, Emotion> emotions;
-  final Map<int, AiDaySummary> summaries;
   final int todayIndex;
   final int budgetChars;
   final int recentDays;
@@ -63,27 +60,12 @@ final class AiContextBuilder {
       quoted.add(day);
     }
 
-    final StringBuffer older = StringBuffer();
-    for (final int day in newestFirst) {
-      if (quoted.contains(day)) continue;
-      final AiDaySummary? summary = summaries[day];
-      if (summary == null) continue;
-      final String line = '- ${dateLabel(day)}: ${summary.text.trim()}\n';
-      if (full.length + older.length + line.length > budgetChars) break;
-      older.write(line);
-    }
-
     final StringBuffer text = StringBuffer()
       ..writeln('Today is ${dateLabel(todayIndex)}.')
       ..writeln(
         quoted.isEmpty ? 'The user has no diary records yet.' : "The user's diary records (time, emotions, text):",
       )
       ..write(full);
-    if (older.isNotEmpty) {
-      text
-        ..writeln('Summaries of earlier days:')
-        ..write(older);
-    }
     quoted.sort((a, b) => b.compareTo(a));
     return AiContext(text: text.toString().trimRight(), dayIndexes: quoted);
   }

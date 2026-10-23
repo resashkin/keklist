@@ -129,30 +129,3 @@ final class AiSession with EquatableMixin {
   @override
   List<Object?> get props => [id, personaId, title, createdAt, updatedAt, messages];
 }
-
-/// A short summary of one day's records; [sourceHash] tells when the records changed since.
-final class AiDaySummary with EquatableMixin {
-  const AiDaySummary({required this.dayIndex, required this.text, required this.sourceHash, required this.createdAt});
-
-  final int dayIndex;
-  final String text;
-  final String sourceHash;
-  final DateTime createdAt;
-
-  Map<String, dynamic> toJson() => {
-    'dayIndex': dayIndex,
-    'text': text,
-    'sourceHash': sourceHash,
-    'createdAt': createdAt.millisecondsSinceEpoch,
-  };
-
-  factory AiDaySummary.fromJson(Map<String, dynamic> json) => AiDaySummary(
-    dayIndex: (json['dayIndex'] as num).toInt(),
-    text: json['text'] as String? ?? '',
-    sourceHash: json['sourceHash'] as String? ?? '',
-    createdAt: DateTime.fromMillisecondsSinceEpoch((json['createdAt'] as num?)?.toInt() ?? 0),
-  );
-
-  @override
-  List<Object?> get props => [dayIndex, text, sourceHash, createdAt];
-}

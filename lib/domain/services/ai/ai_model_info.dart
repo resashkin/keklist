@@ -28,6 +28,19 @@ final class AiModelInfo with EquatableMixin {
 
   String get id => '$repo/$file';
 
+  /// Models below a billion parameters rarely keep up a conversation.
+  bool get isWeak => isWeakName('$name $repo $file');
+
+  /// The largest size like "1.5B" or "360M" named in [text], in billions.
+  static double? parameterBillions(String text) {
+    final Iterable<double> sizes = RegExp(r'(?<![A-Za-z\d.])(\d+(?:\.\d+)?)([BbMm])(?![A-Za-z])')
+        .allMatches(text)
+        .map((match) => double.parse(match[1]!) / (match[2]!.toUpperCase() == 'M' ? 1000 : 1));
+    return sizes.isEmpty ? null : sizes.reduce((a, b) => a > b ? a : b);
+  }
+
+  static bool isWeakName(String text) => (parameterBillions(text) ?? 1) < 1;
+
   Uri get url => Uri.https('huggingface.co', '/$repo/resolve/$revision/$file', {'download': 'true'});
 
   static AiModelFormat formatOf(String file) =>

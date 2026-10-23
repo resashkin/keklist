@@ -1,17 +1,16 @@
 # AI Implementation
 
 ## Overview
-The AI tab lets the user talk about their records with a language model that runs on the phone. It also writes short summaries of days. There is nothing online about the model: records, sessions and generation never leave the device. The network is used only to download models and the model lists.
+The Chat tab lets the user talk about their records with a language model that runs on the phone. There is nothing online about the model: records, sessions and generation never leave the device. The network is used only to download models and the model lists.
 
-- **Tab:** the AI tab sits before Settings. Existing users get it inserted there once.
-- **Top of the tab:** cards with day summaries.
-- **Below:** previous sessions. A tap opens the chat; a swipe deletes a session.
+- **Tab:** the Chat tab (`TabType.ai`) sits before Settings. Existing users get it inserted there once.
+- **Content:** previous sessions. A tap opens the chat; a swipe deletes a session.
 - **New session:** starts with a role, which stays for the whole session. The built-in roles are therapist (reflective, CBT/ACT style, never diagnoses), coach and friend; users can add their own roles.
 - **Chips** under the last reply:
   - 2–3 replies suggested by the model;
   - "Save as mind" (the reply goes to today);
   - "Open day" (the day the reply was based on);
-  - "Week summary".
+  - "Week summary", which sends a regular message asking for the last 7 days.
 - **Free:** the feature is not part of PRO.
 
 ## Implementation Details
@@ -21,15 +20,17 @@ The AI tab lets the user talk about their records with a language model that run
 - **Apple linking:** Apple builds link them through the SwiftPM companions `llamadart_llama_cpp_flutter` and `llamadart_litert_lm_flutter`, whose frameworks carry their privacy manifests.
 - **One at a time:** one model is in memory and one generation runs; requests queue. Cancelling a reply, whether running or still queued, frees the queue right away.
 - **Loading:** the model loads on first use. If the GPU path is unsupported, loading retries on the CPU. Thinking is off.
+- **Too large:** any other load failure (almost always memory) becomes `AiModelLoadException`; the chat shows `AiBackend.modelDoesNotFit` as a plain message with a button to the models screen.
 - **Platform requirements:**
   - iOS deployment target 16.4.
   - The Intel simulator is excluded in `ios/Flutter/{Debug,Release}.xcconfig`, because LiteRT-LM has no x86_64 simulator build.
 
 ### 2. Models
 - **Catalog** (`ai_catalog.dart`):
-  - **Google AI Edge Gallery:** the newest Android (`N_N_N.json`) and iOS (`ios_*.json`) lists from `google-ai-edge/gallery/model_allowlists`. They are merged, keeping `llm_chat` `.litertlm` models, sorted by size. The smallest is labelled "Fastest". New models appear when Google adds them to the list.
+  - **Google AI Edge Gallery:** the newest Android (`N_N_N.json`) and iOS (`ios_*.json`) lists from `google-ai-edge/gallery/model_allowlists`. They are merged, keeping `llm_chat` `.litertlm` models, sorted by size. The smallest is labelled "Recommended". New models appear when Google adds them to the list.
   - **Hugging Face GGUF search:** `gated=false`, sorted by downloads. With nothing typed, it shows popular repositories of 0.5–4B models.
   - **Repository files:** opening a repository lists its `.gguf` files without `mmproj`, pinned to the repository's revision. Only files up to 55% of the phone's memory are shown.
+  - **Weak models:** a name with fewer than 1B parameters (`AiModelInfo.parameterBillions`) gets a "Low quality" badge.
   - **Open models only:** gated repositories need a Hugging Face login, so they are left out. A Gallery entry is dropped when the phone has less memory than its `minDeviceMemoryInGb`.
 - **Device memory** (`device_memory.dart`): `sysctl hw.memsize` on iOS and `/proc/meminfo` on Android. The web version gets a stub.
 - **Downloads and storage** (`ai_model_store.dart`):
@@ -44,7 +45,6 @@ Encrypted Hive boxes (the app's AES cipher) hold JSON strings:
 |---|---|
 | `ai_sessions_box` | `AiSession` with its messages, suggestions and the days each reply used |
 | `ai_personas_box` | the user's own roles |
-| `ai_day_summaries_box` | `AiDaySummary` with a hash of the day's records |
 | `ai_models_box` | downloaded models, the active one, the last Gallery list |
 
 None of this goes into the ZIP export.
@@ -56,7 +56,6 @@ Every message gets, within about 6000 characters:
    - by words: word beginnings, so Russian endings still match;
    - by dates: "yesterday", "позавчера", `dd.mm`, "N days ago";
    - by emotions: an emoji or title.
-3. Summaries of other days, newest first, while the budget allows.
 
 History takes the last 12 messages, up to about 4000 characters.
 
@@ -72,9 +71,8 @@ History takes the last 12 messages, up to about 4000 characters.
 ### 6. Backends (`ai_backend.dart`)
 - `LocalAiBackend` (the phone):
   - runs the model;
-  - writes sessions and summaries;
+  - writes sessions;
   - streams the reply every 120 ms.
-- **Summaries:** a summary is written when its card is tapped. While the tab is open and the phone is charging (`battery_plus`), up to 7 missing or outdated summaries are written one by one per visit, and a chat message stops them. A summary is outdated when the hash of its day's records changes, or when `AiPrompts.daySummaryVersion` is bumped after a prompt change.
 - `PhoneAiBackend` (the web version served by the phone): models are managed on the phone. The browser calls these routes:
 
 | Route | Meaning |
@@ -84,7 +82,6 @@ History takes the last 12 messages, up to about 4000 characters.
 | `POST /api/ai/session/delete` `{id}` | delete a session |
 | `POST /api/ai/send` `{sessionId, text}` | the phone answers in the background |
 | `POST /api/ai/stop` | stop the reply |
-| `POST /api/ai/summarize` `{day}` | write a day's summary |
 | SSE `ai` | the state changed: reload |
 | SSE `ai-reply` | the reply being written, `{sessionId, text}` or `null` |
 
@@ -92,7 +89,6 @@ History takes the last 12 messages, up to about 4000 characters.
 - `ai_screen.dart`:
   - The tab itself.
   - On the first visit without a model, it opens the catalog once.
-  - It turns background summaries on while it is the selected tab.
 - `ai_chat_screen.dart`:
   - Bubbles, the streaming reply and chips.
   - Enter sends on a desktop, Shift+Enter makes a new line.
@@ -129,10 +125,10 @@ History takes the last 12 messages, up to about 4000 characters.
   1. Run on a simulator and open the AI tab.
   2. In the Hugging Face search, download Qwen2.5-0.5B-Instruct `q4_k_m` (469 MB).
   3. Start a Therapist session, send a message and check the streaming reply and chips.
-  4. Tap a day card and check its summary.
 
 ## Edge Cases & Considerations
 - **Simulator speed:** the simulator runs models on the CPU and is slow. Judge speed on a device.
+- **Day summaries (removed):** earlier builds kept them in `ai_day_summaries_box`; `AiStorage.open` deletes that box.
 - **Memory:** Gallery models need 6–12 GB of RAM per Google's list; 0.5–1.5B GGUF files fit older phones.
 - **Telegram web:** the Telegram web build has no AI tab.
 - **Deleting a model:** deleting or switching the active model unloads it from memory.

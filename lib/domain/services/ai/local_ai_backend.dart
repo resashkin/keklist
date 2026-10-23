@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:battery_plus/battery_plus.dart';
-import 'package:crypto/crypto.dart';
 import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/services/ai/ai_backend.dart';
@@ -14,7 +11,6 @@ import 'package:keklist/domain/services/ai/ai_model_store.dart';
 import 'package:keklist/domain/services/ai/ai_prompts.dart';
 import 'package:keklist/domain/services/ai/ai_storage.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
-import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:uuid/uuid.dart';
 
@@ -45,24 +41,15 @@ final class LocalAiBackend extends AiBackend {
   final AiEngine _engine;
   final List<StreamSubscription<Object?>> _subscriptions = [];
 
-  static const int _summaryDaysLimit = 30;
   static const int _historyChars = 4000;
   static const int _historyMessages = 12;
-  static const int _autoSummariesPerVisit = 7;
   static const Duration _streamThrottle = Duration(milliseconds: 120);
 
   String _language = 'English';
   Map<String, String> _builtInNames = const {};
   AiStreamingReply? _streaming;
   String? _lastError;
-  final Set<int> _summarizing = {};
   String? _loadedModelId;
-
-  bool _autoSummaries = false;
-  bool _isCharging = false;
-  int _autoSummariesLeft = 0;
-  StreamSubscription<String>? _backgroundSummary;
-  StreamSubscription<BatteryState>? _battery;
 
   @override
   bool get canManage => true;
@@ -84,36 +71,6 @@ final class LocalAiBackend extends AiBackend {
   ];
 
   @override
-  Map<int, AiDaySummary> get summaries => _storage.summaries;
-
-  Map<int, List<Mind>> get _mindsByDay {
-    final Map<int, List<Mind>> days = {};
-    final int today = DateUtils.getTodayIndex();
-    for (final Mind mind in _minds.values) {
-      if (mind.dayIndex > today || mind.plainNote.trim().isEmpty && mind.emotionIds.isEmpty) continue;
-      days.putIfAbsent(mind.dayIndex, () => []).add(mind);
-    }
-    return days;
-  }
-
-  @override
-  List<int> get summaryDays =>
-      (_mindsByDay.keys.toList()..sort((a, b) => b.compareTo(a))).take(_summaryDaysLimit).toList();
-
-  @override
-  Set<int> get staleSummaryDays {
-    final Map<int, List<Mind>> days = _mindsByDay;
-    final Map<int, AiDaySummary> stored = summaries;
-    return {
-      for (final int day in summaryDays)
-        if (stored[day] case final AiDaySummary summary when summary.sourceHash != _hashOf(day, days[day]!)) day,
-    };
-  }
-
-  @override
-  Set<int> get summarizingDays => Set.unmodifiable(_summarizing);
-
-  @override
   AiStreamingReply? get streaming => _streaming;
 
   @override
@@ -124,18 +81,8 @@ final class LocalAiBackend extends AiBackend {
   AiContextBuilder _builder() => AiContextBuilder(
     minds: _minds.values,
     emotions: _emotionsById,
-    summaries: summaries,
     todayIndex: DateUtils.getTodayIndex(),
   );
-
-  String _hashOf(int day, List<Mind> minds) => sha1
-      .convert(
-        utf8.encode(
-          '${AiPrompts.daySummaryVersion}\n'
-          '${_builder().dayBlock(day, [...minds]..sort((a, b) => a.sortIndex.compareTo(b.sortIndex)))}',
-        ),
-      )
-      .toString();
 
   void _modelsChanged() {
     final String? activeId = _models.active?.id;
@@ -178,7 +125,6 @@ final class LocalAiBackend extends AiBackend {
     final AiModelInfo? model = _models.active;
     final AiSession? stored = _storage.session(sessionId);
     if (model == null || stored == null || _streaming != null || text.trim().isEmpty) return;
-    await _stopBackgroundSummary();
     _lastError = null;
     final AiMessage question = AiMessage(role: AiRole.user, text: text.trim(), createdAt: DateTime.now());
     AiSession session = stored.copyWith(
@@ -208,6 +154,8 @@ final class LocalAiBackend extends AiBackend {
           notifyListeners();
         });
       }
+    } on AiModelLoadException {
+      _lastError = AiBackend.modelDoesNotFit;
     } on Object catch (error) {
       _lastError = error.toString();
     }
@@ -231,7 +179,6 @@ final class LocalAiBackend extends AiBackend {
     }
     _streaming = null;
     notifyListeners();
-    _continueAutoSummaries();
   }
 
   static String _titleOf(String text) {
@@ -258,119 +205,6 @@ final class LocalAiBackend extends AiBackend {
   void stop() => _engine.stop();
 
   @override
-  Future<void> summarizeDay(int dayIndex) async {
-    final AiModelInfo? model = _models.active;
-    final List<Mind>? minds = _mindsByDay[dayIndex];
-    if (model == null || minds == null || _summarizing.contains(dayIndex)) return;
-    _summarizing.add(dayIndex);
-    _lastError = null;
-    notifyListeners();
-    try {
-      final String text = await _summaryStream(model, dayIndex, minds).join();
-      final String summary = text.trim();
-      if (summary.isNotEmpty) {
-        await _storage.putSummary(
-          AiDaySummary(
-            dayIndex: dayIndex,
-            text: summary,
-            sourceHash: _hashOf(dayIndex, minds),
-            createdAt: DateTime.now(),
-          ),
-        );
-      }
-    } on Object catch (error) {
-      _lastError = error.toString();
-    }
-    _summarizing.remove(dayIndex);
-    notifyListeners();
-  }
-
-  Stream<String> _summaryStream(AiModelInfo model, int dayIndex, List<Mind> minds) {
-    return _engine.generate(
-      model: model,
-      path: _models.pathOf(model),
-      system: 'You write short, kind diary summaries.',
-      history: [
-        AiMessage(
-          role: AiRole.user,
-          text: AiPrompts.daySummary(
-            language: _language,
-            records: _builder().dayBlock(dayIndex, [...minds]..sort((a, b) => a.sortIndex.compareTo(b.sortIndex))),
-          ),
-          createdAt: DateTime.now(),
-        ),
-      ],
-      maxTokens: 200,
-    );
-  }
-
-  @override
-  void setAutoSummaries(bool enabled) {
-    if (_autoSummaries == enabled) return;
-    _autoSummaries = enabled;
-    if (!enabled) {
-      unawaited(_battery?.cancel());
-      _battery = null;
-      unawaited(_stopBackgroundSummary());
-      return;
-    }
-    _autoSummariesLeft = _autoSummariesPerVisit;
-    _battery = Battery().onBatteryStateChanged.listen((state) {
-      _isCharging = state == BatteryState.charging || state == BatteryState.full;
-      if (_isCharging) {
-        _continueAutoSummaries();
-      } else {
-        unawaited(_stopBackgroundSummary());
-      }
-    }, onError: (_) {});
-  }
-
-  /// One missing or outdated summary at a time, newest day first, while nothing else runs.
-  void _continueAutoSummaries() {
-    final AiModelInfo? model = _models.active;
-    if (!_autoSummaries || !_isCharging || model == null || _autoSummariesLeft <= 0) return;
-    if (_backgroundSummary != null || _streaming != null || _summarizing.isNotEmpty) return;
-    final Map<int, AiDaySummary> stored = summaries;
-    final Set<int> stale = staleSummaryDays;
-    final int? day = summaryDays.where((day) => !stored.containsKey(day) || stale.contains(day)).firstOrNull;
-    final List<Mind>? minds = day == null ? null : _mindsByDay[day];
-    if (day == null || minds == null) return;
-    _autoSummariesLeft--;
-    _summarizing.add(day);
-    notifyListeners();
-    final StringBuffer text = StringBuffer();
-    _backgroundSummary = _summaryStream(model, day, minds).listen(
-      text.write,
-      onError: (_) {},
-      onDone: () async {
-        _backgroundSummary = null;
-        if (text.toString().trim().isNotEmpty) {
-          await _storage.putSummary(
-            AiDaySummary(
-              dayIndex: day,
-              text: text.toString().trim(),
-              sourceHash: _hashOf(day, minds),
-              createdAt: DateTime.now(),
-            ),
-          );
-        }
-        _summarizing.remove(day);
-        notifyListeners();
-        _continueAutoSummaries();
-      },
-    );
-  }
-
-  Future<void> _stopBackgroundSummary() async {
-    final StreamSubscription<String>? summary = _backgroundSummary;
-    if (summary == null) return;
-    _backgroundSummary = null;
-    await summary.cancel();
-    _summarizing.clear();
-    notifyListeners();
-  }
-
-  @override
   Future<void> savePersona(AiPersona persona) =>
       _storage.putPersona(persona.id.isEmpty ? persona.copyWith(id: const Uuid().v4(), isBuiltIn: false) : persona);
 
@@ -382,7 +216,6 @@ final class LocalAiBackend extends AiBackend {
     for (final StreamSubscription<Object?> subscription in _subscriptions) {
       subscription.cancel();
     }
-    _battery?.cancel();
     _models.removeListener(_modelsChanged);
     unawaited(_engine.unload());
     super.dispose();

@@ -10,12 +10,11 @@ import 'package:keklist/presentation/screens/ai/ai_chat_screen.dart';
 import 'package:keklist/presentation/screens/ai/ai_format.dart';
 import 'package:keklist/presentation/screens/ai/ai_models_screen.dart';
 import 'package:keklist/presentation/screens/ai/widgets/ai_persona_picker_sheet.dart';
-import 'package:keklist/presentation/screens/ai/widgets/ai_summary_sheet.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 
-/// The AI tab: summaries of recent days on top, then the previous sessions; a tap opens the chat.
+/// The chat tab: previous sessions; a tap opens the chat.
 final class AiScreen extends StatefulWidget {
   const AiScreen({super.key});
 
@@ -43,21 +42,13 @@ final class _AiScreenState extends State<AiScreen> {
     AiFormat.configure(context, context.read<AiBackend>());
   }
 
-  @override
-  void dispose() {
-    if (_isVisible) context.read<AiBackend>().setAutoSummaries(false);
-    super.dispose();
-  }
-
   void _visibilityChanged(TabsContainerState state) {
     final bool isVisible =
         state.selectedTabIndex < state.selectedTabs.length &&
         state.selectedTabs[state.selectedTabIndex].type == TabType.ai;
     if (isVisible == _isVisible) return;
     _isVisible = isVisible;
-    final AiBackend backend = context.read<AiBackend>();
-    backend.setAutoSummaries(isVisible);
-    if (isVisible) _promptForModelOnce(backend);
+    if (isVisible) _promptForModelOnce(context.read<AiBackend>());
   }
 
   /// The first visit without a model opens the catalog right away.
@@ -121,10 +112,6 @@ final class _AiScreenState extends State<AiScreen> {
               ),
               children: [
                 if (backend.modelName == null) _NoModelCard(canManage: backend.canManage),
-                if (backend.summaryDays.isNotEmpty) ...[
-                  _SectionTitle(context.l10n.aiDaySummaries),
-                  _SummariesRow(backend: backend),
-                ],
                 _SectionTitle(
                   context.l10n.aiSessions,
                   action: backend.modelName == null
@@ -210,95 +197,6 @@ final class _NoModelCard extends StatelessWidget {
       ),
     ),
   );
-}
-
-final class _SummariesRow extends StatelessWidget {
-  const _SummariesRow({required this.backend});
-
-  final AiBackend backend;
-
-  static const double _cardWidth = 220.0;
-  static const double _height = 150.0;
-
-  @override
-  Widget build(BuildContext context) {
-    final Map<int, AiDaySummary> summaries = backend.summaries;
-    return SizedBox(
-      height: _height,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        itemCount: backend.summaryDays.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 12.0),
-        itemBuilder: (context, index) {
-          final int day = backend.summaryDays[index];
-          final AiDaySummary? summary = summaries[day];
-          final bool isStale = backend.staleSummaryDays.contains(day);
-          final bool isRunning = backend.summarizingDays.contains(day);
-          final ColorScheme colors = Theme.of(context).colorScheme;
-          return SizedBox(
-            width: _cardWidth,
-            child: Material(
-              color: colors.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(16.0),
-              clipBehavior: Clip.antiAlias,
-              child: InkWell(
-                onTap: () {
-                  if (summary != null && !isStale) {
-                    AiSummarySheet.show(context, dayIndex: day);
-                  } else if (backend.modelName != null && !isRunning) {
-                    backend.summarizeDay(day);
-                  }
-                },
-                onLongPress: summary == null ? null : () => AiSummarySheet.show(context, dayIndex: day),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 6.0,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              AiDayLabel.of(context, day),
-                              style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          if (isRunning)
-                            const SizedBox.square(dimension: 14.0, child: CircularProgressIndicator(strokeWidth: 2.0))
-                          else if (isStale)
-                            Icon(Icons.refresh_rounded, size: 16.0, color: colors.primary),
-                        ],
-                      ),
-                      Expanded(
-                        child: Text(
-                          summary?.text ??
-                              (backend.modelName == null ? context.l10n.aiNoModelTitle : context.l10n.aiSummarize),
-                          maxLines: 5,
-                          overflow: TextOverflow.ellipsis,
-                          style: summary == null
-                              ? TextStyle(color: Theme.of(context).hintColor)
-                              : Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ),
-                      if (isStale)
-                        Text(
-                          context.l10n.aiSummaryOutdated,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(color: colors.primary),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
 }
 
 final class _SessionTile extends StatelessWidget {

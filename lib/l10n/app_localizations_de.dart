@@ -962,7 +962,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get webVersionPort => 'Port';
 
   @override
-  String get aiTab => 'KI';
+  String get aiTab => 'Chat';
 
   @override
   String get aiTabDescription =>
@@ -975,19 +975,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get aiDisclaimer =>
       'Kein medizinischer Dienst. Wenn du in Gefahr bist, wende dich an den Notruf.';
-
-  @override
-  String get aiDaySummaries => 'Tageszusammenfassungen';
-
-  @override
-  String get aiSummarize => 'Tippen zum Zusammenfassen';
-
-  @override
-  String get aiSummaryOutdated =>
-      'Einträge geändert — tippen zum Aktualisieren';
-
-  @override
-  String get aiRegenerate => 'Neu schreiben';
 
   @override
   String get aiYesterday => 'Gestern';
@@ -1080,9 +1067,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aiSearchModels => 'GGUF-Modelle suchen';
 
   @override
-  String get aiFastest => 'Am schnellsten';
-
-  @override
   String get aiDownload => 'Herunterladen';
 
   @override
@@ -1160,4 +1144,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get aiDeleteRole => 'Rolle löschen?';
+
+  @override
+  String get aiRecommended => 'Empfohlen';
+
+  @override
+  String get aiLowQuality => 'Geringe Qualität';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Dieses Modell passt nicht in den Speicher des Telefons. Wähle ein kleineres.';
+
+  @override
+  String get aiChooseAnotherModel => 'Anderes Modell wählen';
 }

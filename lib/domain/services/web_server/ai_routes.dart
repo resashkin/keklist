@@ -47,8 +47,6 @@ final class AiRoutes {
         unawaited(_backend.send(body['sessionId'] as String, body['text'] as String));
       case '/api/ai/stop':
         _backend.stop();
-      case '/api/ai/summarize':
-        unawaited(_backend.summarizeDay((body['day'] as num).toInt()));
       default:
         throw ArgumentError.value(path, 'path');
     }
