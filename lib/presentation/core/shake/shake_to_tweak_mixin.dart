@@ -22,7 +22,8 @@ mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
   static final Set<String> _hintShownThisLaunch = {};
   static const Duration _hintDelay = Duration(milliseconds: 1200);
   static const Duration _hintVisibleDuration = Duration(seconds: 5);
-  static const double _hintTopSpacing = 8.0;
+  // Clears the tab bar and the floating button above it.
+  static const double _hintBottomSpacing = 150.0;
   static const double _hintSideSpacing = 16.0;
 
   final ShakeDetector _shakeDetector = ShakeDetector();
@@ -90,10 +91,10 @@ mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
   void _showHintIfUndiscovered() {
     if (!_isFrontmost || _isShakeDiscovered) return;
     _hintShownThisLaunch.add(shakeScreenId);
-    final double top = MediaQuery.paddingOf(context).top + kToolbarHeight + _hintTopSpacing;
+    final double bottom = MediaQuery.paddingOf(context).bottom + _hintBottomSpacing;
     _hintEntry = OverlayEntry(
       builder: (_) => Positioned(
-        top: top,
+        bottom: bottom,
         left: _hintSideSpacing,
         right: _hintSideSpacing,
         child: Center(child: ShakeHintToast(onTap: _hideHint)),

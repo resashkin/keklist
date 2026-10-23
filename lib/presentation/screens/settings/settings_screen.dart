@@ -515,7 +515,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
 
     final minds = switch (mindState) {
       MindList list => list.values,
-      MindSearching searching => searching.allValues,
       _ => <Mind>[],
     };
 

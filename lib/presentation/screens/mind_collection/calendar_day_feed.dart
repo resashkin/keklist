@@ -14,7 +14,11 @@ final class CalendarDayFeed {
 
   CalendarDayFeed._(this._mindsByDay, this._indexer, this.includesMedia);
 
-  factory CalendarDayFeed({required Iterable<Mind> minds, required GalleryIndexer? indexer, required bool includesMedia}) {
+  factory CalendarDayFeed({
+    required Iterable<Mind> minds,
+    required GalleryIndexer? indexer,
+    required bool includesMedia,
+  }) {
     final Map<String, int> reflectionCounts = {};
     for (final Mind mind in minds) {
       final String? rootId = mind.rootId;
@@ -36,5 +40,4 @@ final class CalendarDayFeed {
       media: [for (final GalleryAssetInfo asset in assets) DayFeedAsset(PhotoLibraryGallerySource.entityOf(asset))],
     );
   });
-
 }

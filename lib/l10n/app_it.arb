@@ -299,10 +299,6 @@
     "@minds": {
         "description": "Titolo menti"
     },
-    "searchForYourNotes": "Cerca le tue note",
-    "@searchForYourNotes": {
-        "description": "Suggerimento cerca note"
-    },
     "searchYourEmoji": "Cerca il tuo emoji...",
     "@searchYourEmoji": {
         "description": "Suggerimento cerca emoji"
@@ -523,7 +519,6 @@
     "aiPrivacyNote": "Funziona solo sul telefono: le tue note non lasciano mai il dispositivo.",
     "aiDisclaimer": "Non è un servizio medico. Se sei in pericolo, contatta i servizi di emergenza.",
     "aiYesterday": "Ieri",
-    "aiSessions": "Sessioni",
     "aiNoSessions": "Ancora nessuna sessione",
     "aiNewSession": "Nuova sessione",
     "aiChooseRole": "Scegli un ruolo",
@@ -587,5 +582,6 @@
     "insightsYearAgo": "Un anno fa",
     "insightsTwoYearsAgo": "Due anni fa",
     "insightsVoiceAndVideos": "Vocali e video circolari",
-    "insightsWeekNumber": "Settimana {number}"
+    "insightsWeekNumber": "Settimana {number}",
+    "aiNoSessionsHint": "Chiedi della tua settimana, di una preoccupazione o di una bella giornata: la chat legge le tue note sul telefono."
 }

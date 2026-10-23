@@ -423,9 +423,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get minds => 'Ойлар';
 
   @override
-  String get searchForYourNotes => 'Жазбаларыңызды іздеу';
-
-  @override
   String get searchYourEmoji => 'Эмоджиңізді іздеу...';
 
   @override
@@ -964,9 +961,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get aiYesterday => 'Кеше';
 
   @override
-  String get aiSessions => 'Сессиялар';
-
-  @override
   String get aiNoSessions => 'Әзірге сессия жоқ';
 
   @override
@@ -1173,4 +1167,8 @@ class AppLocalizationsKk extends AppLocalizations {
   String insightsWeekNumber(String number) {
     return '$number-апта';
   }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Аптаңыз, мазасыздық не жақсы күн туралы сұраңыз: чат жазбаларыңызды телефонның өзінде оқиды.';
 }

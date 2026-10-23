@@ -20,7 +20,6 @@ import 'package:keklist/presentation/screens/actions/action_model.dart';
 import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/digest/mind_universal_list_screen.dart';
 import 'package:keklist/presentation/screens/insights/insights_screen.dart';
-import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_search_result_widget.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
 import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
@@ -47,7 +46,6 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
-part 'local_widgets/search_app_bar/search_app_bar.dart';
 part 'local_widgets/app_bar/mind_collection_app_bar.dart';
 part 'local_widgets/body/mind_collection_body.dart';
 
@@ -65,7 +63,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   Iterable<Mind> _minds = [];
   CalendarDayFeed _feed = CalendarDayFeed(minds: const [], indexer: null, includesMedia: false);
   SettingsDataState? _settingsDataState;
-  MindSearching? _searchingMindState;
   bool _isSettingsVisible = true;
   bool _isInsightsVisible = true;
   final bool _isDemoMode = false;
@@ -81,11 +78,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   @override
   void onShakeToTweak() => KekSheet.show(context: context, builder: (_) => const CalendarSettingsBottomSheet());
 
-  // NOTE: Состояние SearchBar.
-  final TextEditingController _searchTextController = TextEditingController(text: null);
-  bool get _isSearching => _searchingMindState != null && _searchingMindState!.enabled;
-  List<Mind> get _searchResults => _isSearching ? _searchingMindState!.resultValues : [];
-
   // NOTE: Payments.
   // final PaymentService _payementService = PaymentService();
 
@@ -96,23 +88,18 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _jumpToNow();
 
-      // NOTE: Слежение за полем ввода поиска при изменении его значения.
-      _searchTextController.addListener(() {
-        sendEventToBloc<MindBloc>(
-          MindEnterSearchText(text: _searchTextController.text),
-        );
-      });
-
-      subscribeToBloc<SettingsBloc>(onNewState: (state) {
-        switch (state) {
-          case SettingsDataState settingsDataState:
-            setState(() => _settingsDataState = settingsDataState);
-            _rebuildFeed();
-          case SettingsShowWhatsNew _:
-            _showWhatsNew();
-            sendEventToBloc<SettingsBloc>(SettingsWhatsNewShown());
-        }
-      })?.disposed(by: this);
+      subscribeToBloc<SettingsBloc>(
+        onNewState: (state) {
+          switch (state) {
+            case SettingsDataState settingsDataState:
+              setState(() => _settingsDataState = settingsDataState);
+              _rebuildFeed();
+            case SettingsShowWhatsNew _:
+              _showWhatsNew();
+              sendEventToBloc<SettingsBloc>(SettingsWhatsNewShown());
+          }
+        },
+      )?.disposed(by: this);
 
       subscribeToBloc<MindBloc>(
         onNewState: (state) async {
@@ -125,13 +112,13 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
 
             // Automatically delete onboarding minds after first real mind is created
             if (!_hasShownOnboardingDialog) {
-              final realMinds = state.values.where(
-                (m) => !OnboardingConstants.isOnboardingMind(m.id, m.rootId),
-              ).toList();
+              final realMinds = state.values
+                  .where((m) => !OnboardingConstants.isOnboardingMind(m.id, m.rootId))
+                  .toList();
 
-              final onboardingMinds = state.values.where(
-                (m) => OnboardingConstants.isOnboardingMind(m.id, m.rootId),
-              ).toList();
+              final onboardingMinds = state.values
+                  .where((m) => OnboardingConstants.isOnboardingMind(m.id, m.rootId))
+                  .toList();
 
               if (realMinds.length == 1 && onboardingMinds.isNotEmpty) {
                 _hasShownOnboardingDialog = true;
@@ -140,8 +127,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
                 sendEventToBloc<LazyOnboardingBloc>(LazyOnboardingMarkAsSeen());
               }
             }
-          } else if (state is MindSearching) {
-            setState(() => _searchingMindState = state);
           }
         },
       )?.disposed(by: this);
@@ -150,9 +135,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
       subscribeToBloc<LazyOnboardingBloc>(
         onNewState: (state) {
           if (state is LazyOnboardingNeeded && state.shouldShow) {
-            sendEventToBloc<LazyOnboardingBloc>(
-              LazyOnboardingCreate(context: context),
-            );
+            sendEventToBloc<LazyOnboardingBloc>(LazyOnboardingCreate(context: context));
             sendEventToBloc<LazyOnboardingBloc>(LazyOnboardingMarkAsSeen());
           }
         },
@@ -161,14 +144,16 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
 
       // Auth removed - no authentication required
 
-      subscribeToBloc<TabsContainerBloc>(onNewState: (state) {
-        if (state is TabsContainerState) {
-          setState(() {
-            _isInsightsVisible = !state.selectedTabs.map((tab) => tab.type).contains(TabType.insights);
-            _isSettingsVisible = !state.selectedTabs.map((tab) => tab.type).contains(TabType.settings);
-          });
-        }
-      })?.disposed(by: this);
+      subscribeToBloc<TabsContainerBloc>(
+        onNewState: (state) {
+          if (state is TabsContainerState) {
+            setState(() {
+              _isInsightsVisible = !state.selectedTabs.map((tab) => tab.type).contains(TabType.insights);
+              _isSettingsVisible = !state.selectedTabs.map((tab) => tab.type).contains(TabType.settings);
+            });
+          }
+        },
+      )?.disposed(by: this);
 
       _indexer.progress
           .where((progress) => progress.status == GalleryIndexStatus.ready)
@@ -185,60 +170,49 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: !_isSearching,
+      extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: BoolWidget(
           condition: !_isDemoMode,
           falseChild: const SizedBox.shrink(),
-          trueChild: BoolWidget(
-            condition: _isSearching,
-            trueChild: _SearchAppBar(
-              searchTextController: _searchTextController,
-              onSearchCancel: () => _cancelSearch(),
-            ),
-            falseChild: _MindCollectionAppBar(
-              onSearch: () => sendEventToBloc<MindBloc>(MindStartSearch()),
-              onTitle: () => _scrollToNow(),
-              onCalendar: () => _showCalendarActions(),
-              onSettings: _isSettingsVisible ? (() => _showSettings()) : null,
-              onInsights: _isInsightsVisible ? (() => _showInsights()) : null,
-              onTitleLongPress: requestTweak,
-            ),
+          trueChild: _MindCollectionAppBar(
+            onTitle: () => _scrollToNow(),
+            onCalendar: () => _showCalendarActions(),
+            onSettings: _isSettingsVisible ? (() => _showSettings()) : null,
+            onInsights: _isInsightsVisible ? (() => _showInsights()) : null,
+            onTitleLongPress: requestTweak,
           ),
         ),
       ),
       body: Stack(
         children: [
           _MindCollectionBody(
-            isSearching: _isSearching,
-            searchResults: _searchResults,
-            hideKeyboard: _hideKeyboard,
             onTapToDay: (dayIndex) => _showDayCollectionScreen(groupDayIndex: dayIndex),
             onOpenItem: _openDayItem,
             onPlay: _playStories,
             feed: _feed,
             settings: _calendarSettings,
-            onColumnCountChanged: (count) =>
-                sendEventToBloc<SettingsBloc>(SettingsUpdateCalendar(calendar: _calendarSettings.copyWith(columnCount: count))),
+            onColumnCountChanged: (count) => sendEventToBloc<SettingsBloc>(
+              SettingsUpdateCalendar(calendar: _calendarSettings.copyWith(columnCount: count)),
+            ),
             showsWeekTitles: _shouldShowTitles,
             todayIndex: _getNowDayIndex(),
             itemScrollController: _itemScrollController,
             itemPositionsListener: _itemPositionsListener,
           ),
-          if (!_isSearching)
-            Positioned(
-              left: 0.0,
-              right: 0.0,
-              bottom: MediaQuery.paddingOf(context).bottom + 12.0,
-              child: Center(
-                child: _CurrentWeekBubble(
-                  itemPositionsListener: _itemPositionsListener,
-                  todayIndex: _getNowDayIndex(),
-                  onTap: _scrollToNow,
-                ),
+          Positioned(
+            left: 0.0,
+            right: 0.0,
+            bottom: MediaQuery.paddingOf(context).bottom + 12.0,
+            child: Center(
+              child: _CurrentWeekBubble(
+                itemPositionsListener: _itemPositionsListener,
+                todayIndex: _getNowDayIndex(),
+                onTap: _scrollToNow,
               ),
             ),
+          ),
         ],
       ),
       resizeToAvoidBottomInset: false,
@@ -249,20 +223,15 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     return showCupertinoModalBottomSheet(
       context: context,
       builder: (builder) {
-        return WebPageScreen(
-          title: 'Whats new?',
-          initialUri: Uri.parse(KeklistConstants.whatsNewURL),
-        );
+        return WebPageScreen(title: 'Whats new?', initialUri: Uri.parse(KeklistConstants.whatsNewURL));
       },
     );
   }
 
   void _showDayCollectionScreen({required int groupDayIndex}) {
-    Navigator.of(context).push(
-      SwipeablePageRoute(
-        builder: (context) => MindDayCollectionScreen(initialDayIndex: groupDayIndex),
-      ),
-    );
+    Navigator.of(
+      context,
+    ).push(SwipeablePageRoute(builder: (context) => MindDayCollectionScreen(initialDayIndex: groupDayIndex)));
   }
 
   void _rebuildFeed() {
@@ -296,11 +265,8 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     duration: const Duration(milliseconds: 200),
   );
 
-  void _openDayItem(int dayIndex, int initialIndex) => DayItemViewerScreen.show(
-    context,
-    items: _feed.itemsOf(dayIndex),
-    initialIndex: initialIndex,
-  );
+  void _openDayItem(int dayIndex, int initialIndex) =>
+      DayItemViewerScreen.show(context, items: _feed.itemsOf(dayIndex), initialIndex: initialIndex);
 
   void _playStories(List<int> dayIndexes) {
     final List<DayFeedItem> items = [for (final int dayIndex in dayIndexes) ..._feed.itemsOf(dayIndex)];
@@ -309,16 +275,11 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
       PageRouteBuilder(
         opaque: false,
         fullscreenDialog: true,
-        pageBuilder: (_, _, _) => DayStoriesScreen(
-          items: items,
-          initialIndex: 0,
-        ),
+        pageBuilder: (_, _, _) => DayStoriesScreen(items: items, initialIndex: 0),
         transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
       ),
     );
   }
-
-  void _hideKeyboard() => FocusScope.of(context).requestFocus(FocusNode());
 
   int _getNowDayIndex() => DateUtils.getDayIndex(from: DateTime.now());
 
@@ -397,21 +358,20 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
       context: context,
       builder: (context) => ActionsScreen(
         actions: [
-          ...PeriodType.values.map((periodType) => (
-                ActionModel.custom(
-                  icon: _getPeriodIcon(periodType),
-                  title: periodType.localizedTitle(context),
-                ),
-                () async {
-                  final List<Mind> periodMinds = periodType.filterMinds(_minds.toList());
-                  if (periodMinds.isNotEmpty) {
-                    _showDigestForPeriod(periodType, periodMinds);
-                  }
+          ...PeriodType.values.map(
+            (periodType) => (
+              ActionModel.custom(icon: _getPeriodIcon(periodType), title: periodType.localizedTitle(context)),
+              () async {
+                final List<Mind> periodMinds = periodType.filterMinds(_minds.toList());
+                if (periodMinds.isNotEmpty) {
+                  _showDigestForPeriod(periodType, periodMinds);
                 }
-              )),
+              },
+            ),
+          ),
           (
             ActionModel.custom(icon: const Icon(Icons.date_range), title: context.l10n.selectPeriod),
-            () async => _showDigestForCustomPeriod()
+            () async => _showDigestForCustomPeriod(),
           ),
         ],
       ),
@@ -464,10 +424,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     _showDigest(startDayIndex: period.$1, endDayIndex: period.$2);
   }
 
-  void _showDigest({
-    required int startDayIndex,
-    required int endDayIndex,
-  }) async {
+  void _showDigest({required int startDayIndex, required int endDayIndex}) async {
     if (mountedContext == null) {
       return;
     }
@@ -499,27 +456,11 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   // }
 
   void _showSettings() {
-    Navigator.push(
-      context,
-      SwipeablePageRoute(
-        builder: (context) => const SettingsScreen(),
-      ),
-    );
+    Navigator.push(context, SwipeablePageRoute(builder: (context) => const SettingsScreen()));
   }
 
   void _showInsights() {
-    Navigator.push(
-      context,
-      SwipeablePageRoute(
-        builder: (context) => const InsightsScreen(),
-      ),
-    );
-  }
-
-  void _cancelSearch() {
-    _searchTextController.clear();
-    sendEventToBloc<MindBloc>(MindStopSearch());
-    WidgetsBinding.instance.addPostFrameCallback((_) async => _jumpToNow());
+    Navigator.push(context, SwipeablePageRoute(builder: (context) => const InsightsScreen()));
   }
 
   void _showMindInfo(Mind mind) => DayItemViewerScreen.showMind(context, mind);

@@ -50,7 +50,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
-import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
 import 'package:keklist/presentation/cubits/weather/weather_cubit.dart';
 import 'package:keklist/di/containers.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
@@ -353,12 +352,10 @@ Widget _getApplication(Injector mainInjector, KeklistWebServer? webServer, (AiBa
     providers: [
       BlocProvider(
         create: (context) => MindBloc(
-          mindSearcherCubit: mainInjector.get<MindSearcherCubit>(),
           mindRepository: mainInjector.get<MindRepository>(),
           fileRepository: mainInjector.get<AppFileRepository>(),
         ),
       ),
-      BlocProvider(create: (context) => mainInjector.get<MindSearcherCubit>()),
       BlocProvider<SettingsBloc>.value(value: mainInjector.get<SettingsBloc>()),
       BlocProvider<EmotionBloc>.value(value: mainInjector.get<EmotionBloc>()..add(EmotionGetList())),
       BlocProvider(
@@ -426,7 +423,6 @@ void _enableDebugBLOCLogs(Injector injector) {
 
 const Map<Type, String> _kBlocEmojis = {
   MindBloc: '🧠',
-  MindSearcherCubit: '🔎',
   SettingsBloc: '⚙️',
   DebugMenuBloc: '🐞',
   MembershipBloc: '💎',

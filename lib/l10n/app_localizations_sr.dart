@@ -420,9 +420,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get minds => 'Белешке';
 
   @override
-  String get searchForYourNotes => 'Претражи своје белешке';
-
-  @override
   String get searchYourEmoji => 'Претражи свој емоџи...';
 
   @override
@@ -963,9 +960,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get aiYesterday => 'Јуче';
 
   @override
-  String get aiSessions => 'Сесије';
-
-  @override
   String get aiNoSessions => 'Још нема сесија';
 
   @override
@@ -1171,6 +1165,10 @@ class AppLocalizationsSr extends AppLocalizations {
   String insightsWeekNumber(String number) {
     return 'Недеља $number';
   }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Питајте о својој недељи, бризи или лепом дану: чет чита ваше записе директно на телефону.';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1587,9 +1585,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get minds => 'Umovi';
-
-  @override
-  String get searchForYourNotes => 'Pretraži svoje beleške';
 
   @override
   String get searchYourEmoji => 'Pretraži svoj emoji...';
@@ -2131,9 +2126,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get aiYesterday => 'Juče';
 
   @override
-  String get aiSessions => 'Sesije';
-
-  @override
   String get aiNoSessions => 'Još nema sesija';
 
   @override
@@ -2339,4 +2331,8 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String insightsWeekNumber(String number) {
     return 'Nedelja $number';
   }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše zapise direktno na telefonu.';
 }

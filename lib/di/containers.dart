@@ -37,7 +37,6 @@ import 'package:keklist/domain/services/weather/weather_api_service.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
-import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
 
 final class MainContainer {
   final StreamingSharedPreferences _streamingSharedPreferences;
@@ -48,7 +47,6 @@ final class MainContainer {
       _hiveCipher = hiveCipher;
 
   Injector initialize(Injector injector) {
-    injector.map<MindSearcherCubit>((injector) => MindSearcherCubit(repository: injector.get<MindRepository>()));
     if (kIsPhoneWeb) {
       _mapPhoneRepositories(injector);
     } else {

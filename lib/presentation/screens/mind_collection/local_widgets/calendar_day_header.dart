@@ -4,8 +4,9 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// The tappable date of a calendar day, centered: a rounded pill with the full date, counters of what the day
-/// holds and a chevron, plus a separate round ▶ that plays its stories. Empty days show the day screen's empty state.
+/// The tappable date of a calendar day, centered: the full date, counters of what the day holds and a chevron in a
+/// thin outline, bright for today and faint otherwise, plus a separate round ▶ that plays its stories.
+/// Empty days show the day screen's empty state.
 final class CalendarDayPill extends StatelessWidget {
   final DateTime date;
   final bool isToday;
@@ -29,8 +30,11 @@ final class CalendarDayPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colors = theme.colorScheme;
-    final Color background = isToday ? colors.primary : colors.onSurface.withValues(alpha: 0.06);
-    final Color foreground = isToday ? colors.onPrimary : colors.onSurface;
+    final BorderSide outline = BorderSide(
+      color: colors.onSurface.withValues(alpha: isToday ? 0.85 : 0.14),
+      width: isToday ? 1.5 : 1.0,
+    );
+    final Color foreground = colors.onSurface;
     final String title = toBeginningOfSentenceCase(
       DateFormat.MMMMEEEEd(Localizations.localeOf(context).toString()).format(date),
     );
@@ -44,8 +48,8 @@ final class CalendarDayPill extends StatelessWidget {
             spacing: 8.0,
             children: [
               Material(
-                color: background,
-                shape: const StadiumBorder(),
+                color: Colors.transparent,
+                shape: StadiumBorder(side: outline),
                 clipBehavior: Clip.antiAlias,
                 child: InkWell(
                   onTap: onTap,
@@ -82,8 +86,8 @@ final class CalendarDayPill extends StatelessWidget {
               ),
               if (onPlay != null)
                 Material(
-                  color: background,
-                  shape: const CircleBorder(),
+                  color: Colors.transparent,
+                  shape: CircleBorder(side: outline),
                   clipBehavior: Clip.antiAlias,
                   child: InkWell(
                     onTap: onPlay,

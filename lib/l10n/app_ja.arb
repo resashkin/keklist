@@ -169,7 +169,6 @@
     "passwordsDoNotMatch": "パスワードが一致しません",
     "reenterPassword": "パスワードを再入力",
     "retry": "再試行",
-    "searchForYourNotes": "メモを検索",
     "searchYourEmoji": "絵文字を検索...",
     "selectPeriod": "期間を選択...",
     "send": "送信",
@@ -295,7 +294,6 @@
     "aiPrivacyNote": "スマホの中だけで動作し、記録が端末の外に出ることはありません。",
     "aiDisclaimer": "医療サービスではありません。危険な状況にある場合は緊急サービスに連絡してください。",
     "aiYesterday": "昨日",
-    "aiSessions": "セッション",
     "aiNoSessions": "まだセッションはありません",
     "aiNewSession": "新しいセッション",
     "aiChooseRole": "役割を選ぶ",
@@ -359,5 +357,6 @@
     "insightsYearAgo": "1年前",
     "insightsTwoYearsAgo": "2年前",
     "insightsVoiceAndVideos": "ボイスと丸い動画",
-    "insightsWeekNumber": "第{number}週"
+    "insightsWeekNumber": "第{number}週",
+    "aiNoSessionsHint": "今週のこと、心配ごと、良かった日について聞いてみましょう。チャットはスマホの中で記録を読みます。"
 }
