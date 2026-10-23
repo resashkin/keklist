@@ -745,12 +745,6 @@ class AppLocalizationsSr extends AppLocalizations {
       'Ова емоција се користи у неким мислима. Архивирајте је да остане тамо, или је обришите свуда.';
 
   @override
-  String get emotionPickHint => 'Додирните за означавање';
-
-  @override
-  String get emotionDrillHint => 'дуже држите за дубље';
-
-  @override
   String get noEmotionsYet => 'Још нема емоција';
 
   @override
@@ -1920,12 +1914,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get emotionInUseMessage =>
       'Ova emocija se koristi u nekim mislima. Arhivirajte je da ostane tamo, ili je obrišite svuda.';
-
-  @override
-  String get emotionPickHint => 'Dodirnite za označavanje';
-
-  @override
-  String get emotionDrillHint => 'duže držite za dublje';
 
   @override
   String get noEmotionsYet => 'Još nema emocija';

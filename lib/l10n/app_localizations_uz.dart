@@ -750,12 +750,6 @@ class AppLocalizationsUz extends AppLocalizations {
       'Bu hissiyot ba\'zi maindlarda ishlatiladi. Uni o\'sha yerda saqlash uchun arxivlang yoki hamma joydan o\'chiring.';
 
   @override
-  String get emotionPickHint => 'Belgilash uchun bosing';
-
-  @override
-  String get emotionDrillHint => 'chuqurlashish uchun bosib turing';
-
-  @override
   String get noEmotionsYet => 'Hozircha hissiyotlar yo\'q';
 
   @override

@@ -571,15 +571,6 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
   /// Long-press only drills in when a chip actually has children, and nesting can
   /// no longer be authored (ADR-0002) — so the hint promises it only where some
   /// chip on this level can deliver it.
-  String _pickHint(BuildContext context) {
-    final state = _state;
-    final bool canDrill =
-        state != null && _levelChildren.any((emotion) => state.hasActiveChildren(emotion.id));
-    return canDrill
-        ? '${context.l10n.emotionPickHint} · ${context.l10n.emotionDrillHint}'
-        : context.l10n.emotionPickHint;
-  }
-
   Widget _buildHint(BuildContext context) {
     final hintStyle = Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor);
     final linkStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -599,7 +590,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
         TextSpan(
           style: hintStyle,
           children: [
-            TextSpan(text: '${_editMode ? context.l10n.emotionEditHint : _pickHint(context)}   ·   '),
+            if (_editMode) TextSpan(text: '${context.l10n.emotionEditHint}   ·   '),
             link(context.l10n.archived, _openArchived),
           ],
         ),
@@ -619,9 +610,10 @@ class _FocusRing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Drawn over the chip so the ring never adds to the gap between chips.
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
-      decoration: BoxDecoration(
+      foregroundDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22.0),
         border: Border.all(
           color: active ? Theme.of(context).colorScheme.primary : Colors.transparent,

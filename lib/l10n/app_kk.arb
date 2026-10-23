@@ -452,8 +452,6 @@
     "newEmotion": "Жаңа эмоция",
     "editEmotion": "Эмоцияны өңдеу",
     "emotionNameHint": "Атауы",
-    "emotionPickHint": "Белгілеу үшін түртіңіз",
-    "emotionDrillHint": "тереңдеу үшін басып тұрыңыз",
     "noEmotionsYet": "Әзірге эмоциялар жоқ",
     "noArchivedEmotions": "Мұрағатталған эмоциялар жоқ",
     "addEmotion": "Эмоция қосу",

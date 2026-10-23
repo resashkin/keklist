@@ -452,8 +452,6 @@
     "newEmotion": "Nova emocija",
     "editEmotion": "Izmeni emociju",
     "emotionNameHint": "Naziv",
-    "emotionPickHint": "Dodirnite za označavanje",
-    "emotionDrillHint": "duže držite za dublje",
     "noEmotionsYet": "Još nema emocija",
     "noArchivedEmotions": "Nema arhiviranih emocija",
     "addEmotion": "Dodaj emociju",

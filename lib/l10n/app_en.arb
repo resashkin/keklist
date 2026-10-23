@@ -984,11 +984,6 @@
     "@emotionInUseMessage": {
         "description": "Message when removing an emotion used by minds, offering archive or delete"
     },
-    "emotionPickHint": "Tap to tag",
-    "emotionDrillHint": "long-press to go deeper",
-    "@emotionPickHint": {
-        "description": "Hint in the emotion marking sheet explaining tap vs long-press"
-    },
     "noEmotionsYet": "No emotions yet",
     "@noEmotionsYet": {
         "description": "Empty state for the emotions list"

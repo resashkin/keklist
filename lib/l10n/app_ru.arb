@@ -224,8 +224,6 @@
     "newEmotion": "Новая эмоция",
     "editEmotion": "Изменить эмоцию",
     "emotionNameHint": "Название",
-    "emotionPickHint": "Нажмите, чтобы отметить",
-    "emotionDrillHint": "удерживайте, чтобы углубиться",
     "noEmotionsYet": "Пока нет эмоций",
     "noArchivedEmotions": "Нет архивных эмоций",
     "addEmotion": "Добавить эмоцию",

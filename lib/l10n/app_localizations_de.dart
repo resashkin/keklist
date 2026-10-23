@@ -754,12 +754,6 @@ class AppLocalizationsDe extends AppLocalizations {
       'Diese Emotion wird von einigen Minds verwendet. Archiviere sie, um sie dort zu behalten, oder lösche sie überall.';
 
   @override
-  String get emotionPickHint => 'Tippen zum Markieren';
-
-  @override
-  String get emotionDrillHint => 'lange drücken für mehr Tiefe';
-
-  @override
   String get noEmotionsYet => 'Noch keine Emotionen';
 
   @override

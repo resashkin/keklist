@@ -53,7 +53,7 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
         ? await _loadPhoneMedia(dayIndex)
         : Platform.isAndroid
         ? await _loadFolderMedia(dayIndex, folderPath, isFolderRecursive)
-        : await _loadPhotoMedia(dayIndex, requestPhotoAccess);
+        : await _loadPhotoMedia(dayIndex, requestPhotoAccess, requestId);
 
     if (requestId != _mediaRequestId || isClosed) return;
     _media = media;
@@ -72,11 +72,28 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
     );
   }
 
-  Future<(List<DayFeedItem>, DayFeedMediaIssue?)> _loadPhotoMedia(int dayIndex, bool requestAccess) async {
+  Future<(List<DayFeedItem>, DayFeedMediaIssue?)> _loadPhotoMedia(
+    int dayIndex,
+    bool requestAccess,
+    int requestId,
+  ) async {
     final bool hasAccess = await DayMediaLoader.hasPhotoAccess(requestIfNeeded: requestAccess);
     if (!hasAccess) return (const <DayFeedItem>[], DayFeedMediaIssue.photoAccessDenied);
     if (requestAccess) _galleryIndexer?.sync();
+    _showIndexedMedia(dayIndex, requestId);
     return (await DayMediaLoader.loadPhotoAssets(dayIndex, indexer: _galleryIndexer), null);
+  }
+
+  /// The index already knows the day's assets: they take their final places at once, and the live
+  /// query that follows only corrects what changed since the last scan.
+  void _showIndexedMedia(int dayIndex, int requestId) {
+    final MediaDayIndex? entry = _galleryIndexer?.entryFor(dayIndex);
+    if (entry == null || requestId != _mediaRequestId) return;
+    _media = [
+      for (final GalleryAssetInfo asset in entry.assets) DayFeedAsset(PhotoLibraryGallerySource.entityOf(asset)),
+    ];
+    _isMediaLoading = false;
+    _emit();
   }
 
   Future<(List<DayFeedItem>, DayFeedMediaIssue?)> _loadFolderMedia(
