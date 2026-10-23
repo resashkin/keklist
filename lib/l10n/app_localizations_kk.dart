@@ -139,7 +139,7 @@ class AppLocalizationsKk extends AppLocalizations {
   }
 
   @override
-  String get insightsOnThisDay => 'Осы күні';
+  String get insightsOnThisDay => 'Сол кезде';
 
   @override
   String get insightsMediaCounters => 'Медиа';
@@ -169,10 +169,11 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get insightsEmptyOnThisDay =>
-      'Өткен жылдары бұл күні әзірге ештеңе жоқ';
+      'Бір апта, ай, жарты жыл және бір жыл бұрын әзірге ештеңе жоқ';
 
   @override
-  String get insightsEmptyRoundVideos => 'Бұл кезеңде дөңгелек бейне жоқ';
+  String get insightsEmptyRoundVideos =>
+      'Бұл кезеңде дауыстық жазбалар мен дөңгелек бейнелер жоқ';
 
   @override
   String get insightsEmptyStreak => 'Серияны бастау үшін бүгін жазба қосыңыз';
@@ -1158,4 +1159,27 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get creatorEmotionsNever => 'Сұрамау';
+
+  @override
+  String get insightsWeekAgo => 'Бір апта бұрын';
+
+  @override
+  String get insightsMonthAgo => 'Бір ай бұрын';
+
+  @override
+  String get insightsHalfYearAgo => 'Жарты жыл бұрын';
+
+  @override
+  String get insightsYearAgo => 'Бір жыл бұрын';
+
+  @override
+  String get insightsTwoYearsAgo => 'Екі жыл бұрын';
+
+  @override
+  String get insightsVoiceAndVideos => 'Дауыс және дөңгелек бейнелер';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return '$number-апта';
+  }
 }

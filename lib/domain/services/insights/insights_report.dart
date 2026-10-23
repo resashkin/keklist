@@ -100,12 +100,15 @@ final class StreakInsight {
   const StreakInsight({required this.current, required this.longest, required this.isTodayDone});
 }
 
+/// How far back a memory looks from today.
+enum MemoryPoint { weekAgo, monthAgo, halfYearAgo, yearAgo, twoYearsAgo }
+
 final class OnThisDayGroup {
-  final int yearsAgo;
+  final MemoryPoint point;
   final int dayIndex;
   final List<String> mindIds;
 
-  const OnThisDayGroup({required this.yearsAgo, required this.dayIndex, required this.mindIds});
+  const OnThisDayGroup({required this.point, required this.dayIndex, required this.mindIds});
 }
 
 final class MediaInsight {
@@ -114,15 +117,15 @@ final class MediaInsight {
   final int audioMinds;
   final int videoMinds;
 
-  /// Root minds and reflections with a round video, newest first.
-  final List<String> roundVideoMindIds;
+  /// Root minds and reflections with a voice note or a round video, newest first.
+  final List<String> voiceMindIds;
 
   const MediaInsight({
     required this.libraryPhotos,
     required this.libraryVideos,
     required this.audioMinds,
     required this.videoMinds,
-    required this.roundVideoMindIds,
+    required this.voiceMindIds,
   });
 }
 

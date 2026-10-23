@@ -354,7 +354,7 @@ abstract class AppLocalizations {
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'On this day'**
+  /// **'Back then'**
   String get insightsOnThisDay;
 
   /// Analytics screen
@@ -408,13 +408,13 @@ abstract class AppLocalizations {
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'Nothing from this day in past years yet'**
+  /// **'Nothing from a week, a month, half a year or a year ago yet'**
   String get insightsEmptyOnThisDay;
 
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'No round videos in this period'**
+  /// **'No voice notes or round videos in this period'**
   String get insightsEmptyRoundVideos;
 
   /// Analytics screen
@@ -2258,6 +2258,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Don\'t ask'**
   String get creatorEmotionsNever;
+
+  /// Insights memories: a week ago
+  ///
+  /// In en, this message translates to:
+  /// **'A week ago'**
+  String get insightsWeekAgo;
+
+  /// Insights memories: a month ago
+  ///
+  /// In en, this message translates to:
+  /// **'A month ago'**
+  String get insightsMonthAgo;
+
+  /// Insights memories: half a year ago
+  ///
+  /// In en, this message translates to:
+  /// **'Half a year ago'**
+  String get insightsHalfYearAgo;
+
+  /// Insights memories: a year ago
+  ///
+  /// In en, this message translates to:
+  /// **'A year ago'**
+  String get insightsYearAgo;
+
+  /// Insights memories: two years ago
+  ///
+  /// In en, this message translates to:
+  /// **'Two years ago'**
+  String get insightsTwoYearsAgo;
+
+  /// Insights card: voice notes and round videos
+  ///
+  /// In en, this message translates to:
+  /// **'Voice and round videos'**
+  String get insightsVoiceAndVideos;
+
+  /// Insights brightest week: week number of the year
+  ///
+  /// In en, this message translates to:
+  /// **'Week {number}'**
+  String insightsWeekNumber(String number);
 }
 
 class _AppLocalizationsDelegate

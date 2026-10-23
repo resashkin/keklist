@@ -41,9 +41,11 @@ final class InsightsStreakCard extends StatelessWidget {
   }
 }
 
-/// Calendar grid for a week or month; a scrollable 52-week strip for longer periods.
+/// A compact calendar for a week or month, days ahead faded; a scrollable 52-week strip for longer periods.
 final class InsightsHeatmapCard extends StatelessWidget {
   static const int _calendarMaxDays = 31;
+  static const double _calendarCell = 28.0;
+  static const double _calendarGap = 4.0;
   static const double _stripCell = 12.0;
   static const double _gap = 3.0;
 
@@ -64,7 +66,7 @@ final class InsightsHeatmapCard extends StatelessWidget {
       child: maxCount == 0
           ? InsightsEmptyHint(context.l10n.insightsEmptyPeriod)
           : range.length <= _calendarMaxDays
-          ? _calendar(context, period, range, counts, maxCount)
+          ? Center(child: _calendar(context, period, range, counts, maxCount))
           : _strip(context, period, range, counts, maxCount),
     );
   }
@@ -74,35 +76,57 @@ final class InsightsHeatmapCard extends StatelessWidget {
       : InsightsCategory.activity.color.withValues(alpha: 0.25 + 0.75 * count / maxCount);
 
   Widget _calendar(BuildContext context, InsightsPeriod period, DayRange range, Map<int, int> counts, int maxCount) {
+    final ThemeData theme = Theme.of(context);
     final int gridStart = InsightsPeriod.weekStart(range.start, period.firstDayOfWeek);
-    final int cellCount = ((range.end - gridStart) / 7).ceil() * 7;
-    return GridView.count(
-      crossAxisCount: 7,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: _gap * 2,
-      crossAxisSpacing: _gap * 2,
+    final int weekCount = ((range.end - gridStart) / 7).ceil();
+    Widget cell(Widget child) => SizedBox.square(dimension: _calendarCell, child: child);
+    Widget day(int day) {
+      if (!range.contains(day)) return cell(const SizedBox.shrink());
+      final bool isAhead = day > period.today;
+      final Widget box = Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: isAhead
+              ? theme.colorScheme.onSurface.withValues(alpha: 0.02)
+              : _colorFor(context, counts[day] ?? 0, maxCount),
+          borderRadius: BorderRadius.circular(6.0),
+          border: day == period.today ? Border.all(color: InsightsCategory.activity.color) : null,
+        ),
+        child: Text(
+          '${InsightsFormat.dateOf(day).day}',
+          style: theme.textTheme.labelSmall?.copyWith(color: isAhead ? theme.disabledColor : null),
+        ),
+      );
+      return cell(
+        isAhead ? box : InkWell(borderRadius: BorderRadius.circular(6.0), onTap: () => data.openDay(day), child: box),
+      );
+    }
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      spacing: _calendarGap,
       children: [
-        for (int day = gridStart; day < gridStart + cellCount; day++)
-          if (!range.contains(day))
-            const SizedBox.shrink()
-          else
-            InkWell(
-              borderRadius: BorderRadius.circular(6.0),
-              onTap: () => data.openDay(day),
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: _colorFor(context, counts[day] ?? 0, maxCount),
-                  borderRadius: BorderRadius.circular(6.0),
-                  border: day == period.today ? Border.all(color: InsightsCategory.activity.color) : null,
-                ),
-                child: Text(
-                  '${InsightsFormat.dateOf(day).day}',
-                  style: Theme.of(context).textTheme.labelSmall,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: _calendarGap,
+          children: [
+            for (int offset = 0; offset < 7; offset++)
+              cell(
+                Center(
+                  child: Text(
+                    InsightsFormat.weekdayShort(context, (period.firstDayOfWeek - 1 + offset) % 7 + 1),
+                    style: theme.textTheme.labelSmall?.copyWith(color: theme.hintColor),
+                  ),
                 ),
               ),
-            ),
+          ],
+        ),
+        for (int week = 0; week < weekCount; week++)
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            spacing: _calendarGap,
+            children: [for (int offset = 0; offset < 7; offset++) day(gridStart + week * 7 + offset)],
+          ),
       ],
     );
   }

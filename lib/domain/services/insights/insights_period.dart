@@ -128,9 +128,10 @@ final class InsightsPeriod {
 
   static int _nextYear(int dayIndex) => _dayOf(calendarDateOf(dayIndex).year + 1, 1, 1);
 
-  /// Range the heatmap draws: the period itself, or the last 52 weeks for longer ones.
+  /// Range the heatmap draws: the whole week or month including days still ahead, or the last 52 weeks.
   DayRange get heatmapRange => switch (kind) {
-    InsightsPeriodKind.week || InsightsPeriodKind.month => current,
+    InsightsPeriodKind.week => DayRange(current.start, current.start + 7),
+    InsightsPeriodKind.month => DayRange(current.start, _nextMonth(current.start)),
     InsightsPeriodKind.year || InsightsPeriodKind.allTime => DayRange(
       weekStart(today - 52 * 7 + 7, firstDayOfWeek).clamp(kind == InsightsPeriodKind.year ? current.start : 0, today),
       today + 1,

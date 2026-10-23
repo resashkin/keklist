@@ -38,7 +38,7 @@
     "insightsHeatmap": "Карта активности",
     "insightsActivityTime": "Время суток",
     "insightsPeakHour": "Чаще всего около {hour}",
-    "insightsOnThisDay": "В этот день",
+    "insightsOnThisDay": "Что было тогда",
     "insightsMediaCounters": "Медиа",
     "insightsPhotos": "Фото",
     "insightsVideos": "Видео",
@@ -47,8 +47,8 @@
     "insightsEmptyPeriod": "В этом периоде пока нет заметок",
     "insightsEmptyEmotions": "Отмечайте эмоции в заметках, чтобы увидеть это",
     "insightsEmptyPairs": "Отметьте в заметке две эмоции, чтобы увидеть пары",
-    "insightsEmptyOnThisDay": "В прошлые годы в этот день пока ничего нет",
-    "insightsEmptyRoundVideos": "В этом периоде нет кружочков",
+    "insightsEmptyOnThisDay": "Неделю, месяц, полгода и год назад пока ничего нет",
+    "insightsEmptyRoundVideos": "За этот период нет голосовых и кружков",
     "insightsEmptyStreak": "Добавьте заметку сегодня, чтобы начать серию",
     "insightsCustomize": "Настроить аналитику",
     "insightsCustomizeDescription": "Включайте и выключайте карточки, перетаскивайте для порядка",
@@ -355,5 +355,12 @@
     "creatorEmotionsTitle": "Эмоции",
     "creatorEmotionsAfterSave": "Спросить после сохранения",
     "creatorEmotionsButton": "Кнопка над клавиатурой",
-    "creatorEmotionsNever": "Не спрашивать"
+    "creatorEmotionsNever": "Не спрашивать",
+    "insightsWeekAgo": "Неделю назад",
+    "insightsMonthAgo": "Месяц назад",
+    "insightsHalfYearAgo": "Полгода назад",
+    "insightsYearAgo": "Год назад",
+    "insightsTwoYearsAgo": "2 года назад",
+    "insightsVoiceAndVideos": "Голосовые и кружки",
+    "insightsWeekNumber": "Неделя {number}"
 }

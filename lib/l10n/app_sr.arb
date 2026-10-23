@@ -38,7 +38,7 @@
     "insightsHeatmap": "Мапа активности",
     "insightsActivityTime": "Доба дана",
     "insightsPeakHour": "Најактивнији око {hour}",
-    "insightsOnThisDay": "На данашњи дан",
+    "insightsOnThisDay": "Тада",
     "insightsMediaCounters": "Медији",
     "insightsPhotos": "Фотографије",
     "insightsVideos": "Видео записи",
@@ -47,8 +47,8 @@
     "insightsEmptyPeriod": "У овом периоду још нема белешки",
     "insightsEmptyEmotions": "Означи белешке емоцијама да видиш ово",
     "insightsEmptyPairs": "Означи белешку са две емоције да видиш парове",
-    "insightsEmptyOnThisDay": "Још ништа са овог дана из претходних година",
-    "insightsEmptyRoundVideos": "Нема округлих видео записа у овом периоду",
+    "insightsEmptyOnThisDay": "Од пре недељу, месец, пола године и годину још ништа нема",
+    "insightsEmptyRoundVideos": "У овом периоду нема гласовних порука ни округлих видеа",
     "insightsEmptyStreak": "Додај белешку данас да започнеш низ",
     "insightsCustomize": "Прилагоди аналитику",
     "insightsCustomizeDescription": "Укључи или искључи картице и превуци их за редослед",
@@ -355,5 +355,12 @@
     "creatorEmotionsTitle": "Емоције",
     "creatorEmotionsAfterSave": "Питај после чувања",
     "creatorEmotionsButton": "Дугме изнад тастатуре",
-    "creatorEmotionsNever": "Не питај"
+    "creatorEmotionsNever": "Не питај",
+    "insightsWeekAgo": "Пре недељу дана",
+    "insightsMonthAgo": "Пре месец дана",
+    "insightsHalfYearAgo": "Пре пола године",
+    "insightsYearAgo": "Пре годину дана",
+    "insightsTwoYearsAgo": "Пре две године",
+    "insightsVoiceAndVideos": "Глас и округли видеи",
+    "insightsWeekNumber": "Недеља {number}"
 }

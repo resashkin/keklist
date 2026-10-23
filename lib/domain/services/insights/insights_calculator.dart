@@ -237,25 +237,31 @@ final class InsightsCalculator {
     return hours;
   }
 
-  /// Same calendar day in earlier years; days that don't exist (29 Feb) are skipped.
+  /// A week, a month, half a year, a year and two years back; a day missing in a shorter month falls on its last day.
   List<OnThisDayGroup> _onThisDay() {
     final DateTime today = InsightsPeriod.calendarDateOf(period.today);
     final Map<int, List<String>> mindsByDay = {};
     for (final Mind mind in _roots) {
       mindsByDay.putIfAbsent(mind.dayIndex, () => []).add(mind.id);
     }
-    final int? firstDay = mindsByDay.keys.isEmpty ? null : mindsByDay.keys.reduce((a, b) => a < b ? a : b);
-    if (firstDay == null) return const [];
-    final int firstYear = InsightsPeriod.calendarDateOf(firstDay).year;
+    int monthsBack(int months) {
+      final int lastDay = DateTime.utc(today.year, today.month - months + 1, 0).day;
+      return DateUtils.getDayIndex(
+        from: DateTime.utc(today.year, today.month - months, today.day > lastDay ? lastDay : today.day),
+      );
+    }
+
     return [
-      for (int year = today.year - 1; year >= firstYear; year--)
-        if (DateTime.utc(year, today.month, today.day).month == today.month)
-          if (mindsByDay[DateUtils.getDayIndex(from: DateTime.utc(year, today.month, today.day))] case final ids?)
-            OnThisDayGroup(
-              yearsAgo: today.year - year,
-              dayIndex: DateUtils.getDayIndex(from: DateTime.utc(year, today.month, today.day)),
-              mindIds: ids,
-            ),
+      for (final MemoryPoint point in MemoryPoint.values)
+        if (switch (point) {
+              MemoryPoint.weekAgo => period.today - 7,
+              MemoryPoint.monthAgo => monthsBack(1),
+              MemoryPoint.halfYearAgo => monthsBack(6),
+              MemoryPoint.yearAgo => monthsBack(12),
+              MemoryPoint.twoYearsAgo => monthsBack(24),
+            }
+            case final int day)
+          if (mindsByDay[day] case final ids?) OnThisDayGroup(point: point, dayIndex: day, mindIds: ids),
     ];
   }
 
@@ -269,14 +275,14 @@ final class InsightsCalculator {
       photos += media.photos;
       videos += media.videos;
     }
-    final List<Mind> roundVideos = minds.where((mind) => mind.noteContent.hasVideo).toList()
+    final List<Mind> voiceMinds = minds.where((mind) => mind.noteContent.hasVideo || mind.noteContent.hasAudio).toList()
       ..sort((a, b) => b.creationDate.compareTo(a.creationDate));
     return MediaInsight(
       libraryPhotos: photos,
       libraryVideos: videos,
       audioMinds: minds.where((mind) => mind.noteContent.hasAudio).length,
-      videoMinds: roundVideos.length,
-      roundVideoMindIds: roundVideos.take(maxRoundVideos).map((mind) => mind.id).toList(),
+      videoMinds: minds.where((mind) => mind.noteContent.hasVideo).length,
+      voiceMindIds: voiceMinds.take(maxRoundVideos).map((mind) => mind.id).toList(),
     );
   }
 }

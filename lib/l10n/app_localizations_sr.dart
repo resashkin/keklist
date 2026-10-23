@@ -138,7 +138,7 @@ class AppLocalizationsSr extends AppLocalizations {
   }
 
   @override
-  String get insightsOnThisDay => 'На данашњи дан';
+  String get insightsOnThisDay => 'Тада';
 
   @override
   String get insightsMediaCounters => 'Медији';
@@ -167,11 +167,11 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get insightsEmptyOnThisDay =>
-      'Још ништа са овог дана из претходних година';
+      'Од пре недељу, месец, пола године и годину још ништа нема';
 
   @override
   String get insightsEmptyRoundVideos =>
-      'Нема округлих видео записа у овом периоду';
+      'У овом периоду нема гласовних порука ни округлих видеа';
 
   @override
   String get insightsEmptyStreak => 'Додај белешку данас да започнеш низ';
@@ -1157,6 +1157,29 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get creatorEmotionsNever => 'Не питај';
+
+  @override
+  String get insightsWeekAgo => 'Пре недељу дана';
+
+  @override
+  String get insightsMonthAgo => 'Пре месец дана';
+
+  @override
+  String get insightsHalfYearAgo => 'Пре пола године';
+
+  @override
+  String get insightsYearAgo => 'Пре годину дана';
+
+  @override
+  String get insightsTwoYearsAgo => 'Пре две године';
+
+  @override
+  String get insightsVoiceAndVideos => 'Глас и округли видеи';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return 'Недеља $number';
+  }
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1293,7 +1316,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   }
 
   @override
-  String get insightsOnThisDay => 'Na današnji dan';
+  String get insightsOnThisDay => 'Tada';
 
   @override
   String get insightsMediaCounters => 'Mediji';
@@ -1322,11 +1345,11 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get insightsEmptyOnThisDay =>
-      'Još ništa sa ovog dana iz prethodnih godina';
+      'Od pre nedelju, mesec, pola godine i godinu još ništa nema';
 
   @override
   String get insightsEmptyRoundVideos =>
-      'Nema okruglih video zapisa u ovom periodu';
+      'U ovom periodu nema glasovnih poruka ni okruglih videa';
 
   @override
   String get insightsEmptyStreak => 'Dodaj belešku danas da započneš niz';
@@ -2311,4 +2334,27 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get creatorEmotionsNever => 'Ne pitaj';
+
+  @override
+  String get insightsWeekAgo => 'Pre nedelju dana';
+
+  @override
+  String get insightsMonthAgo => 'Pre mesec dana';
+
+  @override
+  String get insightsHalfYearAgo => 'Pre pola godine';
+
+  @override
+  String get insightsYearAgo => 'Pre godinu dana';
+
+  @override
+  String get insightsTwoYearsAgo => 'Pre dve godine';
+
+  @override
+  String get insightsVoiceAndVideos => 'Glas i okrugli videi';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return 'Nedelja $number';
+  }
 }

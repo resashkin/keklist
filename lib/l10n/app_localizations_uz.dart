@@ -139,7 +139,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get insightsOnThisDay => 'Shu kuni';
+  String get insightsOnThisDay => 'O‘sha paytda';
 
   @override
   String get insightsMediaCounters => 'Media';
@@ -169,10 +169,11 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get insightsEmptyOnThisDay =>
-      'Oʻtgan yillarda bu kunda hali hech narsa yoʻq';
+      'Bir hafta, oy, yarim yil va bir yil oldin hozircha hech narsa yo‘q';
 
   @override
-  String get insightsEmptyRoundVideos => 'Bu davrda dumaloq video yoʻq';
+  String get insightsEmptyRoundVideos =>
+      'Bu davrda ovozli yozuvlar va dumaloq videolar yo‘q';
 
   @override
   String get insightsEmptyStreak =>
@@ -1160,4 +1161,27 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get creatorEmotionsNever => 'So‘ramaslik';
+
+  @override
+  String get insightsWeekAgo => 'Bir hafta oldin';
+
+  @override
+  String get insightsMonthAgo => 'Bir oy oldin';
+
+  @override
+  String get insightsHalfYearAgo => 'Yarim yil oldin';
+
+  @override
+  String get insightsYearAgo => 'Bir yil oldin';
+
+  @override
+  String get insightsTwoYearsAgo => 'Ikki yil oldin';
+
+  @override
+  String get insightsVoiceAndVideos => 'Ovoz va dumaloq videolar';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return '$number-hafta';
+  }
 }

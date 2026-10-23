@@ -38,7 +38,7 @@
     "insightsHeatmap": "活跃度地图",
     "insightsActivityTime": "时段",
     "insightsPeakHour": "最常在 {hour} 左右",
-    "insightsOnThisDay": "历史上的今天",
+    "insightsOnThisDay": "那时",
     "insightsMediaCounters": "媒体",
     "insightsPhotos": "照片",
     "insightsVideos": "视频",
@@ -47,8 +47,8 @@
     "insightsEmptyPeriod": "此期间还没有笔记",
     "insightsEmptyEmotions": "为笔记标记情绪后即可查看",
     "insightsEmptyPairs": "为一条笔记标记两种情绪即可查看组合",
-    "insightsEmptyOnThisDay": "往年的今天还没有记录",
-    "insightsEmptyRoundVideos": "此期间没有圆形视频",
+    "insightsEmptyOnThisDay": "一周、一个月、半年和一年前还没有记录",
+    "insightsEmptyRoundVideos": "此期间没有语音或圆形视频",
     "insightsEmptyStreak": "今天添加一条笔记开始连续记录",
     "insightsCustomize": "自定义分析",
     "insightsCustomizeDescription": "开关卡片，拖动以重新排序",
@@ -355,5 +355,12 @@
     "creatorEmotionsTitle": "情绪",
     "creatorEmotionsAfterSave": "保存后询问",
     "creatorEmotionsButton": "键盘上方的按钮",
-    "creatorEmotionsNever": "不询问"
+    "creatorEmotionsNever": "不询问",
+    "insightsWeekAgo": "一周前",
+    "insightsMonthAgo": "一个月前",
+    "insightsHalfYearAgo": "半年前",
+    "insightsYearAgo": "一年前",
+    "insightsTwoYearsAgo": "两年前",
+    "insightsVoiceAndVideos": "语音和圆形视频",
+    "insightsWeekNumber": "第{number}周"
 }

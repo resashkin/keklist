@@ -139,7 +139,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get insightsOnThisDay => 'В этот день';
+  String get insightsOnThisDay => 'Что было тогда';
 
   @override
   String get insightsMediaCounters => 'Медиа';
@@ -169,10 +169,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get insightsEmptyOnThisDay =>
-      'В прошлые годы в этот день пока ничего нет';
+      'Неделю, месяц, полгода и год назад пока ничего нет';
 
   @override
-  String get insightsEmptyRoundVideos => 'В этом периоде нет кружочков';
+  String get insightsEmptyRoundVideos =>
+      'За этот период нет голосовых и кружков';
 
   @override
   String get insightsEmptyStreak =>
@@ -1160,4 +1161,27 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get creatorEmotionsNever => 'Не спрашивать';
+
+  @override
+  String get insightsWeekAgo => 'Неделю назад';
+
+  @override
+  String get insightsMonthAgo => 'Месяц назад';
+
+  @override
+  String get insightsHalfYearAgo => 'Полгода назад';
+
+  @override
+  String get insightsYearAgo => 'Год назад';
+
+  @override
+  String get insightsTwoYearsAgo => '2 года назад';
+
+  @override
+  String get insightsVoiceAndVideos => 'Голосовые и кружки';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return 'Неделя $number';
+  }
 }
