@@ -215,7 +215,7 @@
     "@profile": {
         "description": "Профиль таб белгісі"
     },
-    "insights": "Талдау",
+    "insights": "Профиль",
     "@insights": {
         "description": "Талдау таб белгісі"
     },
@@ -355,7 +355,7 @@
     "@calendarDescription": {
         "description": "Күнтізбе таб сипаттамасы"
     },
-    "insightsDescription": "Барлық жазбаларыңыздың статистикасы",
+    "insightsDescription": "Сіз және жазбаларыңыздың статистикасы",
     "@insightsDescription": {
         "description": "Талдау таб сипаттамасы"
     },

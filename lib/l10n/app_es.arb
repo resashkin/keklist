@@ -215,7 +215,7 @@
     "@profile": {
         "description": "Etiqueta de pestaña perfil"
     },
-    "insights": "Perspectivas",
+    "insights": "Perfil",
     "@insights": {
         "description": "Etiqueta de pestaña perspectivas"
     },
@@ -355,7 +355,7 @@
     "@calendarDescription": {
         "description": "Descripción de pestaña calendario"
     },
-    "insightsDescription": "Estadísticas de todas tus entradas",
+    "insightsDescription": "Tú y las estadísticas de tus notas",
     "@insightsDescription": {
         "description": "Descripción de pestaña perspectivas"
     },

@@ -213,7 +213,7 @@
     "@profile": {
         "description": "Oznaka taba profila"
     },
-    "insights": "Uvid",
+    "insights": "Profil",
     "@insights": {
         "description": "Oznaka taba uvida"
     },
@@ -353,7 +353,7 @@
     "@calendarDescription": {
         "description": "Opis taba kalendara"
     },
-    "insightsDescription": "Statistike svih vaših unosa",
+    "insightsDescription": "Vi i statistika vaših zapisa",
     "@insightsDescription": {
         "description": "Opis taba uvida"
     },

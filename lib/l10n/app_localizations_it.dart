@@ -359,7 +359,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get profile => 'Profilo';
 
   @override
-  String get insights => 'Approfondimenti';
+  String get insights => 'Profilo';
 
   @override
   String get calendar => 'Calendario';
@@ -467,7 +467,7 @@ class AppLocalizationsIt extends AppLocalizations {
       'Schermata principale con Calendario delle voci';
 
   @override
-  String get insightsDescription => 'Statistiche di tutte le tue voci';
+  String get insightsDescription => 'Tu e le statistiche delle tue note';
 
   @override
   String get settingsDescription =>

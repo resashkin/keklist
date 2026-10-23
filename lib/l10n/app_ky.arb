@@ -215,7 +215,7 @@
     "@profile": {
         "description": "Профиль таб белгиси"
     },
-    "insights": "Талдоо",
+    "insights": "Профиль",
     "@insights": {
         "description": "Талдоо таб белгиси"
     },
@@ -355,7 +355,7 @@
     "@calendarDescription": {
         "description": "Календарь таб сүрөттөмөсү"
     },
-    "insightsDescription": "Бардык жазмаларыңыздын статистикасы",
+    "insightsDescription": "Сиз жана жазууларыңыздын статистикасы",
     "@insightsDescription": {
         "description": "Талдоо таб сүрөттөмөсү"
     },

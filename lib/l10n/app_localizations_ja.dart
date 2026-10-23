@@ -352,7 +352,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get profile => 'プロフィール';
 
   @override
-  String get insights => 'インサイト';
+  String get insights => 'プロフィール';
 
   @override
   String get calendar => 'カレンダー';
@@ -457,7 +457,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get calendarDescription => 'エントリーのカレンダーがあるメイン画面';
 
   @override
-  String get insightsDescription => 'すべてのエントリーの統計';
+  String get insightsDescription => 'あなたと記録の統計';
 
   @override
   String get settingsDescription => 'すべての設定の画面（ダークモード、同期など）';

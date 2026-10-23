@@ -360,7 +360,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get profile => 'Профиль';
 
   @override
-  String get insights => 'Талдау';
+  String get insights => 'Профиль';
 
   @override
   String get calendar => 'Күнтізбе';
@@ -467,7 +467,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get calendarDescription => 'Жазбалар күнтізбесімен негізгі экран';
 
   @override
-  String get insightsDescription => 'Барлық жазбаларыңыздың статистикасы';
+  String get insightsDescription => 'Сіз және жазбаларыңыздың статистикасы';
 
   @override
   String get settingsDescription =>

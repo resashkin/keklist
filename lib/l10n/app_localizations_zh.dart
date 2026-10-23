@@ -351,7 +351,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get profile => '个人资料';
 
   @override
-  String get insights => '洞察';
+  String get insights => '个人资料';
 
   @override
   String get calendar => '日历';
@@ -456,7 +456,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get calendarDescription => '带有条目日历的主屏幕';
 
   @override
-  String get insightsDescription => '所有条目的统计信息';
+  String get insightsDescription => '你和你的记录统计';
 
   @override
   String get settingsDescription => '包含所有设置的屏幕（深色模式、同步等）';

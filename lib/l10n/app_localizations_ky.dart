@@ -359,7 +359,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get profile => 'Профиль';
 
   @override
-  String get insights => 'Талдоо';
+  String get insights => 'Профиль';
 
   @override
   String get calendar => 'Календарь';
@@ -466,7 +466,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get calendarDescription => 'Жазмалар календары менен негизги экран';
 
   @override
-  String get insightsDescription => 'Бардык жазмаларыңыздын статистикасы';
+  String get insightsDescription => 'Сиз жана жазууларыңыздын статистикасы';
 
   @override
   String get settingsDescription =>
