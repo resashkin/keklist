@@ -39,7 +39,16 @@ final class MediaRecordToggleButton extends StatefulWidget {
   final VoidCallback onRecordVideo;
   final Color? color;
 
-  const MediaRecordToggleButton({super.key, required this.onRecordAudio, required this.onRecordVideo, this.color});
+  /// A white circle with a dark icon instead of a plain icon button.
+  final bool isFilled;
+
+  const MediaRecordToggleButton({
+    super.key,
+    required this.onRecordAudio,
+    required this.onRecordVideo,
+    this.color,
+    this.isFilled = false,
+  });
 
   @override
   State<MediaRecordToggleButton> createState() => _MediaRecordToggleButtonState();
@@ -79,9 +88,12 @@ final class _MediaRecordToggleButtonState extends State<MediaRecordToggleButton>
           child: Icon(
             isAudio ? Icons.mic : Icons.videocam_outlined,
             key: ValueKey(_mode),
-            color: widget.color ?? Colors.blueAccent,
+            color: widget.isFilled ? Colors.black : widget.color ?? Colors.blueAccent,
           ),
         ),
+        style: widget.isFilled
+            ? IconButton.styleFrom(backgroundColor: Colors.white, fixedSize: const Size.square(52.0))
+            : null,
       ),
     );
   }

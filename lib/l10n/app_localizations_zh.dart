@@ -219,9 +219,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get galleryIndexRebuild => '重建';
 
   @override
-  String get allEmotions => '全部…';
-
-  @override
   String get settings => '设置';
 
   @override
@@ -1103,4 +1100,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aiChooseAnotherModel => '选择其他模型';
+
+  @override
+  String get creatorEmotionsTitle => '情绪';
+
+  @override
+  String get creatorEmotionsAfterSave => '保存后询问';
+
+  @override
+  String get creatorEmotionsButton => '键盘上方的按钮';
+
+  @override
+  String get creatorEmotionsNever => '不询问';
 }

@@ -224,9 +224,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get galleryIndexRebuild => 'Поново изгради';
 
   @override
-  String get allEmotions => 'Све…';
-
-  @override
   String get settings => 'Подешавања';
 
   @override
@@ -1148,6 +1145,18 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get aiChooseAnotherModel => 'Изабери други модел';
+
+  @override
+  String get creatorEmotionsTitle => 'Емоције';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Питај после чувања';
+
+  @override
+  String get creatorEmotionsButton => 'Дугме изнад тастатуре';
+
+  @override
+  String get creatorEmotionsNever => 'Не питај';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1368,9 +1377,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get galleryIndexRebuild => 'Ponovo izgradi';
-
-  @override
-  String get allEmotions => 'Sve…';
 
   @override
   String get settings => 'Podešavanja';
@@ -2293,4 +2299,16 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get aiChooseAnotherModel => 'Izaberi drugi model';
+
+  @override
+  String get creatorEmotionsTitle => 'Emocije';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Pitaj posle čuvanja';
+
+  @override
+  String get creatorEmotionsButton => 'Dugme iznad tastature';
+
+  @override
+  String get creatorEmotionsNever => 'Ne pitaj';
 }

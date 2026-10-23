@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "Поново изградити индекс галерије?",
     "galleryIndexRebuildMessage": "Сличице ће бити обрисане, а библиотека поново скенирана.",
     "galleryIndexRebuild": "Поново изгради",
-    "allEmotions": "Све…",
     "settings": "Подешавања",
     "userData": "Кориснички подаци",
     "appearance": "Изглед",
@@ -352,5 +351,9 @@
     "aiRecommended": "Препоручено",
     "aiLowQuality": "Слаб квалитет",
     "aiModelDoesNotFit": "Овај модел не стаје у меморију телефона. Изаберите мањи.",
-    "aiChooseAnotherModel": "Изабери други модел"
+    "aiChooseAnotherModel": "Изабери други модел",
+    "creatorEmotionsTitle": "Емоције",
+    "creatorEmotionsAfterSave": "Питај после чувања",
+    "creatorEmotionsButton": "Дугме изнад тастатуре",
+    "creatorEmotionsNever": "Не питај"
 }

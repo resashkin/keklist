@@ -2,16 +2,17 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
-import 'package:keklist/domain/repositories/mind/mind_repository.dart';
-import 'package:keklist/domain/services/emotions/frequent_emotions.dart';
+import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
+import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
-import 'package:keklist/presentation/screens/emotions/widgets/emotion_chip.dart';
+import 'package:keklist/presentation/screens/mind_creator/mind_creator_tweak_sheet.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
@@ -27,10 +28,16 @@ final class MindCreatorScreen extends StatefulWidget {
   State<MindCreatorScreen> createState() => _MindCreatorScreenState();
 }
 
-final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
+final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> with ShakeToTweakMixin {
   final TextEditingController _textEditingController = TextEditingController();
   final List<String> _selectedEmotionIds = [];
   BaseMindNotePiece? _attachedMedia;
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController.addListener(_textChanged);
+  }
 
   @override
   void dispose() {
@@ -38,8 +45,45 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
     _textEditingController.dispose();
   }
 
+  bool _hasText = false;
+
+  void _textChanged() {
+    final bool hasText = _textEditingController.text.isNotEmpty;
+    if (hasText != _hasText) setState(() => _hasText = hasText);
+  }
+
+  @override
+  String get shakeScreenId => ShakeScreenIds.creator;
+
+  @override
+  void onShakeToTweak() => MindCreatorTweakSheet.show(context);
+
+  MindEmotionsPrompt get _emotionsPrompt => switch (context.watch<SettingsBloc>().state) {
+    SettingsDataState(:final settings) => settings.mindEmotionsPrompt,
+    _ => MindEmotionsPrompt.afterSave,
+  };
+
+  /// In the "after save" mode the emotions come right after Save, before the mind is created.
+  Future<void> _save(MindEmotionsPrompt prompt) async {
+    if (prompt == MindEmotionsPrompt.afterSave && _selectedEmotionIds.isEmpty) {
+      FocusScope.of(context).unfocus();
+      await EmotionMarkingSheet.show(
+        context: context,
+        initialSelectedIds: const {},
+        onSelectionChanged: (ids) => _selectedEmotionIds
+          ..clear()
+          ..addAll(ids),
+      );
+      if (!mounted) return;
+    }
+    Navigator.of(context).pop();
+    widget.onDone(_composeNote(), List.of(_selectedEmotionIds));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final MindEmotionsPrompt emotionsPrompt = _emotionsPrompt;
+    final bool canRecord = _attachedMedia == null && !_hasText && !kIsPhoneWeb;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       appBar: AppBar(
@@ -53,48 +97,58 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
         ),
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              widget.onDone(_composeNote(), List.of(_selectedEmotionIds));
-            },
+            onPressed: () => _save(emotionsPrompt),
             child: Text(context.l10n.save, style: const TextStyle(fontSize: 16.0, color: Colors.blueAccent)),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (_attachedMedia case final BaseMindNotePiece media)
-              _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
-            TextField(
-              autofocus: true,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              textCapitalization: TextCapitalization.sentences,
-              controller: _textEditingController,
-              style: const TextStyle(fontSize: 20.0),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(12.0),
-                border: InputBorder.none,
-                hintText: widget.hintText ?? context.l10n.writeSomething,
-                suffixIcon: _attachedMedia == null && !kIsPhoneWeb
-                    ? MediaRecordToggleButton(
-                        onRecordAudio: () => _attach(MediaRecording.recordAudio),
-                        onRecordVideo: () => _attach(MediaRecording.recordVideo),
-                      )
-                    : null,
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (_attachedMedia case final BaseMindNotePiece media)
+                    _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
+                  TextField(
+                    autofocus: true,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    textCapitalization: TextCapitalization.sentences,
+                    controller: _textEditingController,
+                    style: const TextStyle(fontSize: 20.0),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(12.0),
+                      border: InputBorder.none,
+                      hintText: widget.hintText ?? context.l10n.writeSomething,
+                    ),
+                  ),
+                ],
               ),
             ),
-            _CreatorEmotionsRow(
-              selectedIds: _selectedEmotionIds,
-              onToggle: (id) => setState(
-                () => _selectedEmotionIds.contains(id) ? _selectedEmotionIds.remove(id) : _selectedEmotionIds.add(id),
+          ),
+          // Sits right above the keyboard.
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 12.0),
+            child: SizedBox(
+              height: 52.0,
+              child: Row(
+                children: [
+                  if (emotionsPrompt == MindEmotionsPrompt.button)
+                    _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
+                  const Spacer(),
+                  if (canRecord)
+                    MediaRecordToggleButton(
+                      isFilled: true,
+                      onRecordAudio: () => _attach(MediaRecording.recordAudio),
+                      onRecordVideo: () => _attach(MediaRecording.recordVideo),
+                    ),
+                ],
               ),
-              onOpenAll: _openMarkingSheet,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -139,43 +193,24 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
   }
 }
 
-final class _CreatorEmotionsRow extends StatelessWidget {
+/// Opens the emotion sheet; shows the chosen emojis once there are some.
+final class _EmotionsButton extends StatelessWidget {
   final List<String> selectedIds;
-  final ValueChanged<String> onToggle;
-  final VoidCallback onOpenAll;
+  final VoidCallback onTap;
 
-  const _CreatorEmotionsRow({required this.selectedIds, required this.onToggle, required this.onOpenAll});
+  const _EmotionsButton({required this.selectedIds, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EmotionBloc, EmotionState>(
-      builder: (context, state) {
-        if (state is! EmotionsList) return const SizedBox.shrink();
-        final List<Emotion> frequent = FrequentEmotions.pick(
-          minds: context.read<MindRepository>().values,
-          activeEmotions: state.activeEmotions,
-          fallback: state.rootEmotions,
-        );
-        final List<Emotion> selected = selectedIds.map(state.byId).whereType<Emotion>().toList();
-        final List<Emotion> chips = [...frequent, ...selected.where((emotion) => !frequent.contains(emotion))];
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-          child: Wrap(
-            spacing: 8.0,
-            runSpacing: 8.0,
-            children: [
-              for (final Emotion emotion in chips)
-                EmotionChip(
-                  emojis: [emotion.emoji],
-                  label: emotion.title,
-                  selected: selectedIds.contains(emotion.id),
-                  onTap: () => onToggle(emotion.id),
-                ),
-              EmotionAddChip(label: context.l10n.allEmotions, onTap: onOpenAll),
-            ],
-          ),
-        );
-      },
+    final EmotionState state = context.watch<EmotionBloc>().state;
+    final List<String> emojis = state is EmotionsList
+        ? selectedIds.map(state.byId).whereType<Emotion>().map((emotion) => emotion.emoji).toList()
+        : const [];
+    return OutlinedButton.icon(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(minimumSize: const Size(52.0, 52.0), shape: const StadiumBorder()),
+      icon: emojis.isEmpty ? const Icon(Icons.add_reaction_outlined) : null,
+      label: Text(emojis.isEmpty ? context.l10n.emotions : emojis.join(' ')),
     );
   }
 }

@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "¿Reconstruir el índice de la galería?",
     "galleryIndexRebuildMessage": "Se borrarán las miniaturas y la fototeca se analizará de nuevo.",
     "galleryIndexRebuild": "Reconstruir",
-    "allEmotions": "Todas…",
     "settings": "Configuración",
     "@settings": {
         "description": "Etiqueta de pestaña configuración"
@@ -580,5 +579,9 @@
     "aiRecommended": "Recomendado",
     "aiLowQuality": "Baja calidad",
     "aiModelDoesNotFit": "Este modelo no cabe en la memoria del teléfono. Elige uno más pequeño.",
-    "aiChooseAnotherModel": "Elegir otro modelo"
+    "aiChooseAnotherModel": "Elegir otro modelo",
+    "creatorEmotionsTitle": "Emociones",
+    "creatorEmotionsAfterSave": "Preguntar al guardar",
+    "creatorEmotionsButton": "Botón sobre el teclado",
+    "creatorEmotionsNever": "No preguntar"
 }

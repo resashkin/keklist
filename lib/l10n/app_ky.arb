@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "Галерея индексин кайра түзөбүзбү?",
     "galleryIndexRebuildMessage": "Миниатюралар өчүрүлүп, медиатека кайра текшерилет.",
     "galleryIndexRebuild": "Кайра түзүү",
-    "allEmotions": "Баары…",
     "settings": "Сөздүктөр",
     "@settings": {
         "description": "Сөздүктөр таб белгиси"
@@ -580,5 +579,9 @@
     "aiRecommended": "Сунушталат",
     "aiLowQuality": "Сапаты төмөн",
     "aiModelDoesNotFit": "Бул модель телефондун эсине батпайт. Кичирээк моделди тандаңыз.",
-    "aiChooseAnotherModel": "Башка модель тандоо"
+    "aiChooseAnotherModel": "Башка модель тандоо",
+    "creatorEmotionsTitle": "Эмоциялар",
+    "creatorEmotionsAfterSave": "Сактагандан кийин суроо",
+    "creatorEmotionsButton": "Баскычтоптун үстүндөгү баскыч",
+    "creatorEmotionsNever": "Сурабоо"
 }

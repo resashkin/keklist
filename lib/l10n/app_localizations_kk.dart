@@ -226,9 +226,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get galleryIndexRebuild => 'Қайта құру';
 
   @override
-  String get allEmotions => 'Барлығы…';
-
-  @override
   String get settings => 'Баптаулар';
 
   @override
@@ -1149,4 +1146,16 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get aiChooseAnotherModel => 'Басқа модель таңдау';
+
+  @override
+  String get creatorEmotionsTitle => 'Эмоциялар';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Сақтағаннан кейін сұрау';
+
+  @override
+  String get creatorEmotionsButton => 'Пернетақта үстіндегі түйме';
+
+  @override
+  String get creatorEmotionsNever => 'Сұрамау';
 }

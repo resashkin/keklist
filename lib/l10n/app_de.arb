@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "Galerie-Index neu aufbauen?",
     "galleryIndexRebuildMessage": "Miniaturen werden gelöscht und die Mediathek neu durchsucht.",
     "galleryIndexRebuild": "Neu aufbauen",
-    "allEmotions": "Alle…",
     "settings": "Einstellungen",
     "userData": "Benutzerdaten",
     "appearance": "Erscheinungsbild",
@@ -352,5 +351,9 @@
     "aiRecommended": "Empfohlen",
     "aiLowQuality": "Geringe Qualität",
     "aiModelDoesNotFit": "Dieses Modell passt nicht in den Speicher des Telefons. Wähle ein kleineres.",
-    "aiChooseAnotherModel": "Anderes Modell wählen"
+    "aiChooseAnotherModel": "Anderes Modell wählen",
+    "creatorEmotionsTitle": "Emotionen",
+    "creatorEmotionsAfterSave": "Nach dem Speichern fragen",
+    "creatorEmotionsButton": "Taste über der Tastatur",
+    "creatorEmotionsNever": "Nicht fragen"
 }

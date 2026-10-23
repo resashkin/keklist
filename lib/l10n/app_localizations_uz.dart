@@ -226,9 +226,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get galleryIndexRebuild => 'Qayta tuzish';
 
   @override
-  String get allEmotions => 'Hammasi…';
-
-  @override
   String get settings => 'Sozlamalar';
 
   @override
@@ -1151,4 +1148,16 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get aiChooseAnotherModel => 'Boshqa model tanlash';
+
+  @override
+  String get creatorEmotionsTitle => 'Hissiyotlar';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Saqlagandan keyin so‘rash';
+
+  @override
+  String get creatorEmotionsButton => 'Klaviatura ustidagi tugma';
+
+  @override
+  String get creatorEmotionsNever => 'So‘ramaslik';
 }

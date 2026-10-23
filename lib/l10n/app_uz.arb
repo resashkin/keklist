@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "Galereya indeksi qayta tuzilsinmi?",
     "galleryIndexRebuildMessage": "Miniatyuralar oʻchiriladi va mediateka qayta skanerlanadi.",
     "galleryIndexRebuild": "Qayta tuzish",
-    "allEmotions": "Hammasi…",
     "settings": "Sozlamalar",
     "@settings": {
         "description": "Sozlamalar tab yorlig'i"
@@ -580,5 +579,9 @@
     "aiRecommended": "Tavsiya etiladi",
     "aiLowQuality": "Sifati past",
     "aiModelDoesNotFit": "Bu model telefon xotirasiga sig‘maydi. Kichikroq modelni tanlang.",
-    "aiChooseAnotherModel": "Boshqa model tanlash"
+    "aiChooseAnotherModel": "Boshqa model tanlash",
+    "creatorEmotionsTitle": "Hissiyotlar",
+    "creatorEmotionsAfterSave": "Saqlagandan keyin so‘rash",
+    "creatorEmotionsButton": "Klaviatura ustidagi tugma",
+    "creatorEmotionsNever": "So‘ramaslik"
 }

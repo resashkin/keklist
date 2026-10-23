@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "Пересобрать индекс галереи?",
     "galleryIndexRebuildMessage": "Миниатюры будут удалены, а медиатека просканирована заново.",
     "galleryIndexRebuild": "Пересобрать",
-    "allEmotions": "Все…",
     "settings": "Настройки",
     "userData": "Данные пользователя",
     "appearance": "Внешний вид",
@@ -352,5 +351,9 @@
     "aiRecommended": "Рекомендуем",
     "aiLowQuality": "Слабое качество",
     "aiModelDoesNotFit": "Эта модель не помещается в память телефона. Выберите модель поменьше.",
-    "aiChooseAnotherModel": "Выбрать другую модель"
+    "aiChooseAnotherModel": "Выбрать другую модель",
+    "creatorEmotionsTitle": "Эмоции",
+    "creatorEmotionsAfterSave": "Спросить после сохранения",
+    "creatorEmotionsButton": "Кнопка над клавиатурой",
+    "creatorEmotionsNever": "Не спрашивать"
 }
