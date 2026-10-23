@@ -52,6 +52,7 @@ enum TabType implements Equatable {
   insights,
   settings,
   today,
+  ai,
   debugMenu;
 
   String localizedLabel(BuildContext context) => switch (this) {
@@ -59,6 +60,7 @@ enum TabType implements Equatable {
         TabType.insights => context.l10n.insights,
         TabType.settings => context.l10n.settings,
         TabType.today => context.l10n.today,
+        TabType.ai => context.l10n.aiTab,
         TabType.debugMenu => context.l10n.debugMenu
       };
 
@@ -67,6 +69,7 @@ enum TabType implements Equatable {
         TabType.insights => context.l10n.insightsDescription,
         TabType.settings => context.l10n.settingsDescription,
         TabType.today => context.l10n.todayDescription,
+        TabType.ai => context.l10n.aiTabDescription,
         TabType.debugMenu => context.l10n.debugMenuDescription
       };
 
@@ -75,6 +78,7 @@ enum TabType implements Equatable {
         TabType.insights => Icon(Icons.insights),
         TabType.settings => Icon(Icons.settings),
         TabType.today => Icon(Icons.today),
+        TabType.ai => Icon(Icons.auto_awesome),
         TabType.debugMenu => Icon(Icons.bug_report)
       };
 
@@ -83,6 +87,7 @@ enum TabType implements Equatable {
         TabType.insights => 'chart.bar.fill',
         TabType.settings => 'gearshape',
         TabType.today => 'sun.max',
+        TabType.ai => 'sparkles',
         TabType.debugMenu => 'ant',
       };
 

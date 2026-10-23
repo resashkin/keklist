@@ -11,6 +11,7 @@ import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/helpers/interface_style_utils.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/presentation/core/widgets/bottom_navigation_bar.dart';
+import 'package:keklist/presentation/screens/ai/ai_screen.dart';
 import 'package:keklist/presentation/screens/insights/insights_screen.dart';
 import 'package:keklist/presentation/screens/mind_collection/mind_collection_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
@@ -182,6 +183,8 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
           // strange gap under the FAB.
           fabBottomOffset: _useLiquidGlass && _isTabBarVisible && !_isWide ? kBottomNavigationBarHeight + 48.0 : 0.0,
         );
+      case TabType.ai:
+        return const AiScreen();
       case TabType.debugMenu:
         return const SizedBox.shrink();
     }

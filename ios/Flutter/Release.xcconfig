@@ -1,1 +1,3 @@
 #include "Generated.xcconfig"
+// LiteRT-LM ships no Intel simulator runtime.
+EXCLUDED_ARCHS[sdk=iphonesimulator*]=i386 x86_64

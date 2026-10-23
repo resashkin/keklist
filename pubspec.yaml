@@ -79,6 +79,13 @@ dependencies:
   sensors_plus: ^7.1.1
   image_picker: ^1.2.4
   web: ^1.1.1
+  ffi: ^2.1.0
+  llamadart: ^0.15.6
+  llamadart_llama_cpp_flutter: ^0.15.2
+  llamadart_litert_lm_flutter: ^0.15.2
+  background_downloader: ^9.6.4
+  connectivity_plus: ^7.3.1
+  battery_plus: ^7.1.2
 dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:

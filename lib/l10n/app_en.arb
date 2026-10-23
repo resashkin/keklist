@@ -1190,5 +1190,264 @@
     "webVersionPinNotSet": "Not set",
     "webVersionPinHint": "4–8 digits",
     "webVersionRemovePin": "Remove PIN",
-    "webVersionPort": "Port"
+    "webVersionPort": "Port",
+    "aiTab": "AI",
+    "@aiTab": {
+        "description": "AI tab"
+    },
+    "aiTabDescription": "Talk about your records with an AI that runs on your phone",
+    "@aiTabDescription": {
+        "description": "AI tab"
+    },
+    "aiPrivacyNote": "Runs on your phone only: your records never leave the device.",
+    "@aiPrivacyNote": {
+        "description": "AI tab"
+    },
+    "aiDisclaimer": "Not a medical service. If you are in danger, contact emergency services.",
+    "@aiDisclaimer": {
+        "description": "AI tab"
+    },
+    "aiDaySummaries": "Day summaries",
+    "@aiDaySummaries": {
+        "description": "AI tab"
+    },
+    "aiSummarize": "Tap to summarize",
+    "@aiSummarize": {
+        "description": "AI tab"
+    },
+    "aiSummaryOutdated": "Records changed — tap to update",
+    "@aiSummaryOutdated": {
+        "description": "AI tab"
+    },
+    "aiRegenerate": "Write again",
+    "@aiRegenerate": {
+        "description": "AI tab"
+    },
+    "aiYesterday": "Yesterday",
+    "@aiYesterday": {
+        "description": "AI tab"
+    },
+    "aiSessions": "Sessions",
+    "@aiSessions": {
+        "description": "AI tab"
+    },
+    "aiNoSessions": "No sessions yet",
+    "@aiNoSessions": {
+        "description": "AI tab"
+    },
+    "aiNewSession": "New session",
+    "@aiNewSession": {
+        "description": "AI tab"
+    },
+    "aiChooseRole": "Choose a role",
+    "@aiChooseRole": {
+        "description": "AI tab"
+    },
+    "aiRoleTherapist": "Therapist",
+    "@aiRoleTherapist": {
+        "description": "AI tab"
+    },
+    "aiRoleCoach": "Coach",
+    "@aiRoleCoach": {
+        "description": "AI tab"
+    },
+    "aiRoleFriend": "Friend",
+    "@aiRoleFriend": {
+        "description": "AI tab"
+    },
+    "aiMessageHint": "Message",
+    "@aiMessageHint": {
+        "description": "AI tab"
+    },
+    "aiStarterWeek": "How was my week?",
+    "@aiStarterWeek": {
+        "description": "AI tab"
+    },
+    "aiStarterWorry": "What has been bothering me lately?",
+    "@aiStarterWorry": {
+        "description": "AI tab"
+    },
+    "aiStarterJoy": "What brought me joy recently?",
+    "@aiStarterJoy": {
+        "description": "AI tab"
+    },
+    "aiActionSaveAsMind": "Save as mind",
+    "@aiActionSaveAsMind": {
+        "description": "AI tab"
+    },
+    "aiActionOpenDay": "Open day",
+    "@aiActionOpenDay": {
+        "description": "AI tab"
+    },
+    "aiActionWeekSummary": "Week summary",
+    "@aiActionWeekSummary": {
+        "description": "AI tab"
+    },
+    "aiWeekSummaryPrompt": "Summarize my last 7 days: what happened, how I felt, what stood out.",
+    "@aiWeekSummaryPrompt": {
+        "description": "AI tab"
+    },
+    "aiSavedAsMind": "Saved to today",
+    "@aiSavedAsMind": {
+        "description": "AI tab"
+    },
+    "aiThinking": "Thinking…",
+    "@aiThinking": {
+        "description": "AI tab"
+    },
+    "aiStop": "Stop",
+    "@aiStop": {
+        "description": "AI tab"
+    },
+    "aiNoModelTitle": "Choose a model",
+    "@aiNoModelTitle": {
+        "description": "AI tab"
+    },
+    "aiNoModelMessage": "Download a model to start. It runs on your phone, offline.",
+    "@aiNoModelMessage": {
+        "description": "AI tab"
+    },
+    "aiNoModelOnPhone": "Download a model in the phone app: Settings → AI → Models.",
+    "@aiNoModelOnPhone": {
+        "description": "AI tab"
+    },
+    "aiModels": "Models",
+    "@aiModels": {
+        "description": "AI tab"
+    },
+    "aiRoles": "Roles",
+    "@aiRoles": {
+        "description": "AI tab"
+    },
+    "aiDownloaded": "Downloaded",
+    "@aiDownloaded": {
+        "description": "AI tab"
+    },
+    "aiDownloads": "Downloading",
+    "@aiDownloads": {
+        "description": "AI tab"
+    },
+    "aiGalleryCatalog": "Google AI Edge Gallery",
+    "@aiGalleryCatalog": {
+        "description": "AI tab"
+    },
+    "aiHuggingFace": "Hugging Face (GGUF)",
+    "@aiHuggingFace": {
+        "description": "AI tab"
+    },
+    "aiSearchModels": "Search GGUF models",
+    "@aiSearchModels": {
+        "description": "AI tab"
+    },
+    "aiFastest": "Fastest",
+    "@aiFastest": {
+        "description": "AI tab"
+    },
+    "aiDownload": "Download",
+    "@aiDownload": {
+        "description": "AI tab"
+    },
+    "aiPause": "Pause",
+    "@aiPause": {
+        "description": "AI tab"
+    },
+    "aiPaused": "Paused",
+    "@aiPaused": {
+        "description": "AI tab"
+    },
+    "aiResume": "Resume",
+    "@aiResume": {
+        "description": "AI tab"
+    },
+    "aiDownloadFailed": "Download failed",
+    "@aiDownloadFailed": {
+        "description": "AI tab"
+    },
+    "aiCellularTitle": "Download over mobile data?",
+    "@aiCellularTitle": {
+        "description": "AI tab"
+    },
+    "aiCellularMessage": "{size} will be downloaded over mobile data.",
+    "@aiCellularMessage": {
+        "description": "AI tab",
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "aiDeleteModel": "Delete the model?",
+    "@aiDeleteModel": {
+        "description": "AI tab"
+    },
+    "aiStorageUsed": "On this phone: {size}",
+    "@aiStorageUsed": {
+        "description": "AI tab",
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "aiDeviceMemory": "Phone memory: {size}",
+    "@aiDeviceMemory": {
+        "description": "AI tab",
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "aiCatalogFailed": "Couldn't load the list. Check the connection.",
+    "@aiCatalogFailed": {
+        "description": "AI tab"
+    },
+    "aiNoFilesFit": "None of this model's files fit this phone's memory.",
+    "@aiNoFilesFit": {
+        "description": "AI tab"
+    },
+    "aiBuiltInRole": "Built-in",
+    "@aiBuiltInRole": {
+        "description": "AI tab"
+    },
+    "aiOwnRoles": "Your roles",
+    "@aiOwnRoles": {
+        "description": "AI tab"
+    },
+    "aiDuplicate": "Duplicate",
+    "@aiDuplicate": {
+        "description": "AI tab"
+    },
+    "aiNewRole": "New role",
+    "@aiNewRole": {
+        "description": "AI tab"
+    },
+    "aiRoleName": "Name",
+    "@aiRoleName": {
+        "description": "AI tab"
+    },
+    "aiRoleEmoji": "Emoji",
+    "@aiRoleEmoji": {
+        "description": "AI tab"
+    },
+    "aiRolePrompt": "Prompt",
+    "@aiRolePrompt": {
+        "description": "AI tab"
+    },
+    "aiRolePromptHint": "How the AI should talk and what to focus on",
+    "@aiRolePromptHint": {
+        "description": "AI tab"
+    },
+    "aiReadOnlyRole": "Built-in roles can't be changed. Duplicate one to make your own.",
+    "@aiReadOnlyRole": {
+        "description": "AI tab"
+    },
+    "aiDeleteSession": "Delete the session?",
+    "@aiDeleteSession": {
+        "description": "AI tab"
+    },
+    "aiDeleteRole": "Delete the role?",
+    "@aiDeleteRole": {
+        "description": "AI tab"
+    }
 }

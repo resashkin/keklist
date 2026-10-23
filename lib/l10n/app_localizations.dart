@@ -1880,6 +1880,372 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Port'**
   String get webVersionPort;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'AI'**
+  String get aiTab;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Talk about your records with an AI that runs on your phone'**
+  String get aiTabDescription;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Runs on your phone only: your records never leave the device.'**
+  String get aiPrivacyNote;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Not a medical service. If you are in danger, contact emergency services.'**
+  String get aiDisclaimer;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Day summaries'**
+  String get aiDaySummaries;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to summarize'**
+  String get aiSummarize;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Records changed — tap to update'**
+  String get aiSummaryOutdated;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Write again'**
+  String get aiRegenerate;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get aiYesterday;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Sessions'**
+  String get aiSessions;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'No sessions yet'**
+  String get aiNoSessions;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'New session'**
+  String get aiNewSession;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a role'**
+  String get aiChooseRole;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Therapist'**
+  String get aiRoleTherapist;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Coach'**
+  String get aiRoleCoach;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Friend'**
+  String get aiRoleFriend;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get aiMessageHint;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'How was my week?'**
+  String get aiStarterWeek;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'What has been bothering me lately?'**
+  String get aiStarterWorry;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'What brought me joy recently?'**
+  String get aiStarterJoy;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Save as mind'**
+  String get aiActionSaveAsMind;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Open day'**
+  String get aiActionOpenDay;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Week summary'**
+  String get aiActionWeekSummary;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Summarize my last 7 days: what happened, how I felt, what stood out.'**
+  String get aiWeekSummaryPrompt;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to today'**
+  String get aiSavedAsMind;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking…'**
+  String get aiThinking;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get aiStop;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a model'**
+  String get aiNoModelTitle;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download a model to start. It runs on your phone, offline.'**
+  String get aiNoModelMessage;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download a model in the phone app: Settings → AI → Models.'**
+  String get aiNoModelOnPhone;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Models'**
+  String get aiModels;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Roles'**
+  String get aiRoles;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Downloaded'**
+  String get aiDownloaded;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading'**
+  String get aiDownloads;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Google AI Edge Gallery'**
+  String get aiGalleryCatalog;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Hugging Face (GGUF)'**
+  String get aiHuggingFace;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Search GGUF models'**
+  String get aiSearchModels;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Fastest'**
+  String get aiFastest;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get aiDownload;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get aiPause;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get aiPaused;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get aiResume;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download failed'**
+  String get aiDownloadFailed;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download over mobile data?'**
+  String get aiCellularTitle;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'{size} will be downloaded over mobile data.'**
+  String aiCellularMessage(String size);
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the model?'**
+  String get aiDeleteModel;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'On this phone: {size}'**
+  String aiStorageUsed(String size);
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Phone memory: {size}'**
+  String aiDeviceMemory(String size);
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the list. Check the connection.'**
+  String get aiCatalogFailed;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'None of this model\'s files fit this phone\'s memory.'**
+  String get aiNoFilesFit;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Built-in'**
+  String get aiBuiltInRole;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Your roles'**
+  String get aiOwnRoles;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get aiDuplicate;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'New role'**
+  String get aiNewRole;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get aiRoleName;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji'**
+  String get aiRoleEmoji;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Prompt'**
+  String get aiRolePrompt;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'How the AI should talk and what to focus on'**
+  String get aiRolePromptHint;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Built-in roles can\'t be changed. Duplicate one to make your own.'**
+  String get aiReadOnlyRole;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the session?'**
+  String get aiDeleteSession;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the role?'**
+  String get aiDeleteRole;
 }
 
 class _AppLocalizationsDelegate

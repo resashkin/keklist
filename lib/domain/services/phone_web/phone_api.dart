@@ -16,6 +16,12 @@ final class PhoneApi {
 
   late final Stream<String> events = _bridge.serverEvents(_url('/api/events').toString());
 
+  Stream<String> eventData(String event) => _bridge.eventData(event);
+
+  /// Like [post], with the JSON answer.
+  Future<Object?> postForJson(String path, Object body) async =>
+      jsonDecode(utf8.decode(_check(await _client.post(_url(path), headers: _json, body: jsonEncode(body))).bodyBytes));
+
   Future<Object?> get(String path) async => jsonDecode(utf8.decode(_check(await _client.get(_url(path))).bodyBytes));
 
   Future<void> post(String path, Object body) async => _check(await _client.post(_url(path), headers: _json, body: jsonEncode(body)));

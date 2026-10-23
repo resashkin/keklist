@@ -922,4 +922,193 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get webVersionPort => 'ポート';
+
+  @override
+  String get aiTab => 'AI';
+
+  @override
+  String get aiTabDescription => 'スマホ上で動くAIと記録について話す';
+
+  @override
+  String get aiPrivacyNote => 'スマホの中だけで動作し、記録が端末の外に出ることはありません。';
+
+  @override
+  String get aiDisclaimer => '医療サービスではありません。危険な状況にある場合は緊急サービスに連絡してください。';
+
+  @override
+  String get aiDaySummaries => '日ごとのまとめ';
+
+  @override
+  String get aiSummarize => 'タップしてまとめる';
+
+  @override
+  String get aiSummaryOutdated => '記録が変わりました — タップして更新';
+
+  @override
+  String get aiRegenerate => '書き直す';
+
+  @override
+  String get aiYesterday => '昨日';
+
+  @override
+  String get aiSessions => 'セッション';
+
+  @override
+  String get aiNoSessions => 'まだセッションはありません';
+
+  @override
+  String get aiNewSession => '新しいセッション';
+
+  @override
+  String get aiChooseRole => '役割を選ぶ';
+
+  @override
+  String get aiRoleTherapist => 'セラピスト';
+
+  @override
+  String get aiRoleCoach => 'コーチ';
+
+  @override
+  String get aiRoleFriend => '友達';
+
+  @override
+  String get aiMessageHint => 'メッセージ';
+
+  @override
+  String get aiStarterWeek => '今週はどうだった？';
+
+  @override
+  String get aiStarterWorry => '最近、何が気になっている？';
+
+  @override
+  String get aiStarterJoy => '最近、何がうれしかった？';
+
+  @override
+  String get aiActionSaveAsMind => 'メモとして保存';
+
+  @override
+  String get aiActionOpenDay => '日を開く';
+
+  @override
+  String get aiActionWeekSummary => '週のまとめ';
+
+  @override
+  String get aiWeekSummaryPrompt => '直近7日間をまとめて：何があったか、どう感じたか、何が印象的だったか。';
+
+  @override
+  String get aiSavedAsMind => '今日に保存しました';
+
+  @override
+  String get aiThinking => '考え中…';
+
+  @override
+  String get aiStop => '停止';
+
+  @override
+  String get aiNoModelTitle => 'モデルを選ぶ';
+
+  @override
+  String get aiNoModelMessage => '始めるにはモデルをダウンロードしてください。スマホ上でオフラインで動作します。';
+
+  @override
+  String get aiNoModelOnPhone => 'スマホのアプリでモデルをダウンロードしてください：設定 → AI → モデル。';
+
+  @override
+  String get aiModels => 'モデル';
+
+  @override
+  String get aiRoles => '役割';
+
+  @override
+  String get aiDownloaded => 'ダウンロード済み';
+
+  @override
+  String get aiDownloads => 'ダウンロード中';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'GGUFモデルを検索';
+
+  @override
+  String get aiFastest => '最速';
+
+  @override
+  String get aiDownload => 'ダウンロード';
+
+  @override
+  String get aiPause => '一時停止';
+
+  @override
+  String get aiPaused => '一時停止中';
+
+  @override
+  String get aiResume => '再開';
+
+  @override
+  String get aiDownloadFailed => 'ダウンロードに失敗しました';
+
+  @override
+  String get aiCellularTitle => 'モバイルデータでダウンロードしますか？';
+
+  @override
+  String aiCellularMessage(String size) {
+    return 'モバイルデータで$sizeをダウンロードします。';
+  }
+
+  @override
+  String get aiDeleteModel => 'モデルを削除しますか？';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'このスマホ上：$size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'スマホのメモリ：$size';
+  }
+
+  @override
+  String get aiCatalogFailed => 'リストを読み込めませんでした。接続を確認してください。';
+
+  @override
+  String get aiNoFilesFit => 'このモデルのファイルはどれもこのスマホのメモリに収まりません。';
+
+  @override
+  String get aiBuiltInRole => '組み込み';
+
+  @override
+  String get aiOwnRoles => 'あなたの役割';
+
+  @override
+  String get aiDuplicate => '複製';
+
+  @override
+  String get aiNewRole => '新しい役割';
+
+  @override
+  String get aiRoleName => '名前';
+
+  @override
+  String get aiRoleEmoji => '絵文字';
+
+  @override
+  String get aiRolePrompt => 'プロンプト';
+
+  @override
+  String get aiRolePromptHint => 'AIの話し方と注目すべき点';
+
+  @override
+  String get aiReadOnlyRole => '組み込みの役割は変更できません。複製して自分の役割を作ってください。';
+
+  @override
+  String get aiDeleteSession => 'セッションを削除しますか？';
+
+  @override
+  String get aiDeleteRole => '役割を削除しますか？';
 }

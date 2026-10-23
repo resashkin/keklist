@@ -952,4 +952,203 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get webVersionPort => 'Порт';
+
+  @override
+  String get aiTab => 'AI';
+
+  @override
+  String get aiTabDescription =>
+      'Жазбаларыңызды телефонда жұмыс істейтін AI-мен талқылаңыз';
+
+  @override
+  String get aiPrivacyNote =>
+      'Тек телефонда жұмыс істейді: жазбалар құрылғыдан шықпайды.';
+
+  @override
+  String get aiDisclaimer =>
+      'Бұл медициналық қызмет емес. Қауіп төнсе, шұғыл қызметтерге хабарласыңыз.';
+
+  @override
+  String get aiDaySummaries => 'Күн қорытындылары';
+
+  @override
+  String get aiSummarize => 'Қорытынды жасау үшін түртіңіз';
+
+  @override
+  String get aiSummaryOutdated => 'Жазбалар өзгерді — жаңарту үшін түртіңіз';
+
+  @override
+  String get aiRegenerate => 'Қайта жазу';
+
+  @override
+  String get aiYesterday => 'Кеше';
+
+  @override
+  String get aiSessions => 'Сессиялар';
+
+  @override
+  String get aiNoSessions => 'Әзірге сессия жоқ';
+
+  @override
+  String get aiNewSession => 'Жаңа сессия';
+
+  @override
+  String get aiChooseRole => 'Рөлді таңдаңыз';
+
+  @override
+  String get aiRoleTherapist => 'Терапевт';
+
+  @override
+  String get aiRoleCoach => 'Коуч';
+
+  @override
+  String get aiRoleFriend => 'Дос';
+
+  @override
+  String get aiMessageHint => 'Хабарлама';
+
+  @override
+  String get aiStarterWeek => 'Аптам қалай өтті?';
+
+  @override
+  String get aiStarterWorry => 'Соңғы кезде мені не мазалайды?';
+
+  @override
+  String get aiStarterJoy => 'Соңғы кезде мені не қуантты?';
+
+  @override
+  String get aiActionSaveAsMind => 'Майнд ретінде сақтау';
+
+  @override
+  String get aiActionOpenDay => 'Күнді ашу';
+
+  @override
+  String get aiActionWeekSummary => 'Апта қорытындысы';
+
+  @override
+  String get aiWeekSummaryPrompt =>
+      'Соңғы 7 күнімді қорытындыла: не болды, не сезіндім, не ерекше болды.';
+
+  @override
+  String get aiSavedAsMind => 'Бүгінге сақталды';
+
+  @override
+  String get aiThinking => 'Ойланып жатырмын…';
+
+  @override
+  String get aiStop => 'Тоқтату';
+
+  @override
+  String get aiNoModelTitle => 'Модельді таңдаңыз';
+
+  @override
+  String get aiNoModelMessage =>
+      'Бастау үшін модельді жүктеп алыңыз. Ол телефонда, интернетсіз жұмыс істейді.';
+
+  @override
+  String get aiNoModelOnPhone =>
+      'Модельді телефондағы қолданбада жүктеңіз: Баптаулар → AI → Модельдер.';
+
+  @override
+  String get aiModels => 'Модельдер';
+
+  @override
+  String get aiRoles => 'Рөлдер';
+
+  @override
+  String get aiDownloaded => 'Жүктелгендер';
+
+  @override
+  String get aiDownloads => 'Жүктелуде';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'GGUF модельдерін іздеу';
+
+  @override
+  String get aiFastest => 'Ең жылдам';
+
+  @override
+  String get aiDownload => 'Жүктеу';
+
+  @override
+  String get aiPause => 'Кідірту';
+
+  @override
+  String get aiPaused => 'Кідіртілді';
+
+  @override
+  String get aiResume => 'Жалғастыру';
+
+  @override
+  String get aiDownloadFailed => 'Жүктеу сәтсіз аяқталды';
+
+  @override
+  String get aiCellularTitle => 'Мобильді интернет арқылы жүктеу керек пе?';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '$size мобильді интернет арқылы жүктеледі.';
+  }
+
+  @override
+  String get aiDeleteModel => 'Модельді жою керек пе?';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'Бұл телефонда: $size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'Телефон жады: $size';
+  }
+
+  @override
+  String get aiCatalogFailed =>
+      'Тізімді жүктеу мүмкін болмады. Байланысты тексеріңіз.';
+
+  @override
+  String get aiNoFilesFit =>
+      'Бұл модельдің бірде-бір файлы телефон жадына сыймайды.';
+
+  @override
+  String get aiBuiltInRole => 'Кіріктірілген';
+
+  @override
+  String get aiOwnRoles => 'Сіздің рөлдеріңіз';
+
+  @override
+  String get aiDuplicate => 'Көшірме жасау';
+
+  @override
+  String get aiNewRole => 'Жаңа рөл';
+
+  @override
+  String get aiRoleName => 'Атауы';
+
+  @override
+  String get aiRoleEmoji => 'Эмодзи';
+
+  @override
+  String get aiRolePrompt => 'Промпт';
+
+  @override
+  String get aiRolePromptHint =>
+      'AI қалай сөйлеуі және неге назар аударуы керек';
+
+  @override
+  String get aiReadOnlyRole =>
+      'Кіріктірілген рөлдерді өзгертуге болмайды. Өз рөліңізді жасау үшін көшірмесін жасаңыз.';
+
+  @override
+  String get aiDeleteSession => 'Сессияны жою керек пе?';
+
+  @override
+  String get aiDeleteRole => 'Рөлді жою керек пе?';
 }

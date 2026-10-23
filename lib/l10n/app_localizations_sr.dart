@@ -952,6 +952,205 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get webVersionPort => 'Порт';
+
+  @override
+  String get aiTab => 'AI';
+
+  @override
+  String get aiTabDescription =>
+      'Разговарајте о својим записима са AI-ем који ради на телефону';
+
+  @override
+  String get aiPrivacyNote =>
+      'Ради само на телефону: записи никада не напуштају уређај.';
+
+  @override
+  String get aiDisclaimer =>
+      'Ово није медицинска услуга. Ако сте у опасности, обратите се хитним службама.';
+
+  @override
+  String get aiDaySummaries => 'Сажеци дана';
+
+  @override
+  String get aiSummarize => 'Додирните за сажетак';
+
+  @override
+  String get aiSummaryOutdated =>
+      'Записи су промењени — додирните за ажурирање';
+
+  @override
+  String get aiRegenerate => 'Напиши поново';
+
+  @override
+  String get aiYesterday => 'Јуче';
+
+  @override
+  String get aiSessions => 'Сесије';
+
+  @override
+  String get aiNoSessions => 'Још нема сесија';
+
+  @override
+  String get aiNewSession => 'Нова сесија';
+
+  @override
+  String get aiChooseRole => 'Изаберите улогу';
+
+  @override
+  String get aiRoleTherapist => 'Терапеут';
+
+  @override
+  String get aiRoleCoach => 'Коуч';
+
+  @override
+  String get aiRoleFriend => 'Пријатељ';
+
+  @override
+  String get aiMessageHint => 'Порука';
+
+  @override
+  String get aiStarterWeek => 'Како је прошла моја недеља?';
+
+  @override
+  String get aiStarterWorry => 'Шта ме мучи у последње време?';
+
+  @override
+  String get aiStarterJoy => 'Шта ме је радовало у последње време?';
+
+  @override
+  String get aiActionSaveAsMind => 'Сачувај као мисао';
+
+  @override
+  String get aiActionOpenDay => 'Отвори дан';
+
+  @override
+  String get aiActionWeekSummary => 'Сажетак недеље';
+
+  @override
+  String get aiWeekSummaryPrompt =>
+      'Сажми мојих последњих 7 дана: шта се десило, како сам се осећао, шта се истакло.';
+
+  @override
+  String get aiSavedAsMind => 'Сачувано у данашњи дан';
+
+  @override
+  String get aiThinking => 'Размишљам…';
+
+  @override
+  String get aiStop => 'Заустави';
+
+  @override
+  String get aiNoModelTitle => 'Изаберите модел';
+
+  @override
+  String get aiNoModelMessage =>
+      'Преузмите модел да бисте почели. Ради на телефону, без интернета.';
+
+  @override
+  String get aiNoModelOnPhone =>
+      'Преузмите модел у апликацији на телефону: Подешавања → AI → Модели.';
+
+  @override
+  String get aiModels => 'Модели';
+
+  @override
+  String get aiRoles => 'Улоге';
+
+  @override
+  String get aiDownloaded => 'Преузети';
+
+  @override
+  String get aiDownloads => 'Преузимање';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'Претражи GGUF моделе';
+
+  @override
+  String get aiFastest => 'Најбржи';
+
+  @override
+  String get aiDownload => 'Преузми';
+
+  @override
+  String get aiPause => 'Пауза';
+
+  @override
+  String get aiPaused => 'Паузирано';
+
+  @override
+  String get aiResume => 'Настави';
+
+  @override
+  String get aiDownloadFailed => 'Преузимање није успело';
+
+  @override
+  String get aiCellularTitle => 'Преузети преко мобилних података?';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '$size ће бити преузето преко мобилних података.';
+  }
+
+  @override
+  String get aiDeleteModel => 'Обрисати модел?';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'На овом телефону: $size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'Меморија телефона: $size';
+  }
+
+  @override
+  String get aiCatalogFailed => 'Листа није учитана. Проверите везу.';
+
+  @override
+  String get aiNoFilesFit =>
+      'Ниједна датотека овог модела не стаје у меморију телефона.';
+
+  @override
+  String get aiBuiltInRole => 'Уграђене';
+
+  @override
+  String get aiOwnRoles => 'Ваше улоге';
+
+  @override
+  String get aiDuplicate => 'Дуплирај';
+
+  @override
+  String get aiNewRole => 'Нова улога';
+
+  @override
+  String get aiRoleName => 'Назив';
+
+  @override
+  String get aiRoleEmoji => 'Емоџи';
+
+  @override
+  String get aiRolePrompt => 'Промпт';
+
+  @override
+  String get aiRolePromptHint =>
+      'Како AI треба да говори и на шта да се фокусира';
+
+  @override
+  String get aiReadOnlyRole =>
+      'Уграђене улоге се не могу мењати. Дуплирајте једну да направите своју.';
+
+  @override
+  String get aiDeleteSession => 'Обрисати сесију?';
+
+  @override
+  String get aiDeleteRole => 'Обрисати улогу?';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1901,4 +2100,203 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get webVersionPort => 'Port';
+
+  @override
+  String get aiTab => 'AI';
+
+  @override
+  String get aiTabDescription =>
+      'Razgovarajte o svojim zapisima sa AI-em koji radi na telefonu';
+
+  @override
+  String get aiPrivacyNote =>
+      'Radi samo na telefonu: zapisi nikada ne napuštaju uređaj.';
+
+  @override
+  String get aiDisclaimer =>
+      'Ovo nije medicinska usluga. Ako ste u opasnosti, obratite se hitnim službama.';
+
+  @override
+  String get aiDaySummaries => 'Sažeci dana';
+
+  @override
+  String get aiSummarize => 'Dodirnite za sažetak';
+
+  @override
+  String get aiSummaryOutdated =>
+      'Zapisi su promenjeni — dodirnite za ažuriranje';
+
+  @override
+  String get aiRegenerate => 'Napiši ponovo';
+
+  @override
+  String get aiYesterday => 'Juče';
+
+  @override
+  String get aiSessions => 'Sesije';
+
+  @override
+  String get aiNoSessions => 'Još nema sesija';
+
+  @override
+  String get aiNewSession => 'Nova sesija';
+
+  @override
+  String get aiChooseRole => 'Izaberite ulogu';
+
+  @override
+  String get aiRoleTherapist => 'Terapeut';
+
+  @override
+  String get aiRoleCoach => 'Kouč';
+
+  @override
+  String get aiRoleFriend => 'Prijatelj';
+
+  @override
+  String get aiMessageHint => 'Poruka';
+
+  @override
+  String get aiStarterWeek => 'Kako je prošla moja nedelja?';
+
+  @override
+  String get aiStarterWorry => 'Šta me muči u poslednje vreme?';
+
+  @override
+  String get aiStarterJoy => 'Šta me je radovalo u poslednje vreme?';
+
+  @override
+  String get aiActionSaveAsMind => 'Sačuvaj kao misao';
+
+  @override
+  String get aiActionOpenDay => 'Otvori dan';
+
+  @override
+  String get aiActionWeekSummary => 'Sažetak nedelje';
+
+  @override
+  String get aiWeekSummaryPrompt =>
+      'Sažmi mojih poslednjih 7 dana: šta se desilo, kako sam se osećao, šta se istaklo.';
+
+  @override
+  String get aiSavedAsMind => 'Sačuvano u današnji dan';
+
+  @override
+  String get aiThinking => 'Razmišljam…';
+
+  @override
+  String get aiStop => 'Zaustavi';
+
+  @override
+  String get aiNoModelTitle => 'Izaberite model';
+
+  @override
+  String get aiNoModelMessage =>
+      'Preuzmite model da biste počeli. Radi na telefonu, bez interneta.';
+
+  @override
+  String get aiNoModelOnPhone =>
+      'Preuzmite model u aplikaciji na telefonu: Podešavanja → AI → Modeli.';
+
+  @override
+  String get aiModels => 'Modeli';
+
+  @override
+  String get aiRoles => 'Uloge';
+
+  @override
+  String get aiDownloaded => 'Preuzeti';
+
+  @override
+  String get aiDownloads => 'Preuzimanje';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'Pretraži GGUF modele';
+
+  @override
+  String get aiFastest => 'Najbrži';
+
+  @override
+  String get aiDownload => 'Preuzmi';
+
+  @override
+  String get aiPause => 'Pauza';
+
+  @override
+  String get aiPaused => 'Pauzirano';
+
+  @override
+  String get aiResume => 'Nastavi';
+
+  @override
+  String get aiDownloadFailed => 'Preuzimanje nije uspelo';
+
+  @override
+  String get aiCellularTitle => 'Preuzeti preko mobilnih podataka?';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '$size će biti preuzeto preko mobilnih podataka.';
+  }
+
+  @override
+  String get aiDeleteModel => 'Obrisati model?';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'Na ovom telefonu: $size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'Memorija telefona: $size';
+  }
+
+  @override
+  String get aiCatalogFailed => 'Lista nije učitana. Proverite vezu.';
+
+  @override
+  String get aiNoFilesFit =>
+      'Nijedna datoteka ovog modela ne staje u memoriju telefona.';
+
+  @override
+  String get aiBuiltInRole => 'Ugrađene';
+
+  @override
+  String get aiOwnRoles => 'Vaše uloge';
+
+  @override
+  String get aiDuplicate => 'Dupliraj';
+
+  @override
+  String get aiNewRole => 'Nova uloga';
+
+  @override
+  String get aiRoleName => 'Naziv';
+
+  @override
+  String get aiRoleEmoji => 'Emodži';
+
+  @override
+  String get aiRolePrompt => 'Prompt';
+
+  @override
+  String get aiRolePromptHint =>
+      'Kako AI treba da govori i na šta da se fokusira';
+
+  @override
+  String get aiReadOnlyRole =>
+      'Ugrađene uloge se ne mogu menjati. Duplirajte jednu da napravite svoju.';
+
+  @override
+  String get aiDeleteSession => 'Obrisati sesiju?';
+
+  @override
+  String get aiDeleteRole => 'Obrisati ulogu?';
 }

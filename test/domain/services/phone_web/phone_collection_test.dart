@@ -16,6 +16,9 @@ final class _FakeBridge implements BrowserBridge {
   Stream<String> serverEvents(String url) => events.stream;
 
   @override
+  Stream<String> eventData(String event) => const Stream.empty();
+
+  @override
   void openLogin() => logins++;
 }
 

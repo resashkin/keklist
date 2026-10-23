@@ -126,6 +126,7 @@ final class MainContainer {
   /// The web version served by the phone reads and writes the phone's data; only UI settings stay in the browser.
   void _mapPhoneRepositories(Injector injector) {
     final PhoneApi api = PhoneApi();
+    injector.map<PhoneApi>((_) => api, isSingleton: true);
     injector.map<MindRepository>((_) => MindApiRepository(api: api), isSingleton: true);
     injector.map<EmotionRepository>((_) => EmotionApiRepository(api: api), isSingleton: true);
     injector.map<SettingsRepository>(

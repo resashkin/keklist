@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
+
+import 'package:archive/archive.dart';
+import 'package:csv/csv.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
@@ -176,6 +180,28 @@ void main() {
       final importedChild = created.firstWhere((e) => e.title == 'Child');
       expect(importedChild.parentId, clonedParent.id,
           reason: 'child must follow the cloned parent or it becomes an invisible orphan');
+    });
+
+    test('an export from before archive 4.5 imports its emoji and Cyrillic text whole', () async {
+      final Mind mind = Mind(
+        id: 'm1',
+        legacyEmoji: '😀',
+        note: 'Привет 🌿 мир, долгий текст 🎉',
+        dayIndex: 1,
+        creationDate: DateTime.utc(2026),
+        sortIndex: 0,
+        rootId: null,
+      );
+      final String csv = const CsvEncoder(fieldDelimiter: ';').convert([mind.toCSVEntry()]);
+      // Old exports gave the size in UTF-16 units.
+      final Archive archive = Archive()..addFile(ArchiveFile('minds.csv', csv.length, utf8.encode(csv)));
+      final File file = await File('${tempDir.path}/legacy.zip').writeAsBytes(ZipEncoder().encode(archive));
+
+      when(() => emotionRepository.values).thenReturn(const []);
+      when(() => mindRepository.values).thenReturn(const []);
+      await service.importFromFile(file);
+
+      expect(capturedImportedMinds().single.note, mind.note);
     });
 
     test('an archive without emotions.csv still imports its minds', () async {

@@ -11,6 +11,7 @@ import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
+import 'package:keklist/domain/services/web_server/ai_routes.dart';
 import 'package:keklist/domain/services/web_server/gallery_routes.dart';
 import 'package:keklist/domain/services/web_server/login_page.dart';
 import 'package:keklist/domain/services/web_server/name_announcer.dart';
@@ -73,9 +74,11 @@ final class KeklistWebServer extends ChangeNotifier {
     required SettingsRepository settingsRepository,
     required AppFileRepository fileRepository,
     GalleryRoutes? gallery,
+    AiRoutes? ai,
     NameAnnouncer? announcer,
   }) : _minds = mindRepository,
        _gallery = gallery,
+       _ai = ai,
        _emotions = emotionRepository,
        _settings = settingsRepository,
        _files = fileRepository,
@@ -87,6 +90,7 @@ final class KeklistWebServer extends ChangeNotifier {
   final SettingsRepository _settings;
   final AppFileRepository _files;
   final GalleryRoutes? _gallery;
+  final AiRoutes? _ai;
   final NameAnnouncer? _announcer;
 
   static const _cookie = 'keklist_session';
@@ -119,6 +123,8 @@ final class KeklistWebServer extends ChangeNotifier {
       _minds.stream.skip(1).listen((_) => _broadcast('minds')),
       _emotions.stream.skip(1).listen((_) => _broadcast('emotions')),
       ?_gallery?.changes.listen((_) => _broadcast('gallery')),
+      ?_ai?.changes.listen((_) => _broadcast('ai')),
+      ?_ai?.replies.listen((reply) => _broadcast('ai-reply', data: reply)),
       _settings.stream
           .map((settings) => (settings.userName, settings.avatar))
           .distinct()
@@ -286,7 +292,11 @@ final class KeklistWebServer extends ChangeNotifier {
           return _gallery == null ? _text(response, HttpStatus.notFound, 'Not found') : await _gallery.thumbnail(request);
         case '/gallery/full':
           return _gallery == null ? _text(response, HttpStatus.notFound, 'Not found') : await _gallery.original(request);
+        case '/api/ai':
+          response.headers.set(HttpHeaders.cacheControlHeader, 'no-store');
+          return _json(response, _ai?.stateJson());
       }
+      if (path.startsWith('/api/ai/')) return await _aiAction(request);
       if (path.startsWith('/files/')) return await _file(request);
       return _static(request);
     } on Object catch (error, stack) {
@@ -378,9 +388,30 @@ final class KeklistWebServer extends ChangeNotifier {
     _listeners.remove(response);
   }
 
-  void _broadcast(String event) {
+  /// [data] must be one line, like JSON from [jsonEncode].
+  void _broadcast(String event, {String data = '{}'}) {
     for (final HttpResponse listener in _listeners.toList()) {
-      _send(listener, 'event: $event\ndata: {}\n\n');
+      _send(listener, 'event: $event\ndata: $data\n\n');
+    }
+  }
+
+  Future<void> _aiAction(HttpRequest request) async {
+    final HttpResponse response = request.response;
+    if (request.method != 'POST') return _notAllowed(response, 'POST');
+    final AiRoutes? ai = _ai;
+    if (ai == null) return _text(response, HttpStatus.notFound, 'Not found');
+    final Map<String, dynamic>? body = await _readJson(request);
+    if (body == null) return;
+    try {
+      final Object? answer = await ai.post(request.uri.path, body);
+      if (answer == null) {
+        response.statusCode = HttpStatus.noContent;
+      } else {
+        _json(response, answer);
+      }
+    } on Object catch (error) {
+      if (error is! TypeError && error is! ArgumentError) rethrow;
+      return _text(response, HttpStatus.badRequest, 'Bad request');
     }
   }
 

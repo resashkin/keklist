@@ -948,4 +948,202 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get webVersionPort => 'Port';
+
+  @override
+  String get aiTab => 'AI';
+
+  @override
+  String get aiTabDescription =>
+      'Talk about your records with an AI that runs on your phone';
+
+  @override
+  String get aiPrivacyNote =>
+      'Runs on your phone only: your records never leave the device.';
+
+  @override
+  String get aiDisclaimer =>
+      'Not a medical service. If you are in danger, contact emergency services.';
+
+  @override
+  String get aiDaySummaries => 'Day summaries';
+
+  @override
+  String get aiSummarize => 'Tap to summarize';
+
+  @override
+  String get aiSummaryOutdated => 'Records changed — tap to update';
+
+  @override
+  String get aiRegenerate => 'Write again';
+
+  @override
+  String get aiYesterday => 'Yesterday';
+
+  @override
+  String get aiSessions => 'Sessions';
+
+  @override
+  String get aiNoSessions => 'No sessions yet';
+
+  @override
+  String get aiNewSession => 'New session';
+
+  @override
+  String get aiChooseRole => 'Choose a role';
+
+  @override
+  String get aiRoleTherapist => 'Therapist';
+
+  @override
+  String get aiRoleCoach => 'Coach';
+
+  @override
+  String get aiRoleFriend => 'Friend';
+
+  @override
+  String get aiMessageHint => 'Message';
+
+  @override
+  String get aiStarterWeek => 'How was my week?';
+
+  @override
+  String get aiStarterWorry => 'What has been bothering me lately?';
+
+  @override
+  String get aiStarterJoy => 'What brought me joy recently?';
+
+  @override
+  String get aiActionSaveAsMind => 'Save as mind';
+
+  @override
+  String get aiActionOpenDay => 'Open day';
+
+  @override
+  String get aiActionWeekSummary => 'Week summary';
+
+  @override
+  String get aiWeekSummaryPrompt =>
+      'Summarize my last 7 days: what happened, how I felt, what stood out.';
+
+  @override
+  String get aiSavedAsMind => 'Saved to today';
+
+  @override
+  String get aiThinking => 'Thinking…';
+
+  @override
+  String get aiStop => 'Stop';
+
+  @override
+  String get aiNoModelTitle => 'Choose a model';
+
+  @override
+  String get aiNoModelMessage =>
+      'Download a model to start. It runs on your phone, offline.';
+
+  @override
+  String get aiNoModelOnPhone =>
+      'Download a model in the phone app: Settings → AI → Models.';
+
+  @override
+  String get aiModels => 'Models';
+
+  @override
+  String get aiRoles => 'Roles';
+
+  @override
+  String get aiDownloaded => 'Downloaded';
+
+  @override
+  String get aiDownloads => 'Downloading';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'Search GGUF models';
+
+  @override
+  String get aiFastest => 'Fastest';
+
+  @override
+  String get aiDownload => 'Download';
+
+  @override
+  String get aiPause => 'Pause';
+
+  @override
+  String get aiPaused => 'Paused';
+
+  @override
+  String get aiResume => 'Resume';
+
+  @override
+  String get aiDownloadFailed => 'Download failed';
+
+  @override
+  String get aiCellularTitle => 'Download over mobile data?';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '$size will be downloaded over mobile data.';
+  }
+
+  @override
+  String get aiDeleteModel => 'Delete the model?';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'On this phone: $size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'Phone memory: $size';
+  }
+
+  @override
+  String get aiCatalogFailed =>
+      'Couldn\'t load the list. Check the connection.';
+
+  @override
+  String get aiNoFilesFit =>
+      'None of this model\'s files fit this phone\'s memory.';
+
+  @override
+  String get aiBuiltInRole => 'Built-in';
+
+  @override
+  String get aiOwnRoles => 'Your roles';
+
+  @override
+  String get aiDuplicate => 'Duplicate';
+
+  @override
+  String get aiNewRole => 'New role';
+
+  @override
+  String get aiRoleName => 'Name';
+
+  @override
+  String get aiRoleEmoji => 'Emoji';
+
+  @override
+  String get aiRolePrompt => 'Prompt';
+
+  @override
+  String get aiRolePromptHint => 'How the AI should talk and what to focus on';
+
+  @override
+  String get aiReadOnlyRole =>
+      'Built-in roles can\'t be changed. Duplicate one to make your own.';
+
+  @override
+  String get aiDeleteSession => 'Delete the session?';
+
+  @override
+  String get aiDeleteRole => 'Delete the role?';
 }
