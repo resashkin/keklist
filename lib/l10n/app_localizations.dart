@@ -2264,6 +2264,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ask about your week, a worry or a good day: the chat reads your records right on the phone.'**
   String get aiNoSessionsHint;
+
+  /// Context menu item that opens the photo in the system gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Show in Gallery'**
+  String get showInGallery;
+
+  /// Tweak: how emojis move on mind tiles
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji motion'**
+  String get tileEmojiMotion;
+
+  /// Emoji motion option: slow diagonal drift
+  ///
+  /// In en, this message translates to:
+  /// **'Drift'**
+  String get tileEmojiMotionDrift;
+
+  /// Emoji motion option: sway in place
+  ///
+  /// In en, this message translates to:
+  /// **'Float'**
+  String get tileEmojiMotionFloat;
+
+  /// Emoji motion option: no motion
+  ///
+  /// In en, this message translates to:
+  /// **'Still'**
+  String get tileEmojiMotionStill;
+
+  /// Tweak: animation when a pinch changes the column count
+  ///
+  /// In en, this message translates to:
+  /// **'Pinch animation'**
+  String get gridResizeAnimation;
+
+  /// Pinch animation option: tiles fly to new places
+  ///
+  /// In en, this message translates to:
+  /// **'Fly'**
+  String get gridResizeFly;
+
+  /// Pinch animation option: live zoom
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom'**
+  String get gridResizeZoom;
+
+  /// Pinch animation option: crossfade
+  ///
+  /// In en, this message translates to:
+  /// **'Fade'**
+  String get gridResizeCrossfade;
 }
 
 class _AppLocalizationsDelegate

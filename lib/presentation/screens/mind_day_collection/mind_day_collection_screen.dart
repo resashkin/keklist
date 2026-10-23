@@ -32,6 +32,7 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_cubit.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_settings_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_sliver.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tile_menu.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_weather_backdrop.dart';
 import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -81,6 +82,8 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
       repository: context.read<WeatherRepository>(),
       apiService: WeatherApiService(),
     );
+
+    DayFeedTileMenu.mediaDeleted.listen((_) => _reloadDayFeedMedia(dayIndex)).disposed(by: this);
 
     subscribeToBloc<MindBloc>(
       onNewState: (state) async {
@@ -258,13 +261,13 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     return PinchColumnsDetector(
       columnCount: _dayFeedSettings.columnCount,
       onChanged: (count) => sendEventToBloc<SettingsBloc>(SettingsUpdateDayFeed(columnCount: count)),
-      child: _buildDayFeedScrollView(),
+      builder: (_, isPinching) => _buildDayFeedScrollView(isPinching: isPinching),
     );
   }
 
-  Widget _buildDayFeedScrollView() {
+  Widget _buildDayFeedScrollView({required bool isPinching}) {
     return CustomScrollView(
-      physics: FlutterConstants.mobileOverscrollPhysics,
+      physics: isPinching ? const NeverScrollableScrollPhysics() : FlutterConstants.mobileOverscrollPhysics,
       controller: _scrollController,
       slivers: [
         BlocBuilder<DayFeedCubit, DayFeedState>(

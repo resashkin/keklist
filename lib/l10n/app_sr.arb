@@ -356,5 +356,14 @@
     "insightsTwoYearsAgo": "Пре две године",
     "insightsVoiceAndVideos": "Глас и округли видеи",
     "insightsWeekNumber": "Недеља {number}",
-    "aiNoSessionsHint": "Питајте о својој недељи, бризи или лепом дану: чет чита ваше записе директно на телефону."
+    "aiNoSessionsHint": "Питајте о својој недељи, бризи или лепом дану: чет чита ваше записе директно на телефону.",
+    "showInGallery": "Прикажи у галерији",
+    "tileEmojiMotion": "Кретање емоџија",
+    "tileEmojiMotionDrift": "Плутање",
+    "tileEmojiMotionFloat": "Њихање",
+    "tileEmojiMotionStill": "Мирно",
+    "gridResizeAnimation": "Анимација штипања",
+    "gridResizeFly": "Лет",
+    "gridResizeZoom": "Зум",
+    "gridResizeCrossfade": "Претапање"
 }

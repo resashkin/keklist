@@ -1167,4 +1167,31 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get aiNoSessionsHint =>
       'Haftangiz, tashvish yoki yaxshi kun haqida so‘rang: chat yozuvlaringizni telefonning o‘zida o‘qiydi.';
+
+  @override
+  String get showInGallery => 'Galereyada ko‘rsatish';
+
+  @override
+  String get tileEmojiMotion => 'Emoji harakati';
+
+  @override
+  String get tileEmojiMotionDrift => 'Suzish';
+
+  @override
+  String get tileEmojiMotionFloat => 'Tebranish';
+
+  @override
+  String get tileEmojiMotionStill => 'Harakatsiz';
+
+  @override
+  String get gridResizeAnimation => 'Chimdish animatsiyasi';
+
+  @override
+  String get gridResizeFly => 'Uchish';
+
+  @override
+  String get gridResizeZoom => 'Zum';
+
+  @override
+  String get gridResizeCrossfade => 'Erish';
 }

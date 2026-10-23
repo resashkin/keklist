@@ -1117,4 +1117,31 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aiNoSessionsHint => '问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的记录。';
+
+  @override
+  String get showInGallery => '在图库中显示';
+
+  @override
+  String get tileEmojiMotion => '表情动效';
+
+  @override
+  String get tileEmojiMotionDrift => '漂移';
+
+  @override
+  String get tileEmojiMotionFloat => '浮动';
+
+  @override
+  String get tileEmojiMotionStill => '静止';
+
+  @override
+  String get gridResizeAnimation => '捏合动画';
+
+  @override
+  String get gridResizeFly => '飞移';
+
+  @override
+  String get gridResizeZoom => '缩放';
+
+  @override
+  String get gridResizeCrossfade => '淡入淡出';
 }

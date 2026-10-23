@@ -356,5 +356,14 @@
     "insightsTwoYearsAgo": "两年前",
     "insightsVoiceAndVideos": "语音和圆形视频",
     "insightsWeekNumber": "第{number}周",
-    "aiNoSessionsHint": "问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的记录。"
+    "aiNoSessionsHint": "问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的记录。",
+    "showInGallery": "在图库中显示",
+    "tileEmojiMotion": "表情动效",
+    "tileEmojiMotionDrift": "漂移",
+    "tileEmojiMotionFloat": "浮动",
+    "tileEmojiMotionStill": "静止",
+    "gridResizeAnimation": "捏合动画",
+    "gridResizeFly": "飞移",
+    "gridResizeZoom": "缩放",
+    "gridResizeCrossfade": "淡入淡出"
 }

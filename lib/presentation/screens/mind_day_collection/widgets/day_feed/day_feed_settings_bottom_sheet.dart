@@ -9,6 +9,7 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
+import 'package:keklist/presentation/core/widgets/tile_motion_tweaks.dart';
 
 final class DayFeedSettingsBottomSheet extends StatelessWidget {
   final ValueChanged<bool> onWeatherToggled;
@@ -34,13 +35,19 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
             context,
             settings?.dayFeed ?? const DayFeedSettings(),
             isWeatherEnabled: settings?.isWeatherSourceEnabled ?? false,
+            allSettings: settings,
           );
         },
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, DayFeedSettings settings, {required bool isWeatherEnabled}) {
+  Widget _buildContent(
+    BuildContext context,
+    DayFeedSettings settings, {
+    required bool isWeatherEnabled,
+    required KeklistSettings? allSettings,
+  }) {
     void update(SettingsUpdateDayFeed event) {
       tweakChangeHaptic();
       context.read<SettingsBloc>().add(event);
@@ -67,6 +74,7 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
             value: settings.isMindTextVisible,
             onChanged: (value) => update(SettingsUpdateDayFeed(isMindTextVisible: value)),
           ),
+          TileMotionTweaks(settings: allSettings),
           const Divider(),
           SwitchListTile(
             secondary: const Icon(Icons.cloud_outlined),

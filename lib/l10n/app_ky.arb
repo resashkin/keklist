@@ -581,5 +581,14 @@
     "insightsTwoYearsAgo": "Эки жыл мурун",
     "insightsVoiceAndVideos": "Үн жана тегерек видеолор",
     "insightsWeekNumber": "{number}-жума",
-    "aiNoSessionsHint": "Жумаңыз, тынчсыздануу же жакшы күн жөнүндө сураңыз: чат жазууларыңызды телефондун өзүндө окуйт."
+    "aiNoSessionsHint": "Жумаңыз, тынчсыздануу же жакшы күн жөнүндө сураңыз: чат жазууларыңызды телефондун өзүндө окуйт.",
+    "showInGallery": "Галереяда көрсөтүү",
+    "tileEmojiMotion": "Эмодзи кыймылы",
+    "tileEmojiMotionDrift": "Дрейф",
+    "tileEmojiMotionFloat": "Термелүү",
+    "tileEmojiMotionStill": "Кыймылсыз",
+    "gridResizeAnimation": "Чымчуу анимациясы",
+    "gridResizeFly": "Учуу",
+    "gridResizeZoom": "Зум",
+    "gridResizeCrossfade": "Эрүү"
 }

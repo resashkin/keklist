@@ -33,6 +33,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:translator/translator.dart';
 import 'package:video_player/video_player.dart';
 import 'package:keklist/presentation/core/helpers/media_sources.dart';
+import 'package:keklist/presentation/core/helpers/mind_text_edit.dart';
 import 'package:keklist/presentation/core/widgets/gallery/gallery_media.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:keklist/presentation/core/widgets/text_edit_sheet.dart';
@@ -390,7 +391,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   Future<void> _editText(Mind mind) async {
     final String? text = await TextEditSheet.show(context, initialText: mind.plainNote.trim());
     if (text == null || !mounted) return;
-    context.read<MindBloc>().add(MindEdit(mind: _withText(mind, text)));
+    context.read<MindBloc>().add(MindEdit(mind: mindWithText(mind, text)));
   }
 
   Future<void> _editEmotions(Mind mind) => _whileHeld(
@@ -407,19 +408,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     if (item is! DayFeedMind) return;
     Haptics.vibrate(HapticsType.medium);
     _editEmotions(_liveMind(item.mind.id) ?? item.mind);
-  }
-
-  /// Keeps the audio/video of the mind and replaces its text.
-  static Mind _withText(Mind mind, String newText) {
-    final List<BaseMindNotePiece> keptMedia = mind.noteContent.pieces
-        .where((piece) => piece is MindNoteAudio || piece is MindNoteVideo)
-        .toList();
-    final String text = newText.trim();
-    final MindNoteContent edited = MindNoteContent.fromPieces([
-      ...keptMedia,
-      if (text.isNotEmpty) MindNoteText(keptMedia.isEmpty ? text : '\n$text'),
-    ]);
-    return mind.copyWith(note: edited.toRawNoteString());
   }
 
   // Comments

@@ -356,5 +356,14 @@
     "insightsTwoYearsAgo": "Vor zwei Jahren",
     "insightsVoiceAndVideos": "Sprachnotizen und runde Videos",
     "insightsWeekNumber": "Woche {number}",
-    "aiNoSessionsHint": "Frag nach deiner Woche, einer Sorge oder einem guten Tag: Der Chat liest deine Einträge direkt auf dem Handy."
+    "aiNoSessionsHint": "Frag nach deiner Woche, einer Sorge oder einem guten Tag: Der Chat liest deine Einträge direkt auf dem Handy.",
+    "showInGallery": "In der Galerie zeigen",
+    "tileEmojiMotion": "Emoji-Bewegung",
+    "tileEmojiMotionDrift": "Treiben",
+    "tileEmojiMotionFloat": "Schweben",
+    "tileEmojiMotionStill": "Still",
+    "gridResizeAnimation": "Pinch-Animation",
+    "gridResizeFly": "Fliegen",
+    "gridResizeZoom": "Zoom",
+    "gridResizeCrossfade": "Überblenden"
 }

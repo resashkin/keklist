@@ -581,5 +581,14 @@
     "insightsTwoYearsAgo": "Екі жыл бұрын",
     "insightsVoiceAndVideos": "Дауыс және дөңгелек бейнелер",
     "insightsWeekNumber": "{number}-апта",
-    "aiNoSessionsHint": "Аптаңыз, мазасыздық не жақсы күн туралы сұраңыз: чат жазбаларыңызды телефонның өзінде оқиды."
+    "aiNoSessionsHint": "Аптаңыз, мазасыздық не жақсы күн туралы сұраңыз: чат жазбаларыңызды телефонның өзінде оқиды.",
+    "showInGallery": "Галереяда көрсету",
+    "tileEmojiMotion": "Эмодзи қозғалысы",
+    "tileEmojiMotionDrift": "Дрейф",
+    "tileEmojiMotionFloat": "Тербелу",
+    "tileEmojiMotionStill": "Қозғалыссыз",
+    "gridResizeAnimation": "Шымшу анимациясы",
+    "gridResizeFly": "Ұшу",
+    "gridResizeZoom": "Зум",
+    "gridResizeCrossfade": "Еру"
 }

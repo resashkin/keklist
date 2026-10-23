@@ -6,6 +6,7 @@ import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
+import 'package:keklist/presentation/core/widgets/tile_motion_tweaks.dart';
 
 /// Shake sheet of the calendar: grid columns and what the day grids show.
 final class CalendarSettingsBottomSheet extends StatelessWidget {
@@ -23,13 +24,19 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
             context,
             settings?.calendar ?? const CalendarSettings(),
             showsWeekTitles: settings?.shouldShowTitles ?? true,
+            allSettings: settings,
           );
         },
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, CalendarSettings calendar, {required bool showsWeekTitles}) {
+  Widget _buildContent(
+    BuildContext context,
+    CalendarSettings calendar, {
+    required bool showsWeekTitles,
+    required KeklistSettings? allSettings,
+  }) {
     void update(CalendarSettings value) {
       tweakChangeHaptic();
       context.read<SettingsBloc>().add(SettingsUpdateCalendar(calendar: value));
@@ -63,6 +70,7 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
               context.read<SettingsBloc>().add(SettingsUpdateShouldShowTitlesMode(value: value));
             },
           ),
+          TileMotionTweaks(settings: allSettings),
           const SizedBox(height: 8.0),
         ],
       ),

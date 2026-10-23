@@ -356,5 +356,14 @@
     "insightsTwoYearsAgo": "2 года назад",
     "insightsVoiceAndVideos": "Голосовые и кружки",
     "insightsWeekNumber": "Неделя {number}",
-    "aiNoSessionsHint": "Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши записи прямо на телефоне."
+    "aiNoSessionsHint": "Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши записи прямо на телефоне.",
+    "showInGallery": "Показать в галерее",
+    "tileEmojiMotion": "Движение эмодзи",
+    "tileEmojiMotionDrift": "Дрейф",
+    "tileEmojiMotionFloat": "Покачивание",
+    "tileEmojiMotionStill": "Без движения",
+    "gridResizeAnimation": "Анимация щипка",
+    "gridResizeFly": "Перелёт",
+    "gridResizeZoom": "Зум",
+    "gridResizeCrossfade": "Растворение"
 }

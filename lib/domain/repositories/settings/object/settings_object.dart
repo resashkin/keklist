@@ -125,6 +125,12 @@ final class SettingsObject extends HiveObject {
   @HiveField(41, defaultValue: 0)
   late int mindEmotionsPromptIndex;
 
+  @HiveField(42, defaultValue: 0)
+  late int tileEmojiMotionIndex;
+
+  @HiveField(43, defaultValue: 0)
+  late int gridResizeAnimationIndex;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -172,5 +178,8 @@ final class SettingsObject extends HiveObject {
         avatar: UserAvatar(emoji: avatarEmoji, imagePath: avatarImagePath),
         mindEmotionsPrompt:
             MindEmotionsPrompt.values.elementAtOrNull(mindEmotionsPromptIndex) ?? MindEmotionsPrompt.afterSave,
+        tileEmojiMotion: TileEmojiMotion.values.elementAtOrNull(tileEmojiMotionIndex) ?? TileEmojiMotion.drift,
+        gridResizeAnimation:
+            GridResizeAnimation.values.elementAtOrNull(gridResizeAnimationIndex) ?? GridResizeAnimation.fly,
       );
 }

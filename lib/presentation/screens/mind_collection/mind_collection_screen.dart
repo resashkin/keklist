@@ -43,6 +43,7 @@ import 'package:keklist/presentation/screens/mind_collection/local_widgets/calen
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_grid.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tile_menu.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 part 'local_widgets/app_bar/mind_collection_app_bar.dart';
@@ -158,6 +159,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
           .where((progress) => progress.status == GalleryIndexStatus.ready)
           .listen((_) => _rebuildFeed())
           .disposed(by: this);
+      DayFeedTileMenu.mediaDeleted.listen((_) => _indexer.rebuild()).disposed(by: this);
 
       // Auth removed - no authentication required
       sendEventToBloc<SettingsBloc>(SettingsGet());

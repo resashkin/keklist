@@ -1469,5 +1469,41 @@
     "aiNoSessionsHint": "Ask about your week, a worry or a good day: the chat reads your records right on the phone.",
     "@aiNoSessionsHint": {
         "description": "Hint under the empty list of chat sessions"
+    },
+    "showInGallery": "Show in Gallery",
+    "@showInGallery": {
+        "description": "Context menu item that opens the photo in the system gallery"
+    },
+    "tileEmojiMotion": "Emoji motion",
+    "@tileEmojiMotion": {
+        "description": "Tweak: how emojis move on mind tiles"
+    },
+    "tileEmojiMotionDrift": "Drift",
+    "@tileEmojiMotionDrift": {
+        "description": "Emoji motion option: slow diagonal drift"
+    },
+    "tileEmojiMotionFloat": "Float",
+    "@tileEmojiMotionFloat": {
+        "description": "Emoji motion option: sway in place"
+    },
+    "tileEmojiMotionStill": "Still",
+    "@tileEmojiMotionStill": {
+        "description": "Emoji motion option: no motion"
+    },
+    "gridResizeAnimation": "Pinch animation",
+    "@gridResizeAnimation": {
+        "description": "Tweak: animation when a pinch changes the column count"
+    },
+    "gridResizeFly": "Fly",
+    "@gridResizeFly": {
+        "description": "Pinch animation option: tiles fly to new places"
+    },
+    "gridResizeZoom": "Zoom",
+    "@gridResizeZoom": {
+        "description": "Pinch animation option: live zoom"
+    },
+    "gridResizeCrossfade": "Fade",
+    "@gridResizeCrossfade": {
+        "description": "Pinch animation option: crossfade"
     }
 }

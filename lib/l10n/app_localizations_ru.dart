@@ -1167,4 +1167,31 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get aiNoSessionsHint =>
       'Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши записи прямо на телефоне.';
+
+  @override
+  String get showInGallery => 'Показать в галерее';
+
+  @override
+  String get tileEmojiMotion => 'Движение эмодзи';
+
+  @override
+  String get tileEmojiMotionDrift => 'Дрейф';
+
+  @override
+  String get tileEmojiMotionFloat => 'Покачивание';
+
+  @override
+  String get tileEmojiMotionStill => 'Без движения';
+
+  @override
+  String get gridResizeAnimation => 'Анимация щипка';
+
+  @override
+  String get gridResizeFly => 'Перелёт';
+
+  @override
+  String get gridResizeZoom => 'Зум';
+
+  @override
+  String get gridResizeCrossfade => 'Растворение';
 }

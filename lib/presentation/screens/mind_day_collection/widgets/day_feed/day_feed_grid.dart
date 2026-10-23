@@ -1,6 +1,8 @@
+import 'package:keklist/presentation/core/widgets/resizable_tile_grid.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tile_menu.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tiles.dart';
 
 /// A day's feed as a plain box of square tiles, for lists such as the calendar.
@@ -19,32 +21,22 @@ final class DayFeedGrid extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        const double spacing = DayFeedLayout.cellSpacing;
-        final double cellSize = (constraints.maxWidth - spacing * (columnCount - 1)) / columnCount;
-        final int rowCount = (items.length / columnCount).ceil();
-        return Column(
-          spacing: spacing,
-          children: [
-            for (int row = 0; row < rowCount; row++)
-              Row(
-                spacing: spacing,
-                children: [
-                  for (int index = row * columnCount; index < (row + 1) * columnCount && index < items.length; index++)
-                    SizedBox.square(
-                      dimension: cellSize,
-                      child: GestureDetector(
-                        onTap: () => onOpenItem(index),
-                        child: DayFeedItemTile(item: items[index], isMindTextVisible: isMindTextVisible, size: cellSize),
-                      ),
-                    ),
-                ],
-              ),
-          ],
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => ResizableTileGrid(
+    columnCount: columnCount,
+    spacing: DayFeedLayout.cellSpacing,
+    cells: [
+      for (final (int index, DayFeedItem item) in items.indexed)
+        (
+          key: ValueKey(item.id),
+          span: 1,
+          builder: (cellSize) => DayFeedTileMenu(
+            item: item,
+            child: GestureDetector(
+              onTap: () => onOpenItem(index),
+              child: DayFeedItemTile(item: item, isMindTextVisible: isMindTextVisible, size: cellSize),
+            ),
+          ),
+        ),
+    ],
+  );
 }
