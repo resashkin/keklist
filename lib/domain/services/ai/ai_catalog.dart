@@ -18,6 +18,13 @@ final class AiCatalog {
   /// A GGUF file needs about its own size in memory plus the context, so it gets at most this share of the RAM.
   static const double _ggufMemoryShare = 0.55;
 
+  /// Gemma 4 E2B is open, writes good Russian and other languages, and fits phones with 6 GB.
+  static const String recommendedRepo = 'unsloth/gemma-4-E2B-it-GGUF';
+  static const String _recommendedQuant = 'Q4_K_M';
+
+  /// Reasoning distills spend the reply on hidden thinking and write poorly outside English.
+  static bool isReasoning(String name) => RegExp(r'\bR1\b|distill', caseSensitive: false).hasMatch(name);
+
   /// The newest Android and iOS lists of the Gallery app, merged; the current platform's entries win.
   Future<List<AiModelInfo>> galleryModels() async {
     final List<String> listFiles = await _latestGalleryLists();
@@ -36,11 +43,22 @@ final class AiCatalog {
         if (await _isOpen(repo)) repo,
     };
     final double? memoryGb = DeviceMemory.totalGb;
-    return models.values
-        .where((model) => openRepos.contains(model.repo))
-        .where((model) => memoryGb == null || (model.minMemoryGb ?? 0) <= memoryGb + 0.5)
-        .toList()
-      ..sort((a, b) => a.sizeBytes.compareTo(b.sizeBytes));
+    return [
+      ?await _recommended(),
+      ...models.values
+          .where((model) => openRepos.contains(model.repo) && !isReasoning(model.name))
+          .where((model) => memoryGb == null || (model.minMemoryGb ?? 0) <= memoryGb + 0.5)
+          .toList()
+        ..sort((a, b) => a.sizeBytes.compareTo(b.sizeBytes)),
+    ];
+  }
+
+  Future<AiModelInfo?> _recommended() async {
+    try {
+      return (await ggufFiles(recommendedRepo)).where((model) => model.file.contains(_recommendedQuant)).firstOrNull;
+    } on Object {
+      return null;
+    }
   }
 
   Future<List<String>> _latestGalleryLists() async {

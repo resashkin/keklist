@@ -1266,10 +1266,6 @@
     "@aiSavedAsMind": {
         "description": "AI tab"
     },
-    "aiThinking": "Thinking…",
-    "@aiThinking": {
-        "description": "AI tab"
-    },
     "aiStop": "Stop",
     "@aiStop": {
         "description": "AI tab"

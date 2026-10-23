@@ -1019,9 +1019,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get aiSavedAsMind => 'Salvato in oggi';
 
   @override
-  String get aiThinking => 'Sto pensando…';
-
-  @override
   String get aiStop => 'Ferma';
 
   @override

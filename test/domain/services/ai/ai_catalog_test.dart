@@ -9,7 +9,7 @@ import 'package:keklist/domain/services/ai/ai_model_info.dart';
 void main() {
   http.Response json(Object body) => http.Response(jsonEncode(body), 200);
 
-  test('merges the newest Gallery lists, keeps open chat models, smallest first', () async {
+  test('puts the recommended model first, then open chat models from the newest lists, smallest first', () async {
     final List<String> fetched = [];
     final AiCatalog catalog = AiCatalog(
       client: MockClient((request) async {
@@ -43,6 +43,13 @@ void main() {
                 'taskTypes': ['llm_chat'],
               },
               {
+                'name': 'DeepSeek-R1-Distill-Qwen-1.5B',
+                'modelId': 'org/r1',
+                'modelFile': 'r1.litertlm',
+                'sizeInBytes': 500,
+                'taskTypes': ['llm_chat'],
+              },
+              {
                 'name': 'Gated',
                 'modelId': 'org/gated',
                 'modelFile': 'g.litertlm',
@@ -60,13 +67,19 @@ void main() {
           });
         }
         if (url.contains('/api/models/org/gated')) return json({'gated': 'manual'});
+        if (url.contains('${AiCatalog.recommendedRepo}/tree/')) {
+          return json([
+            {'path': 'gemma-4-E2B-it-Q3_K_M.gguf', 'size': 900},
+            {'path': 'gemma-4-E2B-it-Q4_K_M.gguf', 'size': 1100},
+          ]);
+        }
         if (url.contains('/api/models/')) return json({'gated': false});
         return http.Response('not found', 404);
       }),
     );
     final List<AiModelInfo> models = await catalog.galleryModels();
-    expect(models.map((model) => model.name), ['Small', 'Big']);
-    expect(models.first.url.toString(), 'https://huggingface.co/org/small/resolve/def/small.litertlm?download=true');
+    expect(models.map((model) => model.name), ['gemma-4-E2B-it-Q4_K_M', 'Small', 'Big']);
+    expect(models[1].url.toString(), 'https://huggingface.co/org/small/resolve/def/small.litertlm?download=true');
     expect(fetched.where((url) => url.endsWith('1_0_9.json')), isEmpty);
   });
 
@@ -75,8 +88,16 @@ void main() {
       client: MockClient((request) async {
         if (request.url.path == '/api/models/org/repo') return json({'gated': false, 'sha': 'rev1'});
         return json([
-          {'path': 'model-q8.gguf', 'size': 2000, 'lfs': {'size': 2000}},
-          {'path': 'model-q4.gguf', 'size': 1000, 'lfs': {'size': 1000}},
+          {
+            'path': 'model-q8.gguf',
+            'size': 2000,
+            'lfs': {'size': 2000},
+          },
+          {
+            'path': 'model-q4.gguf',
+            'size': 1000,
+            'lfs': {'size': 1000},
+          },
           {'path': 'mmproj-f16.gguf', 'size': 500},
           {'path': 'README.md', 'size': 10},
         ]);
@@ -86,5 +107,11 @@ void main() {
     expect(files.map((file) => file.file), ['model-q4.gguf', 'model-q8.gguf']);
     expect(files.first.revision, 'rev1');
     expect(files.first.format, AiModelFormat.gguf);
+  });
+
+  test('tells reasoning distills from chat models', () {
+    expect(AiCatalog.isReasoning('DeepSeek-R1-Distill-Qwen-1.5B'), isTrue);
+    expect(AiCatalog.isReasoning('Qwen2.5-1.5B-Instruct'), isFalse);
+    expect(AiCatalog.isReasoning('gemma-4-E2B-it-Q4_K_M'), isFalse);
   });
 }

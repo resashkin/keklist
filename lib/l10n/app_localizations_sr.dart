@@ -1012,9 +1012,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get aiSavedAsMind => 'Сачувано у данашњи дан';
 
   @override
-  String get aiThinking => 'Размишљам…';
-
-  @override
   String get aiStop => 'Заустави';
 
   @override
@@ -2181,9 +2178,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get aiSavedAsMind => 'Sačuvano u današnji dan';
-
-  @override
-  String get aiThinking => 'Razmišljam…';
 
   @override
   String get aiStop => 'Zaustavi';

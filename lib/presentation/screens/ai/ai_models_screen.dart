@@ -1,3 +1,4 @@
+import 'package:keklist/domain/services/ai/ai_catalog.dart';
 import 'package:keklist/domain/services/ai/ai_model_info.dart';
 import 'package:keklist/domain/services/ai/ai_model_store.dart';
 import 'package:keklist/domain/services/ai/device_memory.dart';
@@ -101,8 +102,8 @@ final class _AiModelsScreenState extends State<AiModelsScreen> {
                   title: Text(context.l10n.aiCatalogFailed),
                   trailing: IconButton(icon: const Icon(Icons.refresh_rounded), onPressed: store.refreshGallery),
                 ),
-              for (final (int index, AiModelInfo model) in gallery.indexed)
-                _CatalogTile(model: model, store: store, isFastest: index == 0),
+              for (final AiModelInfo model in gallery)
+                _CatalogTile(model: model, store: store, isRecommended: model.repo == AiCatalog.recommendedRepo),
             ],
           ),
           SettingsSectionHeader(context.l10n.aiHuggingFace.toUpperCase()),
@@ -167,11 +168,11 @@ Future<void> startAiDownload(BuildContext context, AiModelStore store, AiModelIn
 }
 
 final class _CatalogTile extends StatelessWidget {
-  const _CatalogTile({required this.model, required this.store, required this.isFastest});
+  const _CatalogTile({required this.model, required this.store, required this.isRecommended});
 
   final AiModelInfo model;
   final AiModelStore store;
-  final bool isFastest;
+  final bool isRecommended;
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +182,7 @@ final class _CatalogTile extends StatelessWidget {
       title: AiNameWithBadges(
         name: model.name,
         isWeak: model.isWeak,
-        badges: [if (isFastest) context.l10n.aiRecommended],
+        badges: [if (isRecommended) context.l10n.aiRecommended],
       ),
       subtitle: Text(
         [

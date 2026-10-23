@@ -539,7 +539,6 @@
     "aiActionWeekSummary": "Resumen de la semana",
     "aiWeekSummaryPrompt": "Resume mis últimos 7 días: qué pasó, cómo me sentí, qué destacó.",
     "aiSavedAsMind": "Guardado en hoy",
-    "aiThinking": "Pensando…",
     "aiStop": "Detener",
     "aiNoModelTitle": "Elige un modelo",
     "aiNoModelMessage": "Descarga un modelo para empezar. Funciona en tu teléfono, sin conexión.",

@@ -1015,9 +1015,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get aiSavedAsMind => 'Bugunga saqlandi';
 
   @override
-  String get aiThinking => 'O\'ylayapman…';
-
-  @override
   String get aiStop => 'To\'xtatish';
 
   @override

@@ -1009,9 +1009,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aiSavedAsMind => 'Saved to today';
 
   @override
-  String get aiThinking => 'Thinking…';
-
-  @override
   String get aiStop => 'Stop';
 
   @override
