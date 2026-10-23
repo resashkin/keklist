@@ -9,7 +9,6 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emoji_picker_screen.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 const double _kAvatarSize = 88.0;
 const double _kAvatarPixels = 512.0;
@@ -92,12 +91,8 @@ final class UserAvatarView extends StatelessWidget {
 final class ProfileEditSheet extends StatefulWidget {
   const ProfileEditSheet({super.key});
 
-  static Future<void> show(BuildContext context) => showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
-    builder: (_) => const ProfileEditSheet(),
-  );
+  static Future<void> show(BuildContext context) =>
+      KekSheet.show(context: context, builder: (_) => const ProfileEditSheet());
 
   @override
   State<ProfileEditSheet> createState() => _ProfileEditSheetState();
@@ -117,18 +112,15 @@ final class _ProfileEditSheetState extends State<ProfileEditSheet> {
   @override
   Widget build(BuildContext context) {
     final UserProfileState profile = context.watch<UserProfileBloc>().state;
-    return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-      child: Container(
-        decoration: KekBottomSheetStyle.decoration(context),
+    return KekSheetScaffold(
+      title: context.l10n.profile,
+      child: SingleChildScrollView(
         child: SafeArea(
           top: false,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              KekBottomSheetStyle.handle(context),
-              Text(context.l10n.profile, style: KekBottomSheetStyle.titleStyle(context)),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: 8.0),
               UserAvatarView(profile: profile, size: _kAvatarSize),
               const SizedBox(height: 12.0),
               Wrap(
@@ -187,10 +179,6 @@ final class _ProfileEditSheetState extends State<ProfileEditSheet> {
     _updateAvatar(UserProfileUpdateAvatar(photo: File(picked.path)));
   }
 
-  Future<void> _pickEmoji() => showCupertinoModalBottomSheet(
-    context: context,
-    builder: (_) => Material(
-      child: EmojiPickerScreen(onSelect: (emoji) => _updateAvatar(UserProfileUpdateAvatar(emoji: emoji))),
-    ),
-  );
+  Future<void> _pickEmoji() =>
+      EmojiPickerScreen.show(context, onSelect: (emoji) => _updateAvatar(UserProfileUpdateAvatar(emoji: emoji)));
 }

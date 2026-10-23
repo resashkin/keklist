@@ -4,6 +4,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/native/android/media_folder_channel.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 final class MediaFolderSettingsBottomSheet extends StatelessWidget {
   final String? initialFolderPath;
@@ -46,21 +47,20 @@ final class MediaFolderSettingsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return KekSheetScaffold(
+      title: context.l10n.mediaFolderSettings,
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(context.l10n.mediaFolderSettings, style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 16.0),
               Text(
                 'Current folder:',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               const SizedBox(height: 4.0),
               Text(
@@ -79,10 +79,7 @@ final class MediaFolderSettingsBottomSheet extends StatelessWidget {
               const SizedBox(height: 8.0),
               SizedBox(
                 width: double.infinity,
-                child: FilledButton(
-                  onPressed: () => _pickFolder(context),
-                  child: const Text('Pick Folder'),
-                ),
+                child: FilledButton(onPressed: () => _pickFolder(context), child: const Text('Pick Folder')),
               ),
             ],
           ),

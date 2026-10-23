@@ -50,10 +50,8 @@ final class EmotionMarkingSheet extends StatefulWidget {
     required ValueChanged<Set<String>> onSelectionChanged,
     String? focusEmotionId,
   }) {
-    return showModalBottomSheet<void>(
+    return KekSheet.show<void>(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
       builder: (_) => EmotionMarkingSheet(
         initialSelectedIds: initialSelectedIds,
         onSelectionChanged: onSelectionChanged,
@@ -139,6 +137,15 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
   void _goBack() {
     Haptics.vibrate(HapticsType.light);
     setState(() => _path.removeLast());
+  }
+
+  /// Picked emotions lead, the latest pick first; edit mode keeps the real order so dragging stays predictable.
+  List<Emotion> _selectedFirst(List<Emotion> emotions) {
+    final Map<String, Emotion> byId = {for (final Emotion emotion in emotions) emotion.id: emotion};
+    return [
+      ..._selected.toList().reversed.map((id) => byId[id]).whereType<Emotion>(),
+      ...emotions.where((emotion) => !_selected.contains(emotion.id)),
+    ];
   }
 
   void _toggleEditMode() {
@@ -402,7 +409,11 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
                                     child: Center(child: Text(context.l10n.noEmotionsYet)),
                                   )
                                 else
-                                  _buildChipsArea(context, state, _levelChildren),
+                                  _buildChipsArea(
+                                    context,
+                                    state,
+                                    _editMode ? _levelChildren : _selectedFirst(_levelChildren),
+                                  ),
                                 // Creating an emotion is a top-level-only action, so the
                                 // link never offers to nest one inside another.
                                 if (_currentParentId == null) ...[
@@ -554,33 +565,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
             ),
           );
 
-    return SizedBox(
-      height: 52,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 76.0),
-            child: Center(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: KekBottomSheetStyle.titleStyle(context),
-              ),
-            ),
-          ),
-          Align(alignment: Alignment.centerLeft, child: leading),
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
-        ],
-      ),
-    );
+    return KekSheetHeader(title: title, leading: leading);
   }
 
   /// Long-press only drills in when a chip actually has children, and nesting can

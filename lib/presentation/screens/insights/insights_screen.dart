@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart' hide DateUtils;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
@@ -35,6 +34,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collec
 import 'package:keklist/presentation/core/helpers/emotion_colors.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 /// Analytics: one period for the whole screen, calm cards in a user-defined order.
 /// See `documentation/INSIGHTS_REDESIGN_IMPLEMENTATION.md`.
@@ -52,7 +52,7 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
   String get shakeScreenId => ShakeScreenIds.insights;
 
   @override
-  void onShakeToTweak() => showBarModalBottomSheet(context: context, builder: (_) => const InsightsTweakSheet());
+  void onShakeToTweak() => KekSheet.show(context: context, builder: (_) => const InsightsTweakSheet());
 
   @override
   void initState() {

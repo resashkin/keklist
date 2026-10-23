@@ -6,6 +6,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/bullete
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/audio/audio_timer_display_widget.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/audio/play_pause_button.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/audio/wave_progress_widget.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 final class FullScreenAudioPlayerScreen extends StatefulWidget {
   final MindNoteAudio audio;
@@ -17,7 +18,6 @@ final class FullScreenAudioPlayerScreen extends StatefulWidget {
 }
 
 final class _FullScreenAudioPlayerScreenState extends State<FullScreenAudioPlayerScreen> {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
@@ -30,50 +30,52 @@ final class _FullScreenAudioPlayerScreenState extends State<FullScreenAudioPlaye
       builder: (BuildContext context, AudioPlayerState state) {
         if (state is! AudioPlayerReady ||
             state.audio.appRelativeAbsoulutePath != widget.audio.appRelativeAbsoulutePath) {
-          return const Center(child: CircularProgressIndicator());
+          return const KekSheetScaffold(
+            child: SizedBox(height: 200.0, child: Center(child: CircularProgressIndicator())),
+          );
         }
 
-        return Scaffold(
-          body: Column(
-            children: [
-              const SizedBox(height: 12),
+        return KekSheetScaffold(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 12),
 
-              SizedBox(
-                height: 300,
-                child: AudioReactiveWavesWidget(amplitude: state.amplitude),
-              ),
+                SizedBox(height: 300, child: AudioReactiveWavesWidget(amplitude: state.amplitude)),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              // Waveform seeker
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: WaveProgressWidget(
-                  progress: state.progress,
-                  waveform: state.waveform,
-                  onSeek: (double relativePos) => _onSeek(context, state.duration, relativePos),
+                // Waveform seeker
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: WaveProgressWidget(
+                    progress: state.progress,
+                    waveform: state.waveform,
+                    onSeek: (double relativePos) => _onSeek(context, state.duration, relativePos),
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              // Timer display
-              AudioTimerDisplayWidget(position: state.position, duration: state.duration),
+                // Timer display
+                AudioTimerDisplayWidget(position: state.position, duration: state.duration),
 
-              const SizedBox(height: 48),
+                const SizedBox(height: 48),
 
-              // Play/Pause button
-              PlayPauseButton(
-                iconSize: 80.0,
-                isPlaying: state.isPlaying,
-                hasError: false,
-                onPressed: () {
-                  context.read<AudioPlayerBloc>().add(AudioPlayerTogglePlayback());
-                },
-              ),
+                // Play/Pause button
+                PlayPauseButton(
+                  iconSize: 80.0,
+                  isPlaying: state.isPlaying,
+                  hasError: false,
+                  onPressed: () {
+                    context.read<AudioPlayerBloc>().add(AudioPlayerTogglePlayback());
+                  },
+                ),
 
-              const SizedBox(height: 48),
-            ],
+                const SizedBox(height: 48),
+              ],
+            ),
           ),
         );
       },

@@ -1,10 +1,10 @@
 import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/settings/settings_layout.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 final class SettingsCustomizeBottomSheet extends StatelessWidget {
   static const double _rowIndent = 24.0;
@@ -15,7 +15,8 @@ final class SettingsCustomizeBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return KekSheetScaffold(
+      title: context.l10n.customizeSettings,
       child: BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (_, current) => current is SettingsDataState,
         builder: (context, state) {
@@ -35,13 +36,8 @@ final class SettingsCustomizeBottomSheet extends StatelessWidget {
 
     return ListView(
       shrinkWrap: true,
-      controller: ModalScrollController.of(context),
-      padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom + 8.0),
+      padding: const EdgeInsets.only(bottom: 8.0),
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 4.0),
-          child: Text(context.l10n.customizeSettings, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
-        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 8.0),
           child: Text(

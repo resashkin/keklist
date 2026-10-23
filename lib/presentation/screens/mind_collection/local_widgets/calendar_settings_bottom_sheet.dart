@@ -5,6 +5,7 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 /// Shake sheet of the calendar: grid columns and what the day grids show.
 final class CalendarSettingsBottomSheet extends StatelessWidget {
@@ -12,7 +13,8 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return KekSheetScaffold(
+      title: context.l10n.calendarSettings,
       child: BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (_, current) => current is SettingsDataState,
         builder: (context, state) {
@@ -28,22 +30,16 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context, CalendarSettings calendar, {required bool showsWeekTitles}) {
-    final ThemeData theme = Theme.of(context);
     void update(CalendarSettings value) {
       tweakChangeHaptic();
       context.read<SettingsBloc>().add(SettingsUpdateCalendar(calendar: value));
     }
 
-    return SafeArea(
-      top: false,
+    return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-            child: Text(context.l10n.calendarSettings, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
-          ),
           ColumnCountRow(
             title: context.l10n.dayFeedColumns,
             selected: calendar.columnCount,
