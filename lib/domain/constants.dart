@@ -2,7 +2,9 @@ import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/foundation.dart';
 import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 
 final class Themes {
   static final ThemeData light = ThemeData(
@@ -108,11 +110,13 @@ final class KeklistConstants {
   static String sourceCodeURL = 'https://github.com/resashkin/keklist_flutter';
   static String featureSuggestionsURL = 'https://insigh.to/b/keklist';
   static String newsTelegramChannelURL = 'https://t.me/keklistlog';
-  static List<TabModel> availableTabModels = [
+  // The Telegram web build has no AI: models run on the phone.
+  static List<TabModel> get availableTabModels => [
     TabModel(type: TabType.calendar),
     TabModel(type: TabType.insights),
     TabModel(type: TabType.settings),
     TabModel(type: TabType.today),
+    if (!kIsWeb || kIsPhoneWeb) TabModel(type: TabType.ai),
   ];
 
   // Available list of Tabs that can be reached after first launch.
@@ -122,6 +126,7 @@ final class KeklistConstants {
       TabModel(type: TabType.today),
       TabModel(type: TabType.calendar),
       TabModel(type: TabType.insights),
+      TabModel(type: TabType.ai),
       TabModel(type: TabType.settings),
     ],
   );

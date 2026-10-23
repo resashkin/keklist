@@ -105,7 +105,9 @@ final class ExportImportService {
       final archive = Archive();
 
       // Add minds.csv to root
-      archive.addFile(ArchiveFile('minds.csv', csv.length, utf8.encode(csv)));
+      // Sizes are in bytes: archive 4.5 stops reading an entry at its size, which cut emoji text short.
+      final List<int> mindsBytes = utf8.encode(csv);
+      archive.addFile(ArchiveFile('minds.csv', mindsBytes.length, mindsBytes));
 
       // Every emotion travels, archived and unused included: minds may still be
       // tagged with archived ones, and a missing parent would orphan its children.
@@ -113,9 +115,8 @@ final class ExportImportService {
       if (emotions.isNotEmpty) {
         final emotionsCsv =
             const CsvEncoder(fieldDelimiter: ';').convert(emotions.map((e) => e.toCSVEntry()).toList());
-        archive.addFile(
-          ArchiveFile(emotionsFileName, emotionsCsv.length, utf8.encode(emotionsCsv)),
-        );
+        final List<int> emotionsBytes = utf8.encode(emotionsCsv);
+        archive.addFile(ArchiveFile(emotionsFileName, emotionsBytes.length, emotionsBytes));
       }
 
       // Add audio files
@@ -369,6 +370,7 @@ final class ExportImportService {
       Archive archive;
       try {
         archive = ZipDecoder().decodeBytes(zipBytes);
+        _allowLegacyTextSizes(archive);
       } catch (e) {
         return ImportFailure(
           error: ImportError.corruptedFile,
@@ -568,5 +570,14 @@ final class ExportImportService {
     random.seed(pc.KeyParameter(seed));
 
     return random.nextBytes(length);
+  }
+
+  /// Exports before archive 4.5 gave CSV entries their length in UTF-16 units, below the UTF-8 bytes of emoji and
+  /// non-Latin text, and archive 4.5 refuses to decode past an entry's size. Those entries may take up to 4 bytes a unit.
+  static void _allowLegacyTextSizes(Archive archive) {
+    for (final ArchiveFile file in archive) {
+      if (!file.name.endsWith('.csv')) continue;
+      if (file.rawContent case final ZipFile zip) zip.uncompressedSize *= 4;
+    }
   }
 }

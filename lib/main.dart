@@ -54,6 +54,13 @@ import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.da
 import 'package:keklist/presentation/cubits/weather/weather_cubit.dart';
 import 'package:keklist/di/containers.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:keklist/domain/services/ai/ai_backend.dart';
+import 'package:keklist/domain/services/ai/ai_model_store.dart';
+import 'package:keklist/domain/services/ai/ai_storage.dart';
+import 'package:keklist/domain/services/ai/local_ai_backend.dart';
+import 'package:keklist/domain/services/phone_web/phone_ai_backend.dart';
+import 'package:keklist/domain/services/phone_web/phone_api.dart';
+import 'package:keklist/domain/services/web_server/ai_routes.dart';
 import 'package:keklist/domain/services/web_server/bonjour_announcer.dart';
 import 'package:keklist/domain/services/web_server/gallery_routes.dart';
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
@@ -119,8 +126,9 @@ final class _AppRootState extends State<_AppRoot> {
         : dotenv.env['REVENUE_CAT_TEST_API_KEY']!;
     if (!kIsPhoneWeb) await Purchases.configure(PurchasesConfiguration(revenueCatApiKey));
 
-    final KeklistWebServer? webServer = kIsWeb ? null : await _startWebServer(injector);
-    final app = _getApplication(injector, webServer);
+    final (AiBackend?, AiModelStore?) ai = await _createAi(injector, cipher);
+    final KeklistWebServer? webServer = kIsWeb ? null : await _startWebServer(injector, ai.$1);
+    final app = _getApplication(injector, webServer, ai);
     setState(() => _app = app);
     _startGalleryIndexing(injector.get<GalleryIndexer>());
   }
@@ -296,7 +304,23 @@ Future<void> _runMigrations(
 
 /// The phone serves the web version to browsers in its Wi-Fi once a PIN is set. Android answers for keklist.local
 /// itself; an iPhone goes by its own Bonjour name.
-Future<KeklistWebServer> _startWebServer(Injector injector) async {
+/// The phone runs models itself; the web version served by the phone asks it. The Telegram web build has no AI.
+Future<(AiBackend?, AiModelStore?)> _createAi(Injector injector, HiveAesCipher cipher) async {
+  if (kIsPhoneWeb) return (PhoneAiBackend(api: injector.get<PhoneApi>()), null);
+  if (kIsWeb) return (null, null);
+  final AiStorage storage = await AiStorage.open(cipher);
+  final AiModelStore models = AiModelStore(storage: storage);
+  await models.start();
+  final AiBackend backend = LocalAiBackend(
+    storage: storage,
+    models: models,
+    minds: injector.get<MindRepository>(),
+    emotions: injector.get<EmotionRepository>(),
+  );
+  return (backend, models);
+}
+
+Future<KeklistWebServer> _startWebServer(Injector injector, AiBackend? ai) async {
   final KeklistWebServer server = KeklistWebServer(
     access: await WebAccess.load(),
     mindRepository: injector.get<MindRepository>(),
@@ -304,6 +328,7 @@ Future<KeklistWebServer> _startWebServer(Injector injector) async {
     settingsRepository: injector.get<SettingsRepository>(),
     fileRepository: injector.get<AppFileRepository>(),
     gallery: GalleryRoutes(indexer: injector.get<GalleryIndexer>(), settings: injector.get<SettingsRepository>()),
+    ai: ai == null ? null : AiRoutes(backend: ai),
     announcer: switch (defaultTargetPlatform) {
       TargetPlatform.android => MdnsResponder('keklist.local'),
       TargetPlatform.iOS => BonjourAnnouncer(),
@@ -314,9 +339,11 @@ Future<KeklistWebServer> _startWebServer(Injector injector) async {
   return server;
 }
 
-Widget _getApplication(Injector mainInjector, KeklistWebServer? webServer) => MultiProvider(
+Widget _getApplication(Injector mainInjector, KeklistWebServer? webServer, (AiBackend?, AiModelStore?) ai) => MultiProvider(
   providers: [
     if (webServer != null) ChangeNotifierProvider<KeklistWebServer>.value(value: webServer),
+    if (ai.$1 case final AiBackend backend) ChangeNotifierProvider<AiBackend>.value(value: backend),
+    if (ai.$2 case final AiModelStore models) ChangeNotifierProvider<AiModelStore>.value(value: models),
     RepositoryProvider(create: (context) => mainInjector.get<MindRepository>()),
     RepositoryProvider(create: (context) => mainInjector.get<AppFileRepository>()),
     RepositoryProvider(create: (context) => mainInjector.get<WeatherRepository>()),

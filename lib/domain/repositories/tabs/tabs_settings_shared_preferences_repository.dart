@@ -29,6 +29,25 @@ final class TabsSettingsSharedPreferencesRepository extends TabsSettingsReposito
     _behaviorSubject.addStream(
       _tabsSettingsPreferences.asBroadcastStream().whereNotNull().debounceTime(const Duration(milliseconds: 10)),
     );
+    _addAiTabOnce();
+  }
+
+  static const String _aiTabAddedKey = 'tabs_ai_added_v1';
+
+  /// The AI tab arrived after people chose their tabs, so it is put before Settings once; removing it sticks.
+  void _addAiTabOnce() {
+    if (_preferences.getBool(_aiTabAddedKey, defaultValue: false).getValue()) return;
+    _preferences.setBool(_aiTabAddedKey, true);
+    final TabsSettings? settings = _tabsSettingsPreferences.getValue();
+    if (settings == null || settings.selectedTabModels.any((tab) => tab.type == TabType.ai)) return;
+    final List<TabModel> tabs = [...settings.selectedTabModels];
+    final int settingsIndex = tabs.indexWhere((tab) => tab.type == TabType.settings);
+    final int aiIndex = settingsIndex < 0 ? tabs.length : settingsIndex;
+    tabs.insert(aiIndex, TabModel(type: TabType.ai));
+    final int defaultIndex = settings.defaultSelectedTabIndex;
+    _updateSettings(
+      TabsSettings(selectedTabModels: tabs, defaultSelectedTabIndex: defaultIndex >= aiIndex ? defaultIndex + 1 : defaultIndex),
+    );
   }
 
   /// Tabs dropped from [TabType] (like the old Profile) would fail to decode, so they are skipped.

@@ -40,6 +40,8 @@ import 'package:keklist/presentation/screens/tabs_settings/tabs_settings_screen.
 import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
 import 'package:keklist/presentation/screens/paywall/paywall_bottom_sheet.dart';
 import 'package:keklist/presentation/core/widgets/settings/settings_section.dart';
+import 'package:keklist/presentation/screens/ai/ai_models_screen.dart';
+import 'package:keklist/presentation/screens/ai/ai_personas_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
@@ -197,6 +199,26 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             onTap: () => _handleImport(),
           ),
           if (!isIndexing && GalleryIndexTile.isAvailable(context)) _galleryIndexRow(context),
+        ],
+      ),
+    // Models and roles live on the phone.
+    if (!kIsWeb)
+      SettingsSectionModel(
+        id: SettingsItemIds.aiSection,
+        title: context.l10n.aiTab,
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.aiModels,
+            title: context.l10n.aiModels,
+            leading: const Icon(Icons.memory_rounded, color: Colors.deepPurpleAccent),
+            onTap: () => AiModelsScreen.open(context),
+          ),
+          _navigationRow(
+            id: SettingsItemIds.aiRoles,
+            title: context.l10n.aiRoles,
+            leading: const Icon(Icons.theater_comedy_outlined, color: Colors.purpleAccent),
+            onTap: () => AiPersonasScreen.open(context),
+          ),
         ],
       ),
     // Only the phone serves the web version.

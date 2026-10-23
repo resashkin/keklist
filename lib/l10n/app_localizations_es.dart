@@ -958,4 +958,202 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get webVersionPort => 'Puerto';
+
+  @override
+  String get aiTab => 'IA';
+
+  @override
+  String get aiTabDescription =>
+      'Habla de tus notas con una IA que funciona en tu teléfono';
+
+  @override
+  String get aiPrivacyNote =>
+      'Solo funciona en tu teléfono: tus notas nunca salen del dispositivo.';
+
+  @override
+  String get aiDisclaimer =>
+      'No es un servicio médico. Si estás en peligro, contacta con los servicios de emergencia.';
+
+  @override
+  String get aiDaySummaries => 'Resúmenes del día';
+
+  @override
+  String get aiSummarize => 'Toca para resumir';
+
+  @override
+  String get aiSummaryOutdated => 'Las notas cambiaron — toca para actualizar';
+
+  @override
+  String get aiRegenerate => 'Escribir de nuevo';
+
+  @override
+  String get aiYesterday => 'Ayer';
+
+  @override
+  String get aiSessions => 'Sesiones';
+
+  @override
+  String get aiNoSessions => 'Aún no hay sesiones';
+
+  @override
+  String get aiNewSession => 'Nueva sesión';
+
+  @override
+  String get aiChooseRole => 'Elige un rol';
+
+  @override
+  String get aiRoleTherapist => 'Terapeuta';
+
+  @override
+  String get aiRoleCoach => 'Coach';
+
+  @override
+  String get aiRoleFriend => 'Amigo';
+
+  @override
+  String get aiMessageHint => 'Mensaje';
+
+  @override
+  String get aiStarterWeek => '¿Cómo fue mi semana?';
+
+  @override
+  String get aiStarterWorry => '¿Qué me ha preocupado últimamente?';
+
+  @override
+  String get aiStarterJoy => '¿Qué me ha alegrado últimamente?';
+
+  @override
+  String get aiActionSaveAsMind => 'Guardar como nota';
+
+  @override
+  String get aiActionOpenDay => 'Abrir día';
+
+  @override
+  String get aiActionWeekSummary => 'Resumen de la semana';
+
+  @override
+  String get aiWeekSummaryPrompt =>
+      'Resume mis últimos 7 días: qué pasó, cómo me sentí, qué destacó.';
+
+  @override
+  String get aiSavedAsMind => 'Guardado en hoy';
+
+  @override
+  String get aiThinking => 'Pensando…';
+
+  @override
+  String get aiStop => 'Detener';
+
+  @override
+  String get aiNoModelTitle => 'Elige un modelo';
+
+  @override
+  String get aiNoModelMessage =>
+      'Descarga un modelo para empezar. Funciona en tu teléfono, sin conexión.';
+
+  @override
+  String get aiNoModelOnPhone =>
+      'Descarga un modelo en la app del teléfono: Ajustes → IA → Modelos.';
+
+  @override
+  String get aiModels => 'Modelos';
+
+  @override
+  String get aiRoles => 'Roles';
+
+  @override
+  String get aiDownloaded => 'Descargados';
+
+  @override
+  String get aiDownloads => 'Descargando';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'Buscar modelos GGUF';
+
+  @override
+  String get aiFastest => 'Más rápido';
+
+  @override
+  String get aiDownload => 'Descargar';
+
+  @override
+  String get aiPause => 'Pausar';
+
+  @override
+  String get aiPaused => 'En pausa';
+
+  @override
+  String get aiResume => 'Reanudar';
+
+  @override
+  String get aiDownloadFailed => 'Error en la descarga';
+
+  @override
+  String get aiCellularTitle => '¿Descargar con datos móviles?';
+
+  @override
+  String aiCellularMessage(String size) {
+    return 'Se descargarán $size con datos móviles.';
+  }
+
+  @override
+  String get aiDeleteModel => '¿Eliminar el modelo?';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'En este teléfono: $size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'Memoria del teléfono: $size';
+  }
+
+  @override
+  String get aiCatalogFailed =>
+      'No se pudo cargar la lista. Revisa la conexión.';
+
+  @override
+  String get aiNoFilesFit =>
+      'Ningún archivo de este modelo cabe en la memoria del teléfono.';
+
+  @override
+  String get aiBuiltInRole => 'Integrados';
+
+  @override
+  String get aiOwnRoles => 'Tus roles';
+
+  @override
+  String get aiDuplicate => 'Duplicar';
+
+  @override
+  String get aiNewRole => 'Nuevo rol';
+
+  @override
+  String get aiRoleName => 'Nombre';
+
+  @override
+  String get aiRoleEmoji => 'Emoji';
+
+  @override
+  String get aiRolePrompt => 'Prompt';
+
+  @override
+  String get aiRolePromptHint => 'Cómo debe hablar la IA y en qué centrarse';
+
+  @override
+  String get aiReadOnlyRole =>
+      'Los roles integrados no se pueden cambiar. Duplica uno para crear el tuyo.';
+
+  @override
+  String get aiDeleteSession => '¿Eliminar la sesión?';
+
+  @override
+  String get aiDeleteRole => '¿Eliminar el rol?';
 }

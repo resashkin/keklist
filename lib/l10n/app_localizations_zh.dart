@@ -917,4 +917,193 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get webVersionPort => '端口';
+
+  @override
+  String get aiTab => 'AI';
+
+  @override
+  String get aiTabDescription => '与在手机上运行的 AI 聊聊你的记录';
+
+  @override
+  String get aiPrivacyNote => '仅在手机上运行：你的记录不会离开设备。';
+
+  @override
+  String get aiDisclaimer => '这不是医疗服务。如果你处于危险中，请联系紧急服务。';
+
+  @override
+  String get aiDaySummaries => '每日总结';
+
+  @override
+  String get aiSummarize => '点按生成总结';
+
+  @override
+  String get aiSummaryOutdated => '记录已更改 — 点按更新';
+
+  @override
+  String get aiRegenerate => '重新生成';
+
+  @override
+  String get aiYesterday => '昨天';
+
+  @override
+  String get aiSessions => '会话';
+
+  @override
+  String get aiNoSessions => '还没有会话';
+
+  @override
+  String get aiNewSession => '新会话';
+
+  @override
+  String get aiChooseRole => '选择角色';
+
+  @override
+  String get aiRoleTherapist => '心理咨询师';
+
+  @override
+  String get aiRoleCoach => '教练';
+
+  @override
+  String get aiRoleFriend => '朋友';
+
+  @override
+  String get aiMessageHint => '消息';
+
+  @override
+  String get aiStarterWeek => '我这周过得怎么样？';
+
+  @override
+  String get aiStarterWorry => '最近什么让我烦恼？';
+
+  @override
+  String get aiStarterJoy => '最近什么让我开心？';
+
+  @override
+  String get aiActionSaveAsMind => '保存为记录';
+
+  @override
+  String get aiActionOpenDay => '打开当天';
+
+  @override
+  String get aiActionWeekSummary => '本周总结';
+
+  @override
+  String get aiWeekSummaryPrompt => '总结我最近 7 天：发生了什么、我感受如何、什么最突出。';
+
+  @override
+  String get aiSavedAsMind => '已保存到今天';
+
+  @override
+  String get aiThinking => '思考中…';
+
+  @override
+  String get aiStop => '停止';
+
+  @override
+  String get aiNoModelTitle => '选择模型';
+
+  @override
+  String get aiNoModelMessage => '下载一个模型即可开始。它在手机上离线运行。';
+
+  @override
+  String get aiNoModelOnPhone => '请在手机上的应用中下载模型：设置 → AI → 模型。';
+
+  @override
+  String get aiModels => '模型';
+
+  @override
+  String get aiRoles => '角色';
+
+  @override
+  String get aiDownloaded => '已下载';
+
+  @override
+  String get aiDownloads => '下载中';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => '搜索 GGUF 模型';
+
+  @override
+  String get aiFastest => '最快';
+
+  @override
+  String get aiDownload => '下载';
+
+  @override
+  String get aiPause => '暂停';
+
+  @override
+  String get aiPaused => '已暂停';
+
+  @override
+  String get aiResume => '继续';
+
+  @override
+  String get aiDownloadFailed => '下载失败';
+
+  @override
+  String get aiCellularTitle => '使用移动数据下载？';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '将使用移动数据下载 $size。';
+  }
+
+  @override
+  String get aiDeleteModel => '删除模型？';
+
+  @override
+  String aiStorageUsed(String size) {
+    return '本机占用：$size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return '手机内存：$size';
+  }
+
+  @override
+  String get aiCatalogFailed => '无法加载列表。请检查网络连接。';
+
+  @override
+  String get aiNoFilesFit => '该模型没有可放入本机内存的文件。';
+
+  @override
+  String get aiBuiltInRole => '内置';
+
+  @override
+  String get aiOwnRoles => '你的角色';
+
+  @override
+  String get aiDuplicate => '复制';
+
+  @override
+  String get aiNewRole => '新角色';
+
+  @override
+  String get aiRoleName => '名称';
+
+  @override
+  String get aiRoleEmoji => '表情';
+
+  @override
+  String get aiRolePrompt => '提示词';
+
+  @override
+  String get aiRolePromptHint => 'AI 应如何说话以及关注什么';
+
+  @override
+  String get aiReadOnlyRole => '内置角色无法修改。复制一个来创建你自己的角色。';
+
+  @override
+  String get aiDeleteSession => '删除会话？';
+
+  @override
+  String get aiDeleteRole => '删除角色？';
 }
