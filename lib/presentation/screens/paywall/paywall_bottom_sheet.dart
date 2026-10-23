@@ -6,6 +6,7 @@ import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 const _kOfferingId = 'lifetime_offer';
 
@@ -34,12 +35,7 @@ final class PaywallBottomSheet extends StatefulWidget {
   const PaywallBottomSheet({super.key});
 
   static Future<bool> show(BuildContext context) async {
-    final result = await showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => const PaywallBottomSheet(),
-    );
+    final result = await KekSheet.show<bool>(context: context, builder: (_) => const PaywallBottomSheet());
     return result ?? false;
   }
 
@@ -154,25 +150,11 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      child: SafeArea(
+    return KekSheetScaffold(
+      child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Drag handle
-            Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 8),
-              width: 32,
-              height: 4,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
               child: Column(

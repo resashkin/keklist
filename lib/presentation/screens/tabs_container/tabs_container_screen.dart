@@ -18,6 +18,7 @@ import 'package:keklist/presentation/screens/settings/settings_screen.dart';
 
 /// Wider screens get the tabs as a rail on the left, like a desktop app.
 const double _kRailMinWidth = 800.0;
+const double _kContentMaxWidth = 840.0;
 
 final class TabsContainerScreen extends StatefulWidget {
   const TabsContainerScreen({super.key});
@@ -104,7 +105,13 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
         ..clear()
         ..addAll(_tabTypes.map(_bodyWidgetByType));
     }
-    final Widget body = IndexedStack(index: _selectedTabIndex, children: _bodyWidgets);
+    // On wide screens the content stays a readable column instead of stretching edge to edge.
+    final Widget body = Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: _kContentMaxWidth),
+        child: IndexedStack(index: _selectedTabIndex, children: _bodyWidgets),
+      ),
+    );
     if (isWide) {
       return Scaffold(
         body: Row(

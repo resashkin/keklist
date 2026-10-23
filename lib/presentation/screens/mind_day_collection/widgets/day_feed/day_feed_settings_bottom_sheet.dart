@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 final class DayFeedSettingsBottomSheet extends StatelessWidget {
   final ValueChanged<bool> onWeatherToggled;
@@ -23,7 +24,8 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return KekSheetScaffold(
+      title: context.l10n.dayFeedTileSettings,
       child: BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (_, current) => current is SettingsDataState,
         builder: (context, state) {
@@ -39,67 +41,61 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context, DayFeedSettings settings, {required bool isWeatherEnabled}) {
-    final ThemeData theme = Theme.of(context);
     void update(SettingsUpdateDayFeed event) {
       tweakChangeHaptic();
       context.read<SettingsBloc>().add(event);
     }
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-          child: Text(context.l10n.dayFeedTileSettings, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
-        ),
-        ColumnCountRow(
-          title: context.l10n.dayFeedColumns,
-          selected: settings.columnCount,
-          onChanged: (count) => update(SettingsUpdateDayFeed(columnCount: count)),
-        ),
-        _SegmentedRow<int>(
-          title: context.l10n.dayFeedMindTileSize,
-          options: {1: context.l10n.dayFeedMindTileSquare, 2: context.l10n.dayFeedMindTileWide},
-          selected: settings.mindCellSpan,
-          onChanged: (span) => update(SettingsUpdateDayFeed(mindCellSpan: span)),
-        ),
-        SwitchListTile(
-          title: Text(context.l10n.dayFeedShowMindText),
-          value: settings.isMindTextVisible,
-          onChanged: (value) => update(SettingsUpdateDayFeed(isMindTextVisible: value)),
-        ),
-        const Divider(),
-        SwitchListTile(
-          secondary: const Icon(Icons.cloud_outlined),
-          title: Row(
-            spacing: 6.0,
-            children: [Text(context.l10n.sourcesWeather), const _ProBadge()],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ColumnCountRow(
+            title: context.l10n.dayFeedColumns,
+            selected: settings.columnCount,
+            onChanged: (count) => update(SettingsUpdateDayFeed(columnCount: count)),
           ),
-          subtitle: Text(context.l10n.sourcesWeatherSubtitle),
-          value: isWeatherEnabled,
-          onChanged: (value) {
-            tweakChangeHaptic();
-            onWeatherToggled(value);
-          },
-        ),
-        if (isWeatherEnabled)
-          ListTile(
-            leading: const Icon(Icons.place_outlined),
-            title: Text(context.l10n.weatherSettings),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: onWeatherLocation,
+          _SegmentedRow<int>(
+            title: context.l10n.dayFeedMindTileSize,
+            options: {1: context.l10n.dayFeedMindTileSquare, 2: context.l10n.dayFeedMindTileWide},
+            selected: settings.mindCellSpan,
+            onChanged: (span) => update(SettingsUpdateDayFeed(mindCellSpan: span)),
           ),
-        if (!kIsWeb && Platform.isAndroid)
-          ListTile(
-            leading: const Icon(Icons.folder_open),
-            title: Text(context.l10n.sourcesMediaFolder),
-            subtitle: Text(context.l10n.sourcesMediaFolderSubtitle),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: onMediaFolder,
+          SwitchListTile(
+            title: Text(context.l10n.dayFeedShowMindText),
+            value: settings.isMindTextVisible,
+            onChanged: (value) => update(SettingsUpdateDayFeed(isMindTextVisible: value)),
           ),
-        const SafeArea(child: SizedBox(height: 8.0)),
-      ],
+          const Divider(),
+          SwitchListTile(
+            secondary: const Icon(Icons.cloud_outlined),
+            title: Row(spacing: 6.0, children: [Text(context.l10n.sourcesWeather), const _ProBadge()]),
+            subtitle: Text(context.l10n.sourcesWeatherSubtitle),
+            value: isWeatherEnabled,
+            onChanged: (value) {
+              tweakChangeHaptic();
+              onWeatherToggled(value);
+            },
+          ),
+          if (isWeatherEnabled)
+            ListTile(
+              leading: const Icon(Icons.place_outlined),
+              title: Text(context.l10n.weatherSettings),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: onWeatherLocation,
+            ),
+          if (!kIsWeb && Platform.isAndroid)
+            ListTile(
+              leading: const Icon(Icons.folder_open),
+              title: Text(context.l10n.sourcesMediaFolder),
+              subtitle: Text(context.l10n.sourcesMediaFolderSubtitle),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: onMediaFolder,
+            ),
+          const SizedBox(height: 8.0),
+        ],
+      ),
     );
   }
 }

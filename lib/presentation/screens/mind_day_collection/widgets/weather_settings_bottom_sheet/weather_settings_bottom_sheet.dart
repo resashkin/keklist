@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:keklist/domain/services/weather/weather_api_service.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 final class WeatherSettingsBottomSheet extends StatefulWidget {
   final double? initialLatitude;
@@ -31,12 +32,8 @@ final class _WeatherSettingsBottomSheetState extends State<WeatherSettingsBottom
   @override
   void initState() {
     super.initState();
-    _latController = TextEditingController(
-      text: widget.initialLatitude?.toString() ?? '',
-    );
-    _lonController = TextEditingController(
-      text: widget.initialLongitude?.toString() ?? '',
-    );
+    _latController = TextEditingController(text: widget.initialLatitude?.toString() ?? '');
+    _lonController = TextEditingController(text: widget.initialLongitude?.toString() ?? '');
     _latController.addListener(_clearLocationName);
     _lonController.addListener(_clearLocationName);
   }
@@ -56,47 +53,26 @@ final class _WeatherSettingsBottomSheetState extends State<WeatherSettingsBottom
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return KekSheetScaffold(
+      title: context.l10n.weatherSettings,
       child: Padding(
-        padding: EdgeInsets.only(
-          left: 16.0,
-          right: 16.0,
-          top: 16.0,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 16.0,
-        ),
+        padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              context.l10n.weatherSettings,
-              style: Theme.of(context).textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16.0),
             OutlinedButton.icon(
               onPressed: _isDetecting ? null : _detectLocation,
               icon: _isDetecting
-                  ? const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
+                  ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
                   : const Icon(Icons.my_location, size: 18),
-              label: Text(
-                _isDetecting
-                    ? context.l10n.weatherDetectingLocation
-                    : context.l10n.weatherUseMyLocation,
-              ),
+              label: Text(_isDetecting ? context.l10n.weatherDetectingLocation : context.l10n.weatherUseMyLocation),
             ),
             if (_locationError != null) ...[
               const SizedBox(height: 8.0),
               Text(
                 _locationError!,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.error,
-                  fontSize: 12,
-                ),
+                style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -104,10 +80,7 @@ final class _WeatherSettingsBottomSheetState extends State<WeatherSettingsBottom
               const SizedBox(height: 8.0),
               Text(
                 _locationName!,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 12,
-                ),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 12),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -117,10 +90,7 @@ final class _WeatherSettingsBottomSheetState extends State<WeatherSettingsBottom
                 const Expanded(child: Divider()),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    context.l10n.weatherOrEnterManually,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+                  child: Text(context.l10n.weatherOrEnterManually, style: Theme.of(context).textTheme.bodySmall),
                 ),
                 const Expanded(child: Divider()),
               ],
@@ -129,25 +99,16 @@ final class _WeatherSettingsBottomSheetState extends State<WeatherSettingsBottom
             TextField(
               controller: _latController,
               keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
-              decoration: InputDecoration(
-                labelText: context.l10n.weatherLatitude,
-                border: const OutlineInputBorder(),
-              ),
+              decoration: InputDecoration(labelText: context.l10n.weatherLatitude, border: const OutlineInputBorder()),
             ),
             const SizedBox(height: 12.0),
             TextField(
               controller: _lonController,
               keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
-              decoration: InputDecoration(
-                labelText: context.l10n.weatherLongitude,
-                border: const OutlineInputBorder(),
-              ),
+              decoration: InputDecoration(labelText: context.l10n.weatherLongitude, border: const OutlineInputBorder()),
             ),
             const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _onSave,
-              child: Text(context.l10n.weatherSaveLocation),
-            ),
+            ElevatedButton(onPressed: _onSave, child: Text(context.l10n.weatherSaveLocation)),
             SafeArea(child: const SizedBox(height: 8.0)),
           ],
         ),
@@ -194,10 +155,7 @@ final class _WeatherSettingsBottomSheetState extends State<WeatherSettingsBottom
       }
 
       final Position position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.low,
-          timeLimit: Duration(seconds: 15),
-        ),
+        locationSettings: const LocationSettings(accuracy: LocationAccuracy.low, timeLimit: Duration(seconds: 15)),
       );
 
       if (!mounted) return;

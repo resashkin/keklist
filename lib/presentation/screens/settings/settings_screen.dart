@@ -36,12 +36,12 @@ import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/presentation/screens/settings/widgets/gallery_index_tile.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/settings/widgets/settings_customize_bottom_sheet.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/tabs_settings/tabs_settings_screen.dart';
 import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
 import 'package:keklist/presentation/screens/paywall/paywall_bottom_sheet.dart';
 import 'package:keklist/presentation/core/widgets/settings/settings_section.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 // TODO: move methods from MindBloc to SettingsBloc
 
@@ -135,7 +135,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
 
   @override
   void onShakeToTweak() {
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (_) => SettingsCustomizeBottomSheet(sections: _buildSections(context)),
     );
@@ -529,7 +529,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
 
       SettingsExportAction? selectedAction;
 
-      await showModalBottomSheet<void>(
+      await KekSheet.show<void>(
         context: context,
         builder: (context) => ActionsScreen(
           actions: [

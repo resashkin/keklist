@@ -76,11 +76,8 @@ final class MindStoryDetails extends StatelessWidget {
   final Widget? media;
 
   final VoidCallback? onTapText;
-
-  /// Replaces the text while it is being edited.
-  final Widget? textEditor;
-
   final VoidCallback? onEditEmotions;
+  final ValueChanged<Mind>? onTapReflection;
   final ValueChanged<Mind>? onLongPressReflection;
 
   const MindStoryDetails({
@@ -88,8 +85,8 @@ final class MindStoryDetails extends StatelessWidget {
     required this.mind,
     this.media,
     this.onTapText,
-    this.textEditor,
     this.onEditEmotions,
+    this.onTapReflection,
     this.onLongPressReflection,
   });
 
@@ -102,15 +99,13 @@ final class MindStoryDetails extends StatelessWidget {
       spacing: 20.0,
       children: [
         ?media,
-        if (textEditor != null)
-          textEditor!
-        else if (text.isNotEmpty)
+        if (text.isNotEmpty)
           GestureDetector(
             onTap: onTapText,
             child: Text(text, textAlign: TextAlign.center, style: mindStoryTextStyle(foreground)),
           ),
         MindEmotionsPill(mind: mind, onTap: onEditEmotions),
-        MindReflectionsList(mind: mind, onLongPress: onLongPressReflection),
+        MindReflectionsList(mind: mind, onTap: onTapReflection, onLongPress: onLongPressReflection),
       ],
     );
   }
@@ -210,9 +205,10 @@ final class MindEmotionChips extends StatelessWidget {
 /// The mind's reflections, oldest first: time, emotions and full text of each.
 final class MindReflectionsList extends StatelessWidget {
   final Mind mind;
+  final ValueChanged<Mind>? onTap;
   final ValueChanged<Mind>? onLongPress;
 
-  const MindReflectionsList({super.key, required this.mind, this.onLongPress});
+  const MindReflectionsList({super.key, required this.mind, this.onTap, this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
@@ -231,6 +227,7 @@ final class MindReflectionsList extends StatelessWidget {
           children: [
             for (final Mind reflection in reflections)
               GestureDetector(
+                onTap: onTap == null ? null : () => onTap!(reflection),
                 onLongPress: onLongPress == null ? null : () => onLongPress!(reflection),
                 child: Container(
                   padding: const EdgeInsets.all(12.0),

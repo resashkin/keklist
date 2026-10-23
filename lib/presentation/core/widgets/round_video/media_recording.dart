@@ -6,18 +6,14 @@ import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/mind_audio_recorder_sheet.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_recorder_screen.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 final class MediaRecording {
   static Future<MindNoteAudio?> recordAudio(BuildContext context) async {
     final AppFileRepository fileRepository = context.read<AppFileRepository>();
-    final AudioRecordingResult recordedPath = await showModalBottomSheet<AudioRecordingResult>(
+    final AudioRecordingResult recordedPath = await KekSheet.show<AudioRecordingResult>(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (sheetContext) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(sheetContext).viewInsets.bottom),
-        child: MindAudioRecorderSheet(fileRepository: fileRepository),
-      ),
+      builder: (_) => MindAudioRecorderSheet(fileRepository: fileRepository),
     );
     final String relativePath = recordedPath?.trim() ?? '';
     if (relativePath.isEmpty) return null;
@@ -27,8 +23,10 @@ final class MediaRecording {
   }
 
   static Future<MindNoteVideo?> recordVideo(BuildContext context) async {
-    final RoundVideoRecordingResult? result =
-        await RoundVideoRecorderScreen.show(context, fileRepository: context.read<AppFileRepository>());
+    final RoundVideoRecordingResult? result = await RoundVideoRecorderScreen.show(
+      context,
+      fileRepository: context.read<AppFileRepository>(),
+    );
     if (result == null) return null;
     return MindNoteVideo(appRelativePath: result.relativePath, durationSeconds: result.durationSeconds);
   }

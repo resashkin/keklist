@@ -5,76 +5,68 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 /// Shake sheet of stories and the viewer: date header lines, how the emotion texture moves with the sound,
 /// the spectrum around circles and how strongly both react.
 final class StoryTextureTweakSheet extends StatelessWidget {
   const StoryTextureTweakSheet({super.key});
 
-  static Future<void> show(BuildContext context) => showModalBottomSheet(
-    context: context,
-    showDragHandle: true,
-    isScrollControlled: true,
-    builder: (_) => const StoryTextureTweakSheet(),
-  );
+  static Future<void> show(BuildContext context) =>
+      KekSheet.show(context: context, builder: (_) => const StoryTextureTweakSheet());
 
   @override
   Widget build(BuildContext context) {
     final StorySettings story = context.watchStorySettings();
-    final ThemeData theme = Theme.of(context);
     void update(StorySettings value) {
       tweakChangeHaptic();
       context.read<SettingsBloc>().add(SettingsUpdateStory(story: value));
     }
 
-    return SafeArea(
-      top: false,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.8),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(context.l10n.storyBackgroundTweak, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
-              _SectionTitle(context.l10n.storyDateLines),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: SegmentedButton<StoryDateLayout>(
-                  showSelectedIcon: false,
-                  segments: [
-                    for (final StoryDateLayout layout in StoryDateLayout.values)
-                      ButtonSegment(value: layout, label: Text('${layout.index + 1}')),
-                  ],
-                  selected: {story.dateLayout},
-                  onSelectionChanged: (selection) => update(story.copyWith(dateLayout: selection.first)),
-                ),
+    return KekSheetScaffold(
+      title: context.l10n.storyBackgroundTweak,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _SectionTitle(context.l10n.storyDateLines),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: SegmentedButton<StoryDateLayout>(
+                showSelectedIcon: false,
+                segments: [
+                  for (final StoryDateLayout layout in StoryDateLayout.values)
+                    ButtonSegment(value: layout, label: Text('${layout.index + 1}')),
+                ],
+                selected: {story.dateLayout},
+                onSelectionChanged: (selection) => update(story.copyWith(dateLayout: selection.first)),
               ),
-              _SectionTitle(context.l10n.storyTextureTitle),
-              for (final StoryTextureAnimation animation in StoryTextureAnimation.values)
-                ListTile(
-                  leading: Icon(_iconOf(animation)),
-                  title: Text(_titleOf(context, animation)),
-                  trailing: animation == story.textureAnimation ? const Icon(Icons.check_rounded) : null,
-                  onTap: () => update(story.copyWith(textureAnimation: animation)),
-                ),
-              SwitchListTile(
-                secondary: const Icon(Icons.graphic_eq_rounded),
-                title: Text(context.l10n.storySpectrum),
-                value: story.isSpectrumVisible,
-                onChanged: (value) => update(story.copyWith(isSpectrumVisible: value)),
+            ),
+            _SectionTitle(context.l10n.storyTextureTitle),
+            for (final StoryTextureAnimation animation in StoryTextureAnimation.values)
+              ListTile(
+                leading: Icon(_iconOf(animation)),
+                title: Text(_titleOf(context, animation)),
+                trailing: animation == story.textureAnimation ? const Icon(Icons.check_rounded) : null,
+                onTap: () => update(story.copyWith(textureAnimation: animation)),
               ),
-              _SectionTitle('${context.l10n.storySensitivity} · ${story.sensitivity.toStringAsFixed(1)}×'),
-              Slider(
-                value: story.sensitivity,
-                min: StorySettings.minSensitivity,
-                max: StorySettings.maxSensitivity,
-                divisions: ((StorySettings.maxSensitivity - StorySettings.minSensitivity) * 10).round(),
-                onChanged: (value) => update(story.copyWith(sensitivity: value)),
-              ),
-              const SizedBox(height: 8.0),
-            ],
-          ),
+            SwitchListTile(
+              secondary: const Icon(Icons.graphic_eq_rounded),
+              title: Text(context.l10n.storySpectrum),
+              value: story.isSpectrumVisible,
+              onChanged: (value) => update(story.copyWith(isSpectrumVisible: value)),
+            ),
+            _SectionTitle('${context.l10n.storySensitivity} · ${story.sensitivity.toStringAsFixed(1)}×'),
+            Slider(
+              value: story.sensitivity,
+              min: StorySettings.minSensitivity,
+              max: StorySettings.maxSensitivity,
+              divisions: ((StorySettings.maxSensitivity - StorySettings.minSensitivity) * 10).round(),
+              onChanged: (value) => update(story.copyWith(sensitivity: value)),
+            ),
+            const SizedBox(height: 8.0),
+          ],
         ),
       ),
     );

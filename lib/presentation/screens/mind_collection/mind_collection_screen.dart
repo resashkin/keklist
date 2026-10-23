@@ -46,6 +46,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_stories_screen.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 part 'local_widgets/search_app_bar/search_app_bar.dart';
 part 'local_widgets/app_bar/mind_collection_app_bar.dart';
 part 'local_widgets/body/mind_collection_body.dart';
@@ -78,7 +79,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   String get shakeScreenId => ShakeScreenIds.calendar;
 
   @override
-  void onShakeToTweak() => showBarModalBottomSheet(context: context, builder: (_) => const CalendarSettingsBottomSheet());
+  void onShakeToTweak() => KekSheet.show(context: context, builder: (_) => const CalendarSettingsBottomSheet());
 
   // NOTE: Состояние SearchBar.
   final TextEditingController _searchTextController = TextEditingController(text: null);
@@ -380,7 +381,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   }
 
   void _showCalendarActions() {
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (context) => ActionsScreen(
         actions: [
@@ -392,7 +393,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   }
 
   void _showDigestPeriodOptions() {
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (context) => ActionsScreen(
         actions: [

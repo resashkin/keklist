@@ -30,11 +30,12 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/story_texture_tweak_sheet.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:translator/translator.dart';
 import 'package:video_player/video_player.dart';
 import 'package:keklist/presentation/core/helpers/media_sources.dart';
 import 'package:keklist/presentation/core/widgets/gallery/gallery_media.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
+import 'package:keklist/presentation/core/widgets/text_edit_sheet.dart';
 
 const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
@@ -82,12 +83,9 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
   double _scrollPull = 0.0;
   bool _isClosing = false;
 
-  final TextEditingController _textController = TextEditingController();
-  String? _editingMindId;
 
   final TextEditingController _commentController = TextEditingController();
   final FocusNode _commentFocusNode = FocusNode();
-  Mind? _editableComment;
 
   DayFeedItem get _currentItem => widget.items[_index];
 
@@ -106,7 +104,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
   @override
   void dispose() {
     _pageController.dispose();
-    _textController.dispose();
     _commentController.dispose();
     _commentFocusNode.dispose();
     super.dispose();
@@ -151,7 +148,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
                       itemCount: widget.items.length,
                       onPageChanged: (index) => setState(() {
                         _index = index;
-                        _editingMindId = null;
                         _resetComment();
                       }),
                       itemBuilder: (context, index) =>
@@ -191,11 +187,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
       initialMind: mind,
       isCurrent: isCurrent,
       insets: insets,
-      isEditing: _editingMindId == mind.id,
-      textController: _textController,
-      onStartEditing: _startEditing,
-      onSaveEditing: _saveEditing,
-      onCancelEditing: () => setState(() => _editingMindId = null),
+      onEditText: _editText,
       onEditEmotions: _editEmotions,
       onLongPressReflection: _showCommentActions,
     ),
@@ -268,7 +260,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
       // See-through so the mind's texture continues under the comment field.
       data: theme.copyWith(scaffoldBackgroundColor: Colors.transparent),
       child: MindCreatorBottomBar(
-        editableMind: _editableComment,
         focusNode: _commentFocusNode,
         textEditingController: _commentController,
         placeholder: context.l10n.viewerCommentHint,
@@ -283,18 +274,10 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
 
   // Text of the mind
 
-  void _startEditing(Mind mind) {
-    final String text = mind.plainNote.trim();
-    _textController.value = TextEditingValue(
-      text: text,
-      selection: TextSelection.collapsed(offset: text.length),
-    );
-    setState(() => _editingMindId = mind.id);
-  }
-
-  void _saveEditing(Mind mind) {
-    context.read<MindBloc>().add(MindEdit(mind: _withText(mind, _textController.text)));
-    setState(() => _editingMindId = null);
+  Future<void> _editText(Mind mind) async {
+    final String? text = await TextEditSheet.show(context, initialText: mind.plainNote.trim());
+    if (text == null || !mounted) return;
+    context.read<MindBloc>().add(MindEdit(mind: _withText(mind, text)));
   }
 
   void _editEmotions(Mind mind) {
@@ -322,10 +305,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
   // Comments
 
   void _saveComment(Mind root, String text) {
-    final Mind? editable = _editableComment;
-    if (editable != null) {
-      context.read<MindBloc>().add(MindEdit(mind: _withText(editable, text)));
-    } else if (text.trim().isNotEmpty) {
+    if (text.trim().isNotEmpty) {
       context.read<MindBloc>().add(
         MindCreate(dayIndex: root.dayIndex, mindContent: MindNoteContent.parse(text.trim()).pieces, rootId: root.id),
       );
@@ -340,25 +320,17 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
   }
 
   void _resetComment() {
-    _editableComment = null;
     _commentController.clear();
     _commentFocusNode.unfocus();
   }
 
   void _showCommentActions(Mind comment) {
     Haptics.vibrate(HapticsType.medium);
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (_) => ActionsScreen(
         actions: [
-          (
-            ActionModel.edit(context),
-            () {
-              setState(() => _editableComment = comment);
-              _commentController.text = comment.plainNote.trim();
-              _commentFocusNode.requestFocus();
-            },
-          ),
+          (ActionModel.edit(context), () => _editText(comment)),
           if (comment.noteContent.hasMedia)
             (
               ActionModel.custom(title: context.l10n.removeMedia, icon: const Icon(Icons.hide_image_outlined)),
@@ -377,11 +349,11 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen> with Sh
     final bool canTranslate =
         debugState is DebugMenuDataState &&
         debugState.debugMenuItems.any((item) => item.type == DebugMenuType.translation && item.value);
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (_) => ActionsScreen(
         actions: [
-          (ActionModel.edit(context), () => _startEditing(mind)),
+          (ActionModel.edit(context), () => _editText(mind)),
           if (canTranslate) (ActionModel.tranlsateToEnglish(context), () => _translateToEnglish(mind)),
           if (mind.noteContent.hasMedia)
             (
@@ -489,11 +461,7 @@ final class _MindPage extends StatefulWidget {
   final Mind initialMind;
   final bool isCurrent;
   final EdgeInsets insets;
-  final bool isEditing;
-  final TextEditingController textController;
-  final ValueChanged<Mind> onStartEditing;
-  final ValueChanged<Mind> onSaveEditing;
-  final VoidCallback onCancelEditing;
+  final ValueChanged<Mind> onEditText;
   final ValueChanged<Mind> onEditEmotions;
   final ValueChanged<Mind> onLongPressReflection;
 
@@ -502,11 +470,7 @@ final class _MindPage extends StatefulWidget {
     required this.initialMind,
     required this.isCurrent,
     required this.insets,
-    required this.isEditing,
-    required this.textController,
-    required this.onStartEditing,
-    required this.onSaveEditing,
-    required this.onCancelEditing,
+    required this.onEditText,
     required this.onEditEmotions,
     required this.onLongPressReflection,
   });
@@ -570,9 +534,9 @@ final class _MindPageState extends State<_MindPage> {
                             diameter: _kAudioCircleSize,
                           )
                         : null,
-                    onTapText: () => widget.onStartEditing(mind),
-                    textEditor: widget.isEditing ? _buildEditor(mind, foreground) : null,
+                    onTapText: () => widget.onEditText(mind),
                     onEditEmotions: () => widget.onEditEmotions(mind),
+                    onTapReflection: widget.onEditText,
                     onLongPressReflection: widget.onLongPressReflection,
                   ),
                 ),
@@ -581,46 +545,6 @@ final class _MindPageState extends State<_MindPage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildEditor(Mind mind, Color foreground) {
-    return Column(
-      spacing: 8.0,
-      children: [
-        TextField(
-          controller: widget.textController,
-          autofocus: true,
-          maxLines: null,
-          textAlign: TextAlign.center,
-          cursorColor: foreground,
-          style: mindStoryTextStyle(foreground),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: foreground.withValues(alpha: 0.06),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(14.0), borderSide: BorderSide.none),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 12.0,
-          children: [
-            TextButton(
-              style: TextButton.styleFrom(foregroundColor: foreground),
-              onPressed: widget.onCancelEditing,
-              child: Text(context.l10n.cancel),
-            ),
-            FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: foreground,
-                foregroundColor: storyColorsOf(context).background,
-              ),
-              onPressed: () => widget.onSaveEditing(mind),
-              child: Text(context.l10n.save),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

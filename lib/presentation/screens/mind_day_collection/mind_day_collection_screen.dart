@@ -10,7 +10,6 @@ import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/core/widgets/overscroll_listener.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/domain/constants.dart';
@@ -37,6 +36,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_weather_backdrop.dart';
 import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 const double _kFloatingButtonClearance = 96.0;
 
@@ -317,7 +317,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   }
 
   void _showMediaFolderSettings() {
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (_) => MediaFolderSettingsBottomSheet(
         initialFolderPath: _mediaFolderPath,
@@ -349,7 +349,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   }
 
   void _showWeatherSettings() {
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (_) => WeatherSettingsBottomSheet(
         initialLatitude: _weatherLatitude,
@@ -414,7 +414,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   }
 
   void _showDayFeedSettings() {
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (_) => DayFeedSettingsBottomSheet(
         onWeatherToggled: _onWeatherToggled,

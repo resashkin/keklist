@@ -2,7 +2,6 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:translator/translator.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
@@ -21,6 +20,7 @@ import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/mind_collection/local_widgets/mind_collection_empty_day_widget.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/messaged_list/mind_message_widget.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 enum MindUniversalListTitleType {
   text,
@@ -274,7 +274,7 @@ final class _MindUniversalListScreenState extends KekWidgetState<MindUniversalLi
   }
 
   void _showActions({required Mind mind}) {
-    showBarModalBottomSheet(
+    KekSheet.show(
       context: context,
       builder: (context) => ActionsScreen(
         actions: [
