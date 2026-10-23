@@ -226,9 +226,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get galleryIndexRebuild => 'Neu aufbauen';
 
   @override
-  String get allEmotions => 'Alle…';
-
-  @override
   String get settings => 'Einstellungen';
 
   @override
@@ -1157,4 +1154,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get aiChooseAnotherModel => 'Anderes Modell wählen';
+
+  @override
+  String get creatorEmotionsTitle => 'Emotionen';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Nach dem Speichern fragen';
+
+  @override
+  String get creatorEmotionsButton => 'Taste über der Tastatur';
+
+  @override
+  String get creatorEmotionsNever => 'Nicht fragen';
 }

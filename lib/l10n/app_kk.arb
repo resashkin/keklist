@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "Галерея индексін қайта құру керек пе?",
     "galleryIndexRebuildMessage": "Миниатюралар өшіріліп, медиатека қайта сканерленеді.",
     "galleryIndexRebuild": "Қайта құру",
-    "allEmotions": "Барлығы…",
     "settings": "Баптаулар",
     "@settings": {
         "description": "Баптаулар таб белгісі"
@@ -580,5 +579,9 @@
     "aiRecommended": "Ұсынылады",
     "aiLowQuality": "Сапасы төмен",
     "aiModelDoesNotFit": "Бұл модель телефон жадына сыймайды. Кішірек модельді таңдаңыз.",
-    "aiChooseAnotherModel": "Басқа модель таңдау"
+    "aiChooseAnotherModel": "Басқа модель таңдау",
+    "creatorEmotionsTitle": "Эмоциялар",
+    "creatorEmotionsAfterSave": "Сақтағаннан кейін сұрау",
+    "creatorEmotionsButton": "Пернетақта үстіндегі түйме",
+    "creatorEmotionsNever": "Сұрамау"
 }

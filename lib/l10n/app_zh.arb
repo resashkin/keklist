@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "要重建图库索引吗？",
     "galleryIndexRebuildMessage": "缩略图将被清除，并重新扫描图库。",
     "galleryIndexRebuild": "重建",
-    "allEmotions": "全部…",
     "settings": "设置",
     "userData": "用户数据",
     "appearance": "外观",
@@ -352,5 +351,9 @@
     "aiRecommended": "推荐",
     "aiLowQuality": "质量较低",
     "aiModelDoesNotFit": "此模型超出手机内存。请选择更小的模型。",
-    "aiChooseAnotherModel": "选择其他模型"
+    "aiChooseAnotherModel": "选择其他模型",
+    "creatorEmotionsTitle": "情绪",
+    "creatorEmotionsAfterSave": "保存后询问",
+    "creatorEmotionsButton": "键盘上方的按钮",
+    "creatorEmotionsNever": "不询问"
 }

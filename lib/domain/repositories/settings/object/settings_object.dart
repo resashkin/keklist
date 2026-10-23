@@ -122,6 +122,9 @@ final class SettingsObject extends HiveObject {
   @HiveField(40)
   late String? avatarImagePath;
 
+  @HiveField(41, defaultValue: 0)
+  late int mindEmotionsPromptIndex;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -167,5 +170,7 @@ final class SettingsObject extends HiveObject {
           sensitivity: storySensitivity,
         ),
         avatar: UserAvatar(emoji: avatarEmoji, imagePath: avatarImagePath),
+        mindEmotionsPrompt:
+            MindEmotionsPrompt.values.elementAtOrNull(mindEmotionsPromptIndex) ?? MindEmotionsPrompt.afterSave,
       );
 }

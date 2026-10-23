@@ -121,6 +121,11 @@ final class SettingsUpdateStory extends SettingsEvent {
   const SettingsUpdateStory({required this.story});
 }
 
+final class SettingsUpdateMindEmotionsPrompt extends SettingsEvent {
+  final MindEmotionsPrompt prompt;
+  const SettingsUpdateMindEmotionsPrompt({required this.prompt});
+}
+
 final class SettingsMarkShakeDiscovered extends SettingsEvent {
   final String screenId;
   const SettingsMarkShakeDiscovered({required this.screenId});

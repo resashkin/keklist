@@ -225,9 +225,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get galleryIndexRebuild => 'Кайра түзүү';
 
   @override
-  String get allEmotions => 'Баары…';
-
-  @override
   String get settings => 'Сөздүктөр';
 
   @override
@@ -1149,4 +1146,16 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get aiChooseAnotherModel => 'Башка модель тандоо';
+
+  @override
+  String get creatorEmotionsTitle => 'Эмоциялар';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Сактагандан кийин суроо';
+
+  @override
+  String get creatorEmotionsButton => 'Баскычтоптун үстүндөгү баскыч';
+
+  @override
+  String get creatorEmotionsNever => 'Сурабоо';
 }

@@ -312,10 +312,6 @@
     "@galleryIndexRebuild": {
         "description": "Confirm button that rebuilds the gallery index"
     },
-    "allEmotions": "All…",
-    "@allEmotions": {
-        "description": "Chip in the mind creator that opens the full emotion list"
-    },
     "settings": "Settings",
     "@settings": {
         "description": "Settings screen title"
@@ -1445,5 +1441,21 @@
     "aiChooseAnotherModel": "Choose another model",
     "@aiChooseAnotherModel": {
         "description": "AI chat: button that opens the models screen"
+    },
+    "creatorEmotionsTitle": "Emotions",
+    "@creatorEmotionsTitle": {
+        "description": "Mind creator tweak sheet: title"
+    },
+    "creatorEmotionsAfterSave": "Ask after saving",
+    "@creatorEmotionsAfterSave": {
+        "description": "Mind creator tweak: ask for emotions after Save"
+    },
+    "creatorEmotionsButton": "Button above the keyboard",
+    "@creatorEmotionsButton": {
+        "description": "Mind creator tweak: an emotions button above the keyboard"
+    },
+    "creatorEmotionsNever": "Don't ask",
+    "@creatorEmotionsNever": {
+        "description": "Mind creator tweak: don't ask for emotions"
     }
 }

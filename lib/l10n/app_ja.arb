@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "ギャラリーのインデックスを再構築しますか？",
     "galleryIndexRebuildMessage": "サムネイルを削除し、ライブラリを再スキャンします。",
     "galleryIndexRebuild": "再構築",
-    "allEmotions": "すべて…",
     "settings": "設定",
     "userData": "ユーザーデータ",
     "appearance": "外観",
@@ -352,5 +351,9 @@
     "aiRecommended": "おすすめ",
     "aiLowQuality": "低品質",
     "aiModelDoesNotFit": "このモデルはスマートフォンのメモリに収まりません。もっと小さいモデルを選んでください。",
-    "aiChooseAnotherModel": "別のモデルを選ぶ"
+    "aiChooseAnotherModel": "別のモデルを選ぶ",
+    "creatorEmotionsTitle": "感情",
+    "creatorEmotionsAfterSave": "保存後に尋ねる",
+    "creatorEmotionsButton": "キーボードの上のボタン",
+    "creatorEmotionsNever": "尋ねない"
 }

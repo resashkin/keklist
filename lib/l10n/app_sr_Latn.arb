@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "Ponovo izgraditi indeks galerije?",
     "galleryIndexRebuildMessage": "Sličice će biti obrisane, a biblioteka ponovo skenirana.",
     "galleryIndexRebuild": "Ponovo izgradi",
-    "allEmotions": "Sve…",
     "settings": "Podešavanja",
     "@settings": {
         "description": "Oznaka taba podešavanja"
@@ -580,5 +579,9 @@
     "aiRecommended": "Preporučeno",
     "aiLowQuality": "Slab kvalitet",
     "aiModelDoesNotFit": "Ovaj model ne staje u memoriju telefona. Izaberite manji.",
-    "aiChooseAnotherModel": "Izaberi drugi model"
+    "aiChooseAnotherModel": "Izaberi drugi model",
+    "creatorEmotionsTitle": "Emocije",
+    "creatorEmotionsAfterSave": "Pitaj posle čuvanja",
+    "creatorEmotionsButton": "Dugme iznad tastature",
+    "creatorEmotionsNever": "Ne pitaj"
 }

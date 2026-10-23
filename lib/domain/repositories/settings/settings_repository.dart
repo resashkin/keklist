@@ -29,6 +29,9 @@ abstract class SettingsRepository {
   FutureOr<void> markShakeDiscovered(String screenId);
 }
 
+/// How the mind creator asks for emotions; see `documentation/MIND_CREATOR_EMOTIONS.md`.
+enum MindEmotionsPrompt { afterSave, button, never }
+
 final class DayFeedSettings {
   static const int minColumnCount = 2;
   static const int maxColumnCount = 7;
@@ -158,6 +161,7 @@ final class KeklistSettings {
   final UserAvatar avatar;
   final Set<String> hiddenSettingsItemIds;
   final Set<String> shakeDiscoveredScreenIds;
+  final MindEmotionsPrompt mindEmotionsPrompt;
 
   KeklistSettings({
     required this.previousAppVersion,
@@ -182,6 +186,7 @@ final class KeklistSettings {
     this.avatar = const UserAvatar(),
     this.hiddenSettingsItemIds = const {},
     this.shakeDiscoveredScreenIds = const {},
+    this.mindEmotionsPrompt = MindEmotionsPrompt.afterSave,
   });
 
   KeklistSettings copyWith({
@@ -207,6 +212,7 @@ final class KeklistSettings {
     UserAvatar? avatar,
     Set<String>? hiddenSettingsItemIds,
     Set<String>? shakeDiscoveredScreenIds,
+    MindEmotionsPrompt? mindEmotionsPrompt,
   }) {
     return KeklistSettings(
       previousAppVersion: previousAppVersion ?? this.previousAppVersion,
@@ -231,6 +237,7 @@ final class KeklistSettings {
       avatar: avatar ?? this.avatar,
       hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
       shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
+      mindEmotionsPrompt: mindEmotionsPrompt ?? this.mindEmotionsPrompt,
     );
   }
 
@@ -266,6 +273,7 @@ final class KeklistSettings {
     ..storySensitivity = story.sensitivity
     ..avatarEmoji = avatar.emoji
     ..avatarImagePath = avatar.imagePath
+    ..mindEmotionsPromptIndex = mindEmotionsPrompt.index
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 

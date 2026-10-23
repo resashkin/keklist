@@ -63,7 +63,6 @@
     "galleryIndexRebuildTitle": "Ricostruire l'indice della galleria?",
     "galleryIndexRebuildMessage": "Le miniature verranno eliminate e la libreria analizzata di nuovo.",
     "galleryIndexRebuild": "Ricostruisci",
-    "allEmotions": "Tutte…",
     "settings": "Impostazioni",
     "@settings": {
         "description": "Etichetta tab impostazioni"
@@ -580,5 +579,9 @@
     "aiRecommended": "Consigliato",
     "aiLowQuality": "Bassa qualità",
     "aiModelDoesNotFit": "Questo modello non entra nella memoria del telefono. Scegline uno più piccolo.",
-    "aiChooseAnotherModel": "Scegli un altro modello"
+    "aiChooseAnotherModel": "Scegli un altro modello",
+    "creatorEmotionsTitle": "Emozioni",
+    "creatorEmotionsAfterSave": "Chiedi dopo il salvataggio",
+    "creatorEmotionsButton": "Pulsante sopra la tastiera",
+    "creatorEmotionsNever": "Non chiedere"
 }
