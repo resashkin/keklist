@@ -9,8 +9,8 @@ import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/helpers/mind_text_edit.dart';
-import 'package:keklist/presentation/core/widgets/text_edit_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
+import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/media_remove_sheet.dart';
@@ -96,7 +96,7 @@ final class DayFeedTileMenu extends StatelessWidget {
   // Minds
 
   static Future<void> _editText(BuildContext context, Mind mind) async {
-    final String? text = await TextEditSheet.show(context, initialText: mind.plainNote.trim());
+    final String? text = await MindCreatorScreen.editText(context, initialText: mind.plainNote.trim());
     if (text == null || !context.mounted) return;
     context.read<MindBloc>().add(MindEdit(mind: mindWithText(mind, text)));
   }

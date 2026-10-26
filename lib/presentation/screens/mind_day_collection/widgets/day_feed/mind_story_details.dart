@@ -7,6 +7,7 @@ import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:super_context_menu/super_context_menu.dart';
 
 /// Black on dark theme, white on light, with the matching text color; shared by stories and the viewer.
 ({Color background, Color foreground}) storyColorsOf(BuildContext context) =>
@@ -75,18 +76,12 @@ final class MindStoryDetails extends StatelessWidget {
   /// The round video or audio circle.
   final Widget? media;
 
-  final VoidCallback? onTapText;
-  final ValueChanged<Mind>? onTapReflection;
-  final ValueChanged<Mind>? onLongPressReflection;
+  final VoidCallback? onLongPressText;
 
-  const MindStoryDetails({
-    super.key,
-    required this.mind,
-    this.media,
-    this.onTapText,
-    this.onTapReflection,
-    this.onLongPressReflection,
-  });
+  /// The context menu of a reflection, opened with a long press.
+  final List<MenuElement> Function(Mind reflection)? reflectionMenu;
+
+  const MindStoryDetails({super.key, required this.mind, this.media, this.onLongPressText, this.reflectionMenu});
 
   @override
   Widget build(BuildContext context) {
@@ -99,10 +94,10 @@ final class MindStoryDetails extends StatelessWidget {
         ?media,
         if (text.isNotEmpty)
           GestureDetector(
-            onTap: onTapText,
+            onLongPress: onLongPressText,
             child: Text(text, textAlign: TextAlign.center, style: mindStoryTextStyle(foreground)),
           ),
-        MindReflectionsList(mind: mind, onTap: onTapReflection, onLongPress: onLongPressReflection),
+        MindReflectionsList(mind: mind, menu: reflectionMenu),
       ],
     );
   }
@@ -150,10 +145,9 @@ final class MindEmotionChips extends StatelessWidget {
 /// The mind's reflections, oldest first: time, emotions and full text of each.
 final class MindReflectionsList extends StatelessWidget {
   final Mind mind;
-  final ValueChanged<Mind>? onTap;
-  final ValueChanged<Mind>? onLongPress;
+  final List<MenuElement> Function(Mind reflection)? menu;
 
-  const MindReflectionsList({super.key, required this.mind, this.onTap, this.onLongPress});
+  const MindReflectionsList({super.key, required this.mind, this.menu});
 
   @override
   Widget build(BuildContext context) {
@@ -171,9 +165,8 @@ final class MindReflectionsList extends StatelessWidget {
           spacing: 10.0,
           children: [
             for (final Mind reflection in reflections)
-              GestureDetector(
-                onTap: onTap == null ? null : () => onTap!(reflection),
-                onLongPress: onLongPress == null ? null : () => onLongPress!(reflection),
+              _ReflectionMenu(
+                menu: menu == null ? null : () => menu!(reflection),
                 child: Container(
                   padding: const EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
@@ -207,4 +200,21 @@ final class MindReflectionsList extends StatelessWidget {
       },
     );
   }
+}
+
+/// Wraps a reflection in the system context menu when there is one.
+final class _ReflectionMenu extends StatelessWidget {
+  final List<MenuElement> Function()? menu;
+  final Widget child;
+
+  const _ReflectionMenu({required this.menu, required this.child});
+
+  @override
+  Widget build(BuildContext context) => switch (menu) {
+    final List<MenuElement> Function() menu => ContextMenuWidget(
+      menuProvider: (_) => Menu(children: menu()),
+      child: child,
+    ),
+    null => child,
+  };
 }

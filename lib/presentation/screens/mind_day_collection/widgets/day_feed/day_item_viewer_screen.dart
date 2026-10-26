@@ -3,9 +3,9 @@ import 'dart:math' as math;
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
@@ -21,22 +21,21 @@ import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture
 import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_spectrum_ring.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_audio_circle.dart';
-import 'package:keklist/presentation/screens/actions/action_model.dart';
-import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
+import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/story_texture_tweak_sheet.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:native_liquid_glass/native_liquid_glass.dart';
+import 'package:super_context_menu/super_context_menu.dart';
 import 'package:translator/translator.dart';
 import 'package:video_player/video_player.dart';
 import 'package:keklist/presentation/core/helpers/media_sources.dart';
 import 'package:keklist/presentation/core/helpers/mind_text_edit.dart';
 import 'package:keklist/presentation/core/widgets/gallery/gallery_media.dart';
-import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
-import 'package:keklist/presentation/core/widgets/text_edit_sheet.dart';
 
 const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
@@ -47,13 +46,12 @@ const double _kFadeDistance = 320.0;
 const double _kHeaderSpace = 100.0;
 const double _kCommentBarSpace = 72.0;
 const double _kEdgeTapShare = 0.22;
-const double _kOpenEmotionsPush = 80.0;
 const Duration _kVideoFallbackDuration = Duration(seconds: 5);
 const double _kWideMinWidth = 800.0;
 
 /// The day's items as stories: segments on top, a tap on an edge or a swipe moves between them. Opened from a tile it
 /// stands still; with [autoplay] (▶ on a day or a week) a timer moves on and holding pauses it.
-/// Minds are edited right here: tap the text, long-press or swipe up for emotions, comment below, ⋯ for the rest.
+/// Minds are edited right here: long-press the text to edit it, comment below, ⋯ or a long-pressed comment for the rest.
 /// Swipe down or ✕ closes it.
 final class DayItemViewerScreen extends StatefulWidget {
   final List<DayFeedItem> items;
@@ -102,7 +100,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   late int _index = widget.initialIndex;
   double _dragOffsetY = 0.0;
   double _scrollPull = 0.0;
-  double _scrollPush = 0.0;
   bool _isClosing = false;
   bool _isHeld = false;
 
@@ -217,8 +214,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
         onVerticalDragUpdate: (details) =>
             setState(() => _dragOffsetY = (_dragOffsetY + details.delta.dy).clamp(0.0, double.infinity)),
         onVerticalDragEnd: _onVerticalDragEnd,
-        onLongPressStart: (_) => widget.autoplay ? _hold() : _editEmotionsOfCurrent(),
-        onLongPressEnd: (_) => widget.autoplay ? _release() : null,
+        onLongPressStart: widget.autoplay ? (_) => _hold() : null,
+        onLongPressEnd: widget.autoplay ? (_) => _release() : null,
         child: Opacity(
           opacity: 1.0 - dismissProgress * 0.85,
           child: Transform.translate(
@@ -309,7 +306,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       autoplayAudio: widget.autoplay && isCurrent && !_isHeld,
       insets: insets,
       onEditText: _editText,
-      onLongPressReflection: _showCommentActions,
+      reflectionMenu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
       onVideoDuration: (duration) => _onMediaDuration(item.id, duration),
     ),
     _ => _ViewerPage(
@@ -330,10 +327,9 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
           if (item is DayFeedMind)
             Align(
               alignment: Alignment.centerLeft,
-              child: IconButton(
+              child: _StoryMenuButton(
                 color: foreground,
-                icon: const Icon(Icons.more_horiz_rounded),
-                onPressed: () => _showMindActions(_liveMind(item.mind.id) ?? item.mind),
+                actions: () => _mindActions(_liveMind(item.mind.id) ?? item.mind),
               ),
             ),
           Padding(
@@ -389,7 +385,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   // Text of the mind
 
   Future<void> _editText(Mind mind) async {
-    final String? text = await TextEditSheet.show(context, initialText: mind.plainNote.trim());
+    final String? text = await MindCreatorScreen.editText(context, initialText: mind.plainNote.trim());
     if (text == null || !mounted) return;
     context.read<MindBloc>().add(MindEdit(mind: mindWithText(mind, text)));
   }
@@ -402,13 +398,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
           context.read<MindBloc>().add(MindSetEmotions(mindId: mind.id, emotionIds: ids.toList())),
     ),
   );
-
-  void _editEmotionsOfCurrent() {
-    final DayFeedItem item = _currentItem;
-    if (item is! DayFeedMind) return;
-    Haptics.vibrate(HapticsType.medium);
-    _editEmotions(_liveMind(item.mind.id) ?? item.mind);
-  }
 
   // Comments
 
@@ -432,52 +421,37 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     _commentFocusNode.unfocus();
   }
 
-  void _showCommentActions(Mind comment) {
-    Haptics.vibrate(HapticsType.medium);
-    KekSheet.show(
-      context: context,
-      builder: (_) => ActionsScreen(
-        actions: [
-          (ActionModel.edit(context), () => _editText(comment)),
-          if (comment.noteContent.hasMedia)
-            (
-              ActionModel.custom(title: context.l10n.removeMedia, icon: const Icon(Icons.hide_image_outlined)),
-              () => context.read<MindBloc>().add(MindRemoveMedia(mind: comment)),
-            ),
-          (ActionModel.delete(context), () => context.read<MindBloc>().add(MindDelete(mind: comment))),
-        ],
-      ),
-    );
-  }
+  List<_StoryAction> _commentActions(Mind comment) => [
+    _StoryAction.edit(context, () => _editText(comment)),
+    _StoryAction.emotions(context, () => _editEmotions(comment)),
+    if (comment.noteContent.hasMedia) _StoryAction.removeMedia(context, comment),
+    _StoryAction.delete(context, () => context.read<MindBloc>().add(MindDelete(mind: comment))),
+  ];
 
   // The mind itself
 
-  void _showMindActions(Mind mind) {
+  List<_StoryAction> _mindActions(Mind mind) {
     final DebugMenuState debugState = context.read<DebugMenuBloc>().state;
     final bool canTranslate =
         debugState is DebugMenuDataState &&
         debugState.debugMenuItems.any((item) => item.type == DebugMenuType.translation && item.value);
-    KekSheet.show(
-      context: context,
-      builder: (_) => ActionsScreen(
-        actions: [
-          (ActionModel.edit(context), () => _editText(mind)),
-          if (canTranslate) (ActionModel.tranlsateToEnglish(context), () => _translateToEnglish(mind)),
-          if (mind.noteContent.hasMedia)
-            (
-              ActionModel.custom(title: context.l10n.removeMedia, icon: const Icon(Icons.hide_image_outlined)),
-              () => context.read<MindBloc>().add(MindRemoveMedia(mind: mind)),
-            ),
-          (
-            ActionModel.delete(context),
-            () {
-              context.read<MindBloc>().add(MindDelete(mind: mind));
-              _close();
-            },
-          ),
-        ],
-      ),
-    );
+    return [
+      _StoryAction.edit(context, () => _editText(mind)),
+      _StoryAction.emotions(context, () => _editEmotions(mind)),
+      if (canTranslate)
+        _StoryAction(
+          id: 'translate',
+          title: context.l10n.translateToEnglish,
+          sfSymbol: 'globe',
+          icon: Icons.translate,
+          run: () => _translateToEnglish(mind),
+        ),
+      if (mind.noteContent.hasMedia) _StoryAction.removeMedia(context, mind),
+      _StoryAction.delete(context, () {
+        context.read<MindBloc>().add(MindDelete(mind: mind));
+        _close();
+      }),
+    ];
   }
 
   Future<void> _translateToEnglish(Mind mind) async {
@@ -501,15 +475,10 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     switch (notification) {
       case ScrollUpdateNotification(dragDetails: _?):
         _setScrollPull(notification.metrics.minScrollExtent - notification.metrics.pixels);
-        _scrollPush = math.max(0.0, notification.metrics.pixels - notification.metrics.maxScrollExtent);
       case OverscrollNotification(dragDetails: _?, :final overscroll):
         if (overscroll < 0) _setScrollPull(_scrollPull - overscroll);
-        if (overscroll > 0) _scrollPush += overscroll;
       case ScrollUpdateNotification() || ScrollEndNotification():
         if (_scrollPull >= _kDismissOverscroll) _close();
-        // Pushing a mind up past its end opens its emotions.
-        if (_scrollPush >= _kOpenEmotionsPush) _editEmotionsOfCurrent();
-        _scrollPush = 0.0;
         _setScrollPull(0.0);
       default:
         break;
@@ -574,7 +543,7 @@ final class _MindPage extends StatefulWidget {
   final bool autoplayAudio;
   final EdgeInsets insets;
   final ValueChanged<Mind> onEditText;
-  final ValueChanged<Mind> onLongPressReflection;
+  final List<MenuElement> Function(Mind reflection) reflectionMenu;
   final ValueChanged<Duration> onVideoDuration;
 
   const _MindPage({
@@ -584,7 +553,7 @@ final class _MindPage extends StatefulWidget {
     required this.autoplayAudio,
     required this.insets,
     required this.onEditText,
-    required this.onLongPressReflection,
+    required this.reflectionMenu,
     required this.onVideoDuration,
   });
 
@@ -649,9 +618,8 @@ final class _MindPageState extends State<_MindPage> {
                             isPlaying: widget.autoplayAudio,
                           )
                         : null,
-                    onTapText: () => widget.onEditText(mind),
-                    onTapReflection: widget.onEditText,
-                    onLongPressReflection: widget.onLongPressReflection,
+                    onLongPressText: () => widget.onEditText(mind),
+                    reflectionMenu: widget.reflectionMenu,
                   ),
                 ),
               ),
@@ -917,6 +885,106 @@ final class _CommentBar extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// One entry of a story menu, shown both as the ⋯ menu and as a comment's context menu.
+final class _StoryAction {
+  final String id;
+  final String title;
+  final String sfSymbol;
+  final IconData icon;
+  final bool isDestructive;
+  final VoidCallback run;
+
+  const _StoryAction({
+    required this.id,
+    required this.title,
+    required this.sfSymbol,
+    required this.icon,
+    required this.run,
+    this.isDestructive = false,
+  });
+
+  factory _StoryAction.edit(BuildContext context, VoidCallback run) =>
+      _StoryAction(id: 'edit', title: context.l10n.edit, sfSymbol: 'pencil', icon: Icons.edit_outlined, run: run);
+
+  factory _StoryAction.emotions(BuildContext context, VoidCallback run) => _StoryAction(
+    id: 'emotions',
+    title: context.l10n.emotions,
+    sfSymbol: 'face.smiling',
+    icon: Icons.sentiment_satisfied_alt_outlined,
+    run: run,
+  );
+
+  factory _StoryAction.removeMedia(BuildContext context, Mind mind) => _StoryAction(
+    id: 'removeMedia',
+    title: context.l10n.removeMedia,
+    sfSymbol: 'photo.badge.minus',
+    icon: Icons.hide_image_outlined,
+    run: () => context.read<MindBloc>().add(MindRemoveMedia(mind: mind)),
+  );
+
+  factory _StoryAction.delete(BuildContext context, VoidCallback run) => _StoryAction(
+    id: 'delete',
+    title: context.l10n.delete,
+    sfSymbol: 'trash',
+    icon: Icons.delete_outline,
+    isDestructive: true,
+    run: run,
+  );
+
+  MenuAction toMenuAction() => MenuAction(
+    title: title,
+    image: defaultTargetPlatform == TargetPlatform.iOS ? MenuImage.system(sfSymbol) : MenuImage.icon(icon),
+    attributes: MenuActionAttributes(destructive: isDestructive),
+    callback: run,
+  );
+}
+
+/// ⋯ that opens the system pull-down menu on iOS 26+, and a Material menu elsewhere.
+final class _StoryMenuButton extends StatelessWidget {
+  final Color color;
+  final List<_StoryAction> Function() actions;
+
+  const _StoryMenuButton({required this.color, required this.actions});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<_StoryAction> items = actions();
+    void select(String id) => items.firstWhereOrNull((action) => action.id == id)?.run();
+    if (NativeLiquidGlassUtils.supportsLiquidGlass) {
+      return LiquidGlassMenu.icon(
+        icon: const NativeLiquidGlassIcon.sfSymbol('ellipsis'),
+        color: color,
+        items: [
+          for (final _StoryAction action in items)
+            LiquidGlassMenuItem(
+              id: action.id,
+              title: action.title,
+              icon: NativeLiquidGlassIcon.sfSymbol(action.sfSymbol),
+              isDestructive: action.isDestructive,
+            ),
+        ],
+        onItemSelected: select,
+      );
+    }
+    final Color destructive = Theme.of(context).colorScheme.error;
+    return PopupMenuButton<String>(
+      icon: Icon(Icons.more_horiz_rounded, color: color),
+      onSelected: select,
+      itemBuilder: (_) => [
+        for (final _StoryAction action in items)
+          PopupMenuItem<String>(
+            value: action.id,
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(action.icon, color: action.isDestructive ? destructive : null),
+              title: Text(action.title, style: TextStyle(color: action.isDestructive ? destructive : null)),
+            ),
+          ),
+      ],
     );
   }
 }

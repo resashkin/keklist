@@ -22,14 +22,30 @@ final class MindCreatorScreen extends StatefulWidget {
   final Function(String text, List<String> emotionIds) onDone;
   final String? hintText;
 
-  const MindCreatorScreen({super.key, required this.onDone, this.hintText});
+  /// Set when editing: the text is prefilled, and recording and emotions are hidden.
+  final String? initialText;
+
+  const MindCreatorScreen({super.key, required this.onDone, this.hintText, this.initialText});
+
+  /// Edits an existing text full-screen; resolves to the new text, or null when closed without saving.
+  static Future<String?> editText(BuildContext context, {required String initialText}) async {
+    String? result;
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (_) => MindCreatorScreen(initialText: initialText, onDone: (text, _) => result = text),
+      ),
+    );
+    return result;
+  }
 
   @override
   State<MindCreatorScreen> createState() => _MindCreatorScreenState();
 }
 
 final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> with ShakeToTweakMixin {
-  final TextEditingController _textEditingController = TextEditingController();
+  late final TextEditingController _textEditingController = TextEditingController(text: widget.initialText)
+    ..selection = TextSelection.collapsed(offset: widget.initialText?.length ?? 0);
   final List<String> _selectedEmotionIds = [];
   BaseMindNotePiece? _attachedMedia;
 
@@ -45,7 +61,9 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
     _textEditingController.dispose();
   }
 
-  bool _hasText = false;
+  late bool _hasText = _textEditingController.text.isNotEmpty;
+
+  bool get _isEditing => widget.initialText != null;
 
   void _textChanged() {
     final bool hasText = _textEditingController.text.isNotEmpty;
@@ -65,6 +83,11 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
 
   /// In the "after save" mode the emotions come right after Save, before the mind is created.
   Future<void> _save(MindEmotionsPrompt prompt) async {
+    if (_isEditing) {
+      Navigator.of(context).pop();
+      widget.onDone(_textEditingController.text.trim(), const []);
+      return;
+    }
     if (prompt == MindEmotionsPrompt.afterSave && _selectedEmotionIds.isEmpty) {
       FocusScope.of(context).unfocus();
       await EmotionMarkingSheet.show(
@@ -84,7 +107,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
   @override
   Widget build(BuildContext context) {
     final MindEmotionsPrompt emotionsPrompt = _emotionsPrompt;
-    final bool canRecord = _attachedMedia == null && !_hasText && !kIsPhoneWeb;
+    final bool canRecord = _attachedMedia == null && !_hasText && !kIsPhoneWeb && !_isEditing;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       appBar: AppBar(
@@ -136,7 +159,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
               height: 52.0,
               child: Row(
                 children: [
-                  if (emotionsPrompt == MindEmotionsPrompt.button)
+                  if (emotionsPrompt == MindEmotionsPrompt.button && !_isEditing)
                     _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
                   const Spacer(),
                   if (canRecord)
