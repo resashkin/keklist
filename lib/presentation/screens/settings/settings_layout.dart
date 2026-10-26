@@ -16,10 +16,6 @@ abstract final class SettingsItemIds {
   static const String hiddenMedia = 'row.hiddenMedia';
   static const String pro = 'row.pro';
   static const String proStatus = 'row.proStatus';
-  static const String releaseNotes = 'row.releaseNotes';
-  static const String devBlog = 'row.devBlog';
-  static const String suggestFeature = 'row.suggestFeature';
-  static const String emailUs = 'row.emailUs';
   static const String leaveFeedback = 'row.leaveFeedback';
   static const String language = 'row.language';
   static const String appearance = 'row.appearance';

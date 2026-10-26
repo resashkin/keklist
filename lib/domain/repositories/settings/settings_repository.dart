@@ -15,7 +15,6 @@ abstract class SettingsRepository {
   FutureOr<void> updateThemePreference(KeklistThemeMode themeMode);
   FutureOr<void> updateInterfaceStyle(KeklistInterfaceStyle style);
   FutureOr<void> updateShouldShowTitles(bool shouldShowTitles);
-  FutureOr<void> updatePreviousAppVersion(String? previousAppVersion);
   FutureOr<void> updateLanguage(SupportedLanguage language);
   FutureOr<void> updateWeatherSettings({bool? isEnabled, double? latitude, double? longitude});
   FutureOr<void> updateMediaFolderSource({String? folderPath, bool? isRecursive});

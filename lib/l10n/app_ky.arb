@@ -155,25 +155,9 @@
     "@tabsSettings": {
         "description": "Таб жөндөөлөрү навигациясы"
     },
-    "whatsNew": "Жаңы нерселер?",
-    "@whatsNew": {
-        "description": "Жаңы нерселер навигациясы"
-    },
-    "releaseNotes": "Релиз жазмалары",
-    "@releaseNotes": {
-        "description": "Релиз жазмалары навигациясы"
-    },
-    "suggestFeature": "Өзгөчөлүктү сунуш кылуу",
-    "@suggestFeature": {
-        "description": "Өзгөчөлүктү сунуш кылуу навигациясы"
-    },
     "sendFeedback": "Пикир-божомол жөнөтүү",
     "@sendFeedback": {
         "description": "Пикир-божомол жөнөтүү навигациясы"
-    },
-    "emailUs": "Бизге email жазыңыз",
-    "@emailUs": {
-        "description": "Email аркылуу жазуу навигациясы"
     },
     "clearOfflineDataWarning": "Бардык оффлайн маалыматтарың өчүрүлөт. Аларды мурун экспорттогонуңа ынан.",
     "@clearOfflineDataWarning": {

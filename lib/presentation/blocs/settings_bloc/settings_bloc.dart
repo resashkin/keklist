@@ -12,7 +12,6 @@ import 'package:keklist/domain/services/export_import/models/export_result.dart'
 import 'package:keklist/domain/services/export_import/models/import_result.dart';
 import 'package:keklist/domain/services/language_manager.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
 part 'settings_event.dart';
@@ -28,9 +27,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       super(SettingsDataState(settings: KeklistSettings.initial())) {
     on<SettingsExport>(_export);
     on<SettingsImport>(_import);
-    on<SettingsWhatsNewShown>(_disableShowingWhatsNewUntillNewVersion);
     on<SettingsGet>(_getSettings);
-    on<SettingGetWhatsNew>(_sendWhatsNewIfNeeded);
     on<SettingsChangeThemePreference>(_changeThemePreference);
     on<SettingsChangeInterfaceStyle>(_changeInterfaceStyle);
     on<SettingsUpdateShouldShowTitlesMode>(_updateShouldShowTitlesMode);
@@ -164,33 +161,12 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     emit(SettingsDataState(settings: _repository.value));
   }
 
-  FutureOr<void> _disableShowingWhatsNewUntillNewVersion(
-    SettingsWhatsNewShown event,
-    Emitter<SettingsState> emit,
-  ) async {
-    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final String appVersion = '${packageInfo.version} ${packageInfo.buildNumber}';
-
-    await _repository.updatePreviousAppVersion(appVersion);
-  }
-
   FutureOr<void> _changeThemePreference(SettingsChangeThemePreference event, Emitter<SettingsState> emit) async {
     await _repository.updateThemePreference(event.themePreference);
   }
 
   FutureOr<void> _changeInterfaceStyle(SettingsChangeInterfaceStyle event, Emitter<SettingsState> emit) async {
     await _repository.updateInterfaceStyle(event.interfaceStyle);
-  }
-
-  FutureOr<void> _sendWhatsNewIfNeeded(SettingGetWhatsNew event, Emitter<SettingsState> emit) async {
-    // Cбор и отправка стейта Whats new.
-    final String? previousAppVersion = _repository.value.previousAppVersion;
-    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final String appVersion = '${packageInfo.version} ${packageInfo.buildNumber}';
-    final bool needToShowWhatsNewOnStart = previousAppVersion != appVersion;
-    if (needToShowWhatsNewOnStart) {
-      emit(SettingsShowWhatsNew());
-    }
   }
 
   FutureOr<void> _updateShouldShowTitlesMode(

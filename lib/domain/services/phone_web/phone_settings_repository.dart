@@ -72,10 +72,6 @@ final class PhoneSettingsRepository implements SettingsRepository {
   FutureOr<void> updateShouldShowTitles(bool shouldShowTitles) => _local.updateShouldShowTitles(shouldShowTitles);
 
   @override
-  FutureOr<void> updatePreviousAppVersion(String? previousAppVersion) =>
-      _local.updatePreviousAppVersion(previousAppVersion);
-
-  @override
   FutureOr<void> updateLanguage(SupportedLanguage language) => _local.updateLanguage(language);
 
   @override

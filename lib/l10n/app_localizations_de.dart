@@ -314,19 +314,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get tabsSettings => 'Tab-Einstellungen';
 
   @override
-  String get whatsNew => 'Was ist neu?';
-
-  @override
-  String get releaseNotes => 'Versionshinweise';
-
-  @override
-  String get suggestFeature => 'Funktion vorschlagen';
-
-  @override
   String get sendFeedback => 'Feedback senden';
-
-  @override
-  String get emailUs => 'Schreib uns eine E-Mail';
 
   @override
   String get clearOfflineDataWarning =>

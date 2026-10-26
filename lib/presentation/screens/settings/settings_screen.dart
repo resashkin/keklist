@@ -34,13 +34,12 @@ import 'package:keklist/presentation/screens/settings/widgets/web_version_rows.d
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
-import 'package:keklist/presentation/screens/feedback/feedback_sheet.dart';
+import 'package:keklist/presentation/screens/feedback/feedback_screen.dart';
 import 'package:keklist/presentation/screens/hidden_media/hidden_media_screen.dart';
 import 'package:keklist/presentation/screens/settings/widgets/gallery_index_tile.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/settings/widgets/settings_customize_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/tabs_settings/tabs_settings_screen.dart';
-import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
 import 'package:keklist/presentation/screens/paywall/paywall_bottom_sheet.dart';
 import 'package:keklist/presentation/core/widgets/settings/settings_section.dart';
 import 'package:keklist/presentation/screens/ai/ai_models_screen.dart';
@@ -252,37 +251,13 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             leading: const Icon(Icons.favorite, color: Colors.amber),
             onTap: () => PaywallBottomSheet.show(context, tipsOnly: true),
           ),
-        _navigationRow(
-          id: SettingsItemIds.releaseNotes,
-          title: context.l10n.releaseNotes,
-          leading: const Icon(Icons.new_releases, color: Color.fromARGB(255, 191, 188, 191)),
-          onTap: () => _showWhatsNew(),
-        ),
-        _navigationRow(
-          id: SettingsItemIds.devBlog,
-          title: 'Dev Blog [Telegram] [RU]', // TODO: move to feedback settings (new screen)
-          leading: const Icon(Icons.newspaper, color: Colors.blue),
-          onTap: () => _openAppNews(),
-        ),
-        _navigationRow(
-          id: SettingsItemIds.suggestFeature,
-          title: context.l10n.suggestFeature,
-          leading: const Icon(Icons.handyman, color: Colors.green),
-          onTap: () => _openSuggestFeature(),
-        ),
         if (TelegramFeedback.isConfigured)
           _navigationRow(
             id: SettingsItemIds.leaveFeedback,
             title: context.l10n.leaveFeedback,
             leading: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.lightBlueAccent),
-            onTap: () => FeedbackSheet.show(context),
+            onTap: () => FeedbackScreen.show(context),
           ),
-        _navigationRow(
-          id: SettingsItemIds.emailUs,
-          title: context.l10n.emailUs,
-          leading: const Icon(Icons.feedback, color: Colors.blueGrey),
-          onTap: () async => await _openEmailFeedbackForm(),
-        ),
         if (_isPro && !kIsPhoneWeb)
           SettingsRowModel(id: SettingsItemIds.proStatus, title: 'keklist PRO', tile: _buildProFooterTile(context)),
       ],
@@ -429,26 +404,8 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
     Navigator.of(context).push(SwipeablePageRoute(builder: (context) => const LanguagePickerScreen()));
   }
 
-  Future<void> _openEmailFeedbackForm() async {
-    final Uri uri = Uri(
-      scheme: 'mailto',
-      path: KeklistConstants.feedbackEmail,
-      query: 'subject=Feedback about keklist',
-    );
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
-  }
-
   Future<void> _openSourceCode() async {
     final Uri uri = Uri.parse(KeklistConstants.sourceCodeURL);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
-  }
-
-  Future<void> _openSuggestFeature() async {
-    final Uri uri = Uri.parse(KeklistConstants.featureSuggestionsURL);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     }
@@ -468,13 +425,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
     }
   }
 
-  Future<void> _openAppNews() async {
-    final Uri uri = Uri.parse(KeklistConstants.newsTelegramChannelURL);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
-
   Future<void> _openPaywall() async {
     final purchased = await PaywallBottomSheet.show(context);
     if (purchased) sendEventToBloc<MembershipBloc>(const MembershipRefreshEvent());
@@ -489,15 +439,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   // void _switchShowTitles(bool value) {
   //   sendEventToBloc<SettingsBloc>(SettingsUpdateShouldShowTitlesMode(value: value));
   // }
-
-  void _showWhatsNew() {
-    Navigator.of(context).push<void>(
-      SwipeablePageRoute<void>(
-        builder: (BuildContext context) =>
-            WebPageScreen(title: context.l10n.whatsNew, initialUri: Uri.parse(KeklistConstants.whatsNewURL)),
-      ),
-    );
-  }
 
   void _showTabsSettings() {
     Navigator.of(

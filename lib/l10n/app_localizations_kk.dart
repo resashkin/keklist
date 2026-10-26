@@ -314,19 +314,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get tabsSettings => 'Таб баптаулары';
 
   @override
-  String get whatsNew => 'Жаңалықтар?';
-
-  @override
-  String get releaseNotes => 'Шығарылым жазбалары';
-
-  @override
-  String get suggestFeature => 'Функция ұсыну';
-
-  @override
   String get sendFeedback => 'Пікір жіберу';
-
-  @override
-  String get emailUs => 'Бізге email жазыңыз';
 
   @override
   String get clearOfflineDataWarning =>

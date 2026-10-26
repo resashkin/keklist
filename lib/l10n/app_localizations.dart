@@ -675,35 +675,11 @@ abstract class AppLocalizations {
   /// **'Tabs settings'**
   String get tabsSettings;
 
-  /// What's new navigation
-  ///
-  /// In en, this message translates to:
-  /// **'What\'s new?'**
-  String get whatsNew;
-
-  /// Release notes navigation
-  ///
-  /// In en, this message translates to:
-  /// **'Release notes'**
-  String get releaseNotes;
-
-  /// Suggest feature navigation
-  ///
-  /// In en, this message translates to:
-  /// **'Suggest a feature'**
-  String get suggestFeature;
-
   /// Send feedback navigation
   ///
   /// In en, this message translates to:
   /// **'Send feedback'**
   String get sendFeedback;
-
-  /// Email us navigation
-  ///
-  /// In en, this message translates to:
-  /// **'Email us'**
-  String get emailUs;
 
   /// Warning when clearing offline data
   ///

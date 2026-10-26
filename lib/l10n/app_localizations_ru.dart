@@ -314,19 +314,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tabsSettings => 'Настройки вкладок';
 
   @override
-  String get whatsNew => 'Что нового?';
-
-  @override
-  String get releaseNotes => 'История версий';
-
-  @override
-  String get suggestFeature => 'Предложить функцию';
-
-  @override
   String get sendFeedback => 'Отправить отзыв';
-
-  @override
-  String get emailUs => 'Напишите нам на email';
 
   @override
   String get clearOfflineDataWarning =>

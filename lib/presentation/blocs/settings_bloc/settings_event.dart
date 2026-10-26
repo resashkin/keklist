@@ -34,11 +34,7 @@ enum SettingsImportType { csv }
 
 final class SettingsExportAllMindsToCSV extends SettingsEvent {}
 
-final class SettingsWhatsNewShown extends SettingsEvent {}
-
 final class SettingsUploadMindsFromCacheToServer extends SettingsEvent {}
-
-final class SettingGetWhatsNew extends SettingsEvent {}
 
 final class SettingsChangeThemePreference extends SettingsEvent {
   final KeklistThemeMode themePreference;
