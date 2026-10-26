@@ -375,5 +375,17 @@
     "feedGroupingType": "По типу",
     "feedGroupingTimeOfDay": "Время дня",
     "feedSectionMinds": "Записи",
-    "feedSectionGallery": "Галерея"
+    "feedSectionGallery": "Галерея",
+    "removePhotoTitle": "Убрать фото",
+    "removeVideoTitle": "Убрать видео",
+    "hideMedia": "Скрыть",
+    "hideMediaSubtitle": "Только из keklist, в галерее останется",
+    "deleteFromGallery": "Удалить из галереи",
+    "deleteFromGallerySubtitle": "Попадёт в «Недавно удалённые»",
+    "mediaHidden": "Скрыто из keklist",
+    "mediaShownAgain": "Снова в keklist",
+    "undo": "Отменить",
+    "hiddenMedia": "Скрытые фото",
+    "hiddenMediaHint": "Нажми на фото, чтобы вернуть его в keklist",
+    "hiddenMediaEmpty": "Ничего не скрыто"
 }

@@ -42,7 +42,11 @@ final class GalleryRoutes {
     final List<GalleryAssetInfo> assets = defaultTargetPlatform == TargetPlatform.android
         ? await _folderAssets(dayIndex)
         : await _libraryAssets(dayIndex);
-    return assets.map(GalleryWire.assetToJson).toList();
+    final Set<String> hidden = _settings.value.hiddenMediaIds;
+    return [
+      for (final GalleryAssetInfo asset in assets)
+        if (!hidden.contains(_feedIdOf(asset.id))) GalleryWire.assetToJson(asset),
+    ];
   }
 
   Future<List<GalleryAssetInfo>> _libraryAssets(int dayIndex) async {
@@ -66,6 +70,11 @@ final class GalleryRoutes {
           GalleryAssetInfo(id: _register(saf), createDate: item.timestamp, isVideo: saf.isVideo),
     ];
   }
+
+  /// The id the app's feed knows this asset by, which is what hiding stores.
+  String _feedIdOf(String id) => id.startsWith(_folderPrefix)
+      ? 'saf_${_folderItems[id]?.uri}'
+      : DayFeedAsset.idOf(id);
 
   String _register(FolderSafItem item) {
     final String id = '$_folderPrefix${base64Url.encode(utf8.encode(item.uri.toString()))}';

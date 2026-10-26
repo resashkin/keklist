@@ -13,6 +13,7 @@ abstract final class SettingsItemIds {
   static const String exportData = 'row.exportData';
   static const String importData = 'row.importData';
   static const String galleryIndex = 'row.galleryIndex';
+  static const String hiddenMedia = 'row.hiddenMedia';
   static const String pro = 'row.pro';
   static const String proStatus = 'row.proStatus';
   static const String releaseNotes = 'row.releaseNotes';

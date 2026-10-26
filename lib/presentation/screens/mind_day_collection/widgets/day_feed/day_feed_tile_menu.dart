@@ -6,12 +6,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
+import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/helpers/mind_text_edit.dart';
 import 'package:keklist/presentation/core/widgets/text_edit_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/media_remove_sheet.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:share_plus/share_plus.dart';
@@ -20,7 +22,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// Long press on any tile: the system context menu (UIContextMenu with Liquid Glass on iOS, native menus elsewhere)
 /// with the tile lifted as its preview. Minds: edit, emotions, share, delete; photos and videos: share, show in the
-/// gallery, delete.
+/// gallery, and delete, which asks whether to hide them from keklist or delete them from the gallery.
 final class DayFeedTileMenu extends StatelessWidget {
   final DayFeedItem item;
   final Widget child;
@@ -62,10 +64,18 @@ final class DayFeedTileMenu extends StatelessWidget {
         () => _showInGallery(asset),
       ),
       MenuSeparator(),
-      _action(context.l10n.delete, 'trash', Icons.delete_outline, () => _deleteAsset(asset), destructive: true),
+      _action(
+        context.l10n.delete,
+        'trash',
+        Icons.delete_outline,
+        () => _removeAsset(context, asset),
+        destructive: true,
+      ),
     ],
     DayFeedFolderMedia(item: FolderFileItem(:final file)) => [
       _action(context.l10n.share, 'square.and.arrow.up', Icons.ios_share, () => _shareFile(context, file)),
+      MenuSeparator(),
+      _action(context.l10n.hideMedia, 'eye.slash', Icons.visibility_off_outlined, () => hide(context, item.id)),
     ],
     DayFeedFolderMedia() => const [],
   };
@@ -130,6 +140,37 @@ final class DayFeedTileMenu extends StatelessWidget {
         : Uri.parse('content://media/external/${asset.type == AssetType.video ? 'video' : 'images'}/media/${asset.id}'),
     mode: LaunchMode.externalApplication,
   );
+
+  static Future<void> _removeAsset(BuildContext context, AssetEntity asset) async {
+    final MediaRemoval? removal = await MediaRemoveSheet.show(context, isVideo: asset.type == AssetType.video);
+    if (!context.mounted) return;
+    switch (removal) {
+      case MediaRemoval.hide:
+        hide(context, DayFeedAsset.idOf(asset.id));
+      case MediaRemoval.deleteFromGallery:
+        await _deleteAsset(asset);
+      case null:
+        break;
+    }
+  }
+
+  /// Hides a feed item from keklist everywhere; the snackbar can bring it back.
+  static void hide(BuildContext context, String id) {
+    final SettingsBloc settings = context.read<SettingsBloc>();
+    final ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);
+    settings.add(SettingsSetMediaHidden(ids: {id}, isHidden: true));
+    messenger
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.mediaHidden),
+          action: SnackBarAction(
+            label: context.l10n.undo,
+            onPressed: () => settings.add(SettingsSetMediaHidden(ids: {id}, isHidden: false)),
+          ),
+        ),
+      );
+  }
 
   /// The system asks to confirm and keeps it in Recently Deleted.
   static Future<void> _deleteAsset(AssetEntity asset) async {

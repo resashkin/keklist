@@ -375,5 +375,17 @@
     "feedGroupingType": "Врста",
     "feedGroupingTimeOfDay": "Доба дана",
     "feedSectionMinds": "Белешке",
-    "feedSectionGallery": "Галерија"
+    "feedSectionGallery": "Галерија",
+    "removePhotoTitle": "Уклони фотографију",
+    "removeVideoTitle": "Уклони видео",
+    "hideMedia": "Сакриј",
+    "hideMediaSubtitle": "Само из keklist-а, остаје у галерији",
+    "deleteFromGallery": "Обриши из галерије",
+    "deleteFromGallerySubtitle": "Иде у „Недавно обрисано“",
+    "mediaHidden": "Сакривено из keklist-а",
+    "mediaShownAgain": "Поново у keklist-у",
+    "undo": "Опозови",
+    "hiddenMedia": "Сакривене фотографије",
+    "hiddenMediaHint": "Додирни фотографију да се врати у keklist",
+    "hiddenMediaEmpty": "Ништа није сакривено"
 }

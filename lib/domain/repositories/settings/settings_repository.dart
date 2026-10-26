@@ -201,6 +201,9 @@ final class KeklistSettings {
   final TileEmojiMotion tileEmojiMotion;
   final GridResizeAnimation gridResizeAnimation;
 
+  /// Feed ids (`DayFeedItem.id`) of photos and videos hidden from keklist but kept in the gallery.
+  final Set<String> hiddenMediaIds;
+
   KeklistSettings({
     required this.previousAppVersion,
     required this.themePreference,
@@ -227,6 +230,7 @@ final class KeklistSettings {
     this.mindEmotionsPrompt = MindEmotionsPrompt.afterSave,
     this.tileEmojiMotion = TileEmojiMotion.drift,
     this.gridResizeAnimation = GridResizeAnimation.fly,
+    this.hiddenMediaIds = const {},
   });
 
   KeklistSettings copyWith({
@@ -255,6 +259,7 @@ final class KeklistSettings {
     MindEmotionsPrompt? mindEmotionsPrompt,
     TileEmojiMotion? tileEmojiMotion,
     GridResizeAnimation? gridResizeAnimation,
+    Set<String>? hiddenMediaIds,
   }) {
     return KeklistSettings(
       previousAppVersion: previousAppVersion ?? this.previousAppVersion,
@@ -282,6 +287,7 @@ final class KeklistSettings {
       mindEmotionsPrompt: mindEmotionsPrompt ?? this.mindEmotionsPrompt,
       tileEmojiMotion: tileEmojiMotion ?? this.tileEmojiMotion,
       gridResizeAnimation: gridResizeAnimation ?? this.gridResizeAnimation,
+      hiddenMediaIds: hiddenMediaIds ?? this.hiddenMediaIds,
     );
   }
 
@@ -325,6 +331,7 @@ final class KeklistSettings {
     ..tileEmojiMotionIndex = tileEmojiMotion.index
     ..gridResizeAnimationIndex = gridResizeAnimation.index
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
+    ..hiddenMediaIds = hiddenMediaIds.toList()
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 
   factory KeklistSettings.initial() => KeklistSettings(

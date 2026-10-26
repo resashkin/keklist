@@ -1224,4 +1224,40 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get feedSectionGallery => 'Galereya';
+
+  @override
+  String get removePhotoTitle => 'Suratni olib tashlash';
+
+  @override
+  String get removeVideoTitle => 'Videoni olib tashlash';
+
+  @override
+  String get hideMedia => 'Yashirish';
+
+  @override
+  String get hideMediaSubtitle => 'Faqat keklist\'dan, galereyada qoladi';
+
+  @override
+  String get deleteFromGallery => 'Galereyadan o\'chirish';
+
+  @override
+  String get deleteFromGallerySubtitle => '«Yaqinda o\'chirilganlar»ga tushadi';
+
+  @override
+  String get mediaHidden => 'keklist\'dan yashirildi';
+
+  @override
+  String get mediaShownAgain => 'Yana keklist\'da';
+
+  @override
+  String get undo => 'Bekor qilish';
+
+  @override
+  String get hiddenMedia => 'Yashirin suratlar';
+
+  @override
+  String get hiddenMediaHint => 'Suratni keklist\'ga qaytarish uchun bosing';
+
+  @override
+  String get hiddenMediaEmpty => 'Hech narsa yashirilmagan';
 }

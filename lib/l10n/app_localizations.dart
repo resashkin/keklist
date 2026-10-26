@@ -2378,6 +2378,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Gallery'**
   String get feedSectionGallery;
+
+  /// Title of the sheet shown before removing a photo
+  ///
+  /// In en, this message translates to:
+  /// **'Remove photo'**
+  String get removePhotoTitle;
+
+  /// Title of the sheet shown before removing a video
+  ///
+  /// In en, this message translates to:
+  /// **'Remove video'**
+  String get removeVideoTitle;
+
+  /// Hide a photo or video from keklist only
+  ///
+  /// In en, this message translates to:
+  /// **'Hide'**
+  String get hideMedia;
+
+  /// Under Hide: the file stays in the gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Only from keklist, it stays in the gallery'**
+  String get hideMediaSubtitle;
+
+  /// Delete a photo or video from the phone gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Delete from gallery'**
+  String get deleteFromGallery;
+
+  /// Under Delete from gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Moves to Recently Deleted'**
+  String get deleteFromGallerySubtitle;
+
+  /// Snackbar after hiding a photo
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden from keklist'**
+  String get mediaHidden;
+
+  /// Snackbar after showing a hidden photo again
+  ///
+  /// In en, this message translates to:
+  /// **'Back in keklist'**
+  String get mediaShownAgain;
+
+  /// Undo the last action
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// Settings row and screen with photos hidden from keklist
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden photos'**
+  String get hiddenMedia;
+
+  /// Hint on the hidden photos screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a photo to show it in keklist again'**
+  String get hiddenMediaHint;
+
+  /// Hidden photos screen without photos
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is hidden'**
+  String get hiddenMediaEmpty;
 }
 
 class _AppLocalizationsDelegate

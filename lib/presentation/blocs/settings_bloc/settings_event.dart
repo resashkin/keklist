@@ -122,6 +122,12 @@ final class SettingsUpdateDayFeedArrangement extends SettingsEvent {
   const SettingsUpdateDayFeedArrangement({this.sortOrder, this.grouping});
 }
 
+final class SettingsSetMediaHidden extends SettingsEvent {
+  final Set<String> ids;
+  final bool isHidden;
+  const SettingsSetMediaHidden({required this.ids, required this.isHidden});
+}
+
 final class SettingsUpdateStory extends SettingsEvent {
   final StorySettings story;
   const SettingsUpdateStory({required this.story});

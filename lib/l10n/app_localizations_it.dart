@@ -1228,4 +1228,41 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get feedSectionGallery => 'Galleria';
+
+  @override
+  String get removePhotoTitle => 'Rimuovi foto';
+
+  @override
+  String get removeVideoTitle => 'Rimuovi video';
+
+  @override
+  String get hideMedia => 'Nascondi';
+
+  @override
+  String get hideMediaSubtitle => 'Solo da keklist, resta nella galleria';
+
+  @override
+  String get deleteFromGallery => 'Elimina dalla galleria';
+
+  @override
+  String get deleteFromGallerySubtitle => 'Va in Eliminati di recente';
+
+  @override
+  String get mediaHidden => 'Nascosto da keklist';
+
+  @override
+  String get mediaShownAgain => 'Di nuovo in keklist';
+
+  @override
+  String get undo => 'Annulla';
+
+  @override
+  String get hiddenMedia => 'Foto nascoste';
+
+  @override
+  String get hiddenMediaHint =>
+      'Tocca una foto per mostrarla di nuovo in keklist';
+
+  @override
+  String get hiddenMediaEmpty => 'Niente di nascosto';
 }

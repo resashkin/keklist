@@ -25,10 +25,17 @@ emotion emojis on mind tiles, and an animated pinch that resizes the grids witho
 grids with `ContextMenuWidget` from `super_context_menu`: a real `UIContextMenu` on iOS (Liquid Glass on iOS 26,
 SF Symbols, the tile lifted as preview), native menus on Android and desktop, nothing on the web.
 - Mind: Edit (text sheet, keeps media via `mindWithText`), Emotions, Share (text), Delete (confirmation).
-- Library photo/video: Share (original file), Show in Gallery, Delete. Delete goes through
-  `PhotoManager.editor.deleteWithIds`, so the system confirms and keeps it in Recently Deleted;
-  `DayFeedTileMenu.mediaDeleted` then makes the day screen reload and the calendar rebuild its index.
-- Folder file (Android): Share.
+- Library photo/video: Share (original file), Show in Gallery, Delete. Delete opens `MediaRemoveSheet` with two
+  choices:
+  - Hide: adds the item's feed id to `KeklistSettings.hiddenMediaIds` (Hive field 48, `SettingsSetMediaHidden`).
+    A snackbar offers Undo.
+  - Delete from gallery: goes through `PhotoManager.editor.deleteWithIds`, so the system confirms and keeps the item
+    in Recently Deleted. `DayFeedTileMenu.mediaDeleted` then makes the day screen reload and the calendar rebuild
+    its index.
+- Folder file (Android): Share, Hide.
+- Hidden items are filtered out of `DayFeedCubit`, `CalendarDayFeed` (and so the stories) and the web version's
+  `GalleryRoutes.dayJson`. Settings → Hidden photos (`HiddenMediaScreen`) shows them; tapping one shows it in
+  keklist again. Photos deleted since then are left out.
 - iOS has no public API to open Photos at one photo, so Show in Gallery opens the Photos app there
   (`photos-redirect://`); Android opens the photo's content URI.
 

@@ -600,5 +600,17 @@
     "feedGroupingType": "Түрі",
     "feedGroupingTimeOfDay": "Тәулік",
     "feedSectionMinds": "Жазбалар",
-    "feedSectionGallery": "Галерея"
+    "feedSectionGallery": "Галерея",
+    "removePhotoTitle": "Фотоны алып тастау",
+    "removeVideoTitle": "Бейнені алып тастау",
+    "hideMedia": "Жасыру",
+    "hideMediaSubtitle": "Тек keklist-тен, галереяда қалады",
+    "deleteFromGallery": "Галереядан жою",
+    "deleteFromGallerySubtitle": "«Жақында жойылғандарға» түседі",
+    "mediaHidden": "keklist-тен жасырылды",
+    "mediaShownAgain": "Қайта keklist-те",
+    "undo": "Болдырмау",
+    "hiddenMedia": "Жасырын фотолар",
+    "hiddenMediaHint": "Фотоны keklist-ке қайтару үшін басыңыз",
+    "hiddenMediaEmpty": "Ештеңе жасырылмаған"
 }

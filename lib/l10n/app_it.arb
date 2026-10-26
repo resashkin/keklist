@@ -600,5 +600,17 @@
     "feedGroupingType": "Tipo",
     "feedGroupingTimeOfDay": "Fascia",
     "feedSectionMinds": "Note",
-    "feedSectionGallery": "Galleria"
+    "feedSectionGallery": "Galleria",
+    "removePhotoTitle": "Rimuovi foto",
+    "removeVideoTitle": "Rimuovi video",
+    "hideMedia": "Nascondi",
+    "hideMediaSubtitle": "Solo da keklist, resta nella galleria",
+    "deleteFromGallery": "Elimina dalla galleria",
+    "deleteFromGallerySubtitle": "Va in Eliminati di recente",
+    "mediaHidden": "Nascosto da keklist",
+    "mediaShownAgain": "Di nuovo in keklist",
+    "undo": "Annulla",
+    "hiddenMedia": "Foto nascoste",
+    "hiddenMediaHint": "Tocca una foto per mostrarla di nuovo in keklist",
+    "hiddenMediaEmpty": "Niente di nascosto"
 }

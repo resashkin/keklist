@@ -1174,4 +1174,40 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get feedSectionGallery => '图库';
+
+  @override
+  String get removePhotoTitle => '移除照片';
+
+  @override
+  String get removeVideoTitle => '移除视频';
+
+  @override
+  String get hideMedia => '隐藏';
+
+  @override
+  String get hideMediaSubtitle => '仅在keklist中隐藏，图库中保留';
+
+  @override
+  String get deleteFromGallery => '从图库删除';
+
+  @override
+  String get deleteFromGallerySubtitle => '将移至“最近删除”';
+
+  @override
+  String get mediaHidden => '已在keklist中隐藏';
+
+  @override
+  String get mediaShownAgain => '已恢复到keklist';
+
+  @override
+  String get undo => '撤销';
+
+  @override
+  String get hiddenMedia => '隐藏的照片';
+
+  @override
+  String get hiddenMediaHint => '点按照片即可在keklist中重新显示';
+
+  @override
+  String get hiddenMediaEmpty => '没有隐藏的内容';
 }
