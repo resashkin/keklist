@@ -118,6 +118,11 @@ final class SettingsUpdateDayFeedArrangement extends SettingsEvent {
   const SettingsUpdateDayFeedArrangement({this.sortOrder, this.grouping});
 }
 
+final class SettingsSetAnalyticsEnabled extends SettingsEvent {
+  final bool isEnabled;
+  const SettingsSetAnalyticsEnabled({required this.isEnabled});
+}
+
 final class SettingsSetMediaHidden extends SettingsEvent {
   final Set<String> ids;
   final bool isHidden;

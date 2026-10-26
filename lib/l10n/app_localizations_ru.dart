@@ -1268,4 +1268,35 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get feedbackFailed =>
       'Не удалось отправить. Проверь интернет и попробуй ещё раз';
+
+  @override
+  String get analytics => 'Аналитика';
+
+  @override
+  String get analyticsDescription =>
+      'Анонимная статистика использования помогает понять, что улучшать. Всё, что вы пишете, остаётся на устройстве.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Эта сборка ничего не отправляет: аналитика работает только в сборках из App Store и Google Play.';
+
+  @override
+  String get analyticsSent => 'Что отправляется';
+
+  @override
+  String get analyticsSentItems =>
+      'Какие настройки и твики вы выбираете, какие экраны открываете, версия приложения, платформа и язык, покупки Pro и чаевых, отчёты о сбоях без текста ошибок.';
+
+  @override
+  String get analyticsNeverSent => 'Никогда не отправляется';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Ваши записи, их текст, эмоции и комментарии, фото, видео и аудио, их количество, ваше имя, местоположение и IP-адрес.';
+
+  @override
+  String get analyticsResetId => 'Сбросить анонимный ID';
+
+  @override
+  String get analyticsResetIdDone => 'Теперь используется новый анонимный ID';
 }

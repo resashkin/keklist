@@ -17,6 +17,7 @@ abstract final class SettingsItemIds {
   static const String pro = 'row.pro';
   static const String proStatus = 'row.proStatus';
   static const String leaveFeedback = 'row.leaveFeedback';
+  static const String analytics = 'row.analytics';
   static const String language = 'row.language';
   static const String appearance = 'row.appearance';
   static const String tabsSettings = 'row.tabsSettings';

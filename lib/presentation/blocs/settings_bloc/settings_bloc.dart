@@ -1,3 +1,4 @@
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
@@ -46,8 +47,12 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateTileMotion>(_updateTileMotion);
     on<SettingsUpdateDayFeedArrangement>(_updateDayFeedArrangement);
     on<SettingsSetMediaHidden>(_setMediaHidden);
+    on<SettingsSetAnalyticsEnabled>(_setAnalyticsEnabled);
 
-    _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
+    _repository.stream.listen((settings) {
+      Analytics.settingsChanged(settings);
+      add(SettingsGet());
+    }).disposed(by: this);
   }
 
   @override
@@ -226,6 +231,11 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     await _repository.updateSettings(
       settings.copyWith(dayFeed: settings.dayFeed.copyWith(sortOrder: event.sortOrder, grouping: event.grouping)),
     );
+  }
+
+  FutureOr<void> _setAnalyticsEnabled(SettingsSetAnalyticsEnabled event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(_repository.value.copyWith(isAnalyticsEnabled: event.isEnabled));
+    await Analytics.setEnabled(event.isEnabled);
   }
 
   FutureOr<void> _setMediaHidden(SettingsSetMediaHidden event, Emitter<SettingsState> emit) async {

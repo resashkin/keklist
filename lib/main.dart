@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as developer;
@@ -111,6 +112,7 @@ final class _AppRootState extends State<_AppRoot> {
     final injector = MainContainer(streamingSharedPreferences: streamingPrefs, hiveCipher: cipher).initialize(Injector());
 
     _enableDebugBLOCLogs(injector);
+    await Analytics.setUp(injector.get<SettingsRepository>().value);
 
     final debugBox = Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName);
     final useProductionRC = debugBox.get(DebugMenuType.useProductionRevenueCat.name)?.value ?? false;

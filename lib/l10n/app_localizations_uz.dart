@@ -1268,4 +1268,35 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get feedbackFailed =>
       'Yuborib bo\'lmadi. Internetni tekshirib, qayta urinib ko\'ring';
+
+  @override
+  String get analytics => 'Analitika';
+
+  @override
+  String get analyticsDescription =>
+      'Anonim foydalanish statistikasi nimani yaxshilash kerakligini aniqlashga yordam beradi. Siz yozgan hech narsa qurilmadan chiqmaydi.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Bu versiya hech narsa yubormaydi: analitika faqat App Store va Google Play versiyalarida ishlaydi.';
+
+  @override
+  String get analyticsSent => 'Nima yuboriladi';
+
+  @override
+  String get analyticsSentItems =>
+      'Qaysi sozlamalarni tanlaysiz, qaysi ekranlarni ochasiz, ilova versiyasi, platforma va til, Pro va choychaqa xaridlari hamda xabarlarsiz nosozlik hisobotlari.';
+
+  @override
+  String get analyticsNeverSent => 'Hech qachon yuborilmaydi';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Yozuvlaringiz, ularning matni, hissiyotlari va izohlari, rasm, video va audio, ularning soni, ismingiz, joylashuvingiz va IP manzilingiz.';
+
+  @override
+  String get analyticsResetId => 'Anonim ID ni tiklash';
+
+  @override
+  String get analyticsResetIdDone => 'Endi yangi anonim ID ishlatiladi';
 }

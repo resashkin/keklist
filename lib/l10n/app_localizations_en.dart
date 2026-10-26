@@ -1262,4 +1262,35 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get feedbackFailed =>
       'Couldn\'t send. Check the internet and try again';
+
+  @override
+  String get analytics => 'Analytics';
+
+  @override
+  String get analyticsDescription =>
+      'Anonymous usage statistics help decide what to improve. Nothing you write ever leaves your device.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'This build sends nothing: analytics runs only in App Store and Google Play builds.';
+
+  @override
+  String get analyticsSent => 'What is sent';
+
+  @override
+  String get analyticsSentItems =>
+      'Which settings and tweaks you choose, which screens you open, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.';
+
+  @override
+  String get analyticsNeverSent => 'Never sent';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Your minds, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.';
+
+  @override
+  String get analyticsResetId => 'Reset anonymous ID';
+
+  @override
+  String get analyticsResetIdDone => 'A new anonymous ID is used from now on';
 }

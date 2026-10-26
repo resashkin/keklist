@@ -146,6 +146,9 @@ final class SettingsObject extends HiveObject {
   @HiveField(48, defaultValue: <String>[])
   late List<String> hiddenMediaIds;
 
+  @HiveField(49, defaultValue: true)
+  late bool isAnalyticsEnabled;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -175,6 +178,7 @@ final class SettingsObject extends HiveObject {
         ),
         hiddenSettingsItemIds: hiddenSettingsItemIds.toSet(),
         hiddenMediaIds: hiddenMediaIds.toSet(),
+        isAnalyticsEnabled: isAnalyticsEnabled,
         shakeDiscoveredScreenIds: shakeDiscoveredScreenIds.toSet(),
         insights: InsightsSettings(
           widgetOrder: insightsWidgetOrder,

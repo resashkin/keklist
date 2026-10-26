@@ -36,6 +36,9 @@ import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
 import 'package:keklist/presentation/screens/feedback/feedback_screen.dart';
 import 'package:keklist/presentation/screens/hidden_media/hidden_media_screen.dart';
+import 'package:keklist/presentation/screens/analytics/analytics_settings_screen.dart';
+import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_bloc.dart';
+import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
 import 'package:keklist/presentation/screens/settings/widgets/gallery_index_tile.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/settings/widgets/settings_customize_bottom_sheet.dart';
@@ -66,6 +69,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   String? _proPriceString;
   Set<String> _hiddenItemIds = {};
   int _hiddenMediaCount = 0;
+  bool _isAnalyticsEnabled = true;
 
   @override
   void initState() {
@@ -79,6 +83,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
               _isDebugMenuVisible = state.settings.isDebugMenuVisible;
               _hiddenItemIds = state.settings.hiddenSettingsItemIds;
               _hiddenMediaCount = state.settings.hiddenMediaIds.length;
+              _isAnalyticsEnabled = state.settings.isAnalyticsEnabled;
             });
             break;
           case SettingsShowMessage state:
@@ -206,8 +211,8 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
           if (!kIsWeb) _hiddenMediaRow(context),
         ],
       ),
-    // Models and roles live on the phone.
-    if (!kIsWeb)
+    // Models and roles live on the phone, and only while the Chat tab is available.
+    if (!kIsWeb && _isAiChatAvailable(context))
       SettingsSectionModel(
         id: SettingsItemIds.aiSection,
         title: context.l10n.aiTab,
@@ -257,6 +262,21 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             title: context.l10n.leaveFeedback,
             leading: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.lightBlueAccent),
             onTap: () => FeedbackScreen.show(context),
+          ),
+        if (!kIsWeb)
+          SettingsRowModel(
+            id: SettingsItemIds.analytics,
+            title: context.l10n.analytics,
+            leading: const Icon(Icons.query_stats_rounded, color: Colors.tealAccent),
+            tile: ListTile(
+              title: Text(context.l10n.analytics),
+              leading: const Icon(Icons.query_stats_rounded, color: Colors.tealAccent),
+              trailing: Switch.adaptive(
+                value: _isAnalyticsEnabled,
+                onChanged: (value) => sendEventToBloc<SettingsBloc>(SettingsSetAnalyticsEnabled(isEnabled: value)),
+              ),
+              onTap: () => AnalyticsSettingsScreen.show(context),
+            ),
           ),
         if (_isPro && !kIsPhoneWeb)
           SettingsRowModel(id: SettingsItemIds.proStatus, title: 'keklist PRO', tile: _buildProFooterTile(context)),
@@ -364,6 +384,10 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
     id: SettingsItemIds.galleryIndex,
     title: context.l10n.galleryIndex,
     tile: const GalleryIndexTile(),
+  );
+
+  bool _isAiChatAvailable(BuildContext context) => context.select<TabsContainerBloc, bool>(
+    (bloc) => [...bloc.state.selectedTabs, ...bloc.state.hiddenTabs].any((tab) => tab.type == TabType.ai),
   );
 
   SettingsRowModel _navigationRow({

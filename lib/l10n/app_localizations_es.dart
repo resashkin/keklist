@@ -1271,4 +1271,36 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get feedbackFailed =>
       'No se pudo enviar. Revisa la conexión e inténtalo de nuevo';
+
+  @override
+  String get analytics => 'Analítica';
+
+  @override
+  String get analyticsDescription =>
+      'Las estadísticas de uso anónimas ayudan a decidir qué mejorar. Nada de lo que escribes sale de tu dispositivo.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Esta versión no envía nada: la analítica solo funciona en las versiones de App Store y Google Play.';
+
+  @override
+  String get analyticsSent => 'Qué se envía';
+
+  @override
+  String get analyticsSentItems =>
+      'Qué ajustes eliges, qué pantallas abres, la versión de la app, la plataforma y el idioma, las compras de Pro y propinas, e informes de fallos sin sus mensajes.';
+
+  @override
+  String get analyticsNeverSent => 'Nunca se envía';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Tus notas, su texto, emociones y comentarios, fotos, vídeos y audio, cuántos tienes, tu nombre, tu ubicación y tu dirección IP.';
+
+  @override
+  String get analyticsResetId => 'Restablecer ID anónimo';
+
+  @override
+  String get analyticsResetIdDone =>
+      'A partir de ahora se usa un nuevo ID anónimo';
 }

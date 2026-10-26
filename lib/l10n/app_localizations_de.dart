@@ -1275,4 +1275,36 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get feedbackFailed =>
       'Senden fehlgeschlagen. Prüfe das Internet und versuche es erneut';
+
+  @override
+  String get analytics => 'Analyse';
+
+  @override
+  String get analyticsDescription =>
+      'Anonyme Nutzungsstatistiken helfen zu entscheiden, was verbessert wird. Nichts, was du schreibst, verlässt dein Gerät.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Dieser Build sendet nichts: Analyse läuft nur in Builds aus dem App Store und Google Play.';
+
+  @override
+  String get analyticsSent => 'Was gesendet wird';
+
+  @override
+  String get analyticsSentItems =>
+      'Welche Einstellungen du wählst, welche Bildschirme du öffnest, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.';
+
+  @override
+  String get analyticsNeverSent => 'Wird nie gesendet';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Deine Einträge, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, wie viele du hast, dein Name, dein Standort und deine IP-Adresse.';
+
+  @override
+  String get analyticsResetId => 'Anonyme ID zurücksetzen';
+
+  @override
+  String get analyticsResetIdDone =>
+      'Ab jetzt wird eine neue anonyme ID verwendet';
 }

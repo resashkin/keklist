@@ -103,13 +103,14 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
           : (fields[47] as num).toInt()
       ..hiddenMediaIds = fields[48] == null
           ? []
-          : (fields[48] as List).cast<String>();
+          : (fields[48] as List).cast<String>()
+      ..isAnalyticsEnabled = fields[49] == null ? true : fields[49] as bool;
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(41)
+      ..writeByte(42)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)
@@ -191,7 +192,9 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(47)
       ..write(obj.calendarGroupingIndex)
       ..writeByte(48)
-      ..write(obj.hiddenMediaIds);
+      ..write(obj.hiddenMediaIds)
+      ..writeByte(49)
+      ..write(obj.isAnalyticsEnabled);
   }
 
   @override

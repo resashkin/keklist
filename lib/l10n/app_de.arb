@@ -389,5 +389,14 @@
     "feedbackPrivacy": "Gesendet werden nur dieser Text, die App-Version und die Plattform.",
     "feedbackSend": "Senden",
     "feedbackSent": "Danke! Die Nachricht ist angekommen",
-    "feedbackFailed": "Senden fehlgeschlagen. Prüfe das Internet und versuche es erneut"
+    "feedbackFailed": "Senden fehlgeschlagen. Prüfe das Internet und versuche es erneut",
+    "analytics": "Analyse",
+    "analyticsDescription": "Anonyme Nutzungsstatistiken helfen zu entscheiden, was verbessert wird. Nichts, was du schreibst, verlässt dein Gerät.",
+    "analyticsStoreBuildsOnly": "Dieser Build sendet nichts: Analyse läuft nur in Builds aus dem App Store und Google Play.",
+    "analyticsSent": "Was gesendet wird",
+    "analyticsSentItems": "Welche Einstellungen du wählst, welche Bildschirme du öffnest, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.",
+    "analyticsNeverSent": "Wird nie gesendet",
+    "analyticsNeverSentItems": "Deine Einträge, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, wie viele du hast, dein Name, dein Standort und deine IP-Adresse.",
+    "analyticsResetId": "Anonyme ID zurücksetzen",
+    "analyticsResetIdDone": "Ab jetzt wird eine neue anonyme ID verwendet"
 }

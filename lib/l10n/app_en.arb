@@ -1601,5 +1601,41 @@
     "feedbackFailed": "Couldn't send. Check the internet and try again",
     "@feedbackFailed": {
         "description": "Snackbar when feedback could not be sent"
+    },
+    "analytics": "Analytics",
+    "@analytics": {
+        "description": "Settings row and screen title for anonymous usage analytics"
+    },
+    "analyticsDescription": "Anonymous usage statistics help decide what to improve. Nothing you write ever leaves your device.",
+    "@analyticsDescription": {
+        "description": "Explains what analytics is for on the analytics screen"
+    },
+    "analyticsStoreBuildsOnly": "This build sends nothing: analytics runs only in App Store and Google Play builds.",
+    "@analyticsStoreBuildsOnly": {
+        "description": "Shown on the analytics screen in builds that never send analytics (debug, web)"
+    },
+    "analyticsSent": "What is sent",
+    "@analyticsSent": {
+        "description": "Heading of the list of data analytics sends"
+    },
+    "analyticsSentItems": "Which settings and tweaks you choose, which screens you open, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.",
+    "@analyticsSentItems": {
+        "description": "List of data analytics sends"
+    },
+    "analyticsNeverSent": "Never sent",
+    "@analyticsNeverSent": {
+        "description": "Heading of the list of data analytics never sends"
+    },
+    "analyticsNeverSentItems": "Your minds, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.",
+    "@analyticsNeverSentItems": {
+        "description": "List of data analytics never sends"
+    },
+    "analyticsResetId": "Reset anonymous ID",
+    "@analyticsResetId": {
+        "description": "Button that replaces the anonymous analytics id"
+    },
+    "analyticsResetIdDone": "A new anonymous ID is used from now on",
+    "@analyticsResetIdDone": {
+        "description": "Snackbar after the anonymous analytics id is reset"
     }
 }

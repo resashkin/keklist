@@ -1,3 +1,4 @@
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +63,7 @@ mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
   }
 
   void _activate() {
+    Analytics.screenViewed(shakeScreenId);
     _accelerometerSubscription = accelerometerEventStream(
       samplingPeriod: SensorInterval.gameInterval,
     ).listen(_onAccelerometerEvent, onError: (_) {});
