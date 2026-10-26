@@ -60,13 +60,6 @@ final class SettingsHiveRepository implements SettingsRepository {
   }
 
   @override
-  FutureOr<void> updatePreviousAppVersion(String? previousAppVersion) async {
-    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
-    settingsObject?.previousAppVersion = previousAppVersion;
-    await settingsObject?.save();
-  }
-
-  @override
   FutureOr<void> updateHasSeededEmotions(bool value) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     settingsObject?.hasSeededEmotions = value;

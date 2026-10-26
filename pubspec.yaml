@@ -46,7 +46,6 @@ dependencies:
   url_launcher: ^6.1.9
   uuid: ^4.2.1
   video_player: ^2.10.1
-  webview_flutter: ^4.1.0
   gap: ^3.0.1
   #home_widget: ^0.6.0
   #workmanager: ^0.5.2

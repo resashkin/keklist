@@ -311,19 +311,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get tabsSettings => 'Подешавања картица';
 
   @override
-  String get whatsNew => 'Шта је ново?';
-
-  @override
-  String get releaseNotes => 'Белешке о издању';
-
-  @override
-  String get suggestFeature => 'Предложи функцију';
-
-  @override
   String get sendFeedback => 'Пошаљи повратну информацију';
-
-  @override
-  String get emailUs => 'Пошаљи нам e-поруку';
 
   @override
   String get clearOfflineDataWarning =>
@@ -1585,19 +1573,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get tabsSettings => 'Podešavanja tabova';
 
   @override
-  String get whatsNew => 'Šta je novo?';
-
-  @override
-  String get releaseNotes => 'Beleške o izdanju';
-
-  @override
-  String get suggestFeature => 'Predloži funkciju';
-
-  @override
   String get sendFeedback => 'Pošalji povratnu informaciju';
-
-  @override
-  String get emailUs => 'Pošalji nam e-poruku';
 
   @override
   String get clearOfflineDataWarning =>

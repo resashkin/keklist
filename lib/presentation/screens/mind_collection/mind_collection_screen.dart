@@ -21,7 +21,6 @@ import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/digest/mind_universal_list_screen.dart';
 import 'package:keklist/presentation/screens/insights/insights_screen.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
-import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
@@ -30,7 +29,6 @@ import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/domain/period.dart';
@@ -94,9 +92,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
             case SettingsDataState settingsDataState:
               setState(() => _settingsDataState = settingsDataState);
               _rebuildFeed();
-            case SettingsShowWhatsNew _:
-              _showWhatsNew();
-              sendEventToBloc<SettingsBloc>(SettingsWhatsNewShown());
           }
         },
       )?.disposed(by: this);
@@ -217,15 +212,6 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
         ],
       ),
       resizeToAvoidBottomInset: false,
-    );
-  }
-
-  Future<void> _showWhatsNew() {
-    return showCupertinoModalBottomSheet(
-      context: context,
-      builder: (builder) {
-        return WebPageScreen(title: 'Whats new?', initialUri: Uri.parse(KeklistConstants.whatsNewURL));
-      },
     );
   }
 

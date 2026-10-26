@@ -306,19 +306,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tabsSettings => 'タブ設定';
 
   @override
-  String get whatsNew => '新機能';
-
-  @override
-  String get releaseNotes => 'リリースノート';
-
-  @override
-  String get suggestFeature => '機能を提案';
-
-  @override
   String get sendFeedback => 'フィードバックを送信';
-
-  @override
-  String get emailUs => 'メールを送る';
 
   @override
   String get clearOfflineDataWarning =>

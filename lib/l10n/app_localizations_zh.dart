@@ -306,19 +306,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tabsSettings => '标签页设置';
 
   @override
-  String get whatsNew => '新功能';
-
-  @override
-  String get releaseNotes => '发行说明';
-
-  @override
-  String get suggestFeature => '建议功能';
-
-  @override
   String get sendFeedback => '发送反馈';
-
-  @override
-  String get emailUs => '给我们发邮件';
 
   @override
   String get clearOfflineDataWarning => '所有离线数据都会被删除。请确保已提前导出。';

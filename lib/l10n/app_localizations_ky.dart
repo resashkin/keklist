@@ -313,19 +313,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get tabsSettings => 'Таб жөндөөлөрү';
 
   @override
-  String get whatsNew => 'Жаңы нерселер?';
-
-  @override
-  String get releaseNotes => 'Релиз жазмалары';
-
-  @override
-  String get suggestFeature => 'Өзгөчөлүктү сунуш кылуу';
-
-  @override
   String get sendFeedback => 'Пикир-божомол жөнөтүү';
-
-  @override
-  String get emailUs => 'Бизге email жазыңыз';
 
   @override
   String get clearOfflineDataWarning =>

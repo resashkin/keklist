@@ -310,19 +310,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tabsSettings => 'Tabs settings';
 
   @override
-  String get whatsNew => 'What\'s new?';
-
-  @override
-  String get releaseNotes => 'Release notes';
-
-  @override
-  String get suggestFeature => 'Suggest a feature';
-
-  @override
   String get sendFeedback => 'Send feedback';
-
-  @override
-  String get emailUs => 'Email us';
 
   @override
   String get clearOfflineDataWarning =>
