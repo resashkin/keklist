@@ -15,8 +15,13 @@ emotion emojis on mind tiles, and an animated pinch that resizes the grids witho
   length once loaded (`_onMediaDuration`). Holding pauses the timer and the media; the last item closes the screen.
 - Navigation: the left and right 22% of the page are translucent tap zones (they win over the text's tap), swipes,
   arrow keys; Space pauses with the timer, Esc closes. Wide screens get a 9:16 card in the middle.
-- Emotions: the pill under the text is gone, the texture behind the mind shows them. Long press on the background
-  (without the timer) or pushing a mind up past its end opens `EmotionMarkingSheet`.
+- Emotions: the pill under the text is gone, the texture behind the mind shows them; Emotions in ⋯ opens
+  `EmotionMarkingSheet`.
+- Editing: a long press on the text opens `MindCreatorScreen.editText` (the creator in edit mode: text prefilled,
+  recording and emotions hidden). A single tap does nothing; the edges flip stories.
+- ⋯ is `_StoryMenuButton`: the native `LiquidGlassMenu` (UIMenu) on iOS 26+, a `PopupMenuButton` elsewhere. Items
+  come from `_StoryAction`: Edit, Emotions, Translate (debug), Remove media, Delete. A long-pressed comment shows the
+  same actions in a `super_context_menu` context menu.
 - The comment field is the chat's input bar (`_CommentBar`): rounded field, one white button that sends the text
   or records audio/video while the field is empty.
 
@@ -24,7 +29,7 @@ emotion emojis on mind tiles, and an animated pinch that resizes the grids witho
 `DayFeedTileMenu` (`widgets/day_feed/day_feed_tile_menu.dart`) wraps every tile of the day sliver and the calendar
 grids with `ContextMenuWidget` from `super_context_menu`: a real `UIContextMenu` on iOS (Liquid Glass on iOS 26,
 SF Symbols, the tile lifted as preview), native menus on Android and desktop, nothing on the web.
-- Mind: Edit (text sheet, keeps media via `mindWithText`), Emotions, Share (text), Delete (confirmation).
+- Mind: Edit (full-screen creator in edit mode, keeps media via `mindWithText`), Emotions, Share (text), Delete (confirmation).
 - Library photo/video: Share (original file), Show in Gallery, Delete. Delete opens `MediaRemoveSheet` with two
   choices:
   - Hide: adds the item's feed id to `KeklistSettings.hiddenMediaIds` (Hive field 48, `SettingsSetMediaHidden`).
@@ -71,7 +76,7 @@ scroll physics to `NeverScrollableScrollPhysics` while two fingers are down.
 - Strings: `showInGallery`, `tileEmojiMotion*`, `gridResize*` added; `dayFeedMute`, `dayFeedUnmute` removed.
 
 ## Testing
-- Tap a tile: segments on top, nothing moves on its own; edge taps and swipes move, long press opens emotions.
+- Tap a tile: segments on top, nothing moves on its own; edge taps and swipes move, long press on the text edits, ⋯ opens the menu.
 - ▶ on a day: segments fill, items advance, holding pauses, the last one closes.
 - Long-press tiles of each kind and try every action; deleting a photo asks the system first.
 - Shake on the day screen or calendar, switch Emoji motion and Pinch animation, pinch the grid.
