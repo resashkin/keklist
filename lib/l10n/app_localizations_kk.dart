@@ -1258,4 +1258,24 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => 'Ештеңе жасырылмаған';
+
+  @override
+  String get leaveFeedback => 'Пікір қалдыру';
+
+  @override
+  String get feedbackHint => 'Не ұнайды, не бұзылған, не жетіспейді?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Тек осы мәтін, қолданба нұсқасы және платформа жіберіледі.';
+
+  @override
+  String get feedbackSend => 'Жіберу';
+
+  @override
+  String get feedbackSent => 'Рақмет! Әзірлеуші хабарды алды';
+
+  @override
+  String get feedbackFailed =>
+      'Жіберу мүмкін болмады. Интернетті тексеріп, қайталаңыз';
 }

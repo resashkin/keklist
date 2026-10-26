@@ -612,5 +612,11 @@
     "undo": "Annulla",
     "hiddenMedia": "Foto nascoste",
     "hiddenMediaHint": "Tocca una foto per mostrarla di nuovo in keklist",
-    "hiddenMediaEmpty": "Niente di nascosto"
+    "hiddenMediaEmpty": "Niente di nascosto",
+    "leaveFeedback": "Lascia un feedback",
+    "feedbackHint": "Cosa ti piace, cosa non va, cosa manca?",
+    "feedbackPrivacy": "Vengono inviati solo questo testo, la versione dell'app e la piattaforma.",
+    "feedbackSend": "Invia",
+    "feedbackSent": "Grazie! Lo sviluppatore ha ricevuto il messaggio",
+    "feedbackFailed": "Invio non riuscito. Controlla la connessione e riprova"
 }

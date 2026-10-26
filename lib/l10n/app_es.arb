@@ -612,5 +612,11 @@
     "undo": "Deshacer",
     "hiddenMedia": "Fotos ocultas",
     "hiddenMediaHint": "Toca una foto para volver a mostrarla en keklist",
-    "hiddenMediaEmpty": "No hay nada oculto"
+    "hiddenMediaEmpty": "No hay nada oculto",
+    "leaveFeedback": "Dejar un comentario",
+    "feedbackHint": "¿Qué te gusta, qué falla, qué falta?",
+    "feedbackPrivacy": "Solo se envía este texto, la versión de la app y la plataforma.",
+    "feedbackSend": "Enviar",
+    "feedbackSent": "¡Gracias! El desarrollador recibió tu mensaje",
+    "feedbackFailed": "No se pudo enviar. Revisa la conexión e inténtalo de nuevo"
 }

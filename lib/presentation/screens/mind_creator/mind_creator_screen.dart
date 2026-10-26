@@ -70,6 +70,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
       await EmotionMarkingSheet.show(
         context: context,
         initialSelectedIds: const {},
+        showsSaveButton: true,
         onSelectionChanged: (ids) => _selectedEmotionIds
           ..clear()
           ..addAll(ids),

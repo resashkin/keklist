@@ -1593,5 +1593,29 @@
     "hiddenMediaEmpty": "Nothing is hidden",
     "@hiddenMediaEmpty": {
         "description": "Hidden photos screen without photos"
+    },
+    "leaveFeedback": "Leave feedback",
+    "@leaveFeedback": {
+        "description": "Settings row and sheet title for sending feedback to the developer"
+    },
+    "feedbackHint": "What do you like, what's broken, what's missing?",
+    "@feedbackHint": {
+        "description": "Placeholder of the feedback field"
+    },
+    "feedbackPrivacy": "Only this text, the app version and the platform are sent.",
+    "@feedbackPrivacy": {
+        "description": "Under the feedback field: what is sent"
+    },
+    "feedbackSend": "Send",
+    "@feedbackSend": {
+        "description": "Send feedback button"
+    },
+    "feedbackSent": "Thanks! The developer got your message",
+    "@feedbackSent": {
+        "description": "Snackbar after feedback was sent"
+    },
+    "feedbackFailed": "Couldn't send. Check the internet and try again",
+    "@feedbackFailed": {
+        "description": "Snackbar when feedback could not be sent"
     }
 }

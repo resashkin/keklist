@@ -1260,4 +1260,24 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => 'Hech narsa yashirilmagan';
+
+  @override
+  String get leaveFeedback => 'Fikr qoldirish';
+
+  @override
+  String get feedbackHint => 'Nima yoqadi, nima buzilgan, nima yetishmaydi?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Faqat shu matn, ilova versiyasi va platforma yuboriladi.';
+
+  @override
+  String get feedbackSend => 'Yuborish';
+
+  @override
+  String get feedbackSent => 'Rahmat! Dasturchi xabarni oldi';
+
+  @override
+  String get feedbackFailed =>
+      'Yuborib bo\'lmadi. Internetni tekshirib, qayta urinib ko\'ring';
 }

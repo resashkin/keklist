@@ -1256,6 +1256,26 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => 'Ништа није сакривено';
+
+  @override
+  String get leaveFeedback => 'Остави утисак';
+
+  @override
+  String get feedbackHint => 'Шта ти се свиђа, шта не ради, шта недостаје?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Шаље се само овај текст, верзија апликације и платформа.';
+
+  @override
+  String get feedbackSend => 'Пошаљи';
+
+  @override
+  String get feedbackSent => 'Хвала! Порука је стигла програмеру';
+
+  @override
+  String get feedbackFailed =>
+      'Слање није успело. Провери интернет и покушај поново';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2509,4 +2529,24 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get hiddenMediaEmpty => 'Ništa nije sakriveno';
+
+  @override
+  String get leaveFeedback => 'Ostavi utisak';
+
+  @override
+  String get feedbackHint => 'Šta ti se sviđa, šta ne radi, šta nedostaje?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Šalje se samo ovaj tekst, verzija aplikacije i platforma.';
+
+  @override
+  String get feedbackSend => 'Pošalji';
+
+  @override
+  String get feedbackSent => 'Hvala! Poruka je stigla programeru';
+
+  @override
+  String get feedbackFailed =>
+      'Slanje nije uspelo. Proveri internet i pokušaj ponovo';
 }

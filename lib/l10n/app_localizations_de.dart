@@ -1267,4 +1267,24 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => 'Nichts ausgeblendet';
+
+  @override
+  String get leaveFeedback => 'Feedback geben';
+
+  @override
+  String get feedbackHint => 'Was gefällt dir, was ist kaputt, was fehlt?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Gesendet werden nur dieser Text, die App-Version und die Plattform.';
+
+  @override
+  String get feedbackSend => 'Senden';
+
+  @override
+  String get feedbackSent => 'Danke! Die Nachricht ist angekommen';
+
+  @override
+  String get feedbackFailed =>
+      'Senden fehlgeschlagen. Prüfe das Internet und versuche es erneut';
 }

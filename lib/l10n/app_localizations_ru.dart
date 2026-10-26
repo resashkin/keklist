@@ -1260,4 +1260,24 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => 'Ничего не скрыто';
+
+  @override
+  String get leaveFeedback => 'Оставить отзыв';
+
+  @override
+  String get feedbackHint => 'Что нравится, что сломано, чего не хватает?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Отправится только этот текст, версия приложения и платформа.';
+
+  @override
+  String get feedbackSend => 'Отправить';
+
+  @override
+  String get feedbackSent => 'Спасибо! Разработчик получил сообщение';
+
+  @override
+  String get feedbackFailed =>
+      'Не удалось отправить. Проверь интернет и попробуй ещё раз';
 }

@@ -1265,4 +1265,24 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => 'Niente di nascosto';
+
+  @override
+  String get leaveFeedback => 'Lascia un feedback';
+
+  @override
+  String get feedbackHint => 'Cosa ti piace, cosa non va, cosa manca?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Vengono inviati solo questo testo, la versione dell\'app e la piattaforma.';
+
+  @override
+  String get feedbackSend => 'Invia';
+
+  @override
+  String get feedbackSent => 'Grazie! Lo sviluppatore ha ricevuto il messaggio';
+
+  @override
+  String get feedbackFailed =>
+      'Invio non riuscito. Controlla la connessione e riprova';
 }

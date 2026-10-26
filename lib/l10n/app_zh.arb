@@ -387,5 +387,11 @@
     "undo": "撤销",
     "hiddenMedia": "隐藏的照片",
     "hiddenMediaHint": "点按照片即可在keklist中重新显示",
-    "hiddenMediaEmpty": "没有隐藏的内容"
+    "hiddenMediaEmpty": "没有隐藏的内容",
+    "leaveFeedback": "留下反馈",
+    "feedbackHint": "你喜欢什么？哪里坏了？缺少什么？",
+    "feedbackPrivacy": "只会发送这段文字、应用版本和平台。",
+    "feedbackSend": "发送",
+    "feedbackSent": "谢谢！开发者已收到你的消息",
+    "feedbackFailed": "发送失败。请检查网络后重试"
 }
