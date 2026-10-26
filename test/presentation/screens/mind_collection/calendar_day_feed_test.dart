@@ -108,4 +108,15 @@ void main() {
     expect(feed.itemsOf(12), isEmpty);
   });
 
+  test('hidden media stays out of its day', () {
+    final CalendarDayFeed feed = CalendarDayFeed(
+      minds: minds,
+      indexer: indexer,
+      includesMedia: true,
+      hiddenMediaIds: {'asset_photo'},
+    );
+
+    expect(feed.itemsOf(10).map((item) => item.id), ['mind_early', 'mind_late']);
+    expect(feed.itemsOf(12).map((item) => item.id), ['asset_only-media']);
+  });
 }

@@ -14,9 +14,17 @@ final class CalendarDayFeed {
   final bool includesMedia;
   final FeedSortOrder sortOrder;
   final FeedGrouping grouping;
+  final Set<String> hiddenMediaIds;
   final Map<int, List<DayFeedItem>> _itemsByDay = {};
 
-  CalendarDayFeed._(this._mindsByDay, this._indexer, this.includesMedia, this.sortOrder, this.grouping);
+  CalendarDayFeed._(
+    this._mindsByDay,
+    this._indexer,
+    this.includesMedia,
+    this.sortOrder,
+    this.grouping,
+    this.hiddenMediaIds,
+  );
 
   factory CalendarDayFeed({
     required Iterable<Mind> minds,
@@ -24,6 +32,7 @@ final class CalendarDayFeed {
     required bool includesMedia,
     FeedSortOrder sortOrder = FeedSortOrder.time,
     FeedGrouping grouping = FeedGrouping.none,
+    Set<String> hiddenMediaIds = const {},
   }) {
     final Map<String, MindReflections> reflections = MindReflections.countAll(minds);
     final Map<int, List<DayFeedMind>> mindsByDay = {};
@@ -32,7 +41,7 @@ final class CalendarDayFeed {
           .putIfAbsent(mind.dayIndex, () => [])
           .add(DayFeedMind(mind: mind, reflections: reflections[mind.id] ?? const MindReflections()));
     }
-    return CalendarDayFeed._(mindsByDay, indexer, includesMedia, sortOrder, grouping);
+    return CalendarDayFeed._(mindsByDay, indexer, includesMedia, sortOrder, grouping, hiddenMediaIds);
   }
 
   List<DayFeedSection> sectionsOf(int dayIndex) =>
@@ -42,7 +51,11 @@ final class CalendarDayFeed {
     final List<GalleryAssetInfo> assets = includesMedia ? _indexer?.entryFor(dayIndex)?.assets ?? const [] : const [];
     final List<DayFeedItem> merged = DayFeedLayout.merge(
       minds: _mindsByDay[dayIndex] ?? const [],
-      media: [for (final GalleryAssetInfo asset in assets) DayFeedAsset(PhotoLibraryGallerySource.entityOf(asset))],
+      media: [
+        for (final GalleryAssetInfo asset in assets)
+          if (!hiddenMediaIds.contains(DayFeedAsset.idOf(asset.id)))
+            DayFeedAsset(PhotoLibraryGallerySource.entityOf(asset)),
+      ],
     );
     return DayFeedLayout.arrangedItems(merged, sortOrder: sortOrder, grouping: grouping);
   });

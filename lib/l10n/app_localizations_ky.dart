@@ -1222,4 +1222,40 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get feedSectionGallery => 'Галерея';
+
+  @override
+  String get removePhotoTitle => 'Сүрөттү алып салуу';
+
+  @override
+  String get removeVideoTitle => 'Видеону алып салуу';
+
+  @override
+  String get hideMedia => 'Жашыруу';
+
+  @override
+  String get hideMediaSubtitle => 'keklist\'тен гана, галереяда калат';
+
+  @override
+  String get deleteFromGallery => 'Галереядан өчүрүү';
+
+  @override
+  String get deleteFromGallerySubtitle => '«Жакында өчүрүлгөндөргө» түшөт';
+
+  @override
+  String get mediaHidden => 'keklist\'тен жашырылды';
+
+  @override
+  String get mediaShownAgain => 'Кайра keklist\'те';
+
+  @override
+  String get undo => 'Жокко чыгаруу';
+
+  @override
+  String get hiddenMedia => 'Жашыруун сүрөттөр';
+
+  @override
+  String get hiddenMediaHint => 'Сүрөттү keklist\'ке кайтаруу үчүн басыңыз';
+
+  @override
+  String get hiddenMediaEmpty => 'Эч нерсе жашырылган жок';
 }

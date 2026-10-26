@@ -375,5 +375,17 @@
     "feedGroupingType": "类型",
     "feedGroupingTimeOfDay": "时段",
     "feedSectionMinds": "笔记",
-    "feedSectionGallery": "图库"
+    "feedSectionGallery": "图库",
+    "removePhotoTitle": "移除照片",
+    "removeVideoTitle": "移除视频",
+    "hideMedia": "隐藏",
+    "hideMediaSubtitle": "仅在keklist中隐藏，图库中保留",
+    "deleteFromGallery": "从图库删除",
+    "deleteFromGallerySubtitle": "将移至“最近删除”",
+    "mediaHidden": "已在keklist中隐藏",
+    "mediaShownAgain": "已恢复到keklist",
+    "undo": "撤销",
+    "hiddenMedia": "隐藏的照片",
+    "hiddenMediaHint": "点按照片即可在keklist中重新显示",
+    "hiddenMediaEmpty": "没有隐藏的内容"
 }

@@ -27,6 +27,7 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
   bool _isMediaLoading = true;
   DayFeedMediaIssue? _mediaIssue;
   int _mediaRequestId = 0;
+  Set<String> _hiddenMediaIds = const {};
 
   DayFeedCubit({GalleryIndexer? galleryIndexer})
     : _galleryIndexer = galleryIndexer,
@@ -34,6 +35,12 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
 
   void setMinds({required int dayIndex, required Iterable<Mind> allMinds}) {
     _minds = DayFeedLayout.mindItemsForDay(dayIndex: dayIndex, allMinds: allMinds);
+    _emit();
+  }
+
+  void setHiddenMediaIds(Set<String> ids) {
+    if (ids.length == _hiddenMediaIds.length && ids.containsAll(_hiddenMediaIds)) return;
+    _hiddenMediaIds = ids;
     _emit();
   }
 
@@ -109,7 +116,10 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
     if (isClosed) return;
     emit(
       DayFeedState(
-        items: DayFeedLayout.merge(minds: _minds, media: _media),
+        items: DayFeedLayout.merge(
+          minds: _minds,
+          media: [for (final DayFeedItem item in _media) if (!_hiddenMediaIds.contains(item.id)) item],
+        ),
         isMediaLoading: _isMediaLoading,
         mediaIssue: _mediaIssue,
       ),

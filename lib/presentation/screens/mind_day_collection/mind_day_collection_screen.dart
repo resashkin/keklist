@@ -106,6 +106,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
           setState(() {
             _dayFeedSettings = state.settings.dayFeed;
           });
+          _dayFeedCubit.setHiddenMediaIds(state.settings.hiddenMediaIds);
           final bool weatherEnabled = state.settings.isWeatherSourceEnabled;
           final double? lat = state.settings.weatherLatitude;
           final double? lon = state.settings.weatherLongitude;

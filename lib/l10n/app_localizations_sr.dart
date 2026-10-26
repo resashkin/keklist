@@ -1220,6 +1220,42 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get feedSectionGallery => 'Галерија';
+
+  @override
+  String get removePhotoTitle => 'Уклони фотографију';
+
+  @override
+  String get removeVideoTitle => 'Уклони видео';
+
+  @override
+  String get hideMedia => 'Сакриј';
+
+  @override
+  String get hideMediaSubtitle => 'Само из keklist-а, остаје у галерији';
+
+  @override
+  String get deleteFromGallery => 'Обриши из галерије';
+
+  @override
+  String get deleteFromGallerySubtitle => 'Иде у „Недавно обрисано“';
+
+  @override
+  String get mediaHidden => 'Сакривено из keklist-а';
+
+  @override
+  String get mediaShownAgain => 'Поново у keklist-у';
+
+  @override
+  String get undo => 'Опозови';
+
+  @override
+  String get hiddenMedia => 'Сакривене фотографије';
+
+  @override
+  String get hiddenMediaHint => 'Додирни фотографију да се врати у keklist';
+
+  @override
+  String get hiddenMediaEmpty => 'Ништа није сакривено';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2437,4 +2473,40 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get feedSectionGallery => 'Galerija';
+
+  @override
+  String get removePhotoTitle => 'Ukloni fotografiju';
+
+  @override
+  String get removeVideoTitle => 'Ukloni video';
+
+  @override
+  String get hideMedia => 'Sakrij';
+
+  @override
+  String get hideMediaSubtitle => 'Samo iz keklist-a, ostaje u galeriji';
+
+  @override
+  String get deleteFromGallery => 'Obriši iz galerije';
+
+  @override
+  String get deleteFromGallerySubtitle => 'Ide u „Nedavno obrisano“';
+
+  @override
+  String get mediaHidden => 'Sakriveno iz keklist-a';
+
+  @override
+  String get mediaShownAgain => 'Ponovo u keklist-u';
+
+  @override
+  String get undo => 'Opozovi';
+
+  @override
+  String get hiddenMedia => 'Sakrivene fotografije';
+
+  @override
+  String get hiddenMediaHint => 'Dodirni fotografiju da se vrati u keklist';
+
+  @override
+  String get hiddenMediaEmpty => 'Ništa nije sakriveno';
 }

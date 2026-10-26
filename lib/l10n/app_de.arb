@@ -375,5 +375,17 @@
     "feedGroupingType": "Art",
     "feedGroupingTimeOfDay": "Tageszeit",
     "feedSectionMinds": "Notizen",
-    "feedSectionGallery": "Galerie"
+    "feedSectionGallery": "Galerie",
+    "removePhotoTitle": "Foto entfernen",
+    "removeVideoTitle": "Video entfernen",
+    "hideMedia": "Ausblenden",
+    "hideMediaSubtitle": "Nur aus keklist, bleibt in der Galerie",
+    "deleteFromGallery": "Aus der Galerie löschen",
+    "deleteFromGallerySubtitle": "Kommt in „Zuletzt gelöscht“",
+    "mediaHidden": "In keklist ausgeblendet",
+    "mediaShownAgain": "Wieder in keklist",
+    "undo": "Rückgängig",
+    "hiddenMedia": "Ausgeblendete Fotos",
+    "hiddenMediaHint": "Tippe auf ein Foto, um es wieder in keklist zu zeigen",
+    "hiddenMediaEmpty": "Nichts ausgeblendet"
 }

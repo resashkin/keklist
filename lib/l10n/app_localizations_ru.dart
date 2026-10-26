@@ -1224,4 +1224,40 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get feedSectionGallery => 'Галерея';
+
+  @override
+  String get removePhotoTitle => 'Убрать фото';
+
+  @override
+  String get removeVideoTitle => 'Убрать видео';
+
+  @override
+  String get hideMedia => 'Скрыть';
+
+  @override
+  String get hideMediaSubtitle => 'Только из keklist, в галерее останется';
+
+  @override
+  String get deleteFromGallery => 'Удалить из галереи';
+
+  @override
+  String get deleteFromGallerySubtitle => 'Попадёт в «Недавно удалённые»';
+
+  @override
+  String get mediaHidden => 'Скрыто из keklist';
+
+  @override
+  String get mediaShownAgain => 'Снова в keklist';
+
+  @override
+  String get undo => 'Отменить';
+
+  @override
+  String get hiddenMedia => 'Скрытые фото';
+
+  @override
+  String get hiddenMediaHint => 'Нажми на фото, чтобы вернуть его в keklist';
+
+  @override
+  String get hiddenMediaEmpty => 'Ничего не скрыто';
 }

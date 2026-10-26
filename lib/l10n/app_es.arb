@@ -600,5 +600,17 @@
     "feedGroupingType": "Tipo",
     "feedGroupingTimeOfDay": "Momento",
     "feedSectionMinds": "Notas",
-    "feedSectionGallery": "Galería"
+    "feedSectionGallery": "Galería",
+    "removePhotoTitle": "Quitar foto",
+    "removeVideoTitle": "Quitar vídeo",
+    "hideMedia": "Ocultar",
+    "hideMediaSubtitle": "Solo de keklist, sigue en la galería",
+    "deleteFromGallery": "Eliminar de la galería",
+    "deleteFromGallerySubtitle": "Pasa a Eliminado recientemente",
+    "mediaHidden": "Oculto en keklist",
+    "mediaShownAgain": "De vuelta en keklist",
+    "undo": "Deshacer",
+    "hiddenMedia": "Fotos ocultas",
+    "hiddenMediaHint": "Toca una foto para volver a mostrarla en keklist",
+    "hiddenMediaEmpty": "No hay nada oculto"
 }

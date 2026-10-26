@@ -48,6 +48,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateMindEmotionsPrompt>(_updateMindEmotionsPrompt);
     on<SettingsUpdateTileMotion>(_updateTileMotion);
     on<SettingsUpdateDayFeedArrangement>(_updateDayFeedArrangement);
+    on<SettingsSetMediaHidden>(_setMediaHidden);
 
     _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
   }
@@ -249,6 +250,13 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     await _repository.updateSettings(
       settings.copyWith(dayFeed: settings.dayFeed.copyWith(sortOrder: event.sortOrder, grouping: event.grouping)),
     );
+  }
+
+  FutureOr<void> _setMediaHidden(SettingsSetMediaHidden event, Emitter<SettingsState> emit) async {
+    final KeklistSettings settings = _repository.value;
+    final Set<String> hidden = {...settings.hiddenMediaIds};
+    event.isHidden ? hidden.addAll(event.ids) : hidden.removeAll(event.ids);
+    await _repository.updateSettings(settings.copyWith(hiddenMediaIds: hidden));
   }
 
   FutureOr<void> _updateTileMotion(SettingsUpdateTileMotion event, Emitter<SettingsState> emit) async {

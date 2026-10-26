@@ -33,6 +33,7 @@ import 'package:keklist/presentation/screens/settings/settings_layout.dart';
 import 'package:keklist/presentation/screens/settings/widgets/web_version_rows.dart';
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:keklist/presentation/screens/hidden_media/hidden_media_screen.dart';
 import 'package:keklist/presentation/screens/settings/widgets/gallery_index_tile.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/settings/widgets/settings_customize_bottom_sheet.dart';
@@ -63,6 +64,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   DateTime? _proNextRenewalDate;
   String? _proPriceString;
   Set<String> _hiddenItemIds = {};
+  int _hiddenMediaCount = 0;
 
   @override
   void initState() {
@@ -75,6 +77,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             setState(() {
               _isDebugMenuVisible = state.settings.isDebugMenuVisible;
               _hiddenItemIds = state.settings.hiddenSettingsItemIds;
+              _hiddenMediaCount = state.settings.hiddenMediaIds.length;
             });
             break;
           case SettingsShowMessage state:
@@ -199,6 +202,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             onTap: () => _handleImport(),
           ),
           if (!isIndexing && GalleryIndexTile.isAvailable(context)) _galleryIndexRow(context),
+          if (!kIsWeb) _hiddenMediaRow(context),
         ],
       ),
     // Models and roles live on the phone.
@@ -343,6 +347,27 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
         ],
       ),
   ];
+
+  SettingsRowModel _hiddenMediaRow(BuildContext context) => SettingsRowModel(
+    id: SettingsItemIds.hiddenMedia,
+    title: context.l10n.hiddenMedia,
+    leading: const Icon(Icons.visibility_off_outlined),
+    tile: ListTile(
+      title: Text(context.l10n.hiddenMedia),
+      leading: const Icon(Icons.visibility_off_outlined),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 4.0,
+        children: [
+          if (_hiddenMediaCount > 0) Text('$_hiddenMediaCount', style: TextStyle(color: Theme.of(context).hintColor)),
+          settingsNavTrailing(context),
+        ],
+      ),
+      onTap: () => Navigator.of(
+        context,
+      ).push<void>(SwipeablePageRoute<void>(builder: (BuildContext context) => const HiddenMediaScreen())),
+    ),
+  );
 
   SettingsRowModel _galleryIndexRow(BuildContext context) => SettingsRowModel(
     id: SettingsItemIds.galleryIndex,

@@ -62,7 +62,9 @@ final class DayFeedAsset extends DayFeedItem {
   DateTime get timestamp => asset.createDateTime;
 
   @override
-  String get id => 'asset_${asset.id}';
+  String get id => idOf(asset.id);
+
+  static String idOf(String assetId) => 'asset_$assetId';
 }
 
 final class DayFeedFolderMedia extends DayFeedItem {

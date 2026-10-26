@@ -1545,5 +1545,53 @@
     "feedSectionGallery": "Gallery",
     "@feedSectionGallery": {
         "description": "Section header over the photos and videos of a day"
+    },
+    "removePhotoTitle": "Remove photo",
+    "@removePhotoTitle": {
+        "description": "Title of the sheet shown before removing a photo"
+    },
+    "removeVideoTitle": "Remove video",
+    "@removeVideoTitle": {
+        "description": "Title of the sheet shown before removing a video"
+    },
+    "hideMedia": "Hide",
+    "@hideMedia": {
+        "description": "Hide a photo or video from keklist only"
+    },
+    "hideMediaSubtitle": "Only from keklist, it stays in the gallery",
+    "@hideMediaSubtitle": {
+        "description": "Under Hide: the file stays in the gallery"
+    },
+    "deleteFromGallery": "Delete from gallery",
+    "@deleteFromGallery": {
+        "description": "Delete a photo or video from the phone gallery"
+    },
+    "deleteFromGallerySubtitle": "Moves to Recently Deleted",
+    "@deleteFromGallerySubtitle": {
+        "description": "Under Delete from gallery"
+    },
+    "mediaHidden": "Hidden from keklist",
+    "@mediaHidden": {
+        "description": "Snackbar after hiding a photo"
+    },
+    "mediaShownAgain": "Back in keklist",
+    "@mediaShownAgain": {
+        "description": "Snackbar after showing a hidden photo again"
+    },
+    "undo": "Undo",
+    "@undo": {
+        "description": "Undo the last action"
+    },
+    "hiddenMedia": "Hidden photos",
+    "@hiddenMedia": {
+        "description": "Settings row and screen with photos hidden from keklist"
+    },
+    "hiddenMediaHint": "Tap a photo to show it in keklist again",
+    "@hiddenMediaHint": {
+        "description": "Hint on the hidden photos screen"
+    },
+    "hiddenMediaEmpty": "Nothing is hidden",
+    "@hiddenMediaEmpty": {
+        "description": "Hidden photos screen without photos"
     }
 }

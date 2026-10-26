@@ -143,6 +143,9 @@ final class SettingsObject extends HiveObject {
   @HiveField(47, defaultValue: 0)
   late int calendarGroupingIndex;
 
+  @HiveField(48, defaultValue: <String>[])
+  late List<String> hiddenMediaIds;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -171,6 +174,7 @@ final class SettingsObject extends HiveObject {
           grouping: FeedGrouping.values.elementAtOrNull(dayFeedGroupingIndex) ?? FeedGrouping.none,
         ),
         hiddenSettingsItemIds: hiddenSettingsItemIds.toSet(),
+        hiddenMediaIds: hiddenMediaIds.toSet(),
         shakeDiscoveredScreenIds: shakeDiscoveredScreenIds.toSet(),
         insights: InsightsSettings(
           widgetOrder: insightsWidgetOrder,

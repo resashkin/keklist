@@ -600,5 +600,17 @@
     "feedGroupingType": "Түрү",
     "feedGroupingTimeOfDay": "Күн убагы",
     "feedSectionMinds": "Жазуулар",
-    "feedSectionGallery": "Галерея"
+    "feedSectionGallery": "Галерея",
+    "removePhotoTitle": "Сүрөттү алып салуу",
+    "removeVideoTitle": "Видеону алып салуу",
+    "hideMedia": "Жашыруу",
+    "hideMediaSubtitle": "keklist'тен гана, галереяда калат",
+    "deleteFromGallery": "Галереядан өчүрүү",
+    "deleteFromGallerySubtitle": "«Жакында өчүрүлгөндөргө» түшөт",
+    "mediaHidden": "keklist'тен жашырылды",
+    "mediaShownAgain": "Кайра keklist'те",
+    "undo": "Жокко чыгаруу",
+    "hiddenMedia": "Жашыруун сүрөттөр",
+    "hiddenMediaHint": "Сүрөттү keklist'ке кайтаруу үчүн басыңыз",
+    "hiddenMediaEmpty": "Эч нерсе жашырылган жок"
 }

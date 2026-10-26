@@ -1180,4 +1180,40 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get feedSectionGallery => 'ギャラリー';
+
+  @override
+  String get removePhotoTitle => '写真を外す';
+
+  @override
+  String get removeVideoTitle => '動画を外す';
+
+  @override
+  String get hideMedia => '非表示';
+
+  @override
+  String get hideMediaSubtitle => 'keklistからのみ。ギャラリーには残ります';
+
+  @override
+  String get deleteFromGallery => 'ギャラリーから削除';
+
+  @override
+  String get deleteFromGallerySubtitle => '「最近削除した項目」に移動します';
+
+  @override
+  String get mediaHidden => 'keklistで非表示にしました';
+
+  @override
+  String get mediaShownAgain => 'keklistに戻しました';
+
+  @override
+  String get undo => '取り消す';
+
+  @override
+  String get hiddenMedia => '非表示の写真';
+
+  @override
+  String get hiddenMediaHint => '写真をタップするとkeklistに戻ります';
+
+  @override
+  String get hiddenMediaEmpty => '非表示のものはありません';
 }

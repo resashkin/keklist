@@ -375,5 +375,17 @@
     "feedGroupingType": "種類",
     "feedGroupingTimeOfDay": "時間帯",
     "feedSectionMinds": "メモ",
-    "feedSectionGallery": "ギャラリー"
+    "feedSectionGallery": "ギャラリー",
+    "removePhotoTitle": "写真を外す",
+    "removeVideoTitle": "動画を外す",
+    "hideMedia": "非表示",
+    "hideMediaSubtitle": "keklistからのみ。ギャラリーには残ります",
+    "deleteFromGallery": "ギャラリーから削除",
+    "deleteFromGallerySubtitle": "「最近削除した項目」に移動します",
+    "mediaHidden": "keklistで非表示にしました",
+    "mediaShownAgain": "keklistに戻しました",
+    "undo": "取り消す",
+    "hiddenMedia": "非表示の写真",
+    "hiddenMediaHint": "写真をタップするとkeklistに戻ります",
+    "hiddenMediaEmpty": "非表示のものはありません"
 }

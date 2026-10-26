@@ -600,5 +600,17 @@
     "feedGroupingType": "Turi",
     "feedGroupingTimeOfDay": "Kun vaqti",
     "feedSectionMinds": "Yozuvlar",
-    "feedSectionGallery": "Galereya"
+    "feedSectionGallery": "Galereya",
+    "removePhotoTitle": "Suratni olib tashlash",
+    "removeVideoTitle": "Videoni olib tashlash",
+    "hideMedia": "Yashirish",
+    "hideMediaSubtitle": "Faqat keklist'dan, galereyada qoladi",
+    "deleteFromGallery": "Galereyadan o'chirish",
+    "deleteFromGallerySubtitle": "«Yaqinda o'chirilganlar»ga tushadi",
+    "mediaHidden": "keklist'dan yashirildi",
+    "mediaShownAgain": "Yana keklist'da",
+    "undo": "Bekor qilish",
+    "hiddenMedia": "Yashirin suratlar",
+    "hiddenMediaHint": "Suratni keklist'ga qaytarish uchun bosing",
+    "hiddenMediaEmpty": "Hech narsa yashirilmagan"
 }
