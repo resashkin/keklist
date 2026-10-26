@@ -203,7 +203,7 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
     AutoSizeText(title, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600), maxLines: 1),
     const Gap(4),
     AutoSizeText(
-      'A one-time tip, nothing to unlock',
+      'A one-time tip',
       style: TextStyle(fontSize: 13, color: theme.colorScheme.onSurfaceVariant),
       maxLines: 1,
     ),
