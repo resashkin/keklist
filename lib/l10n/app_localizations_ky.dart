@@ -1266,4 +1266,35 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get feedbackFailed =>
       'Жөнөтүү мүмкүн болбоду. Интернетти текшерип, кайра аракет кылыңыз';
+
+  @override
+  String get analytics => 'Аналитика';
+
+  @override
+  String get analyticsDescription =>
+      'Анонимдүү колдонуу статистикасы эмнени жакшыртуу керектигин түшүнүүгө жардам берет. Сиз жазгандын баары түзмөктө калат.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Бул версия эч нерсе жибербейт: аналитика App Store жана Google Play версияларында гана иштейт.';
+
+  @override
+  String get analyticsSent => 'Эмне жөнөтүлөт';
+
+  @override
+  String get analyticsSentItems =>
+      'Кайсы жөндөөлөрдү тандайсыз, кайсы экрандарды ачасыз, колдонмонун версиясы, платформа жана тил, Pro жана чай пул сатып алуулар, ката текстисиз кыйроо отчеттору.';
+
+  @override
+  String get analyticsNeverSent => 'Эч качан жөнөтүлбөйт';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Жазууларыңыз, алардын тексти, эмоциялары жана комментарийлери, сүрөт, видео жана аудио, алардын саны, атыңыз, жайгашкан жериңиз жана IP дарегиңиз.';
+
+  @override
+  String get analyticsResetId => 'Анонимдүү ID\'ни баштапкы абалга келтирүү';
+
+  @override
+  String get analyticsResetIdDone => 'Эми жаңы анонимдүү ID колдонулат';
 }

@@ -1273,4 +1273,36 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get feedbackFailed =>
       'Invio non riuscito. Controlla la connessione e riprova';
+
+  @override
+  String get analytics => 'Analisi';
+
+  @override
+  String get analyticsDescription =>
+      'Le statistiche d\'uso anonime aiutano a capire cosa migliorare. Niente di ciò che scrivi lascia il tuo dispositivo.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Questa build non invia nulla: l\'analisi funziona solo nelle build di App Store e Google Play.';
+
+  @override
+  String get analyticsSent => 'Cosa viene inviato';
+
+  @override
+  String get analyticsSentItems =>
+      'Quali impostazioni scegli, quali schermate apri, la versione dell\'app, la piattaforma e la lingua, gli acquisti di Pro e mance, e i report di crash senza i loro messaggi.';
+
+  @override
+  String get analyticsNeverSent => 'Mai inviato';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Le tue note, il loro testo, emozioni e commenti, foto, video e audio, quanti ne hai, il tuo nome, la tua posizione e il tuo indirizzo IP.';
+
+  @override
+  String get analyticsResetId => 'Reimposta ID anonimo';
+
+  @override
+  String get analyticsResetIdDone =>
+      'D\'ora in poi viene usato un nuovo ID anonimo';
 }

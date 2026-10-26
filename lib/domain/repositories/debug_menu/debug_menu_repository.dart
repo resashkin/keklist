@@ -26,4 +26,5 @@ enum DebugMenuType {
   simulatePro,
   useProductionRevenueCat,
   enableBlocLogs,
+  forceAiChat,
 }

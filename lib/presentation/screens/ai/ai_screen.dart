@@ -1,3 +1,4 @@
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
 import 'package:keklist/domain/services/ai/ai_backend.dart';
@@ -51,7 +52,9 @@ final class _AiScreenState extends State<AiScreen> {
         state.selectedTabs[state.selectedTabIndex].type == TabType.ai;
     if (isVisible == _isVisible) return;
     _isVisible = isVisible;
-    if (isVisible) _promptForModelOnce(context.read<AiBackend>());
+    if (!isVisible) return;
+    Analytics.screenViewed('ai');
+    _promptForModelOnce(context.read<AiBackend>());
   }
 
   /// The first visit without a model opens the catalog right away.

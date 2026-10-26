@@ -2462,6 +2462,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t send. Check the internet and try again'**
   String get feedbackFailed;
+
+  /// Settings row and screen title for anonymous usage analytics
+  ///
+  /// In en, this message translates to:
+  /// **'Analytics'**
+  String get analytics;
+
+  /// Explains what analytics is for on the analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Anonymous usage statistics help decide what to improve. Nothing you write ever leaves your device.'**
+  String get analyticsDescription;
+
+  /// Shown on the analytics screen in builds that never send analytics (debug, web)
+  ///
+  /// In en, this message translates to:
+  /// **'This build sends nothing: analytics runs only in App Store and Google Play builds.'**
+  String get analyticsStoreBuildsOnly;
+
+  /// Heading of the list of data analytics sends
+  ///
+  /// In en, this message translates to:
+  /// **'What is sent'**
+  String get analyticsSent;
+
+  /// List of data analytics sends
+  ///
+  /// In en, this message translates to:
+  /// **'Which settings and tweaks you choose, which screens you open, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.'**
+  String get analyticsSentItems;
+
+  /// Heading of the list of data analytics never sends
+  ///
+  /// In en, this message translates to:
+  /// **'Never sent'**
+  String get analyticsNeverSent;
+
+  /// List of data analytics never sends
+  ///
+  /// In en, this message translates to:
+  /// **'Your minds, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.'**
+  String get analyticsNeverSentItems;
+
+  /// Button that replaces the anonymous analytics id
+  ///
+  /// In en, this message translates to:
+  /// **'Reset anonymous ID'**
+  String get analyticsResetId;
+
+  /// Snackbar after the anonymous analytics id is reset
+  ///
+  /// In en, this message translates to:
+  /// **'A new anonymous ID is used from now on'**
+  String get analyticsResetIdDone;
 }
 
 class _AppLocalizationsDelegate

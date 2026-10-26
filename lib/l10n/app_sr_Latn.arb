@@ -602,5 +602,14 @@
     "feedbackPrivacy": "Šalje se samo ovaj tekst, verzija aplikacije i platforma.",
     "feedbackSend": "Pošalji",
     "feedbackSent": "Hvala! Poruka je stigla programeru",
-    "feedbackFailed": "Slanje nije uspelo. Proveri internet i pokušaj ponovo"
+    "feedbackFailed": "Slanje nije uspelo. Proveri internet i pokušaj ponovo",
+    "analytics": "Analitika",
+    "analyticsDescription": "Anonimna statistika korišćenja pomaže da se odluči šta poboljšati. Ništa što pišeš ne napušta uređaj.",
+    "analyticsStoreBuildsOnly": "Ova verzija ništa ne šalje: analitika radi samo u verzijama iz App Store i Google Play.",
+    "analyticsSent": "Šta se šalje",
+    "analyticsSentItems": "Koja podešavanja biraš, koje ekrane otvaraš, verzija aplikacije, platforma i jezik, kupovine Pro i napojnica, i izveštaji o padovima bez njihovih poruka.",
+    "analyticsNeverSent": "Nikad se ne šalje",
+    "analyticsNeverSentItems": "Tvoji zapisi, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.",
+    "analyticsResetId": "Resetuj anonimni ID",
+    "analyticsResetIdDone": "Od sada se koristi novi anonimni ID"
 }

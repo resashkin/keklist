@@ -1222,4 +1222,35 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get feedbackFailed => '送信できませんでした。接続を確認してもう一度お試しください';
+
+  @override
+  String get analytics => '分析';
+
+  @override
+  String get analyticsDescription =>
+      '匿名の利用統計は改善点を決めるのに役立ちます。あなたが書いた内容は端末から出ません。';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'このビルドは何も送信しません。分析は App Store と Google Play のビルドでのみ動作します。';
+
+  @override
+  String get analyticsSent => '送信されるもの';
+
+  @override
+  String get analyticsSentItems =>
+      '選んだ設定、開いた画面、アプリのバージョン・プラットフォーム・言語、Pro とチップの購入、メッセージを除いたクラッシュレポート。';
+
+  @override
+  String get analyticsNeverSent => '送信されないもの';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'あなたの記録とそのテキスト・感情・コメント、写真・動画・音声、その数、名前、位置情報、IP アドレス。';
+
+  @override
+  String get analyticsResetId => '匿名 ID をリセット';
+
+  @override
+  String get analyticsResetIdDone => 'これから新しい匿名 ID が使われます';
 }

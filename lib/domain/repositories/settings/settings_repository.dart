@@ -203,6 +203,9 @@ final class KeklistSettings {
   /// Feed ids (`DayFeedItem.id`) of photos and videos hidden from keklist but kept in the gallery.
   final Set<String> hiddenMediaIds;
 
+  /// Anonymous usage analytics, see `documentation/ANALYTICS_IMPLEMENTATION.md`; on until the user turns it off.
+  final bool isAnalyticsEnabled;
+
   KeklistSettings({
     required this.previousAppVersion,
     required this.themePreference,
@@ -230,6 +233,7 @@ final class KeklistSettings {
     this.tileEmojiMotion = TileEmojiMotion.drift,
     this.gridResizeAnimation = GridResizeAnimation.fly,
     this.hiddenMediaIds = const {},
+    this.isAnalyticsEnabled = true,
   });
 
   KeklistSettings copyWith({
@@ -259,6 +263,7 @@ final class KeklistSettings {
     TileEmojiMotion? tileEmojiMotion,
     GridResizeAnimation? gridResizeAnimation,
     Set<String>? hiddenMediaIds,
+    bool? isAnalyticsEnabled,
   }) {
     return KeklistSettings(
       previousAppVersion: previousAppVersion ?? this.previousAppVersion,
@@ -287,6 +292,7 @@ final class KeklistSettings {
       tileEmojiMotion: tileEmojiMotion ?? this.tileEmojiMotion,
       gridResizeAnimation: gridResizeAnimation ?? this.gridResizeAnimation,
       hiddenMediaIds: hiddenMediaIds ?? this.hiddenMediaIds,
+      isAnalyticsEnabled: isAnalyticsEnabled ?? this.isAnalyticsEnabled,
     );
   }
 
@@ -331,6 +337,7 @@ final class KeklistSettings {
     ..gridResizeAnimationIndex = gridResizeAnimation.index
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..hiddenMediaIds = hiddenMediaIds.toList()
+    ..isAnalyticsEnabled = isAnalyticsEnabled
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 
   factory KeklistSettings.initial() => KeklistSettings(

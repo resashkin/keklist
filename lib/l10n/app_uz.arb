@@ -602,5 +602,14 @@
     "feedbackPrivacy": "Faqat shu matn, ilova versiyasi va platforma yuboriladi.",
     "feedbackSend": "Yuborish",
     "feedbackSent": "Rahmat! Dasturchi xabarni oldi",
-    "feedbackFailed": "Yuborib bo'lmadi. Internetni tekshirib, qayta urinib ko'ring"
+    "feedbackFailed": "Yuborib bo'lmadi. Internetni tekshirib, qayta urinib ko'ring",
+    "analytics": "Analitika",
+    "analyticsDescription": "Anonim foydalanish statistikasi nimani yaxshilash kerakligini aniqlashga yordam beradi. Siz yozgan hech narsa qurilmadan chiqmaydi.",
+    "analyticsStoreBuildsOnly": "Bu versiya hech narsa yubormaydi: analitika faqat App Store va Google Play versiyalarida ishlaydi.",
+    "analyticsSent": "Nima yuboriladi",
+    "analyticsSentItems": "Qaysi sozlamalarni tanlaysiz, qaysi ekranlarni ochasiz, ilova versiyasi, platforma va til, Pro va choychaqa xaridlari hamda xabarlarsiz nosozlik hisobotlari.",
+    "analyticsNeverSent": "Hech qachon yuborilmaydi",
+    "analyticsNeverSentItems": "Yozuvlaringiz, ularning matni, hissiyotlari va izohlari, rasm, video va audio, ularning soni, ismingiz, joylashuvingiz va IP manzilingiz.",
+    "analyticsResetId": "Anonim ID ni tiklash",
+    "analyticsResetIdDone": "Endi yangi anonim ID ishlatiladi"
 }

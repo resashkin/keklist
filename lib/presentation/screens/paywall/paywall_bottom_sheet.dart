@@ -1,3 +1,4 @@
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
@@ -45,6 +46,7 @@ final class PaywallBottomSheet extends StatefulWidget {
   const PaywallBottomSheet({super.key, this.tipsOnly = false});
 
   static Future<bool> show(BuildContext context, {bool tipsOnly = false}) async {
+    Analytics.paywallShown(tipsOnly: tipsOnly);
     final result = await KekSheet.show<bool>(
       context: context,
       builder: (_) => PaywallBottomSheet(tipsOnly: tipsOnly),
@@ -90,6 +92,7 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
     setState(() => _buyingTipId = product.identifier);
     try {
       await Purchases.purchase(PurchaseParams.storeProduct(product));
+      Analytics.tipPurchased(product.identifier);
       if (mounted) _showThanks();
     } on PurchasesError catch (e) {
       if (e.code != PurchasesErrorCode.purchaseCancelledError && mounted) _showError(e.message);
@@ -154,6 +157,7 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
     setState(() => _purchasing = true);
     try {
       await Purchases.purchase(PurchaseParams.package(pkg));
+      Analytics.proPurchased(pkg.storeProduct.identifier);
       if (mounted) Navigator.of(context).pop(true);
     } on PurchasesError catch (e) {
       if (e.code != PurchasesErrorCode.purchaseCancelledError && mounted) {

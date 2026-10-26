@@ -1216,4 +1216,34 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get feedbackFailed => '发送失败。请检查网络后重试';
+
+  @override
+  String get analytics => '分析';
+
+  @override
+  String get analyticsDescription => '匿名使用统计帮助决定改进方向。你写的任何内容都不会离开设备。';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      '此版本不发送任何数据:分析仅在 App Store 和 Google Play 版本中运行。';
+
+  @override
+  String get analyticsSent => '发送的内容';
+
+  @override
+  String get analyticsSentItems =>
+      '你选择的设置、打开的页面、应用版本、平台和语言、Pro 与打赏购买,以及不含消息内容的崩溃报告。';
+
+  @override
+  String get analyticsNeverSent => '绝不发送';
+
+  @override
+  String get analyticsNeverSentItems =>
+      '你的记录及其文字、情绪和评论,照片、视频和音频,它们的数量,你的名字、位置和 IP 地址。';
+
+  @override
+  String get analyticsResetId => '重置匿名 ID';
+
+  @override
+  String get analyticsResetIdDone => '从现在起使用新的匿名 ID';
 }

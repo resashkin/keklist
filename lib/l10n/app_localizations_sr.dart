@@ -1264,6 +1264,37 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get feedbackFailed =>
       'Слање није успело. Провери интернет и покушај поново';
+
+  @override
+  String get analytics => 'Аналитика';
+
+  @override
+  String get analyticsDescription =>
+      'Анонимна статистика коришћења помаже да се одлучи шта побољшати. Ништа што пишеш не напушта уређај.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Ова верзија ништа не шаље: аналитика ради само у верзијама из App Store и Google Play.';
+
+  @override
+  String get analyticsSent => 'Шта се шаље';
+
+  @override
+  String get analyticsSentItems =>
+      'Која подешавања бираш, које екране отвараш, верзија апликације, платформа и језик, куповине Pro и напојница, и извештаји о падовима без њихових порука.';
+
+  @override
+  String get analyticsNeverSent => 'Никад се не шаље';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Твоји записи, њихов текст, емоције и коментари, фотографије, видео и аудио, колико их имаш, твоје име, локација и IP адреса.';
+
+  @override
+  String get analyticsResetId => 'Ресетуј анонимни ID';
+
+  @override
+  String get analyticsResetIdDone => 'Од сада се користи нови анонимни ID';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2525,4 +2556,35 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get feedbackFailed =>
       'Slanje nije uspelo. Proveri internet i pokušaj ponovo';
+
+  @override
+  String get analytics => 'Analitika';
+
+  @override
+  String get analyticsDescription =>
+      'Anonimna statistika korišćenja pomaže da se odluči šta poboljšati. Ništa što pišeš ne napušta uređaj.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Ova verzija ništa ne šalje: analitika radi samo u verzijama iz App Store i Google Play.';
+
+  @override
+  String get analyticsSent => 'Šta se šalje';
+
+  @override
+  String get analyticsSentItems =>
+      'Koja podešavanja biraš, koje ekrane otvaraš, verzija aplikacije, platforma i jezik, kupovine Pro i napojnica, i izveštaji o padovima bez njihovih poruka.';
+
+  @override
+  String get analyticsNeverSent => 'Nikad se ne šalje';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Tvoji zapisi, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.';
+
+  @override
+  String get analyticsResetId => 'Resetuj anonimni ID';
+
+  @override
+  String get analyticsResetIdDone => 'Od sada se koristi novi anonimni ID';
 }

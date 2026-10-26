@@ -61,6 +61,8 @@ void main() {
       SettingsItemIds.importData,
       SettingsItemIds.pro,
       SettingsItemIds.proStatus,
+      SettingsItemIds.leaveFeedback,
+      SettingsItemIds.analytics,
       SettingsItemIds.language,
       SettingsItemIds.appearance,
       SettingsItemIds.tabsSettings,

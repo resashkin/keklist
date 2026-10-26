@@ -151,6 +151,7 @@ final class _DebugMenuScreenState extends KekWidgetState<DebugMenuScreen> {
         DebugMenuType.simulatePro => 'Simulate Pro Subscription',
         DebugMenuType.useProductionRevenueCat => 'Use Production RevenueCat',
         DebugMenuType.enableBlocLogs => 'Enable BLoC Logs',
+        DebugMenuType.forceAiChat => 'Force AI Chat',
       };
 
   String _getDebugMenuItemDescription(DebugMenuType type) => switch (type) {
@@ -162,5 +163,6 @@ final class _DebugMenuScreenState extends KekWidgetState<DebugMenuScreen> {
           'Use production RevenueCat API keys instead of test keys. Restart required to take effect.',
         DebugMenuType.enableBlocLogs =>
           'Master switch for BLoC console logs (events, transitions, errors, lifecycle). Configure verbosity and per-BLoC silencing in BLoC Log Settings.',
+        DebugMenuType.forceAiChat => 'Shows the Chat tab even while the ai-chat flag in PostHog is off.',
       };
 }
