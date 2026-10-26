@@ -1210,4 +1210,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => '没有隐藏的内容';
+
+  @override
+  String get leaveFeedback => '留下反馈';
+
+  @override
+  String get feedbackHint => '你喜欢什么？哪里坏了？缺少什么？';
+
+  @override
+  String get feedbackPrivacy => '只会发送这段文字、应用版本和平台。';
+
+  @override
+  String get feedbackSend => '发送';
+
+  @override
+  String get feedbackSent => '谢谢！开发者已收到你的消息';
+
+  @override
+  String get feedbackFailed => '发送失败。请检查网络后重试';
 }

@@ -33,6 +33,8 @@ import 'package:keklist/presentation/screens/settings/settings_layout.dart';
 import 'package:keklist/presentation/screens/settings/widgets/web_version_rows.dart';
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
+import 'package:keklist/presentation/screens/feedback/feedback_sheet.dart';
 import 'package:keklist/presentation/screens/hidden_media/hidden_media_screen.dart';
 import 'package:keklist/presentation/screens/settings/widgets/gallery_index_tile.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
@@ -242,6 +244,13 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             title: 'keklist PRO',
             leading: const Icon(Icons.handshake, color: Colors.yellowAccent),
             onTap: () => _openPaywall(),
+          )
+        else if (!kIsPhoneWeb)
+          _navigationRow(
+            id: SettingsItemIds.pro,
+            title: 'Support keklist',
+            leading: const Icon(Icons.favorite, color: Colors.amber),
+            onTap: () => PaywallBottomSheet.show(context, tipsOnly: true),
           ),
         _navigationRow(
           id: SettingsItemIds.releaseNotes,
@@ -261,6 +270,13 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
           leading: const Icon(Icons.handyman, color: Colors.green),
           onTap: () => _openSuggestFeature(),
         ),
+        if (TelegramFeedback.isConfigured)
+          _navigationRow(
+            id: SettingsItemIds.leaveFeedback,
+            title: context.l10n.leaveFeedback,
+            leading: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.lightBlueAccent),
+            onTap: () => FeedbackSheet.show(context),
+          ),
         _navigationRow(
           id: SettingsItemIds.emailUs,
           title: context.l10n.emailUs,

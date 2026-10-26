@@ -33,11 +33,15 @@ final class EmotionMarkingSheet extends StatefulWidget {
   /// chain, then its chip is scrolled into view and briefly ringed.
   final String? focusEmotionId;
 
+  /// Whether a wide Save button closes the sheet, for flows that continue once it is gone.
+  final bool showsSaveButton;
+
   const EmotionMarkingSheet({
     super.key,
     required this.initialSelectedIds,
     required this.onSelectionChanged,
     this.focusEmotionId,
+    this.showsSaveButton = false,
   });
 
   /// Fraction of the screen the sheet occupies. Fixed — the sheet is not resizable.
@@ -49,6 +53,7 @@ final class EmotionMarkingSheet extends StatefulWidget {
     required Set<String> initialSelectedIds,
     required ValueChanged<Set<String>> onSelectionChanged,
     String? focusEmotionId,
+    bool showsSaveButton = false,
   }) {
     return KekSheet.show<void>(
       context: context,
@@ -56,6 +61,7 @@ final class EmotionMarkingSheet extends StatefulWidget {
         initialSelectedIds: initialSelectedIds,
         onSelectionChanged: onSelectionChanged,
         focusEmotionId: focusEmotionId,
+        showsSaveButton: showsSaveButton,
       ),
     );
   }
@@ -438,6 +444,19 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
               ),
             ),
             _buildHint(context),
+            if (widget.showsSaveButton)
+              SafeArea(
+                top: false,
+                minimum: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 12.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 50.0,
+                  child: FilledButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(context.l10n.save, style: const TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600)),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

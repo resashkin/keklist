@@ -1263,4 +1263,24 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => 'No hay nada oculto';
+
+  @override
+  String get leaveFeedback => 'Dejar un comentario';
+
+  @override
+  String get feedbackHint => '¿Qué te gusta, qué falla, qué falta?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Solo se envía este texto, la versión de la app y la plataforma.';
+
+  @override
+  String get feedbackSend => 'Enviar';
+
+  @override
+  String get feedbackSent => '¡Gracias! El desarrollador recibió tu mensaje';
+
+  @override
+  String get feedbackFailed =>
+      'No se pudo enviar. Revisa la conexión e inténtalo de nuevo';
 }

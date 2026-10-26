@@ -1258,4 +1258,24 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => 'Эч нерсе жашырылган жок';
+
+  @override
+  String get leaveFeedback => 'Пикир калтыруу';
+
+  @override
+  String get feedbackHint => 'Эмнеси жагат, эмне бузук, эмне жетишпейт?';
+
+  @override
+  String get feedbackPrivacy =>
+      'Ушул текст, колдонмонун версиясы жана платформа гана жөнөтүлөт.';
+
+  @override
+  String get feedbackSend => 'Жөнөтүү';
+
+  @override
+  String get feedbackSent => 'Рахмат! Иштеп чыгуучу билдирүүнү алды';
+
+  @override
+  String get feedbackFailed =>
+      'Жөнөтүү мүмкүн болбоду. Интернетти текшерип, кайра аракет кылыңыз';
 }

@@ -2450,6 +2450,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing is hidden'**
   String get hiddenMediaEmpty;
+
+  /// Settings row and sheet title for sending feedback to the developer
+  ///
+  /// In en, this message translates to:
+  /// **'Leave feedback'**
+  String get leaveFeedback;
+
+  /// Placeholder of the feedback field
+  ///
+  /// In en, this message translates to:
+  /// **'What do you like, what\'s broken, what\'s missing?'**
+  String get feedbackHint;
+
+  /// Under the feedback field: what is sent
+  ///
+  /// In en, this message translates to:
+  /// **'Only this text, the app version and the platform are sent.'**
+  String get feedbackPrivacy;
+
+  /// Send feedback button
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get feedbackSend;
+
+  /// Snackbar after feedback was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks! The developer got your message'**
+  String get feedbackSent;
+
+  /// Snackbar when feedback could not be sent
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send. Check the internet and try again'**
+  String get feedbackFailed;
 }
 
 class _AppLocalizationsDelegate

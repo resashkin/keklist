@@ -1216,4 +1216,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get hiddenMediaEmpty => '非表示のものはありません';
+
+  @override
+  String get leaveFeedback => 'フィードバックを送る';
+
+  @override
+  String get feedbackHint => '気に入った点、不具合、足りないものは？';
+
+  @override
+  String get feedbackPrivacy => '送信されるのはこのテキスト、アプリのバージョン、プラットフォームだけです。';
+
+  @override
+  String get feedbackSend => '送信';
+
+  @override
+  String get feedbackSent => 'ありがとう！開発者に届きました';
+
+  @override
+  String get feedbackFailed => '送信できませんでした。接続を確認してもう一度お試しください';
 }

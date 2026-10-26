@@ -387,5 +387,11 @@
     "undo": "Rückgängig",
     "hiddenMedia": "Ausgeblendete Fotos",
     "hiddenMediaHint": "Tippe auf ein Foto, um es wieder in keklist zu zeigen",
-    "hiddenMediaEmpty": "Nichts ausgeblendet"
+    "hiddenMediaEmpty": "Nichts ausgeblendet",
+    "leaveFeedback": "Feedback geben",
+    "feedbackHint": "Was gefällt dir, was ist kaputt, was fehlt?",
+    "feedbackPrivacy": "Gesendet werden nur dieser Text, die App-Version und die Plattform.",
+    "feedbackSend": "Senden",
+    "feedbackSent": "Danke! Die Nachricht ist angekommen",
+    "feedbackFailed": "Senden fehlgeschlagen. Prüfe das Internet und versuche es erneut"
 }
