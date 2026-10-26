@@ -365,5 +365,15 @@
     "gridResizeAnimation": "Анимација штипања",
     "gridResizeFly": "Лет",
     "gridResizeZoom": "Зум",
-    "gridResizeCrossfade": "Претапање"
+    "gridResizeCrossfade": "Претапање",
+    "feedSortOrder": "Редослед",
+    "feedSortTime": "Време",
+    "feedSortMindsFirst": "Прво белешке",
+    "feedSortMediaFirst": "Прво медији",
+    "feedGrouping": "Групе",
+    "feedGroupingNone": "Без",
+    "feedGroupingType": "Врста",
+    "feedGroupingTimeOfDay": "Доба дана",
+    "feedSectionMinds": "Белешке",
+    "feedSectionGallery": "Галерија"
 }

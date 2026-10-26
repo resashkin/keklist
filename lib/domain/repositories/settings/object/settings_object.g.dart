@@ -88,13 +88,25 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
           : (fields[42] as num).toInt()
       ..gridResizeAnimationIndex = fields[43] == null
           ? 0
-          : (fields[43] as num).toInt();
+          : (fields[43] as num).toInt()
+      ..dayFeedSortOrderIndex = fields[44] == null
+          ? 0
+          : (fields[44] as num).toInt()
+      ..dayFeedGroupingIndex = fields[45] == null
+          ? 0
+          : (fields[45] as num).toInt()
+      ..calendarSortOrderIndex = fields[46] == null
+          ? 0
+          : (fields[46] as num).toInt()
+      ..calendarGroupingIndex = fields[47] == null
+          ? 0
+          : (fields[47] as num).toInt();
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(36)
+      ..writeByte(40)
       ..writeByte(1)
       ..write(obj.previousAppVersion)
       ..writeByte(3)
@@ -166,7 +178,15 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(42)
       ..write(obj.tileEmojiMotionIndex)
       ..writeByte(43)
-      ..write(obj.gridResizeAnimationIndex);
+      ..write(obj.gridResizeAnimationIndex)
+      ..writeByte(44)
+      ..write(obj.dayFeedSortOrderIndex)
+      ..writeByte(45)
+      ..write(obj.dayFeedGroupingIndex)
+      ..writeByte(46)
+      ..write(obj.calendarSortOrderIndex)
+      ..writeByte(47)
+      ..write(obj.calendarGroupingIndex);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
+import 'package:keklist/presentation/core/widgets/glass_segmented_switcher.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Title above a full-width 2–7 segmented picker; six segments do not fit beside a title.
@@ -18,14 +19,11 @@ final class ColumnCountRow extends StatelessWidget {
         spacing: 8.0,
         children: [
           Text(title, style: Theme.of(context).textTheme.bodyLarge),
-          SegmentedButton<int>(
-            showSelectedIcon: false,
-            segments: [
-              for (final int count in DayFeedSettings.columnCountOptions)
-                ButtonSegment<int>(value: count, label: Text('$count')),
-            ],
-            selected: {selected.clamp(DayFeedSettings.minColumnCount, DayFeedSettings.maxColumnCount)},
-            onSelectionChanged: (selection) => onChanged(selection.first),
+          GlassSegmentedSwitcher<int>(
+            values: DayFeedSettings.columnCountOptions,
+            selected: selected.clamp(DayFeedSettings.minColumnCount, DayFeedSettings.maxColumnCount),
+            labelOf: (count) => '$count',
+            onChanged: onChanged,
           ),
         ],
       ),

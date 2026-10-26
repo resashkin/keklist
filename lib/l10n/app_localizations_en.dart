@@ -1187,4 +1187,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => 'Fade';
+
+  @override
+  String get feedSortOrder => 'Order';
+
+  @override
+  String get feedSortTime => 'Time';
+
+  @override
+  String get feedSortMindsFirst => 'Notes first';
+
+  @override
+  String get feedSortMediaFirst => 'Media first';
+
+  @override
+  String get feedGrouping => 'Groups';
+
+  @override
+  String get feedGroupingNone => 'None';
+
+  @override
+  String get feedGroupingType => 'Type';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Time of day';
+
+  @override
+  String get feedSectionMinds => 'Notes';
+
+  @override
+  String get feedSectionGallery => 'Gallery';
 }

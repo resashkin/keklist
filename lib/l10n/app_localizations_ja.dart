@@ -1150,4 +1150,34 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => 'フェード';
+
+  @override
+  String get feedSortOrder => '並び順';
+
+  @override
+  String get feedSortTime => '時間順';
+
+  @override
+  String get feedSortMindsFirst => 'メモが先';
+
+  @override
+  String get feedSortMediaFirst => '写真が先';
+
+  @override
+  String get feedGrouping => 'グループ';
+
+  @override
+  String get feedGroupingNone => 'なし';
+
+  @override
+  String get feedGroupingType => '種類';
+
+  @override
+  String get feedGroupingTimeOfDay => '時間帯';
+
+  @override
+  String get feedSectionMinds => 'メモ';
+
+  @override
+  String get feedSectionGallery => 'ギャラリー';
 }

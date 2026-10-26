@@ -10,9 +10,8 @@ import 'package:material_ui/material_ui.dart';
 List<SettingsRowModel> webVersionRows(BuildContext context, KeklistWebServer server) {
   final WebAccess access = server.access;
   final ThemeData theme = Theme.of(context);
-  final TextStyle? note = theme.textTheme.bodySmall?.copyWith(color: theme.hintColor);
   final Widget status = switch (server.state) {
-    WebServerRunning(:final addresses, :final nameProblem) when addresses.isNotEmpty => Column(
+    WebServerRunning(:final addresses) when addresses.isNotEmpty => Column(
       children: [
         for (final String address in addresses)
           ListTile(
@@ -21,11 +20,6 @@ List<SettingsRowModel> webVersionRows(BuildContext context, KeklistWebServer ser
             subtitle: address == addresses.first ? Text(context.l10n.webVersionAddressHint) : null,
             trailing: const Icon(Icons.copy, size: 18.0),
             onTap: () => _copy(context, address),
-          ),
-        if (nameProblem != null)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 12.0),
-            child: Text(nameProblem, style: note),
           ),
       ],
     ),

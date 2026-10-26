@@ -6,6 +6,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_empty_state.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_section_header.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tile_menu.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_tiles.dart';
 
@@ -17,8 +18,9 @@ sealed class _DayFeedCell {
 }
 
 final class _ItemCell extends _DayFeedCell {
+  final DayFeedItem item;
   final int itemIndex;
-  const _ItemCell(this.itemIndex);
+  const _ItemCell(this.item, this.itemIndex);
 }
 
 final class _SkeletonCell extends _DayFeedCell {
@@ -28,6 +30,8 @@ final class _SkeletonCell extends _DayFeedCell {
 final class DayFeedSliver extends StatelessWidget {
   final DayFeedState state;
   final DayFeedSettings settings;
+
+  /// Gets the index in [DayFeedLayout.arrangedItems] of the state's items.
   final ValueChanged<int> onOpenItem;
   final ValueChanged<DayFeedMediaIssue> onResolveMediaIssue;
 
@@ -41,7 +45,7 @@ final class DayFeedSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<_DayFeedCell> cells = _buildCells();
+    final List<(DayFeedSectionKind?, List<_DayFeedCell>)> sections = _buildSections();
     final DayFeedMediaIssue? mediaIssue = state.mediaIssue;
     final bool isEmpty = state.items.isEmpty && !state.isMediaLoading;
 
@@ -53,54 +57,67 @@ final class DayFeedSliver extends StatelessWidget {
             SliverToBoxAdapter(
               child: _MediaIssueBanner(issue: mediaIssue, onResolve: () => onResolveMediaIssue(mediaIssue)),
             ),
-          SliverToBoxAdapter(
-            child: ResizableTileGrid(
-              columnCount: settings.columnCount,
-              spacing: _kCellSpacing,
-              cells: [
-                for (final (int index, _DayFeedCell cell) in cells.indexed)
-                  (
-                    key: switch (cell) {
-                      _ItemCell(:final itemIndex) => ValueKey(state.items[itemIndex].id),
-                      _SkeletonCell() => ValueKey('skeleton-$index'),
-                    },
-                    span: _spanOf(cell),
-                    builder: (cellSize) => _buildCellContent(cell, cellSize),
+          for (final (DayFeedSectionKind? kind, List<_DayFeedCell> cells) in sections)
+            SliverToBoxAdapter(
+              key: ValueKey(kind),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (kind != null) DayFeedSectionHeader(kind: kind),
+                  ResizableTileGrid(
+                    columnCount: settings.columnCount,
+                    spacing: _kCellSpacing,
+                    cells: [
+                      for (final (int index, _DayFeedCell cell) in cells.indexed)
+                        (
+                          key: switch (cell) {
+                            _ItemCell(:final item) => ValueKey(item.id),
+                            _SkeletonCell() => ValueKey('skeleton-$index'),
+                          },
+                          span: _spanOf(cell),
+                          builder: (cellSize) => _buildCellContent(cell, cellSize),
+                        ),
+                    ],
                   ),
-              ],
+                ],
+              ),
             ),
-          ),
-          if (isEmpty)
-            const SliverToBoxAdapter(child: DayEmptyState()),
+          if (isEmpty) const SliverToBoxAdapter(child: DayEmptyState()),
         ],
       ),
     );
   }
 
-  List<_DayFeedCell> _buildCells() => [
-        for (int index = 0; index < state.items.length; index++) _ItemCell(index),
-        if (state.isMediaLoading)
-          for (int index = 0; index < settings.columnCount * 2; index++) const _SkeletonCell(),
-      ];
+  List<(DayFeedSectionKind?, List<_DayFeedCell>)> _buildSections() {
+    int itemIndex = 0;
+    final List<(DayFeedSectionKind?, List<_DayFeedCell>)> sections = [
+      for (final DayFeedSection section in DayFeedLayout.arrange(
+        state.items,
+        sortOrder: settings.sortOrder,
+        grouping: settings.grouping,
+      ))
+        (section.kind, [for (final DayFeedItem item in section.items) _ItemCell(item, itemIndex++)]),
+    ];
+    if (!state.isMediaLoading) return sections;
+    final List<_DayFeedCell> skeletons = [
+      for (int index = 0; index < settings.columnCount * 2; index++) const _SkeletonCell(),
+    ];
+    if (sections.isEmpty || settings.grouping != FeedGrouping.none) return [...sections, (null, skeletons)];
+    return [(sections.first.$1, [...sections.first.$2, ...skeletons])];
+  }
 
   int _spanOf(_DayFeedCell cell) => switch (cell) {
-        _ItemCell(:final itemIndex) when state.items[itemIndex] is DayFeedMind => settings.mindCellSpan,
+        _ItemCell(:final item) when item is DayFeedMind => settings.mindCellSpan,
         _ => 1,
       };
 
-
-
   Widget _buildCellContent(_DayFeedCell cell, double cellSize) => switch (cell) {
         _SkeletonCell() => const DayFeedSkeletonTile(),
-        _ItemCell(:final itemIndex) => DayFeedTileMenu(
-            item: state.items[itemIndex],
+        _ItemCell(:final item, :final itemIndex) => DayFeedTileMenu(
+            item: item,
             child: GestureDetector(
               onTap: () => onOpenItem(itemIndex),
-              child: DayFeedItemTile(
-                item: state.items[itemIndex],
-                isMindTextVisible: settings.isMindTextVisible,
-                size: cellSize,
-              ),
+              child: DayFeedItemTile(item: item, isMindTextVisible: settings.isMindTextVisible, size: cellSize),
             ),
           ),
       };

@@ -1194,4 +1194,34 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => 'Erish';
+
+  @override
+  String get feedSortOrder => 'Tartib';
+
+  @override
+  String get feedSortTime => 'Vaqt';
+
+  @override
+  String get feedSortMindsFirst => 'Avval yozuvlar';
+
+  @override
+  String get feedSortMediaFirst => 'Avval media';
+
+  @override
+  String get feedGrouping => 'Guruhlar';
+
+  @override
+  String get feedGroupingNone => 'Yo\'q';
+
+  @override
+  String get feedGroupingType => 'Turi';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Kun vaqti';
+
+  @override
+  String get feedSectionMinds => 'Yozuvlar';
+
+  @override
+  String get feedSectionGallery => 'Galereya';
 }

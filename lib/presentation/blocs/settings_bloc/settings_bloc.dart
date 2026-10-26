@@ -47,6 +47,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateStory>(_updateStory);
     on<SettingsUpdateMindEmotionsPrompt>(_updateMindEmotionsPrompt);
     on<SettingsUpdateTileMotion>(_updateTileMotion);
+    on<SettingsUpdateDayFeedArrangement>(_updateDayFeedArrangement);
 
     _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
   }
@@ -241,6 +242,13 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _updateCalendar(SettingsUpdateCalendar event, Emitter<SettingsState> emit) async {
     await _repository.updateSettings(_repository.value.copyWith(calendar: event.calendar));
+  }
+
+  FutureOr<void> _updateDayFeedArrangement(SettingsUpdateDayFeedArrangement event, Emitter<SettingsState> emit) async {
+    final KeklistSettings settings = _repository.value;
+    await _repository.updateSettings(
+      settings.copyWith(dayFeed: settings.dayFeed.copyWith(sortOrder: event.sortOrder, grouping: event.grouping)),
+    );
   }
 
   FutureOr<void> _updateTileMotion(SettingsUpdateTileMotion event, Emitter<SettingsState> emit) async {

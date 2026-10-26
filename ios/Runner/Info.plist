@@ -55,10 +55,6 @@
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>keklist opens in a browser on your computer in the same Wi-Fi.</string>
-	<key>NSBonjourServices</key>
-	<array>
-		<string>_http._tcp</string>
-	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

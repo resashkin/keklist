@@ -1505,5 +1505,45 @@
     "gridResizeCrossfade": "Fade",
     "@gridResizeCrossfade": {
         "description": "Pinch animation option: crossfade"
+    },
+    "feedSortOrder": "Order",
+    "@feedSortOrder": {
+        "description": "Tweak sheet: order of day tiles"
+    },
+    "feedSortTime": "Time",
+    "@feedSortTime": {
+        "description": "Order option: by time"
+    },
+    "feedSortMindsFirst": "Notes first",
+    "@feedSortMindsFirst": {
+        "description": "Order option: notes before photos"
+    },
+    "feedSortMediaFirst": "Media first",
+    "@feedSortMediaFirst": {
+        "description": "Order option: photos before notes"
+    },
+    "feedGrouping": "Groups",
+    "@feedGrouping": {
+        "description": "Tweak sheet: grouping of day tiles"
+    },
+    "feedGroupingNone": "None",
+    "@feedGroupingNone": {
+        "description": "Grouping option: none"
+    },
+    "feedGroupingType": "Type",
+    "@feedGroupingType": {
+        "description": "Grouping option: notes and gallery"
+    },
+    "feedGroupingTimeOfDay": "Time of day",
+    "@feedGroupingTimeOfDay": {
+        "description": "Grouping option: morning, afternoon, evening, night"
+    },
+    "feedSectionMinds": "Notes",
+    "@feedSectionMinds": {
+        "description": "Section header over the notes of a day"
+    },
+    "feedSectionGallery": "Gallery",
+    "@feedSectionGallery": {
+        "description": "Section header over the photos and videos of a day"
     }
 }

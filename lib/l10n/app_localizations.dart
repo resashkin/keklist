@@ -2318,6 +2318,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fade'**
   String get gridResizeCrossfade;
+
+  /// Tweak sheet: order of day tiles
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get feedSortOrder;
+
+  /// Order option: by time
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get feedSortTime;
+
+  /// Order option: notes before photos
+  ///
+  /// In en, this message translates to:
+  /// **'Notes first'**
+  String get feedSortMindsFirst;
+
+  /// Order option: photos before notes
+  ///
+  /// In en, this message translates to:
+  /// **'Media first'**
+  String get feedSortMediaFirst;
+
+  /// Tweak sheet: grouping of day tiles
+  ///
+  /// In en, this message translates to:
+  /// **'Groups'**
+  String get feedGrouping;
+
+  /// Grouping option: none
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get feedGroupingNone;
+
+  /// Grouping option: notes and gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get feedGroupingType;
+
+  /// Grouping option: morning, afternoon, evening, night
+  ///
+  /// In en, this message translates to:
+  /// **'Time of day'**
+  String get feedGroupingTimeOfDay;
+
+  /// Section header over the notes of a day
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get feedSectionMinds;
+
+  /// Section header over the photos and videos of a day
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get feedSectionGallery;
 }
 
 class _AppLocalizationsDelegate

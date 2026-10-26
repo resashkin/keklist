@@ -14,7 +14,6 @@ import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/web_server/ai_routes.dart';
 import 'package:keklist/domain/services/web_server/gallery_routes.dart';
 import 'package:keklist/domain/services/web_server/login_page.dart';
-import 'package:keklist/domain/services/web_server/name_announcer.dart';
 import 'package:keklist/domain/services/web_server/web_access.dart';
 import 'package:keklist/domain/services/web_server/serve_file.dart';
 import 'package:keklist/domain/services/web_server/web_bundle.dart';
@@ -38,24 +37,15 @@ final class WebServerStarting extends WebServerState {
 }
 
 final class WebServerRunning extends WebServerState {
-  const WebServerRunning(this.port, this.hosts, {this.name, this.nameProblem});
+  const WebServerRunning(this.port, this.hosts);
 
   final int port;
 
   /// This device's addresses in the local network, the Wi-Fi first.
   final List<String> hosts;
 
-  /// The name the network knows this device by, like "keklist.local".
-  final String? name;
-
-  /// Why there is no [name], when the user can do something about it.
-  final String? nameProblem;
-
-  /// Where to open the web version: by [name] first, then by address.
-  List<String> get addresses => [
-    if (name case final name?) 'http://$name:$port',
-    for (final host in hosts) 'http://$host:$port',
-  ];
+  /// Where to open the web version, the Wi-Fi address first.
+  List<String> get addresses => [for (final host in hosts) 'http://$host:$port'];
 }
 
 final class WebServerFailed extends WebServerState {
@@ -75,14 +65,12 @@ final class KeklistWebServer extends ChangeNotifier {
     required AppFileRepository fileRepository,
     GalleryRoutes? gallery,
     AiRoutes? ai,
-    NameAnnouncer? announcer,
   }) : _minds = mindRepository,
        _gallery = gallery,
        _ai = ai,
        _emotions = emotionRepository,
        _settings = settingsRepository,
-       _files = fileRepository,
-       _announcer = announcer;
+       _files = fileRepository;
 
   final WebAccess access;
   final MindRepository _minds;
@@ -91,12 +79,9 @@ final class KeklistWebServer extends ChangeNotifier {
   final AppFileRepository _files;
   final GalleryRoutes? _gallery;
   final AiRoutes? _ai;
-  final NameAnnouncer? _announcer;
 
   static const _cookie = 'keklist_session';
   static const _maxBody = 16 << 20;
-  static const _nameRetryDelay = Duration(seconds: 10);
-  static const _nameRetries = 3;
   static const _keepAlive = Duration(seconds: 20);
 
   WebServerState _state = const WebServerStarting();
@@ -104,8 +89,6 @@ final class KeklistWebServer extends ChangeNotifier {
   HttpServer? _server;
   int? _boundPort;
   AppLifecycleListener? _lifecycle;
-  Timer? _nameRetry;
-  var _nameAttempts = 0;
   var _disposed = false;
   final List<StreamSubscription<Object?>> _changes = [];
   final Set<HttpResponse> _listeners = {};
@@ -171,47 +154,23 @@ final class KeklistWebServer extends ChangeNotifier {
         if (identical(_server, server)) _apply(restart: true);
       },
     );
-    await _announce();
+    await _publishHosts();
   }
 
-  /// Finds where the server is reached now and tells the network its name.
-  Future<void> _announce() async {
+  /// Finds the addresses the server is reached by now.
+  Future<void> _publishHosts() async {
     final List<String> hosts = await lanHosts();
     final HttpServer? server = _server;
     if (server == null || _disposed) return;
-    final NameAnnouncer? announcer = _announcer;
-    String? name;
-    if (announcer != null) {
-      if (hosts.isEmpty) {
-        await announcer.withdraw();
-      } else {
-        name = await announcer.announce(address: InternetAddress(hosts.first), port: server.port);
-        _retryName(missing: name == null);
-      }
-      if (!identical(_server, server)) return;
-    }
-    _set(WebServerRunning(server.port, hosts, name: name, nameProblem: name == null ? announcer?.problem : null));
-  }
-
-  void _retryName({required bool missing}) {
-    _nameRetry?.cancel();
-    if (!missing) {
-      _nameAttempts = 0;
-      return;
-    }
-    if (++_nameAttempts > _nameRetries) return;
-    _nameRetry = Timer(_nameRetryDelay, () => _work = _work.then((_) => _refreshHosts()));
+    _set(WebServerRunning(server.port, hosts));
   }
 
   Future<void> _refreshHosts() async {
-    if (_state is WebServerRunning) await _announce();
+    if (_state is WebServerRunning) await _publishHosts();
   }
 
   Future<void> _end(WebServerState state) async {
     await _close();
-    _nameRetry?.cancel();
-    _nameAttempts = 0;
-    await _announcer?.withdraw();
     _set(state);
   }
 
@@ -248,8 +207,6 @@ final class KeklistWebServer extends ChangeNotifier {
       change.cancel();
     }
     _close();
-    _nameRetry?.cancel();
-    _announcer?.withdraw();
     super.dispose();
   }
 
@@ -311,12 +268,12 @@ final class KeklistWebServer extends ChangeNotifier {
     }
   }
 
-  /// Hosts the phone is reached by in the local network: addresses and ".local" names.
+  /// Hosts the phone is reached by in the local network: its addresses.
   static bool _knownHost(HttpRequest request) {
     final String? host = request.headers.host;
     if (host == null) return false;
     final String bare = host.startsWith('[') && host.endsWith(']') ? host.substring(1, host.length - 1) : host;
-    return InternetAddress.tryParse(bare) != null || bare == 'localhost' || bare.endsWith('.local');
+    return InternetAddress.tryParse(bare) != null || bare == 'localhost';
   }
 
   static String? _sessionToken(HttpRequest request) {

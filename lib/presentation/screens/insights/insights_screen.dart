@@ -181,14 +181,10 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
   /// Each top-level emotion gets a palette color; nested ones inherit their root's.
   void _openMinds(List<String> mindIds, {int initialIndex = 0}) {
     final Map<String, Mind> byId = {for (final Mind mind in _minds) mind.id: mind};
-    final Map<String, int> reflectionCounts = {};
-    for (final Mind mind in _minds) {
-      final String? rootId = mind.rootId;
-      if (rootId != null) reflectionCounts[rootId] = (reflectionCounts[rootId] ?? 0) + 1;
-    }
+    final Map<String, MindReflections> reflections = MindReflections.countAll(_minds);
     final List<DayFeedItem> items = [
       for (final Mind mind in mindIds.map((id) => byId[id]).whereType<Mind>())
-        DayFeedMind(mind: mind, reflectionCount: reflectionCounts[mind.id] ?? 0),
+        DayFeedMind(mind: mind, reflections: reflections[mind.id] ?? const MindReflections()),
     ];
     DayItemViewerScreen.show(
       context,

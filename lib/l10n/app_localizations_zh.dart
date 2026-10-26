@@ -1144,4 +1144,34 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => '淡入淡出';
+
+  @override
+  String get feedSortOrder => '顺序';
+
+  @override
+  String get feedSortTime => '按时间';
+
+  @override
+  String get feedSortMindsFirst => '笔记优先';
+
+  @override
+  String get feedSortMediaFirst => '媒体优先';
+
+  @override
+  String get feedGrouping => '分组';
+
+  @override
+  String get feedGroupingNone => '无';
+
+  @override
+  String get feedGroupingType => '类型';
+
+  @override
+  String get feedGroupingTimeOfDay => '时段';
+
+  @override
+  String get feedSectionMinds => '笔记';
+
+  @override
+  String get feedSectionGallery => '图库';
 }

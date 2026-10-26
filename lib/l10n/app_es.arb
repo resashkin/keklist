@@ -590,5 +590,15 @@
     "gridResizeAnimation": "Animación al pellizcar",
     "gridResizeFly": "Volar",
     "gridResizeZoom": "Zoom",
-    "gridResizeCrossfade": "Fundido"
+    "gridResizeCrossfade": "Fundido",
+    "feedSortOrder": "Orden",
+    "feedSortTime": "Hora",
+    "feedSortMindsFirst": "Notas primero",
+    "feedSortMediaFirst": "Fotos primero",
+    "feedGrouping": "Grupos",
+    "feedGroupingNone": "No",
+    "feedGroupingType": "Tipo",
+    "feedGroupingTimeOfDay": "Momento",
+    "feedSectionMinds": "Notas",
+    "feedSectionGallery": "Galería"
 }

@@ -4,8 +4,8 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// The tappable date of a calendar day, centered: the full date, counters of what the day holds and a chevron in a
-/// thin outline, bright for today and faint otherwise, plus a separate round ▶ that plays its stories.
+/// The tappable date of a calendar day, centered: the full date, counters of what the day holds and a chevron,
+/// plus a round ▶ that plays its stories; the day's frame is drawn around the whole day by the calendar.
 /// Empty days show the day screen's empty state.
 final class CalendarDayPill extends StatelessWidget {
   final DateTime date;
@@ -30,10 +30,6 @@ final class CalendarDayPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colors = theme.colorScheme;
-    final BorderSide outline = BorderSide(
-      color: colors.onSurface.withValues(alpha: isToday ? 0.85 : 0.14),
-      width: isToday ? 1.5 : 1.0,
-    );
     final Color foreground = colors.onSurface;
     final String title = toBeginningOfSentenceCase(
       DateFormat.MMMMEEEEd(Localizations.localeOf(context).toString()).format(date),
@@ -49,7 +45,7 @@ final class CalendarDayPill extends StatelessWidget {
             children: [
               Material(
                 color: Colors.transparent,
-                shape: StadiumBorder(side: outline),
+                shape: const StadiumBorder(),
                 clipBehavior: Clip.antiAlias,
                 child: InkWell(
                   onTap: onTap,
@@ -87,7 +83,7 @@ final class CalendarDayPill extends StatelessWidget {
               if (onPlay != null)
                 Material(
                   color: Colors.transparent,
-                  shape: CircleBorder(side: outline),
+                  shape: const CircleBorder(),
                   clipBehavior: Clip.antiAlias,
                   child: InkWell(
                     onTap: onPlay,
@@ -111,7 +107,7 @@ final class CalendarDayPill extends StatelessWidget {
   }
 }
 
-/// "✎ 6 · 📷 3 · ▶ 1": minds, photos and videos of the day; zero counts are hidden.
+/// "✎ 6 · 📷 3 · ▶ 1 · ☺ 7": minds, photos, videos and emotion marks of the day; zero counts are hidden.
 final class _DayCounters extends StatelessWidget {
   final List<DayFeedItem> items;
   final Color color;
@@ -131,11 +127,13 @@ final class _DayCounters extends StatelessWidget {
         )
         .length;
     final int photos = items.length - minds - videos;
+    final int emotions = items.whereType<DayFeedMind>().fold(0, (sum, item) => sum + item.mind.emotionIds.length);
     final TextStyle? style = Theme.of(context).textTheme.labelMedium?.copyWith(color: color);
     final List<(IconData, int)> counters = [
       (Icons.edit_note_rounded, minds),
       (Icons.photo_outlined, photos),
       (Icons.videocam_outlined, videos),
+      (Icons.sentiment_satisfied_outlined, emotions),
     ].where((counter) => counter.$2 > 0).toList();
     return Row(
       mainAxisSize: MainAxisSize.min,

@@ -241,6 +241,8 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
       minds: _minds,
       indexer: _indexer,
       includesMedia: _calendarSettings.isMediaVisible,
+      sortOrder: _calendarSettings.sortOrder,
+      grouping: _calendarSettings.grouping,
     );
     setState(() => _feed = feed);
   }
