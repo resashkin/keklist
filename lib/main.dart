@@ -60,10 +60,8 @@ import 'package:keklist/domain/services/ai/local_ai_backend.dart';
 import 'package:keklist/domain/services/phone_web/phone_ai_backend.dart';
 import 'package:keklist/domain/services/phone_web/phone_api.dart';
 import 'package:keklist/domain/services/web_server/ai_routes.dart';
-import 'package:keklist/domain/services/web_server/bonjour_announcer.dart';
 import 'package:keklist/domain/services/web_server/gallery_routes.dart';
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
-import 'package:keklist/domain/services/web_server/mdns_responder.dart';
 import 'package:keklist/domain/services/web_server/web_access.dart';
 
 
@@ -301,8 +299,6 @@ Future<void> _runMigrations(
 // App widget tree
 // ---------------------------------------------------------------------------
 
-/// The phone serves the web version to browsers in its Wi-Fi once a PIN is set. Android answers for keklist.local
-/// itself; an iPhone goes by its own Bonjour name.
 /// The phone runs models itself; the web version served by the phone asks it. The Telegram web build has no AI.
 Future<(AiBackend?, AiModelStore?)> _createAi(Injector injector, HiveAesCipher cipher) async {
   if (kIsPhoneWeb) return (PhoneAiBackend(api: injector.get<PhoneApi>()), null);
@@ -319,6 +315,7 @@ Future<(AiBackend?, AiModelStore?)> _createAi(Injector injector, HiveAesCipher c
   return (backend, models);
 }
 
+/// The phone serves the web version to browsers in its Wi-Fi, by its address, once a PIN is set.
 Future<KeklistWebServer> _startWebServer(Injector injector, AiBackend? ai) async {
   final KeklistWebServer server = KeklistWebServer(
     access: await WebAccess.load(),
@@ -328,11 +325,6 @@ Future<KeklistWebServer> _startWebServer(Injector injector, AiBackend? ai) async
     fileRepository: injector.get<AppFileRepository>(),
     gallery: GalleryRoutes(indexer: injector.get<GalleryIndexer>(), settings: injector.get<SettingsRepository>()),
     ai: ai == null ? null : AiRoutes(backend: ai),
-    announcer: switch (defaultTargetPlatform) {
-      TargetPlatform.android => MdnsResponder('keklist.local'),
-      TargetPlatform.iOS => BonjourAnnouncer(),
-      _ => null,
-    },
   );
   unawaited(server.start());
   return server;

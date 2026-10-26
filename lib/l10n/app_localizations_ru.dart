@@ -1194,4 +1194,34 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => 'Растворение';
+
+  @override
+  String get feedSortOrder => 'Порядок';
+
+  @override
+  String get feedSortTime => 'По времени';
+
+  @override
+  String get feedSortMindsFirst => 'Сначала записи';
+
+  @override
+  String get feedSortMediaFirst => 'Сначала медиа';
+
+  @override
+  String get feedGrouping => 'Группы';
+
+  @override
+  String get feedGroupingNone => 'Нет';
+
+  @override
+  String get feedGroupingType => 'По типу';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Время дня';
+
+  @override
+  String get feedSectionMinds => 'Записи';
+
+  @override
+  String get feedSectionGallery => 'Галерея';
 }

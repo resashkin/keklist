@@ -9,6 +9,7 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
+import 'package:keklist/presentation/core/widgets/feed_arrangement_tweaks.dart';
 import 'package:keklist/presentation/core/widgets/tile_motion_tweaks.dart';
 
 final class DayFeedSettingsBottomSheet extends StatelessWidget {
@@ -48,9 +49,10 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
     required bool isWeatherEnabled,
     required KeklistSettings? allSettings,
   }) {
+    void send(SettingsUpdateDayFeed event) => context.read<SettingsBloc>().add(event);
     void update(SettingsUpdateDayFeed event) {
       tweakChangeHaptic();
-      context.read<SettingsBloc>().add(event);
+      send(event);
     }
 
     return SingleChildScrollView(
@@ -61,18 +63,25 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
           ColumnCountRow(
             title: context.l10n.dayFeedColumns,
             selected: settings.columnCount,
-            onChanged: (count) => update(SettingsUpdateDayFeed(columnCount: count)),
+            onChanged: (count) => send(SettingsUpdateDayFeed(columnCount: count)),
           ),
-          _SegmentedRow<int>(
+          TweakChoice<int>(
             title: context.l10n.dayFeedMindTileSize,
             options: {1: context.l10n.dayFeedMindTileSquare, 2: context.l10n.dayFeedMindTileWide},
             selected: settings.mindCellSpan,
-            onChanged: (span) => update(SettingsUpdateDayFeed(mindCellSpan: span)),
+            onChanged: (span) => send(SettingsUpdateDayFeed(mindCellSpan: span)),
           ),
           SwitchListTile(
             title: Text(context.l10n.dayFeedShowMindText),
             value: settings.isMindTextVisible,
             onChanged: (value) => update(SettingsUpdateDayFeed(isMindTextVisible: value)),
+          ),
+          FeedArrangementTweaks(
+            sortOrder: settings.sortOrder,
+            grouping: settings.grouping,
+            onChanged: ({sortOrder, grouping}) => context.read<SettingsBloc>().add(
+              SettingsUpdateDayFeedArrangement(sortOrder: sortOrder, grouping: grouping),
+            ),
           ),
           TileMotionTweaks(settings: allSettings),
           const Divider(),
@@ -102,35 +111,6 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
               onTap: onMediaFolder,
             ),
           const SizedBox(height: 8.0),
-        ],
-      ),
-    );
-  }
-}
-
-final class _SegmentedRow<T> extends StatelessWidget {
-  final String title;
-  final Map<T, String> options;
-  final T selected;
-  final ValueChanged<T> onChanged;
-
-  const _SegmentedRow({required this.title, required this.options, required this.selected, required this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
-      child: Row(
-        children: [
-          Expanded(child: Text(title, style: Theme.of(context).textTheme.bodyLarge)),
-          SegmentedButton<T>(
-            showSelectedIcon: false,
-            segments: options.entries
-                .map((option) => ButtonSegment<T>(value: option.key, label: Text(option.value)))
-                .toList(),
-            selected: {selected},
-            onSelectionChanged: (selection) => onChanged(selection.first),
-          ),
         ],
       ),
     );

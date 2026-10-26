@@ -10,7 +10,6 @@ The phone app serves a copy of keklist built for the web, so the same interface 
 - `web_bundle.dart`: serves `assets/web/keklist_web.zip` straight from the zip, using the zip's deflate data as pre-gzipped bodies, with an ETag and `no-cache`.
 - `web_access.dart`: the PIN is stored salted (HMAC-SHA256) in SharedPreferences. Sessions are stored as token digests and last 30 days. After 5 wrong PINs the login locks for 5 minutes. The default port is 8643.
 - `login_page.dart`: the plain HTML PIN form. The session cookie `keklist_session` is httpOnly and SameSite=Strict.
-- `bonjour_announcer.dart` (iOS, `ios/Runner/BonjourPlugin.swift`, channel `keklist/bonjour`) and `mdns_responder.dart` (Android, `keklist.local`): make the phone reachable by name as well as by IP.
 
 Routes:
 
@@ -27,7 +26,7 @@ Routes:
 | anything else | the web bundle, falling back to `index.html` |
 
 Protections:
-- The Host header must be an IP, `localhost` or `*.local` (against DNS rebinding).
+- The Host header must be an IP or `localhost` (against DNS rebinding). The phone is reached by its IP only.
 - Writes must be `application/json` (against CSRF from plain forms).
 - `/files` rejects path traversal.
 
@@ -62,7 +61,7 @@ When a web edit or delete drops a mind's media, the server deletes those files, 
 
 ## How It Works
 1. The user sets a PIN in Settings, and the server starts and shows its addresses.
-2. The computer opens `http://<phone>.local:8643`, enters the PIN and gets the cookie.
+2. The computer opens `http://<phone IP>:8643`, enters the PIN and gets the cookie.
 3. The web app loads minds and emotions from `/api/...` and listens on `/api/events`.
 4. Changes on either side are written to the phone's Hive, which notifies every open browser.
 
@@ -76,6 +75,6 @@ When a web edit or delete drops a mind's media, the server deletes those files, 
 
 ## Edge Cases & Considerations
 - The server lives only while the app is in the foreground. There is no Android foreground service.
-- iOS asks for Local Network access the first time (`NSLocalNetworkUsageDescription`, `NSBonjourServices`).
+- iOS asks for Local Network access the first time (`NSLocalNetworkUsageDescription`).
 - Removing the PIN stops the server, and changing the PIN invalidates every session.
 - `archive` stays on 4.0.x: 4.5 breaks the export/import ZIP round-trip tests.

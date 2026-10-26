@@ -71,7 +71,7 @@ final class _MindCollectionBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 2.0, bottom: 8.0),
             child: DayFeedGrid(
-              items: items,
+              sections: feed.sectionsOf(dayIndex),
               columnCount: settings.columnCount,
               isMindTextVisible: settings.isMindTextVisible,
               onOpenItem: (itemIndex) => onOpenItem(dayIndex, itemIndex),
@@ -87,7 +87,7 @@ final class _MindCollectionBody extends StatelessWidget {
         children: [
           if (showsWeekTitles && startsWeek)
             CalendarWeekHeader(weekNumber: weekNumber, onPlay: hasWeekItems ? () => onPlay(weekDays) : null),
-          if (dayIndex == todayIndex) _TodayFrame(child: day) else day,
+          _DayFrame(isToday: dayIndex == todayIndex, child: day),
         ],
       ),
     );
@@ -102,24 +102,27 @@ final class _MindCollectionBody extends StatelessWidget {
   }
 }
 
-/// Sets today apart from the other days: an accent frame and a light tint around its pill and grid.
-final class _TodayFrame extends StatelessWidget {
+/// A rounded frame around a whole day, its pill and grid: faint for every day, accented and tinted for today.
+final class _DayFrame extends StatelessWidget {
+  final bool isToday;
   final Widget child;
 
-  const _TodayFrame({required this.child});
+  const _DayFrame({required this.isToday, required this.child});
 
   static const double _radius = 22.0;
 
   @override
   Widget build(BuildContext context) {
-    final Color accent = Theme.of(context).colorScheme.primary;
+    final ColorScheme colors = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4.0),
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
       decoration: BoxDecoration(
-        color: accent.withValues(alpha: 0.05),
+        color: isToday ? colors.primary.withValues(alpha: 0.05) : null,
         borderRadius: BorderRadius.circular(_radius),
-        border: Border.all(color: accent, width: 2.0),
+        border: isToday
+            ? Border.all(color: colors.primary, width: 2.0)
+            : Border.all(color: colors.onSurface.withValues(alpha: 0.14)),
       ),
       child: child,
     );

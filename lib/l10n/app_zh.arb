@@ -365,5 +365,15 @@
     "gridResizeAnimation": "捏合动画",
     "gridResizeFly": "飞移",
     "gridResizeZoom": "缩放",
-    "gridResizeCrossfade": "淡入淡出"
+    "gridResizeCrossfade": "淡入淡出",
+    "feedSortOrder": "顺序",
+    "feedSortTime": "按时间",
+    "feedSortMindsFirst": "笔记优先",
+    "feedSortMediaFirst": "媒体优先",
+    "feedGrouping": "分组",
+    "feedGroupingNone": "无",
+    "feedGroupingType": "类型",
+    "feedGroupingTimeOfDay": "时段",
+    "feedSectionMinds": "笔记",
+    "feedSectionGallery": "图库"
 }

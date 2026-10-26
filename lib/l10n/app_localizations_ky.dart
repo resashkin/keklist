@@ -1192,4 +1192,34 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => 'Эрүү';
+
+  @override
+  String get feedSortOrder => 'Тартиби';
+
+  @override
+  String get feedSortTime => 'Убакыт';
+
+  @override
+  String get feedSortMindsFirst => 'Адегенде жазуулар';
+
+  @override
+  String get feedSortMediaFirst => 'Адегенде медиа';
+
+  @override
+  String get feedGrouping => 'Топтор';
+
+  @override
+  String get feedGroupingNone => 'Жок';
+
+  @override
+  String get feedGroupingType => 'Түрү';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Күн убагы';
+
+  @override
+  String get feedSectionMinds => 'Жазуулар';
+
+  @override
+  String get feedSectionGallery => 'Галерея';
 }

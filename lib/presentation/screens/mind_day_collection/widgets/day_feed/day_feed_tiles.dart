@@ -14,6 +14,8 @@ const double _kMinTextSize = 7.0;
 const double _kMaxTextSize = 14.0;
 const double _kTextLineHeight = 1.2;
 const double _kTextPadding = 8.0;
+const double _kReflectionsBadgeHeight = 14.0;
+const double _kMinReflectionsTileSize = 48.0;
 
 /// The tile of any feed item, shared by the day screen and the calendar.
 final class DayFeedItemTile extends StatelessWidget {
@@ -53,6 +55,7 @@ final class DayFeedMindTile extends StatelessWidget {
     final Duration? mediaDuration = video?.duration ?? content.audioPieces.firstOrNull?.duration;
     final String text = item.mind.plainNote.trim();
     final bool showText = isTextVisible && text.isNotEmpty;
+    final bool showsReflections = item.reflections.total > 0 && size >= _kMinReflectionsTileSize;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(_kTileRadius),
@@ -63,7 +66,11 @@ final class DayFeedMindTile extends StatelessWidget {
           children: [
             if (mediaCircle != null || showText) MindEmotionTexture(mind: item.mind, emojiSize: size * 0.2),
             Padding(
-              padding: EdgeInsets.all(mediaCircle != null ? 4.0 : _kTextPadding),
+              padding: mediaCircle != null
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(_kTextPadding).copyWith(
+                      bottom: showsReflections ? _kTextPadding + _kReflectionsBadgeHeight : _kTextPadding,
+                    ),
               child: mediaCircle != null
                   ? Center(child: mediaCircle)
                   : showText
@@ -82,6 +89,19 @@ final class DayFeedMindTile extends StatelessWidget {
                       ),
                     ),
             ),
+            if (showsReflections)
+              Positioned(
+                left: 4,
+                bottom: 4,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: size - 8.0),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.bottomLeft,
+                    child: _ReflectionsBadge(reflections: item.reflections),
+                  ),
+                ),
+              ),
             if (mediaCircle != null && mediaDuration != null)
               Positioned(bottom: 4, right: 4, child: _VideoBadge(seconds: mediaDuration.inSeconds)),
             // Minds matter more than gallery media, so they are framed to stand out next to photos.
@@ -236,6 +256,42 @@ final class _VideoBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
       decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.7), borderRadius: BorderRadius.circular(4)),
       child: Text(formatted, style: const TextStyle(color: Colors.white, fontSize: 10)),
+    );
+  }
+}
+
+/// "💬 1 🎥 1 🎙 1": a mind's comments, round videos and audio notes, as icons with counts.
+final class _ReflectionsBadge extends StatelessWidget {
+  final MindReflections reflections;
+
+  const _ReflectionsBadge({required this.reflections});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<(IconData, int)> counters = [
+      (Icons.chat_bubble_outline_rounded, reflections.comments),
+      (Icons.videocam_outlined, reflections.videos),
+      (Icons.mic_none_rounded, reflections.audios),
+    ].where((counter) => counter.$2 > 0).toList();
+    return Container(
+      height: _kReflectionsBadgeHeight,
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(4)),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 5.0,
+        children: [
+          for (final (IconData icon, int count) in counters)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 2.0,
+              children: [
+                Icon(icon, size: 10.0, color: Colors.white),
+                Text('$count', style: const TextStyle(color: Colors.white, fontSize: 9.5, height: 1.0)),
+              ],
+            ),
+        ],
+      ),
     );
   }
 }

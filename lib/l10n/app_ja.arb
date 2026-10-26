@@ -365,5 +365,15 @@
     "gridResizeAnimation": "ピンチのアニメーション",
     "gridResizeFly": "移動",
     "gridResizeZoom": "ズーム",
-    "gridResizeCrossfade": "フェード"
+    "gridResizeCrossfade": "フェード",
+    "feedSortOrder": "並び順",
+    "feedSortTime": "時間順",
+    "feedSortMindsFirst": "メモが先",
+    "feedSortMediaFirst": "写真が先",
+    "feedGrouping": "グループ",
+    "feedGroupingNone": "なし",
+    "feedGroupingType": "種類",
+    "feedGroupingTimeOfDay": "時間帯",
+    "feedSectionMinds": "メモ",
+    "feedSectionGallery": "ギャラリー"
 }

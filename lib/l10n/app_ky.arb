@@ -590,5 +590,15 @@
     "gridResizeAnimation": "Чымчуу анимациясы",
     "gridResizeFly": "Учуу",
     "gridResizeZoom": "Зум",
-    "gridResizeCrossfade": "Эрүү"
+    "gridResizeCrossfade": "Эрүү",
+    "feedSortOrder": "Тартиби",
+    "feedSortTime": "Убакыт",
+    "feedSortMindsFirst": "Адегенде жазуулар",
+    "feedSortMediaFirst": "Адегенде медиа",
+    "feedGrouping": "Топтор",
+    "feedGroupingNone": "Жок",
+    "feedGroupingType": "Түрү",
+    "feedGroupingTimeOfDay": "Күн убагы",
+    "feedSectionMinds": "Жазуулар",
+    "feedSectionGallery": "Галерея"
 }

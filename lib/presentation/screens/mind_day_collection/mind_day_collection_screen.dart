@@ -1,5 +1,7 @@
 import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/core/widgets/pinch_columns_detector.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:collection/collection.dart';
@@ -172,10 +174,13 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
             title: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('$formattedDay$yearSuffix', style: const TextStyle(fontSize: 15.0, fontWeight: .w600)),
+                Text(
+                  '$formattedDay$yearSuffix',
+                  style: const TextStyle(fontSize: 14.0, fontWeight: .w600, height: 1.0),
+                ),
                 Text(
                   DateFormatters.formatWeekday(dayDate, locale),
-                  style: const TextStyle(fontSize: 12.0, fontWeight: .w400),
+                  style: const TextStyle(fontSize: 11.0, fontWeight: .w400, height: 1.1),
                 ),
               ],
             ),
@@ -277,7 +282,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
             settings: _dayFeedSettings,
             onOpenItem: (index) => DayItemViewerScreen.show(
               context,
-              items: state.items,
+              items: _arrangedItems(state),
               initialIndex: index,
             ),
             onResolveMediaIssue: (issue) => _resolveDayFeedMediaIssue(issue),
@@ -442,7 +447,13 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   }
 
   void _openDayStories(DayFeedState state, int initialIndex) =>
-      DayItemViewerScreen.show(context, items: state.items, initialIndex: initialIndex, autoplay: true);
+      DayItemViewerScreen.show(context, items: _arrangedItems(state), initialIndex: initialIndex, autoplay: true);
+
+  List<DayFeedItem> _arrangedItems(DayFeedState state) => DayFeedLayout.arrangedItems(
+    state.items,
+    sortOrder: _dayFeedSettings.sortOrder,
+    grouping: _dayFeedSettings.grouping,
+  );
 
   void _vibrate() {
     Haptics.vibrate(HapticsType.heavy);

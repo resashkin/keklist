@@ -1200,4 +1200,34 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => 'Überblenden';
+
+  @override
+  String get feedSortOrder => 'Reihenfolge';
+
+  @override
+  String get feedSortTime => 'Zeit';
+
+  @override
+  String get feedSortMindsFirst => 'Notizen zuerst';
+
+  @override
+  String get feedSortMediaFirst => 'Medien zuerst';
+
+  @override
+  String get feedGrouping => 'Gruppen';
+
+  @override
+  String get feedGroupingNone => 'Keine';
+
+  @override
+  String get feedGroupingType => 'Art';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Tageszeit';
+
+  @override
+  String get feedSectionMinds => 'Notizen';
+
+  @override
+  String get feedSectionGallery => 'Galerie';
 }

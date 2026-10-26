@@ -6,6 +6,7 @@ import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
+import 'package:keklist/presentation/core/widgets/feed_arrangement_tweaks.dart';
 import 'package:keklist/presentation/core/widgets/tile_motion_tweaks.dart';
 
 /// Shake sheet of the calendar: grid columns and what the day grids show.
@@ -50,7 +51,8 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
           ColumnCountRow(
             title: context.l10n.dayFeedColumns,
             selected: calendar.columnCount,
-            onChanged: (count) => update(calendar.copyWith(columnCount: count)),
+            onChanged: (count) =>
+                context.read<SettingsBloc>().add(SettingsUpdateCalendar(calendar: calendar.copyWith(columnCount: count))),
           ),
           SwitchListTile(
             title: Text(context.l10n.dayFeedShowMindText),
@@ -69,6 +71,13 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
               tweakChangeHaptic();
               context.read<SettingsBloc>().add(SettingsUpdateShouldShowTitlesMode(value: value));
             },
+          ),
+          FeedArrangementTweaks(
+            sortOrder: calendar.sortOrder,
+            grouping: calendar.grouping,
+            onChanged: ({sortOrder, grouping}) => context.read<SettingsBloc>().add(
+              SettingsUpdateCalendar(calendar: calendar.copyWith(sortOrder: sortOrder, grouping: grouping)),
+            ),
           ),
           TileMotionTweaks(settings: allSettings),
           const SizedBox(height: 8.0),

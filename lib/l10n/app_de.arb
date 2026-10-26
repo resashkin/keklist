@@ -365,5 +365,15 @@
     "gridResizeAnimation": "Pinch-Animation",
     "gridResizeFly": "Fliegen",
     "gridResizeZoom": "Zoom",
-    "gridResizeCrossfade": "Überblenden"
+    "gridResizeCrossfade": "Überblenden",
+    "feedSortOrder": "Reihenfolge",
+    "feedSortTime": "Zeit",
+    "feedSortMindsFirst": "Notizen zuerst",
+    "feedSortMediaFirst": "Medien zuerst",
+    "feedGrouping": "Gruppen",
+    "feedGroupingNone": "Keine",
+    "feedGroupingType": "Art",
+    "feedGroupingTimeOfDay": "Tageszeit",
+    "feedSectionMinds": "Notizen",
+    "feedSectionGallery": "Galerie"
 }

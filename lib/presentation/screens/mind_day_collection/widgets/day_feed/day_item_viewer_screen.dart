@@ -86,7 +86,7 @@ final class DayItemViewerScreen extends StatefulWidget {
 
   /// A single mind, e.g. from search or the digest.
   static Future<void> showMind(BuildContext context, Mind mind) =>
-      show(context, items: [DayFeedMind(mind: mind, reflectionCount: 0)], initialIndex: 0);
+      show(context, items: [DayFeedMind(mind: mind)], initialIndex: 0);
 
   @override
   State<DayItemViewerScreen> createState() => _DayItemViewerScreenState();

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/presentation/core/widgets/glass_segmented_switcher.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
@@ -33,14 +34,13 @@ final class StoryTextureTweakSheet extends StatelessWidget {
             _SectionTitle(context.l10n.storyDateLines),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: SegmentedButton<StoryDateLayout>(
-                showSelectedIcon: false,
-                segments: [
-                  for (final StoryDateLayout layout in StoryDateLayout.values)
-                    ButtonSegment(value: layout, label: Text('${layout.index + 1}')),
-                ],
-                selected: {story.dateLayout},
-                onSelectionChanged: (selection) => update(story.copyWith(dateLayout: selection.first)),
+              child: GlassSegmentedSwitcher<StoryDateLayout>(
+                values: StoryDateLayout.values,
+                selected: story.dateLayout,
+                labelOf: (layout) => '${layout.index + 1}',
+                onChanged: (layout) => context.read<SettingsBloc>().add(
+                  SettingsUpdateStory(story: story.copyWith(dateLayout: layout)),
+                ),
               ),
             ),
             _SectionTitle(context.l10n.storyTextureTitle),

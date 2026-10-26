@@ -1198,4 +1198,34 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => 'Dissolvenza';
+
+  @override
+  String get feedSortOrder => 'Ordine';
+
+  @override
+  String get feedSortTime => 'Ora';
+
+  @override
+  String get feedSortMindsFirst => 'Prima note';
+
+  @override
+  String get feedSortMediaFirst => 'Prima foto';
+
+  @override
+  String get feedGrouping => 'Gruppi';
+
+  @override
+  String get feedGroupingNone => 'No';
+
+  @override
+  String get feedGroupingType => 'Tipo';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Fascia';
+
+  @override
+  String get feedSectionMinds => 'Note';
+
+  @override
+  String get feedSectionGallery => 'Galleria';
 }

@@ -1190,6 +1190,36 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get gridResizeCrossfade => 'Претапање';
+
+  @override
+  String get feedSortOrder => 'Редослед';
+
+  @override
+  String get feedSortTime => 'Време';
+
+  @override
+  String get feedSortMindsFirst => 'Прво белешке';
+
+  @override
+  String get feedSortMediaFirst => 'Прво медији';
+
+  @override
+  String get feedGrouping => 'Групе';
+
+  @override
+  String get feedGroupingNone => 'Без';
+
+  @override
+  String get feedGroupingType => 'Врста';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Доба дана';
+
+  @override
+  String get feedSectionMinds => 'Белешке';
+
+  @override
+  String get feedSectionGallery => 'Галерија';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2377,4 +2407,34 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get gridResizeCrossfade => 'Pretapanje';
+
+  @override
+  String get feedSortOrder => 'Redosled';
+
+  @override
+  String get feedSortTime => 'Vreme';
+
+  @override
+  String get feedSortMindsFirst => 'Prvo beleške';
+
+  @override
+  String get feedSortMediaFirst => 'Prvo mediji';
+
+  @override
+  String get feedGrouping => 'Grupe';
+
+  @override
+  String get feedGroupingNone => 'Bez';
+
+  @override
+  String get feedGroupingType => 'Vrsta';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Doba dana';
+
+  @override
+  String get feedSectionMinds => 'Beleške';
+
+  @override
+  String get feedSectionGallery => 'Galerija';
 }

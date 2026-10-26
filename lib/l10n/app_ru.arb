@@ -365,5 +365,15 @@
     "gridResizeAnimation": "Анимация щипка",
     "gridResizeFly": "Перелёт",
     "gridResizeZoom": "Зум",
-    "gridResizeCrossfade": "Растворение"
+    "gridResizeCrossfade": "Растворение",
+    "feedSortOrder": "Порядок",
+    "feedSortTime": "По времени",
+    "feedSortMindsFirst": "Сначала записи",
+    "feedSortMediaFirst": "Сначала медиа",
+    "feedGrouping": "Группы",
+    "feedGroupingNone": "Нет",
+    "feedGroupingType": "По типу",
+    "feedGroupingTimeOfDay": "Время дня",
+    "feedSectionMinds": "Записи",
+    "feedSectionGallery": "Галерея"
 }

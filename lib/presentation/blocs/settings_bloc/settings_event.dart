@@ -116,6 +116,12 @@ final class SettingsUpdateCalendar extends SettingsEvent {
   const SettingsUpdateCalendar({required this.calendar});
 }
 
+final class SettingsUpdateDayFeedArrangement extends SettingsEvent {
+  final FeedSortOrder? sortOrder;
+  final FeedGrouping? grouping;
+  const SettingsUpdateDayFeedArrangement({this.sortOrder, this.grouping});
+}
+
 final class SettingsUpdateStory extends SettingsEvent {
   final StorySettings story;
   const SettingsUpdateStory({required this.story});

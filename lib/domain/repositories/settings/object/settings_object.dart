@@ -131,6 +131,18 @@ final class SettingsObject extends HiveObject {
   @HiveField(43, defaultValue: 0)
   late int gridResizeAnimationIndex;
 
+  @HiveField(44, defaultValue: 0)
+  late int dayFeedSortOrderIndex;
+
+  @HiveField(45, defaultValue: 0)
+  late int dayFeedGroupingIndex;
+
+  @HiveField(46, defaultValue: 0)
+  late int calendarSortOrderIndex;
+
+  @HiveField(47, defaultValue: 0)
+  late int calendarGroupingIndex;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -155,6 +167,8 @@ final class SettingsObject extends HiveObject {
           columnCount: dayFeedColumnCount,
           mindCellSpan: dayFeedMindCellSpan,
           isMindTextVisible: isDayFeedMindTextVisible,
+          sortOrder: FeedSortOrder.values.elementAtOrNull(dayFeedSortOrderIndex) ?? FeedSortOrder.time,
+          grouping: FeedGrouping.values.elementAtOrNull(dayFeedGroupingIndex) ?? FeedGrouping.none,
         ),
         hiddenSettingsItemIds: hiddenSettingsItemIds.toSet(),
         shakeDiscoveredScreenIds: shakeDiscoveredScreenIds.toSet(),
@@ -167,6 +181,8 @@ final class SettingsObject extends HiveObject {
           columnCount: calendarColumnCount,
           isMindTextVisible: isCalendarMindTextVisible,
           isMediaVisible: isCalendarMediaVisible,
+          sortOrder: FeedSortOrder.values.elementAtOrNull(calendarSortOrderIndex) ?? FeedSortOrder.time,
+          grouping: FeedGrouping.values.elementAtOrNull(calendarGroupingIndex) ?? FeedGrouping.none,
         ),
         story: StorySettings(
           textureAnimation:

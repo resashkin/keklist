@@ -38,6 +38,12 @@ enum TileEmojiMotion { drift, float, still }
 /// How a grid changes when a pinch changes its column count.
 enum GridResizeAnimation { fly, zoom, crossfade }
 
+/// The order of a day's tiles; within each kind they stay in time order.
+enum FeedSortOrder { time, mindsFirst, mediaFirst }
+
+/// How a day's tiles are split under small headers.
+enum FeedGrouping { none, type, timeOfDay }
+
 final class DayFeedSettings {
   static const int minColumnCount = 2;
   static const int maxColumnCount = 7;
@@ -46,12 +52,24 @@ final class DayFeedSettings {
   final int columnCount;
   final int mindCellSpan;
   final bool isMindTextVisible;
+  final FeedSortOrder sortOrder;
+  final FeedGrouping grouping;
 
   const DayFeedSettings({
     this.columnCount = 4,
     this.mindCellSpan = 1,
     this.isMindTextVisible = true,
+    this.sortOrder = FeedSortOrder.time,
+    this.grouping = FeedGrouping.none,
   });
+
+  DayFeedSettings copyWith({FeedSortOrder? sortOrder, FeedGrouping? grouping}) => DayFeedSettings(
+    columnCount: columnCount,
+    mindCellSpan: mindCellSpan,
+    isMindTextVisible: isMindTextVisible,
+    sortOrder: sortOrder ?? this.sortOrder,
+    grouping: grouping ?? this.grouping,
+  );
 }
 
 /// Calendar day grids; week titles stay in `KeklistSettings.shouldShowTitles`.
@@ -59,17 +77,29 @@ final class CalendarSettings {
   final int columnCount;
   final bool isMindTextVisible;
   final bool isMediaVisible;
+  final FeedSortOrder sortOrder;
+  final FeedGrouping grouping;
 
   const CalendarSettings({
     this.columnCount = 4,
     this.isMindTextVisible = true,
     this.isMediaVisible = true,
+    this.sortOrder = FeedSortOrder.time,
+    this.grouping = FeedGrouping.none,
   });
 
-  CalendarSettings copyWith({int? columnCount, bool? isMindTextVisible, bool? isMediaVisible}) => CalendarSettings(
+  CalendarSettings copyWith({
+    int? columnCount,
+    bool? isMindTextVisible,
+    bool? isMediaVisible,
+    FeedSortOrder? sortOrder,
+    FeedGrouping? grouping,
+  }) => CalendarSettings(
     columnCount: columnCount ?? this.columnCount,
     isMindTextVisible: isMindTextVisible ?? this.isMindTextVisible,
     isMediaVisible: isMediaVisible ?? this.isMediaVisible,
+    sortOrder: sortOrder ?? this.sortOrder,
+    grouping: grouping ?? this.grouping,
   );
 }
 
@@ -275,12 +305,16 @@ final class KeklistSettings {
     ..dayFeedColumnCount = dayFeed.columnCount
     ..dayFeedMindCellSpan = dayFeed.mindCellSpan
     ..isDayFeedMindTextVisible = dayFeed.isMindTextVisible
+    ..dayFeedSortOrderIndex = dayFeed.sortOrder.index
+    ..dayFeedGroupingIndex = dayFeed.grouping.index
     ..insightsWidgetOrder = insights.widgetOrder
     ..hiddenInsightsWidgetIds = insights.hiddenWidgetIds.toList()
     ..insightsPeriodIndex = insights.periodIndex
     ..calendarColumnCount = calendar.columnCount
     ..isCalendarMindTextVisible = calendar.isMindTextVisible
     ..isCalendarMediaVisible = calendar.isMediaVisible
+    ..calendarSortOrderIndex = calendar.sortOrder.index
+    ..calendarGroupingIndex = calendar.grouping.index
     ..storyTextureAnimationIndex = story.textureAnimation.index
     ..storyDateLayoutIndex = story.dateLayout.index
     ..isStorySpectrumVisible = story.isSpectrumVisible
