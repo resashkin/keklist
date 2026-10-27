@@ -1249,9 +1249,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get leaveFeedback => 'Fikr qoldirish';
 
   @override
-  String get feedbackHint => 'Nima yoqadi, nima buzilgan, nima yetishmaydi?';
-
-  @override
   String get feedbackSend => 'Yuborish';
 
   @override

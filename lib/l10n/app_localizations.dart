@@ -2427,12 +2427,6 @@ abstract class AppLocalizations {
   /// **'Leave feedback'**
   String get leaveFeedback;
 
-  /// Placeholder of the feedback field
-  ///
-  /// In en, this message translates to:
-  /// **'What do you like, what\'s broken, what\'s missing?'**
-  String get feedbackHint;
-
   /// Send feedback button
   ///
   /// In en, this message translates to:

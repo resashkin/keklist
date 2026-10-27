@@ -1249,9 +1249,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get leaveFeedback => 'Оставить отзыв';
 
   @override
-  String get feedbackHint => 'Что нравится, что сломано, чего не хватает?';
-
-  @override
   String get feedbackSend => 'Отправить';
 
   @override

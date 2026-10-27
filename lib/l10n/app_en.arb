@@ -1581,10 +1581,6 @@
     "@leaveFeedback": {
         "description": "Settings row and sheet title for sending feedback to the developer"
     },
-    "feedbackHint": "What do you like, what's broken, what's missing?",
-    "@feedbackHint": {
-        "description": "Placeholder of the feedback field"
-    },
     "feedbackSend": "Send",
     "@feedbackSend": {
         "description": "Send feedback button"

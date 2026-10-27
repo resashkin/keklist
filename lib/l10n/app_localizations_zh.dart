@@ -1200,9 +1200,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get leaveFeedback => '留下反馈';
 
   @override
-  String get feedbackHint => '你喜欢什么？哪里坏了？缺少什么？';
-
-  @override
   String get feedbackSend => '发送';
 
   @override
