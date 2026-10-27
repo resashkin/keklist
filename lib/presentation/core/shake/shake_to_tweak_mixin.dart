@@ -1,6 +1,7 @@
 import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:material_ui/material_ui.dart';
@@ -91,7 +92,8 @@ mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
   }
 
   void _showHintIfUndiscovered() {
-    if (!_isFrontmost || _isShakeDiscovered) return;
+    // A browser can't be shaken; the title's long press still opens the tweaks there.
+    if (kIsWeb || !_isFrontmost || _isShakeDiscovered) return;
     _hintShownThisLaunch.add(shakeScreenId);
     final double bottom = MediaQuery.paddingOf(context).bottom + _hintBottomSpacing;
     _hintEntry = OverlayEntry(
