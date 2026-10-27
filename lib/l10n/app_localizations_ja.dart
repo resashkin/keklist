@@ -1206,9 +1206,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get leaveFeedback => 'フィードバックを送る';
 
   @override
-  String get feedbackHint => '気に入った点、不具合、足りないものは？';
-
-  @override
   String get feedbackSend => '送信';
 
   @override

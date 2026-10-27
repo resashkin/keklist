@@ -1,22 +1,22 @@
 import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// A full-screen text field like the mind creator; Send delivers it to the developer's Telegram, see
+/// A sheet with a text field that grows with the text; Send delivers it to the developer's Telegram, see
 /// [TelegramFeedback].
-final class FeedbackScreen extends StatefulWidget {
-  const FeedbackScreen({super.key});
+final class FeedbackSheet extends StatefulWidget {
+  const FeedbackSheet({super.key});
 
-  static Future<void> show(BuildContext context) => Navigator.of(
-    context,
-  ).push<void>(MaterialPageRoute<void>(fullscreenDialog: true, builder: (_) => const FeedbackScreen()));
+  static Future<void> show(BuildContext context) =>
+      KekSheet.show<void>(context: context, builder: (_) => const FeedbackSheet());
 
   @override
-  State<FeedbackScreen> createState() => _FeedbackScreenState();
+  State<FeedbackSheet> createState() => _FeedbackSheetState();
 }
 
-final class _FeedbackScreenState extends State<FeedbackScreen> {
+final class _FeedbackSheetState extends State<FeedbackSheet> {
   final TextEditingController _controller = TextEditingController();
   bool _isSending = false;
 
@@ -41,36 +41,31 @@ final class _FeedbackScreenState extends State<FeedbackScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: theme.scaffoldBackgroundColor,
-        title: Text(context.l10n.leaveFeedback),
-        leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
-      ),
-      body: Column(
+    return KekSheetScaffold(
+      title: context.l10n.leaveFeedback,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
+          Flexible(
             child: SingleChildScrollView(
               child: TextField(
                 controller: _controller,
                 autofocus: true,
                 enabled: !_isSending,
                 keyboardType: TextInputType.multiline,
+                minLines: 5,
                 maxLines: null,
                 maxLength: 4000,
                 textCapitalization: TextCapitalization.sentences,
                 style: const TextStyle(fontSize: 20.0),
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(12.0),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                   border: InputBorder.none,
                   counterText: '',
-                  hintText: context.l10n.feedbackHint,
                 ),
               ),
             ),
           ),
-          // Sits right above the keyboard.
           SafeArea(
             top: false,
             child: Padding(

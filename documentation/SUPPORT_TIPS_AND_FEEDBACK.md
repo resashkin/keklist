@@ -15,11 +15,11 @@ Telegram, and the emotions sheet shown after saving a mind has a Save button.
   which replaces "keklist PRO" for subscribers.
 - Pro still gates only the weather source; nothing else is locked.
 
-### 2. Feedback (`telegram_feedback.dart`, `feedback_screen.dart`)
+### 2. Feedback (`telegram_feedback.dart`, `feedback_sheet.dart`)
 - Telegram is the only feedback channel: "Email us", "Suggest a feature", "Release notes" (with the What's New page
   shown after updates, and `webview_flutter`) and "Dev Blog" were removed.
-- `FeedbackScreen` is a full-screen dialog like the mind creator: ✕ and Send in the app bar, a borderless text field,
-  and the privacy note above the keyboard.
+- `FeedbackSheet` is a bottom sheet: title and ✕ in the header, a borderless text field without a placeholder that
+  grows with the text, and a centered glass Send above the keyboard.
 - `TelegramFeedback.send` posts to `sendMessage` of a feedback-only bot. It sends the text, the app version and
   build, and the platform, and only when the user taps Send.
 - Keys in `dotenv`: `TELEGRAM_FEEDBACK_BOT_TOKEN`, `TELEGRAM_FEEDBACK_CHAT_ID`. Without them the "Leave feedback"

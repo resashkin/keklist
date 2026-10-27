@@ -34,7 +34,7 @@ import 'package:keklist/presentation/screens/settings/widgets/web_version_rows.d
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
-import 'package:keklist/presentation/screens/feedback/feedback_screen.dart';
+import 'package:keklist/presentation/screens/feedback/feedback_sheet.dart';
 import 'package:keklist/presentation/screens/hidden_media/hidden_media_screen.dart';
 import 'package:keklist/presentation/screens/analytics/analytics_settings_screen.dart';
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_bloc.dart';
@@ -261,7 +261,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             id: SettingsItemIds.leaveFeedback,
             title: context.l10n.leaveFeedback,
             leading: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.lightBlueAccent),
-            onTap: () => FeedbackScreen.show(context),
+            onTap: () => FeedbackSheet.show(context),
           ),
       ],
     ),

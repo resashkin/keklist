@@ -1247,9 +1247,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get leaveFeedback => 'Пікір қалдыру';
 
   @override
-  String get feedbackHint => 'Не ұнайды, не бұзылған, не жетіспейді?';
-
-  @override
   String get feedbackSend => 'Жіберу';
 
   @override

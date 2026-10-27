@@ -1245,9 +1245,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get leaveFeedback => 'Остави утисак';
 
   @override
-  String get feedbackHint => 'Шта ти се свиђа, шта не ради, шта недостаје?';
-
-  @override
   String get feedbackSend => 'Пошаљи';
 
   @override
@@ -2542,9 +2539,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get leaveFeedback => 'Ostavi utisak';
-
-  @override
-  String get feedbackHint => 'Šta ti se sviđa, šta ne radi, šta nedostaje?';
 
   @override
   String get feedbackSend => 'Pošalji';

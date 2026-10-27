@@ -1256,9 +1256,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get leaveFeedback => 'Feedback geben';
 
   @override
-  String get feedbackHint => 'Was gefällt dir, was ist kaputt, was fehlt?';
-
-  @override
   String get feedbackSend => 'Senden';
 
   @override
