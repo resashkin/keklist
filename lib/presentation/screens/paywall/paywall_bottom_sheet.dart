@@ -13,10 +13,11 @@ import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 const _kOfferingId = 'lifetime_offer';
 
 /// One-time tips (consumables in App Store Connect and Google Play), shown with these prices until the store answers.
-const List<(String, String)> _kTips = [
-  ('keklist_tip_1', r'$1'),
-  ('keklist_tip_10', r'$10'),
-  ('keklist_tip_100', r'$100'),
+/// Each with the hearts its card shows over the price.
+const List<(String, String, String)> _kTips = [
+  ('keklist_tip_1', r'$1', '💛'),
+  ('keklist_tip_10', r'$10', '💛💛'),
+  ('keklist_tip_100', r'$100', '💛💛💛'),
 ];
 
 // ---------------------------------------------------------------------------
@@ -83,7 +84,7 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
   Future<void> _loadTips() async {
     try {
       final List<StoreProduct> products = await Purchases.getProducts(
-        [for (final (String id, _) in _kTips) id],
+        [for (final (String id, _, _) in _kTips) id],
         productCategory: ProductCategory.nonSubscription,
       );
       if (mounted) setState(() => _tipProducts = {for (final StoreProduct product in products) product.identifier: product});
@@ -221,10 +222,10 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
               Row(
                 spacing: 12,
                 children: [
-                  for (final (String id, String fallbackPrice) in _kTips)
+                  for (final (String id, String fallbackPrice, String hearts) in _kTips)
                     Expanded(
                       child: _OptionCard(
-                        label: 'TIP',
+                        label: hearts,
                         price: _tipProducts[id]?.priceString ?? fallbackPrice,
                         isSelected: _selectedTipId == id,
                         onTap: () {
@@ -243,7 +244,7 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
                 child: _buyingTipId != null
                     ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
                     : AutoSizeText(
-                        'Tip · ${selectedTip?.priceString ?? _kTips.firstWhere((tip) => tip.$1 == _selectedTipId).$2}',
+                        'Support · ${selectedTip?.priceString ?? _kTips.firstWhere((tip) => tip.$1 == _selectedTipId).$2}',
                         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                         maxLines: 1,
                       ),
