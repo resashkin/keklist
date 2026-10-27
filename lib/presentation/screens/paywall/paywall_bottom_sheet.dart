@@ -71,6 +71,7 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
   String? _error;
   Map<String, StoreProduct> _tipProducts = const {};
   String? _buyingTipId;
+  String _selectedTipId = _kTips[1].$1;
 
   @override
   void initState() {
@@ -204,45 +205,49 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
     );
   }
 
-  List<Widget> _buildTips(ThemeData theme, {required String title}) => [
-    AutoSizeText(title, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600), maxLines: 1),
-    const Gap(4),
-    AutoSizeText(
-      'A one-time tip',
-      style: TextStyle(fontSize: 13, color: theme.colorScheme.onSurfaceVariant),
-      maxLines: 1,
-    ),
-    const Gap(12),
-    Row(
-      spacing: 12,
-      children: [
-        for (final (String id, String fallbackPrice) in _kTips)
-          Expanded(
-            child: _TipCard(
-              price: _tipProducts[id]?.priceString ?? fallbackPrice,
-              isBuying: _buyingTipId == id,
-              onTap: _tipProducts[id] == null || _buyingTipId != null || _purchasing
-                  ? null
-                  : () => _buyTip(_tipProducts[id]!),
-            ),
-          ),
-      ],
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     if (widget.tipsOnly) {
+      final StoreProduct? selectedTip = _tipProducts[_selectedTipId];
       return KekSheetScaffold(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const AutoSizeText('💛', style: TextStyle(fontSize: 48), maxLines: 1),
-              const Gap(12),
-              ..._buildTips(theme, title: 'Support keklist'),
+              const _SheetHeader(emoji: '💛', title: 'Support keklist', subtitle: 'A one-time tip'),
+              const Gap(28),
+              Row(
+                spacing: 12,
+                children: [
+                  for (final (String id, String fallbackPrice) in _kTips)
+                    Expanded(
+                      child: _OptionCard(
+                        label: 'TIP',
+                        price: _tipProducts[id]?.priceString ?? fallbackPrice,
+                        isSelected: _selectedTipId == id,
+                        onTap: () {
+                          Haptics.vibrate(HapticsType.light);
+                          setState(() => _selectedTipId = id);
+                        },
+                      ),
+                    ),
+                ],
+              ),
+              const Gap(24),
+              GlassCapsuleButton(
+                height: 52,
+                isExpanded: true,
+                onTap: selectedTip == null || _buyingTipId != null ? null : () => _buyTip(selectedTip),
+                child: _buyingTipId != null
+                    ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                    : AutoSizeText(
+                        'Tip · ${selectedTip?.priceString ?? _kTips.firstWhere((tip) => tip.$1 == _selectedTipId).$2}',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        maxLines: 1,
+                      ),
+              ),
             ],
           ),
         ),
@@ -258,19 +263,7 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const AutoSizeText('🤝', style: TextStyle(fontSize: 48), maxLines: 1),
-                  const Gap(12),
-                  const AutoSizeText(
-                    'keklist PRO',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                  ),
-                  const Gap(8),
-                  AutoSizeText(
-                    'Unlock all features',
-                    style: TextStyle(fontSize: 15, color: theme.colorScheme.onSurfaceVariant),
-                    maxLines: 1,
-                  ),
+                  const _SheetHeader(emoji: '🤝', title: 'keklist PRO', subtitle: 'Unlock all features'),
                     const Gap(8),
                     const Gap(12),
                     const _FeatureList(),
@@ -285,8 +278,9 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
                         children: _plans.map((plan) {
                           final isSelected = _selected == plan;
                           return Expanded(
-                            child: _PlanCard(
-                              plan: plan,
+                            child: _OptionCard(
+                              label: plan.label,
+                              price: plan.priceString,
                               isSelected: isSelected,
                               onTap: plan.available
                                   ? () {
@@ -380,15 +374,17 @@ class _FeatureList extends StatelessWidget {
 }
 
 // ---------------------------------------------------------------------------
-// Plan card
+// Option card
 // ---------------------------------------------------------------------------
 
-class _PlanCard extends StatelessWidget {
-  final _Plan plan;
+/// A square choice of the paywall and the tips sheet: a label over a price, outlined when selected.
+class _OptionCard extends StatelessWidget {
+  final String label;
+  final String price;
   final bool isSelected;
   final VoidCallback? onTap;
 
-  const _PlanCard({required this.plan, required this.isSelected, this.onTap});
+  const _OptionCard({required this.label, required this.price, required this.isSelected, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -410,7 +406,7 @@ class _PlanCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AutoSizeText(
-                plan.label,
+                label,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -422,7 +418,7 @@ class _PlanCard extends StatelessWidget {
               ),
               const Gap(8),
               AutoSizeText(
-                plan.priceString,
+                price,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
@@ -439,40 +435,29 @@ class _PlanCard extends StatelessWidget {
   }
 }
 
-/// A one-time tip: a heart and the price; it buys at once on tap.
-class _TipCard extends StatelessWidget {
-  final String price;
-  final bool isBuying;
-  final VoidCallback? onTap;
+/// The emoji, title and subtitle that open the paywall and the tips sheet.
+class _SheetHeader extends StatelessWidget {
+  final String emoji;
+  final String title;
+  final String subtitle;
 
-  const _TipCard({required this.price, required this.isBuying, this.onTap});
+  const _SheetHeader({required this.emoji, required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    return Opacity(
-      opacity: onTap == null && !isBuying ? 0.45 : 1.0,
-      child: Material(
-        color: cs.onSurface.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(12),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: onTap,
-          child: SizedBox(
-            height: 72,
-            child: isBuying
-                ? const Center(child: SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2)))
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const AutoSizeText('💛', style: TextStyle(fontSize: 20), maxLines: 1),
-                      const Gap(4),
-                      AutoSizeText(price, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold), maxLines: 1),
-                    ],
-                  ),
-          ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AutoSizeText(emoji, style: const TextStyle(fontSize: 48), maxLines: 1),
+        const Gap(12),
+        AutoSizeText(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold), maxLines: 1),
+        const Gap(8),
+        AutoSizeText(
+          subtitle,
+          style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onSurfaceVariant),
+          maxLines: 1,
         ),
-      ),
+      ],
     );
   }
 }
