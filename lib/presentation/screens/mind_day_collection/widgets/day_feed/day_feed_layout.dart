@@ -63,7 +63,12 @@ final class DayFeedLayout {
           DayFeedSection(kind: kind, items: sorted(items.where((item) => timeOfDayOf(item.timestamp) == kind).toList())),
       ],
     };
-    return sections.where((section) => section.items.isNotEmpty).toList();
+    final List<DayFeedSection> filled = sections.where((section) => section.items.isNotEmpty).toList();
+    // "Notes" or "Gallery" alone says nothing, so a single source goes without its header.
+    if (grouping == FeedGrouping.type && filled.length == 1) {
+      return [DayFeedSection(kind: null, items: filled.single.items)];
+    }
+    return filled;
   }
 
   static List<DayFeedItem> arrangedItems(

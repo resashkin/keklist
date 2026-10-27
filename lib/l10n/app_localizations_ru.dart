@@ -354,7 +354,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get calendar => 'Календарь';
 
   @override
-  String get debugMenu => 'Меню отладки';
+  String get debugMenu => 'Меню разработчика';
 
   @override
   String get discussion => 'Обсуждение';
@@ -895,10 +895,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get webVersionCopied => 'Адрес скопирован';
 
   @override
-  String get webVersionNeedsPin =>
-      'Задайте PIN, чтобы открыть keklist в браузере компьютера в той же Wi‑Fi.';
-
-  @override
   String get webVersionStarting => 'Запуск…';
 
   @override
@@ -1299,4 +1295,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get analyticsResetIdDone => 'Теперь используется новый анонимный ID';
+
+  @override
+  String get settingsSupport => 'Поддержка';
+
+  @override
+  String get calendarOpenDay => 'Открыть день';
+
+  @override
+  String get webVersionEnabled => 'Включить веб-версию';
 }

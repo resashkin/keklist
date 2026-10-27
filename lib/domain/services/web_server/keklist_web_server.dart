@@ -22,9 +22,9 @@ sealed class WebServerState {
   const WebServerState();
 }
 
-/// Not served: without a PIN anyone in the Wi-Fi could open it.
-final class WebServerNeedsPin extends WebServerState {
-  const WebServerNeedsPin();
+/// Not served: switched off in Settings.
+final class WebServerOff extends WebServerState {
+  const WebServerOff();
 }
 
 /// Not served: the app was built without scripts/build_web_bundle.sh.
@@ -98,7 +98,7 @@ final class KeklistWebServer extends ChangeNotifier {
 
   WebServerState get state => _state;
 
-  /// Serves whenever a PIN is set, from now on: setting or removing the PIN or changing the port takes effect at once.
+  /// Serves while switched on, from now on: switching, changing the PIN or the port takes effect at once.
   Future<void> start() {
     access.addListener(_accessChanged);
     _lifecycle = AppLifecycleListener(onResume: _resumed);
@@ -129,7 +129,7 @@ final class KeklistWebServer extends ChangeNotifier {
 
   Future<void> _update({required bool restart}) async {
     if (_disposed) return;
-    if (!access.hasPin) return _end(const WebServerNeedsPin());
+    if (!access.isEnabled) return _end(const WebServerOff());
     if (!restart && _server != null && _boundPort == access.port) return _refreshHosts();
     await _close();
     final WebBundle? bundle = _bundle ??= await WebBundle.load();

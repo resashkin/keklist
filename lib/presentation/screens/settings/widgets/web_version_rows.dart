@@ -6,7 +6,7 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/screens/settings/settings_layout.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// Rows of the "Web version" section: where to open it, the PIN that guards it and its port.
+/// Rows of the "Web version" section: its switch, then while on where to open it, the PIN that guards it and its port.
 List<SettingsRowModel> webVersionRows(BuildContext context, KeklistWebServer server) {
   final WebAccess access = server.access;
   final ThemeData theme = Theme.of(context);
@@ -24,12 +24,24 @@ List<SettingsRowModel> webVersionRows(BuildContext context, KeklistWebServer ser
       ],
     ),
     WebServerRunning() => _note(context.l10n.webVersionNoWifi),
-    WebServerNeedsPin() => _note(context.l10n.webVersionNeedsPin),
+    WebServerOff() => const SizedBox.shrink(),
     WebServerStarting() => _note(context.l10n.webVersionStarting),
     WebServerNoBundle() => _note(context.l10n.webVersionNoBundle),
     WebServerFailed(:final message) => _note(message, color: theme.colorScheme.error),
   };
+  final SettingsRowModel toggle = SettingsRowModel(
+    id: SettingsItemIds.webVersionEnabled,
+    title: context.l10n.webVersionEnabled,
+    tile: SwitchListTile.adaptive(
+      secondary: const Icon(Icons.wifi_tethering),
+      title: Text(context.l10n.webVersionEnabled),
+      value: access.isEnabled,
+      onChanged: (value) => _setEnabled(context, access, value),
+    ),
+  );
+  if (!access.isEnabled) return [toggle];
   return [
+    toggle,
     SettingsRowModel(id: SettingsItemIds.webVersionAddress, title: context.l10n.webVersion, tile: status),
     SettingsRowModel(
       id: SettingsItemIds.webVersionPin,
@@ -71,6 +83,12 @@ Widget _note(String text, {Color? color}) => Builder(
 void _copy(BuildContext context, String address) {
   Clipboard.setData(ClipboardData(text: address));
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.webVersionCopied)));
+}
+
+// Switching on without a PIN asks for one first: the web version is never served unguarded.
+Future<void> _setEnabled(BuildContext context, WebAccess access, bool isEnabled) async {
+  if (isEnabled && !access.hasPin) await _setPin(context, access);
+  if (!isEnabled || access.hasPin) await access.setEnabled(isEnabled);
 }
 
 Future<void> _setPin(BuildContext context, WebAccess access) async {

@@ -34,6 +34,7 @@ final class GalleryIndexer {
   final GallerySource _source;
   final BehaviorSubject<GalleryIndexProgress> _progress;
   Future<void>? _running;
+  Future<void>? _queued;
 
   GalleryIndexer({required MediaIndexRepository repository, required GallerySource source})
     : _repository = repository,
@@ -68,8 +69,18 @@ final class GalleryIndexer {
     return dayIndex < DateUtils.getDayIndex(from: lastScan) && _repository.entryFor(dayIndex) == null;
   }
 
-  /// Full scan the first time, then only the days touched by modified assets.
-  Future<void> sync() => _running ??= _sync(forceFull: false).whenComplete(() => _running = null);
+  /// Full scan the first time, then only the days touched by modified assets. A call during a sync runs
+  /// one more after it, so a change made meanwhile isn't missed.
+  Future<void> sync() {
+    final Future<void>? running = _running;
+    if (running != null) {
+      return _queued ??= running.then((_) {
+        _queued = null;
+        return sync();
+      });
+    }
+    return _running = _sync(forceFull: false).whenComplete(() => _running = null);
+  }
 
   Future<void> rebuild() async {
     await _running;

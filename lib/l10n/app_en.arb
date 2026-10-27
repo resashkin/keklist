@@ -480,9 +480,9 @@
     "@calendar": {
         "description": "Calendar title"
     },
-    "debugMenu": "Debug Menu",
+    "debugMenu": "Developer menu",
     "@debugMenu": {
-        "description": "Debug menu title"
+        "description": "Settings row and screen title of the hidden developer menu"
     },
     "discussion": "Discussion",
     "@discussion": {
@@ -1144,7 +1144,6 @@
     "webVersion": "Web version",
     "webVersionAddressHint": "Open in a browser on a computer in the same Wi-Fi; keep keklist open",
     "webVersionCopied": "Address copied",
-    "webVersionNeedsPin": "Set a PIN to open keklist in a browser on a computer in the same Wi-Fi.",
     "webVersionStarting": "Starting…",
     "webVersionNoWifi": "Connect to Wi-Fi to open keklist in a browser.",
     "webVersionNoBundle": "This build doesn't include the web version.",
@@ -1637,5 +1636,17 @@
     "analyticsResetIdDone": "A new anonymous ID is used from now on",
     "@analyticsResetIdDone": {
         "description": "Snackbar after the anonymous analytics id is reset"
+    },
+    "settingsSupport": "Support",
+    "@settingsSupport": {
+        "description": "Settings section with the subscription, tips and feedback"
+    },
+    "calendarOpenDay": "Open day",
+    "@calendarOpenDay": {
+        "description": "Button under a calendar day that opens the day screen"
+    },
+    "webVersionEnabled": "Serve web version",
+    "@webVersionEnabled": {
+        "description": "Switch that turns the phone's web version server on or off"
     }
 }

@@ -207,7 +207,7 @@
     "@calendar": {
         "description": "Календарь таб белгиси"
     },
-    "debugMenu": "Debug менюсу",
+    "debugMenu": "Иштеп чыгуучунун менюсу",
     "@debugMenu": {
         "description": "Debug менюсу таб белгиси"
     },
@@ -486,7 +486,6 @@
     "webVersion": "Веб-версия",
     "webVersionAddressHint": "Ошол эле Wi‑Fi'дагы компьютердин браузеринде ачыңыз; keklist ачык турушу керек",
     "webVersionCopied": "Дарек көчүрүлдү",
-    "webVersionNeedsPin": "keklist'ти ошол эле Wi‑Fi'дагы компьютердин браузеринде ачуу үчүн PIN коюңуз.",
     "webVersionStarting": "Иштетилүүдө…",
     "webVersionNoWifi": "keklist'ти браузерде ачуу үчүн Wi‑Fi'га туташыңыз.",
     "webVersionNoBundle": "Бул курамада веб-версия жок.",
@@ -611,5 +610,8 @@
     "analyticsNeverSent": "Эч качан жөнөтүлбөйт",
     "analyticsNeverSentItems": "Жазууларыңыз, алардын тексти, эмоциялары жана комментарийлери, сүрөт, видео жана аудио, алардын саны, атыңыз, жайгашкан жериңиз жана IP дарегиңиз.",
     "analyticsResetId": "Анонимдүү ID'ни баштапкы абалга келтирүү",
-    "analyticsResetIdDone": "Эми жаңы анонимдүү ID колдонулат"
+    "analyticsResetIdDone": "Эми жаңы анонимдүү ID колдонулат",
+    "settingsSupport": "Колдоо",
+    "calendarOpenDay": "Күндү ачуу",
+    "webVersionEnabled": "Веб-версияны күйгүзүү"
 }

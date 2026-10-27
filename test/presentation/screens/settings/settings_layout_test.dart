@@ -53,7 +53,8 @@ void main() {
   test('every id is unique', () {
     final List<String> ids = [
       SettingsItemIds.userDataSection,
-      SettingsItemIds.applicationSection,
+      SettingsItemIds.supportSection,
+      SettingsItemIds.developerSection,
       SettingsItemIds.appearanceSection,
       SettingsItemIds.aboutSection,
       SettingsItemIds.dangerZoneSection,
@@ -61,6 +62,7 @@ void main() {
       SettingsItemIds.importData,
       SettingsItemIds.pro,
       SettingsItemIds.proStatus,
+      SettingsItemIds.tips,
       SettingsItemIds.leaveFeedback,
       SettingsItemIds.analytics,
       SettingsItemIds.language,

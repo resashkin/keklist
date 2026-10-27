@@ -17,6 +17,8 @@ import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
 import 'package:keklist/domain/repositories/media_index/object/media_day_index_object.dart';
 import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
+import 'package:keklist/domain/services/media_index/photo_library_gallery_source.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:keklist/domain/repositories/tabs/tabs_settings_repository.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
@@ -90,6 +92,7 @@ final class _AppRootState extends State<_AppRoot> {
   final _stepNotifier = ValueNotifier<String>('');
   Widget? _app;
   AppLifecycleListener? _galleryIndexLifecycle;
+  StreamSubscription<void>? _libraryChanges;
 
   @override
   void initState() {
@@ -135,12 +138,21 @@ final class _AppRootState extends State<_AppRoot> {
   void _startGalleryIndexing(GalleryIndexer indexer) {
     indexer.sync();
     _galleryIndexLifecycle = AppLifecycleListener(onResume: indexer.sync);
+    if (indexer.currentProgress.status == GalleryIndexStatus.unsupported) return;
+    // Watching starts once access is known, so it never prompts for photo access by itself.
+    indexer.progress.firstWhere((progress) => progress.status == GalleryIndexStatus.ready).then((_) {
+      if (!mounted) return;
+      _libraryChanges = PhotoLibraryGallerySource.libraryChanges()
+          .debounceTime(const Duration(seconds: 1))
+          .listen((_) => indexer.sync());
+    });
   }
 
   @override
   void dispose() {
     _stepNotifier.dispose();
     _galleryIndexLifecycle?.dispose();
+    _libraryChanges?.cancel();
     super.dispose();
   }
 

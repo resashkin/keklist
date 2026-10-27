@@ -86,6 +86,13 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     );
 
     DayFeedTileMenu.mediaDeleted.listen((_) => _reloadDayFeedMedia(dayIndex)).disposed(by: this);
+    context
+        .read<GalleryIndexer>()
+        .progress
+        .skip(1)
+        .where((progress) => progress.status == GalleryIndexStatus.ready)
+        .listen((_) => _reloadDayFeedMedia(dayIndex, keepsShownMedia: true))
+        .disposed(by: this);
 
     subscribeToBloc<MindBloc>(
       onNewState: (state) async {
@@ -412,12 +419,13 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     _reloadDayFeedMedia(dayIndex);
   }
 
-  void _reloadDayFeedMedia(int dayIndex, {bool requestPhotoAccess = false}) {
+  void _reloadDayFeedMedia(int dayIndex, {bool requestPhotoAccess = false, bool keepsShownMedia = false}) {
     _dayFeedCubit.loadMedia(
       dayIndex: dayIndex,
       folderPath: _mediaFolderPath,
       isFolderRecursive: _isMediaFolderRecursive,
       requestPhotoAccess: requestPhotoAccess,
+      keepsShownMedia: keepsShownMedia,
     );
   }
 

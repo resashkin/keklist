@@ -105,7 +105,7 @@
     "profile": "Profil",
     "insights": "Profil",
     "calendar": "Kalender",
-    "debugMenu": "Debug-Menü",
+    "debugMenu": "Entwicklermenü",
     "discussion": "Diskussion",
     "about": "Über",
     "dangerZone": "Gefahrenzone",
@@ -273,7 +273,6 @@
     "webVersion": "Webversion",
     "webVersionAddressHint": "Im Browser eines Computers im selben WLAN öffnen; keklist muss offen bleiben",
     "webVersionCopied": "Adresse kopiert",
-    "webVersionNeedsPin": "Lege eine PIN fest, um keklist im Browser eines Computers im selben WLAN zu öffnen.",
     "webVersionStarting": "Wird gestartet…",
     "webVersionNoWifi": "Verbinde dich mit einem WLAN, um keklist im Browser zu öffnen.",
     "webVersionNoBundle": "Dieser Build enthält keine Webversion.",
@@ -398,5 +397,8 @@
     "analyticsNeverSent": "Wird nie gesendet",
     "analyticsNeverSentItems": "Deine Einträge, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, wie viele du hast, dein Name, dein Standort und deine IP-Adresse.",
     "analyticsResetId": "Anonyme ID zurücksetzen",
-    "analyticsResetIdDone": "Ab jetzt wird eine neue anonyme ID verwendet"
+    "analyticsResetIdDone": "Ab jetzt wird eine neue anonyme ID verwendet",
+    "settingsSupport": "Unterstützung",
+    "calendarOpenDay": "Tag öffnen",
+    "webVersionEnabled": "Webversion aktivieren"
 }

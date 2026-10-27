@@ -78,6 +78,14 @@ void main() {
       expect(mediaFirst.map((section) => section.kind), [DayFeedSectionKind.gallery, DayFeedSectionKind.minds]);
     });
 
+    test('a single source goes without its header', () {
+      final List<DayFeedSection> mindsOnly =
+          DayFeedLayout.arrange([_mindAt(3), _mindAt(9)], sortOrder: FeedSortOrder.time, grouping: FeedGrouping.type);
+
+      expect(mindsOnly.single.kind, isNull);
+      expect(mindsOnly.single.items.length, 2);
+    });
+
     test('groups by time of day and leaves out empty parts', () {
       final List<DayFeedSection> sections =
           DayFeedLayout.arrange(day, sortOrder: FeedSortOrder.mediaFirst, grouping: FeedGrouping.timeOfDay);

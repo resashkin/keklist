@@ -60,16 +60,10 @@ final class _MindCollectionBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        CalendarDayPill(
-          date: date,
-          isToday: dayIndex == todayIndex,
-          items: items,
-          onTap: () => onTapToDay(dayIndex),
-          onPlay: items.isEmpty ? null : () => onPlay([dayIndex]),
-        ),
+        CalendarDayTitle(date: date, isEmpty: items.isEmpty),
         if (items.isNotEmpty)
           Padding(
-            padding: const EdgeInsets.only(top: 2.0, bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: DayFeedGrid(
               sections: feed.sectionsOf(dayIndex),
               columnCount: settings.columnCount,
@@ -77,6 +71,7 @@ final class _MindCollectionBody extends StatelessWidget {
               onOpenItem: (itemIndex) => onOpenItem(dayIndex, itemIndex),
             ),
           ),
+        CalendarOpenDayButton(onTap: () => onTapToDay(dayIndex)),
       ],
     );
     return Padding(
