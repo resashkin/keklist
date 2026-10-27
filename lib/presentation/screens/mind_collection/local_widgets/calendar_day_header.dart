@@ -18,7 +18,8 @@ final class CalendarDayTitle extends StatelessWidget {
       DateFormat.MMMMEEEEd(Localizations.localeOf(context).toString()).format(date),
     );
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      // The empty state's own padding keeps its text midway between the date and "Open day".
+      padding: EdgeInsets.only(top: 12.0, bottom: isEmpty ? 0.0 : 12.0),
       child: Column(
         children: [
           Text(
@@ -51,7 +52,7 @@ final class CalendarOpenDayButton extends StatelessWidget {
     final bool isDark = theme.brightness == Brightness.dark;
     final BorderRadius radius = BorderRadius.circular(_height / 2);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 12.0),
       child: Center(
         child: DecoratedBox(
           decoration: BoxDecoration(
