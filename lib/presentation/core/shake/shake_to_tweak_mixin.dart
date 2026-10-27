@@ -23,8 +23,8 @@ mixin ShakeToTweakMixin<W extends StatefulWidget> on State<W> {
   static final Set<String> _hintShownThisLaunch = {};
   static const Duration _hintDelay = Duration(milliseconds: 1200);
   static const Duration _hintVisibleDuration = Duration(seconds: 5);
-  // Clears the tab bar and the floating button above it.
-  static const double _hintBottomSpacing = 150.0;
+  // The bottom padding already covers the floating tab bar, so this is just the gap above it.
+  static const double _hintBottomSpacing = 8.0;
   static const double _hintSideSpacing = 16.0;
 
   final ShakeDetector _shakeDetector = ShakeDetector();
