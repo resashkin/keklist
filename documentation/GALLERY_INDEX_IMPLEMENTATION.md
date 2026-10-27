@@ -29,6 +29,7 @@ Phase 2 of the main-emoji/analytics work. The index is also the data source for 
 
 ### 2. Presentation
 - Startup (`_AppRootState`): `sync()` after the app is built and again on every resume (`AppLifecycleListener`). It never asks for Photos permission; when the day screen gets access, it calls `sync()` itself.
+- Live changes: after the first `ready`, `PhotoLibraryGallerySource.libraryChanges()` (PhotoKit change notifications) triggers a debounced `sync()`, so a screenshot taken while the app runs reaches the calendar and the open day screen at once. A `sync()` requested mid-sync runs once more after it.
 - `DayMediaLoader.loadPhotoAssets` skips known-empty days, queries the "All" album for the day otherwise, and calls `refreshDay`.
 - `GalleryThumbnailCache`: 240 px JPEG (quality 70) per asset in `<app support>/gallery_thumbnails`, named by asset id and modification second, so edited photos get a fresh file.
 - `CachedAssetThumbnailProvider`: an `ImageProvider` over the cache, equal per asset version, so Flutter's memory cache dedupes it too. Used by `DayFeedAssetTile`.
@@ -55,7 +56,7 @@ Phase 2 of the main-emoji/analytics work. The index is also the data source for 
 ## Edge Cases & Considerations
 - iOS only. On Android media comes from a user-picked folder (SAF), which is not indexed; the Settings row is hidden there.
 - Only the "All"/Recents album is read. Hidden photos and shared-album items that are not in Recents are not shown (the old per-album loop could include them).
-- An old-dated photo imported after the last scan stays hidden on its (known-empty) day until the next `sync()` (next launch or resume).
+- An old-dated photo imported after the last scan stays hidden on its (known-empty) day until the next `sync()` (a library change, launch or resume).
 - The thumbnail folder grows with the photos you actually look at (~15 KB each); "Rebuild" clears it.
 - An interrupted full scan leaves `isComplete == false`, so the next `sync()` starts over.
 - Startup: the gallery index box is no longer part of "Opening database..."; the calendar and the day screen pick the index up when `sync()` finishes.

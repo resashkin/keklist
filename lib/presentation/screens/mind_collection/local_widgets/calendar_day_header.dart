@@ -1,154 +1,104 @@
 import 'package:intl/intl.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_empty_state.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// The tappable date of a calendar day, centered: the full date, counters of what the day holds and a chevron,
-/// plus a round ▶ that plays its stories; the day's frame is drawn around the whole day by the calendar.
+/// The date of a calendar day, centered; the day's frame is drawn around the whole day by the calendar.
 /// Empty days show the day screen's empty state.
-final class CalendarDayPill extends StatelessWidget {
+final class CalendarDayTitle extends StatelessWidget {
   final DateTime date;
-  final bool isToday;
-  final List<DayFeedItem> items;
-  final VoidCallback onTap;
-  final VoidCallback? onPlay;
+  final bool isEmpty;
 
-  const CalendarDayPill({
-    super.key,
-    required this.date,
-    required this.isToday,
-    required this.items,
-    required this.onTap,
-    required this.onPlay,
-  });
-
-  static const double _kMinPillWidth = 200.0;
-  static const double _kPillHeight = 48.0;
+  const CalendarDayTitle({super.key, required this.date, required this.isEmpty});
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final ColorScheme colors = theme.colorScheme;
-    final Color foreground = colors.onSurface;
     final String title = toBeginningOfSentenceCase(
       DateFormat.MMMMEEEEd(Localizations.localeOf(context).toString()).format(date),
     );
-
     return Padding(
-      padding: const EdgeInsets.only(top: 6.0, bottom: 6.0),
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 8.0,
-            children: [
-              Material(
-                color: Colors.transparent,
-                shape: const StadiumBorder(),
-                clipBehavior: Clip.antiAlias,
-                child: InkWell(
-                  onTap: onTap,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(minWidth: _kMinPillWidth, minHeight: _kPillHeight),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20.0, 6.0, 12.0, 6.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 4.0,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            spacing: 2.0,
-                            children: [
-                              Text(
-                                title,
-                                style: theme.textTheme.titleSmall?.copyWith(
-                                  color: foreground,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              if (items.isNotEmpty)
-                                _DayCounters(items: items, color: foreground.withValues(alpha: 0.65)),
-                            ],
-                          ),
-                          Icon(Icons.chevron_right, size: 20.0, color: foreground.withValues(alpha: 0.7)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              if (onPlay != null)
-                Material(
-                  color: Colors.transparent,
-                  shape: const CircleBorder(),
-                  clipBehavior: Clip.antiAlias,
-                  child: InkWell(
-                    onTap: onPlay,
-                    child: SizedBox.square(
-                      dimension: _kPillHeight,
-                      child: Icon(
-                        Icons.play_arrow_rounded,
-                        size: 24.0,
-                        color: foreground,
-                        semanticLabel: context.l10n.calendarPlayStories,
-                      ),
-                    ),
-                  ),
-                ),
-            ],
+          Text(
+            title,
+            style: theme.textTheme.titleSmall?.copyWith(
+              color: theme.colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          if (items.isEmpty) const DayEmptyState(),
+          if (isEmpty) const DayEmptyState(),
         ],
       ),
     );
   }
 }
 
-/// "✎ 6 · 📷 3 · ▶ 1 · ☺ 7": minds, photos, videos and emotion marks of the day; zero counts are hidden.
-final class _DayCounters extends StatelessWidget {
-  final List<DayFeedItem> items;
-  final Color color;
+/// "Open day" under a calendar day, the way into its day screen: a small glass capsule. It draws the glass
+/// itself rather than blurring, since the plain card behind it has nothing to blur and the list is long.
+final class CalendarOpenDayButton extends StatelessWidget {
+  final VoidCallback onTap;
 
-  const _DayCounters({required this.items, required this.color});
+  const CalendarOpenDayButton({super.key, required this.onTap});
+
+  static const double _height = 34.0;
 
   @override
   Widget build(BuildContext context) {
-    final int minds = items.whereType<DayFeedMind>().length;
-    final int videos = items
-        .where(
-          (item) => switch (item) {
-            DayFeedAsset() => item.isVideo,
-            DayFeedFolderMedia() => item.isVideo,
-            DayFeedMind() => false,
-          },
-        )
-        .length;
-    final int photos = items.length - minds - videos;
-    final int emotions = items.whereType<DayFeedMind>().fold(0, (sum, item) => sum + item.mind.emotionIds.length);
-    final TextStyle? style = Theme.of(context).textTheme.labelMedium?.copyWith(color: color);
-    final List<(IconData, int)> counters = [
-      (Icons.edit_note_rounded, minds),
-      (Icons.photo_outlined, photos),
-      (Icons.videocam_outlined, videos),
-      (Icons.sentiment_satisfied_outlined, emotions),
-    ].where((counter) => counter.$2 > 0).toList();
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 10.0,
-      children: [
-        for (final (IconData icon, int count) in counters)
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            spacing: 3.0,
-            children: [
-              Icon(icon, size: 14.0, color: color),
-              Text('$count', style: style),
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colors = theme.colorScheme;
+    final bool isDark = theme.brightness == Brightness.dark;
+    final BorderRadius radius = BorderRadius.circular(_height / 2);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Center(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: radius,
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.lerp(colors.surface, Colors.white, isDark ? 0.14 : 1.0)!.withValues(alpha: 0.9),
+                Color.lerp(colors.surface, colors.onSurface, isDark ? 0.04 : 0.05)!.withValues(alpha: 0.9),
+              ],
+            ),
+            border: Border.all(color: Colors.white.withValues(alpha: isDark ? 0.18 : 0.9)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: isDark ? 0.35 : 0.08),
+                blurRadius: 12.0,
+                offset: const Offset(0.0, 3.0),
+              ),
             ],
           ),
-      ],
+          child: Material(
+            type: MaterialType.transparency,
+            borderRadius: radius,
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              onTap: onTap,
+              child: SizedBox(
+                height: _height,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                  child: Center(
+                    widthFactor: 1.0,
+                    child: Text(
+                      context.l10n.calendarOpenDay,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: colors.onSurface.withValues(alpha: 0.85),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

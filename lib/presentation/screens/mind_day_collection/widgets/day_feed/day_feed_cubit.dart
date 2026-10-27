@@ -49,12 +49,15 @@ final class DayFeedCubit extends Cubit<DayFeedState> {
     required String? folderPath,
     required bool isFolderRecursive,
     bool requestPhotoAccess = false,
+    bool keepsShownMedia = false,
   }) async {
     final int requestId = ++_mediaRequestId;
-    _media = const [];
-    _mediaIssue = null;
-    _isMediaLoading = true;
-    _emit();
+    if (!keepsShownMedia) {
+      _media = const [];
+      _mediaIssue = null;
+      _isMediaLoading = true;
+      _emit();
+    }
 
     final (List<DayFeedItem> media, DayFeedMediaIssue? issue) = kIsPhoneWeb
         ? await _loadPhoneMedia(dayIndex)

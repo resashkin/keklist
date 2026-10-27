@@ -351,7 +351,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get calendar => 'Календар';
 
   @override
-  String get debugMenu => 'Мени за отклањање грешака';
+  String get debugMenu => 'Мени за програмере';
 
   @override
   String get discussion => 'Дискусија';
@@ -892,10 +892,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get webVersionCopied => 'Адреса је копирана';
 
   @override
-  String get webVersionNeedsPin =>
-      'Поставите PIN да бисте отворили keklist у прегледачу рачунара на истој Wi‑Fi мрежи.';
-
-  @override
   String get webVersionStarting => 'Покретање…';
 
   @override
@@ -1295,6 +1291,15 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get analyticsResetIdDone => 'Од сада се користи нови анонимни ID';
+
+  @override
+  String get settingsSupport => 'Подршка';
+
+  @override
+  String get calendarOpenDay => 'Отвори дан';
+
+  @override
+  String get webVersionEnabled => 'Укључи веб верзију';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1644,7 +1649,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get calendar => 'Kalendar';
 
   @override
-  String get debugMenu => 'Debug meni';
+  String get debugMenu => 'Meni za programere';
 
   @override
   String get discussion => 'Diskusija';
@@ -2184,10 +2189,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get webVersionCopied => 'Adresa je kopirana';
 
   @override
-  String get webVersionNeedsPin =>
-      'Postavite PIN da biste otvorili keklist u pregledaču računara na istoj Wi‑Fi mreži.';
-
-  @override
   String get webVersionStarting => 'Pokretanje…';
 
   @override
@@ -2587,4 +2588,13 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get analyticsResetIdDone => 'Od sada se koristi novi anonimni ID';
+
+  @override
+  String get settingsSupport => 'Podrška';
+
+  @override
+  String get calendarOpenDay => 'Otvori dan';
+
+  @override
+  String get webVersionEnabled => 'Uključi veb verziju';
 }

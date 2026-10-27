@@ -5,10 +5,11 @@ abstract final class SettingsItemIds {
   static const String userDataSection = 'section.userData';
   static const String webVersionSection = 'section.webVersion';
   static const String aiSection = 'section.ai';
-  static const String applicationSection = 'section.application';
+  static const String supportSection = 'section.support';
   static const String appearanceSection = 'section.appearance';
   static const String aboutSection = 'section.about';
   static const String dangerZoneSection = 'section.dangerZone';
+  static const String developerSection = 'section.developer';
 
   static const String exportData = 'row.exportData';
   static const String importData = 'row.importData';
@@ -16,6 +17,7 @@ abstract final class SettingsItemIds {
   static const String hiddenMedia = 'row.hiddenMedia';
   static const String pro = 'row.pro';
   static const String proStatus = 'row.proStatus';
+  static const String tips = 'row.tips';
   static const String leaveFeedback = 'row.leaveFeedback';
   static const String analytics = 'row.analytics';
   static const String language = 'row.language';
@@ -27,6 +29,7 @@ abstract final class SettingsItemIds {
   static const String privacyPolicy = 'row.privacyPolicy';
   static const String licenses = 'row.licenses';
   static const String clearOnDeviceData = 'row.clearOnDeviceData';
+  static const String webVersionEnabled = 'row.webVersionEnabled';
   static const String webVersionAddress = 'row.webVersionAddress';
   static const String webVersionPin = 'row.webVersionPin';
   static const String webVersionPort = 'row.webVersionPort';

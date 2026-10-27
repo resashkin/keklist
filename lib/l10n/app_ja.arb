@@ -105,7 +105,7 @@
     "profile": "プロフィール",
     "insights": "プロフィール",
     "calendar": "カレンダー",
-    "debugMenu": "デバッグメニュー",
+    "debugMenu": "開発者メニュー",
     "discussion": "ディスカッション",
     "about": "について",
     "dangerZone": "危険ゾーン",
@@ -273,7 +273,6 @@
     "webVersion": "Web版",
     "webVersionAddressHint": "同じWi‑Fiのパソコンのブラウザで開きます。keklistは開いたままにしてください",
     "webVersionCopied": "アドレスをコピーしました",
-    "webVersionNeedsPin": "PINを設定すると、同じWi‑Fiのパソコンのブラウザでkeklistを開けます。",
     "webVersionStarting": "起動中…",
     "webVersionNoWifi": "ブラウザでkeklistを開くにはWi‑Fiに接続してください。",
     "webVersionNoBundle": "このビルドにはWeb版が含まれていません。",
@@ -398,5 +397,8 @@
     "analyticsNeverSent": "送信されないもの",
     "analyticsNeverSentItems": "あなたの記録とそのテキスト・感情・コメント、写真・動画・音声、その数、名前、位置情報、IP アドレス。",
     "analyticsResetId": "匿名 ID をリセット",
-    "analyticsResetIdDone": "これから新しい匿名 ID が使われます"
+    "analyticsResetIdDone": "これから新しい匿名 ID が使われます",
+    "settingsSupport": "サポート",
+    "calendarOpenDay": "日を開く",
+    "webVersionEnabled": "Web版を有効にする"
 }

@@ -105,7 +105,7 @@
     "profile": "Профиль",
     "insights": "Профиль",
     "calendar": "Календарь",
-    "debugMenu": "Меню отладки",
+    "debugMenu": "Меню разработчика",
     "discussion": "Обсуждение",
     "about": "О программе",
     "dangerZone": "Опасная зона",
@@ -273,7 +273,6 @@
     "webVersion": "Веб-версия",
     "webVersionAddressHint": "Откройте в браузере компьютера в той же Wi‑Fi; keklist должен быть открыт",
     "webVersionCopied": "Адрес скопирован",
-    "webVersionNeedsPin": "Задайте PIN, чтобы открыть keklist в браузере компьютера в той же Wi‑Fi.",
     "webVersionStarting": "Запуск…",
     "webVersionNoWifi": "Подключитесь к Wi‑Fi, чтобы открыть keklist в браузере.",
     "webVersionNoBundle": "В эту сборку не входит веб-версия.",
@@ -398,5 +397,8 @@
     "analyticsNeverSent": "Никогда не отправляется",
     "analyticsNeverSentItems": "Ваши записи, их текст, эмоции и комментарии, фото, видео и аудио, их количество, ваше имя, местоположение и IP-адрес.",
     "analyticsResetId": "Сбросить анонимный ID",
-    "analyticsResetIdDone": "Теперь используется новый анонимный ID"
+    "analyticsResetIdDone": "Теперь используется новый анонимный ID",
+    "settingsSupport": "Поддержка",
+    "calendarOpenDay": "Открыть день",
+    "webVersionEnabled": "Включить веб-версию"
 }

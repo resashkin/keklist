@@ -105,7 +105,7 @@
     "profile": "Профил",
     "insights": "Профил",
     "calendar": "Календар",
-    "debugMenu": "Мени за отклањање грешака",
+    "debugMenu": "Мени за програмере",
     "discussion": "Дискусија",
     "about": "О програму",
     "dangerZone": "Опасна зона",
@@ -273,7 +273,6 @@
     "webVersion": "Веб верзија",
     "webVersionAddressHint": "Отворите у прегледачу рачунара на истој Wi‑Fi мрежи; keklist мора остати отворен",
     "webVersionCopied": "Адреса је копирана",
-    "webVersionNeedsPin": "Поставите PIN да бисте отворили keklist у прегледачу рачунара на истој Wi‑Fi мрежи.",
     "webVersionStarting": "Покретање…",
     "webVersionNoWifi": "Повежите се на Wi‑Fi да бисте отворили keklist у прегледачу.",
     "webVersionNoBundle": "Ова верзија не садржи веб верзију.",
@@ -398,5 +397,8 @@
     "analyticsNeverSent": "Никад се не шаље",
     "analyticsNeverSentItems": "Твоји записи, њихов текст, емоције и коментари, фотографије, видео и аудио, колико их имаш, твоје име, локација и IP адреса.",
     "analyticsResetId": "Ресетуј анонимни ID",
-    "analyticsResetIdDone": "Од сада се користи нови анонимни ID"
+    "analyticsResetIdDone": "Од сада се користи нови анонимни ID",
+    "settingsSupport": "Подршка",
+    "calendarOpenDay": "Отвори дан",
+    "webVersionEnabled": "Укључи веб верзију"
 }

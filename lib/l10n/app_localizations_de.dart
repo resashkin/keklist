@@ -354,7 +354,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get calendar => 'Kalender';
 
   @override
-  String get debugMenu => 'Debug-Menü';
+  String get debugMenu => 'Entwicklermenü';
 
   @override
   String get discussion => 'Diskussion';
@@ -900,10 +900,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get webVersionCopied => 'Adresse kopiert';
 
   @override
-  String get webVersionNeedsPin =>
-      'Lege eine PIN fest, um keklist im Browser eines Computers im selben WLAN zu öffnen.';
-
-  @override
   String get webVersionStarting => 'Wird gestartet…';
 
   @override
@@ -1307,4 +1303,13 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get analyticsResetIdDone =>
       'Ab jetzt wird eine neue anonyme ID verwendet';
+
+  @override
+  String get settingsSupport => 'Unterstützung';
+
+  @override
+  String get calendarOpenDay => 'Tag öffnen';
+
+  @override
+  String get webVersionEnabled => 'Webversion aktivieren';
 }

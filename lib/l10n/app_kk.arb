@@ -207,7 +207,7 @@
     "@calendar": {
         "description": "Күнтізбе таб белгісі"
     },
-    "debugMenu": "Debug мәзірі",
+    "debugMenu": "Әзірлеуші мәзірі",
     "@debugMenu": {
         "description": "Debug мәзірі таб белгісі"
     },
@@ -486,7 +486,6 @@
     "webVersion": "Веб-нұсқа",
     "webVersionAddressHint": "Сол Wi‑Fi желісіндегі компьютер браузерінде ашыңыз; keklist ашық тұруы керек",
     "webVersionCopied": "Мекенжай көшірілді",
-    "webVersionNeedsPin": "keklist-ті сол Wi‑Fi желісіндегі компьютер браузерінде ашу үшін PIN орнатыңыз.",
     "webVersionStarting": "Іске қосылуда…",
     "webVersionNoWifi": "keklist-ті браузерде ашу үшін Wi‑Fi-ға қосылыңыз.",
     "webVersionNoBundle": "Бұл құрастыруда веб-нұсқа жоқ.",
@@ -611,5 +610,8 @@
     "analyticsNeverSent": "Ешқашан жіберілмейді",
     "analyticsNeverSentItems": "Жазбаларыңыз, олардың мәтіні, эмоциялары мен пікірлері, фото, бейне және аудио, олардың саны, атыңыз, орналасқан жеріңіз және IP-мекенжайыңыз.",
     "analyticsResetId": "Анонимді ID-ні қалпына келтіру",
-    "analyticsResetIdDone": "Енді жаңа анонимді ID қолданылады"
+    "analyticsResetIdDone": "Енді жаңа анонимді ID қолданылады",
+    "settingsSupport": "Қолдау",
+    "calendarOpenDay": "Күнді ашу",
+    "webVersionEnabled": "Веб-нұсқаны қосу"
 }

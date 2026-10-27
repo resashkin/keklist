@@ -353,7 +353,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get calendar => 'Календарь';
 
   @override
-  String get debugMenu => 'Debug менюсу';
+  String get debugMenu => 'Иштеп чыгуучунун менюсу';
 
   @override
   String get discussion => 'Талкуулоо';
@@ -893,10 +893,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get webVersionCopied => 'Дарек көчүрүлдү';
 
   @override
-  String get webVersionNeedsPin =>
-      'keklist\'ти ошол эле Wi‑Fi\'дагы компьютердин браузеринде ачуу үчүн PIN коюңуз.';
-
-  @override
   String get webVersionStarting => 'Иштетилүүдө…';
 
   @override
@@ -1297,4 +1293,13 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get analyticsResetIdDone => 'Эми жаңы анонимдүү ID колдонулат';
+
+  @override
+  String get settingsSupport => 'Колдоо';
+
+  @override
+  String get calendarOpenDay => 'Күндү ачуу';
+
+  @override
+  String get webVersionEnabled => 'Веб-версияны күйгүзүү';
 }

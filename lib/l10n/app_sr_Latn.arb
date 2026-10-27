@@ -205,7 +205,7 @@
     "@calendar": {
         "description": "Oznaka taba kalendara"
     },
-    "debugMenu": "Debug meni",
+    "debugMenu": "Meni za programere",
     "@debugMenu": {
         "description": "Oznaka taba debug menija"
     },
@@ -486,7 +486,6 @@
     "webVersion": "Veb verzija",
     "webVersionAddressHint": "Otvorite u pregledaču računara na istoj Wi‑Fi mreži; keklist mora ostati otvoren",
     "webVersionCopied": "Adresa je kopirana",
-    "webVersionNeedsPin": "Postavite PIN da biste otvorili keklist u pregledaču računara na istoj Wi‑Fi mreži.",
     "webVersionStarting": "Pokretanje…",
     "webVersionNoWifi": "Povežite se na Wi‑Fi da biste otvorili keklist u pregledaču.",
     "webVersionNoBundle": "Ova verzija ne sadrži veb verziju.",
@@ -611,5 +610,8 @@
     "analyticsNeverSent": "Nikad se ne šalje",
     "analyticsNeverSentItems": "Tvoji zapisi, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.",
     "analyticsResetId": "Resetuj anonimni ID",
-    "analyticsResetIdDone": "Od sada se koristi novi anonimni ID"
+    "analyticsResetIdDone": "Od sada se koristi novi anonimni ID",
+    "settingsSupport": "Podrška",
+    "calendarOpenDay": "Otvori dan",
+    "webVersionEnabled": "Uključi veb verziju"
 }

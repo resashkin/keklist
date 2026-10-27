@@ -28,6 +28,7 @@ class WebAccess extends ChangeNotifier {
   static const sessionLifetime = Duration(days: 30);
   static final pinFormat = RegExp(r'^\d{4,8}$');
 
+  static const _enabledKey = 'web.enabled';
   static const _pinKey = 'web.pin';
   static const _portKey = 'web.port';
   static const _sessionsKey = 'web.sessions';
@@ -50,8 +51,15 @@ class WebAccess extends ChangeNotifier {
   var _failures = 0;
   DateTime? _lockedUntil;
 
-  /// Without a PIN the web version is not served at all.
   bool get hasPin => _prefs.containsKey(_pinKey);
+
+  /// Served only while switched on and guarded by a PIN; off until the user turns it on.
+  bool get isEnabled => hasPin && (_prefs.getBool(_enabledKey) ?? false);
+
+  Future<void> setEnabled(bool isEnabled) async {
+    await _prefs.setBool(_enabledKey, isEnabled);
+    notifyListeners();
+  }
 
   /// Sets the PIN, or removes it with `null`. Browsers that entered the old
   /// one have to enter the new one.
@@ -65,6 +73,7 @@ class WebAccess extends ChangeNotifier {
     await _prefs.remove(_sessionsKey);
     if (pin == null) {
       await _prefs.remove(_pinKey);
+      await _prefs.remove(_enabledKey);
     } else {
       final salt = _randomBytes(16);
       await _prefs.setString(

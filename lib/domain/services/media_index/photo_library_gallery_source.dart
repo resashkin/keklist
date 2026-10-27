@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import 'package:keklist/domain/services/media_index/gallery_source.dart';
 import 'package:keklist/domain/services/media_index/media_day_index.dart';
@@ -60,6 +62,23 @@ final class PhotoLibraryGallerySource implements GallerySource {
     createDateSecond: info.createDate.millisecondsSinceEpoch ~/ 1000,
     modifiedDateSecond: info.modifiedDate.millisecondsSinceEpoch ~/ 1000,
   );
+
+  /// Fires while the app runs whenever the library changes, e.g. after a screenshot; call once access is granted.
+  static Stream<void> libraryChanges() {
+    late final StreamController<void> controller;
+    void onChange(MethodCall _) => controller.add(null);
+    controller = StreamController<void>.broadcast(
+      onListen: () {
+        PhotoManager.addChangeCallback(onChange);
+        PhotoManager.startChangeNotify();
+      },
+      onCancel: () {
+        PhotoManager.removeChangeCallback(onChange);
+        PhotoManager.stopChangeNotify();
+      },
+    );
+    return controller.stream;
+  }
 
   @override
   bool get isSupported => !kIsWeb && Platform.isIOS;

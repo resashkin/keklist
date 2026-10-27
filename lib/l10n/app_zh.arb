@@ -105,7 +105,7 @@
     "profile": "个人资料",
     "insights": "个人资料",
     "calendar": "日历",
-    "debugMenu": "调试菜单",
+    "debugMenu": "开发者菜单",
     "discussion": "讨论",
     "about": "关于",
     "dangerZone": "危险区域",
@@ -273,7 +273,6 @@
     "webVersion": "网页版",
     "webVersionAddressHint": "在同一 Wi‑Fi 下的电脑浏览器中打开；请保持 keklist 打开",
     "webVersionCopied": "地址已复制",
-    "webVersionNeedsPin": "设置 PIN 后即可在同一 Wi‑Fi 下的电脑浏览器中打开 keklist。",
     "webVersionStarting": "正在启动…",
     "webVersionNoWifi": "连接 Wi‑Fi 后即可在浏览器中打开 keklist。",
     "webVersionNoBundle": "此版本不包含网页版。",
@@ -398,5 +397,8 @@
     "analyticsNeverSent": "绝不发送",
     "analyticsNeverSentItems": "你的记录及其文字、情绪和评论,照片、视频和音频,它们的数量,你的名字、位置和 IP 地址。",
     "analyticsResetId": "重置匿名 ID",
-    "analyticsResetIdDone": "从现在起使用新的匿名 ID"
+    "analyticsResetIdDone": "从现在起使用新的匿名 ID",
+    "settingsSupport": "支持",
+    "calendarOpenDay": "打开这一天",
+    "webVersionEnabled": "启用网页版"
 }

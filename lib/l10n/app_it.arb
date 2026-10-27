@@ -207,7 +207,7 @@
     "@calendar": {
         "description": "Etichetta tab calendario"
     },
-    "debugMenu": "Menu Debug",
+    "debugMenu": "Menu sviluppatore",
     "@debugMenu": {
         "description": "Etichetta tab menu debug"
     },
@@ -486,7 +486,6 @@
     "webVersion": "Versione web",
     "webVersionAddressHint": "Aprila nel browser di un computer sulla stessa Wi‑Fi; tieni keklist aperto",
     "webVersionCopied": "Indirizzo copiato",
-    "webVersionNeedsPin": "Imposta un PIN per aprire keklist nel browser di un computer sulla stessa Wi‑Fi.",
     "webVersionStarting": "Avvio…",
     "webVersionNoWifi": "Connettiti a una Wi‑Fi per aprire keklist in un browser.",
     "webVersionNoBundle": "Questa build non include la versione web.",
@@ -611,5 +610,8 @@
     "analyticsNeverSent": "Mai inviato",
     "analyticsNeverSentItems": "Le tue note, il loro testo, emozioni e commenti, foto, video e audio, quanti ne hai, il tuo nome, la tua posizione e il tuo indirizzo IP.",
     "analyticsResetId": "Reimposta ID anonimo",
-    "analyticsResetIdDone": "D'ora in poi viene usato un nuovo ID anonimo"
+    "analyticsResetIdDone": "D'ora in poi viene usato un nuovo ID anonimo",
+    "settingsSupport": "Supporto",
+    "calendarOpenDay": "Apri giorno",
+    "webVersionEnabled": "Attiva versione web"
 }

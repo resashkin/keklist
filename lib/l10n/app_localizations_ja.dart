@@ -346,7 +346,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get calendar => 'カレンダー';
 
   @override
-  String get debugMenu => 'デバッグメニュー';
+  String get debugMenu => '開発者メニュー';
 
   @override
   String get discussion => 'ディスカッション';
@@ -864,9 +864,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get webVersionCopied => 'アドレスをコピーしました';
 
   @override
-  String get webVersionNeedsPin => 'PINを設定すると、同じWi‑Fiのパソコンのブラウザでkeklistを開けます。';
-
-  @override
   String get webVersionStarting => '起動中…';
 
   @override
@@ -1253,4 +1250,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get analyticsResetIdDone => 'これから新しい匿名 ID が使われます';
+
+  @override
+  String get settingsSupport => 'サポート';
+
+  @override
+  String get calendarOpenDay => '日を開く';
+
+  @override
+  String get webVersionEnabled => 'Web版を有効にする';
 }

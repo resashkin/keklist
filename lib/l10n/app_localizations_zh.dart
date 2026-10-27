@@ -345,7 +345,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get calendar => '日历';
 
   @override
-  String get debugMenu => '调试菜单';
+  String get debugMenu => '开发者菜单';
 
   @override
   String get discussion => '讨论';
@@ -859,9 +859,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get webVersionCopied => '地址已复制';
 
   @override
-  String get webVersionNeedsPin => '设置 PIN 后即可在同一 Wi‑Fi 下的电脑浏览器中打开 keklist。';
-
-  @override
   String get webVersionStarting => '正在启动…';
 
   @override
@@ -1246,4 +1243,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get analyticsResetIdDone => '从现在起使用新的匿名 ID';
+
+  @override
+  String get settingsSupport => '支持';
+
+  @override
+  String get calendarOpenDay => '打开这一天';
+
+  @override
+  String get webVersionEnabled => '启用网页版';
 }

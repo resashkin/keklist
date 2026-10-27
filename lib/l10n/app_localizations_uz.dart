@@ -354,7 +354,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get calendar => 'Taqvim';
 
   @override
-  String get debugMenu => 'Debug menyusi';
+  String get debugMenu => 'Dasturchi menyusi';
 
   @override
   String get discussion => 'Muhokama';
@@ -894,10 +894,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get webVersionCopied => 'Manzil nusxalandi';
 
   @override
-  String get webVersionNeedsPin =>
-      'keklist\'ni xuddi shu Wi‑Fi\'dagi kompyuter brauzerida ochish uchun PIN o‘rnating.';
-
-  @override
   String get webVersionStarting => 'Ishga tushmoqda…';
 
   @override
@@ -1299,4 +1295,13 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get analyticsResetIdDone => 'Endi yangi anonim ID ishlatiladi';
+
+  @override
+  String get settingsSupport => 'Qo\'llab-quvvatlash';
+
+  @override
+  String get calendarOpenDay => 'Kunni ochish';
+
+  @override
+  String get webVersionEnabled => 'Veb-versiyani yoqish';
 }

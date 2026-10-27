@@ -753,10 +753,10 @@ abstract class AppLocalizations {
   /// **'Calendar'**
   String get calendar;
 
-  /// Debug menu title
+  /// Settings row and screen title of the hidden developer menu
   ///
   /// In en, this message translates to:
-  /// **'Debug Menu'**
+  /// **'Developer menu'**
   String get debugMenu;
 
   /// Discussion screen title
@@ -1761,12 +1761,6 @@ abstract class AppLocalizations {
   /// **'Address copied'**
   String get webVersionCopied;
 
-  /// No description provided for @webVersionNeedsPin.
-  ///
-  /// In en, this message translates to:
-  /// **'Set a PIN to open keklist in a browser on a computer in the same Wi-Fi.'**
-  String get webVersionNeedsPin;
-
   /// No description provided for @webVersionStarting.
   ///
   /// In en, this message translates to:
@@ -2516,6 +2510,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A new anonymous ID is used from now on'**
   String get analyticsResetIdDone;
+
+  /// Settings section with the subscription, tips and feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get settingsSupport;
+
+  /// Button under a calendar day that opens the day screen
+  ///
+  /// In en, this message translates to:
+  /// **'Open day'**
+  String get calendarOpenDay;
+
+  /// Switch that turns the phone's web version server on or off
+  ///
+  /// In en, this message translates to:
+  /// **'Serve web version'**
+  String get webVersionEnabled;
 }
 
 class _AppLocalizationsDelegate

@@ -69,7 +69,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   String? _proPriceString;
   Set<String> _hiddenItemIds = {};
   int _hiddenMediaCount = 0;
-  bool _isAnalyticsEnabled = true;
 
   @override
   void initState() {
@@ -83,7 +82,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
               _isDebugMenuVisible = state.settings.isDebugMenuVisible;
               _hiddenItemIds = state.settings.hiddenSettingsItemIds;
               _hiddenMediaCount = state.settings.hiddenMediaIds.length;
-              _isAnalyticsEnabled = state.settings.isAnalyticsEnabled;
             });
             break;
           case SettingsShowMessage state:
@@ -239,8 +237,8 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
         rows: webVersionRows(context, context.watch<KeklistWebServer>()),
       ),
     SettingsSectionModel(
-      id: SettingsItemIds.applicationSection,
-      title: 'Application', // TODO: localize
+      id: SettingsItemIds.supportSection,
+      title: context.l10n.settingsSupport,
       rows: [
         if (!_isPro)
           _navigationRow(
@@ -250,8 +248,10 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             onTap: () => _openPaywall(),
           )
         else if (!kIsPhoneWeb)
+          SettingsRowModel(id: SettingsItemIds.proStatus, title: 'keklist PRO', tile: _buildProFooterTile(context)),
+        if (!kIsPhoneWeb)
           _navigationRow(
-            id: SettingsItemIds.pro,
+            id: SettingsItemIds.tips,
             title: 'Support keklist',
             leading: const Icon(Icons.favorite, color: Colors.amber),
             onTap: () => PaywallBottomSheet.show(context, tipsOnly: true),
@@ -263,23 +263,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             leading: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.lightBlueAccent),
             onTap: () => FeedbackScreen.show(context),
           ),
-        if (!kIsWeb)
-          SettingsRowModel(
-            id: SettingsItemIds.analytics,
-            title: context.l10n.analytics,
-            leading: const Icon(Icons.query_stats_rounded, color: Colors.tealAccent),
-            tile: ListTile(
-              title: Text(context.l10n.analytics),
-              leading: const Icon(Icons.query_stats_rounded, color: Colors.tealAccent),
-              trailing: Switch.adaptive(
-                value: _isAnalyticsEnabled,
-                onChanged: (value) => sendEventToBloc<SettingsBloc>(SettingsSetAnalyticsEnabled(isEnabled: value)),
-              ),
-              onTap: () => AnalyticsSettingsScreen.show(context),
-            ),
-          ),
-        if (_isPro && !kIsPhoneWeb)
-          SettingsRowModel(id: SettingsItemIds.proStatus, title: 'keklist PRO', tile: _buildProFooterTile(context)),
       ],
     ),
     SettingsSectionModel(
@@ -304,12 +287,12 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
           leading: const Icon(Icons.dashboard, color: Colors.blue),
           onTap: () => _showTabsSettings(),
         ),
-        if (_isDebugMenuVisible)
+        if (!kIsWeb)
           _navigationRow(
-            id: SettingsItemIds.debugMenu,
-            title: context.l10n.debugMenu,
-            leading: const Icon(Icons.bug_report, color: Colors.orange),
-            onTap: () => _showDebugMenu(),
+            id: SettingsItemIds.analytics,
+            title: context.l10n.analytics,
+            leading: const Icon(Icons.query_stats_rounded, color: Colors.tealAccent),
+            onTap: () => AnalyticsSettingsScreen.show(context),
           ),
       ],
     ),
@@ -354,6 +337,19 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             leading: const Icon(Icons.delete_outline, color: Colors.red),
             hasChevron: false,
             onTap: () async => await _clearCache(),
+          ),
+        ],
+      ),
+    if (_isDebugMenuVisible)
+      SettingsSectionModel(
+        id: SettingsItemIds.developerSection,
+        title: context.l10n.debugMenu,
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.debugMenu,
+            title: context.l10n.debugMenu,
+            leading: const Icon(Icons.bug_report, color: Colors.orange),
+            onTap: () => _showDebugMenu(),
           ),
         ],
       ),
