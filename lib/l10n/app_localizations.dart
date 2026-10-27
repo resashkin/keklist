@@ -2433,12 +2433,6 @@ abstract class AppLocalizations {
   /// **'What do you like, what\'s broken, what\'s missing?'**
   String get feedbackHint;
 
-  /// Under the feedback field: what is sent
-  ///
-  /// In en, this message translates to:
-  /// **'Only this text, the app version and the platform are sent.'**
-  String get feedbackPrivacy;
-
   /// Send feedback button
   ///
   /// In en, this message translates to:
@@ -2528,6 +2522,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Serve web version'**
   String get webVersionEnabled;
+
+  /// Title of the bottom sheet with a story mind's comments
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get viewerComments;
+
+  /// Shown in the comments sheet when a mind has no comments yet
+  ///
+  /// In en, this message translates to:
+  /// **'No comments yet'**
+  String get viewerNoComments;
 }
 
 class _AppLocalizationsDelegate

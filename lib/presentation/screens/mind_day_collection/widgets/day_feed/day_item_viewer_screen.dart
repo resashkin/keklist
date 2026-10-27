@@ -15,7 +15,6 @@ import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart'
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
-import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
@@ -26,6 +25,7 @@ import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.da
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_layout.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/folder_media_item.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_comments.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/story_texture_tweak_sheet.dart';
 import 'package:material_ui/material_ui.dart';
@@ -44,7 +44,6 @@ const double _kRoundVideoSize = 260.0;
 const double _kAudioCircleSize = 200.0;
 const double _kFadeDistance = 320.0;
 const double _kHeaderSpace = 100.0;
-const double _kCommentBarSpace = 72.0;
 const double _kEdgeTapShare = 0.22;
 const Duration _kVideoFallbackDuration = Duration(seconds: 5);
 const double _kWideMinWidth = 800.0;
@@ -103,8 +102,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   bool _isClosing = false;
   bool _isHeld = false;
 
-  final TextEditingController _commentController = TextEditingController();
-  final FocusNode _commentFocusNode = FocusNode();
 
   DayFeedItem get _currentItem => widget.items[_index];
 
@@ -117,7 +114,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   @override
   void initState() {
     super.initState();
-    _commentController.addListener(() => setState(() {}));
     _startTimer();
   }
 
@@ -125,8 +121,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   void dispose() {
     _progress.dispose();
     _pageController.dispose();
-    _commentController.dispose();
-    _commentFocusNode.dispose();
     super.dispose();
   }
 
@@ -206,7 +200,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     final DayFeedItem item = _currentItem;
     final EdgeInsets safe = MediaQuery.paddingOf(context);
     // Pages fill the whole screen so the texture runs behind the header and the comment bar.
-    final double commentSpace = item is DayFeedMind ? _kCommentBarSpace : 0.0;
+    final double commentSpace = item is DayFeedMind ? MindCommentPreview.height + 8.0 : 0.0;
     final EdgeInsets contentInsets = EdgeInsets.only(top: safe.top + _kHeaderSpace, bottom: safe.bottom + commentSpace);
     final Widget story = NotificationListener<ScrollNotification>(
       onNotification: _onScroll,
@@ -218,25 +212,25 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
         onLongPressEnd: widget.autoplay ? (_) => _release() : null,
         child: Opacity(
           opacity: 1.0 - dismissProgress * 0.85,
-          child: Transform.translate(
-            offset: Offset(0.0, _dragOffsetY),
-            child: Stack(
-              children: [
-                Positioned.fill(
+          child: Stack(
+            children: [
+              // Only the page follows the finger; the segments, header and comment bar stay put, as when a mind
+              // is pulled past its top.
+              Positioned.fill(
+                child: Transform.translate(
+                  offset: Offset(0.0, _dragOffsetY),
                   child: PageView.builder(
                     controller: _pageController,
                     itemCount: widget.items.length,
                     onPageChanged: (index) {
-                      setState(() {
-                        _index = index;
-                        _resetComment();
-                      });
+                      setState(() => _index = index);
                       _startTimer();
                     },
                     itemBuilder: (context, index) =>
                         _buildPage(widget.items[index], isCurrent: index == _index, insets: contentInsets),
                   ),
                 ),
+              ),
                 for (final bool isLeft in [true, false])
                   Positioned(
                     top: contentInsets.top,
@@ -259,10 +253,9 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                   ),
                 ),
                 if (item is DayFeedMind)
-                  Positioned(left: 0.0, right: 0.0, bottom: 0.0, child: _buildCommentBar(item.mind)),
+                  Positioned(left: 0.0, right: 0.0, bottom: 0.0, child: _buildComments(item.mind)),
               ],
             ),
-          ),
         ),
       ),
     );
@@ -306,7 +299,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       autoplayAudio: widget.autoplay && isCurrent && !_isHeld,
       insets: insets,
       onEditText: _editText,
-      reflectionMenu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
       onVideoDuration: (duration) => _onMediaDuration(item.id, duration),
     ),
     _ => _ViewerPage(
@@ -374,12 +366,20 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     ),
   );
 
-  Widget _buildCommentBar(Mind root) => _CommentBar(
-    controller: _commentController,
-    focusNode: _commentFocusNode,
-    onSend: () => _saveComment(root, _commentController.text),
-    onRecordAudio: () => _recordComment(root, MediaRecording.recordAudio),
-    onRecordVideo: () => _recordComment(root, MediaRecording.recordVideo),
+  Widget _buildComments(Mind root) => SafeArea(
+    top: false,
+    child: Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: MindCommentPreview(root: root, onTap: () => _openComments(root)),
+    ),
+  );
+
+  Future<void> _openComments(Mind root) => _whileHeld(
+    () => MindCommentsSheet.show(
+      context,
+      root: root,
+      menu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
+    ),
   );
 
   // Text of the mind
@@ -400,26 +400,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   );
 
   // Comments
-
-  void _saveComment(Mind root, String text) {
-    if (text.trim().isNotEmpty) {
-      context.read<MindBloc>().add(
-        MindCreate(dayIndex: root.dayIndex, mindContent: MindNoteContent.parse(text.trim()).pieces, rootId: root.id),
-      );
-    }
-    setState(_resetComment);
-  }
-
-  Future<void> _recordComment(Mind root, Future<BaseMindNotePiece?> Function(BuildContext) record) async {
-    final BaseMindNotePiece? media = await record(context);
-    if (media == null || !mounted) return;
-    context.read<MindBloc>().add(MindCreate(dayIndex: root.dayIndex, mindContent: [media], rootId: root.id));
-  }
-
-  void _resetComment() {
-    _commentController.clear();
-    _commentFocusNode.unfocus();
-  }
 
   List<_StoryAction> _commentActions(Mind comment) => [
     _StoryAction.edit(context, () => _editText(comment)),
@@ -543,7 +523,6 @@ final class _MindPage extends StatefulWidget {
   final bool autoplayAudio;
   final EdgeInsets insets;
   final ValueChanged<Mind> onEditText;
-  final List<MenuElement> Function(Mind reflection) reflectionMenu;
   final ValueChanged<Duration> onVideoDuration;
 
   const _MindPage({
@@ -553,7 +532,6 @@ final class _MindPage extends StatefulWidget {
     required this.autoplayAudio,
     required this.insets,
     required this.onEditText,
-    required this.reflectionMenu,
     required this.onVideoDuration,
   });
 
@@ -619,7 +597,6 @@ final class _MindPageState extends State<_MindPage> {
                           )
                         : null,
                     onLongPressText: () => widget.onEditText(mind),
-                    reflectionMenu: widget.reflectionMenu,
                   ),
                 ),
               ),
@@ -826,67 +803,6 @@ final class _Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       Center(child: CircularProgressIndicator(color: storyColorsOf(context).foreground));
-}
-
-/// The chat's input bar for comments: a rounded field and one round white button that sends the text, or records
-/// audio or video (tap switches, hold records) while the field is empty.
-final class _CommentBar extends StatelessWidget {
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final VoidCallback onSend;
-  final VoidCallback onRecordAudio;
-  final VoidCallback onRecordVideo;
-
-  const _CommentBar({
-    required this.controller,
-    required this.focusNode,
-    required this.onSend,
-    required this.onRecordAudio,
-    required this.onRecordVideo,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final bool hasText = controller.text.trim().isNotEmpty;
-    return SafeArea(
-      top: false,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(12.0, 4.0, 8.0, 8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          spacing: 4.0,
-          children: [
-            Expanded(
-              child: TextField(
-                controller: controller,
-                focusNode: focusNode,
-                minLines: 1,
-                maxLines: 5,
-                keyboardType: TextInputType.multiline,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  hintText: context.l10n.viewerCommentHint,
-                  filled: true,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(24.0), borderSide: BorderSide.none),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                ),
-              ),
-            ),
-            SizedBox.square(
-              dimension: 52.0,
-              child: hasText
-                  ? IconButton.filled(
-                      onPressed: onSend,
-                      style: IconButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black),
-                      icon: const Icon(Icons.arrow_upward_rounded),
-                    )
-                  : MediaRecordToggleButton(isFilled: true, onRecordAudio: onRecordAudio, onRecordVideo: onRecordVideo),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 /// One entry of a story menu, shown both as the ⋯ menu and as a comment's context menu.

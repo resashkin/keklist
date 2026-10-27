@@ -1252,10 +1252,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get feedbackHint => 'Что нравится, что сломано, чего не хватает?';
 
   @override
-  String get feedbackPrivacy =>
-      'Отправится только этот текст, версия приложения и платформа.';
-
-  @override
   String get feedbackSend => 'Отправить';
 
   @override
@@ -1304,4 +1300,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get webVersionEnabled => 'Включить веб-версию';
+
+  @override
+  String get viewerComments => 'Комментарии';
+
+  @override
+  String get viewerNoComments => 'Пока нет комментариев';
 }

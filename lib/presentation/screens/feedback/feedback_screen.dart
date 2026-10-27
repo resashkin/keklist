@@ -1,5 +1,6 @@
 import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// A full-screen text field like the mind creator; Send delivers it to the developer's Telegram, see
@@ -46,20 +47,6 @@ final class _FeedbackScreenState extends State<FeedbackScreen> {
         backgroundColor: theme.scaffoldBackgroundColor,
         title: Text(context.l10n.leaveFeedback),
         leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
-        actions: [
-          ValueListenableBuilder<TextEditingValue>(
-            valueListenable: _controller,
-            builder: (context, value, _) => _isSending
-                ? const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: SizedBox.square(dimension: 20.0, child: CircularProgressIndicator(strokeWidth: 2.0)),
-                  )
-                : TextButton(
-                    onPressed: value.text.trim().isEmpty ? null : _send,
-                    child: Text(context.l10n.feedbackSend, style: const TextStyle(fontSize: 16.0)),
-                  ),
-          ),
-        ],
       ),
       body: Column(
         children: [
@@ -84,11 +71,20 @@ final class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
           ),
           // Sits right above the keyboard.
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 12.0),
-            child: Text(
-              context.l10n.feedbackPrivacy,
-              style: theme.textTheme.bodySmall?.copyWith(color: theme.hintColor),
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 12.0),
+              child: ValueListenableBuilder<TextEditingValue>(
+                valueListenable: _controller,
+                builder: (context, value, _) => GlassCapsuleButton(
+                  height: 48.0,
+                  onTap: _isSending || value.text.trim().isEmpty ? null : _send,
+                  child: _isSending
+                      ? const SizedBox.square(dimension: 20.0, child: CircularProgressIndicator(strokeWidth: 2.0))
+                      : Text(context.l10n.feedbackSend, style: const TextStyle(fontSize: 16.0)),
+                ),
+              ),
             ),
           ),
         ],

@@ -598,7 +598,6 @@
     "hiddenMediaEmpty": "Ništa nije sakriveno",
     "leaveFeedback": "Ostavi utisak",
     "feedbackHint": "Šta ti se sviđa, šta ne radi, šta nedostaje?",
-    "feedbackPrivacy": "Šalje se samo ovaj tekst, verzija aplikacije i platforma.",
     "feedbackSend": "Pošalji",
     "feedbackSent": "Hvala! Poruka je stigla programeru",
     "feedbackFailed": "Slanje nije uspelo. Proveri internet i pokušaj ponovo",
@@ -613,5 +612,7 @@
     "analyticsResetIdDone": "Od sada se koristi novi anonimni ID",
     "settingsSupport": "Podrška",
     "calendarOpenDay": "Otvori dan",
-    "webVersionEnabled": "Uključi veb verziju"
+    "webVersionEnabled": "Uključi veb verziju",
+    "viewerComments": "Komentari",
+    "viewerNoComments": "Još nema komentara"
 }

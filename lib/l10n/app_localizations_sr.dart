@@ -1248,10 +1248,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get feedbackHint => 'Шта ти се свиђа, шта не ради, шта недостаје?';
 
   @override
-  String get feedbackPrivacy =>
-      'Шаље се само овај текст, верзија апликације и платформа.';
-
-  @override
   String get feedbackSend => 'Пошаљи';
 
   @override
@@ -1300,6 +1296,12 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get webVersionEnabled => 'Укључи веб верзију';
+
+  @override
+  String get viewerComments => 'Коментари';
+
+  @override
+  String get viewerNoComments => 'Још нема коментара';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2545,10 +2547,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get feedbackHint => 'Šta ti se sviđa, šta ne radi, šta nedostaje?';
 
   @override
-  String get feedbackPrivacy =>
-      'Šalje se samo ovaj tekst, verzija aplikacije i platforma.';
-
-  @override
   String get feedbackSend => 'Pošalji';
 
   @override
@@ -2597,4 +2595,10 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get webVersionEnabled => 'Uključi veb verziju';
+
+  @override
+  String get viewerComments => 'Komentari';
+
+  @override
+  String get viewerNoComments => 'Još nema komentara';
 }

@@ -385,7 +385,6 @@
     "hiddenMediaEmpty": "没有隐藏的内容",
     "leaveFeedback": "留下反馈",
     "feedbackHint": "你喜欢什么？哪里坏了？缺少什么？",
-    "feedbackPrivacy": "只会发送这段文字、应用版本和平台。",
     "feedbackSend": "发送",
     "feedbackSent": "谢谢！开发者已收到你的消息",
     "feedbackFailed": "发送失败。请检查网络后重试",
@@ -400,5 +399,7 @@
     "analyticsResetIdDone": "从现在起使用新的匿名 ID",
     "settingsSupport": "支持",
     "calendarOpenDay": "打开这一天",
-    "webVersionEnabled": "启用网页版"
+    "webVersionEnabled": "启用网页版",
+    "viewerComments": "评论",
+    "viewerNoComments": "暂无评论"
 }

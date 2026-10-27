@@ -598,7 +598,6 @@
     "hiddenMediaEmpty": "Ештеңе жасырылмаған",
     "leaveFeedback": "Пікір қалдыру",
     "feedbackHint": "Не ұнайды, не бұзылған, не жетіспейді?",
-    "feedbackPrivacy": "Тек осы мәтін, қолданба нұсқасы және платформа жіберіледі.",
     "feedbackSend": "Жіберу",
     "feedbackSent": "Рақмет! Әзірлеуші хабарды алды",
     "feedbackFailed": "Жіберу мүмкін болмады. Интернетті тексеріп, қайталаңыз",
@@ -613,5 +612,7 @@
     "analyticsResetIdDone": "Енді жаңа анонимді ID қолданылады",
     "settingsSupport": "Қолдау",
     "calendarOpenDay": "Күнді ашу",
-    "webVersionEnabled": "Веб-нұсқаны қосу"
+    "webVersionEnabled": "Веб-нұсқаны қосу",
+    "viewerComments": "Пікірлер",
+    "viewerNoComments": "Әзірге пікір жоқ"
 }

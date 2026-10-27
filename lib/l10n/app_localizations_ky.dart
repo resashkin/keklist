@@ -1250,10 +1250,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get feedbackHint => 'Эмнеси жагат, эмне бузук, эмне жетишпейт?';
 
   @override
-  String get feedbackPrivacy =>
-      'Ушул текст, колдонмонун версиясы жана платформа гана жөнөтүлөт.';
-
-  @override
   String get feedbackSend => 'Жөнөтүү';
 
   @override
@@ -1302,4 +1298,10 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get webVersionEnabled => 'Веб-версияны күйгүзүү';
+
+  @override
+  String get viewerComments => 'Комментарийлер';
+
+  @override
+  String get viewerNoComments => 'Азырынча комментарий жок';
 }

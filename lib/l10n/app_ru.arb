@@ -385,7 +385,6 @@
     "hiddenMediaEmpty": "Ничего не скрыто",
     "leaveFeedback": "Оставить отзыв",
     "feedbackHint": "Что нравится, что сломано, чего не хватает?",
-    "feedbackPrivacy": "Отправится только этот текст, версия приложения и платформа.",
     "feedbackSend": "Отправить",
     "feedbackSent": "Спасибо! Разработчик получил сообщение",
     "feedbackFailed": "Не удалось отправить. Проверь интернет и попробуй ещё раз",
@@ -400,5 +399,7 @@
     "analyticsResetIdDone": "Теперь используется новый анонимный ID",
     "settingsSupport": "Поддержка",
     "calendarOpenDay": "Открыть день",
-    "webVersionEnabled": "Включить веб-версию"
+    "webVersionEnabled": "Включить веб-версию",
+    "viewerComments": "Комментарии",
+    "viewerNoComments": "Пока нет комментариев"
 }

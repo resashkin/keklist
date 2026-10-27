@@ -598,7 +598,6 @@
     "hiddenMediaEmpty": "Hech narsa yashirilmagan",
     "leaveFeedback": "Fikr qoldirish",
     "feedbackHint": "Nima yoqadi, nima buzilgan, nima yetishmaydi?",
-    "feedbackPrivacy": "Faqat shu matn, ilova versiyasi va platforma yuboriladi.",
     "feedbackSend": "Yuborish",
     "feedbackSent": "Rahmat! Dasturchi xabarni oldi",
     "feedbackFailed": "Yuborib bo'lmadi. Internetni tekshirib, qayta urinib ko'ring",
@@ -613,5 +612,7 @@
     "analyticsResetIdDone": "Endi yangi anonim ID ishlatiladi",
     "settingsSupport": "Qo'llab-quvvatlash",
     "calendarOpenDay": "Kunni ochish",
-    "webVersionEnabled": "Veb-versiyani yoqish"
+    "webVersionEnabled": "Veb-versiyani yoqish",
+    "viewerComments": "Izohlar",
+    "viewerNoComments": "Hozircha izoh yo'q"
 }

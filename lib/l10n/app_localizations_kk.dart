@@ -1250,10 +1250,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get feedbackHint => 'Не ұнайды, не бұзылған, не жетіспейді?';
 
   @override
-  String get feedbackPrivacy =>
-      'Тек осы мәтін, қолданба нұсқасы және платформа жіберіледі.';
-
-  @override
   String get feedbackSend => 'Жіберу';
 
   @override
@@ -1302,4 +1298,10 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get webVersionEnabled => 'Веб-нұсқаны қосу';
+
+  @override
+  String get viewerComments => 'Пікірлер';
+
+  @override
+  String get viewerNoComments => 'Әзірге пікір жоқ';
 }

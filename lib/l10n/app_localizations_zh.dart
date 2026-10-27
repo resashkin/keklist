@@ -1203,9 +1203,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get feedbackHint => '你喜欢什么？哪里坏了？缺少什么？';
 
   @override
-  String get feedbackPrivacy => '只会发送这段文字、应用版本和平台。';
-
-  @override
   String get feedbackSend => '发送';
 
   @override
@@ -1252,4 +1249,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get webVersionEnabled => '启用网页版';
+
+  @override
+  String get viewerComments => '评论';
+
+  @override
+  String get viewerNoComments => '暂无评论';
 }
