@@ -7,6 +7,7 @@ import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 const _kOfferingId = 'lifetime_offer';
@@ -280,50 +281,37 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
                       AutoSizeText(_error!, style: const TextStyle(color: Colors.redAccent), maxLines: 3)
                     else ...[
                       Row(
+                        spacing: 12,
                         children: _plans.map((plan) {
                           final isSelected = _selected == plan;
                           return Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: plan == _plans.first ? 0 : 6,
-                                right: plan == _plans.last ? 0 : 6,
-                              ),
-                              child: _PlanCard(
-                                plan: plan,
-                                isSelected: isSelected,
-                                onTap: plan.available
-                                    ? () {
-                                        Haptics.vibrate(HapticsType.light);
-                                        setState(() => _selected = plan);
-                                      }
-                                    : null,
-                              ),
+                            child: _PlanCard(
+                              plan: plan,
+                              isSelected: isSelected,
+                              onTap: plan.available
+                                  ? () {
+                                      Haptics.vibrate(HapticsType.light);
+                                      setState(() => _selected = plan);
+                                    }
+                                  : null,
                             ),
                           );
                         }).toList(),
                       ),
                       const Gap(20),
-                      SizedBox(
-                        width: double.infinity,
+                      GlassCapsuleButton(
                         height: 52,
-                        child: FilledButton(
-                          onPressed: (_purchasing || _selected?.available != true) ? null : _purchase,
-                          child: _purchasing
-                              ? const SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                                )
-                              : AutoSizeText(
-                                  _selected != null ? 'Subscribe · ${_selected!.priceString}' : 'Subscribe',
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                                  maxLines: 1,
-                                ),
-                        ),
+                        isExpanded: true,
+                        onTap: (_purchasing || _selected?.available != true) ? null : _purchase,
+                        child: _purchasing
+                            ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                            : AutoSizeText(
+                                _selected != null ? 'Subscribe · ${_selected!.priceString}' : 'Subscribe',
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                maxLines: 1,
+                              ),
                       ),
-                      const Gap(28),
-                      ..._buildTips(theme, title: 'Or just support keklist'),
-                      const Gap(20),
+                      const Gap(24),
                       GestureDetector(
                         onTap: _purchasing ? null : _restore,
                         child: AutoSizeText(
@@ -366,9 +354,9 @@ class _FeatureList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const features = [
-      ('🙂', 'support our project'),
       ('☀️', 'weather per each day'),
       ('☁️', 'access to online features'),
+      ('🙂', 'support our project'),
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -405,13 +393,15 @@ class _PlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final borderColor = isSelected ? cs.onSurface : cs.outlineVariant;
+    // The selected card gets a full-strength border and a tint; the others only a faint hairline.
+    final borderColor = isSelected ? cs.onSurface : cs.onSurface.withValues(alpha: 0.12);
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         decoration: BoxDecoration(
-          border: Border.all(color: borderColor, width: isSelected ? 2 : 1),
+          color: isSelected ? cs.onSurface.withValues(alpha: 0.06) : null,
+          border: Border.all(color: borderColor, width: isSelected ? 2.5 : 1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: AspectRatio(
