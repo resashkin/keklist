@@ -1585,10 +1585,6 @@
     "@feedbackHint": {
         "description": "Placeholder of the feedback field"
     },
-    "feedbackPrivacy": "Only this text, the app version and the platform are sent.",
-    "@feedbackPrivacy": {
-        "description": "Under the feedback field: what is sent"
-    },
     "feedbackSend": "Send",
     "@feedbackSend": {
         "description": "Send feedback button"
@@ -1648,5 +1644,13 @@
     "webVersionEnabled": "Serve web version",
     "@webVersionEnabled": {
         "description": "Switch that turns the phone's web version server on or off"
+    },
+    "viewerComments": "Comments",
+    "@viewerComments": {
+        "description": "Title of the bottom sheet with a story mind's comments"
+    },
+    "viewerNoComments": "No comments yet",
+    "@viewerNoComments": {
+        "description": "Shown in the comments sheet when a mind has no comments yet"
     }
 }

@@ -1259,10 +1259,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get feedbackHint => 'Was gefällt dir, was ist kaputt, was fehlt?';
 
   @override
-  String get feedbackPrivacy =>
-      'Gesendet werden nur dieser Text, die App-Version und die Plattform.';
-
-  @override
   String get feedbackSend => 'Senden';
 
   @override
@@ -1312,4 +1308,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get webVersionEnabled => 'Webversion aktivieren';
+
+  @override
+  String get viewerComments => 'Kommentare';
+
+  @override
+  String get viewerNoComments => 'Noch keine Kommentare';
 }

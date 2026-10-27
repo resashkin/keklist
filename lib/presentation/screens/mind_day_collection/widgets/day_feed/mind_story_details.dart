@@ -68,7 +68,7 @@ final class StoryDateHeader extends StatelessWidget {
   }
 }
 
-/// Everything about a mind in a story, content first: its circle (video or audio), the text and the comments.
+/// A mind in a story: its circle (video or audio) and the text; comments open in their own sheet.
 /// Its emotions are the texture behind it.
 final class MindStoryDetails extends StatelessWidget {
   final Mind mind;
@@ -78,10 +78,7 @@ final class MindStoryDetails extends StatelessWidget {
 
   final VoidCallback? onLongPressText;
 
-  /// The context menu of a reflection, opened with a long press.
-  final List<MenuElement> Function(Mind reflection)? reflectionMenu;
-
-  const MindStoryDetails({super.key, required this.mind, this.media, this.onLongPressText, this.reflectionMenu});
+  const MindStoryDetails({super.key, required this.mind, this.media, this.onLongPressText});
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +94,6 @@ final class MindStoryDetails extends StatelessWidget {
             onLongPress: onLongPressText,
             child: Text(text, textAlign: TextAlign.center, style: mindStoryTextStyle(foreground)),
           ),
-        MindReflectionsList(mind: mind, menu: reflectionMenu),
       ],
     );
   }
@@ -142,6 +138,10 @@ final class MindEmotionChips extends StatelessWidget {
   }
 }
 
+/// The reflections of the mind with [rootId], oldest first.
+List<Mind> mindReflectionsOf(Iterable<Mind> minds, String rootId) =>
+    minds.where((other) => other.rootId == rootId).toList()..sort((a, b) => a.creationDate.compareTo(b.creationDate));
+
 /// The mind's reflections, oldest first: time, emotions and full text of each.
 final class MindReflectionsList extends StatelessWidget {
   final Mind mind;
@@ -156,9 +156,7 @@ final class MindReflectionsList extends StatelessWidget {
     return BlocBuilder<MindBloc, MindState>(
       buildWhen: (_, current) => current is MindList,
       builder: (context, state) {
-        final Iterable<Mind> all = state is MindList ? state.values : const [];
-        final List<Mind> reflections = all.where((other) => other.rootId == mind.id).toList()
-          ..sort((a, b) => a.creationDate.compareTo(b.creationDate));
+        final List<Mind> reflections = state is MindList ? mindReflectionsOf(state.values, mind.id) : const [];
         if (reflections.isEmpty) return const SizedBox.shrink();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -170,8 +168,7 @@ final class MindReflectionsList extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
-                    // Opaque so the emotion texture never runs through the comment.
-                    color: Color.alphaBlend(foreground.withValues(alpha: 0.07), storyColorsOf(context).background),
+                    color: foreground.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14.0),
                   ),
                   child: Column(

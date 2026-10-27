@@ -1209,9 +1209,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get feedbackHint => '気に入った点、不具合、足りないものは？';
 
   @override
-  String get feedbackPrivacy => '送信されるのはこのテキスト、アプリのバージョン、プラットフォームだけです。';
-
-  @override
   String get feedbackSend => '送信';
 
   @override
@@ -1259,4 +1256,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get webVersionEnabled => 'Web版を有効にする';
+
+  @override
+  String get viewerComments => 'コメント';
+
+  @override
+  String get viewerNoComments => 'まだコメントはありません';
 }

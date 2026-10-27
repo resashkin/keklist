@@ -385,7 +385,6 @@
     "hiddenMediaEmpty": "Nichts ausgeblendet",
     "leaveFeedback": "Feedback geben",
     "feedbackHint": "Was gefällt dir, was ist kaputt, was fehlt?",
-    "feedbackPrivacy": "Gesendet werden nur dieser Text, die App-Version und die Plattform.",
     "feedbackSend": "Senden",
     "feedbackSent": "Danke! Die Nachricht ist angekommen",
     "feedbackFailed": "Senden fehlgeschlagen. Prüfe das Internet und versuche es erneut",
@@ -400,5 +399,7 @@
     "analyticsResetIdDone": "Ab jetzt wird eine neue anonyme ID verwendet",
     "settingsSupport": "Unterstützung",
     "calendarOpenDay": "Tag öffnen",
-    "webVersionEnabled": "Webversion aktivieren"
+    "webVersionEnabled": "Webversion aktivieren",
+    "viewerComments": "Kommentare",
+    "viewerNoComments": "Noch keine Kommentare"
 }

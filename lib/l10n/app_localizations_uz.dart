@@ -1252,10 +1252,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get feedbackHint => 'Nima yoqadi, nima buzilgan, nima yetishmaydi?';
 
   @override
-  String get feedbackPrivacy =>
-      'Faqat shu matn, ilova versiyasi va platforma yuboriladi.';
-
-  @override
   String get feedbackSend => 'Yuborish';
 
   @override
@@ -1304,4 +1300,10 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get webVersionEnabled => 'Veb-versiyani yoqish';
+
+  @override
+  String get viewerComments => 'Izohlar';
+
+  @override
+  String get viewerNoComments => 'Hozircha izoh yo\'q';
 }
