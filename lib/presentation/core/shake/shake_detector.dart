@@ -10,17 +10,22 @@ final class ShakeDetector {
 
   final List<DateTime> _peakTimestamps = [];
   DateTime? _lastShakeTimestamp;
+  bool _isAboveThreshold = false;
 
+  /// A real back-and-forth shake: three separate strong peaks within a second, so a bump or a phone put down
+  /// on a table doesn't count.
   ShakeDetector({
-    this.thresholdGravity = 2.7,
-    this.requiredPeakCount = 2,
-    this.peakWindow = const Duration(milliseconds: 800),
+    this.thresholdGravity = 3.0,
+    this.requiredPeakCount = 3,
+    this.peakWindow = const Duration(milliseconds: 1000),
     this.cooldown = const Duration(milliseconds: 1500),
   });
 
   bool addReading({required double x, required double y, required double z, required DateTime timestamp}) {
-    if (_isCoolingDown(timestamp)) return false;
-    if (gForce(x: x, y: y, z: z) < thresholdGravity) return false;
+    final bool wasAboveThreshold = _isAboveThreshold;
+    _isAboveThreshold = gForce(x: x, y: y, z: z) >= thresholdGravity;
+    // A peak counts once, however many readings it spans, until the force drops below the threshold again.
+    if (!_isAboveThreshold || wasAboveThreshold || _isCoolingDown(timestamp)) return false;
 
     _peakTimestamps
       ..add(timestamp)
