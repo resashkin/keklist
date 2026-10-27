@@ -82,15 +82,28 @@ final class KekSheetScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.sizeOf(context).height;
-    final Widget body = Column(
+    final bool hasHeader = title != null || leading != null;
+    final Widget column = Column(
       mainAxisSize: heightFactor == null ? MainAxisSize.min : MainAxisSize.max,
       children: [
         KekBottomSheetStyle.handle(context),
-        if (title != null || leading != null || showsClose)
-          KekSheetHeader(title: title, leading: leading, showsClose: showsClose),
+        if (hasHeader) KekSheetHeader(title: title, leading: leading, showsClose: showsClose),
         Flexible(child: child),
       ],
     );
+    // With nothing else in the header, close floats in the corner beside the handle instead of taking a row.
+    final Widget body = hasHeader || !showsClose
+        ? column
+        : Stack(
+            children: [
+              column,
+              Positioned(
+                top: 4.0,
+                right: 4.0,
+                child: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
+              ),
+            ],
+          );
     return Padding(
       // Text fields in a sheet stay above the keyboard.
       padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
