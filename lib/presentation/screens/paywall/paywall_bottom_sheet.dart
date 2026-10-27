@@ -299,19 +299,6 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
                         }).toList(),
                       ),
                       const Gap(20),
-                      GlassCapsuleButton(
-                        height: 52,
-                        isExpanded: true,
-                        onTap: (_purchasing || _selected?.available != true) ? null : _purchase,
-                        child: _purchasing
-                            ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
-                            : AutoSizeText(
-                                _selected != null ? 'Subscribe · ${_selected!.priceString}' : 'Subscribe',
-                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                                maxLines: 1,
-                              ),
-                      ),
-                      const Gap(24),
                       GestureDetector(
                         onTap: _purchasing ? null : _restore,
                         child: AutoSizeText(
@@ -332,6 +319,19 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
                           ),
                           _LegalLink(label: 'Terms of Use', url: KeklistConstants.termsOfUseURL),
                         ],
+                      ),
+                      const Gap(24),
+                      GlassCapsuleButton(
+                        height: 52,
+                        isExpanded: true,
+                        onTap: (_purchasing || _selected?.available != true) ? null : _purchase,
+                        child: _purchasing
+                            ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                            : AutoSizeText(
+                                _selected != null ? 'Subscribe · ${_selected!.priceString}' : 'Subscribe',
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                maxLines: 1,
+                              ),
                       ),
                     ],
                   ],
