@@ -69,7 +69,7 @@ final class DayFeedMindTile extends StatelessWidget {
               padding: mediaCircle != null
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(_kTextPadding).copyWith(
-                      bottom: showsReflections ? _kTextPadding + _kReflectionsBadgeHeight : _kTextPadding,
+                      bottom: showsReflections ? _kTextPadding + _kReflectionsBadgeHeight + 2.0 : _kTextPadding,
                     ),
               child: mediaCircle != null
                   ? Center(child: mediaCircle)
@@ -89,17 +89,15 @@ final class DayFeedMindTile extends StatelessWidget {
                       ),
                     ),
             ),
+            // Centered under the text, clear of the frame's rounded corners.
             if (showsReflections)
               Positioned(
-                left: 4,
-                bottom: 4,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: size - 8.0),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: Alignment.bottomLeft,
-                    child: _ReflectionsBadge(reflections: item.reflections),
-                  ),
+                left: 6,
+                right: 6,
+                bottom: 6,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: _ReflectionsBadge(reflections: item.reflections),
                 ),
               ),
             if (mediaCircle != null && mediaDuration != null)
@@ -275,8 +273,11 @@ final class _ReflectionsBadge extends StatelessWidget {
     ].where((counter) => counter.$2 > 0).toList();
     return Container(
       height: _kReflectionsBadgeHeight,
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(4)),
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.6),
+        borderRadius: BorderRadius.circular(_kReflectionsBadgeHeight / 2),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 5.0,
