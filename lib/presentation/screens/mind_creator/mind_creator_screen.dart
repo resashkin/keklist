@@ -152,23 +152,26 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
               ),
             ),
           ),
-          // Sits right above the keyboard.
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 12.0),
-            child: SizedBox(
-              height: 52.0,
-              child: Row(
-                children: [
-                  if (emotionsPrompt == MindEmotionsPrompt.button && !_isEditing)
-                    _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
-                  const Spacer(),
-                  if (canRecord)
-                    MediaRecordToggleButton(
-                      isFilled: true,
-                      onRecordAudio: () => _attach(MediaRecording.recordAudio),
-                      onRecordVideo: () => _attach(MediaRecording.recordVideo),
-                    ),
-                ],
+          // Right above the keyboard, or clear of the rounded corners and the home indicator without it.
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 4.0, 20.0, 12.0),
+              child: SizedBox(
+                height: 52.0,
+                child: Row(
+                  children: [
+                    if (emotionsPrompt == MindEmotionsPrompt.button && !_isEditing)
+                      _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
+                    const Spacer(),
+                    if (canRecord)
+                      MediaRecordToggleButton(
+                        isFilled: true,
+                        onRecordAudio: () => _attach(MediaRecording.recordAudio),
+                        onRecordVideo: () => _attach(MediaRecording.recordVideo),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
