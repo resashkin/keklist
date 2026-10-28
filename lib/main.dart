@@ -117,16 +117,8 @@ final class _AppRootState extends State<_AppRoot> {
     _enableDebugBLOCLogs(injector);
     await Analytics.setUp(injector.get<SettingsRepository>().value);
 
-    final debugBox = Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName);
-    final useProductionRC = debugBox.get(DebugMenuType.useProductionRevenueCat.name)?.value ?? false;
-    final String revenueCatApiKey = (!kDebugMode || useProductionRC)
-        ? switch (defaultTargetPlatform) {
-            TargetPlatform.iOS => dotenv.env['REVENUE_CAT_PROD_API_IOS_KEY']!,
-            TargetPlatform.android => dotenv.env['REVENUE_CAT_PROD_API_ANDROID_KEY']!,
-            _ => dotenv.env['REVENUE_CAT_TEST_API_KEY']!,
-          }
-        : dotenv.env['REVENUE_CAT_TEST_API_KEY']!;
-    if (!kIsPhoneWeb) await Purchases.configure(PurchasesConfiguration(revenueCatApiKey));
+    // The web version's dotenv carries no keys; purchases happen on the phone.
+    if (!kIsPhoneWeb) await Purchases.configure(PurchasesConfiguration(_revenueCatApiKey()));
 
     final (AiBackend?, AiModelStore?) ai = await _createAi(injector, cipher);
     final KeklistWebServer? webServer = kIsWeb ? null : await _startWebServer(injector, ai.$1);
@@ -163,6 +155,18 @@ final class _AppRootState extends State<_AppRoot> {
       child: _app ?? PreparationScreen(key: const ValueKey('prep'), stepNotifier: _stepNotifier),
     );
   }
+}
+
+String _revenueCatApiKey() {
+  final debugBox = Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName);
+  final useProductionRC = debugBox.get(DebugMenuType.useProductionRevenueCat.name)?.value ?? false;
+  return (!kDebugMode || useProductionRC)
+      ? switch (defaultTargetPlatform) {
+          TargetPlatform.iOS => dotenv.env['REVENUE_CAT_PROD_API_IOS_KEY']!,
+          TargetPlatform.android => dotenv.env['REVENUE_CAT_PROD_API_ANDROID_KEY']!,
+          _ => dotenv.env['REVENUE_CAT_TEST_API_KEY']!,
+        }
+      : dotenv.env['REVENUE_CAT_TEST_API_KEY']!;
 }
 
 // ---------------------------------------------------------------------------
