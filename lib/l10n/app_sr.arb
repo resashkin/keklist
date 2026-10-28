@@ -270,7 +270,7 @@
     "profilePhoto": "Фотографија",
     "profileEmoji": "Емоџи",
     "profileInitial": "Слово",
-    "webVersion": "Веб верзија",
+    "webVersion": "Приступ преко Wi‑Fi мреже",
     "webVersionAddressHint": "Отворите у прегледачу рачунара на истој Wi‑Fi мрежи; keklist мора остати отворен",
     "webVersionCopied": "Адреса је копирана",
     "webVersionStarting": "Покретање…",
@@ -398,7 +398,7 @@
     "analyticsResetIdDone": "Од сада се користи нови анонимни ID",
     "settingsSupport": "Подршка",
     "calendarOpenDay": "Отвори дан",
-    "webVersionEnabled": "Укључи веб верзију",
+    "webVersionEnabled": "Пресликај у прегледач",
     "viewerComments": "Коментари",
     "viewerNoComments": "Још нема коментара"
 }

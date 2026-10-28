@@ -270,7 +270,7 @@
     "profilePhoto": "Foto",
     "profileEmoji": "Emoji",
     "profileInitial": "Buchstabe",
-    "webVersion": "Webversion",
+    "webVersion": "WLAN-Zugriff",
     "webVersionAddressHint": "Im Browser eines Computers im selben WLAN öffnen; keklist muss offen bleiben",
     "webVersionCopied": "Adresse kopiert",
     "webVersionStarting": "Wird gestartet…",
@@ -398,7 +398,7 @@
     "analyticsResetIdDone": "Ab jetzt wird eine neue anonyme ID verwendet",
     "settingsSupport": "Unterstützung",
     "calendarOpenDay": "Tag öffnen",
-    "webVersionEnabled": "Webversion aktivieren",
+    "webVersionEnabled": "Im Browser spiegeln",
     "viewerComments": "Kommentare",
     "viewerNoComments": "Noch keine Kommentare"
 }

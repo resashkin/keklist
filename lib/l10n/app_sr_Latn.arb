@@ -483,7 +483,7 @@
     "profilePhoto": "Fotografija",
     "profileEmoji": "Emodži",
     "profileInitial": "Slovo",
-    "webVersion": "Veb verzija",
+    "webVersion": "Pristup preko Wi‑Fi mreže",
     "webVersionAddressHint": "Otvorite u pregledaču računara na istoj Wi‑Fi mreži; keklist mora ostati otvoren",
     "webVersionCopied": "Adresa je kopirana",
     "webVersionStarting": "Pokretanje…",
@@ -611,7 +611,7 @@
     "analyticsResetIdDone": "Od sada se koristi novi anonimni ID",
     "settingsSupport": "Podrška",
     "calendarOpenDay": "Otvori dan",
-    "webVersionEnabled": "Uključi veb verziju",
+    "webVersionEnabled": "Preslikaj u pregledač",
     "viewerComments": "Komentari",
     "viewerNoComments": "Još nema komentara"
 }

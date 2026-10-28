@@ -890,7 +890,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profileInitial => 'Buchstabe';
 
   @override
-  String get webVersion => 'Webversion';
+  String get webVersion => 'WLAN-Zugriff';
 
   @override
   String get webVersionAddressHint =>
@@ -1304,7 +1304,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get calendarOpenDay => 'Tag öffnen';
 
   @override
-  String get webVersionEnabled => 'Webversion aktivieren';
+  String get webVersionEnabled => 'Im Browser spiegeln';
 
   @override
   String get viewerComments => 'Kommentare';

@@ -1743,10 +1743,10 @@ abstract class AppLocalizations {
   /// **'Letter'**
   String get profileInitial;
 
-  /// No description provided for @webVersion.
+  /// Title of the Settings section that lets browsers in the same Wi-Fi open keklist from the phone
   ///
   /// In en, this message translates to:
-  /// **'Web version'**
+  /// **'Wi‑Fi access'**
   String get webVersion;
 
   /// No description provided for @webVersionAddressHint.
@@ -2511,10 +2511,10 @@ abstract class AppLocalizations {
   /// **'Open day'**
   String get calendarOpenDay;
 
-  /// Switch that turns the phone's web version server on or off
+  /// Switch that starts serving keklist to browsers in the same Wi-Fi
   ///
   /// In en, this message translates to:
-  /// **'Serve web version'**
+  /// **'Mirror to browser'**
   String get webVersionEnabled;
 
   /// Title of the bottom sheet with a story mind's comments

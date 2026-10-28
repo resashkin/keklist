@@ -888,7 +888,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get profileInitial => 'Lettera';
 
   @override
-  String get webVersion => 'Versione web';
+  String get webVersion => 'Accesso via Wi‑Fi';
 
   @override
   String get webVersionAddressHint =>
@@ -1302,7 +1302,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get calendarOpenDay => 'Apri giorno';
 
   @override
-  String get webVersionEnabled => 'Attiva versione web';
+  String get webVersionEnabled => 'Duplica nel browser';
 
   @override
   String get viewerComments => 'Commenti';

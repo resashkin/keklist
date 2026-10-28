@@ -884,7 +884,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get profileInitial => 'Harf';
 
   @override
-  String get webVersion => 'Veb-versiya';
+  String get webVersion => 'Wi‑Fi orqali kirish';
 
   @override
   String get webVersionAddressHint =>
@@ -1296,7 +1296,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get calendarOpenDay => 'Kunni ochish';
 
   @override
-  String get webVersionEnabled => 'Veb-versiyani yoqish';
+  String get webVersionEnabled => 'Brauzerda aks ettirish';
 
   @override
   String get viewerComments => 'Izohlar';

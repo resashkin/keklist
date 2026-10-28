@@ -850,7 +850,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get profileInitial => '字母';
 
   @override
-  String get webVersion => '网页版';
+  String get webVersion => 'Wi‑Fi 访问';
 
   @override
   String get webVersionAddressHint => '在同一 Wi‑Fi 下的电脑浏览器中打开；请保持 keklist 打开';
@@ -1245,7 +1245,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get calendarOpenDay => '打开这一天';
 
   @override
-  String get webVersionEnabled => '启用网页版';
+  String get webVersionEnabled => '镜像到浏览器';
 
   @override
   String get viewerComments => '评论';

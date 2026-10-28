@@ -270,7 +270,7 @@
     "profilePhoto": "照片",
     "profileEmoji": "表情",
     "profileInitial": "字母",
-    "webVersion": "网页版",
+    "webVersion": "Wi‑Fi 访问",
     "webVersionAddressHint": "在同一 Wi‑Fi 下的电脑浏览器中打开；请保持 keklist 打开",
     "webVersionCopied": "地址已复制",
     "webVersionStarting": "正在启动…",
@@ -398,7 +398,7 @@
     "analyticsResetIdDone": "从现在起使用新的匿名 ID",
     "settingsSupport": "支持",
     "calendarOpenDay": "打开这一天",
-    "webVersionEnabled": "启用网页版",
+    "webVersionEnabled": "镜像到浏览器",
     "viewerComments": "评论",
     "viewerNoComments": "暂无评论"
 }

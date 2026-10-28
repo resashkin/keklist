@@ -270,7 +270,7 @@
     "profilePhoto": "Фото",
     "profileEmoji": "Эмодзи",
     "profileInitial": "Буква",
-    "webVersion": "Веб-версия",
+    "webVersion": "Доступ по Wi‑Fi",
     "webVersionAddressHint": "Откройте в браузере компьютера в той же Wi‑Fi; keklist должен быть открыт",
     "webVersionCopied": "Адрес скопирован",
     "webVersionStarting": "Запуск…",
@@ -398,7 +398,7 @@
     "analyticsResetIdDone": "Теперь используется новый анонимный ID",
     "settingsSupport": "Поддержка",
     "calendarOpenDay": "Открыть день",
-    "webVersionEnabled": "Включить веб-версию",
+    "webVersionEnabled": "Зеркало в браузере",
     "viewerComments": "Комментарии",
     "viewerNoComments": "Пока нет комментариев"
 }

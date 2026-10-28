@@ -878,7 +878,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileInitial => 'Letter';
 
   @override
-  String get webVersion => 'Web version';
+  String get webVersion => 'Wi‑Fi access';
 
   @override
   String get webVersionAddressHint =>
@@ -1289,7 +1289,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get calendarOpenDay => 'Open day';
 
   @override
-  String get webVersionEnabled => 'Serve web version';
+  String get webVersionEnabled => 'Mirror to browser';
 
   @override
   String get viewerComments => 'Comments';
