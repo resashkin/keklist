@@ -146,7 +146,8 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   void onShakeToTweak() {
     KekSheet.show(
       context: context,
-      builder: (_) => SettingsCustomizeBottomSheet(sections: _buildSections(context)),
+      // Built in the sheet's own build, where the sections may subscribe to blocs.
+      builder: (sheetContext) => SettingsCustomizeBottomSheet(sections: _buildSections(sheetContext)),
     );
   }
 
