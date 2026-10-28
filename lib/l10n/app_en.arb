@@ -1141,7 +1141,7 @@
     "profilePhoto": "Photo",
     "profileEmoji": "Emoji",
     "profileInitial": "Letter",
-    "webVersion": "Web version",
+    "webVersion": "Wi‑Fi access",
     "webVersionAddressHint": "Open in a browser on a computer in the same Wi-Fi; keep keklist open",
     "webVersionCopied": "Address copied",
     "webVersionStarting": "Starting…",
@@ -1637,9 +1637,9 @@
     "@calendarOpenDay": {
         "description": "Button under a calendar day that opens the day screen"
     },
-    "webVersionEnabled": "Serve web version",
+    "webVersionEnabled": "Mirror to browser",
     "@webVersionEnabled": {
-        "description": "Switch that turns the phone's web version server on or off"
+        "description": "Switch that starts serving keklist to browsers in the same Wi-Fi"
     },
     "viewerComments": "Comments",
     "@viewerComments": {
@@ -1648,5 +1648,8 @@
     "viewerNoComments": "No comments yet",
     "@viewerNoComments": {
         "description": "Shown in the comments sheet when a mind has no comments yet"
+    },
+    "@webVersion": {
+        "description": "Title of the Settings section that lets browsers in the same Wi-Fi open keklist from the phone"
     }
 }

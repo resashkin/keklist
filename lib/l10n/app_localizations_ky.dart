@@ -883,7 +883,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get profileInitial => 'Тамга';
 
   @override
-  String get webVersion => 'Веб-версия';
+  String get webVersion => 'Wi‑Fi аркылуу кирүү';
 
   @override
   String get webVersionAddressHint =>
@@ -1294,7 +1294,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get calendarOpenDay => 'Күндү ачуу';
 
   @override
-  String get webVersionEnabled => 'Веб-версияны күйгүзүү';
+  String get webVersionEnabled => 'Браузерге чагылдыруу';
 
   @override
   String get viewerComments => 'Комментарийлер';

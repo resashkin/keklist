@@ -854,7 +854,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get profileInitial => '頭文字';
 
   @override
-  String get webVersion => 'Web版';
+  String get webVersion => 'Wi‑Fiアクセス';
 
   @override
   String get webVersionAddressHint =>
@@ -1252,7 +1252,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get calendarOpenDay => '日を開く';
 
   @override
-  String get webVersionEnabled => 'Web版を有効にする';
+  String get webVersionEnabled => 'ブラウザにミラーリング';
 
   @override
   String get viewerComments => 'コメント';

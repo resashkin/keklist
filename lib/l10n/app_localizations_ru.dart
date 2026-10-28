@@ -885,7 +885,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileInitial => 'Буква';
 
   @override
-  String get webVersion => 'Веб-версия';
+  String get webVersion => 'Доступ по Wi‑Fi';
 
   @override
   String get webVersionAddressHint =>
@@ -1296,7 +1296,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get calendarOpenDay => 'Открыть день';
 
   @override
-  String get webVersionEnabled => 'Включить веб-версию';
+  String get webVersionEnabled => 'Зеркало в браузере';
 
   @override
   String get viewerComments => 'Комментарии';

@@ -270,7 +270,7 @@
     "profilePhoto": "写真",
     "profileEmoji": "絵文字",
     "profileInitial": "頭文字",
-    "webVersion": "Web版",
+    "webVersion": "Wi‑Fiアクセス",
     "webVersionAddressHint": "同じWi‑Fiのパソコンのブラウザで開きます。keklistは開いたままにしてください",
     "webVersionCopied": "アドレスをコピーしました",
     "webVersionStarting": "起動中…",
@@ -398,7 +398,7 @@
     "analyticsResetIdDone": "これから新しい匿名 ID が使われます",
     "settingsSupport": "サポート",
     "calendarOpenDay": "日を開く",
-    "webVersionEnabled": "Web版を有効にする",
+    "webVersionEnabled": "ブラウザにミラーリング",
     "viewerComments": "コメント",
     "viewerNoComments": "まだコメントはありません"
 }

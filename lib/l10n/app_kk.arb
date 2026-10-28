@@ -483,7 +483,7 @@
     "profilePhoto": "Фото",
     "profileEmoji": "Эмодзи",
     "profileInitial": "Әріп",
-    "webVersion": "Веб-нұсқа",
+    "webVersion": "Wi‑Fi арқылы қолжетімділік",
     "webVersionAddressHint": "Сол Wi‑Fi желісіндегі компьютер браузерінде ашыңыз; keklist ашық тұруы керек",
     "webVersionCopied": "Мекенжай көшірілді",
     "webVersionStarting": "Іске қосылуда…",
@@ -611,7 +611,7 @@
     "analyticsResetIdDone": "Енді жаңа анонимді ID қолданылады",
     "settingsSupport": "Қолдау",
     "calendarOpenDay": "Күнді ашу",
-    "webVersionEnabled": "Веб-нұсқаны қосу",
+    "webVersionEnabled": "Браузерге көрсету",
     "viewerComments": "Пікірлер",
     "viewerNoComments": "Әзірге пікір жоқ"
 }

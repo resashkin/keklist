@@ -882,7 +882,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get profileInitial => 'Слово';
 
   @override
-  String get webVersion => 'Веб верзија';
+  String get webVersion => 'Приступ преко Wi‑Fi мреже';
 
   @override
   String get webVersionAddressHint =>
@@ -1292,7 +1292,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get calendarOpenDay => 'Отвори дан';
 
   @override
-  String get webVersionEnabled => 'Укључи веб верзију';
+  String get webVersionEnabled => 'Пресликај у прегледач';
 
   @override
   String get viewerComments => 'Коментари';
@@ -2178,7 +2178,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get profileInitial => 'Slovo';
 
   @override
-  String get webVersion => 'Veb verzija';
+  String get webVersion => 'Pristup preko Wi‑Fi mreže';
 
   @override
   String get webVersionAddressHint =>
@@ -2588,7 +2588,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get calendarOpenDay => 'Otvori dan';
 
   @override
-  String get webVersionEnabled => 'Uključi veb verziju';
+  String get webVersionEnabled => 'Preslikaj u pregledač';
 
   @override
   String get viewerComments => 'Komentari';

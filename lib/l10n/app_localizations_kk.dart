@@ -883,7 +883,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get profileInitial => 'Әріп';
 
   @override
-  String get webVersion => 'Веб-нұсқа';
+  String get webVersion => 'Wi‑Fi арқылы қолжетімділік';
 
   @override
   String get webVersionAddressHint =>
@@ -1294,7 +1294,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get calendarOpenDay => 'Күнді ашу';
 
   @override
-  String get webVersionEnabled => 'Веб-нұсқаны қосу';
+  String get webVersionEnabled => 'Браузерге көрсету';
 
   @override
   String get viewerComments => 'Пікірлер';
