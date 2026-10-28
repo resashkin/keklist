@@ -44,6 +44,7 @@ final class DebugMenuHiveRepository implements DebugMenuRepository {
         DebugMenuType.useProductionRevenueCat => false,
         DebugMenuType.enableBlocLogs => false,
         DebugMenuType.forceAiChat => false,
+        DebugMenuType.showTouches => false,
       };
 
   List<DebugMenuData> _getCurrentDebugMenuItems() =>

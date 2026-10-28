@@ -11,6 +11,10 @@ import 'package:keklist/presentation/screens/tabs_container/tabs_container_scree
 import 'package:keklist/l10n/app_localizations.dart';
 import 'package:keklist/domain/services/language_manager.dart';
 import 'package:keklist/native/ios/interface_style_channel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
+import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
+import 'package:keklist/presentation/core/widgets/touch_indicators.dart';
 
 final class KeklistApp extends StatefulWidget {
   const KeklistApp({super.key});
@@ -64,7 +68,14 @@ final class KeklistAppState extends KekWidgetState<KeklistApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) {
         InterfaceStyleChannel.sync(Theme.of(context).brightness);
-        return _easyLoadingBuilder(context, child);
+        return BlocBuilder<DebugMenuBloc, DebugMenuState>(
+          buildWhen: (_, current) => current is DebugMenuDataState,
+          builder: (context, state) => TouchIndicators(
+            isEnabled: state is DebugMenuDataState &&
+                state.debugMenuItems.any((item) => item.type == DebugMenuType.showTouches && item.value),
+            child: _easyLoadingBuilder(context, child),
+          ),
+        );
       },
     );
   }
