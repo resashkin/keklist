@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/services.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
 import 'package:keklist/domain/services/web_server/web_access.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
@@ -88,7 +89,9 @@ void _copy(BuildContext context, String address) {
 // Switching on without a PIN asks for one first: the web version is never served unguarded.
 Future<void> _setEnabled(BuildContext context, WebAccess access, bool isEnabled) async {
   if (isEnabled && !access.hasPin) await _setPin(context, access);
-  if (!isEnabled || access.hasPin) await access.setEnabled(isEnabled);
+  if (isEnabled && !access.hasPin) return;
+  Haptics.vibrate(isEnabled ? HapticsType.success : HapticsType.light);
+  await access.setEnabled(isEnabled);
 }
 
 Future<void> _setPin(BuildContext context, WebAccess access) async {
