@@ -1301,4 +1301,10 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get viewerNoComments => 'Азырынча комментарий жок';
+
+  @override
+  String get previousDay => 'Мурунку күн';
+
+  @override
+  String get nextDay => 'Кийинки күн';
 }

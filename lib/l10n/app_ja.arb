@@ -400,5 +400,7 @@
     "calendarOpenDay": "日を開く",
     "webVersionEnabled": "ブラウザにミラーリング",
     "viewerComments": "コメント",
-    "viewerNoComments": "まだコメントはありません"
+    "viewerNoComments": "まだコメントはありません",
+    "previousDay": "前の日",
+    "nextDay": "次の日"
 }

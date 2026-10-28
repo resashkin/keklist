@@ -613,5 +613,7 @@
     "calendarOpenDay": "Otvori dan",
     "webVersionEnabled": "Preslikaj u pregledač",
     "viewerComments": "Komentari",
-    "viewerNoComments": "Još nema komentara"
+    "viewerNoComments": "Još nema komentara",
+    "previousDay": "Prethodni dan",
+    "nextDay": "Sledeći dan"
 }

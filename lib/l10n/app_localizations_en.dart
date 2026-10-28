@@ -1296,4 +1296,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewerNoComments => 'No comments yet';
+
+  @override
+  String get previousDay => 'Previous day';
+
+  @override
+  String get nextDay => 'Next day';
 }

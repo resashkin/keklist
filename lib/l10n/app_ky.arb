@@ -613,5 +613,7 @@
     "calendarOpenDay": "Күндү ачуу",
     "webVersionEnabled": "Браузерге чагылдыруу",
     "viewerComments": "Комментарийлер",
-    "viewerNoComments": "Азырынча комментарий жок"
+    "viewerNoComments": "Азырынча комментарий жок",
+    "previousDay": "Мурунку күн",
+    "nextDay": "Кийинки күн"
 }

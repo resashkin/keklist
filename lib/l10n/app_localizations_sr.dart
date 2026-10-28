@@ -1299,6 +1299,12 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get viewerNoComments => 'Још нема коментара';
+
+  @override
+  String get previousDay => 'Претходни дан';
+
+  @override
+  String get nextDay => 'Следећи дан';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2595,4 +2601,10 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get viewerNoComments => 'Još nema komentara';
+
+  @override
+  String get previousDay => 'Prethodni dan';
+
+  @override
+  String get nextDay => 'Sledeći dan';
 }

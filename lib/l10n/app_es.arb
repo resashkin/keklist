@@ -613,5 +613,7 @@
     "calendarOpenDay": "Abrir día",
     "webVersionEnabled": "Reflejar en el navegador",
     "viewerComments": "Comentarios",
-    "viewerNoComments": "Aún no hay comentarios"
+    "viewerNoComments": "Aún no hay comentarios",
+    "previousDay": "Día anterior",
+    "nextDay": "Día siguiente"
 }

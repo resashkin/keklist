@@ -400,5 +400,7 @@
     "calendarOpenDay": "Tag öffnen",
     "webVersionEnabled": "Im Browser spiegeln",
     "viewerComments": "Kommentare",
-    "viewerNoComments": "Noch keine Kommentare"
+    "viewerNoComments": "Noch keine Kommentare",
+    "previousDay": "Vorheriger Tag",
+    "nextDay": "Nächster Tag"
 }

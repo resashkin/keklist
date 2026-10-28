@@ -15,6 +15,7 @@ final class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onTitleLongPress;
   final List<GlassBarAction> actions;
   final bool centerTitle;
+  final EdgeInsetsGeometry titlePadding;
 
   const GlassAppBar({
     super.key,
@@ -23,6 +24,7 @@ final class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onTitleLongPress,
     this.actions = const [],
     this.centerTitle = false,
+    this.titlePadding = const EdgeInsets.symmetric(horizontal: 16.0),
   });
 
   @override
@@ -35,7 +37,7 @@ final class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
       onTap: onTitleTap,
       onLongPress: onTitleLongPress,
       child: GlassBubble(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: titlePadding,
         child: DefaultTextStyle.merge(
           style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           maxLines: 1,

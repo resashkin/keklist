@@ -400,5 +400,7 @@
     "calendarOpenDay": "Открыть день",
     "webVersionEnabled": "Зеркало в браузере",
     "viewerComments": "Комментарии",
-    "viewerNoComments": "Пока нет комментариев"
+    "viewerNoComments": "Пока нет комментариев",
+    "previousDay": "Предыдущий день",
+    "nextDay": "Следующий день"
 }

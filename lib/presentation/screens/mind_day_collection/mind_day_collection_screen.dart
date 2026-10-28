@@ -6,10 +6,9 @@ import 'package:keklist/presentation/core/widgets/pinch_columns_detector.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart' hide DateUtils;
-import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
-import 'package:keklist/presentation/core/widgets/overscroll_listener.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_switcher.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
@@ -39,6 +38,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
+import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 
 const double _kFloatingButtonClearance = 96.0;
 
@@ -57,11 +57,12 @@ final class MindDayCollectionScreen extends StatefulWidget {
   State<MindDayCollectionScreen> createState() => MindDayCollectionScreenState(dayIndex: initialDayIndex);
 }
 
-final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectionScreen> with ShakeToTweakMixin {
+final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectionScreen> with ShakeToTweakMixin, SingleTickerProviderStateMixin {
   int dayIndex;
   final List<Mind> allMinds = [];
 
   final ScrollController _scrollController = ScrollController();
+  late final DaySlideController _daySlide = DaySlideController(vsync: this);
 
   bool _hasReceivedSettings = false;
   bool _isWeatherSourceEnabled = false;
@@ -176,21 +177,27 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
             onTitleTap: () async {
               final int? selectedDayIndex = await _showDateSwitcherToNewDay();
               if (selectedDayIndex == null) return;
-              _switchToDayIndex(selectedDayIndex);
+              _slideToDay(selectedDayIndex);
             },
             onTitleLongPress: requestTweak,
-            title: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '$formattedDay$yearSuffix',
-                  style: const TextStyle(fontSize: 14.0, fontWeight: .w600, height: 1.0),
-                ),
-                Text(
-                  DateFormatters.formatWeekday(dayDate, locale),
-                  style: const TextStyle(fontSize: 11.0, fontWeight: .w400, height: 1.1),
-                ),
-              ],
+            titlePadding: const EdgeInsets.symmetric(horizontal: 2.0),
+            title: DaySwitcherTitle(
+              dayIndex: dayIndex,
+              onPrevious: () => _slideToDay(dayIndex - 1),
+              onNext: () => _slideToDay(dayIndex + 1),
+              title: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '$formattedDay$yearSuffix',
+                    style: const TextStyle(fontSize: 14.0, fontWeight: .w600, height: 1.0),
+                  ),
+                  Text(
+                    DateFormatters.formatWeekday(dayDate, locale),
+                    style: const TextStyle(fontSize: 11.0, fontWeight: .w400, height: 1.1),
+                  ),
+                ],
+              ),
             ),
             actions: [
               if (state.items.isNotEmpty)
@@ -208,37 +215,11 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
       body: Stack(
         children: [
           _buildWeatherBackdrop(),
-          OverscrollListener(
-        onOverscrollTopPointerUp: () => _switchToDayIndexWithScrollToTop(dayIndex - 1),
-        onOverscrollBottomPointerUp: () => _switchToDayIndexWithScrollToBottom(dayIndex + 1),
-        onOverscrollTop: () => _vibrate(),
-        onOverscrollBottom: () => _vibrate(),
-        overscrollTargetOffset: 150.0,
-        scrollBottomOffset: 150.0,
-        childScrollController: _scrollController,
-        topOverscrollChild: Column(
-          children: [
-            Text(
-              DateFormatters.formatFullDate(
-                DateUtils.getDateFromDayIndex(dayIndex - 1),
-                Localizations.localeOf(context),
-              ),
-            ),
-            const Icon(Icons.arrow_upward),
-          ],
-        ),
-        bottomOverscrollChild: Column(
-          children: [
-            const Icon(Icons.arrow_downward),
-            Text(
-              DateFormatters.formatFullDate(
-                DateUtils.getDateFromDayIndex(dayIndex + 1),
-                Localizations.localeOf(context),
-              ),
-            ),
-          ],
-        ),
-        child: _buildDayFeedBody(),
+          DaySwipeArea(
+            controller: _daySlide,
+            onPrevious: () => _slideToDay(dayIndex - 1),
+            onNext: () => _slideToDay(dayIndex + 1),
+            child: _buildDayFeedBody(),
           ),
         ],
       ),
@@ -310,6 +291,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     cancelSubscriptions();
     _weatherCubit?.close();
     _dayFeedCubit.close();
+    _daySlide.dispose();
     super.dispose();
   }
 
@@ -377,30 +359,17 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     );
   }
 
-  void goToToday() => _switchToDayIndex(DateUtils.getTodayIndex());
+  void goToToday() => _slideToDay(DateUtils.getTodayIndex());
+
+  // The day slides out towards where it is in time and the new one slides in from the other side.
+  Future<void> _slideToDay(int newDayIndex) async {
+    if (newDayIndex == dayIndex || _daySlide.isSliding) return;
+    tweakChangeHaptic();
+    await _daySlide.slide(forward: newDayIndex > dayIndex, onSwap: () => _switchToDayIndex(newDayIndex));
+  }
 
   void _switchToDayIndex(int dayIndex) {
-    _scrollController.jumpTo(0);
-    setState(() {
-      this.dayIndex = dayIndex;
-    });
-    _reloadWeather(dayIndex);
-    _reloadDayFeed(dayIndex);
-  }
-
-  void _switchToDayIndexWithScrollToTop(int dayIndex) {
-    _scrollController.jumpTo(_scrollController.position.maxScrollExtent + 500.0);
-    _scrollController.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
-    setState(() {
-      this.dayIndex = dayIndex;
-    });
-    _reloadWeather(dayIndex);
-    _reloadDayFeed(dayIndex);
-  }
-
-  void _switchToDayIndexWithScrollToBottom(int dayIndex) {
-    _scrollController.jumpTo(-500);
-    _scrollController.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
+    if (_scrollController.hasClients) _scrollController.jumpTo(0);
     setState(() {
       this.dayIndex = dayIndex;
     });
@@ -463,10 +432,6 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     sortOrder: _dayFeedSettings.sortOrder,
     grouping: _dayFeedSettings.grouping,
   );
-
-  void _vibrate() {
-    Haptics.vibrate(HapticsType.heavy);
-  }
 
   void _showMindCreator() {
     // Pushed as a full-screen route (not a bottom sheet) so a stray swipe can't
