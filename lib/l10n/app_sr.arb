@@ -400,5 +400,7 @@
     "calendarOpenDay": "Отвори дан",
     "webVersionEnabled": "Пресликај у прегледач",
     "viewerComments": "Коментари",
-    "viewerNoComments": "Још нема коментара"
+    "viewerNoComments": "Још нема коментара",
+    "previousDay": "Претходни дан",
+    "nextDay": "Следећи дан"
 }

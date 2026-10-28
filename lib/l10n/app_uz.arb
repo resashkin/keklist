@@ -613,5 +613,7 @@
     "calendarOpenDay": "Kunni ochish",
     "webVersionEnabled": "Brauzerda aks ettirish",
     "viewerComments": "Izohlar",
-    "viewerNoComments": "Hozircha izoh yo'q"
+    "viewerNoComments": "Hozircha izoh yo'q",
+    "previousDay": "Oldingi kun",
+    "nextDay": "Keyingi kun"
 }

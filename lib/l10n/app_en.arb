@@ -1651,5 +1651,13 @@
     },
     "@webVersion": {
         "description": "Title of the Settings section that lets browsers in the same Wi-Fi open keklist from the phone"
+    },
+    "previousDay": "Previous day",
+    "@previousDay": {
+        "description": "Tooltip of the chevron that opens the previous day"
+    },
+    "nextDay": "Next day",
+    "@nextDay": {
+        "description": "Tooltip of the chevron that opens the next day"
     }
 }

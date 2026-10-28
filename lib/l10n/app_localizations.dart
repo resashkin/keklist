@@ -2528,6 +2528,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No comments yet'**
   String get viewerNoComments;
+
+  /// Tooltip of the chevron that opens the previous day
+  ///
+  /// In en, this message translates to:
+  /// **'Previous day'**
+  String get previousDay;
+
+  /// Tooltip of the chevron that opens the next day
+  ///
+  /// In en, this message translates to:
+  /// **'Next day'**
+  String get nextDay;
 }
 
 class _AppLocalizationsDelegate

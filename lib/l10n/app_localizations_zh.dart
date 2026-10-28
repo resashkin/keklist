@@ -1252,4 +1252,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get viewerNoComments => '暂无评论';
+
+  @override
+  String get previousDay => '前一天';
+
+  @override
+  String get nextDay => '后一天';
 }

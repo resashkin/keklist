@@ -400,5 +400,7 @@
     "calendarOpenDay": "打开这一天",
     "webVersionEnabled": "镜像到浏览器",
     "viewerComments": "评论",
-    "viewerNoComments": "暂无评论"
+    "viewerNoComments": "暂无评论",
+    "previousDay": "前一天",
+    "nextDay": "后一天"
 }

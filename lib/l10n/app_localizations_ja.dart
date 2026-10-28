@@ -1259,4 +1259,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get viewerNoComments => 'まだコメントはありません';
+
+  @override
+  String get previousDay => '前の日';
+
+  @override
+  String get nextDay => '次の日';
 }

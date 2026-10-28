@@ -1303,4 +1303,10 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get viewerNoComments => 'Hozircha izoh yo\'q';
+
+  @override
+  String get previousDay => 'Oldingi kun';
+
+  @override
+  String get nextDay => 'Keyingi kun';
 }

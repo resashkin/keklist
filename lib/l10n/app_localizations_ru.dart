@@ -1303,4 +1303,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get viewerNoComments => 'Пока нет комментариев';
+
+  @override
+  String get previousDay => 'Предыдущий день';
+
+  @override
+  String get nextDay => 'Следующий день';
 }
