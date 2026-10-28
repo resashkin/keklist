@@ -9,7 +9,7 @@ part of 'mind.dart';
 Mind _$MindFromJson(Map<String, dynamic> json) => Mind(
   id: json['id'] as String,
   note: json['note'] as String,
-  emoji: json['emoji'] as String,
+  legacyEmoji: json['emoji'] as String?,
   dayIndex: (json['dayIndex'] as num).toInt(),
   creationDate: DateTime.parse(json['creationDate'] as String),
   sortIndex: (json['sortIndex'] as num).toInt(),
@@ -23,7 +23,7 @@ Mind _$MindFromJson(Map<String, dynamic> json) => Mind(
 
 Map<String, dynamic> _$MindToJson(Mind instance) => <String, dynamic>{
   'id': instance.id,
-  'emoji': instance.emoji,
+  'emoji': instance.legacyEmoji,
   'note': instance.note,
   'dayIndex': instance.dayIndex,
   'creationDate': instance.creationDate.toIso8601String(),

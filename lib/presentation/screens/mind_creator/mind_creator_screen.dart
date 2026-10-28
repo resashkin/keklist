@@ -1,72 +1,58 @@
-import 'dart:math';
+import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:keklist/presentation/blocs/mind_creator_bloc/mind_creator_bloc.dart';
-import 'package:keklist/presentation/core/dispose_bag.dart';
-import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/domain/repositories/settings/settings_repository.dart';
+import 'package:keklist/domain/services/entities/emotion.dart';
+
+import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
+import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
-import 'package:keklist/presentation/screens/mind_picker/mind_picker_screen.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
+import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
+import 'package:keklist/presentation/screens/mind_creator/mind_creator_tweak_sheet.dart';
+import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
+import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 
 final class MindCreatorScreen extends StatefulWidget {
-  final Function(String text, String emoji) onDone;
-  final String? initialText;
-  final String? initialEmoji;
+  final Function(String text, List<String> emotionIds) onDone;
   final String? hintText;
-  final bool shouldSuggestEmoji;
 
-  const MindCreatorScreen({
-    super.key,
-    required this.onDone,
-    this.initialText,
-    this.initialEmoji,
-    this.hintText,
-    this.shouldSuggestEmoji = false,
-  });
+  /// Set when editing: the text is prefilled, and recording and emotions are hidden.
+  final String? initialText;
+
+  const MindCreatorScreen({super.key, required this.onDone, this.hintText, this.initialText});
+
+  /// Edits an existing text full-screen; resolves to the new text, or null when closed without saving.
+  static Future<String?> editText(BuildContext context, {required String initialText}) async {
+    String? result;
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (_) => MindCreatorScreen(initialText: initialText, onDone: (text, _) => result = text),
+      ),
+    );
+    return result;
+  }
 
   @override
   State<MindCreatorScreen> createState() => _MindCreatorScreenState();
 }
 
-final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
-  String _selectedEmoji = '🙂';
+final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> with ShakeToTweakMixin {
+  late final TextEditingController _textEditingController = TextEditingController(text: widget.initialText)
+    ..selection = TextSelection.collapsed(offset: widget.initialText?.length ?? 0);
+  final List<String> _selectedEmotionIds = [];
+  BaseMindNotePiece? _attachedMedia;
 
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (widget.initialEmoji != null) {
-        setState(() {
-          _selectedEmoji = widget.initialEmoji!;
-        });
-      }
-
-      if (widget.initialText != null) {
-        _textEditingController.text = widget.initialText!;
-      }
-
-      if (widget.shouldSuggestEmoji) {
-        subscribeToBloc<MindCreatorBloc>(
-          onNewState: (state) {
-            if (state.suggestions.isEmpty) {
-              return;
-            }
-            setState(() {
-              _selectedEmoji = state.suggestions.first;
-            });
-          },
-        )?.disposed(by: this);
-      }
-
-      if (widget.shouldSuggestEmoji) {
-        _textEditingController.addListener(() {
-          sendEventToBloc<MindCreatorBloc>(MindCreatorGetSuggestions(text: _textEditingController.text));
-        });
-      }
-    });
+    _textEditingController.addListener(_textChanged);
   }
 
   @override
@@ -75,118 +61,215 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
     _textEditingController.dispose();
   }
 
+  late bool _hasText = _textEditingController.text.isNotEmpty;
+
+  bool get _isEditing => widget.initialText != null;
+
+  void _textChanged() {
+    final bool hasText = _textEditingController.text.isNotEmpty;
+    if (hasText != _hasText) setState(() => _hasText = hasText);
+  }
+
+  @override
+  String get shakeScreenId => ShakeScreenIds.creator;
+
+  @override
+  void onShakeToTweak() => MindCreatorTweakSheet.show(context);
+
+  MindEmotionsPrompt get _emotionsPrompt => switch (context.watch<SettingsBloc>().state) {
+    SettingsDataState(:final settings) => settings.mindEmotionsPrompt,
+    _ => MindEmotionsPrompt.afterSave,
+  };
+
+  /// In the "after save" mode the emotions come right after Save, before the mind is created.
+  Future<void> _save(MindEmotionsPrompt prompt) async {
+    if (_isEditing) {
+      Navigator.of(context).pop();
+      widget.onDone(_textEditingController.text.trim(), const []);
+      return;
+    }
+    if (prompt == MindEmotionsPrompt.afterSave && _selectedEmotionIds.isEmpty) {
+      FocusScope.of(context).unfocus();
+      await EmotionMarkingSheet.show(
+        context: context,
+        initialSelectedIds: const {},
+        showsSaveButton: true,
+        onSelectionChanged: (ids) => _selectedEmotionIds
+          ..clear()
+          ..addAll(ids),
+      );
+      if (!mounted) return;
+    }
+    Navigator.of(context).pop();
+    widget.onDone(_composeNote(), List.of(_selectedEmotionIds));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final MindEmotionsPrompt emotionsPrompt = _emotionsPrompt;
+    final bool canRecord = _attachedMedia == null && !_hasText && !kIsPhoneWeb && !_isEditing;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            _removeAttachedMedia();
+            Navigator.of(context).pop();
+          },
+        ),
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              widget.onDone(_textEditingController.text, _selectedEmoji);
-            },
+            onPressed: () => _save(emotionsPrompt),
             child: Text(context.l10n.save, style: const TextStyle(fontSize: 16.0, color: Colors.blueAccent)),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                _showEmojiPickerScreen(
-                  onSelect: (emoji) {
-                    setState(() {
-                      _selectedEmoji = emoji;
-                    });
-                  },
-                );
-              },
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (_attachedMedia case final BaseMindNotePiece media)
+                    _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
+                  TextField(
+                    autofocus: true,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    textCapitalization: TextCapitalization.sentences,
+                    controller: _textEditingController,
+                    style: const TextStyle(fontSize: 20.0),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(12.0),
+                      border: InputBorder.none,
+                      hintText: widget.hintText ?? context.l10n.writeSomething,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Right above the keyboard, or clear of the rounded corners and the home indicator without it.
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 4.0, 20.0, 12.0),
               child: SizedBox(
-                width: 120,
-                height: 120,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
+                height: 52.0,
+                child: Row(
                   children: [
-                    // Stroke effect - smooth circular outline
-                    ..._buildStrokeEmojis(
-                      _selectedEmoji,
-                      strokeColor: Theme.of(context).colorScheme.onSurface,
-                      strokeWidth: 4.0,
-                    ),
-                    // Main emoji
-                    Text(_selectedEmoji, style: const TextStyle(fontSize: 64.0)),
-                    // Edit icon
-                    Positioned(
-                      right: 18,
-                      bottom: 18,
-                      child: Container(
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Theme.of(context).scaffoldBackgroundColor, width: 1.5),
-                        ),
-                        child: Icon(Icons.edit, size: 12, color: Theme.of(context).colorScheme.onPrimary),
+                    if (emotionsPrompt == MindEmotionsPrompt.button && !_isEditing)
+                      _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
+                    const Spacer(),
+                    if (canRecord)
+                      MediaRecordToggleButton(
+                        isFilled: true,
+                        onRecordAudio: () => _attach(MediaRecording.recordAudio),
+                        onRecordVideo: () => _attach(MediaRecording.recordVideo),
                       ),
-                    ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 16.0),
-            TextField(
-              autofocus: true,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              textCapitalization: TextCapitalization.sentences,
-              controller: _textEditingController,
-              style: const TextStyle(fontSize: 20.0),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(12.0),
-                border: InputBorder.none,
-                hintText: widget.hintText ?? context.l10n.writeSomething,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  void _showEmojiPickerScreen({required Function(String) onSelect}) async {
-    await showCupertinoModalBottomSheet(
+  void _openMarkingSheet() {
+    EmotionMarkingSheet.show(
       context: context,
-      builder: (context) => MindPickerScreen(onSelect: onSelect, suggestions: []),
+      initialSelectedIds: _selectedEmotionIds.toSet(),
+      onSelectionChanged: (ids) => setState(
+        () => _selectedEmotionIds
+          ..clear()
+          ..addAll(ids),
+      ),
     );
   }
 
-  List<Widget> _buildStrokeEmojis(String emoji, {required Color strokeColor, required double strokeWidth}) {
-    const double fontSize = 64.0;
-    final List<Widget> strokeEmojis = [];
-
-    // 16 directional offsets in a circle for smooth stroke effect
-    const int directions = 16;
-    for (int i = 0; i < directions; i++) {
-      final double angle = (i * 2 * pi) / directions;
-      final double dx = strokeWidth * cos(angle);
-      final double dy = strokeWidth * sin(angle);
-
-      strokeEmojis.add(
-        Transform.translate(
-          offset: Offset(dx, dy),
-          child: ColorFiltered(
-            colorFilter: ColorFilter.mode(strokeColor, BlendMode.srcIn),
-            child: Text(emoji, style: const TextStyle(fontSize: fontSize)),
-          ),
-        ),
-      );
-    }
-
-    return strokeEmojis;
+  Future<void> _attach(Future<BaseMindNotePiece?> Function(BuildContext) record) async {
+    final BaseMindNotePiece? media = await record(context);
+    if (media == null || !mounted) return;
+    setState(() => _attachedMedia = media);
   }
+
+  // A discarded recording is never saved into a mind, so its file can go right away.
+  Future<void> _removeAttachedMedia() async {
+    final BaseMindNotePiece? media = _attachedMedia;
+    setState(() => _attachedMedia = null);
+    if (media == null) return;
+    final AppFileRepository fileRepository = context.read<AppFileRepository>();
+    for (final String path in MindNoteContent.fromPieces([media]).mediaFilePaths) {
+      final File file = File(await fileRepository.resolveAbsolutePath(path));
+      if (await file.exists()) await file.delete();
+    }
+  }
+
+  String _composeNote() {
+    final String text = _textEditingController.text.trim();
+    final BaseMindNotePiece? media = _attachedMedia;
+    return MindNoteContent.fromPieces([
+      ?media,
+      if (text.isNotEmpty) MindNoteText(media == null ? text : '\n$text'),
+    ]).toRawNoteString();
+  }
+}
+
+/// Opens the emotion sheet; shows the chosen emojis once there are some.
+final class _EmotionsButton extends StatelessWidget {
+  final List<String> selectedIds;
+  final VoidCallback onTap;
+
+  const _EmotionsButton({required this.selectedIds, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final EmotionState state = context.watch<EmotionBloc>().state;
+    final List<String> emojis = state is EmotionsList
+        ? selectedIds.map(state.byId).whereType<Emotion>().map((emotion) => emotion.emoji).toList()
+        : const [];
+    return OutlinedButton.icon(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(minimumSize: const Size(52.0, 52.0), shape: const StadiumBorder()),
+      icon: emojis.isEmpty ? const Icon(Icons.add_reaction_outlined) : null,
+      label: Text(emojis.isEmpty ? context.l10n.emotions : emojis.join(' ')),
+    );
+  }
+}
+
+final class _AttachedMediaPreview extends StatelessWidget {
+  final BaseMindNotePiece media;
+  final VoidCallback onRemove;
+
+  const _AttachedMediaPreview({required this.media, required this.onRemove});
+
+  @override
+  Widget build(BuildContext context) {
+    final Widget preview = switch (media) {
+      MindNoteVideo video => RoundVideoMessage(video: video, size: 180.0),
+      MindNoteAudio audio => Chip(
+          avatar: const Icon(Icons.mic, size: 18.0),
+          label: Text(_formatDuration(audio.duration ?? Duration.zero)),
+        ),
+      _ => const SizedBox.shrink(),
+    };
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          preview,
+          IconButton(icon: const Icon(Icons.delete_outline), tooltip: context.l10n.removeMedia, onPressed: onRemove),
+        ],
+      ),
+    );
+  }
+
+  String _formatDuration(Duration duration) =>
+      '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
 }

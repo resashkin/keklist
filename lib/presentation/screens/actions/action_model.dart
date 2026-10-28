@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 
 sealed class ActionModel {
@@ -23,7 +23,6 @@ sealed class ActionModel {
   factory ActionModel.switchDay(BuildContext context) => SwitchDayMenuActionModel(context: context);
   factory ActionModel.showDigest(BuildContext context) => ShowDigestActionModel(context: context);
   factory ActionModel.goToDate(BuildContext context) => GoToDateMenuActionModel(context: context);
-  factory ActionModel.showAll(BuildContext context) => ShowAllMenuActionModel(context: context);
   factory ActionModel.tranlsateToEnglish(BuildContext context) => TranslateToEnglishMenuActionModel(context: context);
   factory ActionModel.convertToStandalone(BuildContext context) => ConvertToStandaloneMenuActionModel(context: context);
 }
@@ -101,14 +100,6 @@ final class ShowDigestActionModel extends ActionModel {
       : super(
           title: context.l10n.showDigest,
           icon: const Icon(Icons.filter_center_focus),
-        );
-}
-
-final class ShowAllMenuActionModel extends ActionModel {
-  ShowAllMenuActionModel({required BuildContext context})
-      : super(
-          title: context.l10n.showAll,
-          icon: const Icon(Icons.show_chart),
         );
 }
 

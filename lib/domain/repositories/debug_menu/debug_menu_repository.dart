@@ -23,8 +23,9 @@ final class DebugMenuData {
 
 enum DebugMenuType {
   translation,
-  sensitiveContent,
   simulatePro,
   useProductionRevenueCat,
   enableBlocLogs,
+  forceAiChat,
+  showTouches,
 }

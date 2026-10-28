@@ -31,7 +31,7 @@ void main() {
     final Mind mind = Mind(
       id: '1',
       note: 'Heh1',
-      emoji: ' ',
+      legacyEmoji: ' ',
       dayIndex: 0,
       sortIndex: 5,
       creationDate: DateTime.now(),
@@ -56,7 +56,7 @@ void main() {
       var mind = Mind(
         id: '1',
         note: 'Heh1',
-        emoji: ' ',
+        legacyEmoji: ' ',
         dayIndex: 0,
         sortIndex: 5,
         creationDate: DateTime.now(),

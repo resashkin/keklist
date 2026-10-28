@@ -1,3 +1,4 @@
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
@@ -12,7 +13,6 @@ import 'package:keklist/domain/services/export_import/models/export_result.dart'
 import 'package:keklist/domain/services/export_import/models/import_result.dart';
 import 'package:keklist/domain/services/language_manager.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
 part 'settings_event.dart';
@@ -28,21 +28,31 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
       super(SettingsDataState(settings: KeklistSettings.initial())) {
     on<SettingsExport>(_export);
     on<SettingsImport>(_import);
-    on<SettingsChangeMindContentVisibility>(_changeMindContentVisibility);
-    on<SettingsWhatsNewShown>(_disableShowingWhatsNewUntillNewVersion);
     on<SettingsGet>(_getSettings);
-    on<SettingGetWhatsNew>(_sendWhatsNewIfNeeded);
     on<SettingsChangeThemePreference>(_changeThemePreference);
     on<SettingsChangeInterfaceStyle>(_changeInterfaceStyle);
     on<SettingsUpdateShouldShowTitlesMode>(_updateShouldShowTitlesMode);
     on<SettingsChangeLanguage>(_changeLanguage);
     on<SettingsEnableDebugMenu>(_enableDebugMenu);
-    on<SettingsTogglePhotoVideoSource>(_togglePhotoVideoSource);
     on<SettingsToggleWeatherSource>(_toggleWeatherSource);
     on<SettingsUpdateWeatherLocation>(_updateWeatherLocation);
     on<SettingsUpdateMediaFolderSource>(_updateMediaFolderSource);
+    on<SettingsUpdateDayFeed>(_updateDayFeed);
+    on<SettingsUpdateItemHidden>(_updateItemHidden);
+    on<SettingsMarkShakeDiscovered>(_markShakeDiscovered);
+    on<SettingsUpdateInsights>(_updateInsights);
+    on<SettingsUpdateCalendar>(_updateCalendar);
+    on<SettingsUpdateStory>(_updateStory);
+    on<SettingsUpdateMindEmotionsPrompt>(_updateMindEmotionsPrompt);
+    on<SettingsUpdateTileMotion>(_updateTileMotion);
+    on<SettingsUpdateDayFeedArrangement>(_updateDayFeedArrangement);
+    on<SettingsSetMediaHidden>(_setMediaHidden);
+    on<SettingsSetAnalyticsEnabled>(_setAnalyticsEnabled);
 
-    _repository.stream.listen((settings) => add(SettingsGet())).disposed(by: this);
+    _repository.stream.listen((settings) {
+      Analytics.settingsChanged(settings);
+      add(SettingsGet());
+    }).disposed(by: this);
   }
 
   @override
@@ -156,40 +166,12 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     emit(SettingsDataState(settings: _repository.value));
   }
 
-  FutureOr<void> _disableShowingWhatsNewUntillNewVersion(
-    SettingsWhatsNewShown event,
-    Emitter<SettingsState> emit,
-  ) async {
-    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final String appVersion = '${packageInfo.version} ${packageInfo.buildNumber}';
-
-    await _repository.updatePreviousAppVersion(appVersion);
-  }
-
-  FutureOr<void> _changeMindContentVisibility(
-    SettingsChangeMindContentVisibility event,
-    Emitter<SettingsState> emit,
-  ) async {
-    await _repository.updateMindContentVisibility(event.isVisible);
-  }
-
   FutureOr<void> _changeThemePreference(SettingsChangeThemePreference event, Emitter<SettingsState> emit) async {
     await _repository.updateThemePreference(event.themePreference);
   }
 
   FutureOr<void> _changeInterfaceStyle(SettingsChangeInterfaceStyle event, Emitter<SettingsState> emit) async {
     await _repository.updateInterfaceStyle(event.interfaceStyle);
-  }
-
-  FutureOr<void> _sendWhatsNewIfNeeded(SettingGetWhatsNew event, Emitter<SettingsState> emit) async {
-    // Cбор и отправка стейта Whats new.
-    final String? previousAppVersion = _repository.value.previousAppVersion;
-    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final String appVersion = '${packageInfo.version} ${packageInfo.buildNumber}';
-    final bool needToShowWhatsNewOnStart = previousAppVersion != appVersion;
-    if (needToShowWhatsNewOnStart) {
-      emit(SettingsShowWhatsNew());
-    }
   }
 
   FutureOr<void> _updateShouldShowTitlesMode(
@@ -205,30 +187,8 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _enableDebugMenu(SettingsEnableDebugMenu event, Emitter<SettingsState> emit) async {
     final currentSettings = _repository.value;
-    final updatedSettings = KeklistSettings(
-      isMindContentVisible: currentSettings.isMindContentVisible,
-      previousAppVersion: currentSettings.previousAppVersion,
-      themePreference: currentSettings.themePreference,
-      interfaceStyle: currentSettings.interfaceStyle,
-      shouldShowTitles: currentSettings.shouldShowTitles,
-      userName: currentSettings.userName,
-      language: currentSettings.language,
-      dataSchemaVersion: currentSettings.dataSchemaVersion,
-      hasSeenLazyOnboarding: currentSettings.hasSeenLazyOnboarding,
-      isDebugMenuVisible: true,
-      isPhotoVideoSourceEnabled: currentSettings.isPhotoVideoSourceEnabled,
-      isWeatherSourceEnabled: currentSettings.isWeatherSourceEnabled,
-      weatherLatitude: currentSettings.weatherLatitude,
-      weatherLongitude: currentSettings.weatherLongitude,
-      isMediaFolderSourceEnabled: currentSettings.isMediaFolderSourceEnabled,
-      mediaFolderPath: currentSettings.mediaFolderPath,
-      isMediaFolderRecursive: currentSettings.isMediaFolderRecursive,
-    );
+    final updatedSettings = currentSettings.copyWith(isDebugMenuVisible: true);
     await _repository.updateSettings(updatedSettings);
-  }
-
-  FutureOr<void> _togglePhotoVideoSource(SettingsTogglePhotoVideoSource event, Emitter<SettingsState> emit) async {
-    await _repository.updateIsPhotoVideoSourceEnabled(event.isEnabled);
   }
 
   FutureOr<void> _toggleWeatherSource(SettingsToggleWeatherSource event, Emitter<SettingsState> emit) async {
@@ -241,10 +201,69 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _updateMediaFolderSource(SettingsUpdateMediaFolderSource event, Emitter<SettingsState> emit) async {
     await _repository.updateMediaFolderSource(
-      isEnabled: event.isEnabled,
       folderPath: event.folderPath,
       isRecursive: event.isRecursive,
     );
+  }
+
+  FutureOr<void> _updateDayFeed(SettingsUpdateDayFeed event, Emitter<SettingsState> emit) async {
+    await _repository.updateDayFeedSettings(
+      columnCount: event.columnCount,
+      mindCellSpan: event.mindCellSpan,
+      isMindTextVisible: event.isMindTextVisible,
+    );
+  }
+
+  FutureOr<void> _updateItemHidden(SettingsUpdateItemHidden event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettingsItemHidden(event.id, isHidden: event.isHidden);
+  }
+
+  FutureOr<void> _updateInsights(SettingsUpdateInsights event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(_repository.value.copyWith(insights: event.insights));
+  }
+
+  FutureOr<void> _updateCalendar(SettingsUpdateCalendar event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(_repository.value.copyWith(calendar: event.calendar));
+  }
+
+  FutureOr<void> _updateDayFeedArrangement(SettingsUpdateDayFeedArrangement event, Emitter<SettingsState> emit) async {
+    final KeklistSettings settings = _repository.value;
+    await _repository.updateSettings(
+      settings.copyWith(dayFeed: settings.dayFeed.copyWith(sortOrder: event.sortOrder, grouping: event.grouping)),
+    );
+  }
+
+  FutureOr<void> _setAnalyticsEnabled(SettingsSetAnalyticsEnabled event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(_repository.value.copyWith(isAnalyticsEnabled: event.isEnabled));
+    await Analytics.setEnabled(event.isEnabled);
+  }
+
+  FutureOr<void> _setMediaHidden(SettingsSetMediaHidden event, Emitter<SettingsState> emit) async {
+    final KeklistSettings settings = _repository.value;
+    final Set<String> hidden = {...settings.hiddenMediaIds};
+    event.isHidden ? hidden.addAll(event.ids) : hidden.removeAll(event.ids);
+    await _repository.updateSettings(settings.copyWith(hiddenMediaIds: hidden));
+  }
+
+  FutureOr<void> _updateTileMotion(SettingsUpdateTileMotion event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(
+      _repository.value.copyWith(
+        tileEmojiMotion: event.emojiMotion,
+        gridResizeAnimation: event.resizeAnimation,
+      ),
+    );
+  }
+
+  FutureOr<void> _updateMindEmotionsPrompt(SettingsUpdateMindEmotionsPrompt event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(_repository.value.copyWith(mindEmotionsPrompt: event.prompt));
+  }
+
+  FutureOr<void> _updateStory(SettingsUpdateStory event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(_repository.value.copyWith(story: event.story));
+  }
+
+  FutureOr<void> _markShakeDiscovered(SettingsMarkShakeDiscovered event, Emitter<SettingsState> emit) async {
+    await _repository.markShakeDiscovered(event.screenId);
   }
 
   // FutureOr<void> _exportToEncryptedImage(

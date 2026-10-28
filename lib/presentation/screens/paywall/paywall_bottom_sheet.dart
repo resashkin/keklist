@@ -1,13 +1,24 @@
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:gap/gap.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/constants.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 const _kOfferingId = 'lifetime_offer';
+
+/// One-time tips (consumables in App Store Connect and Google Play), shown with these prices until the store answers.
+/// Each with the hearts its card shows over the price.
+const List<(String, String, String)> _kTips = [
+  ('keklist_tip_1', r'$1', '💛'),
+  ('keklist_tip_10', r'$10', '💛💛'),
+  ('keklist_tip_100', r'$100', '💛💛💛'),
+];
 
 // ---------------------------------------------------------------------------
 // Plan model
@@ -31,14 +42,16 @@ class _Plan {
 // ---------------------------------------------------------------------------
 
 final class PaywallBottomSheet extends StatefulWidget {
-  const PaywallBottomSheet({super.key});
+  /// Only the one-time tips, for people who already have Pro.
+  final bool tipsOnly;
 
-  static Future<bool> show(BuildContext context) async {
-    final result = await showModalBottomSheet<bool>(
+  const PaywallBottomSheet({super.key, this.tipsOnly = false});
+
+  static Future<bool> show(BuildContext context, {bool tipsOnly = false}) async {
+    Analytics.paywallShown(tipsOnly: tipsOnly);
+    final result = await KekSheet.show<bool>(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => const PaywallBottomSheet(),
+      builder: (_) => PaywallBottomSheet(tipsOnly: tipsOnly),
     );
     return result ?? false;
   }
@@ -57,11 +70,52 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
   bool _loading = true;
   bool _purchasing = false;
   String? _error;
+  Map<String, StoreProduct> _tipProducts = const {};
+  String? _buyingTipId;
+  String _selectedTipId = _kTips[1].$1;
 
   @override
   void initState() {
     super.initState();
     _loadOfferings();
+    _loadTips();
+  }
+
+  Future<void> _loadTips() async {
+    try {
+      final List<StoreProduct> products = await Purchases.getProducts(
+        [for (final (String id, _, _) in _kTips) id],
+        productCategory: ProductCategory.nonSubscription,
+      );
+      if (mounted) setState(() => _tipProducts = {for (final StoreProduct product in products) product.identifier: product});
+    } catch (_) {}
+  }
+
+  Future<void> _buyTip(StoreProduct product) async {
+    setState(() => _buyingTipId = product.identifier);
+    try {
+      await Purchases.purchase(PurchaseParams.storeProduct(product));
+      Analytics.tipPurchased(product.identifier);
+      if (mounted) _showThanks();
+    } on PurchasesError catch (e) {
+      if (e.code != PurchasesErrorCode.purchaseCancelledError && mounted) _showError(e.message);
+    } catch (e) {
+      if (mounted) _showError(e.toString());
+    } finally {
+      if (mounted) setState(() => _buyingTipId = null);
+    }
+  }
+
+  void _showThanks() {
+    Haptics.vibrate(HapticsType.success);
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const AutoSizeText('💛', textAlign: TextAlign.center, style: TextStyle(fontSize: 44), maxLines: 1),
+        content: const Text('Thank you for supporting keklist!', textAlign: TextAlign.center),
+        actions: [TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const Text('OK'))],
+      ),
+    );
   }
 
   Package? _find(List<Package> all, _PlanType type) => switch (type) {
@@ -106,6 +160,7 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
     setState(() => _purchasing = true);
     try {
       await Purchases.purchase(PurchaseParams.package(pkg));
+      Analytics.proPurchased(pkg.storeProduct.identifier);
       if (mounted) Navigator.of(context).pop(true);
     } on PurchasesError catch (e) {
       if (e.code != PurchasesErrorCode.purchaseCancelledError && mounted) {
@@ -154,43 +209,62 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      child: SafeArea(
+    if (widget.tipsOnly) {
+      final StoreProduct? selectedTip = _tipProducts[_selectedTipId];
+      return KekSheetScaffold(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const _SheetHeader(emoji: '💛', title: 'Support keklist', subtitle: 'A one-time tip'),
+              const Gap(28),
+              Row(
+                spacing: 12,
+                children: [
+                  for (final (String id, String fallbackPrice, String hearts) in _kTips)
+                    Expanded(
+                      child: _OptionCard(
+                        label: hearts,
+                        price: _tipProducts[id]?.priceString ?? fallbackPrice,
+                        isSelected: _selectedTipId == id,
+                        onTap: () {
+                          Haptics.vibrate(HapticsType.light);
+                          setState(() => _selectedTipId = id);
+                        },
+                      ),
+                    ),
+                ],
+              ),
+              const Gap(24),
+              GlassCapsuleButton(
+                height: 52,
+                isExpanded: true,
+                onTap: selectedTip == null || _buyingTipId != null ? null : () => _buyTip(selectedTip),
+                child: _buyingTipId != null
+                    ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                    : AutoSizeText(
+                        'Support · ${selectedTip?.priceString ?? _kTips.firstWhere((tip) => tip.$1 == _selectedTipId).$2}',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        maxLines: 1,
+                      ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    return KekSheetScaffold(
+      child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Drag handle
-            Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 8),
-              width: 32,
-              height: 4,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const AutoSizeText('🤝', style: TextStyle(fontSize: 48), maxLines: 1),
-                  const Gap(12),
-                  const AutoSizeText(
-                    'keklist PRO',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                  ),
-                  const Gap(8),
-                  AutoSizeText(
-                    'Unlock all features',
-                    style: TextStyle(fontSize: 15, color: theme.colorScheme.onSurfaceVariant),
-                    maxLines: 1,
-                  ),
+                  const _SheetHeader(emoji: '🤝', title: 'keklist PRO', subtitle: 'Unlock all features'),
                     const Gap(8),
                     const Gap(12),
                     const _FeatureList(),
@@ -201,48 +275,25 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
                       AutoSizeText(_error!, style: const TextStyle(color: Colors.redAccent), maxLines: 3)
                     else ...[
                       Row(
+                        spacing: 12,
                         children: _plans.map((plan) {
                           final isSelected = _selected == plan;
                           return Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: plan == _plans.first ? 0 : 6,
-                                right: plan == _plans.last ? 0 : 6,
-                              ),
-                              child: _PlanCard(
-                                plan: plan,
-                                isSelected: isSelected,
-                                onTap: plan.available
-                                    ? () {
-                                        Haptics.vibrate(HapticsType.light);
-                                        setState(() => _selected = plan);
-                                      }
-                                    : null,
-                              ),
+                            child: _OptionCard(
+                              label: plan.label,
+                              price: plan.priceString,
+                              isSelected: isSelected,
+                              onTap: plan.available
+                                  ? () {
+                                      Haptics.vibrate(HapticsType.light);
+                                      setState(() => _selected = plan);
+                                    }
+                                  : null,
                             ),
                           );
                         }).toList(),
                       ),
                       const Gap(20),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 52,
-                        child: FilledButton(
-                          onPressed: (_purchasing || _selected?.available != true) ? null : _purchase,
-                          child: _purchasing
-                              ? const SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                                )
-                              : AutoSizeText(
-                                  _selected != null ? 'Subscribe · ${_selected!.priceString}' : 'Subscribe',
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                                  maxLines: 1,
-                                ),
-                        ),
-                      ),
-                      const Gap(12),
                       GestureDetector(
                         onTap: _purchasing ? null : _restore,
                         child: AutoSizeText(
@@ -263,6 +314,19 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
                           ),
                           _LegalLink(label: 'Terms of Use', url: KeklistConstants.termsOfUseURL),
                         ],
+                      ),
+                      const Gap(24),
+                      GlassCapsuleButton(
+                        height: 52,
+                        isExpanded: true,
+                        onTap: (_purchasing || _selected?.available != true) ? null : _purchase,
+                        child: _purchasing
+                            ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                            : AutoSizeText(
+                                _selected != null ? 'Subscribe · ${_selected!.priceString}' : 'Subscribe',
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                maxLines: 1,
+                              ),
                       ),
                     ],
                   ],
@@ -285,9 +349,9 @@ class _FeatureList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const features = [
-      ('🙂', 'support our project'),
       ('☀️', 'weather per each day'),
       ('☁️', 'access to online features'),
+      ('🙂', 'support our project'),
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,26 +375,30 @@ class _FeatureList extends StatelessWidget {
 }
 
 // ---------------------------------------------------------------------------
-// Plan card
+// Option card
 // ---------------------------------------------------------------------------
 
-class _PlanCard extends StatelessWidget {
-  final _Plan plan;
+/// A square choice of the paywall and the tips sheet: a label over a price, outlined when selected.
+class _OptionCard extends StatelessWidget {
+  final String label;
+  final String price;
   final bool isSelected;
   final VoidCallback? onTap;
 
-  const _PlanCard({required this.plan, required this.isSelected, this.onTap});
+  const _OptionCard({required this.label, required this.price, required this.isSelected, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final borderColor = isSelected ? cs.onSurface : cs.outlineVariant;
+    // The selected card gets a full-strength border and a tint; the others only a faint hairline.
+    final borderColor = isSelected ? cs.onSurface : cs.onSurface.withValues(alpha: 0.12);
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         decoration: BoxDecoration(
-          border: Border.all(color: borderColor, width: isSelected ? 2 : 1),
+          color: isSelected ? cs.onSurface.withValues(alpha: 0.06) : null,
+          border: Border.all(color: borderColor, width: isSelected ? 2.5 : 1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: AspectRatio(
@@ -339,7 +407,7 @@ class _PlanCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AutoSizeText(
-                plan.label,
+                label,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -351,7 +419,7 @@ class _PlanCard extends StatelessWidget {
               ),
               const Gap(8),
               AutoSizeText(
-                plan.priceString,
+                price,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
@@ -364,6 +432,33 @@ class _PlanCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// The emoji, title and subtitle that open the paywall and the tips sheet.
+class _SheetHeader extends StatelessWidget {
+  final String emoji;
+  final String title;
+  final String subtitle;
+
+  const _SheetHeader({required this.emoji, required this.title, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AutoSizeText(emoji, style: const TextStyle(fontSize: 48), maxLines: 1),
+        const Gap(12),
+        AutoSizeText(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold), maxLines: 1),
+        const Gap(8),
+        AutoSizeText(
+          subtitle,
+          style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onSurfaceVariant),
+          maxLines: 1,
+        ),
+      ],
     );
   }
 }

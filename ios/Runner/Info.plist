@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>com.posthog.posthog.AUTO_INIT</key>
+	<false/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -54,7 +56,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>This app needs to access local network resources to discover and connect to nearby devices</string>
+	<string>keklist opens in a browser on your computer in the same Wi-Fi.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -81,14 +83,14 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSFaceIDUsageDescription</key>
-	<string>For showing/hiding sensetive data for other users by current user</string>
 	<key>NSCameraUsageDescription</key>
-	<string>keklist may use the camera via the file picker to attach photos or videos to entries</string>
+	<string>keklist uses the camera to record round video messages and to attach photos or videos to entries</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>keklist needs access to photo library to import your backups from files</string>
+	<key>NSMotionUsageDescription</key>
+	<string>keklist detects a shake of the phone to open screen customization</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>keklist needs access to your microphone only to record voice messages</string>
+	<string>keklist needs access to your microphone to record voice and video messages</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>keklist uses your location to tag entries with a place and to set weather coordinates</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

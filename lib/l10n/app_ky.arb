@@ -1,4 +1,68 @@
 {
+    "insightsBrightestPeriod": "Эң жаркын мезгил",
+    "insightsPeriodWeek": "Апта",
+    "insightsPeriodMonth": "Ай",
+    "insightsPeriodYear": "Жыл",
+    "insightsPeriodAllTime": "Бардык убакыт",
+    "insightsVsLastWeek": "Өткөн жумага салыштырмалуу {delta}",
+    "insightsVsLastMonth": "Өткөн айга салыштырмалуу {delta}",
+    "insightsVsLastYear": "Өткөн жылга салыштырмалуу {delta}",
+    "insightsCategorySummary": "Сереп",
+    "insightsCategoryEmotions": "Эмоциялар",
+    "insightsCategoryActivity": "Активдүүлүк",
+    "insightsCategoryMemories": "Эскерүүлөр",
+    "insightsCategoryMedia": "Медиа",
+    "insightsCounters": "Сандар менен",
+    "insightsMinds": "Жазуулар",
+    "insightsActiveDays": "Активдүү күндөр",
+    "insightsWords": "Сөздөр",
+    "insightsBrightestDay": "Эң жаркын күн",
+    "insightsBrightestWeek": "Эң жаркын жума",
+    "insightsBrightestMonth": "Эң жаркын ай",
+    "insightsBrightestYear": "Эң жаркын жыл",
+    "insightsBrightestDetails": "жазуу: {minds} · эмоция: {emotions} · медиа: {media}",
+    "insightsEmotionDistribution": "Эмоциялар",
+    "insightsEmotionTrend": "Эмоциялардын динамикасы",
+    "insightsEmotionPairs": "Бирге кездешкен эмоциялар",
+    "insightsEmotionRhythm": "Эмоционалдык ритм",
+    "insightsByWeekday": "Жуманын күндөрү боюнча",
+    "insightsByDayPart": "Суткалык убакыт боюнча",
+    "insightsNight": "Түн",
+    "insightsMorning": "Эртең менен",
+    "insightsAfternoon": "Күндүз",
+    "insightsEvening": "Кечинде",
+    "insightsStreak": "Серия",
+    "insightsStreakLabel": "күн катары менен",
+    "insightsLongestStreak": "Рекорд: {count}",
+    "insightsStreakKeepGoing": "Серияны үзбөө үчүн бүгүн жазуу кошуңуз",
+    "insightsHeatmap": "Активдүүлүк картасы",
+    "insightsActivityTime": "Суткалык убакыт",
+    "insightsPeakHour": "Көбүнчө {hour} чамасында",
+    "insightsOnThisDay": "Ошол кезде",
+    "insightsMediaCounters": "Медиа",
+    "insightsPhotos": "Сүрөттөр",
+    "insightsVideos": "Видеолор",
+    "insightsVoiceNotes": "Үн жазуулары",
+    "insightsRoundVideos": "Тегерек видеолор",
+    "insightsEmptyPeriod": "Бул мезгилде азырынча жазуу жок",
+    "insightsEmptyEmotions": "Муну көрүү үчүн жазууларга эмоция белгилеңиз",
+    "insightsEmptyPairs": "Жуптарды көрүү үчүн жазууга эки эмоция белгилеңиз",
+    "insightsEmptyOnThisDay": "Бир жума, ай, жарым жыл жана бир жыл мурун азырынча эч нерсе жок",
+    "insightsEmptyRoundVideos": "Бул мезгилде үн жазуулар жана тегерек видеолор жок",
+    "insightsEmptyStreak": "Серияны баштоо үчүн бүгүн жазуу кошуңуз",
+    "insightsCustomize": "Аналитиканы ыңгайлаштыруу",
+    "insightsCustomizeDescription": "Карточкаларды күйгүзүп же өчүрүп, тартып тартибин өзгөртүңүз",
+    "insightsResetLayout": "Баштапкы абалга",
+    "activeTasks": "Активдүү тапшырмалар",
+    "galleryIndex": "Галерея индекси",
+    "galleryIndexNoAccess": "Сүрөттөргө уруксат жок",
+    "galleryIndexNotIndexed": "Азырынча индекстелген жок",
+    "galleryIndexIndexing": "Индекстөө {done} / {total}",
+    "galleryIndexReady": "{count} сүрөт жана видео · жаңыртылды {time}",
+    "galleryIndexThumbnails": "Миниатюралар кеши: {size}",
+    "galleryIndexRebuildTitle": "Галерея индексин кайра түзөбүзбү?",
+    "galleryIndexRebuildMessage": "Миниатюралар өчүрүлүп, медиатека кайра текшерилет.",
+    "galleryIndexRebuild": "Кайра түзүү",
     "settings": "Сөздүктөр",
     "@settings": {
         "description": "Сөздүктөр таб белгиси"
@@ -63,10 +127,6 @@
     "@showDigest": {
         "description": "Жыйынтык көрсөтүү аракети"
     },
-    "showAll": "Баарын көрсөтүү",
-    "@showAll": {
-        "description": "Баарын көрсөтүү аракети"
-    },
     "translateToEnglish": "Англис тилине которуу",
     "@translateToEnglish": {
         "description": "Англис тилине которуу аракети"
@@ -95,25 +155,9 @@
     "@tabsSettings": {
         "description": "Таб жөндөөлөрү навигациясы"
     },
-    "whatsNew": "Жаңы нерселер?",
-    "@whatsNew": {
-        "description": "Жаңы нерселер навигациясы"
-    },
-    "releaseNotes": "Релиз жазмалары",
-    "@releaseNotes": {
-        "description": "Релиз жазмалары навигациясы"
-    },
-    "suggestFeature": "Өзгөчөлүктү сунуш кылуу",
-    "@suggestFeature": {
-        "description": "Өзгөчөлүктү сунуш кылуу навигациясы"
-    },
     "sendFeedback": "Пикир-божомол жөнөтүү",
     "@sendFeedback": {
         "description": "Пикир-божомол жөнөтүү навигациясы"
-    },
-    "emailUs": "Бизге email жазыңыз",
-    "@emailUs": {
-        "description": "Email аркылуу жазуу навигациясы"
     },
     "clearOfflineDataWarning": "Бардык оффлайн маалыматтарың өчүрүлөт. Аларды мурун экспорттогонуңа ынан.",
     "@clearOfflineDataWarning": {
@@ -155,7 +199,7 @@
     "@profile": {
         "description": "Профиль таб белгиси"
     },
-    "insights": "Талдоо",
+    "insights": "Профиль",
     "@insights": {
         "description": "Талдоо таб белгиси"
     },
@@ -163,7 +207,7 @@
     "@calendar": {
         "description": "Календарь таб белгиси"
     },
-    "debugMenu": "Debug менюсу",
+    "debugMenu": "Иштеп чыгуучунун менюсу",
     "@debugMenu": {
         "description": "Debug менюсу таб белгиси"
     },
@@ -178,10 +222,6 @@
     "dangerZone": "Кооптуу зона",
     "@dangerZone": {
         "description": "Кооптуу зона бөлүмүнүн аталышы"
-    },
-    "editMind": "Ойду түзөтүү",
-    "@editMind": {
-        "description": "Ойду түзөтүү диалогунун аталышы"
     },
     "enterTokenHere": "Токенди бул жерге киргизиңиз",
     "@enterTokenHere": {
@@ -215,15 +255,7 @@
     "@send": {
         "description": "Жөнөтүү баскычы"
     },
-    "updateYourNickname": "Никнэмиңизди жаңылоо",
-    "@updateYourNickname": {
-        "description": "Никнэмиңизди жаңылоо диалогунун аталышы"
-    },
-    "yourNickname": "Сиздин никнэмиңиз",
-    "@yourNickname": {
-        "description": "Никнэм киргизүү көрсөткүчү"
-    },
-    "create": "Жазуу",
+    "create": "Түзүү",
     "@create": {
         "description": "Жаратуу баскычы"
     },
@@ -251,10 +283,6 @@
     "@minds": {
         "description": "Ойлор аталышы"
     },
-    "searchForYourNotes": "Эскертмелериңизди издөө",
-    "@searchForYourNotes": {
-        "description": "Эскертмелерди издөө көрсөткүчү"
-    },
     "searchYourEmoji": "Эмоджиңизди издөө...",
     "@searchYourEmoji": {
         "description": "Эмоджи издөө көрсөткүчү"
@@ -263,29 +291,13 @@
     "@writeSomething": {
         "description": "Бир нерсе жазуу көрсөткүчү"
     },
-    "topMinds": "Эң жакшы ойлор",
-    "@topMinds": {
-        "description": "Эң жакшы ойлор аталышы"
-    },
     "todayMinds": "Бүгүнкү ойлор",
     "@todayMinds": {
         "description": "Бүгүнкү ойлор аталышы"
     },
-    "randomMind": "Туш келди ой",
-    "@randomMind": {
-        "description": "Туш келди ой аталышы"
-    },
-    "spectrum": "Спектр",
-    "@spectrum": {
-        "description": "Спектр аталышы"
-    },
     "youDidNotCollectAnyEntriesYet": "Сиз али эч кандай жазма чогулткан жоксуз",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Эч кандай жазма чогултталбаган билдирүүсү"
-    },
-    "pleaseAuthenticateToShowContent": "Ойдуңуздун мазмунун көрсөтүү үчүн аутентификациядан өтүңүз",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Аутентификация талап кылынган билдирүү"
     },
     "areYouSure": "Ишенимиңиз келип турабы?",
     "@areYouSure": {
@@ -323,17 +335,13 @@
     "@calendarDescription": {
         "description": "Календарь таб сүрөттөмөсү"
     },
-    "insightsDescription": "Бардык жазмаларыңыздын статистикасы",
+    "insightsDescription": "Сиз жана жазууларыңыздын статистикасы",
     "@insightsDescription": {
         "description": "Талдоо таб сүрөттөмөсү"
     },
     "settingsDescription": "Бардык жөндөөлөр экраны (караңгы режим, синхрондоштуруу жана башкалар)",
     "@settingsDescription": {
         "description": "Сөздүктөр таб сүрөттөмөсү"
-    },
-    "profileDescription": "Профилиңиз менен экран",
-    "@profileDescription": {
-        "description": "Профиль таб сүрөттөмөсү"
     },
     "todayDescription": "Анткени бүгүнкү ойлор",
     "@todayDescription": {
@@ -346,15 +354,6 @@
     "noMindsForThisDay": "Бул күн үчүн ойлор жок",
     "@noMindsForThisDay": {
         "description": "Бул күн үчүн ойлор жок билдирүүсү"
-    },
-    "showMindsForPeriod": "{period} үчүн ойлорду көрсөтүү",
-    "@showMindsForPeriod": {
-        "description": "Мезгил үчүн ойлорду көрсөтүү билдирүүсү",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Жума",
     "password": "Сырсөз",
@@ -397,20 +396,10 @@
     "onboardingMind4": "'Аналитика' өтмөгү жазууларыңыздын кыскача статистикасын көрсөтөт",
     "onboardingMind5": "Бардык жазуулар телефонуңузда гана сакталат",
     "onboardingMind6": "Жаңы жазуу жасоо үчүн 'Жазуу' баскычын басыңыз",
-    "viewPhotos": "Сүрөттөрдү көрүү",
     "noPhotosForDay": "Бул күндө сүрөттөр табылган жок",
-    "dateGallerySubtitle": "Бул күндүн медиа файлдары",
-    "dayMediaFilesCount": "{count} медиа файл бул күнгө",
-    "sources": "Булактар",
-    "sourcesMinds": "Ойлор",
-    "sourcesMindsSubtitle": "Сиздин ойлоруңуз жана учурларыңыз",
-    "sourcesPhotoVideo": "Сүрөт жана видео",
-    "sourcesPhotoVideoSubtitle": "Бул күн үчүн түзмөктүн сүрөттөрү жана видеолору",
     "sourcesMediaFolder": "Медиа файлдар",
     "sourcesMediaFolderSubtitle": "Тандалган папкадан сүрөттөр жана видеолор",
     "mediaFolderSettings": "Медиа файлдар",
-    "mediaFolderNoPath": "Папка тандалган жок",
-    "mediaFolderPickFolder": "Папканы тандоо",
     "licenses": "Лицензиялар",
     "sourcesWeather": "Аба ырайы",
     "sourcesWeatherSubtitle": "Бул күн үчүн жергиликтүү аба ырайы шарттары",
@@ -418,7 +407,6 @@
     "weatherLatitude": "Кеңдик",
     "weatherLongitude": "Узундук",
     "weatherSaveLocation": "Жерди сактоо",
-    "weatherNoLocation": "Аба ырайын көрүү үчүн жерди коюңуз",
     "weatherUseMyLocation": "Менин жеримди колдонуу",
     "weatherDetectingLocation": "Жер аныкталууда...",
     "weatherOrEnterManually": "же кол менен киргизүү",
@@ -426,11 +414,6 @@
     "weatherLocationServicesDisabled": "Геолокация кызматтары өчүрүлгөн. Жөндөөлөрдө иштетиңиз.",
     "weatherLocationPermissionDenied": "Геолокацияга уруксат берилген жок.",
     "weatherLocationPermissionPermanentlyDenied": "Геолокацияга уруксат туруктуу берилген жок. Колдонмо жөндөөлөрү ачылууда.",
-    "weatherTemperature": "Температура",
-    "weatherUvIndex": "УК-индекс",
-    "weatherHumidity": "Нымдуулук",
-    "weatherWindSpeed": "Шамалдын ылдамдыгы",
-    "weatherPrecipitation": "Жаан-чачын",
     "audioRecordTitle": "Аудио жаздыруу",
     "audioRecordTitleRecording": "Жазылууда…",
     "audioRecordHint": "Сактоо үчүн «Токтотуу» баскычын басыңыз.",
@@ -440,8 +423,6 @@
     "audioRecordPermissionError": "Аудио жаздыруу үчүн микрофон уруксаты керек.",
     "audioRecordStartError": "Жаздырууну баштоо мүмкүн болмоду. Кайталап аракет кылыңыз.",
     "audioRecordStopError": "Жаздырууну токтотуу мүмкүн болмоду. Кайталап аракет кылыңыз.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Сиз PRO колдонуучусуз. Кийинки {price} төлөм {date} болот.",
     "emotions": "Эмоциялар",
     "archived": "Архив",
@@ -451,8 +432,6 @@
     "newEmotion": "Жаңы эмоция",
     "editEmotion": "Эмоцияны түзөтүү",
     "emotionNameHint": "Аталышы",
-    "emotionPickHint": "Белгилөө үчүн басыңыз",
-    "emotionDrillHint": "тереңдөө үчүн кармап туруңуз",
     "noEmotionsYet": "Азырынча эмоциялар жок",
     "noArchivedEmotions": "Архивделген эмоциялар жок",
     "addEmotion": "Эмоция кошуу",
@@ -460,5 +439,181 @@
     "doneEditing": "Даяр",
     "emotionEditHint": "Атын өзгөртүү үчүн басыңыз · ✕ өчүрүү үчүн · иреттөө үчүн сүйрөңүз",
     "emotionInUseMessage": "Бул эмоция кээ бир майндтарда колдонулат. Аны ошол жерде сактоо үчүн архивдеңиз же бардык жерден өчүрүңүз.",
-    "deleteEmotionMessage": "Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык майндтардан өчүрүлөт."
+    "deleteEmotionMessage": "Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык майндтардан өчүрүлөт.",
+    "dayFeedTileSettings": "Плитка жөндөөлөрү",
+    "dayFeedColumns": "Мамычалар",
+    "dayFeedMindTileSize": "Плитканын өлчөмү",
+    "dayFeedMindTileSquare": "Чарчы",
+    "dayFeedMindTileWide": "Кең",
+    "dayFeedShowMindText": "Текстти көрсөтүү",
+    "dayFeedPhotoAccessHint": "Бул жерде сүрөт жана видеолорду көрүү үчүн сүрөткө уруксат бериңиз",
+    "dayFeedAllowAccess": "Уруксат берүү",
+    "dayFeedFolderHint": "Бул жерде сүрөт жана видеолорду көрүү үчүн медиа папканы тандаңыз",
+    "dayFeedChooseFolder": "Тандоо",
+    "holdToRecordAudio": "Үн билдирүү жазуу үчүн басып туруңуз",
+    "holdToRecordVideo": "Видео билдирүү жазуу үчүн басып туруңуз",
+    "roundVideoRecordError": "Видеону жазуу мүмкүн болбоду",
+    "roundVideoCameraUnavailable": "Бул түзмөктө камера жеткиликсиз",
+    "roundVideoRetake": "Кайра тартуу",
+    "roundVideoUse": "Колдонуу",
+    "removeMedia": "Медианы өчүрүү",
+    "shakeToCustomize": "Ыңгайлаштыруу үчүн силкиңиз",
+    "shakeToCustomizeHint": "же аталышты басып туруңуз",
+    "customizeSettings": "Жөндөөлөрдү ыңгайлаштыруу",
+    "customizeSettingsDescription": "Белгиси алынган бөлүмдөр жана саптар жөндөөлөр экранында жашырылат.",
+    "calendarSettings": "Календардын жөндөөлөрү",
+    "calendarShowMedia": "Сүрөт жана видеолорду көрсөтүү",
+    "calendarWeekTitles": "Жуманын аталыштары",
+    "calendarPlayStories": "Окуяларды көрүү",
+    "storyBackgroundTweak": "Окуялардын фону",
+    "storyAnimationOff": "Өчүк",
+    "storyAnimationPulse": "Пульс",
+    "storyAnimationWave": "Толкун",
+    "storyAnimationEqualizer": "Эквалайзер",
+    "storyAnimationDrift": "Дрейф",
+    "storyAnimationGlow": "Жаркыроо",
+    "viewerCommentHint": "Комментарий…",
+    "calendarToCurrentWeek": "Учурдагы жумага",
+    "storyDateLines": "Дата саптары",
+    "storyTextureTitle": "Текстура",
+    "storySpectrum": "Үн спектри",
+    "storySensitivity": "Сезгичтик",
+    "profileMindfulDays": "{count, plural, other{Аң-сезимдүү {count} күн}}",
+    "profileName": "Аты",
+    "profilePhoto": "Сүрөт",
+    "profileEmoji": "Эмодзи",
+    "profileInitial": "Тамга",
+    "webVersion": "Wi‑Fi аркылуу кирүү",
+    "webVersionAddressHint": "Ошол эле Wi‑Fi'дагы компьютердин браузеринде ачыңыз; keklist ачык турушу керек",
+    "webVersionCopied": "Дарек көчүрүлдү",
+    "webVersionStarting": "Иштетилүүдө…",
+    "webVersionNoWifi": "keklist'ти браузерде ачуу үчүн Wi‑Fi'га туташыңыз.",
+    "webVersionNoBundle": "Бул курамада веб-версия жок.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Ар бир браузер аны 30 күндө бир жолу сурайт",
+    "webVersionPinNotSet": "Коюлган эмес",
+    "webVersionPinHint": "4–8 сан",
+    "webVersionRemovePin": "PIN'ди өчүрүү",
+    "webVersionPort": "Порт",
+    "aiTab": "Чат",
+    "aiTabDescription": "Жазууларыңызды телефондо иштеген AI менен талкулаңыз",
+    "aiPrivacyNote": "Телефондо гана иштейт: жазуулар түзмөктөн чыкпайт.",
+    "aiDisclaimer": "Бул медициналык кызмат эмес. Коркунучта болсоңуз, тез жардам кызматына кайрылыңыз.",
+    "aiYesterday": "Кечээ",
+    "aiNoSessions": "Азырынча сессия жок",
+    "aiNewSession": "Жаңы сессия",
+    "aiChooseRole": "Ролду тандаңыз",
+    "aiRoleTherapist": "Терапевт",
+    "aiRoleCoach": "Коуч",
+    "aiRoleFriend": "Дос",
+    "aiMessageHint": "Билдирүү",
+    "aiStarterWeek": "Жумам кандай өттү?",
+    "aiStarterWorry": "Акыркы убакта мени эмне тынчсыздандырат?",
+    "aiStarterJoy": "Акыркы убакта мени эмне кубантты?",
+    "aiActionSaveAsMind": "Майнд катары сактоо",
+    "aiActionOpenDay": "Күндү ачуу",
+    "aiActionWeekSummary": "Жуманын жыйынтыгы",
+    "aiWeekSummaryPrompt": "Акыркы 7 күнүмдү жыйынтыкта: эмне болду, эмнени сездим, эмне өзгөчө болду.",
+    "aiSavedAsMind": "Бүгүнгө сакталды",
+    "aiStop": "Токтотуу",
+    "aiNoModelTitle": "Моделди тандаңыз",
+    "aiNoModelMessage": "Баштоо үчүн моделди жүктөп алыңыз. Ал телефондо, интернетсиз иштейт.",
+    "aiNoModelOnPhone": "Моделди телефондогу колдонмодон жүктөңүз: Жөндөөлөр → AI → Моделдер.",
+    "aiModels": "Моделдер",
+    "aiRoles": "Ролдор",
+    "aiDownloaded": "Жүктөлгөндөр",
+    "aiDownloads": "Жүктөлүүдө",
+    "aiGalleryCatalog": "Google AI Edge Gallery",
+    "aiHuggingFace": "Hugging Face (GGUF)",
+    "aiSearchModels": "GGUF моделдерин издөө",
+    "aiDownload": "Жүктөө",
+    "aiPause": "Тыным",
+    "aiPaused": "Тынымда",
+    "aiResume": "Улантуу",
+    "aiDownloadFailed": "Жүктөө ишке ашкан жок",
+    "aiCellularTitle": "Мобилдик интернет аркылуу жүктөйсүзбү?",
+    "aiCellularMessage": "{size} мобилдик интернет аркылуу жүктөлөт.",
+    "aiDeleteModel": "Моделди өчүрөсүзбү?",
+    "aiStorageUsed": "Бул телефондо: {size}",
+    "aiDeviceMemory": "Телефондун эс тутуму: {size}",
+    "aiCatalogFailed": "Тизмени жүктөө мүмкүн болбоду. Байланышты текшериңиз.",
+    "aiNoFilesFit": "Бул моделдин бир да файлы телефондун эс тутумуна батпайт.",
+    "aiBuiltInRole": "Орнотулган",
+    "aiOwnRoles": "Сиздин ролдоруңуз",
+    "aiDuplicate": "Көчүрмөсүн жасоо",
+    "aiNewRole": "Жаңы роль",
+    "aiRoleName": "Аталышы",
+    "aiRoleEmoji": "Эмодзи",
+    "aiRolePrompt": "Промпт",
+    "aiRolePromptHint": "AI кантип сүйлөшү жана эмнеге көңүл бурушу керек",
+    "aiReadOnlyRole": "Орнотулган ролдорду өзгөртүүгө болбойт. Өз ролуңузду жасоо үчүн көчүрмөсүн жасаңыз.",
+    "aiDeleteSession": "Сессияны өчүрөсүзбү?",
+    "aiDeleteRole": "Ролду өчүрөсүзбү?",
+    "aiRecommended": "Сунушталат",
+    "aiLowQuality": "Сапаты төмөн",
+    "aiModelDoesNotFit": "Бул модель телефондун эсине батпайт. Кичирээк моделди тандаңыз.",
+    "aiChooseAnotherModel": "Башка модель тандоо",
+    "creatorEmotionsTitle": "Эмоциялар",
+    "creatorEmotionsAfterSave": "Сактагандан кийин суроо",
+    "creatorEmotionsButton": "Баскычтоптун үстүндөгү баскыч",
+    "creatorEmotionsNever": "Сурабоо",
+    "insightsWeekAgo": "Бир жума мурун",
+    "insightsMonthAgo": "Бир ай мурун",
+    "insightsHalfYearAgo": "Жарым жыл мурун",
+    "insightsYearAgo": "Бир жыл мурун",
+    "insightsTwoYearsAgo": "Эки жыл мурун",
+    "insightsVoiceAndVideos": "Үн жана тегерек видеолор",
+    "insightsWeekNumber": "{number}-жума",
+    "aiNoSessionsHint": "Жумаңыз, тынчсыздануу же жакшы күн жөнүндө сураңыз: чат жазууларыңызды телефондун өзүндө окуйт.",
+    "showInGallery": "Галереяда көрсөтүү",
+    "tileEmojiMotion": "Эмодзи кыймылы",
+    "tileEmojiMotionDrift": "Дрейф",
+    "tileEmojiMotionFloat": "Термелүү",
+    "tileEmojiMotionStill": "Кыймылсыз",
+    "gridResizeAnimation": "Чымчуу анимациясы",
+    "gridResizeFly": "Учуу",
+    "gridResizeZoom": "Зум",
+    "gridResizeCrossfade": "Эрүү",
+    "feedSortOrder": "Тартиби",
+    "feedSortTime": "Убакыт",
+    "feedSortMindsFirst": "Адегенде жазуулар",
+    "feedSortMediaFirst": "Адегенде медиа",
+    "feedGrouping": "Топтор",
+    "feedGroupingNone": "Жок",
+    "feedGroupingType": "Түрү",
+    "feedGroupingTimeOfDay": "Күн убагы",
+    "feedSectionMinds": "Жазуулар",
+    "feedSectionGallery": "Галерея",
+    "removePhotoTitle": "Сүрөттү алып салуу",
+    "removeVideoTitle": "Видеону алып салуу",
+    "hideMedia": "Жашыруу",
+    "hideMediaSubtitle": "keklist'тен гана, галереяда калат",
+    "deleteFromGallery": "Галереядан өчүрүү",
+    "deleteFromGallerySubtitle": "«Жакында өчүрүлгөндөргө» түшөт",
+    "mediaHidden": "keklist'тен жашырылды",
+    "mediaShownAgain": "Кайра keklist'те",
+    "undo": "Жокко чыгаруу",
+    "hiddenMedia": "Жашыруун сүрөттөр",
+    "hiddenMediaHint": "Сүрөттү keklist'ке кайтаруу үчүн басыңыз",
+    "hiddenMediaEmpty": "Эч нерсе жашырылган жок",
+    "leaveFeedback": "Пикир калтыруу",
+    "feedbackSend": "Жөнөтүү",
+    "feedbackSent": "Рахмат! Иштеп чыгуучу билдирүүнү алды",
+    "feedbackFailed": "Жөнөтүү мүмкүн болбоду. Интернетти текшерип, кайра аракет кылыңыз",
+    "analytics": "Аналитика",
+    "analyticsDescription": "Анонимдүү колдонуу статистикасы эмнени жакшыртуу керектигин түшүнүүгө жардам берет. Сиз жазгандын баары түзмөктө калат.",
+    "analyticsStoreBuildsOnly": "Бул версия эч нерсе жибербейт: аналитика App Store жана Google Play версияларында гана иштейт.",
+    "analyticsSent": "Эмне жөнөтүлөт",
+    "analyticsSentItems": "Кайсы жөндөөлөрдү тандайсыз, кайсы экрандарды ачасыз, колдонмонун версиясы, платформа жана тил, Pro жана чай пул сатып алуулар, ката текстисиз кыйроо отчеттору.",
+    "analyticsNeverSent": "Эч качан жөнөтүлбөйт",
+    "analyticsNeverSentItems": "Жазууларыңыз, алардын тексти, эмоциялары жана комментарийлери, сүрөт, видео жана аудио, алардын саны, атыңыз, жайгашкан жериңиз жана IP дарегиңиз.",
+    "analyticsResetId": "Анонимдүү ID'ни баштапкы абалга келтирүү",
+    "analyticsResetIdDone": "Эми жаңы анонимдүү ID колдонулат",
+    "settingsSupport": "Колдоо",
+    "calendarOpenDay": "Күндү ачуу",
+    "webVersionEnabled": "Браузерге чагылдыруу",
+    "viewerComments": "Комментарийлер",
+    "viewerNoComments": "Азырынча комментарий жок",
+    "previousDay": "Мурунку күн",
+    "nextDay": "Кийинки күн"
 }

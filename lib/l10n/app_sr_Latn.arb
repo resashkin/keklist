@@ -1,4 +1,68 @@
 {
+    "insightsBrightestPeriod": "Najupečatljiviji period",
+    "insightsPeriodWeek": "Nedelja",
+    "insightsPeriodMonth": "Mesec",
+    "insightsPeriodYear": "Godina",
+    "insightsPeriodAllTime": "Sve vreme",
+    "insightsVsLastWeek": "{delta} u odnosu na prošlu nedelju",
+    "insightsVsLastMonth": "{delta} u odnosu na prošli mesec",
+    "insightsVsLastYear": "{delta} u odnosu na prošlu godinu",
+    "insightsCategorySummary": "Pregled",
+    "insightsCategoryEmotions": "Emocije",
+    "insightsCategoryActivity": "Aktivnost",
+    "insightsCategoryMemories": "Uspomene",
+    "insightsCategoryMedia": "Mediji",
+    "insightsCounters": "U brojkama",
+    "insightsMinds": "Beleške",
+    "insightsActiveDays": "Aktivni dani",
+    "insightsWords": "Reči",
+    "insightsBrightestDay": "Najupečatljiviji dan",
+    "insightsBrightestWeek": "Najupečatljivija nedelja",
+    "insightsBrightestMonth": "Najupečatljiviji mesec",
+    "insightsBrightestYear": "Najupečatljivija godina",
+    "insightsBrightestDetails": "beleški: {minds} · emocija: {emotions} · medija: {media}",
+    "insightsEmotionDistribution": "Emocije",
+    "insightsEmotionTrend": "Tok emocija",
+    "insightsEmotionPairs": "Emocije zajedno",
+    "insightsEmotionRhythm": "Emocionalni ritam",
+    "insightsByWeekday": "Po danima u nedelji",
+    "insightsByDayPart": "Po dobu dana",
+    "insightsNight": "Noć",
+    "insightsMorning": "Jutro",
+    "insightsAfternoon": "Popodne",
+    "insightsEvening": "Veče",
+    "insightsStreak": "Niz",
+    "insightsStreakLabel": "dana zaredom",
+    "insightsLongestStreak": "Rekord: {count}",
+    "insightsStreakKeepGoing": "Dodaj belešku danas da nastaviš niz",
+    "insightsHeatmap": "Mapa aktivnosti",
+    "insightsActivityTime": "Doba dana",
+    "insightsPeakHour": "Najaktivniji oko {hour}",
+    "insightsOnThisDay": "Tada",
+    "insightsMediaCounters": "Mediji",
+    "insightsPhotos": "Fotografije",
+    "insightsVideos": "Video zapisi",
+    "insightsVoiceNotes": "Glasovne beleške",
+    "insightsRoundVideos": "Okrugli video zapisi",
+    "insightsEmptyPeriod": "U ovom periodu još nema beleški",
+    "insightsEmptyEmotions": "Označi beleške emocijama da vidiš ovo",
+    "insightsEmptyPairs": "Označi belešku sa dve emocije da vidiš parove",
+    "insightsEmptyOnThisDay": "Od pre nedelju, mesec, pola godine i godinu još ništa nema",
+    "insightsEmptyRoundVideos": "U ovom periodu nema glasovnih poruka ni okruglih videa",
+    "insightsEmptyStreak": "Dodaj belešku danas da započneš niz",
+    "insightsCustomize": "Prilagodi analitiku",
+    "insightsCustomizeDescription": "Uključi ili isključi kartice i prevuci ih za redosled",
+    "insightsResetLayout": "Resetuj",
+    "activeTasks": "Aktivni zadaci",
+    "galleryIndex": "Indeks galerije",
+    "galleryIndexNoAccess": "Nema pristupa Fotografijama",
+    "galleryIndexNotIndexed": "Još nije indeksirano",
+    "galleryIndexIndexing": "Indeksiranje {done} od {total}",
+    "galleryIndexReady": "{count} fotografija i video zapisa · ažurirano {time}",
+    "galleryIndexThumbnails": "Keš sličica: {size}",
+    "galleryIndexRebuildTitle": "Ponovo izgraditi indeks galerije?",
+    "galleryIndexRebuildMessage": "Sličice će biti obrisane, a biblioteka ponovo skenirana.",
+    "galleryIndexRebuild": "Ponovo izgradi",
     "settings": "Podešavanja",
     "@settings": {
         "description": "Oznaka taba podešavanja"
@@ -61,10 +125,6 @@
     "@showDigest": {
         "description": "Akcija prikazivanja sažetka"
     },
-    "showAll": "Prikaži sve",
-    "@showAll": {
-        "description": "Akcija prikazivanja svega"
-    },
     "translateToEnglish": "Prevedi na engleski",
     "@translateToEnglish": {
         "description": "Akcija prevođenja na engleski"
@@ -93,25 +153,9 @@
     "@tabsSettings": {
         "description": "Navigacija podešavanja tabova"
     },
-    "whatsNew": "Šta je novo?",
-    "@whatsNew": {
-        "description": "Navigacija šta je novo"
-    },
-    "releaseNotes": "Beleške o izdanju",
-    "@releaseNotes": {
-        "description": "Navigacija beleške o izdanju"
-    },
-    "suggestFeature": "Predloži funkciju",
-    "@suggestFeature": {
-        "description": "Navigacija predlaganja funkcije"
-    },
     "sendFeedback": "Pošalji povratnu informaciju",
     "@sendFeedback": {
         "description": "Navigacija slanja povratne informacije"
-    },
-    "emailUs": "Pošalji nam e-poruku",
-    "@emailUs": {
-        "description": "Navigacija slanja email poruke"
     },
     "clearOfflineDataWarning": "Svi oflajn podaci će biti obrisani. Uveri se da si ih već izvezao.",
     "@clearOfflineDataWarning": {
@@ -153,7 +197,7 @@
     "@profile": {
         "description": "Oznaka taba profila"
     },
-    "insights": "Uvid",
+    "insights": "Profil",
     "@insights": {
         "description": "Oznaka taba uvida"
     },
@@ -161,7 +205,7 @@
     "@calendar": {
         "description": "Oznaka taba kalendara"
     },
-    "debugMenu": "Debug meni",
+    "debugMenu": "Meni za programere",
     "@debugMenu": {
         "description": "Oznaka taba debug menija"
     },
@@ -176,10 +220,6 @@
     "dangerZone": "Zona opasnosti",
     "@dangerZone": {
         "description": "Naslov sekcije zone opasnosti"
-    },
-    "editMind": "Uredi um",
-    "@editMind": {
-        "description": "Naslov dijaloga uređivanja uma"
     },
     "enterTokenHere": "Unesite token ovde",
     "@enterTokenHere": {
@@ -213,15 +253,7 @@
     "@send": {
         "description": "Dugme pošalji"
     },
-    "updateYourNickname": "Ažuriraj svoj nadimak",
-    "@updateYourNickname": {
-        "description": "Naslov dijaloga ažuriranja nadimka"
-    },
-    "yourNickname": "Tvoj nadimak",
-    "@yourNickname": {
-        "description": "Savet za unos nadimka"
-    },
-    "create": "Napiši",
+    "create": "Napravi",
     "@create": {
         "description": "Dugme kreiraj"
     },
@@ -249,10 +281,6 @@
     "@minds": {
         "description": "Naslov umova"
     },
-    "searchForYourNotes": "Pretraži svoje beleške",
-    "@searchForYourNotes": {
-        "description": "Savet za pretragu beleški"
-    },
     "searchYourEmoji": "Pretraži svoj emoji...",
     "@searchYourEmoji": {
         "description": "Savet za pretragu emoji-ja"
@@ -261,29 +289,13 @@
     "@writeSomething": {
         "description": "Savet za pisanje nečega"
     },
-    "topMinds": "Najbolji umovi",
-    "@topMinds": {
-        "description": "Naslov najboljih umova"
-    },
     "todayMinds": "Današnji umovi",
     "@todayMinds": {
         "description": "Naslov današnjih umova"
     },
-    "randomMind": "Slučajni um",
-    "@randomMind": {
-        "description": "Naslov slučajnog uma"
-    },
-    "spectrum": "Spektar",
-    "@spectrum": {
-        "description": "Naslov spektra"
-    },
     "youDidNotCollectAnyEntriesYet": "Još uvek niste prikupili nijedan unos",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Poruka nijedan unos nije prikupljen"
-    },
-    "pleaseAuthenticateToShowContent": "Molimo autentifikujte se da biste videli sadržaj svog uma",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Poruka o potrebi autentifikacije"
     },
     "areYouSure": "Da li ste sigurni?",
     "@areYouSure": {
@@ -321,17 +333,13 @@
     "@calendarDescription": {
         "description": "Opis taba kalendara"
     },
-    "insightsDescription": "Statistike svih vaših unosa",
+    "insightsDescription": "Vi i statistika vaših zapisa",
     "@insightsDescription": {
         "description": "Opis taba uvida"
     },
     "settingsDescription": "Ekran sa svim podešavanjima (tamni režim, sinhronizacija i sl.)",
     "@settingsDescription": {
         "description": "Opis taba podešavanja"
-    },
-    "profileDescription": "Ekran sa vašim profilom",
-    "@profileDescription": {
-        "description": "Opis taba profila"
     },
     "todayDescription": "Samo današnji umovi",
     "@todayDescription": {
@@ -344,15 +352,6 @@
     "noMindsForThisDay": "Nema uma za ovaj dan",
     "@noMindsForThisDay": {
         "description": "Poruka nema uma za ovaj dan"
-    },
-    "showMindsForPeriod": "Prikaži umove za {period}",
-    "@showMindsForPeriod": {
-        "description": "Poruka prikazivanja umova za period",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Nedelja",
     "password": "Lozinka",
@@ -397,20 +396,10 @@
     "onboardingMind4": "Kartica 'Analitika' prikazuje kratku statistiku vaših unosa",
     "onboardingMind5": "Sve beleške se čuvaju samo na vašem telefonu",
     "onboardingMind6": "Da kreirate novu belešku, dodirnite 'Piši'",
-    "viewPhotos": "Pogledaj fotografije",
     "noPhotosForDay": "Nema fotografija za ovaj dan",
-    "dateGallerySubtitle": "Medijske datoteke za ovaj dan",
-    "dayMediaFilesCount": "{count} medijskih datoteka za ovaj dan",
-    "sources": "Izvori",
-    "sourcesMinds": "Misli",
-    "sourcesMindsSubtitle": "Vaše misli i trenuci",
-    "sourcesPhotoVideo": "Fotografije i video",
-    "sourcesPhotoVideoSubtitle": "Fotografije i video snimci uređaja za ovaj dan",
     "sourcesMediaFolder": "Medijske datoteke",
     "sourcesMediaFolderSubtitle": "Fotografije i video iz prilagođene fascikle",
     "mediaFolderSettings": "Medijske datoteke",
-    "mediaFolderNoPath": "Nema izabrane fascikle",
-    "mediaFolderPickFolder": "Izaberi fasciklu",
     "licenses": "Licence",
     "sourcesWeather": "Vremenska prognoza",
     "sourcesWeatherSubtitle": "Lokalne vremenske prilike za ovaj dan",
@@ -418,7 +407,6 @@
     "weatherLatitude": "Geografska širina",
     "weatherLongitude": "Geografska dužina",
     "weatherSaveLocation": "Sačuvaj lokaciju",
-    "weatherNoLocation": "Postavite lokaciju u podešavanjima vremenske prognoze",
     "weatherUseMyLocation": "Koristi moju lokaciju",
     "weatherDetectingLocation": "Otkrivanje lokacije...",
     "weatherOrEnterManually": "ili unesite ručno",
@@ -426,11 +414,6 @@
     "weatherLocationServicesDisabled": "Usluge lokacije su onemogućene. Omogućite ih u podešavanjima.",
     "weatherLocationPermissionDenied": "Dozvola za lokaciju odbijena.",
     "weatherLocationPermissionPermanentlyDenied": "Dozvola za lokaciju je trajno odbijena. Otvaranje podešavanja aplikacije.",
-    "weatherTemperature": "Temperatura",
-    "weatherUvIndex": "UV indeks",
-    "weatherHumidity": "Vlažnost",
-    "weatherWindSpeed": "Brzina vetra",
-    "weatherPrecipitation": "Padavine",
     "audioRecordTitle": "Snimi audio",
     "audioRecordTitleRecording": "Snima se…",
     "audioRecordHint": "Tapnite Stop da sačuvate na uređaj.",
@@ -440,8 +423,6 @@
     "audioRecordPermissionError": "Potrebna je dozvola za mikrofon za snimanje zvuka.",
     "audioRecordStartError": "Nije moguće pokrenuti snimanje. Pokušajte ponovo.",
     "audioRecordStopError": "Nije moguće zaustaviti snimanje. Pokušajte ponovo.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Vi ste PRO korisnik. Sledeća uplata {price} biće {date}.",
     "emotions": "Emocije",
     "archived": "Arhivirano",
@@ -451,8 +432,6 @@
     "newEmotion": "Nova emocija",
     "editEmotion": "Izmeni emociju",
     "emotionNameHint": "Naziv",
-    "emotionPickHint": "Dodirnite za označavanje",
-    "emotionDrillHint": "duže držite za dublje",
     "noEmotionsYet": "Još nema emocija",
     "noArchivedEmotions": "Nema arhiviranih emocija",
     "addEmotion": "Dodaj emociju",
@@ -460,5 +439,181 @@
     "doneEditing": "Gotovo",
     "emotionEditHint": "Dodirnite za preimenovanje · ✕ za uklanjanje · prevucite za preuređivanje",
     "emotionInUseMessage": "Ova emocija se koristi u nekim mislima. Arhivirajte je da ostane tamo, ili je obrišite svuda.",
-    "deleteEmotionMessage": "Obrisati ovu emociju? Biće uklonjena iz svih misli koje je koriste."
+    "deleteEmotionMessage": "Obrisati ovu emociju? Biće uklonjena iz svih misli koje je koriste.",
+    "dayFeedTileSettings": "Podešavanja pločica",
+    "dayFeedColumns": "Kolone",
+    "dayFeedMindTileSize": "Veličina pločice",
+    "dayFeedMindTileSquare": "Kvadrat",
+    "dayFeedMindTileWide": "Široka",
+    "dayFeedShowMindText": "Prikaži tekst",
+    "dayFeedPhotoAccessHint": "Dozvoli pristup fotografijama da bi ovde video fotografije i video zapise",
+    "dayFeedAllowAccess": "Dozvoli",
+    "dayFeedFolderHint": "Izaberi medijsku fasciklu da bi ovde video fotografije i video zapise",
+    "dayFeedChooseFolder": "Izaberi",
+    "holdToRecordAudio": "Drži za glasovnu poruku",
+    "holdToRecordVideo": "Drži za video poruku",
+    "roundVideoRecordError": "Snimanje videa nije uspelo",
+    "roundVideoCameraUnavailable": "Kamera nije dostupna na ovom uređaju",
+    "roundVideoRetake": "Snimi ponovo",
+    "roundVideoUse": "Koristi",
+    "removeMedia": "Ukloni medije",
+    "shakeToCustomize": "Protresite za prilagođavanje",
+    "shakeToCustomizeHint": "ili dugo pritisnite naslov",
+    "customizeSettings": "Prilagodi podešavanja",
+    "customizeSettingsDescription": "Neoznačeni odeljci i redovi se skrivaju sa ekrana podešavanja.",
+    "calendarSettings": "Podešavanja kalendara",
+    "calendarShowMedia": "Prikaži fotografije i video zapise",
+    "calendarWeekTitles": "Naslovi nedelja",
+    "calendarPlayStories": "Pusti priče",
+    "storyBackgroundTweak": "Pozadina priča",
+    "storyAnimationOff": "Isključeno",
+    "storyAnimationPulse": "Puls",
+    "storyAnimationWave": "Talas",
+    "storyAnimationEqualizer": "Ekvilajzer",
+    "storyAnimationDrift": "Drift",
+    "storyAnimationGlow": "Sjaj",
+    "viewerCommentHint": "Komentar…",
+    "calendarToCurrentWeek": "Na tekuću nedelju",
+    "storyDateLines": "Redovi datuma",
+    "storyTextureTitle": "Tekstura",
+    "storySpectrum": "Spektar zvuka",
+    "storySensitivity": "Osetljivost",
+    "profileMindfulDays": "{count, plural, one{Svesno {count} dan} few{Svesno {count} dana} other{Svesno {count} dana}}",
+    "profileName": "Ime",
+    "profilePhoto": "Fotografija",
+    "profileEmoji": "Emodži",
+    "profileInitial": "Slovo",
+    "webVersion": "Pristup preko Wi‑Fi mreže",
+    "webVersionAddressHint": "Otvorite u pregledaču računara na istoj Wi‑Fi mreži; keklist mora ostati otvoren",
+    "webVersionCopied": "Adresa je kopirana",
+    "webVersionStarting": "Pokretanje…",
+    "webVersionNoWifi": "Povežite se na Wi‑Fi da biste otvorili keklist u pregledaču.",
+    "webVersionNoBundle": "Ova verzija ne sadrži veb verziju.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Svaki pregledač ga traži jednom u 30 dana",
+    "webVersionPinNotSet": "Nije postavljen",
+    "webVersionPinHint": "4–8 cifara",
+    "webVersionRemovePin": "Ukloni PIN",
+    "webVersionPort": "Port",
+    "aiTab": "Ćaskanje",
+    "aiTabDescription": "Razgovarajte o svojim zapisima sa AI-em koji radi na telefonu",
+    "aiPrivacyNote": "Radi samo na telefonu: zapisi nikada ne napuštaju uređaj.",
+    "aiDisclaimer": "Ovo nije medicinska usluga. Ako ste u opasnosti, obratite se hitnim službama.",
+    "aiYesterday": "Juče",
+    "aiNoSessions": "Još nema sesija",
+    "aiNewSession": "Nova sesija",
+    "aiChooseRole": "Izaberite ulogu",
+    "aiRoleTherapist": "Terapeut",
+    "aiRoleCoach": "Kouč",
+    "aiRoleFriend": "Prijatelj",
+    "aiMessageHint": "Poruka",
+    "aiStarterWeek": "Kako je prošla moja nedelja?",
+    "aiStarterWorry": "Šta me muči u poslednje vreme?",
+    "aiStarterJoy": "Šta me je radovalo u poslednje vreme?",
+    "aiActionSaveAsMind": "Sačuvaj kao misao",
+    "aiActionOpenDay": "Otvori dan",
+    "aiActionWeekSummary": "Sažetak nedelje",
+    "aiWeekSummaryPrompt": "Sažmi mojih poslednjih 7 dana: šta se desilo, kako sam se osećao, šta se istaklo.",
+    "aiSavedAsMind": "Sačuvano u današnji dan",
+    "aiStop": "Zaustavi",
+    "aiNoModelTitle": "Izaberite model",
+    "aiNoModelMessage": "Preuzmite model da biste počeli. Radi na telefonu, bez interneta.",
+    "aiNoModelOnPhone": "Preuzmite model u aplikaciji na telefonu: Podešavanja → AI → Modeli.",
+    "aiModels": "Modeli",
+    "aiRoles": "Uloge",
+    "aiDownloaded": "Preuzeti",
+    "aiDownloads": "Preuzimanje",
+    "aiGalleryCatalog": "Google AI Edge Gallery",
+    "aiHuggingFace": "Hugging Face (GGUF)",
+    "aiSearchModels": "Pretraži GGUF modele",
+    "aiDownload": "Preuzmi",
+    "aiPause": "Pauza",
+    "aiPaused": "Pauzirano",
+    "aiResume": "Nastavi",
+    "aiDownloadFailed": "Preuzimanje nije uspelo",
+    "aiCellularTitle": "Preuzeti preko mobilnih podataka?",
+    "aiCellularMessage": "{size} će biti preuzeto preko mobilnih podataka.",
+    "aiDeleteModel": "Obrisati model?",
+    "aiStorageUsed": "Na ovom telefonu: {size}",
+    "aiDeviceMemory": "Memorija telefona: {size}",
+    "aiCatalogFailed": "Lista nije učitana. Proverite vezu.",
+    "aiNoFilesFit": "Nijedna datoteka ovog modela ne staje u memoriju telefona.",
+    "aiBuiltInRole": "Ugrađene",
+    "aiOwnRoles": "Vaše uloge",
+    "aiDuplicate": "Dupliraj",
+    "aiNewRole": "Nova uloga",
+    "aiRoleName": "Naziv",
+    "aiRoleEmoji": "Emodži",
+    "aiRolePrompt": "Prompt",
+    "aiRolePromptHint": "Kako AI treba da govori i na šta da se fokusira",
+    "aiReadOnlyRole": "Ugrađene uloge se ne mogu menjati. Duplirajte jednu da napravite svoju.",
+    "aiDeleteSession": "Obrisati sesiju?",
+    "aiDeleteRole": "Obrisati ulogu?",
+    "aiRecommended": "Preporučeno",
+    "aiLowQuality": "Slab kvalitet",
+    "aiModelDoesNotFit": "Ovaj model ne staje u memoriju telefona. Izaberite manji.",
+    "aiChooseAnotherModel": "Izaberi drugi model",
+    "creatorEmotionsTitle": "Emocije",
+    "creatorEmotionsAfterSave": "Pitaj posle čuvanja",
+    "creatorEmotionsButton": "Dugme iznad tastature",
+    "creatorEmotionsNever": "Ne pitaj",
+    "insightsWeekAgo": "Pre nedelju dana",
+    "insightsMonthAgo": "Pre mesec dana",
+    "insightsHalfYearAgo": "Pre pola godine",
+    "insightsYearAgo": "Pre godinu dana",
+    "insightsTwoYearsAgo": "Pre dve godine",
+    "insightsVoiceAndVideos": "Glas i okrugli videi",
+    "insightsWeekNumber": "Nedelja {number}",
+    "aiNoSessionsHint": "Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše zapise direktno na telefonu.",
+    "showInGallery": "Prikaži u galeriji",
+    "tileEmojiMotion": "Kretanje emodžija",
+    "tileEmojiMotionDrift": "Plutanje",
+    "tileEmojiMotionFloat": "Njihanje",
+    "tileEmojiMotionStill": "Mirno",
+    "gridResizeAnimation": "Animacija štipanja",
+    "gridResizeFly": "Let",
+    "gridResizeZoom": "Zum",
+    "gridResizeCrossfade": "Pretapanje",
+    "feedSortOrder": "Redosled",
+    "feedSortTime": "Vreme",
+    "feedSortMindsFirst": "Prvo beleške",
+    "feedSortMediaFirst": "Prvo mediji",
+    "feedGrouping": "Grupe",
+    "feedGroupingNone": "Bez",
+    "feedGroupingType": "Vrsta",
+    "feedGroupingTimeOfDay": "Doba dana",
+    "feedSectionMinds": "Beleške",
+    "feedSectionGallery": "Galerija",
+    "removePhotoTitle": "Ukloni fotografiju",
+    "removeVideoTitle": "Ukloni video",
+    "hideMedia": "Sakrij",
+    "hideMediaSubtitle": "Samo iz keklist-a, ostaje u galeriji",
+    "deleteFromGallery": "Obriši iz galerije",
+    "deleteFromGallerySubtitle": "Ide u „Nedavno obrisano“",
+    "mediaHidden": "Sakriveno iz keklist-a",
+    "mediaShownAgain": "Ponovo u keklist-u",
+    "undo": "Opozovi",
+    "hiddenMedia": "Sakrivene fotografije",
+    "hiddenMediaHint": "Dodirni fotografiju da se vrati u keklist",
+    "hiddenMediaEmpty": "Ništa nije sakriveno",
+    "leaveFeedback": "Ostavi utisak",
+    "feedbackSend": "Pošalji",
+    "feedbackSent": "Hvala! Poruka je stigla programeru",
+    "feedbackFailed": "Slanje nije uspelo. Proveri internet i pokušaj ponovo",
+    "analytics": "Analitika",
+    "analyticsDescription": "Anonimna statistika korišćenja pomaže da se odluči šta poboljšati. Ništa što pišeš ne napušta uređaj.",
+    "analyticsStoreBuildsOnly": "Ova verzija ništa ne šalje: analitika radi samo u verzijama iz App Store i Google Play.",
+    "analyticsSent": "Šta se šalje",
+    "analyticsSentItems": "Koja podešavanja biraš, koje ekrane otvaraš, verzija aplikacije, platforma i jezik, kupovine Pro i napojnica, i izveštaji o padovima bez njihovih poruka.",
+    "analyticsNeverSent": "Nikad se ne šalje",
+    "analyticsNeverSentItems": "Tvoji zapisi, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.",
+    "analyticsResetId": "Resetuj anonimni ID",
+    "analyticsResetIdDone": "Od sada se koristi novi anonimni ID",
+    "settingsSupport": "Podrška",
+    "calendarOpenDay": "Otvori dan",
+    "webVersionEnabled": "Preslikaj u pregledač",
+    "viewerComments": "Komentari",
+    "viewerNoComments": "Još nema komentara",
+    "previousDay": "Prethodni dan",
+    "nextDay": "Sledeći dan"
 }

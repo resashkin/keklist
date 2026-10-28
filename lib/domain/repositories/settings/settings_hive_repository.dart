@@ -53,23 +53,9 @@ final class SettingsHiveRepository implements SettingsRepository {
   }
 
   @override
-  FutureOr<void> updateMindContentVisibility(bool isVisible) async {
-    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
-    settingsObject?.isMindContentVisible = isVisible;
-    await settingsObject?.save();
-  }
-
-  @override
   FutureOr<void> updateLanguage(SupportedLanguage language) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     settingsObject?.language = language.code;
-    await settingsObject?.save();
-  }
-
-  @override
-  FutureOr<void> updatePreviousAppVersion(String? previousAppVersion) async {
-    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
-    settingsObject?.previousAppVersion = previousAppVersion;
     await settingsObject?.save();
   }
 
@@ -100,10 +86,12 @@ final class SettingsHiveRepository implements SettingsRepository {
   }
 
   @override
-  FutureOr<void> updateIsPhotoVideoSourceEnabled(bool value) async {
+  FutureOr<void> updateUserAvatar(UserAvatar avatar) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
-    settingsObject?.isPhotoVideoSourceEnabled = value;
-    await settingsObject?.save();
+    if (settingsObject == null) return;
+    settingsObject.avatarEmoji = avatar.emoji;
+    settingsObject.avatarImagePath = avatar.imagePath;
+    await settingsObject.save();
   }
 
   @override
@@ -117,12 +105,44 @@ final class SettingsHiveRepository implements SettingsRepository {
   }
 
   @override
-  FutureOr<void> updateMediaFolderSource({bool? isEnabled, String? folderPath, bool? isRecursive}) async {
+  FutureOr<void> updateMediaFolderSource({String? folderPath, bool? isRecursive}) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     if (settingsObject == null) return;
-    if (isEnabled != null) settingsObject.isMediaFolderSourceEnabled = isEnabled;
     if (folderPath != null) settingsObject.mediaFolderPath = folderPath;
     if (isRecursive != null) settingsObject.isMediaFolderRecursive = isRecursive;
+    await settingsObject.save();
+  }
+
+  @override
+  FutureOr<void> updateDayFeedSettings({
+    int? columnCount,
+    int? mindCellSpan,
+    bool? isMindTextVisible,
+  }) async {
+    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
+    if (settingsObject == null) return;
+    if (columnCount != null) settingsObject.dayFeedColumnCount = columnCount;
+    if (mindCellSpan != null) settingsObject.dayFeedMindCellSpan = mindCellSpan;
+    if (isMindTextVisible != null) settingsObject.isDayFeedMindTextVisible = isMindTextVisible;
+    await settingsObject.save();
+  }
+
+  @override
+  FutureOr<void> updateSettingsItemHidden(String id, {required bool isHidden}) async {
+    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
+    if (settingsObject == null) return;
+    final Set<String> hiddenIds = settingsObject.hiddenSettingsItemIds.toSet();
+    final bool isChanged = isHidden ? hiddenIds.add(id) : hiddenIds.remove(id);
+    if (!isChanged) return;
+    settingsObject.hiddenSettingsItemIds = hiddenIds.toList();
+    await settingsObject.save();
+  }
+
+  @override
+  FutureOr<void> markShakeDiscovered(String screenId) async {
+    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
+    if (settingsObject == null || settingsObject.shakeDiscoveredScreenIds.contains(screenId)) return;
+    settingsObject.shakeDiscoveredScreenIds = [...settingsObject.shakeDiscoveredScreenIds, screenId];
     await settingsObject.save();
   }
 }

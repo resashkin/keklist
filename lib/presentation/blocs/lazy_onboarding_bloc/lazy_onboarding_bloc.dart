@@ -2,10 +2,14 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/constants/onboarding_constants.dart';
+import 'package:keklist/domain/services/emotions/emotion_seeder.dart';
+import 'package:keklist/domain/services/emotions/legacy_emoji_linker.dart';
+import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart' as kek_date_utils;
@@ -18,10 +22,15 @@ part 'lazy_onboarding_state.dart';
 final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingState> {
   final MindRepository _mindRepository;
   final SettingsRepository _settingsRepository;
+  final EmotionRepository _emotionRepository;
 
-  LazyOnboardingBloc({required MindRepository mindRepository, required SettingsRepository settingsRepository})
-    : _mindRepository = mindRepository,
-      _settingsRepository = settingsRepository,
+  LazyOnboardingBloc({
+    required MindRepository mindRepository,
+    required SettingsRepository settingsRepository,
+    required EmotionRepository emotionRepository,
+  }) : _mindRepository = mindRepository,
+       _settingsRepository = settingsRepository,
+       _emotionRepository = emotionRepository,
       super(LazyOnboardingInitial()) {
     on<LazyOnboardingCheck>(_onCheck);
     on<LazyOnboardingCreate>(_onCreate);
@@ -61,18 +70,23 @@ final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingS
     final l10n = event.context.l10n;
 
     final List<Mind> mindsToCreate = [];
+    await EmotionSeeder.seedIfNeeded(emotionRepository: _emotionRepository, settingsRepository: _settingsRepository);
+    final Map<String, String> emotionIdByEmoji = {
+      for (final Emotion emotion in _emotionRepository.values.where((e) => !e.isArchived && e.parentId == null))
+        LegacyEmojiLinker.normalize(emotion.emoji): emotion.id,
+    };
 
     // Create parent minds with ONBOARDING_ prefix in ID
     for (final parentData in OnboardingConstants.parentMinds) {
       final parentId = '${OnboardingConstants.onboardingIdPrefix}${uuid.v4()}';
       final parentMind = Mind(
         id: parentId,
-        emoji: parentData.emoji,
         note: parentData.translation(l10n),
         dayIndex: todayDayIndex,
         creationDate: DateTime.now(),
         sortIndex: parentData.sortIndex,
         rootId: null, // Parent minds have no rootId - they ARE the root
+        emotionIds: [?emotionIdByEmoji[LegacyEmojiLinker.normalize(parentData.emotionEmoji ?? '')]],
       );
       mindsToCreate.add(parentMind);
 
@@ -82,7 +96,6 @@ final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingS
         for (int i = 0; i < commentTranslations.length; i++) {
           final commentMind = Mind(
             id: uuid.v4(),
-            emoji: parentData.emoji,
             note: commentTranslations[i](l10n),
             dayIndex: todayDayIndex,
             creationDate: DateTime.now(),
@@ -118,19 +131,7 @@ final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingS
 
   Future<void> _onMarkAsSeen(LazyOnboardingMarkAsSeen event, Emitter<LazyOnboardingState> emit) async {
     final currentSettings = _settingsRepository.value;
-    final updatedSettings = KeklistSettings(
-      isMindContentVisible: currentSettings.isMindContentVisible,
-      previousAppVersion: currentSettings.previousAppVersion,
-      themePreference: currentSettings.themePreference,
-      interfaceStyle: currentSettings.interfaceStyle,
-      shouldShowTitles: currentSettings.shouldShowTitles,
-      userName: currentSettings.userName,
-      language: currentSettings.language,
-      dataSchemaVersion: currentSettings.dataSchemaVersion,
-      hasSeenLazyOnboarding: true,
-      isDebugMenuVisible: currentSettings.isDebugMenuVisible,
-      isPhotoVideoSourceEnabled: currentSettings.isPhotoVideoSourceEnabled,
-    );
+    final updatedSettings = currentSettings.copyWith(hasSeenLazyOnboarding: true);
 
     await _settingsRepository.updateSettings(updatedSettings);
   }
@@ -149,19 +150,7 @@ final class LazyOnboardingBloc extends Bloc<LazyOnboardingEvent, LazyOnboardingS
 
     // Reset the flag in settings
     final currentSettings = _settingsRepository.value;
-    final updatedSettings = KeklistSettings(
-      isMindContentVisible: currentSettings.isMindContentVisible,
-      previousAppVersion: currentSettings.previousAppVersion,
-      themePreference: currentSettings.themePreference,
-      interfaceStyle: currentSettings.interfaceStyle,
-      shouldShowTitles: currentSettings.shouldShowTitles,
-      userName: currentSettings.userName,
-      language: currentSettings.language,
-      dataSchemaVersion: currentSettings.dataSchemaVersion,
-      hasSeenLazyOnboarding: false,
-      isDebugMenuVisible: currentSettings.isDebugMenuVisible,
-      isPhotoVideoSourceEnabled: currentSettings.isPhotoVideoSourceEnabled,
-    );
+    final updatedSettings = currentSettings.copyWith(hasSeenLazyOnboarding: false);
 
     await _settingsRepository.updateSettings(updatedSettings);
 

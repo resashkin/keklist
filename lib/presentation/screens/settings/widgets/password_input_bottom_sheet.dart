@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
@@ -40,19 +40,14 @@ class PasswordInputBottomSheet extends StatefulWidget {
     int? audioFilesCount,
     int? emotionsCount,
   }) {
-    return showModalBottomSheet<String>(
+    return KekSheet.show<String>(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: PasswordInputBottomSheet(
-          title: title,
-          isOptional: isOptional,
-          mindsCount: mindsCount,
-          audioFilesCount: audioFilesCount,
-          emotionsCount: emotionsCount,
-        ),
+      builder: (context) => PasswordInputBottomSheet(
+        title: title,
+        isOptional: isOptional,
+        mindsCount: mindsCount,
+        audioFilesCount: audioFilesCount,
+        emotionsCount: emotionsCount,
       ),
     );
   }
@@ -86,99 +81,83 @@ class _PasswordInputBottomSheetState extends State<PasswordInputBottomSheet> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      decoration: KekBottomSheetStyle.decoration(context),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          KekBottomSheetStyle.handle(context),
-
-          // Title
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-            child: Text(
-              widget.title,
-              style: KekBottomSheetStyle.titleStyle(context),
-              textAlign: TextAlign.center,
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(top: 0, bottom: 24.0, left: 24.0, right: 24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Metadata info (if provided)
-                if (widget.mindsCount != null) ...[
-                  const SizedBox(height: 16),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('${context.l10n.mindsToExport} - ${widget.mindsCount}', style: theme.textTheme.bodyMedium),
-                        if (widget.audioFilesCount != null && widget.audioFilesCount! > 0) ...[
-                          const SizedBox(height: 8),
-                          Text(
-                            '${context.l10n.audioFilesToExport} - ${widget.audioFilesCount}',
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        ],
-                        if (widget.emotionsCount != null && widget.emotionsCount! > 0) ...[
-                          const SizedBox(height: 8),
-                          Text(
-                            '${context.l10n.emotionsToExport} - ${widget.emotionsCount}',
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        ],
+    return KekSheetScaffold(
+      title: widget.title,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 0, bottom: 24.0, left: 24.0, right: 24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Metadata info (if provided)
+              if (widget.mindsCount != null) ...[
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('${context.l10n.mindsToExport} - ${widget.mindsCount}', style: theme.textTheme.bodyMedium),
+                      if (widget.audioFilesCount != null && widget.audioFilesCount! > 0) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          '${context.l10n.audioFilesToExport} - ${widget.audioFilesCount}',
+                          style: theme.textTheme.bodyMedium,
+                        ),
                       ],
-                    ),
+                      if (widget.emotionsCount != null && widget.emotionsCount! > 0) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          '${context.l10n.emotionsToExport} - ${widget.emotionsCount}',
+                          style: theme.textTheme.bodyMedium,
+                        ),
+                      ],
+                    ],
                   ),
-                ],
-
-                const SizedBox(height: 24),
-
-                // Password field
-                TextField(
-                  controller: _passwordController,
-                  obscureText: !_isPasswordVisible,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: widget.mindsCount != null ? context.l10n.archivePassword : context.l10n.password,
-                    hintText: context.l10n.enterPassword,
-                    border: const OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      icon: Icon(_isPasswordVisible ? Icons.visibility_off : Icons.visibility),
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                    ),
-                  ),
-                  onSubmitted: (_) => _onContinue(),
                 ),
-
-                const SizedBox(height: 24),
-
-                // Continue button
-                FilledButton(onPressed: _onContinue, child: Text(context.l10n.continue_)),
-
-                // Skip button (if optional)
-                if (widget.isOptional) ...[
-                  const SizedBox(height: 8),
-                  TextButton(onPressed: _onSkip, child: Text(context.l10n.skipPassword)),
-                ],
               ],
-            ),
+
+              const SizedBox(height: 24),
+
+              // Password field
+              TextField(
+                controller: _passwordController,
+                obscureText: !_isPasswordVisible,
+                autofocus: true,
+                decoration: InputDecoration(
+                  labelText: widget.mindsCount != null ? context.l10n.archivePassword : context.l10n.password,
+                  hintText: context.l10n.enterPassword,
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(_isPasswordVisible ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                  ),
+                ),
+                onSubmitted: (_) => _onContinue(),
+              ),
+
+              const SizedBox(height: 24),
+
+              // Continue button
+              FilledButton(onPressed: _onContinue, child: Text(context.l10n.continue_)),
+
+              // Skip button (if optional)
+              if (widget.isOptional) ...[
+                const SizedBox(height: 8),
+                TextButton(onPressed: _onSkip, child: Text(context.l10n.skipPassword)),
+              ],
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

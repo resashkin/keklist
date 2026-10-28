@@ -1,4 +1,68 @@
 {
+    "insightsBrightestPeriod": "Eng yorqin davr",
+    "insightsPeriodWeek": "Hafta",
+    "insightsPeriodMonth": "Oy",
+    "insightsPeriodYear": "Yil",
+    "insightsPeriodAllTime": "Butun davr",
+    "insightsVsLastWeek": "Oʻtgan haftaga nisbatan {delta}",
+    "insightsVsLastMonth": "Oʻtgan oyga nisbatan {delta}",
+    "insightsVsLastYear": "Oʻtgan yilga nisbatan {delta}",
+    "insightsCategorySummary": "Umumiy",
+    "insightsCategoryEmotions": "Hissiyotlar",
+    "insightsCategoryActivity": "Faollik",
+    "insightsCategoryMemories": "Xotiralar",
+    "insightsCategoryMedia": "Media",
+    "insightsCounters": "Raqamlarda",
+    "insightsMinds": "Yozuvlar",
+    "insightsActiveDays": "Faol kunlar",
+    "insightsWords": "Soʻzlar",
+    "insightsBrightestDay": "Eng yorqin kun",
+    "insightsBrightestWeek": "Eng yorqin hafta",
+    "insightsBrightestMonth": "Eng yorqin oy",
+    "insightsBrightestYear": "Eng yorqin yil",
+    "insightsBrightestDetails": "yozuv: {minds} · hissiyot: {emotions} · media: {media}",
+    "insightsEmotionDistribution": "Hissiyotlar",
+    "insightsEmotionTrend": "Hissiyotlar dinamikasi",
+    "insightsEmotionPairs": "Birga uchraydigan hissiyotlar",
+    "insightsEmotionRhythm": "Hissiy ritm",
+    "insightsByWeekday": "Hafta kunlari boʻyicha",
+    "insightsByDayPart": "Kun vaqti boʻyicha",
+    "insightsNight": "Tun",
+    "insightsMorning": "Ertalab",
+    "insightsAfternoon": "Kunduzi",
+    "insightsEvening": "Kechqurun",
+    "insightsStreak": "Seriya",
+    "insightsStreakLabel": "kun ketma-ket",
+    "insightsLongestStreak": "Rekord: {count}",
+    "insightsStreakKeepGoing": "Seriyani uzmaslik uchun bugun yozuv qoʻshing",
+    "insightsHeatmap": "Faollik xaritasi",
+    "insightsActivityTime": "Kun vaqti",
+    "insightsPeakHour": "Koʻpincha {hour} atrofida",
+    "insightsOnThisDay": "O‘sha paytda",
+    "insightsMediaCounters": "Media",
+    "insightsPhotos": "Rasmlar",
+    "insightsVideos": "Videolar",
+    "insightsVoiceNotes": "Ovozli yozuvlar",
+    "insightsRoundVideos": "Dumaloq videolar",
+    "insightsEmptyPeriod": "Bu davrda hali yozuv yoʻq",
+    "insightsEmptyEmotions": "Buni koʻrish uchun yozuvlarga hissiyot belgilang",
+    "insightsEmptyPairs": "Juftlarni koʻrish uchun yozuvga ikki hissiyot belgilang",
+    "insightsEmptyOnThisDay": "Bir hafta, oy, yarim yil va bir yil oldin hozircha hech narsa yo‘q",
+    "insightsEmptyRoundVideos": "Bu davrda ovozli yozuvlar va dumaloq videolar yo‘q",
+    "insightsEmptyStreak": "Seriyani boshlash uchun bugun yozuv qoʻshing",
+    "insightsCustomize": "Analitikani sozlash",
+    "insightsCustomizeDescription": "Kartochkalarni yoqing yoki oʻchiring, tartibini sudrab oʻzgartiring",
+    "insightsResetLayout": "Tiklash",
+    "activeTasks": "Faol vazifalar",
+    "galleryIndex": "Galereya indeksi",
+    "galleryIndexNoAccess": "Rasmlarga ruxsat yoʻq",
+    "galleryIndexNotIndexed": "Hali indekslanmagan",
+    "galleryIndexIndexing": "Indekslanmoqda {done} / {total}",
+    "galleryIndexReady": "{count} ta rasm va video · yangilandi {time}",
+    "galleryIndexThumbnails": "Miniatyuralar keshi: {size}",
+    "galleryIndexRebuildTitle": "Galereya indeksi qayta tuzilsinmi?",
+    "galleryIndexRebuildMessage": "Miniatyuralar oʻchiriladi va mediateka qayta skanerlanadi.",
+    "galleryIndexRebuild": "Qayta tuzish",
     "settings": "Sozlamalar",
     "@settings": {
         "description": "Sozlamalar tab yorlig'i"
@@ -63,10 +127,6 @@
     "@showDigest": {
         "description": "Xulosa ko'rsatish harakati"
     },
-    "showAll": "Hammasini ko'rsatish",
-    "@showAll": {
-        "description": "Hammasini ko'rsatish harakati"
-    },
     "translateToEnglish": "Ingliz tiliga tarjima qilish",
     "@translateToEnglish": {
         "description": "Ingliz tiliga tarjima qilish harakati"
@@ -95,25 +155,9 @@
     "@tabsSettings": {
         "description": "Tab sozlamalari navigatsiyasi"
     },
-    "whatsNew": "Yangi nimalar?",
-    "@whatsNew": {
-        "description": "Yangi nimalar navigatsiyasi"
-    },
-    "releaseNotes": "Reliz eslatmalari",
-    "@releaseNotes": {
-        "description": "Reliz eslatmalari navigatsiyasi"
-    },
-    "suggestFeature": "Xususiyat taklif qilish",
-    "@suggestFeature": {
-        "description": "Xususiyat taklif qilish navigatsiyasi"
-    },
     "sendFeedback": "Fikr-mulohaza yuborish",
     "@sendFeedback": {
         "description": "Fikr-mulohaza yuborish navigatsiyasi"
-    },
-    "emailUs": "Bizga email yozing",
-    "@emailUs": {
-        "description": "Email yozish navigatsiyasi"
     },
     "clearOfflineDataWarning": "Barcha oflayn ma'lumotlaringiz o'chiriladi. Ularni oldindan eksport qilganingizga ishonch hosil qiling.",
     "@clearOfflineDataWarning": {
@@ -155,7 +199,7 @@
     "@profile": {
         "description": "Profil tab yorlig'i"
     },
-    "insights": "Tahlil",
+    "insights": "Profil",
     "@insights": {
         "description": "Tahlil tab yorlig'i"
     },
@@ -163,7 +207,7 @@
     "@calendar": {
         "description": "Taqvim tab yorlig'i"
     },
-    "debugMenu": "Debug menyusi",
+    "debugMenu": "Dasturchi menyusi",
     "@debugMenu": {
         "description": "Debug menyusi tab yorlig'i"
     },
@@ -178,10 +222,6 @@
     "dangerZone": "Xavfli zona",
     "@dangerZone": {
         "description": "Xavfli zona bo'limi sarlavhasi"
-    },
-    "editMind": "Fikrni tahrirlash",
-    "@editMind": {
-        "description": "Fikrni tahrirlash dialogi sarlavhasi"
     },
     "enterTokenHere": "Token bu yerga kiriting",
     "@enterTokenHere": {
@@ -215,15 +255,7 @@
     "@send": {
         "description": "Yuborish tugmasi"
     },
-    "updateYourNickname": "Niknamingizni yangilash",
-    "@updateYourNickname": {
-        "description": "Niknamingizni yangilash dialogi sarlavhasi"
-    },
-    "yourNickname": "Sizning niknamingiz",
-    "@yourNickname": {
-        "description": "Nikname kiritish ko'rsatkichi"
-    },
-    "create": "Yozish",
+    "create": "Yaratish",
     "@create": {
         "description": "Yaratish tugmasi"
     },
@@ -251,10 +283,6 @@
     "@minds": {
         "description": "Fikrlar sarlavhasi"
     },
-    "searchForYourNotes": "Eslatmalaringizni qidiring",
-    "@searchForYourNotes": {
-        "description": "Eslatmalarni qidirish ko'rsatkichi"
-    },
     "searchYourEmoji": "Emojingizni qidiring...",
     "@searchYourEmoji": {
         "description": "Emoji qidirish ko'rsatkichi"
@@ -263,29 +291,13 @@
     "@writeSomething": {
         "description": "Biror narsa yozish ko'rsatkichi"
     },
-    "topMinds": "Eng yaxshi fikrlar",
-    "@topMinds": {
-        "description": "Eng yaxshi fikrlar sarlavhasi"
-    },
     "todayMinds": "Bugungi fikrlar",
     "@todayMinds": {
         "description": "Bugungi fikrlar sarlavhasi"
     },
-    "randomMind": "Tasodifiy fikr",
-    "@randomMind": {
-        "description": "Tasodifiy fikr sarlavhasi"
-    },
-    "spectrum": "Spektr",
-    "@spectrum": {
-        "description": "Spektr sarlavhasi"
-    },
     "youDidNotCollectAnyEntriesYet": "Siz hali hech qanday yozuv yig'ganingiz yo'q",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Hech qanday yozuv yig'ilmagan xabari"
-    },
-    "pleaseAuthenticateToShowContent": "Fikringizning kontentini ko'rsatish uchun autentifikatsiyadan o'ting",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Autentifikatsiya talab qilinadigan xabar"
     },
     "areYouSure": "Ishonchingiz komilmi?",
     "@areYouSure": {
@@ -323,17 +335,13 @@
     "@calendarDescription": {
         "description": "Taqvim tab tavsifi"
     },
-    "insightsDescription": "Barcha yozuvlaringiz statistikasi",
+    "insightsDescription": "Siz va yozuvlaringiz statistikasi",
     "@insightsDescription": {
         "description": "Tahlil tab tavsifi"
     },
     "settingsDescription": "Barcha sozlamalar ekrani (qorong'u rejim, sinxronlash va boshqalar)",
     "@settingsDescription": {
         "description": "Sozlamalar tab tavsifi"
-    },
-    "profileDescription": "Profilingiz bilan ekran",
-    "@profileDescription": {
-        "description": "Profil tab tavsifi"
     },
     "todayDescription": "Faqat bugungi fikrlar",
     "@todayDescription": {
@@ -346,15 +354,6 @@
     "noMindsForThisDay": "Bu kun uchun fikrlar yo'q",
     "@noMindsForThisDay": {
         "description": "Bu kun uchun fikrlar yo'q xabari"
-    },
-    "showMindsForPeriod": "{period} uchun fikrlarni ko'rsatish",
-    "@showMindsForPeriod": {
-        "description": "Davr uchun fikrlarni ko'rsatish xabari",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Hafta",
     "password": "Parol",
@@ -397,20 +396,10 @@
     "onboardingMind4": "'Analitika' yorlig'i yozuvlaringizning qisqacha statistikasini ko'rsatadi",
     "onboardingMind5": "Barcha yozuvlar faqat telefoningizda saqlanadi",
     "onboardingMind6": "Yangi yozuv yaratish uchun 'Yozish' tugmasini bosing",
-    "viewPhotos": "Rasmlarni ko'rish",
     "noPhotosForDay": "Bu kun uchun rasmlar topilmadi",
-    "dateGallerySubtitle": "Ushbu kunning media fayllari",
-    "dayMediaFilesCount": "{count} ta media fayl shu kun uchun",
-    "sources": "Manbalar",
-    "sourcesMinds": "Fikrlar",
-    "sourcesMindsSubtitle": "Sizning fikr va lahzalaringiz",
-    "sourcesPhotoVideo": "Foto va video",
-    "sourcesPhotoVideoSubtitle": "Ushbu kun uchun qurilma foto va videolari",
     "sourcesMediaFolder": "Media fayllar",
     "sourcesMediaFolderSubtitle": "Tanlangan papkadan foto va videolar",
     "mediaFolderSettings": "Media fayllar",
-    "mediaFolderNoPath": "Papka tanlanmagan",
-    "mediaFolderPickFolder": "Papkani tanlash",
     "licenses": "Litsenziyalar",
     "sourcesWeather": "Ob-havo",
     "sourcesWeatherSubtitle": "Ushbu kun uchun mahalliy ob-havo sharoitlari",
@@ -418,7 +407,6 @@
     "weatherLatitude": "Kenglik",
     "weatherLongitude": "Uzunlik",
     "weatherSaveLocation": "Joylashuvni saqlash",
-    "weatherNoLocation": "Ob-havoni ko'rish uchun joylashuvni sozlang",
     "weatherUseMyLocation": "Mening joylashuvimdan foydalanish",
     "weatherDetectingLocation": "Joylashuv aniqlanmoqda...",
     "weatherOrEnterManually": "yoki qo'lda kiriting",
@@ -426,11 +414,6 @@
     "weatherLocationServicesDisabled": "Joylashuv xizmatlari o'chirilgan. Sozlamalarda yoqing.",
     "weatherLocationPermissionDenied": "Joylashuv ruxsati rad etildi.",
     "weatherLocationPermissionPermanentlyDenied": "Joylashuv ruxsati doimiy ravishda rad etildi. Ilova sozlamalari ochilmoqda.",
-    "weatherTemperature": "Harorat",
-    "weatherUvIndex": "UV indeks",
-    "weatherHumidity": "Namlik",
-    "weatherWindSpeed": "Shamol tezligi",
-    "weatherPrecipitation": "Yog'ingarchilik",
     "audioRecordTitle": "Audio yozish",
     "audioRecordTitleRecording": "Yozilmoqda…",
     "audioRecordHint": "Saqlash uchun «To'xtatish»ni bosing.",
@@ -440,8 +423,6 @@
     "audioRecordPermissionError": "Audio yozish uchun mikrofon ruxsati talab qilinadi.",
     "audioRecordStartError": "Yozishni boshlash imkoni bo'lmadi. Qayta urinib ko'ring.",
     "audioRecordStopError": "Yozishni to'xtatish imkoni bo'lmadi. Qayta urinib ko'ring.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Siz PRO foydalanuvchisiz. Keyingi {price} to'lov {date} da bo'ladi.",
     "emotions": "Hissiyotlar",
     "archived": "Arxivlangan",
@@ -451,8 +432,6 @@
     "newEmotion": "Yangi hissiyot",
     "editEmotion": "Hissiyotni tahrirlash",
     "emotionNameHint": "Nomi",
-    "emotionPickHint": "Belgilash uchun bosing",
-    "emotionDrillHint": "chuqurlashish uchun bosib turing",
     "noEmotionsYet": "Hozircha hissiyotlar yo'q",
     "noArchivedEmotions": "Arxivlangan hissiyotlar yo'q",
     "addEmotion": "Hissiyot qo'shish",
@@ -460,5 +439,181 @@
     "doneEditing": "Tayyor",
     "emotionEditHint": "Nomini o'zgartirish uchun bosing · ✕ o'chirish uchun · tartiblash uchun torting",
     "emotionInUseMessage": "Bu hissiyot ba'zi maindlarda ishlatiladi. Uni o'sha yerda saqlash uchun arxivlang yoki hamma joydan o'chiring.",
-    "deleteEmotionMessage": "Bu hissiyotni o'chirasizmi? U undan foydalanadigan barcha maindlardan olib tashlanadi."
+    "deleteEmotionMessage": "Bu hissiyotni o'chirasizmi? U undan foydalanadigan barcha maindlardan olib tashlanadi.",
+    "dayFeedTileSettings": "Plitka sozlamalari",
+    "dayFeedColumns": "Ustunlar",
+    "dayFeedMindTileSize": "Plitka o‘lchami",
+    "dayFeedMindTileSquare": "Kvadrat",
+    "dayFeedMindTileWide": "Keng",
+    "dayFeedShowMindText": "Matnni ko‘rsatish",
+    "dayFeedPhotoAccessHint": "Bu yerda foto va videolarni ko‘rish uchun suratlarga ruxsat bering",
+    "dayFeedAllowAccess": "Ruxsat berish",
+    "dayFeedFolderHint": "Bu yerda foto va videolarni ko‘rish uchun media papkasini tanlang",
+    "dayFeedChooseFolder": "Tanlash",
+    "holdToRecordAudio": "Ovozli xabar yozish uchun bosib turing",
+    "holdToRecordVideo": "Video xabar yozish uchun bosib turing",
+    "roundVideoRecordError": "Videoni yozib bo‘lmadi",
+    "roundVideoCameraUnavailable": "Bu qurilmada kamera mavjud emas",
+    "roundVideoRetake": "Qayta olish",
+    "roundVideoUse": "Foydalanish",
+    "removeMedia": "Mediani o‘chirish",
+    "shakeToCustomize": "Sozlash uchun silkiting",
+    "shakeToCustomizeHint": "yoki sarlavhani bosib turing",
+    "customizeSettings": "Sozlamalarni moslash",
+    "customizeSettingsDescription": "Belgisi olib tashlangan bo‘lim va qatorlar Sozlamalar ekranida yashiriladi.",
+    "calendarSettings": "Kalendar sozlamalari",
+    "calendarShowMedia": "Foto va videolarni ko‘rsatish",
+    "calendarWeekTitles": "Hafta sarlavhalari",
+    "calendarPlayStories": "Hikoyalarni ko‘rish",
+    "storyBackgroundTweak": "Hikoyalar foni",
+    "storyAnimationOff": "O‘chiq",
+    "storyAnimationPulse": "Puls",
+    "storyAnimationWave": "To‘lqin",
+    "storyAnimationEqualizer": "Ekvalayzer",
+    "storyAnimationDrift": "Drift",
+    "storyAnimationGlow": "Yorqinlik",
+    "viewerCommentHint": "Izoh…",
+    "calendarToCurrentWeek": "Joriy haftaga",
+    "storyDateLines": "Sana qatorlari",
+    "storyTextureTitle": "Tekstura",
+    "storySpectrum": "Tovush spektri",
+    "storySensitivity": "Sezgirlik",
+    "profileMindfulDays": "{count, plural, other{Ongli {count} kun}}",
+    "profileName": "Ism",
+    "profilePhoto": "Rasm",
+    "profileEmoji": "Emoji",
+    "profileInitial": "Harf",
+    "webVersion": "Wi‑Fi orqali kirish",
+    "webVersionAddressHint": "Xuddi shu Wi‑Fi'dagi kompyuter brauzerida oching; keklist ochiq turishi kerak",
+    "webVersionCopied": "Manzil nusxalandi",
+    "webVersionStarting": "Ishga tushmoqda…",
+    "webVersionNoWifi": "keklist'ni brauzerda ochish uchun Wi‑Fi'ga ulaning.",
+    "webVersionNoBundle": "Bu yig‘mada veb-versiya yo‘q.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Har bir brauzer uni 30 kunda bir marta so‘raydi",
+    "webVersionPinNotSet": "O‘rnatilmagan",
+    "webVersionPinHint": "4–8 raqam",
+    "webVersionRemovePin": "PIN'ni o‘chirish",
+    "webVersionPort": "Port",
+    "aiTab": "Chat",
+    "aiTabDescription": "Yozuvlaringizni telefonda ishlaydigan AI bilan muhokama qiling",
+    "aiPrivacyNote": "Faqat telefonda ishlaydi: yozuvlaringiz qurilmadan chiqmaydi.",
+    "aiDisclaimer": "Bu tibbiy xizmat emas. Xavf ostida bo'lsangiz, favqulodda xizmatlarga murojaat qiling.",
+    "aiYesterday": "Kecha",
+    "aiNoSessions": "Hozircha sessiyalar yo'q",
+    "aiNewSession": "Yangi sessiya",
+    "aiChooseRole": "Rolni tanlang",
+    "aiRoleTherapist": "Terapevt",
+    "aiRoleCoach": "Kouch",
+    "aiRoleFriend": "Do'st",
+    "aiMessageHint": "Xabar",
+    "aiStarterWeek": "Haftam qanday o'tdi?",
+    "aiStarterWorry": "Oxirgi paytda meni nima bezovta qilyapti?",
+    "aiStarterJoy": "Oxirgi paytda meni nima xursand qildi?",
+    "aiActionSaveAsMind": "Maynd sifatida saqlash",
+    "aiActionOpenDay": "Kunni ochish",
+    "aiActionWeekSummary": "Hafta xulosasi",
+    "aiWeekSummaryPrompt": "Oxirgi 7 kunimni xulosa qil: nima bo'ldi, nimani his qildim, nima ajralib turdi.",
+    "aiSavedAsMind": "Bugunga saqlandi",
+    "aiStop": "To'xtatish",
+    "aiNoModelTitle": "Modelni tanlang",
+    "aiNoModelMessage": "Boshlash uchun modelni yuklab oling. U telefonda, internetsiz ishlaydi.",
+    "aiNoModelOnPhone": "Modelni telefondagi ilovada yuklab oling: Sozlamalar → AI → Modellar.",
+    "aiModels": "Modellar",
+    "aiRoles": "Rollar",
+    "aiDownloaded": "Yuklab olinganlar",
+    "aiDownloads": "Yuklanmoqda",
+    "aiGalleryCatalog": "Google AI Edge Gallery",
+    "aiHuggingFace": "Hugging Face (GGUF)",
+    "aiSearchModels": "GGUF modellarini qidirish",
+    "aiDownload": "Yuklab olish",
+    "aiPause": "Pauza",
+    "aiPaused": "Pauzada",
+    "aiResume": "Davom ettirish",
+    "aiDownloadFailed": "Yuklab bo'lmadi",
+    "aiCellularTitle": "Mobil internet orqali yuklab olinsinmi?",
+    "aiCellularMessage": "{size} mobil internet orqali yuklab olinadi.",
+    "aiDeleteModel": "Model o'chirilsinmi?",
+    "aiStorageUsed": "Bu telefonda: {size}",
+    "aiDeviceMemory": "Telefon xotirasi: {size}",
+    "aiCatalogFailed": "Ro'yxatni yuklab bo'lmadi. Ulanishni tekshiring.",
+    "aiNoFilesFit": "Bu modelning birorta fayli telefon xotirasiga sig'maydi.",
+    "aiBuiltInRole": "O'rnatilgan",
+    "aiOwnRoles": "Sizning rollaringiz",
+    "aiDuplicate": "Nusxa olish",
+    "aiNewRole": "Yangi rol",
+    "aiRoleName": "Nomi",
+    "aiRoleEmoji": "Emoji",
+    "aiRolePrompt": "Prompt",
+    "aiRolePromptHint": "AI qanday gapirishi va nimaga e'tibor berishi kerak",
+    "aiReadOnlyRole": "O'rnatilgan rollarni o'zgartirib bo'lmaydi. O'zingiznikini yaratish uchun nusxa oling.",
+    "aiDeleteSession": "Sessiya o'chirilsinmi?",
+    "aiDeleteRole": "Rol o'chirilsinmi?",
+    "aiRecommended": "Tavsiya etiladi",
+    "aiLowQuality": "Sifati past",
+    "aiModelDoesNotFit": "Bu model telefon xotirasiga sig‘maydi. Kichikroq modelni tanlang.",
+    "aiChooseAnotherModel": "Boshqa model tanlash",
+    "creatorEmotionsTitle": "Hissiyotlar",
+    "creatorEmotionsAfterSave": "Saqlagandan keyin so‘rash",
+    "creatorEmotionsButton": "Klaviatura ustidagi tugma",
+    "creatorEmotionsNever": "So‘ramaslik",
+    "insightsWeekAgo": "Bir hafta oldin",
+    "insightsMonthAgo": "Bir oy oldin",
+    "insightsHalfYearAgo": "Yarim yil oldin",
+    "insightsYearAgo": "Bir yil oldin",
+    "insightsTwoYearsAgo": "Ikki yil oldin",
+    "insightsVoiceAndVideos": "Ovoz va dumaloq videolar",
+    "insightsWeekNumber": "{number}-hafta",
+    "aiNoSessionsHint": "Haftangiz, tashvish yoki yaxshi kun haqida so‘rang: chat yozuvlaringizni telefonning o‘zida o‘qiydi.",
+    "showInGallery": "Galereyada ko‘rsatish",
+    "tileEmojiMotion": "Emoji harakati",
+    "tileEmojiMotionDrift": "Suzish",
+    "tileEmojiMotionFloat": "Tebranish",
+    "tileEmojiMotionStill": "Harakatsiz",
+    "gridResizeAnimation": "Chimdish animatsiyasi",
+    "gridResizeFly": "Uchish",
+    "gridResizeZoom": "Zum",
+    "gridResizeCrossfade": "Erish",
+    "feedSortOrder": "Tartib",
+    "feedSortTime": "Vaqt",
+    "feedSortMindsFirst": "Avval yozuvlar",
+    "feedSortMediaFirst": "Avval media",
+    "feedGrouping": "Guruhlar",
+    "feedGroupingNone": "Yo'q",
+    "feedGroupingType": "Turi",
+    "feedGroupingTimeOfDay": "Kun vaqti",
+    "feedSectionMinds": "Yozuvlar",
+    "feedSectionGallery": "Galereya",
+    "removePhotoTitle": "Suratni olib tashlash",
+    "removeVideoTitle": "Videoni olib tashlash",
+    "hideMedia": "Yashirish",
+    "hideMediaSubtitle": "Faqat keklist'dan, galereyada qoladi",
+    "deleteFromGallery": "Galereyadan o'chirish",
+    "deleteFromGallerySubtitle": "«Yaqinda o'chirilganlar»ga tushadi",
+    "mediaHidden": "keklist'dan yashirildi",
+    "mediaShownAgain": "Yana keklist'da",
+    "undo": "Bekor qilish",
+    "hiddenMedia": "Yashirin suratlar",
+    "hiddenMediaHint": "Suratni keklist'ga qaytarish uchun bosing",
+    "hiddenMediaEmpty": "Hech narsa yashirilmagan",
+    "leaveFeedback": "Fikr qoldirish",
+    "feedbackSend": "Yuborish",
+    "feedbackSent": "Rahmat! Dasturchi xabarni oldi",
+    "feedbackFailed": "Yuborib bo'lmadi. Internetni tekshirib, qayta urinib ko'ring",
+    "analytics": "Analitika",
+    "analyticsDescription": "Anonim foydalanish statistikasi nimani yaxshilash kerakligini aniqlashga yordam beradi. Siz yozgan hech narsa qurilmadan chiqmaydi.",
+    "analyticsStoreBuildsOnly": "Bu versiya hech narsa yubormaydi: analitika faqat App Store va Google Play versiyalarida ishlaydi.",
+    "analyticsSent": "Nima yuboriladi",
+    "analyticsSentItems": "Qaysi sozlamalarni tanlaysiz, qaysi ekranlarni ochasiz, ilova versiyasi, platforma va til, Pro va choychaqa xaridlari hamda xabarlarsiz nosozlik hisobotlari.",
+    "analyticsNeverSent": "Hech qachon yuborilmaydi",
+    "analyticsNeverSentItems": "Yozuvlaringiz, ularning matni, hissiyotlari va izohlari, rasm, video va audio, ularning soni, ismingiz, joylashuvingiz va IP manzilingiz.",
+    "analyticsResetId": "Anonim ID ni tiklash",
+    "analyticsResetIdDone": "Endi yangi anonim ID ishlatiladi",
+    "settingsSupport": "Qo'llab-quvvatlash",
+    "calendarOpenDay": "Kunni ochish",
+    "webVersionEnabled": "Brauzerda aks ettirish",
+    "viewerComments": "Izohlar",
+    "viewerNoComments": "Hozircha izoh yo'q",
+    "previousDay": "Oldingi kun",
+    "nextDay": "Keyingi kun"
 }

@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "posthog-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/PostHog/posthog-ios",
+      "state" : {
+        "revision" : "f16284d53bb43c2277c1f861a14bb3536d8087cf",
+        "version" : "3.92.5"
+      }
+    },
+    {
       "identity" : "purchases-hybrid-common",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-hybrid-common.git",

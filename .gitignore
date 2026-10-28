@@ -155,3 +155,6 @@ firebase-debug.log
 
 # fastlane reports
 report.xml
+
+# Web version bundled into the phone apps (scripts/build_web_bundle.sh)
+/assets/web/*.zip

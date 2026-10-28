@@ -9,6 +9,216 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => '最も充実した期間';
+
+  @override
+  String get insightsPeriodWeek => '週';
+
+  @override
+  String get insightsPeriodMonth => '月';
+
+  @override
+  String get insightsPeriodYear => '年';
+
+  @override
+  String get insightsPeriodAllTime => '全期間';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '先週比 $delta';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '先月比 $delta';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '昨年比 $delta';
+  }
+
+  @override
+  String get insightsCategorySummary => '概要';
+
+  @override
+  String get insightsCategoryEmotions => '感情';
+
+  @override
+  String get insightsCategoryActivity => 'アクティビティ';
+
+  @override
+  String get insightsCategoryMemories => '思い出';
+
+  @override
+  String get insightsCategoryMedia => 'メディア';
+
+  @override
+  String get insightsCounters => '数字で見る';
+
+  @override
+  String get insightsMinds => 'メモ';
+
+  @override
+  String get insightsActiveDays => '記録した日';
+
+  @override
+  String get insightsWords => '単語';
+
+  @override
+  String get insightsBrightestDay => '最も充実した日';
+
+  @override
+  String get insightsBrightestWeek => '最も充実した週';
+
+  @override
+  String get insightsBrightestMonth => '最も充実した月';
+
+  @override
+  String get insightsBrightestYear => '最も充実した年';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'メモ $minds · 感情 $emotions · メディア $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => '感情';
+
+  @override
+  String get insightsEmotionTrend => '感情の推移';
+
+  @override
+  String get insightsEmotionPairs => '一緒に現れる感情';
+
+  @override
+  String get insightsEmotionRhythm => '感情のリズム';
+
+  @override
+  String get insightsByWeekday => '曜日別';
+
+  @override
+  String get insightsByDayPart => '時間帯別';
+
+  @override
+  String get insightsNight => '夜';
+
+  @override
+  String get insightsMorning => '朝';
+
+  @override
+  String get insightsAfternoon => '昼';
+
+  @override
+  String get insightsEvening => '夕方';
+
+  @override
+  String get insightsStreak => '連続記録';
+
+  @override
+  String get insightsStreakLabel => '日連続';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return '最長: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing => '今日メモを追加して記録を続けましょう';
+
+  @override
+  String get insightsHeatmap => 'アクティビティマップ';
+
+  @override
+  String get insightsActivityTime => '時間帯';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return '$hour 頃が最も活発';
+  }
+
+  @override
+  String get insightsOnThisDay => 'あの頃';
+
+  @override
+  String get insightsMediaCounters => 'メディア';
+
+  @override
+  String get insightsPhotos => '写真';
+
+  @override
+  String get insightsVideos => 'ビデオ';
+
+  @override
+  String get insightsVoiceNotes => 'ボイスメモ';
+
+  @override
+  String get insightsRoundVideos => '丸いビデオ';
+
+  @override
+  String get insightsEmptyPeriod => 'この期間のメモはまだありません';
+
+  @override
+  String get insightsEmptyEmotions => 'メモに感情を付けると表示されます';
+
+  @override
+  String get insightsEmptyPairs => 'メモに感情を2つ付けるとペアが表示されます';
+
+  @override
+  String get insightsEmptyOnThisDay => '1週間前、1か月前、半年前、1年前の記録はまだありません';
+
+  @override
+  String get insightsEmptyRoundVideos => 'この期間のボイスメモや丸い動画はありません';
+
+  @override
+  String get insightsEmptyStreak => '今日メモを追加して連続記録を始めましょう';
+
+  @override
+  String get insightsCustomize => '分析をカスタマイズ';
+
+  @override
+  String get insightsCustomizeDescription => 'カードのオン・オフを切り替え、ドラッグで並べ替え';
+
+  @override
+  String get insightsResetLayout => 'リセット';
+
+  @override
+  String get activeTasks => '実行中のタスク';
+
+  @override
+  String get galleryIndex => 'ギャラリーのインデックス';
+
+  @override
+  String get galleryIndexNoAccess => '写真へのアクセスがありません';
+
+  @override
+  String get galleryIndexNotIndexed => 'まだインデックスされていません';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'インデックス中 $done / $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '写真とビデオ $count 件 · $time に更新';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'サムネイルキャッシュ: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'ギャラリーのインデックスを再構築しますか？';
+
+  @override
+  String get galleryIndexRebuildMessage => 'サムネイルを削除し、ライブラリを再スキャンします。';
+
+  @override
+  String get galleryIndexRebuild => '再構築';
+
+  @override
   String get settings => '設定';
 
   @override
@@ -66,9 +276,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get showDigest => '...の要約を表示';
 
   @override
-  String get showAll => 'すべて表示';
-
-  @override
   String get translateToEnglish => '英語に翻訳';
 
   @override
@@ -99,19 +306,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tabsSettings => 'タブ設定';
 
   @override
-  String get whatsNew => '新機能';
-
-  @override
-  String get releaseNotes => 'リリースノート';
-
-  @override
-  String get suggestFeature => '機能を提案';
-
-  @override
   String get sendFeedback => 'フィードバックを送信';
-
-  @override
-  String get emailUs => 'メールを送る';
 
   @override
   String get clearOfflineDataWarning =>
@@ -145,13 +340,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get profile => 'プロフィール';
 
   @override
-  String get insights => 'インサイト';
+  String get insights => 'プロフィール';
 
   @override
   String get calendar => 'カレンダー';
 
   @override
-  String get debugMenu => 'デバッグメニュー';
+  String get debugMenu => '開発者メニュー';
 
   @override
   String get discussion => 'ディスカッション';
@@ -161,9 +356,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get dangerZone => '危険ゾーン';
-
-  @override
-  String get editMind => 'メモを編集';
 
   @override
   String get enterTokenHere => 'ここにトークンを入力';
@@ -190,13 +382,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get send => '送信';
 
   @override
-  String get updateYourNickname => 'ニックネームを更新';
-
-  @override
-  String get yourNickname => 'あなたのニックネーム';
-
-  @override
-  String get create => '書く';
+  String get create => '作成';
 
   @override
   String get yourFolderName => 'あなたのフォルダー名';
@@ -217,31 +403,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get minds => 'メモ';
 
   @override
-  String get searchForYourNotes => 'メモを検索';
-
-  @override
   String get searchYourEmoji => '絵文字を検索...';
 
   @override
   String get writeSomething => '何か書いてください...';
 
   @override
-  String get topMinds => 'トップメモ';
-
-  @override
   String get todayMinds => '今日のメモ';
 
   @override
-  String get randomMind => 'ランダムなメモ';
-
-  @override
-  String get spectrum => 'スペクトラム';
-
-  @override
   String get youDidNotCollectAnyEntriesYet => 'まだエントリーを収集していません';
-
-  @override
-  String get pleaseAuthenticateToShowContent => 'メモの内容を表示するには認証してください';
 
   @override
   String get areYouSure => 'よろしいですか？';
@@ -271,13 +442,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get calendarDescription => 'エントリーのカレンダーがあるメイン画面';
 
   @override
-  String get insightsDescription => 'すべてのエントリーの統計';
+  String get insightsDescription => 'あなたと記録の統計';
 
   @override
   String get settingsDescription => 'すべての設定の画面（ダークモード、同期など）';
-
-  @override
-  String get profileDescription => 'あなたのプロフィールの画面';
 
   @override
   String get todayDescription => '今日のメモのみ';
@@ -287,11 +455,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'この日のメモはありません';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return '$periodのメモを表示';
-  }
 
   @override
   String get week => '週';
@@ -419,33 +582,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get onboardingMind6 => '新しいメモを作成するには、\'書く\'をタップしてください';
 
   @override
-  String get viewPhotos => '写真を見る';
-
-  @override
   String get noPhotosForDay => 'この日の写真が見つかりません';
-
-  @override
-  String get dateGallerySubtitle => 'この日のメディアファイル';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count件のメディアファイル';
-  }
-
-  @override
-  String get sources => 'ソース';
-
-  @override
-  String get sourcesMinds => 'マインド';
-
-  @override
-  String get sourcesMindsSubtitle => 'あなたの思考と瞬間';
-
-  @override
-  String get sourcesPhotoVideo => '写真・動画';
-
-  @override
-  String get sourcesPhotoVideoSubtitle => 'この日のデバイスの写真と動画';
 
   @override
   String get sourcesMediaFolder => 'メディアファイル';
@@ -455,12 +592,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'メディアファイル';
-
-  @override
-  String get mediaFolderNoPath => 'フォルダが選択されていません';
-
-  @override
-  String get mediaFolderPickFolder => 'フォルダを選択';
 
   @override
   String get licenses => 'ライセンス';
@@ -484,9 +615,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get weatherSaveLocation => '場所を保存';
 
   @override
-  String get weatherNoLocation => '天気設定で場所を設定してください';
-
-  @override
   String get weatherUseMyLocation => '現在地を使用';
 
   @override
@@ -507,21 +635,6 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       '位置情報の許可が恒久的に拒否されています。アプリ設定を開きます。';
-
-  @override
-  String get weatherTemperature => '気温';
-
-  @override
-  String get weatherUvIndex => 'UV指数';
-
-  @override
-  String get weatherHumidity => '湿度';
-
-  @override
-  String get weatherWindSpeed => '風速';
-
-  @override
-  String get weatherPrecipitation => '降水量';
 
   @override
   String get audioRecordTitle => '音声を録音';
@@ -549,12 +662,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get audioRecordStopError => '録音を停止できませんでした。もう一度お試しください。';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {
@@ -602,12 +709,6 @@ class AppLocalizationsJa extends AppLocalizations {
       'この感情は一部のマインドで使われています。アーカイブしてそこに残すか、すべてから削除します。';
 
   @override
-  String get emotionPickHint => 'タップで付与';
-
-  @override
-  String get emotionDrillHint => '長押しで詳細へ';
-
-  @override
   String get noEmotionsYet => '感情がまだありません';
 
   @override
@@ -615,4 +716,553 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage => 'この感情を削除しますか？使用しているすべてのマインドから削除されます。';
+
+  @override
+  String get dayFeedTileSettings => 'タイル設定';
+
+  @override
+  String get dayFeedColumns => '列数';
+
+  @override
+  String get dayFeedMindTileSize => 'タイルのサイズ';
+
+  @override
+  String get dayFeedMindTileSquare => '正方形';
+
+  @override
+  String get dayFeedMindTileWide => 'ワイド';
+
+  @override
+  String get dayFeedShowMindText => 'テキストを表示';
+
+  @override
+  String get dayFeedPhotoAccessHint => 'ここに写真と動画を表示するには写真へのアクセスを許可してください';
+
+  @override
+  String get dayFeedAllowAccess => '許可';
+
+  @override
+  String get dayFeedFolderHint => 'ここに写真と動画を表示するにはメディアフォルダを選択してください';
+
+  @override
+  String get dayFeedChooseFolder => '選択';
+
+  @override
+  String get holdToRecordAudio => '長押しで音声メッセージを録音';
+
+  @override
+  String get holdToRecordVideo => '長押しでビデオメッセージを録画';
+
+  @override
+  String get roundVideoRecordError => 'ビデオを録画できませんでした';
+
+  @override
+  String get roundVideoCameraUnavailable => 'このデバイスではカメラを利用できません';
+
+  @override
+  String get roundVideoRetake => '撮り直す';
+
+  @override
+  String get roundVideoUse => '使用する';
+
+  @override
+  String get removeMedia => 'メディアを削除';
+
+  @override
+  String get shakeToCustomize => '振ってカスタマイズ';
+
+  @override
+  String get shakeToCustomizeHint => 'またはタイトルを長押し';
+
+  @override
+  String get customizeSettings => '設定をカスタマイズ';
+
+  @override
+  String get customizeSettingsDescription => 'チェックを外したセクションと項目は設定画面に表示されません。';
+
+  @override
+  String get calendarSettings => 'カレンダー設定';
+
+  @override
+  String get calendarShowMedia => '写真とビデオを表示';
+
+  @override
+  String get calendarWeekTitles => '週のタイトル';
+
+  @override
+  String get calendarPlayStories => 'ストーリーを再生';
+
+  @override
+  String get storyBackgroundTweak => 'ストーリーの背景';
+
+  @override
+  String get storyAnimationOff => 'オフ';
+
+  @override
+  String get storyAnimationPulse => 'パルス';
+
+  @override
+  String get storyAnimationWave => 'ウェーブ';
+
+  @override
+  String get storyAnimationEqualizer => 'イコライザー';
+
+  @override
+  String get storyAnimationDrift => 'ドリフト';
+
+  @override
+  String get storyAnimationGlow => 'グロー';
+
+  @override
+  String get viewerCommentHint => 'コメント…';
+
+  @override
+  String get calendarToCurrentWeek => '今週へ';
+
+  @override
+  String get storyDateLines => '日付の行数';
+
+  @override
+  String get storyTextureTitle => 'テクスチャ';
+
+  @override
+  String get storySpectrum => '音のスペクトラム';
+
+  @override
+  String get storySensitivity => '感度';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '意識した日 $count日',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => '名前';
+
+  @override
+  String get profilePhoto => '写真';
+
+  @override
+  String get profileEmoji => '絵文字';
+
+  @override
+  String get profileInitial => '頭文字';
+
+  @override
+  String get webVersion => 'Wi‑Fiアクセス';
+
+  @override
+  String get webVersionAddressHint =>
+      '同じWi‑Fiのパソコンのブラウザで開きます。keklistは開いたままにしてください';
+
+  @override
+  String get webVersionCopied => 'アドレスをコピーしました';
+
+  @override
+  String get webVersionStarting => '起動中…';
+
+  @override
+  String get webVersionNoWifi => 'ブラウザでkeklistを開くにはWi‑Fiに接続してください。';
+
+  @override
+  String get webVersionNoBundle => 'このビルドにはWeb版が含まれていません。';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => '各ブラウザで30日に1回入力します';
+
+  @override
+  String get webVersionPinNotSet => '未設定';
+
+  @override
+  String get webVersionPinHint => '4〜8桁';
+
+  @override
+  String get webVersionRemovePin => 'PINを削除';
+
+  @override
+  String get webVersionPort => 'ポート';
+
+  @override
+  String get aiTab => 'チャット';
+
+  @override
+  String get aiTabDescription => 'スマホ上で動くAIと記録について話す';
+
+  @override
+  String get aiPrivacyNote => 'スマホの中だけで動作し、記録が端末の外に出ることはありません。';
+
+  @override
+  String get aiDisclaimer => '医療サービスではありません。危険な状況にある場合は緊急サービスに連絡してください。';
+
+  @override
+  String get aiYesterday => '昨日';
+
+  @override
+  String get aiNoSessions => 'まだセッションはありません';
+
+  @override
+  String get aiNewSession => '新しいセッション';
+
+  @override
+  String get aiChooseRole => '役割を選ぶ';
+
+  @override
+  String get aiRoleTherapist => 'セラピスト';
+
+  @override
+  String get aiRoleCoach => 'コーチ';
+
+  @override
+  String get aiRoleFriend => '友達';
+
+  @override
+  String get aiMessageHint => 'メッセージ';
+
+  @override
+  String get aiStarterWeek => '今週はどうだった？';
+
+  @override
+  String get aiStarterWorry => '最近、何が気になっている？';
+
+  @override
+  String get aiStarterJoy => '最近、何がうれしかった？';
+
+  @override
+  String get aiActionSaveAsMind => 'メモとして保存';
+
+  @override
+  String get aiActionOpenDay => '日を開く';
+
+  @override
+  String get aiActionWeekSummary => '週のまとめ';
+
+  @override
+  String get aiWeekSummaryPrompt => '直近7日間をまとめて：何があったか、どう感じたか、何が印象的だったか。';
+
+  @override
+  String get aiSavedAsMind => '今日に保存しました';
+
+  @override
+  String get aiStop => '停止';
+
+  @override
+  String get aiNoModelTitle => 'モデルを選ぶ';
+
+  @override
+  String get aiNoModelMessage => '始めるにはモデルをダウンロードしてください。スマホ上でオフラインで動作します。';
+
+  @override
+  String get aiNoModelOnPhone => 'スマホのアプリでモデルをダウンロードしてください：設定 → AI → モデル。';
+
+  @override
+  String get aiModels => 'モデル';
+
+  @override
+  String get aiRoles => '役割';
+
+  @override
+  String get aiDownloaded => 'ダウンロード済み';
+
+  @override
+  String get aiDownloads => 'ダウンロード中';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'GGUFモデルを検索';
+
+  @override
+  String get aiDownload => 'ダウンロード';
+
+  @override
+  String get aiPause => '一時停止';
+
+  @override
+  String get aiPaused => '一時停止中';
+
+  @override
+  String get aiResume => '再開';
+
+  @override
+  String get aiDownloadFailed => 'ダウンロードに失敗しました';
+
+  @override
+  String get aiCellularTitle => 'モバイルデータでダウンロードしますか？';
+
+  @override
+  String aiCellularMessage(String size) {
+    return 'モバイルデータで$sizeをダウンロードします。';
+  }
+
+  @override
+  String get aiDeleteModel => 'モデルを削除しますか？';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'このスマホ上：$size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'スマホのメモリ：$size';
+  }
+
+  @override
+  String get aiCatalogFailed => 'リストを読み込めませんでした。接続を確認してください。';
+
+  @override
+  String get aiNoFilesFit => 'このモデルのファイルはどれもこのスマホのメモリに収まりません。';
+
+  @override
+  String get aiBuiltInRole => '組み込み';
+
+  @override
+  String get aiOwnRoles => 'あなたの役割';
+
+  @override
+  String get aiDuplicate => '複製';
+
+  @override
+  String get aiNewRole => '新しい役割';
+
+  @override
+  String get aiRoleName => '名前';
+
+  @override
+  String get aiRoleEmoji => '絵文字';
+
+  @override
+  String get aiRolePrompt => 'プロンプト';
+
+  @override
+  String get aiRolePromptHint => 'AIの話し方と注目すべき点';
+
+  @override
+  String get aiReadOnlyRole => '組み込みの役割は変更できません。複製して自分の役割を作ってください。';
+
+  @override
+  String get aiDeleteSession => 'セッションを削除しますか？';
+
+  @override
+  String get aiDeleteRole => '役割を削除しますか？';
+
+  @override
+  String get aiRecommended => 'おすすめ';
+
+  @override
+  String get aiLowQuality => '低品質';
+
+  @override
+  String get aiModelDoesNotFit => 'このモデルはスマートフォンのメモリに収まりません。もっと小さいモデルを選んでください。';
+
+  @override
+  String get aiChooseAnotherModel => '別のモデルを選ぶ';
+
+  @override
+  String get creatorEmotionsTitle => '感情';
+
+  @override
+  String get creatorEmotionsAfterSave => '保存後に尋ねる';
+
+  @override
+  String get creatorEmotionsButton => 'キーボードの上のボタン';
+
+  @override
+  String get creatorEmotionsNever => '尋ねない';
+
+  @override
+  String get insightsWeekAgo => '1週間前';
+
+  @override
+  String get insightsMonthAgo => '1か月前';
+
+  @override
+  String get insightsHalfYearAgo => '半年前';
+
+  @override
+  String get insightsYearAgo => '1年前';
+
+  @override
+  String get insightsTwoYearsAgo => '2年前';
+
+  @override
+  String get insightsVoiceAndVideos => 'ボイスと丸い動画';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return '第$number週';
+  }
+
+  @override
+  String get aiNoSessionsHint =>
+      '今週のこと、心配ごと、良かった日について聞いてみましょう。チャットはスマホの中で記録を読みます。';
+
+  @override
+  String get showInGallery => 'ギャラリーで表示';
+
+  @override
+  String get tileEmojiMotion => '絵文字の動き';
+
+  @override
+  String get tileEmojiMotionDrift => '漂流';
+
+  @override
+  String get tileEmojiMotionFloat => 'ゆらぎ';
+
+  @override
+  String get tileEmojiMotionStill => '静止';
+
+  @override
+  String get gridResizeAnimation => 'ピンチのアニメーション';
+
+  @override
+  String get gridResizeFly => '移動';
+
+  @override
+  String get gridResizeZoom => 'ズーム';
+
+  @override
+  String get gridResizeCrossfade => 'フェード';
+
+  @override
+  String get feedSortOrder => '並び順';
+
+  @override
+  String get feedSortTime => '時間順';
+
+  @override
+  String get feedSortMindsFirst => 'メモが先';
+
+  @override
+  String get feedSortMediaFirst => '写真が先';
+
+  @override
+  String get feedGrouping => 'グループ';
+
+  @override
+  String get feedGroupingNone => 'なし';
+
+  @override
+  String get feedGroupingType => '種類';
+
+  @override
+  String get feedGroupingTimeOfDay => '時間帯';
+
+  @override
+  String get feedSectionMinds => 'メモ';
+
+  @override
+  String get feedSectionGallery => 'ギャラリー';
+
+  @override
+  String get removePhotoTitle => '写真を外す';
+
+  @override
+  String get removeVideoTitle => '動画を外す';
+
+  @override
+  String get hideMedia => '非表示';
+
+  @override
+  String get hideMediaSubtitle => 'keklistからのみ。ギャラリーには残ります';
+
+  @override
+  String get deleteFromGallery => 'ギャラリーから削除';
+
+  @override
+  String get deleteFromGallerySubtitle => '「最近削除した項目」に移動します';
+
+  @override
+  String get mediaHidden => 'keklistで非表示にしました';
+
+  @override
+  String get mediaShownAgain => 'keklistに戻しました';
+
+  @override
+  String get undo => '取り消す';
+
+  @override
+  String get hiddenMedia => '非表示の写真';
+
+  @override
+  String get hiddenMediaHint => '写真をタップするとkeklistに戻ります';
+
+  @override
+  String get hiddenMediaEmpty => '非表示のものはありません';
+
+  @override
+  String get leaveFeedback => 'フィードバックを送る';
+
+  @override
+  String get feedbackSend => '送信';
+
+  @override
+  String get feedbackSent => 'ありがとう！開発者に届きました';
+
+  @override
+  String get feedbackFailed => '送信できませんでした。接続を確認してもう一度お試しください';
+
+  @override
+  String get analytics => '分析';
+
+  @override
+  String get analyticsDescription =>
+      '匿名の利用統計は改善点を決めるのに役立ちます。あなたが書いた内容は端末から出ません。';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'このビルドは何も送信しません。分析は App Store と Google Play のビルドでのみ動作します。';
+
+  @override
+  String get analyticsSent => '送信されるもの';
+
+  @override
+  String get analyticsSentItems =>
+      '選んだ設定、開いた画面、アプリのバージョン・プラットフォーム・言語、Pro とチップの購入、メッセージを除いたクラッシュレポート。';
+
+  @override
+  String get analyticsNeverSent => '送信されないもの';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'あなたの記録とそのテキスト・感情・コメント、写真・動画・音声、その数、名前、位置情報、IP アドレス。';
+
+  @override
+  String get analyticsResetId => '匿名 ID をリセット';
+
+  @override
+  String get analyticsResetIdDone => 'これから新しい匿名 ID が使われます';
+
+  @override
+  String get settingsSupport => 'サポート';
+
+  @override
+  String get calendarOpenDay => '日を開く';
+
+  @override
+  String get webVersionEnabled => 'ブラウザにミラーリング';
+
+  @override
+  String get viewerComments => 'コメント';
+
+  @override
+  String get viewerNoComments => 'まだコメントはありません';
+
+  @override
+  String get previousDay => '前の日';
+
+  @override
+  String get nextDay => '次の日';
 }

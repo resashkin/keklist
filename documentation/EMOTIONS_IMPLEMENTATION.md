@@ -77,8 +77,7 @@ afterwards; the user builds depth by adding sub-emotions.
   `EmotionChip`s under the note; tapping a chip immediately untags it. Resolves ids
   via `EmotionBloc` (archived included, unresolved ids skipped).
 - **Action menu** — "Edit emotions" (`AddEmotionsMenuActionModel`) in the per-mind
-  action sheets (`MindInfoScreen`, `MindOneEmojiCollectionScreen`,
-  `MindUniversalListScreen`), shown only for root minds (not comments).
+  action sheets (`MindInfoScreen`, `MindUniversalListScreen`), shown only for root minds (not comments).
 - **Settings** — "Emotions" row under *User Data* opens the management screen.
 
 ## How It Works

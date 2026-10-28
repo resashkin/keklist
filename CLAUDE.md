@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-keklist is an open-source Flutter app for collecting "minds" (emoji + text thoughts/moments) with offline support, available on iOS, Android, and Web. The app uses local-first architecture with Hive for storage and includes features like insights/analytics, calendar view, reflections, and audio notes.
+keklist is an open-source Flutter app for collecting "minds" (text, audio and round-video thoughts tagged with emotions) with offline support, available on iOS, Android, and Web. The app uses local-first architecture with Hive for storage and includes features like insights/analytics, calendar view, reflections, and audio notes.
 
 ## Commands
 
@@ -78,7 +78,7 @@ lib/
 │   └── core/           # Shared UI utilities, widgets, helpers
 ├── di/                 # Dependency injection container
 ├── l10n/               # Localization ARB files
-└── native/             # Platform-specific code (iOS Watch, Web Telegram)
+└── native/             # Platform-specific code (Web Telegram)
 ```
 
 ### Key Architectural Patterns
@@ -119,7 +119,8 @@ The app includes a data migration system (`lib/domain/migrations/`) for schema c
 
 The central entity is `Mind` (`lib/domain/services/entities/mind.dart`):
 - `id` - UUID
-- `emoji` - Single emoji character
+- `legacyEmoji` - Former main emoji, kept only for CSV export and migration (never shown)
+- `emotionIds` - Tagged emotions; see `documentation/MAIN_EMOJI_REMOVAL_IMPLEMENTATION.md`
 - `note` - Raw note string (can contain text + audio references)
 - `dayIndex` - Day offset from epoch (for calendar organization)
 - `creationDate` - Timestamp
@@ -211,7 +212,7 @@ Load with `await dotenv.load(fileName: 'dotenv')` in `main.dart`.
 
 ### Platform-Specific Code
 
-- **iOS Watch**: `lib/presentation/native/ios/watch/` - Apple Watch communication via `WatchCommunicationManager`
+- **iOS Watch**: the Dart link was removed; the Swift watch app in `ios/` is left untouched and disconnected
 - **Web Telegram**: `lib/native/web/telegram/` - Telegram Web App integration
 - Platform detection via `DeviceUtils.safeGetPlatform()` returns `SupportedPlatform` enum
 

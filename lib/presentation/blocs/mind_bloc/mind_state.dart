@@ -9,15 +9,3 @@ final class MindList extends MindState {
 }
 
 final class MindMobileWidgetsUpdated extends MindState {}
-
-final class MindSearching extends MindState {
-  final bool enabled;
-  final Iterable<Mind> allValues;
-  final List<Mind> resultValues;
-
-  MindSearching({
-    required this.enabled,
-    required this.allValues,
-    required this.resultValues,
-  });
-}

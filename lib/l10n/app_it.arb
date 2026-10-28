@@ -1,4 +1,68 @@
 {
+    "insightsBrightestPeriod": "Periodo più intenso",
+    "insightsPeriodWeek": "Settimana",
+    "insightsPeriodMonth": "Mese",
+    "insightsPeriodYear": "Anno",
+    "insightsPeriodAllTime": "Sempre",
+    "insightsVsLastWeek": "{delta} rispetto alla settimana scorsa",
+    "insightsVsLastMonth": "{delta} rispetto al mese scorso",
+    "insightsVsLastYear": "{delta} rispetto all'anno scorso",
+    "insightsCategorySummary": "Riepilogo",
+    "insightsCategoryEmotions": "Emozioni",
+    "insightsCategoryActivity": "Attività",
+    "insightsCategoryMemories": "Ricordi",
+    "insightsCategoryMedia": "Media",
+    "insightsCounters": "In numeri",
+    "insightsMinds": "Note",
+    "insightsActiveDays": "Giorni attivi",
+    "insightsWords": "Parole",
+    "insightsBrightestDay": "Giorno più intenso",
+    "insightsBrightestWeek": "Settimana più intensa",
+    "insightsBrightestMonth": "Mese più intenso",
+    "insightsBrightestYear": "Anno più intenso",
+    "insightsBrightestDetails": "{minds} note · {emotions} emozioni · {media} media",
+    "insightsEmotionDistribution": "Emozioni",
+    "insightsEmotionTrend": "Andamento delle emozioni",
+    "insightsEmotionPairs": "Emozioni insieme",
+    "insightsEmotionRhythm": "Ritmo emotivo",
+    "insightsByWeekday": "Per giorno della settimana",
+    "insightsByDayPart": "Per momento della giornata",
+    "insightsNight": "Notte",
+    "insightsMorning": "Mattina",
+    "insightsAfternoon": "Pomeriggio",
+    "insightsEvening": "Sera",
+    "insightsStreak": "Serie",
+    "insightsStreakLabel": "giorni di fila",
+    "insightsLongestStreak": "Record: {count}",
+    "insightsStreakKeepGoing": "Aggiungi una nota oggi per continuare",
+    "insightsHeatmap": "Mappa dell'attività",
+    "insightsActivityTime": "Momento della giornata",
+    "insightsPeakHour": "Più attivo verso le {hour}",
+    "insightsOnThisDay": "A quel tempo",
+    "insightsMediaCounters": "Media",
+    "insightsPhotos": "Foto",
+    "insightsVideos": "Video",
+    "insightsVoiceNotes": "Note vocali",
+    "insightsRoundVideos": "Video circolari",
+    "insightsEmptyPeriod": "Ancora nessuna nota in questo periodo",
+    "insightsEmptyEmotions": "Tagga le note con emozioni per vederlo",
+    "insightsEmptyPairs": "Tagga una nota con due emozioni per vedere le coppie",
+    "insightsEmptyOnThisDay": "Ancora niente di una settimana, un mese, sei mesi o un anno fa",
+    "insightsEmptyRoundVideos": "Nessun vocale o video circolare in questo periodo",
+    "insightsEmptyStreak": "Aggiungi una nota oggi per iniziare una serie",
+    "insightsCustomize": "Personalizza analisi",
+    "insightsCustomizeDescription": "Attiva o disattiva le schede e trascinale per riordinarle",
+    "insightsResetLayout": "Ripristina",
+    "activeTasks": "Attività in corso",
+    "galleryIndex": "Indice della galleria",
+    "galleryIndexNoAccess": "Nessun accesso a Foto",
+    "galleryIndexNotIndexed": "Non ancora indicizzato",
+    "galleryIndexIndexing": "Indicizzazione {done} di {total}",
+    "galleryIndexReady": "{count} foto e video · aggiornato {time}",
+    "galleryIndexThumbnails": "Cache miniature: {size}",
+    "galleryIndexRebuildTitle": "Ricostruire l'indice della galleria?",
+    "galleryIndexRebuildMessage": "Le miniature verranno eliminate e la libreria analizzata di nuovo.",
+    "galleryIndexRebuild": "Ricostruisci",
     "settings": "Impostazioni",
     "@settings": {
         "description": "Etichetta tab impostazioni"
@@ -63,10 +127,6 @@
     "@showDigest": {
         "description": "Azione mostra riassunto"
     },
-    "showAll": "Mostra tutto",
-    "@showAll": {
-        "description": "Azione mostra tutto"
-    },
     "translateToEnglish": "Traduci in inglese",
     "@translateToEnglish": {
         "description": "Azione traduci in inglese"
@@ -95,25 +155,9 @@
     "@tabsSettings": {
         "description": "Navigazione impostazioni tab"
     },
-    "whatsNew": "Cosa c'è di nuovo?",
-    "@whatsNew": {
-        "description": "Navigazione cosa c'è di nuovo"
-    },
-    "releaseNotes": "Note di rilascio",
-    "@releaseNotes": {
-        "description": "Navigazione note di rilascio"
-    },
-    "suggestFeature": "Suggerisci una funzione",
-    "@suggestFeature": {
-        "description": "Navigazione suggerisci funzione"
-    },
     "sendFeedback": "Invia feedback",
     "@sendFeedback": {
         "description": "Navigazione invia feedback"
-    },
-    "emailUs": "Inviaci un'email",
-    "@emailUs": {
-        "description": "Navigazione inviaci un'email"
     },
     "clearOfflineDataWarning": "Tutti i tuoi dati offline verranno eliminati. Assicurati di averli già esportati.",
     "@clearOfflineDataWarning": {
@@ -155,7 +199,7 @@
     "@profile": {
         "description": "Etichetta tab profilo"
     },
-    "insights": "Approfondimenti",
+    "insights": "Profilo",
     "@insights": {
         "description": "Etichetta tab approfondimenti"
     },
@@ -163,7 +207,7 @@
     "@calendar": {
         "description": "Etichetta tab calendario"
     },
-    "debugMenu": "Menu Debug",
+    "debugMenu": "Menu sviluppatore",
     "@debugMenu": {
         "description": "Etichetta tab menu debug"
     },
@@ -178,10 +222,6 @@
     "dangerZone": "Zona Pericolo",
     "@dangerZone": {
         "description": "Titolo sezione zona pericolo"
-    },
-    "editMind": "Modifica mente",
-    "@editMind": {
-        "description": "Titolo dialogo modifica mente"
     },
     "enterTokenHere": "Inserisci token qui",
     "@enterTokenHere": {
@@ -215,15 +255,7 @@
     "@send": {
         "description": "Pulsante invia"
     },
-    "updateYourNickname": "Aggiorna il tuo nickname",
-    "@updateYourNickname": {
-        "description": "Titolo dialogo aggiorna nickname"
-    },
-    "yourNickname": "Il tuo nickname",
-    "@yourNickname": {
-        "description": "Suggerimento input nickname"
-    },
-    "create": "Scrivi",
+    "create": "Crea",
     "@create": {
         "description": "Pulsante crea"
     },
@@ -251,10 +283,6 @@
     "@minds": {
         "description": "Titolo menti"
     },
-    "searchForYourNotes": "Cerca le tue note",
-    "@searchForYourNotes": {
-        "description": "Suggerimento cerca note"
-    },
     "searchYourEmoji": "Cerca il tuo emoji...",
     "@searchYourEmoji": {
         "description": "Suggerimento cerca emoji"
@@ -263,29 +291,13 @@
     "@writeSomething": {
         "description": "Suggerimento scrivi qualcosa"
     },
-    "topMinds": "Menti principali",
-    "@topMinds": {
-        "description": "Titolo menti principali"
-    },
     "todayMinds": "Menti di oggi",
     "@todayMinds": {
         "description": "Titolo menti di oggi"
     },
-    "randomMind": "Mente casuale",
-    "@randomMind": {
-        "description": "Titolo mente casuale"
-    },
-    "spectrum": "Spettro",
-    "@spectrum": {
-        "description": "Titolo spettro"
-    },
     "youDidNotCollectAnyEntriesYet": "Non hai ancora raccolto nessuna voce",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Messaggio nessuna voce raccolta"
-    },
-    "pleaseAuthenticateToShowContent": "Autenticati per mostrare il contenuto della tua mente",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Messaggio autenticazione richiesta"
     },
     "areYouSure": "Sei sicuro?",
     "@areYouSure": {
@@ -323,17 +335,13 @@
     "@calendarDescription": {
         "description": "Descrizione tab calendario"
     },
-    "insightsDescription": "Statistiche di tutte le tue voci",
+    "insightsDescription": "Tu e le statistiche delle tue note",
     "@insightsDescription": {
         "description": "Descrizione tab approfondimenti"
     },
     "settingsDescription": "Schermata con tutte le impostazioni (modalità scura, sincronizzazione e altro)",
     "@settingsDescription": {
         "description": "Descrizione tab impostazioni"
-    },
-    "profileDescription": "Schermata con il tuo profilo",
-    "@profileDescription": {
-        "description": "Descrizione tab profilo"
     },
     "todayDescription": "Solo menti di oggi",
     "@todayDescription": {
@@ -346,15 +354,6 @@
     "noMindsForThisDay": "Nessuna mente per questo giorno",
     "@noMindsForThisDay": {
         "description": "Messaggio nessuna mente per questo giorno"
-    },
-    "showMindsForPeriod": "Mostra menti per {period}",
-    "@showMindsForPeriod": {
-        "description": "Messaggio mostra menti per periodo",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Settimana",
     "password": "Password",
@@ -397,20 +396,10 @@
     "onboardingMind4": "La scheda 'Statistiche' mostra brevi statistiche delle tue voci",
     "onboardingMind5": "Tutte le note sono memorizzate solo sul tuo telefono",
     "onboardingMind6": "Per creare una nuova nota, tocca 'Scrivi'",
-    "viewPhotos": "Visualizza foto",
     "noPhotosForDay": "Nessuna foto trovata per questo giorno",
-    "dateGallerySubtitle": "File multimediali di questo giorno",
-    "dayMediaFilesCount": "{count} file multimediali di questo giorno",
-    "sources": "Sorgenti",
-    "sourcesMinds": "Menti",
-    "sourcesMindsSubtitle": "I tuoi pensieri e momenti",
-    "sourcesPhotoVideo": "Foto e video",
-    "sourcesPhotoVideoSubtitle": "Foto e video del dispositivo per questo giorno",
     "sourcesMediaFolder": "File multimediali",
     "sourcesMediaFolderSubtitle": "Foto e video da una cartella personalizzata",
     "mediaFolderSettings": "File multimediali",
-    "mediaFolderNoPath": "Nessuna cartella selezionata",
-    "mediaFolderPickFolder": "Seleziona cartella",
     "licenses": "Licenze",
     "sourcesWeather": "Meteo",
     "sourcesWeatherSubtitle": "Condizioni meteorologiche locali per questo giorno",
@@ -418,7 +407,6 @@
     "weatherLatitude": "Latitudine",
     "weatherLongitude": "Longitudine",
     "weatherSaveLocation": "Salva posizione",
-    "weatherNoLocation": "Imposta la posizione nelle impostazioni meteo",
     "weatherUseMyLocation": "Usa la mia posizione",
     "weatherDetectingLocation": "Rilevamento posizione...",
     "weatherOrEnterManually": "o inserisci manualmente",
@@ -426,11 +414,6 @@
     "weatherLocationServicesDisabled": "I servizi di localizzazione sono disabilitati. Attivali nelle impostazioni.",
     "weatherLocationPermissionDenied": "Autorizzazione di localizzazione negata.",
     "weatherLocationPermissionPermanentlyDenied": "Autorizzazione di localizzazione negata in modo permanente. Apertura impostazioni app.",
-    "weatherTemperature": "Temperatura",
-    "weatherUvIndex": "Indice UV",
-    "weatherHumidity": "Umidità",
-    "weatherWindSpeed": "Velocità del vento",
-    "weatherPrecipitation": "Precipitazioni",
     "audioRecordTitle": "Registra audio",
     "audioRecordTitleRecording": "Registrazione…",
     "audioRecordHint": "Tocca Stop per salvare sul tuo dispositivo.",
@@ -440,8 +423,6 @@
     "audioRecordPermissionError": "Il permesso per il microfono è necessario per registrare audio.",
     "audioRecordStartError": "Impossibile avviare la registrazione. Riprova.",
     "audioRecordStopError": "Impossibile fermare la registrazione. Riprova.",
-    "emojiPickerUsedInMinds": "Used in minds",
-    "emojiPickerAll": "All",
     "proUserFooter": "Sei un utente PRO. Il prossimo pagamento di {price} sarà il {date}.",
     "emotions": "Emozioni",
     "archived": "Archiviate",
@@ -451,8 +432,6 @@
     "newEmotion": "Nuova emozione",
     "editEmotion": "Modifica emozione",
     "emotionNameHint": "Nome",
-    "emotionPickHint": "Tocca per assegnare",
-    "emotionDrillHint": "tieni premuto per approfondire",
     "noEmotionsYet": "Ancora nessuna emozione",
     "noArchivedEmotions": "Nessuna emozione archiviata",
     "addEmotion": "Aggiungi emozione",
@@ -460,5 +439,181 @@
     "doneEditing": "Fatto",
     "emotionEditHint": "Tocca per rinominare · ✕ per rimuovere · trascina per riordinare",
     "emotionInUseMessage": "Questa emozione è usata in alcune menti. Archiviala per mantenerla lì, o eliminala ovunque.",
-    "deleteEmotionMessage": "Eliminare questa emozione? Verrà rimossa da tutte le menti che la usano."
+    "deleteEmotionMessage": "Eliminare questa emozione? Verrà rimossa da tutte le menti che la usano.",
+    "dayFeedTileSettings": "Impostazioni riquadri",
+    "dayFeedColumns": "Colonne",
+    "dayFeedMindTileSize": "Dimensione riquadro",
+    "dayFeedMindTileSquare": "Quadrato",
+    "dayFeedMindTileWide": "Largo",
+    "dayFeedShowMindText": "Mostra testo",
+    "dayFeedPhotoAccessHint": "Consenti l'accesso alle foto per vedere qui foto e video",
+    "dayFeedAllowAccess": "Consenti",
+    "dayFeedFolderHint": "Scegli una cartella multimediale per vedere qui foto e video",
+    "dayFeedChooseFolder": "Scegli",
+    "holdToRecordAudio": "Tieni premuto per registrare un messaggio vocale",
+    "holdToRecordVideo": "Tieni premuto per registrare un videomessaggio",
+    "roundVideoRecordError": "Impossibile registrare il video",
+    "roundVideoCameraUnavailable": "Fotocamera non disponibile su questo dispositivo",
+    "roundVideoRetake": "Rifai",
+    "roundVideoUse": "Usa",
+    "removeMedia": "Rimuovi media",
+    "shakeToCustomize": "Scuoti per personalizzare",
+    "shakeToCustomizeHint": "o tieni premuto il titolo",
+    "customizeSettings": "Personalizza impostazioni",
+    "customizeSettingsDescription": "Le sezioni e le righe deselezionate vengono nascoste nelle Impostazioni.",
+    "calendarSettings": "Impostazioni calendario",
+    "calendarShowMedia": "Mostra foto e video",
+    "calendarWeekTitles": "Titoli delle settimane",
+    "calendarPlayStories": "Guarda le storie",
+    "storyBackgroundTweak": "Sfondo delle storie",
+    "storyAnimationOff": "Disattivato",
+    "storyAnimationPulse": "Pulsazione",
+    "storyAnimationWave": "Onda",
+    "storyAnimationEqualizer": "Equalizzatore",
+    "storyAnimationDrift": "Deriva",
+    "storyAnimationGlow": "Bagliore",
+    "viewerCommentHint": "Commento…",
+    "calendarToCurrentWeek": "Alla settimana corrente",
+    "storyDateLines": "Righe della data",
+    "storyTextureTitle": "Texture",
+    "storySpectrum": "Spettro del suono",
+    "storySensitivity": "Sensibilità",
+    "profileMindfulDays": "{count, plural, one{Consapevole da {count} giorno} other{Consapevole da {count} giorni}}",
+    "profileName": "Nome",
+    "profilePhoto": "Foto",
+    "profileEmoji": "Emoji",
+    "profileInitial": "Lettera",
+    "webVersion": "Accesso via Wi‑Fi",
+    "webVersionAddressHint": "Aprila nel browser di un computer sulla stessa Wi‑Fi; tieni keklist aperto",
+    "webVersionCopied": "Indirizzo copiato",
+    "webVersionStarting": "Avvio…",
+    "webVersionNoWifi": "Connettiti a una Wi‑Fi per aprire keklist in un browser.",
+    "webVersionNoBundle": "Questa build non include la versione web.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Ogni browser lo chiede una volta ogni 30 giorni",
+    "webVersionPinNotSet": "Non impostato",
+    "webVersionPinHint": "4–8 cifre",
+    "webVersionRemovePin": "Rimuovi PIN",
+    "webVersionPort": "Porta",
+    "aiTab": "Chat",
+    "aiTabDescription": "Parla delle tue note con un'IA che funziona sul telefono",
+    "aiPrivacyNote": "Funziona solo sul telefono: le tue note non lasciano mai il dispositivo.",
+    "aiDisclaimer": "Non è un servizio medico. Se sei in pericolo, contatta i servizi di emergenza.",
+    "aiYesterday": "Ieri",
+    "aiNoSessions": "Ancora nessuna sessione",
+    "aiNewSession": "Nuova sessione",
+    "aiChooseRole": "Scegli un ruolo",
+    "aiRoleTherapist": "Terapeuta",
+    "aiRoleCoach": "Coach",
+    "aiRoleFriend": "Amico",
+    "aiMessageHint": "Messaggio",
+    "aiStarterWeek": "Com'è andata la mia settimana?",
+    "aiStarterWorry": "Cosa mi preoccupa ultimamente?",
+    "aiStarterJoy": "Cosa mi ha reso felice di recente?",
+    "aiActionSaveAsMind": "Salva come nota",
+    "aiActionOpenDay": "Apri giorno",
+    "aiActionWeekSummary": "Riepilogo della settimana",
+    "aiWeekSummaryPrompt": "Riassumi i miei ultimi 7 giorni: cosa è successo, come mi sono sentito, cosa è emerso.",
+    "aiSavedAsMind": "Salvato in oggi",
+    "aiStop": "Ferma",
+    "aiNoModelTitle": "Scegli un modello",
+    "aiNoModelMessage": "Scarica un modello per iniziare. Funziona sul telefono, offline.",
+    "aiNoModelOnPhone": "Scarica un modello nell'app sul telefono: Impostazioni → IA → Modelli.",
+    "aiModels": "Modelli",
+    "aiRoles": "Ruoli",
+    "aiDownloaded": "Scaricati",
+    "aiDownloads": "In download",
+    "aiGalleryCatalog": "Google AI Edge Gallery",
+    "aiHuggingFace": "Hugging Face (GGUF)",
+    "aiSearchModels": "Cerca modelli GGUF",
+    "aiDownload": "Scarica",
+    "aiPause": "Pausa",
+    "aiPaused": "In pausa",
+    "aiResume": "Riprendi",
+    "aiDownloadFailed": "Download non riuscito",
+    "aiCellularTitle": "Scaricare con i dati mobili?",
+    "aiCellularMessage": "Verranno scaricati {size} con i dati mobili.",
+    "aiDeleteModel": "Eliminare il modello?",
+    "aiStorageUsed": "Su questo telefono: {size}",
+    "aiDeviceMemory": "Memoria del telefono: {size}",
+    "aiCatalogFailed": "Impossibile caricare l'elenco. Controlla la connessione.",
+    "aiNoFilesFit": "Nessun file di questo modello entra nella memoria del telefono.",
+    "aiBuiltInRole": "Integrati",
+    "aiOwnRoles": "I tuoi ruoli",
+    "aiDuplicate": "Duplica",
+    "aiNewRole": "Nuovo ruolo",
+    "aiRoleName": "Nome",
+    "aiRoleEmoji": "Emoji",
+    "aiRolePrompt": "Prompt",
+    "aiRolePromptHint": "Come deve parlare l'IA e su cosa concentrarsi",
+    "aiReadOnlyRole": "I ruoli integrati non si possono modificare. Duplicane uno per crearne uno tuo.",
+    "aiDeleteSession": "Eliminare la sessione?",
+    "aiDeleteRole": "Eliminare il ruolo?",
+    "aiRecommended": "Consigliato",
+    "aiLowQuality": "Bassa qualità",
+    "aiModelDoesNotFit": "Questo modello non entra nella memoria del telefono. Scegline uno più piccolo.",
+    "aiChooseAnotherModel": "Scegli un altro modello",
+    "creatorEmotionsTitle": "Emozioni",
+    "creatorEmotionsAfterSave": "Chiedi dopo il salvataggio",
+    "creatorEmotionsButton": "Pulsante sopra la tastiera",
+    "creatorEmotionsNever": "Non chiedere",
+    "insightsWeekAgo": "Una settimana fa",
+    "insightsMonthAgo": "Un mese fa",
+    "insightsHalfYearAgo": "Sei mesi fa",
+    "insightsYearAgo": "Un anno fa",
+    "insightsTwoYearsAgo": "Due anni fa",
+    "insightsVoiceAndVideos": "Vocali e video circolari",
+    "insightsWeekNumber": "Settimana {number}",
+    "aiNoSessionsHint": "Chiedi della tua settimana, di una preoccupazione o di una bella giornata: la chat legge le tue note sul telefono.",
+    "showInGallery": "Mostra nella galleria",
+    "tileEmojiMotion": "Movimento emoji",
+    "tileEmojiMotionDrift": "Deriva",
+    "tileEmojiMotionFloat": "Ondeggiare",
+    "tileEmojiMotionStill": "Fermo",
+    "gridResizeAnimation": "Animazione pizzico",
+    "gridResizeFly": "Volo",
+    "gridResizeZoom": "Zoom",
+    "gridResizeCrossfade": "Dissolvenza",
+    "feedSortOrder": "Ordine",
+    "feedSortTime": "Ora",
+    "feedSortMindsFirst": "Prima note",
+    "feedSortMediaFirst": "Prima foto",
+    "feedGrouping": "Gruppi",
+    "feedGroupingNone": "No",
+    "feedGroupingType": "Tipo",
+    "feedGroupingTimeOfDay": "Fascia",
+    "feedSectionMinds": "Note",
+    "feedSectionGallery": "Galleria",
+    "removePhotoTitle": "Rimuovi foto",
+    "removeVideoTitle": "Rimuovi video",
+    "hideMedia": "Nascondi",
+    "hideMediaSubtitle": "Solo da keklist, resta nella galleria",
+    "deleteFromGallery": "Elimina dalla galleria",
+    "deleteFromGallerySubtitle": "Va in Eliminati di recente",
+    "mediaHidden": "Nascosto da keklist",
+    "mediaShownAgain": "Di nuovo in keklist",
+    "undo": "Annulla",
+    "hiddenMedia": "Foto nascoste",
+    "hiddenMediaHint": "Tocca una foto per mostrarla di nuovo in keklist",
+    "hiddenMediaEmpty": "Niente di nascosto",
+    "leaveFeedback": "Lascia un feedback",
+    "feedbackSend": "Invia",
+    "feedbackSent": "Grazie! Lo sviluppatore ha ricevuto il messaggio",
+    "feedbackFailed": "Invio non riuscito. Controlla la connessione e riprova",
+    "analytics": "Analisi",
+    "analyticsDescription": "Le statistiche d'uso anonime aiutano a capire cosa migliorare. Niente di ciò che scrivi lascia il tuo dispositivo.",
+    "analyticsStoreBuildsOnly": "Questa build non invia nulla: l'analisi funziona solo nelle build di App Store e Google Play.",
+    "analyticsSent": "Cosa viene inviato",
+    "analyticsSentItems": "Quali impostazioni scegli, quali schermate apri, la versione dell'app, la piattaforma e la lingua, gli acquisti di Pro e mance, e i report di crash senza i loro messaggi.",
+    "analyticsNeverSent": "Mai inviato",
+    "analyticsNeverSentItems": "Le tue note, il loro testo, emozioni e commenti, foto, video e audio, quanti ne hai, il tuo nome, la tua posizione e il tuo indirizzo IP.",
+    "analyticsResetId": "Reimposta ID anonimo",
+    "analyticsResetIdDone": "D'ora in poi viene usato un nuovo ID anonimo",
+    "settingsSupport": "Supporto",
+    "calendarOpenDay": "Apri giorno",
+    "webVersionEnabled": "Duplica nel browser",
+    "viewerComments": "Commenti",
+    "viewerNoComments": "Ancora nessun commento",
+    "previousDay": "Giorno precedente",
+    "nextDay": "Giorno successivo"
 }

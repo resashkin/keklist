@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
@@ -33,11 +33,15 @@ final class EmotionMarkingSheet extends StatefulWidget {
   /// chain, then its chip is scrolled into view and briefly ringed.
   final String? focusEmotionId;
 
+  /// Whether a wide Save button closes the sheet, for flows that continue once it is gone.
+  final bool showsSaveButton;
+
   const EmotionMarkingSheet({
     super.key,
     required this.initialSelectedIds,
     required this.onSelectionChanged,
     this.focusEmotionId,
+    this.showsSaveButton = false,
   });
 
   /// Fraction of the screen the sheet occupies. Fixed — the sheet is not resizable.
@@ -49,15 +53,15 @@ final class EmotionMarkingSheet extends StatefulWidget {
     required Set<String> initialSelectedIds,
     required ValueChanged<Set<String>> onSelectionChanged,
     String? focusEmotionId,
+    bool showsSaveButton = false,
   }) {
-    return showModalBottomSheet<void>(
+    return KekSheet.show<void>(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
       builder: (_) => EmotionMarkingSheet(
         initialSelectedIds: initialSelectedIds,
         onSelectionChanged: onSelectionChanged,
         focusEmotionId: focusEmotionId,
+        showsSaveButton: showsSaveButton,
       ),
     );
   }
@@ -139,6 +143,15 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
   void _goBack() {
     Haptics.vibrate(HapticsType.light);
     setState(() => _path.removeLast());
+  }
+
+  /// Picked emotions lead, the latest pick first; edit mode keeps the real order so dragging stays predictable.
+  List<Emotion> _selectedFirst(List<Emotion> emotions) {
+    final Map<String, Emotion> byId = {for (final Emotion emotion in emotions) emotion.id: emotion};
+    return [
+      ..._selected.toList().reversed.map((id) => byId[id]).whereType<Emotion>(),
+      ...emotions.where((emotion) => !_selected.contains(emotion.id)),
+    ];
   }
 
   void _toggleEditMode() {
@@ -402,7 +415,11 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
                                     child: Center(child: Text(context.l10n.noEmotionsYet)),
                                   )
                                 else
-                                  _buildChipsArea(context, state, _levelChildren),
+                                  _buildChipsArea(
+                                    context,
+                                    state,
+                                    _editMode ? _levelChildren : _selectedFirst(_levelChildren),
+                                  ),
                                 // Creating an emotion is a top-level-only action, so the
                                 // link never offers to nest one inside another.
                                 if (_currentParentId == null) ...[
@@ -427,6 +444,19 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
               ),
             ),
             _buildHint(context),
+            if (widget.showsSaveButton)
+              SafeArea(
+                top: false,
+                minimum: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 12.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 50.0,
+                  child: FilledButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(context.l10n.save, style: const TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600)),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -554,47 +584,12 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
             ),
           );
 
-    return SizedBox(
-      height: 52,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 76.0),
-            child: Center(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: KekBottomSheetStyle.titleStyle(context),
-              ),
-            ),
-          ),
-          Align(alignment: Alignment.centerLeft, child: leading),
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
-        ],
-      ),
-    );
+    return KekSheetHeader(title: title, leading: leading);
   }
 
   /// Long-press only drills in when a chip actually has children, and nesting can
   /// no longer be authored (ADR-0002) — so the hint promises it only where some
   /// chip on this level can deliver it.
-  String _pickHint(BuildContext context) {
-    final state = _state;
-    final bool canDrill =
-        state != null && _levelChildren.any((emotion) => state.hasActiveChildren(emotion.id));
-    return canDrill
-        ? '${context.l10n.emotionPickHint} · ${context.l10n.emotionDrillHint}'
-        : context.l10n.emotionPickHint;
-  }
-
   Widget _buildHint(BuildContext context) {
     final hintStyle = Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor);
     final linkStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -614,7 +609,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
         TextSpan(
           style: hintStyle,
           children: [
-            TextSpan(text: '${_editMode ? context.l10n.emotionEditHint : _pickHint(context)}   ·   '),
+            if (_editMode) TextSpan(text: '${context.l10n.emotionEditHint}   ·   '),
             link(context.l10n.archived, _openArchived),
           ],
         ),
@@ -634,9 +629,10 @@ class _FocusRing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Drawn over the chip so the ring never adds to the gap between chips.
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
-      decoration: BoxDecoration(
+      foregroundDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22.0),
         border: Border.all(
           color: active ? Theme.of(context).colorScheme.primary : Colors.transparent,

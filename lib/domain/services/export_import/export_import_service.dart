@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:csv/csv.dart';
+import 'package:keklist/domain/services/emotions/legacy_emoji_linker.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
@@ -31,6 +32,14 @@ final class ExportImportService {
   }) : _mindRepository = mindRepository,
        _fileRepository = fileRepository,
        _emotionRepository = emotionRepository;
+
+  /// Old backups carry a main emoji instead of emotions; link it like migration v4.
+  List<Mind> _withLegacyEmojiLinked(List<Mind> minds) {
+    final Map<String, Mind> linkedById = {
+      for (final Mind mind in LegacyEmojiLinker.link(minds: minds, emotions: _emotionRepository.values)) mind.id: mind,
+    };
+    return [for (final Mind mind in minds) linkedById[mind.id] ?? mind];
+  }
 
   /// Name of the emotion definitions entry inside a ZIP export.
   static const String emotionsFileName = 'emotions.csv';
@@ -89,16 +98,16 @@ final class ExportImportService {
 
       for (final mind in minds) {
         final noteContent = MindNoteContent.parse(mind.note);
-        for (final audioPiece in noteContent.audioPieces) {
-          audioFiles.add(audioPiece.appRelativeAbsoulutePath);
-        }
+        audioFiles.addAll(noteContent.mediaFilePaths);
       }
 
       // Create archive
       final archive = Archive();
 
       // Add minds.csv to root
-      archive.addFile(ArchiveFile('minds.csv', csv.length, utf8.encode(csv)));
+      // Sizes are in bytes: archive 4.5 stops reading an entry at its size, which cut emoji text short.
+      final List<int> mindsBytes = utf8.encode(csv);
+      archive.addFile(ArchiveFile('minds.csv', mindsBytes.length, mindsBytes));
 
       // Every emotion travels, archived and unused included: minds may still be
       // tagged with archived ones, and a missing parent would orphan its children.
@@ -106,9 +115,8 @@ final class ExportImportService {
       if (emotions.isNotEmpty) {
         final emotionsCsv =
             const CsvEncoder(fieldDelimiter: ';').convert(emotions.map((e) => e.toCSVEntry()).toList());
-        archive.addFile(
-          ArchiveFile(emotionsFileName, emotionsCsv.length, utf8.encode(emotionsCsv)),
-        );
+        final List<int> emotionsBytes = utf8.encode(emotionsCsv);
+        archive.addFile(ArchiveFile(emotionsFileName, emotionsBytes.length, emotionsBytes));
       }
 
       // Add audio files
@@ -120,9 +128,8 @@ final class ExportImportService {
 
           if (await file.exists()) {
             final bytes = await file.readAsBytes();
-            // Extract just the filename from the relative path (e.g., "audio/uuid.m4a" -> "uuid.m4a")
-            final fileName = relativePath.split('/').last;
-            archive.addFile(ArchiveFile('audio/$fileName', bytes.length, bytes));
+            // The relative path ("audio/uuid.m4a", "video/uuid.mp4") doubles as the archive path.
+            archive.addFile(ArchiveFile(relativePath, bytes.length, bytes));
             successfulAudioCount++;
           } else {
             missingAudioFiles.add(relativePath);
@@ -303,17 +310,7 @@ final class ExportImportService {
         }
 
         try {
-          final mind = Mind(
-            id: row[0].toString(),
-            emoji: row[1].toString(),
-            note: row[2].toString(),
-            dayIndex: int.parse(row[3].toString()),
-            sortIndex: int.parse(row[4].toString()),
-            creationDate: DateTime.parse(row[5].toString()),
-            rootId: row[6].toString() == 'null' ? null : row[6].toString(),
-            emotionIds: Mind.emotionIdsFromCSVEntry(row),
-          );
-          mindsToImport.add(mind);
+          mindsToImport.add(Mind.fromCSVEntry(row));
         } catch (e) {
           // Skip invalid rows
           continue;
@@ -324,8 +321,7 @@ final class ExportImportService {
         return const ImportFailure(error: ImportError.invalidFormat, details: 'No valid minds found in CSV file');
       }
 
-      // Batch import
-      await _mindRepository.createMinds(minds: mindsToImport);
+      await _mindRepository.createMinds(minds: _withLegacyEmojiLinked(mindsToImport));
 
       return ImportSuccess(mindsCount: mindsToImport.length, audioFilesCount: 0);
     } catch (e) {
@@ -374,6 +370,7 @@ final class ExportImportService {
       Archive archive;
       try {
         archive = ZipDecoder().decodeBytes(zipBytes);
+        _allowLegacyTextSizes(archive);
       } catch (e) {
         return ImportFailure(
           error: ImportError.corruptedFile,
@@ -413,17 +410,7 @@ final class ExportImportService {
         if (row.length < 7) continue;
 
         try {
-          final mind = Mind(
-            id: row[0].toString(),
-            emoji: row[1].toString(),
-            note: row[2].toString(),
-            dayIndex: int.parse(row[3].toString()),
-            sortIndex: int.parse(row[4].toString()),
-            creationDate: DateTime.parse(row[5].toString()),
-            rootId: row[6].toString() == 'null' ? null : row[6].toString(),
-            emotionIds: Mind.emotionIdsFromCSVEntry(row),
-          );
-          mindsToImport.add(mind);
+          mindsToImport.add(Mind.fromCSVEntry(row));
         } catch (e) {
           continue;
         }
@@ -452,17 +439,18 @@ final class ExportImportService {
           ..addAll(remapped);
       }
 
-      // Copy audio files to app directory
-      final audioDir = Directory('${tempExtractDir.path}/audio');
+      // Copy audio and video files to app directory
       int audioFilesCopied = 0;
       final skippedAudioFiles = <String>[];
 
-      if (await audioDir.exists()) {
-        final audioFiles = await audioDir.list().where((entity) => entity is File).cast<File>().toList();
+      for (final String mediaFolder in AppFileRepository.mediaFolderNames) {
+        final mediaDir = Directory('${tempExtractDir.path}/$mediaFolder');
+        if (!await mediaDir.exists()) continue;
+        final mediaFiles = await mediaDir.list().where((entity) => entity is File).cast<File>().toList();
 
-        for (final audioFile in audioFiles) {
-          final fileName = audioFile.path.split('/').last;
-          final relativePath = 'audio/$fileName';
+        for (final mediaFile in mediaFiles) {
+          final fileName = mediaFile.path.split('/').last;
+          final relativePath = '$mediaFolder/$fileName';
           final targetPath = await _fileRepository.resolveAbsolutePath(relativePath);
           final targetFile = File(targetPath);
 
@@ -476,13 +464,12 @@ final class ExportImportService {
           await targetFile.parent.create(recursive: true);
 
           // Copy file
-          await audioFile.copy(targetPath);
+          await mediaFile.copy(targetPath);
           audioFilesCopied++;
         }
       }
 
-      // Import minds
-      await _mindRepository.createMinds(minds: mindsToImport);
+      await _mindRepository.createMinds(minds: _withLegacyEmojiLinked(mindsToImport));
 
       // Cleanup
       await tempExtractDir.delete(recursive: true);
@@ -583,5 +570,14 @@ final class ExportImportService {
     random.seed(pc.KeyParameter(seed));
 
     return random.nextBytes(length);
+  }
+
+  /// Exports before archive 4.5 gave CSV entries their length in UTF-16 units, below the UTF-8 bytes of emoji and
+  /// non-Latin text, and archive 4.5 refuses to decode past an entry's size. Those entries may take up to 4 bytes a unit.
+  static void _allowLegacyTextSizes(Archive archive) {
+    for (final ArchiveFile file in archive) {
+      if (!file.name.endsWith('.csv')) continue;
+      if (file.rawContent case final ZipFile zip) zip.uncompressedSize *= 4;
+    }
   }
 }

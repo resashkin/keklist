@@ -9,8 +9,6 @@ import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -20,16 +18,11 @@ part 'mind_event.dart';
 part 'mind_state.dart';
 
 final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
-  late final MindSearcherCubit _searcherCubit;
   late final MindRepository _mindRepository;
   late final AppFileRepository _fileRepository;
 
-  MindBloc({
-    required MindSearcherCubit mindSearcherCubit,
-    required MindRepository mindRepository,
-    required AppFileRepository fileRepository,
-  }) : super(MindList(values: const [])) {
-    _searcherCubit = mindSearcherCubit;
+  MindBloc({required MindRepository mindRepository, required AppFileRepository fileRepository})
+    : super(MindList(values: const [])) {
     _mindRepository = mindRepository;
     _fileRepository = fileRepository;
     on<MindGetList>(_getMinds);
@@ -39,12 +32,7 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     on<MindDelete>(_deleteMind);
     on<MindClearCache>(_clearCache);
     on<MindEdit>(_editMind);
-    on<MindStartSearch>(_startSearch);
-    on<MindStopSearch>(_stopSearch);
-    on<MindEnterSearchText>(
-      _enterTextSearch,
-      transformer: (events, mapper) => events.debounceTime(const Duration(milliseconds: 300)).asyncExpand(mapper),
-    );
+    on<MindRemoveMedia>(_removeMedia);
     on<MindInternalGetListFromCache>((_, emit) => _emitMindList(emit));
     _mindRepository.stream.listen((event) => add(MindInternalGetListFromCache())).disposed(by: this);
   }
@@ -78,11 +66,12 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
           sanitizedPieces.add(
             trimmedPath == audioPiece.appRelativeAbsoulutePath
                 ? audioPiece
-                : MindNoteAudio(
-                    appRelativeAbsoulutePath: trimmedPath,
-                    durationSeconds: audioPiece.durationSeconds,
-                  ),
+                : MindNoteAudio(appRelativeAbsoulutePath: trimmedPath, durationSeconds: audioPiece.durationSeconds),
           );
+        },
+        video: (MindNoteVideo videoPiece) {
+          if (videoPiece.appRelativePath.trim().isEmpty) return;
+          sanitizedPieces.add(videoPiece);
         },
         unknown: () => null,
       );
@@ -96,7 +85,6 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
       id: const Uuid().v4(),
       dayIndex: event.dayIndex,
       note: content.toRawNoteString(),
-      emoji: event.emoji,
       creationDate: DateTime.now().toUtc(),
       sortIndex: sortIndex,
       rootId: event.rootId,
@@ -113,18 +101,13 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
 
   Future<void> _deleteMind(MindDelete event, Emitter<MindState> emit) async {
     // Collect all minds to be deleted (main mind + child minds with rootId)
-    final mindsToDelete = <Mind>[
-      event.mind,
-      ..._mindRepository.values.where((mind) => mind.rootId == event.mind.id),
-    ];
+    final mindsToDelete = <Mind>[event.mind, ..._mindRepository.values.where((mind) => mind.rootId == event.mind.id)];
 
     // Collect all audio files from all minds to be deleted
     final audioFilesToDelete = <String>{};
     for (final mind in mindsToDelete) {
       final noteContent = MindNoteContent.parse(mind.note);
-      for (final audioPiece in noteContent.audioPieces) {
-        audioFilesToDelete.add(audioPiece.appRelativeAbsoulutePath);
-      }
+      audioFilesToDelete.addAll(noteContent.mediaFilePaths);
     }
 
     // Delete all audio files
@@ -147,23 +130,27 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     await _mindRepository.deleteMind(mindId: event.mind.id);
   }
 
-  FutureOr<void> _startSearch(MindStartSearch event, emit) async {
-    emit(MindSearching(enabled: true, allValues: _mindRepository.values, resultValues: const []));
-  }
-
-  FutureOr<void> _stopSearch(MindStopSearch event, emit) async {
-    emit(MindSearching(enabled: false, allValues: _mindRepository.values, resultValues: const []));
-  }
-
-  FutureOr<void> _enterTextSearch(MindEnterSearchText event, Emitter<MindState> emit) async {
-    final List<Mind> filteredMinds = await _searcherCubit.searchMindList(event.text);
-    emit(MindSearching(enabled: true, allValues: _mindRepository.values, resultValues: filteredMinds));
-  }
-
   Future<List<Mind>> _findMindsByDayIndex(int index) async {
     final minds = await _mindRepository.obtainMindsWhere((mind) => mind.dayIndex == index && mind.rootId == null)
       ..sortedByProperty((it) => it.sortIndex);
     return minds.toList();
+  }
+
+  Future<void> _removeMedia(MindRemoveMedia event, Emitter<MindState> emit) async {
+    final MindNoteContent content = event.mind.noteContent;
+    await _deleteFiles(content.mediaFilePaths);
+    await _mindRepository.updateMind(mind: event.mind.copyWith(note: content.withoutMedia().toRawNoteString()));
+  }
+
+  Future<void> _deleteFiles(Iterable<String> relativePaths) async {
+    for (final String relativePath in relativePaths) {
+      try {
+        final File file = File(await _fileRepository.resolveAbsolutePath(relativePath));
+        if (await file.exists()) await file.delete();
+      } catch (e) {
+        debugPrint('Error deleting media file $relativePath: $e');
+      }
+    }
   }
 
   Future<void> _editMind(MindEdit event, Emitter<MindState> emit) async {
@@ -180,9 +167,7 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
     final audioFilesToDelete = <String>{};
     for (final mind in _mindRepository.values) {
       final noteContent = MindNoteContent.parse(mind.note);
-      for (final audioPiece in noteContent.audioPieces) {
-        audioFilesToDelete.add(audioPiece.appRelativeAbsoulutePath);
-      }
+      audioFilesToDelete.addAll(noteContent.mediaFilePaths);
     }
 
     // Delete all audio files

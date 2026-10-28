@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide DateUtils;
+import 'package:material_ui/material_ui.dart' hide DateUtils;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
@@ -11,11 +11,15 @@ import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/helpers/interface_style_utils.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/presentation/core/widgets/bottom_navigation_bar.dart';
+import 'package:keklist/presentation/screens/ai/ai_screen.dart';
 import 'package:keklist/presentation/screens/insights/insights_screen.dart';
 import 'package:keklist/presentation/screens/mind_collection/mind_collection_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
-import 'package:keklist/presentation/screens/user_profile/user_profile_screen.dart';
+
+/// Wider screens get the tabs as a rail on the left, like a desktop app.
+const double _kRailMinWidth = 800.0;
+const double _kContentMaxWidth = 840.0;
 
 final class TabsContainerScreen extends StatefulWidget {
   const TabsContainerScreen({super.key});
@@ -30,6 +34,7 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
   final List<Widget> _bodyWidgets = [];
   List<TabType> _tabTypes = [];
   bool _useLiquidGlass = false;
+  bool _isWide = false;
   final GlobalKey<MindDayCollectionScreenState> _todayKey = GlobalKey();
 
   @override
@@ -66,7 +71,7 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
         if (next != _useLiquidGlass) {
           setState(() {
             _useLiquidGlass = next;
-            // Rebuild cached body children so the Today tab's fabBottomOffset tracks the new value.
+            // Rebuild cached body children so the Today and Chat tabs' fabBottomOffset tracks the new value.
             final Iterable<Widget> bodyWidgets = _tabTypes.map(_bodyWidgetByType);
             _bodyWidgets
               ..clear()
@@ -76,6 +81,9 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
       },
     )?.disposed(by: this);
   }
+
+  double get _fabBottomOffset =>
+      _useLiquidGlass && _isTabBarVisible && !_isWide ? kBottomNavigationBarHeight + 48.0 : 0.0;
 
   bool _readUseLiquidGlass(SettingsState state) {
     if (state is! SettingsDataState) return _useLiquidGlass;
@@ -89,28 +97,71 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
     cancelSubscriptions();
   }
 
+  bool get _isTabBarVisible => _items.length >= 2;
+
   @override
-  Widget build(BuildContext context) => Scaffold(
-    extendBody: _useLiquidGlass,
-    body: IndexedStack(index: _selectedTabIndex, children: _bodyWidgets),
-    bottomNavigationBar: BoolWidget(
-      condition: _items.length >= 2,
-      trueChild: AdaptiveBottomNavigationBar(
-        items: List.of(_items.length >= 2 ? _items : _getFakeItems()),
-        tabTypes: _tabTypes,
-        useLiquidGlass: _useLiquidGlass,
-        selectedIndex: _selectedTabIndex,
-        onTap: (tabIndex) {
-          if (tabIndex == _selectedTabIndex && tabIndex < _tabTypes.length && _tabTypes[tabIndex] == TabType.today) {
-            _todayKey.currentState?.goToToday();
-          } else {
-            sendEventToBloc<TabsContainerBloc>(TabsContainerChangeSelectedTab(selectedIndex: tabIndex));
-          }
-        },
+  Widget build(BuildContext context) {
+    final bool isWide = _isTabBarVisible && MediaQuery.sizeOf(context).width >= _kRailMinWidth;
+    if (isWide != _isWide) {
+      _isWide = isWide;
+      // The Today FAB offset depends on whether a bottom bar overlaps the body.
+      _bodyWidgets
+        ..clear()
+        ..addAll(_tabTypes.map(_bodyWidgetByType));
+    }
+    // On wide screens the content stays a readable column instead of stretching edge to edge.
+    final Widget body = Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: _kContentMaxWidth),
+        child: IndexedStack(index: _selectedTabIndex, children: _bodyWidgets),
       ),
-      falseChild: SizedBox.shrink(),
-    ),
-  );
+    );
+    if (isWide) {
+      return Scaffold(
+        body: Row(
+          children: [
+            SafeArea(
+              right: false,
+              child: NavigationRail(
+                selectedIndex: _selectedTabIndex,
+                onDestinationSelected: _onTap,
+                labelType: NavigationRailLabelType.all,
+                destinations: [
+                  for (final BottomNavigationBarItem item in _items)
+                    NavigationRailDestination(icon: item.icon, label: Text(item.label ?? '')),
+                ],
+              ),
+            ),
+            const VerticalDivider(width: 1, thickness: 1),
+            Expanded(child: body),
+          ],
+        ),
+      );
+    }
+    return Scaffold(
+      extendBody: _useLiquidGlass,
+      body: body,
+      bottomNavigationBar: BoolWidget(
+        condition: _isTabBarVisible,
+        trueChild: AdaptiveBottomNavigationBar(
+          items: List.of(_isTabBarVisible ? _items : _getFakeItems()),
+          tabTypes: _tabTypes,
+          useLiquidGlass: _useLiquidGlass,
+          selectedIndex: _selectedTabIndex,
+          onTap: _onTap,
+        ),
+        falseChild: SizedBox.shrink(),
+      ),
+    );
+  }
+
+  void _onTap(int tabIndex) {
+    if (tabIndex == _selectedTabIndex && tabIndex < _tabTypes.length && _tabTypes[tabIndex] == TabType.today) {
+      _todayKey.currentState?.goToToday();
+    } else {
+      sendEventToBloc<TabsContainerBloc>(TabsContainerChangeSelectedTab(selectedIndex: tabIndex));
+    }
+  }
 
   List<BottomNavigationBarItem> _getFakeItems() => [
     BottomNavigationBarItem(icon: TabType.calendar.materialIcon, label: TabType.calendar.localizedLabel(context)),
@@ -123,8 +174,6 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
         return MindCollectionScreen();
       case TabType.insights:
         return InsightsScreen();
-      case TabType.profile:
-        return UserProfileScreen();
       case TabType.settings:
         return SettingsScreen();
       case TabType.today:
@@ -135,8 +184,10 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
           // overlaps the body via `extendBody`. In Material mode the solid nav
           // bar already reserves its space, so the extra offset would leave a
           // strange gap under the FAB.
-          fabBottomOffset: _useLiquidGlass ? kBottomNavigationBarHeight + 48.0 : 0.0,
+          fabBottomOffset: _fabBottomOffset,
         );
+      case TabType.ai:
+        return AiScreen(fabBottomOffset: _fabBottomOffset);
       case TabType.debugMenu:
         return const SizedBox.shrink();
     }

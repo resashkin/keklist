@@ -9,6 +9,224 @@ class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Intensivster Zeitraum';
+
+  @override
+  String get insightsPeriodWeek => 'Woche';
+
+  @override
+  String get insightsPeriodMonth => 'Monat';
+
+  @override
+  String get insightsPeriodYear => 'Jahr';
+
+  @override
+  String get insightsPeriodAllTime => 'Gesamt';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '$delta ggü. letzter Woche';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '$delta ggü. letztem Monat';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '$delta ggü. letztem Jahr';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Übersicht';
+
+  @override
+  String get insightsCategoryEmotions => 'Emotionen';
+
+  @override
+  String get insightsCategoryActivity => 'Aktivität';
+
+  @override
+  String get insightsCategoryMemories => 'Erinnerungen';
+
+  @override
+  String get insightsCategoryMedia => 'Medien';
+
+  @override
+  String get insightsCounters => 'In Zahlen';
+
+  @override
+  String get insightsMinds => 'Notizen';
+
+  @override
+  String get insightsActiveDays => 'Aktive Tage';
+
+  @override
+  String get insightsWords => 'Wörter';
+
+  @override
+  String get insightsBrightestDay => 'Intensivster Tag';
+
+  @override
+  String get insightsBrightestWeek => 'Intensivste Woche';
+
+  @override
+  String get insightsBrightestMonth => 'Intensivster Monat';
+
+  @override
+  String get insightsBrightestYear => 'Intensivstes Jahr';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return '$minds Notizen · $emotions Emotionen · $media Medien';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Emotionen';
+
+  @override
+  String get insightsEmotionTrend => 'Emotionsverlauf';
+
+  @override
+  String get insightsEmotionPairs => 'Emotionen zusammen';
+
+  @override
+  String get insightsEmotionRhythm => 'Emotionaler Rhythmus';
+
+  @override
+  String get insightsByWeekday => 'Nach Wochentag';
+
+  @override
+  String get insightsByDayPart => 'Nach Tageszeit';
+
+  @override
+  String get insightsNight => 'Nacht';
+
+  @override
+  String get insightsMorning => 'Morgen';
+
+  @override
+  String get insightsAfternoon => 'Nachmittag';
+
+  @override
+  String get insightsEvening => 'Abend';
+
+  @override
+  String get insightsStreak => 'Serie';
+
+  @override
+  String get insightsStreakLabel => 'Tage in Folge';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Rekord: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing =>
+      'Füge heute eine Notiz hinzu, um weiterzumachen';
+
+  @override
+  String get insightsHeatmap => 'Aktivitätskarte';
+
+  @override
+  String get insightsActivityTime => 'Tageszeit';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Am aktivsten gegen $hour';
+  }
+
+  @override
+  String get insightsOnThisDay => 'Damals';
+
+  @override
+  String get insightsMediaCounters => 'Medien';
+
+  @override
+  String get insightsPhotos => 'Fotos';
+
+  @override
+  String get insightsVideos => 'Videos';
+
+  @override
+  String get insightsVoiceNotes => 'Sprachnotizen';
+
+  @override
+  String get insightsRoundVideos => 'Rundvideos';
+
+  @override
+  String get insightsEmptyPeriod => 'Noch keine Notizen in diesem Zeitraum';
+
+  @override
+  String get insightsEmptyEmotions =>
+      'Markiere Notizen mit Emotionen, um das zu sehen';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Markiere eine Notiz mit zwei Emotionen, um Paare zu sehen';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Noch nichts von vor einer Woche, einem Monat, einem halben Jahr oder einem Jahr';
+
+  @override
+  String get insightsEmptyRoundVideos =>
+      'Keine Sprachnotizen oder runden Videos in diesem Zeitraum';
+
+  @override
+  String get insightsEmptyStreak =>
+      'Füge heute eine Notiz hinzu, um eine Serie zu starten';
+
+  @override
+  String get insightsCustomize => 'Analysen anpassen';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Karten ein- oder ausschalten und zum Sortieren ziehen';
+
+  @override
+  String get insightsResetLayout => 'Zurücksetzen';
+
+  @override
+  String get activeTasks => 'Aktive Aufgaben';
+
+  @override
+  String get galleryIndex => 'Galerie-Index';
+
+  @override
+  String get galleryIndexNoAccess => 'Kein Zugriff auf Fotos';
+
+  @override
+  String get galleryIndexNotIndexed => 'Noch nicht indexiert';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Indexiere $done von $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count Fotos und Videos · aktualisiert $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Miniaturen-Cache: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Galerie-Index neu aufbauen?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Miniaturen werden gelöscht und die Mediathek neu durchsucht.';
+
+  @override
+  String get galleryIndexRebuild => 'Neu aufbauen';
+
+  @override
   String get settings => 'Einstellungen';
 
   @override
@@ -66,9 +284,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get showDigest => 'Zusammenfassung anzeigen für ...';
 
   @override
-  String get showAll => 'Alle anzeigen';
-
-  @override
   String get translateToEnglish => 'Ins Englische übersetzen';
 
   @override
@@ -99,19 +314,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get tabsSettings => 'Tab-Einstellungen';
 
   @override
-  String get whatsNew => 'Was ist neu?';
-
-  @override
-  String get releaseNotes => 'Versionshinweise';
-
-  @override
-  String get suggestFeature => 'Funktion vorschlagen';
-
-  @override
   String get sendFeedback => 'Feedback senden';
-
-  @override
-  String get emailUs => 'Schreib uns eine E-Mail';
 
   @override
   String get clearOfflineDataWarning =>
@@ -145,13 +348,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile => 'Profil';
 
   @override
-  String get insights => 'Einblicke';
+  String get insights => 'Profil';
 
   @override
   String get calendar => 'Kalender';
 
   @override
-  String get debugMenu => 'Debug-Menü';
+  String get debugMenu => 'Entwicklermenü';
 
   @override
   String get discussion => 'Diskussion';
@@ -161,9 +364,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get dangerZone => 'Gefahrenzone';
-
-  @override
-  String get editMind => 'Notiz bearbeiten';
 
   @override
   String get enterTokenHere => 'Token hier eingeben';
@@ -190,13 +390,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get send => 'SENDEN';
 
   @override
-  String get updateYourNickname => 'Aktualisieren Sie Ihren Spitznamen';
-
-  @override
-  String get yourNickname => 'Ihr Spitzname';
-
-  @override
-  String get create => 'Schreiben';
+  String get create => 'Erstellen';
 
   @override
   String get yourFolderName => 'Ihr Ordnername';
@@ -218,33 +412,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String get minds => 'Notizen';
 
   @override
-  String get searchForYourNotes => 'Suchen Sie nach Ihren Notizen';
-
-  @override
   String get searchYourEmoji => 'Suchen Sie nach Ihrem Emoji...';
 
   @override
   String get writeSomething => 'Schreiben Sie etwas...';
 
   @override
-  String get topMinds => 'Top-Notizen';
-
-  @override
   String get todayMinds => 'Heutige Notizen';
-
-  @override
-  String get randomMind => 'Zufällige Notiz';
-
-  @override
-  String get spectrum => 'Spektrum';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Sie haben noch keine Einträge gesammelt';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Bitte authentifizieren Sie sich, um den Inhalt Ihrer Notiz anzuzeigen';
 
   @override
   String get areYouSure => 'Sind Sie sicher?';
@@ -275,14 +453,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get calendarDescription => 'Hauptbildschirm mit Kalender der Einträge';
 
   @override
-  String get insightsDescription => 'Statistiken aller Ihrer Einträge';
+  String get insightsDescription => 'Du und die Statistik deiner Einträge';
 
   @override
   String get settingsDescription =>
       'Bildschirm mit allen Einstellungen (Dunkler Modus, Synchronisierung usw.)';
-
-  @override
-  String get profileDescription => 'Bildschirm mit Ihrem Profil';
 
   @override
   String get todayDescription => 'Nur heutige Notizen';
@@ -293,11 +468,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'Keine Notizen für diesen Tag';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return 'Notizen anzeigen für $period';
-  }
 
   @override
   String get week => 'Woche';
@@ -432,34 +602,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Um eine neue Notiz zu erstellen, tippen Sie auf \'Schreiben\'';
 
   @override
-  String get viewPhotos => 'Fotos ansehen';
-
-  @override
   String get noPhotosForDay => 'Keine Fotos für diesen Tag gefunden';
-
-  @override
-  String get dateGallerySubtitle => 'Mediendateien für diesen Tag';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count Mediendateien für diesen Tag';
-  }
-
-  @override
-  String get sources => 'Quellen';
-
-  @override
-  String get sourcesMinds => 'Gedanken';
-
-  @override
-  String get sourcesMindsSubtitle => 'Deine Gedanken und Momente';
-
-  @override
-  String get sourcesPhotoVideo => 'Foto & Video';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Gerätefotos und -videos für diesen Tag';
 
   @override
   String get sourcesMediaFolder => 'Mediendateien';
@@ -470,12 +613,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'Mediendateien';
-
-  @override
-  String get mediaFolderNoPath => 'Kein Ordner ausgewählt';
-
-  @override
-  String get mediaFolderPickFolder => 'Ordner auswählen';
 
   @override
   String get licenses => 'Lizenzen';
@@ -498,10 +635,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get weatherSaveLocation => 'Standort speichern';
-
-  @override
-  String get weatherNoLocation =>
-      'Standort in den Wettereinstellungen festlegen';
 
   @override
   String get weatherUseMyLocation => 'Meinen Standort verwenden';
@@ -527,21 +660,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Standortberechtigung dauerhaft verweigert. App-Einstellungen werden geöffnet.';
-
-  @override
-  String get weatherTemperature => 'Temperatur';
-
-  @override
-  String get weatherUvIndex => 'UV-Index';
-
-  @override
-  String get weatherHumidity => 'Luftfeuchtigkeit';
-
-  @override
-  String get weatherWindSpeed => 'Windgeschwindigkeit';
-
-  @override
-  String get weatherPrecipitation => 'Niederschlag';
 
   @override
   String get audioRecordTitle => 'Audio aufnehmen';
@@ -573,12 +691,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'Aufnahme konnte nicht gestoppt werden. Bitte versuche es erneut.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {
@@ -627,12 +739,6 @@ class AppLocalizationsDe extends AppLocalizations {
       'Diese Emotion wird von einigen Minds verwendet. Archiviere sie, um sie dort zu behalten, oder lösche sie überall.';
 
   @override
-  String get emotionPickHint => 'Tippen zum Markieren';
-
-  @override
-  String get emotionDrillHint => 'lange drücken für mehr Tiefe';
-
-  @override
   String get noEmotionsYet => 'Noch keine Emotionen';
 
   @override
@@ -641,4 +747,574 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Diese Emotion löschen? Sie wird aus allen Minds entfernt, die sie verwenden.';
+
+  @override
+  String get dayFeedTileSettings => 'Kachel-Einstellungen';
+
+  @override
+  String get dayFeedColumns => 'Spalten';
+
+  @override
+  String get dayFeedMindTileSize => 'Kachelgröße';
+
+  @override
+  String get dayFeedMindTileSquare => 'Quadrat';
+
+  @override
+  String get dayFeedMindTileWide => 'Breit';
+
+  @override
+  String get dayFeedShowMindText => 'Text anzeigen';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Erlaube den Fotozugriff, um hier deine Fotos und Videos zu sehen';
+
+  @override
+  String get dayFeedAllowAccess => 'Erlauben';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Wähle einen Medienordner, um hier deine Fotos und Videos zu sehen';
+
+  @override
+  String get dayFeedChooseFolder => 'Wählen';
+
+  @override
+  String get holdToRecordAudio => 'Gedrückt halten für eine Sprachnachricht';
+
+  @override
+  String get holdToRecordVideo => 'Gedrückt halten für eine Videonachricht';
+
+  @override
+  String get roundVideoRecordError => 'Video konnte nicht aufgenommen werden';
+
+  @override
+  String get roundVideoCameraUnavailable =>
+      'Kamera auf diesem Gerät nicht verfügbar';
+
+  @override
+  String get roundVideoRetake => 'Neu aufnehmen';
+
+  @override
+  String get roundVideoUse => 'Verwenden';
+
+  @override
+  String get removeMedia => 'Medien entfernen';
+
+  @override
+  String get shakeToCustomize => 'Schütteln zum Anpassen';
+
+  @override
+  String get shakeToCustomizeHint => 'oder Titel lange drücken';
+
+  @override
+  String get customizeSettings => 'Einstellungen anpassen';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Abgewählte Bereiche und Zeilen werden in den Einstellungen ausgeblendet.';
+
+  @override
+  String get calendarSettings => 'Kalendereinstellungen';
+
+  @override
+  String get calendarShowMedia => 'Fotos und Videos anzeigen';
+
+  @override
+  String get calendarWeekTitles => 'Wochentitel';
+
+  @override
+  String get calendarPlayStories => 'Storys abspielen';
+
+  @override
+  String get storyBackgroundTweak => 'Story-Hintergrund';
+
+  @override
+  String get storyAnimationOff => 'Aus';
+
+  @override
+  String get storyAnimationPulse => 'Puls';
+
+  @override
+  String get storyAnimationWave => 'Welle';
+
+  @override
+  String get storyAnimationEqualizer => 'Equalizer';
+
+  @override
+  String get storyAnimationDrift => 'Treiben';
+
+  @override
+  String get storyAnimationGlow => 'Leuchten';
+
+  @override
+  String get viewerCommentHint => 'Kommentar…';
+
+  @override
+  String get calendarToCurrentWeek => 'Zur aktuellen Woche';
+
+  @override
+  String get storyDateLines => 'Datumszeilen';
+
+  @override
+  String get storyTextureTitle => 'Textur';
+
+  @override
+  String get storySpectrum => 'Klangspektrum';
+
+  @override
+  String get storySensitivity => 'Empfindlichkeit';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Achtsam an $count Tagen',
+      one: 'Achtsam an $count Tag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Name';
+
+  @override
+  String get profilePhoto => 'Foto';
+
+  @override
+  String get profileEmoji => 'Emoji';
+
+  @override
+  String get profileInitial => 'Buchstabe';
+
+  @override
+  String get webVersion => 'WLAN-Zugriff';
+
+  @override
+  String get webVersionAddressHint =>
+      'Im Browser eines Computers im selben WLAN öffnen; keklist muss offen bleiben';
+
+  @override
+  String get webVersionCopied => 'Adresse kopiert';
+
+  @override
+  String get webVersionStarting => 'Wird gestartet…';
+
+  @override
+  String get webVersionNoWifi =>
+      'Verbinde dich mit einem WLAN, um keklist im Browser zu öffnen.';
+
+  @override
+  String get webVersionNoBundle => 'Dieser Build enthält keine Webversion.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet =>
+      'Jeder Browser fragt alle 30 Tage einmal danach';
+
+  @override
+  String get webVersionPinNotSet => 'Nicht festgelegt';
+
+  @override
+  String get webVersionPinHint => '4–8 Ziffern';
+
+  @override
+  String get webVersionRemovePin => 'PIN entfernen';
+
+  @override
+  String get webVersionPort => 'Port';
+
+  @override
+  String get aiTab => 'Chat';
+
+  @override
+  String get aiTabDescription =>
+      'Sprich mit einer KI auf deinem Handy über deine Einträge';
+
+  @override
+  String get aiPrivacyNote =>
+      'Läuft nur auf deinem Handy: deine Einträge verlassen das Gerät nie.';
+
+  @override
+  String get aiDisclaimer =>
+      'Kein medizinischer Dienst. Wenn du in Gefahr bist, wende dich an den Notruf.';
+
+  @override
+  String get aiYesterday => 'Gestern';
+
+  @override
+  String get aiNoSessions => 'Noch keine Sitzungen';
+
+  @override
+  String get aiNewSession => 'Neue Sitzung';
+
+  @override
+  String get aiChooseRole => 'Wähle eine Rolle';
+
+  @override
+  String get aiRoleTherapist => 'Therapeut';
+
+  @override
+  String get aiRoleCoach => 'Coach';
+
+  @override
+  String get aiRoleFriend => 'Freund';
+
+  @override
+  String get aiMessageHint => 'Nachricht';
+
+  @override
+  String get aiStarterWeek => 'Wie war meine Woche?';
+
+  @override
+  String get aiStarterWorry => 'Was beschäftigt mich in letzter Zeit?';
+
+  @override
+  String get aiStarterJoy => 'Was hat mir zuletzt Freude gemacht?';
+
+  @override
+  String get aiActionSaveAsMind => 'Als Eintrag speichern';
+
+  @override
+  String get aiActionOpenDay => 'Tag öffnen';
+
+  @override
+  String get aiActionWeekSummary => 'Wochenzusammenfassung';
+
+  @override
+  String get aiWeekSummaryPrompt =>
+      'Fasse meine letzten 7 Tage zusammen: was passiert ist, wie ich mich gefühlt habe, was herausstach.';
+
+  @override
+  String get aiSavedAsMind => 'In Heute gespeichert';
+
+  @override
+  String get aiStop => 'Stopp';
+
+  @override
+  String get aiNoModelTitle => 'Wähle ein Modell';
+
+  @override
+  String get aiNoModelMessage =>
+      'Lade ein Modell herunter, um zu starten. Es läuft auf deinem Handy, offline.';
+
+  @override
+  String get aiNoModelOnPhone =>
+      'Lade ein Modell in der App auf dem Handy: Einstellungen → KI → Modelle.';
+
+  @override
+  String get aiModels => 'Modelle';
+
+  @override
+  String get aiRoles => 'Rollen';
+
+  @override
+  String get aiDownloaded => 'Heruntergeladen';
+
+  @override
+  String get aiDownloads => 'Wird geladen';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'GGUF-Modelle suchen';
+
+  @override
+  String get aiDownload => 'Herunterladen';
+
+  @override
+  String get aiPause => 'Pause';
+
+  @override
+  String get aiPaused => 'Pausiert';
+
+  @override
+  String get aiResume => 'Fortsetzen';
+
+  @override
+  String get aiDownloadFailed => 'Download fehlgeschlagen';
+
+  @override
+  String get aiCellularTitle => 'Über mobile Daten laden?';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '$size werden über mobile Daten geladen.';
+  }
+
+  @override
+  String get aiDeleteModel => 'Modell löschen?';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'Auf diesem Handy: $size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'Arbeitsspeicher: $size';
+  }
+
+  @override
+  String get aiCatalogFailed =>
+      'Liste konnte nicht geladen werden. Prüfe die Verbindung.';
+
+  @override
+  String get aiNoFilesFit =>
+      'Keine Datei dieses Modells passt in den Speicher dieses Handys.';
+
+  @override
+  String get aiBuiltInRole => 'Integriert';
+
+  @override
+  String get aiOwnRoles => 'Deine Rollen';
+
+  @override
+  String get aiDuplicate => 'Duplizieren';
+
+  @override
+  String get aiNewRole => 'Neue Rolle';
+
+  @override
+  String get aiRoleName => 'Name';
+
+  @override
+  String get aiRoleEmoji => 'Emoji';
+
+  @override
+  String get aiRolePrompt => 'Prompt';
+
+  @override
+  String get aiRolePromptHint =>
+      'Wie die KI sprechen und worauf sie achten soll';
+
+  @override
+  String get aiReadOnlyRole =>
+      'Integrierte Rollen können nicht geändert werden. Dupliziere eine, um deine eigene zu erstellen.';
+
+  @override
+  String get aiDeleteSession => 'Sitzung löschen?';
+
+  @override
+  String get aiDeleteRole => 'Rolle löschen?';
+
+  @override
+  String get aiRecommended => 'Empfohlen';
+
+  @override
+  String get aiLowQuality => 'Geringe Qualität';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Dieses Modell passt nicht in den Speicher des Telefons. Wähle ein kleineres.';
+
+  @override
+  String get aiChooseAnotherModel => 'Anderes Modell wählen';
+
+  @override
+  String get creatorEmotionsTitle => 'Emotionen';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Nach dem Speichern fragen';
+
+  @override
+  String get creatorEmotionsButton => 'Taste über der Tastatur';
+
+  @override
+  String get creatorEmotionsNever => 'Nicht fragen';
+
+  @override
+  String get insightsWeekAgo => 'Vor einer Woche';
+
+  @override
+  String get insightsMonthAgo => 'Vor einem Monat';
+
+  @override
+  String get insightsHalfYearAgo => 'Vor einem halben Jahr';
+
+  @override
+  String get insightsYearAgo => 'Vor einem Jahr';
+
+  @override
+  String get insightsTwoYearsAgo => 'Vor zwei Jahren';
+
+  @override
+  String get insightsVoiceAndVideos => 'Sprachnotizen und runde Videos';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return 'Woche $number';
+  }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Frag nach deiner Woche, einer Sorge oder einem guten Tag: Der Chat liest deine Einträge direkt auf dem Handy.';
+
+  @override
+  String get showInGallery => 'In der Galerie zeigen';
+
+  @override
+  String get tileEmojiMotion => 'Emoji-Bewegung';
+
+  @override
+  String get tileEmojiMotionDrift => 'Treiben';
+
+  @override
+  String get tileEmojiMotionFloat => 'Schweben';
+
+  @override
+  String get tileEmojiMotionStill => 'Still';
+
+  @override
+  String get gridResizeAnimation => 'Pinch-Animation';
+
+  @override
+  String get gridResizeFly => 'Fliegen';
+
+  @override
+  String get gridResizeZoom => 'Zoom';
+
+  @override
+  String get gridResizeCrossfade => 'Überblenden';
+
+  @override
+  String get feedSortOrder => 'Reihenfolge';
+
+  @override
+  String get feedSortTime => 'Zeit';
+
+  @override
+  String get feedSortMindsFirst => 'Notizen zuerst';
+
+  @override
+  String get feedSortMediaFirst => 'Medien zuerst';
+
+  @override
+  String get feedGrouping => 'Gruppen';
+
+  @override
+  String get feedGroupingNone => 'Keine';
+
+  @override
+  String get feedGroupingType => 'Art';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Tageszeit';
+
+  @override
+  String get feedSectionMinds => 'Notizen';
+
+  @override
+  String get feedSectionGallery => 'Galerie';
+
+  @override
+  String get removePhotoTitle => 'Foto entfernen';
+
+  @override
+  String get removeVideoTitle => 'Video entfernen';
+
+  @override
+  String get hideMedia => 'Ausblenden';
+
+  @override
+  String get hideMediaSubtitle => 'Nur aus keklist, bleibt in der Galerie';
+
+  @override
+  String get deleteFromGallery => 'Aus der Galerie löschen';
+
+  @override
+  String get deleteFromGallerySubtitle => 'Kommt in „Zuletzt gelöscht“';
+
+  @override
+  String get mediaHidden => 'In keklist ausgeblendet';
+
+  @override
+  String get mediaShownAgain => 'Wieder in keklist';
+
+  @override
+  String get undo => 'Rückgängig';
+
+  @override
+  String get hiddenMedia => 'Ausgeblendete Fotos';
+
+  @override
+  String get hiddenMediaHint =>
+      'Tippe auf ein Foto, um es wieder in keklist zu zeigen';
+
+  @override
+  String get hiddenMediaEmpty => 'Nichts ausgeblendet';
+
+  @override
+  String get leaveFeedback => 'Feedback geben';
+
+  @override
+  String get feedbackSend => 'Senden';
+
+  @override
+  String get feedbackSent => 'Danke! Die Nachricht ist angekommen';
+
+  @override
+  String get feedbackFailed =>
+      'Senden fehlgeschlagen. Prüfe das Internet und versuche es erneut';
+
+  @override
+  String get analytics => 'Analyse';
+
+  @override
+  String get analyticsDescription =>
+      'Anonyme Nutzungsstatistiken helfen zu entscheiden, was verbessert wird. Nichts, was du schreibst, verlässt dein Gerät.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Dieser Build sendet nichts: Analyse läuft nur in Builds aus dem App Store und Google Play.';
+
+  @override
+  String get analyticsSent => 'Was gesendet wird';
+
+  @override
+  String get analyticsSentItems =>
+      'Welche Einstellungen du wählst, welche Bildschirme du öffnest, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.';
+
+  @override
+  String get analyticsNeverSent => 'Wird nie gesendet';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Deine Einträge, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, wie viele du hast, dein Name, dein Standort und deine IP-Adresse.';
+
+  @override
+  String get analyticsResetId => 'Anonyme ID zurücksetzen';
+
+  @override
+  String get analyticsResetIdDone =>
+      'Ab jetzt wird eine neue anonyme ID verwendet';
+
+  @override
+  String get settingsSupport => 'Unterstützung';
+
+  @override
+  String get calendarOpenDay => 'Tag öffnen';
+
+  @override
+  String get webVersionEnabled => 'Im Browser spiegeln';
+
+  @override
+  String get viewerComments => 'Kommentare';
+
+  @override
+  String get viewerNoComments => 'Noch keine Kommentare';
+
+  @override
+  String get previousDay => 'Vorheriger Tag';
+
+  @override
+  String get nextDay => 'Nächster Tag';
 }

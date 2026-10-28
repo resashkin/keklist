@@ -117,6 +117,390 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// Analytics card name in the customize sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest period'**
+  String get insightsBrightestPeriod;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get insightsPeriodWeek;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get insightsPeriodMonth;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get insightsPeriodYear;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get insightsPeriodAllTime;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'{delta} vs last week'**
+  String insightsVsLastWeek(String delta);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'{delta} vs last month'**
+  String insightsVsLastMonth(String delta);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'{delta} vs last year'**
+  String insightsVsLastYear(String delta);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get insightsCategorySummary;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions'**
+  String get insightsCategoryEmotions;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get insightsCategoryActivity;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Memories'**
+  String get insightsCategoryMemories;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Media'**
+  String get insightsCategoryMedia;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'In numbers'**
+  String get insightsCounters;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Minds'**
+  String get insightsMinds;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Active days'**
+  String get insightsActiveDays;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Words'**
+  String get insightsWords;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest day'**
+  String get insightsBrightestDay;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest week'**
+  String get insightsBrightestWeek;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest month'**
+  String get insightsBrightestMonth;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brightest year'**
+  String get insightsBrightestYear;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'{minds} minds · {emotions} emotions · {media} media'**
+  String insightsBrightestDetails(String minds, String emotions, String media);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions'**
+  String get insightsEmotionDistribution;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotion trend'**
+  String get insightsEmotionTrend;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions together'**
+  String get insightsEmotionPairs;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Emotional rhythm'**
+  String get insightsEmotionRhythm;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'By weekday'**
+  String get insightsByWeekday;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'By time of day'**
+  String get insightsByDayPart;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Night'**
+  String get insightsNight;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get insightsMorning;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon'**
+  String get insightsAfternoon;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get insightsEvening;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get insightsStreak;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'days in a row'**
+  String get insightsStreakLabel;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Longest: {count}'**
+  String insightsLongestStreak(String count);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add a mind today to keep it going'**
+  String get insightsStreakKeepGoing;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Activity map'**
+  String get insightsHeatmap;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Time of day'**
+  String get insightsActivityTime;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Most active around {hour}'**
+  String insightsPeakHour(String hour);
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Back then'**
+  String get insightsOnThisDay;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Media'**
+  String get insightsMediaCounters;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get insightsPhotos;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Videos'**
+  String get insightsVideos;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Voice notes'**
+  String get insightsVoiceNotes;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Round videos'**
+  String get insightsRoundVideos;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'No minds in this period yet'**
+  String get insightsEmptyPeriod;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tag minds with emotions to see this'**
+  String get insightsEmptyEmotions;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tag a mind with two emotions to see pairs'**
+  String get insightsEmptyPairs;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing from a week, a month, half a year or a year ago yet'**
+  String get insightsEmptyOnThisDay;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'No voice notes or round videos in this period'**
+  String get insightsEmptyRoundVideos;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add a mind today to start a streak'**
+  String get insightsEmptyStreak;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Customize analytics'**
+  String get insightsCustomize;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Turn cards on or off and drag to reorder'**
+  String get insightsCustomizeDescription;
+
+  /// Analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get insightsResetLayout;
+
+  /// Settings section shown on top while a background job runs
+  ///
+  /// In en, this message translates to:
+  /// **'Active tasks'**
+  String get activeTasks;
+
+  /// Settings row for the photo library index
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery index'**
+  String get galleryIndex;
+
+  /// Gallery index subtitle when Photos access is missing
+  ///
+  /// In en, this message translates to:
+  /// **'No access to Photos'**
+  String get galleryIndexNoAccess;
+
+  /// Gallery index subtitle before the first scan
+  ///
+  /// In en, this message translates to:
+  /// **'Not indexed yet'**
+  String get galleryIndexNotIndexed;
+
+  /// Gallery index subtitle while scanning
+  ///
+  /// In en, this message translates to:
+  /// **'Indexing {done} of {total}'**
+  String galleryIndexIndexing(String done, String total);
+
+  /// Gallery index subtitle after a scan
+  ///
+  /// In en, this message translates to:
+  /// **'{count} photos and videos · updated {time}'**
+  String galleryIndexReady(String count, String time);
+
+  /// Size of the on-disk thumbnail cache
+  ///
+  /// In en, this message translates to:
+  /// **'Thumbnail cache: {size}'**
+  String galleryIndexThumbnails(String size);
+
+  /// Confirm dialog title for rebuilding the gallery index
+  ///
+  /// In en, this message translates to:
+  /// **'Rebuild the gallery index?'**
+  String get galleryIndexRebuildTitle;
+
+  /// Confirm dialog message for rebuilding the gallery index
+  ///
+  /// In en, this message translates to:
+  /// **'Thumbnails will be cleared and the library scanned again.'**
+  String get galleryIndexRebuildMessage;
+
+  /// Confirm button that rebuilds the gallery index
+  ///
+  /// In en, this message translates to:
+  /// **'Rebuild'**
+  String get galleryIndexRebuild;
+
   /// Settings screen title
   ///
   /// In en, this message translates to:
@@ -231,12 +615,6 @@ abstract class AppLocalizations {
   /// **'Show digest for ...'**
   String get showDigest;
 
-  /// Show all action
-  ///
-  /// In en, this message translates to:
-  /// **'Show all'**
-  String get showAll;
-
   /// Translate to English action
   ///
   /// In en, this message translates to:
@@ -297,35 +675,11 @@ abstract class AppLocalizations {
   /// **'Tabs settings'**
   String get tabsSettings;
 
-  /// What's new navigation
-  ///
-  /// In en, this message translates to:
-  /// **'What\'s new?'**
-  String get whatsNew;
-
-  /// Release notes navigation
-  ///
-  /// In en, this message translates to:
-  /// **'Release notes'**
-  String get releaseNotes;
-
-  /// Suggest feature navigation
-  ///
-  /// In en, this message translates to:
-  /// **'Suggest a feature'**
-  String get suggestFeature;
-
   /// Send feedback navigation
   ///
   /// In en, this message translates to:
   /// **'Send feedback'**
   String get sendFeedback;
-
-  /// Email us navigation
-  ///
-  /// In en, this message translates to:
-  /// **'Email us'**
-  String get emailUs;
 
   /// Warning when clearing offline data
   ///
@@ -390,7 +744,7 @@ abstract class AppLocalizations {
   /// Insights screen title
   ///
   /// In en, this message translates to:
-  /// **'Insights'**
+  /// **'Profile'**
   String get insights;
 
   /// Calendar title
@@ -399,10 +753,10 @@ abstract class AppLocalizations {
   /// **'Calendar'**
   String get calendar;
 
-  /// Debug menu title
+  /// Settings row and screen title of the hidden developer menu
   ///
   /// In en, this message translates to:
-  /// **'Debug Menu'**
+  /// **'Developer menu'**
   String get debugMenu;
 
   /// Discussion screen title
@@ -422,12 +776,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Danger Zone'**
   String get dangerZone;
-
-  /// Edit mind dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Edit mind'**
-  String get editMind;
 
   /// Token input hint
   ///
@@ -477,22 +825,10 @@ abstract class AppLocalizations {
   /// **'SEND'**
   String get send;
 
-  /// Update nickname dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Update your nickname'**
-  String get updateYourNickname;
-
-  /// Nickname input hint
-  ///
-  /// In en, this message translates to:
-  /// **'Your nickname'**
-  String get yourNickname;
-
   /// Create button
   ///
   /// In en, this message translates to:
-  /// **'Write'**
+  /// **'Create'**
   String get create;
 
   /// Folder name input hint
@@ -531,12 +867,6 @@ abstract class AppLocalizations {
   /// **'Minds'**
   String get minds;
 
-  /// Search notes hint
-  ///
-  /// In en, this message translates to:
-  /// **'Search for your notes'**
-  String get searchForYourNotes;
-
   /// Search emoji hint
   ///
   /// In en, this message translates to:
@@ -549,41 +879,17 @@ abstract class AppLocalizations {
   /// **'Write something...'**
   String get writeSomething;
 
-  /// Top minds title
-  ///
-  /// In en, this message translates to:
-  /// **'Top minds'**
-  String get topMinds;
-
   /// Today minds title
   ///
   /// In en, this message translates to:
   /// **'Today minds'**
   String get todayMinds;
 
-  /// Random mind title
-  ///
-  /// In en, this message translates to:
-  /// **'Random mind'**
-  String get randomMind;
-
-  /// Spectrum title
-  ///
-  /// In en, this message translates to:
-  /// **'Spectrum'**
-  String get spectrum;
-
   /// No entries collected message
   ///
   /// In en, this message translates to:
   /// **'You did not collect any entries yet'**
   String get youDidNotCollectAnyEntriesYet;
-
-  /// Authentication required message
-  ///
-  /// In en, this message translates to:
-  /// **'Please authenticate to show content of your mind'**
-  String get pleaseAuthenticateToShowContent;
 
   /// Confirmation dialog title
   ///
@@ -642,7 +948,7 @@ abstract class AppLocalizations {
   /// Insights tab description
   ///
   /// In en, this message translates to:
-  /// **'Statistics all yours entries'**
+  /// **'You and the statistics of your entries'**
   String get insightsDescription;
 
   /// Settings tab description
@@ -650,12 +956,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Screen with all settings (dark mode, sync and etc.)'**
   String get settingsDescription;
-
-  /// Profile tab description
-  ///
-  /// In en, this message translates to:
-  /// **'Screen with your profile'**
-  String get profileDescription;
 
   /// Today tab description
   ///
@@ -674,12 +974,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No minds for this day'**
   String get noMindsForThisDay;
-
-  /// Show minds for period message
-  ///
-  /// In en, this message translates to:
-  /// **'Show minds for {period}'**
-  String showMindsForPeriod(String period);
 
   /// Week label
   ///
@@ -927,59 +1221,11 @@ abstract class AppLocalizations {
   /// **'To create new note tap \'Write\''**
   String get onboardingMind6;
 
-  /// Button text to open gallery for Mind day
-  ///
-  /// In en, this message translates to:
-  /// **'View Photos'**
-  String get viewPhotos;
-
   /// Empty state message when day has no photos
   ///
   /// In en, this message translates to:
   /// **'No photos found for this day'**
   String get noPhotosForDay;
-
-  /// Date gallery screen subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Media files for this day'**
-  String get dateGallerySubtitle;
-
-  /// Subtitle showing count of media files for the day
-  ///
-  /// In en, this message translates to:
-  /// **'{count} media files for this day'**
-  String dayMediaFilesCount(int count);
-
-  /// Sources section title
-  ///
-  /// In en, this message translates to:
-  /// **'Sources'**
-  String get sources;
-
-  /// Minds source item title
-  ///
-  /// In en, this message translates to:
-  /// **'Minds'**
-  String get sourcesMinds;
-
-  /// Minds source item subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Your thoughts and moments'**
-  String get sourcesMindsSubtitle;
-
-  /// Photo and video source item title
-  ///
-  /// In en, this message translates to:
-  /// **'Photo & video'**
-  String get sourcesPhotoVideo;
-
-  /// Photo and video source item subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Device photos and videos for this day'**
-  String get sourcesPhotoVideoSubtitle;
 
   /// Media files source item title
   ///
@@ -998,18 +1244,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Media Files'**
   String get mediaFolderSettings;
-
-  /// Message when no media folder is selected
-  ///
-  /// In en, this message translates to:
-  /// **'No folder selected'**
-  String get mediaFolderNoPath;
-
-  /// Button to pick a media folder
-  ///
-  /// In en, this message translates to:
-  /// **'Pick Folder'**
-  String get mediaFolderPickFolder;
 
   /// Licenses menu item
   ///
@@ -1053,12 +1287,6 @@ abstract class AppLocalizations {
   /// **'Save location'**
   String get weatherSaveLocation;
 
-  /// Message shown when weather location is not configured
-  ///
-  /// In en, this message translates to:
-  /// **'Set location in weather settings to see weather'**
-  String get weatherNoLocation;
-
   /// Button to detect GPS location automatically
   ///
   /// In en, this message translates to:
@@ -1100,36 +1328,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location permission is permanently denied. Opening app settings.'**
   String get weatherLocationPermissionPermanentlyDenied;
-
-  /// Temperature parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'Temperature'**
-  String get weatherTemperature;
-
-  /// UV Index parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'UV Index'**
-  String get weatherUvIndex;
-
-  /// Humidity parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'Humidity'**
-  String get weatherHumidity;
-
-  /// Wind Speed parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'Wind Speed'**
-  String get weatherWindSpeed;
-
-  /// Precipitation parameter label
-  ///
-  /// In en, this message translates to:
-  /// **'Precipitation'**
-  String get weatherPrecipitation;
 
   /// Title of the audio recorder bottom sheet
   ///
@@ -1184,18 +1382,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unable to stop the recording. Please try again.'**
   String get audioRecordStopError;
-
-  /// Section header for emojis used in minds in the emoji picker
-  ///
-  /// In en, this message translates to:
-  /// **'Used in minds'**
-  String get emojiPickerUsedInMinds;
-
-  /// Section header for all emojis in the emoji picker
-  ///
-  /// In en, this message translates to:
-  /// **'All'**
-  String get emojiPickerAll;
 
   /// Footer in APPLICATION settings section when user has active PRO subscription
   ///
@@ -1281,18 +1467,6 @@ abstract class AppLocalizations {
   /// **'This emotion is used by some minds. Archive it to keep it there, or delete it everywhere.'**
   String get emotionInUseMessage;
 
-  /// Hint in the emotion marking sheet explaining tap vs long-press
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to tag'**
-  String get emotionPickHint;
-
-  /// No description provided for @emotionDrillHint.
-  ///
-  /// In en, this message translates to:
-  /// **'long-press to go deeper'**
-  String get emotionDrillHint;
-
   /// Empty state for the emotions list
   ///
   /// In en, this message translates to:
@@ -1310,6 +1484,1062 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete this emotion? It will be removed from any minds using it.'**
   String get deleteEmotionMessage;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Tile settings'**
+  String get dayFeedTileSettings;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Columns'**
+  String get dayFeedColumns;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Mind tile size'**
+  String get dayFeedMindTileSize;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Square'**
+  String get dayFeedMindTileSquare;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Wide'**
+  String get dayFeedMindTileWide;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Show text'**
+  String get dayFeedShowMindText;
+
+  /// Banner in the unified day grid when photo access is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Allow photo access to see your photos and videos here'**
+  String get dayFeedPhotoAccessHint;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get dayFeedAllowAccess;
+
+  /// Banner in the unified day grid on Android when no media folder is chosen
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a media folder to see your photos and videos here'**
+  String get dayFeedFolderHint;
+
+  /// Unified day grid (All mode) label
+  ///
+  /// In en, this message translates to:
+  /// **'Choose'**
+  String get dayFeedChooseFolder;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Hold to record a voice message'**
+  String get holdToRecordAudio;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Hold to record a video message'**
+  String get holdToRecordVideo;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t record the video'**
+  String get roundVideoRecordError;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Camera is unavailable on this device'**
+  String get roundVideoCameraUnavailable;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Retake'**
+  String get roundVideoRetake;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Use'**
+  String get roundVideoUse;
+
+  /// Audio/video mind recording
+  ///
+  /// In en, this message translates to:
+  /// **'Remove media'**
+  String get removeMedia;
+
+  /// Shake-to-customize: shakeToCustomize
+  ///
+  /// In en, this message translates to:
+  /// **'Shake to customize'**
+  String get shakeToCustomize;
+
+  /// Shake-to-customize: shakeToCustomizeHint
+  ///
+  /// In en, this message translates to:
+  /// **'or long-press the title'**
+  String get shakeToCustomizeHint;
+
+  /// Shake-to-customize: customizeSettings
+  ///
+  /// In en, this message translates to:
+  /// **'Customize settings'**
+  String get customizeSettings;
+
+  /// Shake-to-customize: customizeSettingsDescription
+  ///
+  /// In en, this message translates to:
+  /// **'Unchecked sections and rows are hidden from the Settings screen.'**
+  String get customizeSettingsDescription;
+
+  /// Calendar shake sheet title
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar settings'**
+  String get calendarSettings;
+
+  /// Calendar setting: show gallery media in day grids
+  ///
+  /// In en, this message translates to:
+  /// **'Show photos and videos'**
+  String get calendarShowMedia;
+
+  /// Calendar setting: show week number headers
+  ///
+  /// In en, this message translates to:
+  /// **'Week titles'**
+  String get calendarWeekTitles;
+
+  /// Calendar: play the stories of a day or a week
+  ///
+  /// In en, this message translates to:
+  /// **'Play stories'**
+  String get calendarPlayStories;
+
+  /// Story/viewer shake sheet title
+  ///
+  /// In en, this message translates to:
+  /// **'Story background'**
+  String get storyBackgroundTweak;
+
+  /// Texture animation: none
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get storyAnimationOff;
+
+  /// Texture animation: emojis grow with loudness
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse'**
+  String get storyAnimationPulse;
+
+  /// Texture animation: rows sway like a wave
+  ///
+  /// In en, this message translates to:
+  /// **'Wave'**
+  String get storyAnimationWave;
+
+  /// Texture animation: columns bounce like bars
+  ///
+  /// In en, this message translates to:
+  /// **'Equalizer'**
+  String get storyAnimationEqualizer;
+
+  /// Texture animation: texture slides, faster when louder
+  ///
+  /// In en, this message translates to:
+  /// **'Drift'**
+  String get storyAnimationDrift;
+
+  /// Texture animation: opacity and blur follow loudness
+  ///
+  /// In en, this message translates to:
+  /// **'Glow'**
+  String get storyAnimationGlow;
+
+  /// Viewer: placeholder of the comment field
+  ///
+  /// In en, this message translates to:
+  /// **'Comment…'**
+  String get viewerCommentHint;
+
+  /// Calendar: bubble that scrolls back to the current week
+  ///
+  /// In en, this message translates to:
+  /// **'To current week'**
+  String get calendarToCurrentWeek;
+
+  /// Story tweak: how many lines the date header takes
+  ///
+  /// In en, this message translates to:
+  /// **'Date lines'**
+  String get storyDateLines;
+
+  /// Story tweak: texture animation section
+  ///
+  /// In en, this message translates to:
+  /// **'Texture'**
+  String get storyTextureTitle;
+
+  /// Story tweak: rays around audio/video circles
+  ///
+  /// In en, this message translates to:
+  /// **'Sound spectrum'**
+  String get storySpectrum;
+
+  /// Story tweak: how strongly visuals react to loudness
+  ///
+  /// In en, this message translates to:
+  /// **'Sensitivity'**
+  String get storySensitivity;
+
+  /// Insights header: number of days with at least one mind
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{Mindful for {count} day} other{Mindful for {count} days}}'**
+  String profileMindfulDays(int count);
+
+  /// No description provided for @profileName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profileName;
+
+  /// No description provided for @profilePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get profilePhoto;
+
+  /// No description provided for @profileEmoji.
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji'**
+  String get profileEmoji;
+
+  /// No description provided for @profileInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'Letter'**
+  String get profileInitial;
+
+  /// Title of the Settings section that lets browsers in the same Wi-Fi open keklist from the phone
+  ///
+  /// In en, this message translates to:
+  /// **'Wi‑Fi access'**
+  String get webVersion;
+
+  /// No description provided for @webVersionAddressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in a browser on a computer in the same Wi-Fi; keep keklist open'**
+  String get webVersionAddressHint;
+
+  /// No description provided for @webVersionCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Address copied'**
+  String get webVersionCopied;
+
+  /// No description provided for @webVersionStarting.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting…'**
+  String get webVersionStarting;
+
+  /// No description provided for @webVersionNoWifi.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to Wi-Fi to open keklist in a browser.'**
+  String get webVersionNoWifi;
+
+  /// No description provided for @webVersionNoBundle.
+  ///
+  /// In en, this message translates to:
+  /// **'This build doesn\'t include the web version.'**
+  String get webVersionNoBundle;
+
+  /// No description provided for @webVersionPin.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN'**
+  String get webVersionPin;
+
+  /// No description provided for @webVersionPinSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Each browser asks for it once in 30 days'**
+  String get webVersionPinSet;
+
+  /// No description provided for @webVersionPinNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get webVersionPinNotSet;
+
+  /// No description provided for @webVersionPinHint.
+  ///
+  /// In en, this message translates to:
+  /// **'4–8 digits'**
+  String get webVersionPinHint;
+
+  /// No description provided for @webVersionRemovePin.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove PIN'**
+  String get webVersionRemovePin;
+
+  /// No description provided for @webVersionPort.
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get webVersionPort;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get aiTab;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Talk about your records with an AI that runs on your phone'**
+  String get aiTabDescription;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Runs on your phone only: your records never leave the device.'**
+  String get aiPrivacyNote;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Not a medical service. If you are in danger, contact emergency services.'**
+  String get aiDisclaimer;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get aiYesterday;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'No sessions yet'**
+  String get aiNoSessions;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'New session'**
+  String get aiNewSession;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a role'**
+  String get aiChooseRole;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Therapist'**
+  String get aiRoleTherapist;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Coach'**
+  String get aiRoleCoach;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Friend'**
+  String get aiRoleFriend;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get aiMessageHint;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'How was my week?'**
+  String get aiStarterWeek;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'What has been bothering me lately?'**
+  String get aiStarterWorry;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'What brought me joy recently?'**
+  String get aiStarterJoy;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Save as mind'**
+  String get aiActionSaveAsMind;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Open day'**
+  String get aiActionOpenDay;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Week summary'**
+  String get aiActionWeekSummary;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Summarize my last 7 days: what happened, how I felt, what stood out.'**
+  String get aiWeekSummaryPrompt;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to today'**
+  String get aiSavedAsMind;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get aiStop;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a model'**
+  String get aiNoModelTitle;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download a model to start. It runs on your phone, offline.'**
+  String get aiNoModelMessage;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download a model in the phone app: Settings → AI → Models.'**
+  String get aiNoModelOnPhone;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Models'**
+  String get aiModels;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Roles'**
+  String get aiRoles;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Downloaded'**
+  String get aiDownloaded;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading'**
+  String get aiDownloads;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Google AI Edge Gallery'**
+  String get aiGalleryCatalog;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Hugging Face (GGUF)'**
+  String get aiHuggingFace;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Search GGUF models'**
+  String get aiSearchModels;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get aiDownload;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get aiPause;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get aiPaused;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get aiResume;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download failed'**
+  String get aiDownloadFailed;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Download over mobile data?'**
+  String get aiCellularTitle;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'{size} will be downloaded over mobile data.'**
+  String aiCellularMessage(String size);
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the model?'**
+  String get aiDeleteModel;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'On this phone: {size}'**
+  String aiStorageUsed(String size);
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Phone memory: {size}'**
+  String aiDeviceMemory(String size);
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the list. Check the connection.'**
+  String get aiCatalogFailed;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'None of this model\'s files fit this phone\'s memory.'**
+  String get aiNoFilesFit;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Built-in'**
+  String get aiBuiltInRole;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Your roles'**
+  String get aiOwnRoles;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get aiDuplicate;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'New role'**
+  String get aiNewRole;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get aiRoleName;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji'**
+  String get aiRoleEmoji;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Prompt'**
+  String get aiRolePrompt;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'How the AI should talk and what to focus on'**
+  String get aiRolePromptHint;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Built-in roles can\'t be changed. Duplicate one to make your own.'**
+  String get aiReadOnlyRole;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the session?'**
+  String get aiDeleteSession;
+
+  /// AI tab
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the role?'**
+  String get aiDeleteRole;
+
+  /// AI models: badge on the recommended model
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get aiRecommended;
+
+  /// AI models: badge on models under 1B parameters
+  ///
+  /// In en, this message translates to:
+  /// **'Low quality'**
+  String get aiLowQuality;
+
+  /// AI chat: the model could not be loaded
+  ///
+  /// In en, this message translates to:
+  /// **'This model doesn\'t fit in your phone\'s memory. Choose a smaller one.'**
+  String get aiModelDoesNotFit;
+
+  /// AI chat: button that opens the models screen
+  ///
+  /// In en, this message translates to:
+  /// **'Choose another model'**
+  String get aiChooseAnotherModel;
+
+  /// Mind creator tweak sheet: title
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions'**
+  String get creatorEmotionsTitle;
+
+  /// Mind creator tweak: ask for emotions after Save
+  ///
+  /// In en, this message translates to:
+  /// **'Ask after saving'**
+  String get creatorEmotionsAfterSave;
+
+  /// Mind creator tweak: an emotions button above the keyboard
+  ///
+  /// In en, this message translates to:
+  /// **'Button above the keyboard'**
+  String get creatorEmotionsButton;
+
+  /// Mind creator tweak: don't ask for emotions
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t ask'**
+  String get creatorEmotionsNever;
+
+  /// Insights memories: a week ago
+  ///
+  /// In en, this message translates to:
+  /// **'A week ago'**
+  String get insightsWeekAgo;
+
+  /// Insights memories: a month ago
+  ///
+  /// In en, this message translates to:
+  /// **'A month ago'**
+  String get insightsMonthAgo;
+
+  /// Insights memories: half a year ago
+  ///
+  /// In en, this message translates to:
+  /// **'Half a year ago'**
+  String get insightsHalfYearAgo;
+
+  /// Insights memories: a year ago
+  ///
+  /// In en, this message translates to:
+  /// **'A year ago'**
+  String get insightsYearAgo;
+
+  /// Insights memories: two years ago
+  ///
+  /// In en, this message translates to:
+  /// **'Two years ago'**
+  String get insightsTwoYearsAgo;
+
+  /// Insights card: voice notes and round videos
+  ///
+  /// In en, this message translates to:
+  /// **'Voice and round videos'**
+  String get insightsVoiceAndVideos;
+
+  /// Insights brightest week: week number of the year
+  ///
+  /// In en, this message translates to:
+  /// **'Week {number}'**
+  String insightsWeekNumber(String number);
+
+  /// Hint under the empty list of chat sessions
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about your week, a worry or a good day: the chat reads your records right on the phone.'**
+  String get aiNoSessionsHint;
+
+  /// Context menu item that opens the photo in the system gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Show in Gallery'**
+  String get showInGallery;
+
+  /// Tweak: how emojis move on mind tiles
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji motion'**
+  String get tileEmojiMotion;
+
+  /// Emoji motion option: slow diagonal drift
+  ///
+  /// In en, this message translates to:
+  /// **'Drift'**
+  String get tileEmojiMotionDrift;
+
+  /// Emoji motion option: sway in place
+  ///
+  /// In en, this message translates to:
+  /// **'Float'**
+  String get tileEmojiMotionFloat;
+
+  /// Emoji motion option: no motion
+  ///
+  /// In en, this message translates to:
+  /// **'Still'**
+  String get tileEmojiMotionStill;
+
+  /// Tweak: animation when a pinch changes the column count
+  ///
+  /// In en, this message translates to:
+  /// **'Pinch animation'**
+  String get gridResizeAnimation;
+
+  /// Pinch animation option: tiles fly to new places
+  ///
+  /// In en, this message translates to:
+  /// **'Fly'**
+  String get gridResizeFly;
+
+  /// Pinch animation option: live zoom
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom'**
+  String get gridResizeZoom;
+
+  /// Pinch animation option: crossfade
+  ///
+  /// In en, this message translates to:
+  /// **'Fade'**
+  String get gridResizeCrossfade;
+
+  /// Tweak sheet: order of day tiles
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get feedSortOrder;
+
+  /// Order option: by time
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get feedSortTime;
+
+  /// Order option: notes before photos
+  ///
+  /// In en, this message translates to:
+  /// **'Notes first'**
+  String get feedSortMindsFirst;
+
+  /// Order option: photos before notes
+  ///
+  /// In en, this message translates to:
+  /// **'Media first'**
+  String get feedSortMediaFirst;
+
+  /// Tweak sheet: grouping of day tiles
+  ///
+  /// In en, this message translates to:
+  /// **'Groups'**
+  String get feedGrouping;
+
+  /// Grouping option: none
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get feedGroupingNone;
+
+  /// Grouping option: notes and gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get feedGroupingType;
+
+  /// Grouping option: morning, afternoon, evening, night
+  ///
+  /// In en, this message translates to:
+  /// **'Time of day'**
+  String get feedGroupingTimeOfDay;
+
+  /// Section header over the notes of a day
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get feedSectionMinds;
+
+  /// Section header over the photos and videos of a day
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get feedSectionGallery;
+
+  /// Title of the sheet shown before removing a photo
+  ///
+  /// In en, this message translates to:
+  /// **'Remove photo'**
+  String get removePhotoTitle;
+
+  /// Title of the sheet shown before removing a video
+  ///
+  /// In en, this message translates to:
+  /// **'Remove video'**
+  String get removeVideoTitle;
+
+  /// Hide a photo or video from keklist only
+  ///
+  /// In en, this message translates to:
+  /// **'Hide'**
+  String get hideMedia;
+
+  /// Under Hide: the file stays in the gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Only from keklist, it stays in the gallery'**
+  String get hideMediaSubtitle;
+
+  /// Delete a photo or video from the phone gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Delete from gallery'**
+  String get deleteFromGallery;
+
+  /// Under Delete from gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Moves to Recently Deleted'**
+  String get deleteFromGallerySubtitle;
+
+  /// Snackbar after hiding a photo
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden from keklist'**
+  String get mediaHidden;
+
+  /// Snackbar after showing a hidden photo again
+  ///
+  /// In en, this message translates to:
+  /// **'Back in keklist'**
+  String get mediaShownAgain;
+
+  /// Undo the last action
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// Settings row and screen with photos hidden from keklist
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden photos'**
+  String get hiddenMedia;
+
+  /// Hint on the hidden photos screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a photo to show it in keklist again'**
+  String get hiddenMediaHint;
+
+  /// Hidden photos screen without photos
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is hidden'**
+  String get hiddenMediaEmpty;
+
+  /// Settings row and sheet title for sending feedback to the developer
+  ///
+  /// In en, this message translates to:
+  /// **'Leave feedback'**
+  String get leaveFeedback;
+
+  /// Send feedback button
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get feedbackSend;
+
+  /// Snackbar after feedback was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks! The developer got your message'**
+  String get feedbackSent;
+
+  /// Snackbar when feedback could not be sent
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send. Check the internet and try again'**
+  String get feedbackFailed;
+
+  /// Settings row and screen title for anonymous usage analytics
+  ///
+  /// In en, this message translates to:
+  /// **'Analytics'**
+  String get analytics;
+
+  /// Explains what analytics is for on the analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Anonymous usage statistics help decide what to improve. Nothing you write ever leaves your device.'**
+  String get analyticsDescription;
+
+  /// Shown on the analytics screen in builds that never send analytics (debug, web)
+  ///
+  /// In en, this message translates to:
+  /// **'This build sends nothing: analytics runs only in App Store and Google Play builds.'**
+  String get analyticsStoreBuildsOnly;
+
+  /// Heading of the list of data analytics sends
+  ///
+  /// In en, this message translates to:
+  /// **'What is sent'**
+  String get analyticsSent;
+
+  /// List of data analytics sends
+  ///
+  /// In en, this message translates to:
+  /// **'Which settings and tweaks you choose, which screens you open, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.'**
+  String get analyticsSentItems;
+
+  /// Heading of the list of data analytics never sends
+  ///
+  /// In en, this message translates to:
+  /// **'Never sent'**
+  String get analyticsNeverSent;
+
+  /// List of data analytics never sends
+  ///
+  /// In en, this message translates to:
+  /// **'Your minds, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.'**
+  String get analyticsNeverSentItems;
+
+  /// Button that replaces the anonymous analytics id
+  ///
+  /// In en, this message translates to:
+  /// **'Reset anonymous ID'**
+  String get analyticsResetId;
+
+  /// Snackbar after the anonymous analytics id is reset
+  ///
+  /// In en, this message translates to:
+  /// **'A new anonymous ID is used from now on'**
+  String get analyticsResetIdDone;
+
+  /// Settings section with the subscription, tips and feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get settingsSupport;
+
+  /// Button under a calendar day that opens the day screen
+  ///
+  /// In en, this message translates to:
+  /// **'Open day'**
+  String get calendarOpenDay;
+
+  /// Switch that starts serving keklist to browsers in the same Wi-Fi
+  ///
+  /// In en, this message translates to:
+  /// **'Mirror to browser'**
+  String get webVersionEnabled;
+
+  /// Title of the bottom sheet with a story mind's comments
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get viewerComments;
+
+  /// Shown in the comments sheet when a mind has no comments yet
+  ///
+  /// In en, this message translates to:
+  /// **'No comments yet'**
+  String get viewerNoComments;
+
+  /// Tooltip of the chevron that opens the previous day
+  ///
+  /// In en, this message translates to:
+  /// **'Previous day'**
+  String get previousDay;
+
+  /// Tooltip of the chevron that opens the next day
+  ///
+  /// In en, this message translates to:
+  /// **'Next day'**
+  String get nextDay;
 }
 
 class _AppLocalizationsDelegate

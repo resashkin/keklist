@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const double _kSettingsMaxWidth = 700.0;
 
@@ -18,7 +18,10 @@ final class SettingsListView extends StatelessWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: _kSettingsMaxWidth),
         child: ListView(
-          padding: EdgeInsets.only(top: 8.0, bottom: MediaQuery.paddingOf(context).bottom + 16.0),
+          padding: EdgeInsets.only(
+            top: MediaQuery.paddingOf(context).top + 8.0,
+            bottom: MediaQuery.paddingOf(context).bottom + 16.0,
+          ),
           children: children,
         ),
       ),

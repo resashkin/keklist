@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/foundation.dart';
 import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 
 final class Themes {
   static final ThemeData light = ThemeData(
@@ -102,26 +104,15 @@ enum SupportedPlatform { iOS, android, web }
 final class KeklistConstants {
   static String demoAccountEmail = dotenv.get('DEMO_ACCOUNT_EMAIL');
   static String termsOfUseURL = 'https://resashkin.github.io/keklist-terms/';
-  static String whatsNewURL = 'https://sashkyn.notion.site/Rememoji-Mind-Tracker-8548383aede2406bbb8d26c7f58e769c';
   static String privacyURL = 'https://resashkin.github.io/keklist-privacy/';
-  static String feedbackEmail = 'sashkn2@gmail.com';
   static String sourceCodeURL = 'https://github.com/resashkin/keklist_flutter';
-  static String featureSuggestionsURL = 'https://insigh.to/b/keklist';
-  static String newsTelegramChannelURL = 'https://t.me/keklistlog';
-  static Iterable<String> defaultEmojiesToPick = [
-    '😔',
-    '🙁',
-    '🙂',
-    '☺️',
-    '🤩',
-  ];
-
-  static List<TabModel> availableTabModels = [
+  // The Telegram web build has no AI: models run on the phone.
+  static List<TabModel> get availableTabModels => [
     TabModel(type: TabType.calendar),
     TabModel(type: TabType.insights),
-    //TabModel(type: TabType.profile),
     TabModel(type: TabType.settings),
     TabModel(type: TabType.today),
+    if (!kIsWeb || kIsPhoneWeb) TabModel(type: TabType.ai),
   ];
 
   // Available list of Tabs that can be reached after first launch.
@@ -131,6 +122,7 @@ final class KeklistConstants {
       TabModel(type: TabType.today),
       TabModel(type: TabType.calendar),
       TabModel(type: TabType.insights),
+      TabModel(type: TabType.ai),
       TabModel(type: TabType.settings),
     ],
   );

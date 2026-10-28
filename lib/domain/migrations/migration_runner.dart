@@ -63,26 +63,7 @@ class MigrationRunner {
             // Update schema version after successful migration
             final updatedSettings = settingsRepository.value;
             await settingsRepository.updateSettings(
-              KeklistSettings(
-                isMindContentVisible: updatedSettings.isMindContentVisible,
-                previousAppVersion: updatedSettings.previousAppVersion,
-                themePreference: updatedSettings.themePreference,
-                interfaceStyle: updatedSettings.interfaceStyle,
-                shouldShowTitles: updatedSettings.shouldShowTitles,
-                userName: updatedSettings.userName,
-                language: updatedSettings.language,
-                dataSchemaVersion: migration.version,
-                hasSeenLazyOnboarding: updatedSettings.hasSeenLazyOnboarding,
-                isDebugMenuVisible: updatedSettings.isDebugMenuVisible,
-                isPhotoVideoSourceEnabled: updatedSettings.isPhotoVideoSourceEnabled,
-                isWeatherSourceEnabled: updatedSettings.isWeatherSourceEnabled,
-                weatherLatitude: updatedSettings.weatherLatitude,
-                weatherLongitude: updatedSettings.weatherLongitude,
-                isMediaFolderSourceEnabled: updatedSettings.isMediaFolderSourceEnabled,
-                mediaFolderPath: updatedSettings.mediaFolderPath,
-                isMediaFolderRecursive: updatedSettings.isMediaFolderRecursive,
-                hasSeededEmotions: updatedSettings.hasSeededEmotions,
-              ),
+              updatedSettings.copyWith(dataSchemaVersion: migration.version),
             );
 
             print(

@@ -9,6 +9,216 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => '最精彩的时段';
+
+  @override
+  String get insightsPeriodWeek => '周';
+
+  @override
+  String get insightsPeriodMonth => '月';
+
+  @override
+  String get insightsPeriodYear => '年';
+
+  @override
+  String get insightsPeriodAllTime => '全部';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '较上周 $delta';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '较上月 $delta';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '较去年 $delta';
+  }
+
+  @override
+  String get insightsCategorySummary => '概览';
+
+  @override
+  String get insightsCategoryEmotions => '情绪';
+
+  @override
+  String get insightsCategoryActivity => '活跃度';
+
+  @override
+  String get insightsCategoryMemories => '回忆';
+
+  @override
+  String get insightsCategoryMedia => '媒体';
+
+  @override
+  String get insightsCounters => '数据一览';
+
+  @override
+  String get insightsMinds => '笔记';
+
+  @override
+  String get insightsActiveDays => '活跃天数';
+
+  @override
+  String get insightsWords => '字数';
+
+  @override
+  String get insightsBrightestDay => '最精彩的一天';
+
+  @override
+  String get insightsBrightestWeek => '最精彩的一周';
+
+  @override
+  String get insightsBrightestMonth => '最精彩的一个月';
+
+  @override
+  String get insightsBrightestYear => '最精彩的一年';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return '笔记 $minds · 情绪 $emotions · 媒体 $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => '情绪';
+
+  @override
+  String get insightsEmotionTrend => '情绪趋势';
+
+  @override
+  String get insightsEmotionPairs => '同时出现的情绪';
+
+  @override
+  String get insightsEmotionRhythm => '情绪节律';
+
+  @override
+  String get insightsByWeekday => '按星期';
+
+  @override
+  String get insightsByDayPart => '按时段';
+
+  @override
+  String get insightsNight => '夜间';
+
+  @override
+  String get insightsMorning => '上午';
+
+  @override
+  String get insightsAfternoon => '下午';
+
+  @override
+  String get insightsEvening => '晚上';
+
+  @override
+  String get insightsStreak => '连续记录';
+
+  @override
+  String get insightsStreakLabel => '天连续';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return '最长：$count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing => '今天添加一条笔记以保持连续';
+
+  @override
+  String get insightsHeatmap => '活跃度地图';
+
+  @override
+  String get insightsActivityTime => '时段';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return '最常在 $hour 左右';
+  }
+
+  @override
+  String get insightsOnThisDay => '那时';
+
+  @override
+  String get insightsMediaCounters => '媒体';
+
+  @override
+  String get insightsPhotos => '照片';
+
+  @override
+  String get insightsVideos => '视频';
+
+  @override
+  String get insightsVoiceNotes => '语音笔记';
+
+  @override
+  String get insightsRoundVideos => '圆形视频';
+
+  @override
+  String get insightsEmptyPeriod => '此期间还没有笔记';
+
+  @override
+  String get insightsEmptyEmotions => '为笔记标记情绪后即可查看';
+
+  @override
+  String get insightsEmptyPairs => '为一条笔记标记两种情绪即可查看组合';
+
+  @override
+  String get insightsEmptyOnThisDay => '一周、一个月、半年和一年前还没有记录';
+
+  @override
+  String get insightsEmptyRoundVideos => '此期间没有语音或圆形视频';
+
+  @override
+  String get insightsEmptyStreak => '今天添加一条笔记开始连续记录';
+
+  @override
+  String get insightsCustomize => '自定义分析';
+
+  @override
+  String get insightsCustomizeDescription => '开关卡片，拖动以重新排序';
+
+  @override
+  String get insightsResetLayout => '重置';
+
+  @override
+  String get activeTasks => '进行中的任务';
+
+  @override
+  String get galleryIndex => '图库索引';
+
+  @override
+  String get galleryIndexNoAccess => '无法访问照片';
+
+  @override
+  String get galleryIndexNotIndexed => '尚未建立索引';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return '正在索引 $done / $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count 张照片和视频 · 更新于 $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return '缩略图缓存：$size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => '要重建图库索引吗？';
+
+  @override
+  String get galleryIndexRebuildMessage => '缩略图将被清除，并重新扫描图库。';
+
+  @override
+  String get galleryIndexRebuild => '重建';
+
+  @override
   String get settings => '设置';
 
   @override
@@ -66,9 +276,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get showDigest => '显示摘要...';
 
   @override
-  String get showAll => '显示全部';
-
-  @override
   String get translateToEnglish => '翻译为英文';
 
   @override
@@ -99,19 +306,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tabsSettings => '标签页设置';
 
   @override
-  String get whatsNew => '新功能';
-
-  @override
-  String get releaseNotes => '发行说明';
-
-  @override
-  String get suggestFeature => '建议功能';
-
-  @override
   String get sendFeedback => '发送反馈';
-
-  @override
-  String get emailUs => '给我们发邮件';
 
   @override
   String get clearOfflineDataWarning => '所有离线数据都会被删除。请确保已提前导出。';
@@ -144,13 +339,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get profile => '个人资料';
 
   @override
-  String get insights => '洞察';
+  String get insights => '个人资料';
 
   @override
   String get calendar => '日历';
 
   @override
-  String get debugMenu => '调试菜单';
+  String get debugMenu => '开发者菜单';
 
   @override
   String get discussion => '讨论';
@@ -160,9 +355,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get dangerZone => '危险区域';
-
-  @override
-  String get editMind => '编辑笔记';
 
   @override
   String get enterTokenHere => '在此输入令牌';
@@ -189,13 +381,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get send => '发送';
 
   @override
-  String get updateYourNickname => '更新您的昵称';
-
-  @override
-  String get yourNickname => '您的昵称';
-
-  @override
-  String get create => '写';
+  String get create => '创建';
 
   @override
   String get yourFolderName => '您的文件夹名称';
@@ -216,31 +402,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get minds => '笔记';
 
   @override
-  String get searchForYourNotes => '搜索您的笔记';
-
-  @override
   String get searchYourEmoji => '搜索您的表情符号...';
 
   @override
   String get writeSomething => '写点什么...';
 
   @override
-  String get topMinds => '热门笔记';
-
-  @override
   String get todayMinds => '今天的笔记';
 
   @override
-  String get randomMind => '随机笔记';
-
-  @override
-  String get spectrum => '光谱';
-
-  @override
   String get youDidNotCollectAnyEntriesYet => '您还没有收集任何条目';
-
-  @override
-  String get pleaseAuthenticateToShowContent => '请进行身份验证以显示您的笔记内容';
 
   @override
   String get areYouSure => '您确定吗？';
@@ -270,13 +441,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get calendarDescription => '带有条目日历的主屏幕';
 
   @override
-  String get insightsDescription => '所有条目的统计信息';
+  String get insightsDescription => '你和你的记录统计';
 
   @override
   String get settingsDescription => '包含所有设置的屏幕（深色模式、同步等）';
-
-  @override
-  String get profileDescription => '您的个人资料屏幕';
 
   @override
   String get todayDescription => '仅今天的笔记';
@@ -286,11 +454,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => '这一天没有笔记';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return '显示$period的笔记';
-  }
 
   @override
   String get week => '周';
@@ -416,33 +579,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingMind6 => '要创建新笔记，请点击\'写入\'';
 
   @override
-  String get viewPhotos => '查看照片';
-
-  @override
   String get noPhotosForDay => '未找到当天的照片';
-
-  @override
-  String get dateGallerySubtitle => '本日的媒体文件';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count个媒体文件';
-  }
-
-  @override
-  String get sources => '来源';
-
-  @override
-  String get sourcesMinds => '想法';
-
-  @override
-  String get sourcesMindsSubtitle => '你的想法和时刻';
-
-  @override
-  String get sourcesPhotoVideo => '照片和视频';
-
-  @override
-  String get sourcesPhotoVideoSubtitle => '本日设备的照片和视频';
 
   @override
   String get sourcesMediaFolder => '媒体文件';
@@ -452,12 +589,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => '媒体文件';
-
-  @override
-  String get mediaFolderNoPath => '未选择文件夹';
-
-  @override
-  String get mediaFolderPickFolder => '选择文件夹';
 
   @override
   String get licenses => '许可证';
@@ -481,9 +612,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get weatherSaveLocation => '保存位置';
 
   @override
-  String get weatherNoLocation => '请在天气设置中设置位置';
-
-  @override
   String get weatherUseMyLocation => '使用我的位置';
 
   @override
@@ -504,21 +632,6 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       '位置权限被永久拒绝，正在打开应用设置。';
-
-  @override
-  String get weatherTemperature => '温度';
-
-  @override
-  String get weatherUvIndex => '紫外线指数';
-
-  @override
-  String get weatherHumidity => '湿度';
-
-  @override
-  String get weatherWindSpeed => '风速';
-
-  @override
-  String get weatherPrecipitation => '降水量';
 
   @override
   String get audioRecordTitle => '录制音频';
@@ -546,12 +659,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get audioRecordStopError => '无法停止录制。请重试。';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {
@@ -598,12 +705,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get emotionInUseMessage => '此情绪已被一些 mind 使用。归档可将其保留在那里，或彻底删除。';
 
   @override
-  String get emotionPickHint => '点按标记';
-
-  @override
-  String get emotionDrillHint => '长按进入下级';
-
-  @override
   String get noEmotionsYet => '还没有情绪';
 
   @override
@@ -611,4 +712,550 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage => '删除此情绪？它将从所有使用它的 mind 中移除。';
+
+  @override
+  String get dayFeedTileSettings => '磁贴设置';
+
+  @override
+  String get dayFeedColumns => '列数';
+
+  @override
+  String get dayFeedMindTileSize => '磁贴大小';
+
+  @override
+  String get dayFeedMindTileSquare => '方形';
+
+  @override
+  String get dayFeedMindTileWide => '宽';
+
+  @override
+  String get dayFeedShowMindText => '显示文字';
+
+  @override
+  String get dayFeedPhotoAccessHint => '允许访问照片以在此查看你的照片和视频';
+
+  @override
+  String get dayFeedAllowAccess => '允许';
+
+  @override
+  String get dayFeedFolderHint => '选择媒体文件夹以在此查看你的照片和视频';
+
+  @override
+  String get dayFeedChooseFolder => '选择';
+
+  @override
+  String get holdToRecordAudio => '按住录制语音消息';
+
+  @override
+  String get holdToRecordVideo => '按住录制视频消息';
+
+  @override
+  String get roundVideoRecordError => '无法录制视频';
+
+  @override
+  String get roundVideoCameraUnavailable => '此设备上的相机不可用';
+
+  @override
+  String get roundVideoRetake => '重拍';
+
+  @override
+  String get roundVideoUse => '使用';
+
+  @override
+  String get removeMedia => '移除媒体';
+
+  @override
+  String get shakeToCustomize => '摇一摇进行自定义';
+
+  @override
+  String get shakeToCustomizeHint => '或长按标题';
+
+  @override
+  String get customizeSettings => '自定义设置';
+
+  @override
+  String get customizeSettingsDescription => '取消勾选的分区和行将在设置页面中隐藏。';
+
+  @override
+  String get calendarSettings => '日历设置';
+
+  @override
+  String get calendarShowMedia => '显示照片和视频';
+
+  @override
+  String get calendarWeekTitles => '周标题';
+
+  @override
+  String get calendarPlayStories => '播放故事';
+
+  @override
+  String get storyBackgroundTweak => '故事背景';
+
+  @override
+  String get storyAnimationOff => '关闭';
+
+  @override
+  String get storyAnimationPulse => '脉动';
+
+  @override
+  String get storyAnimationWave => '波浪';
+
+  @override
+  String get storyAnimationEqualizer => '均衡器';
+
+  @override
+  String get storyAnimationDrift => '漂移';
+
+  @override
+  String get storyAnimationGlow => '光晕';
+
+  @override
+  String get viewerCommentHint => '评论…';
+
+  @override
+  String get calendarToCurrentWeek => '回到本周';
+
+  @override
+  String get storyDateLines => '日期行数';
+
+  @override
+  String get storyTextureTitle => '纹理';
+
+  @override
+  String get storySpectrum => '声音频谱';
+
+  @override
+  String get storySensitivity => '灵敏度';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '用心记录 $count 天',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => '名字';
+
+  @override
+  String get profilePhoto => '照片';
+
+  @override
+  String get profileEmoji => '表情';
+
+  @override
+  String get profileInitial => '字母';
+
+  @override
+  String get webVersion => 'Wi‑Fi 访问';
+
+  @override
+  String get webVersionAddressHint => '在同一 Wi‑Fi 下的电脑浏览器中打开；请保持 keklist 打开';
+
+  @override
+  String get webVersionCopied => '地址已复制';
+
+  @override
+  String get webVersionStarting => '正在启动…';
+
+  @override
+  String get webVersionNoWifi => '连接 Wi‑Fi 后即可在浏览器中打开 keklist。';
+
+  @override
+  String get webVersionNoBundle => '此版本不包含网页版。';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => '每个浏览器每 30 天询问一次';
+
+  @override
+  String get webVersionPinNotSet => '未设置';
+
+  @override
+  String get webVersionPinHint => '4–8 位数字';
+
+  @override
+  String get webVersionRemovePin => '删除 PIN';
+
+  @override
+  String get webVersionPort => '端口';
+
+  @override
+  String get aiTab => '聊天';
+
+  @override
+  String get aiTabDescription => '与在手机上运行的 AI 聊聊你的记录';
+
+  @override
+  String get aiPrivacyNote => '仅在手机上运行：你的记录不会离开设备。';
+
+  @override
+  String get aiDisclaimer => '这不是医疗服务。如果你处于危险中，请联系紧急服务。';
+
+  @override
+  String get aiYesterday => '昨天';
+
+  @override
+  String get aiNoSessions => '还没有会话';
+
+  @override
+  String get aiNewSession => '新会话';
+
+  @override
+  String get aiChooseRole => '选择角色';
+
+  @override
+  String get aiRoleTherapist => '心理咨询师';
+
+  @override
+  String get aiRoleCoach => '教练';
+
+  @override
+  String get aiRoleFriend => '朋友';
+
+  @override
+  String get aiMessageHint => '消息';
+
+  @override
+  String get aiStarterWeek => '我这周过得怎么样？';
+
+  @override
+  String get aiStarterWorry => '最近什么让我烦恼？';
+
+  @override
+  String get aiStarterJoy => '最近什么让我开心？';
+
+  @override
+  String get aiActionSaveAsMind => '保存为记录';
+
+  @override
+  String get aiActionOpenDay => '打开当天';
+
+  @override
+  String get aiActionWeekSummary => '本周总结';
+
+  @override
+  String get aiWeekSummaryPrompt => '总结我最近 7 天：发生了什么、我感受如何、什么最突出。';
+
+  @override
+  String get aiSavedAsMind => '已保存到今天';
+
+  @override
+  String get aiStop => '停止';
+
+  @override
+  String get aiNoModelTitle => '选择模型';
+
+  @override
+  String get aiNoModelMessage => '下载一个模型即可开始。它在手机上离线运行。';
+
+  @override
+  String get aiNoModelOnPhone => '请在手机上的应用中下载模型：设置 → AI → 模型。';
+
+  @override
+  String get aiModels => '模型';
+
+  @override
+  String get aiRoles => '角色';
+
+  @override
+  String get aiDownloaded => '已下载';
+
+  @override
+  String get aiDownloads => '下载中';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => '搜索 GGUF 模型';
+
+  @override
+  String get aiDownload => '下载';
+
+  @override
+  String get aiPause => '暂停';
+
+  @override
+  String get aiPaused => '已暂停';
+
+  @override
+  String get aiResume => '继续';
+
+  @override
+  String get aiDownloadFailed => '下载失败';
+
+  @override
+  String get aiCellularTitle => '使用移动数据下载？';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '将使用移动数据下载 $size。';
+  }
+
+  @override
+  String get aiDeleteModel => '删除模型？';
+
+  @override
+  String aiStorageUsed(String size) {
+    return '本机占用：$size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return '手机内存：$size';
+  }
+
+  @override
+  String get aiCatalogFailed => '无法加载列表。请检查网络连接。';
+
+  @override
+  String get aiNoFilesFit => '该模型没有可放入本机内存的文件。';
+
+  @override
+  String get aiBuiltInRole => '内置';
+
+  @override
+  String get aiOwnRoles => '你的角色';
+
+  @override
+  String get aiDuplicate => '复制';
+
+  @override
+  String get aiNewRole => '新角色';
+
+  @override
+  String get aiRoleName => '名称';
+
+  @override
+  String get aiRoleEmoji => '表情';
+
+  @override
+  String get aiRolePrompt => '提示词';
+
+  @override
+  String get aiRolePromptHint => 'AI 应如何说话以及关注什么';
+
+  @override
+  String get aiReadOnlyRole => '内置角色无法修改。复制一个来创建你自己的角色。';
+
+  @override
+  String get aiDeleteSession => '删除会话？';
+
+  @override
+  String get aiDeleteRole => '删除角色？';
+
+  @override
+  String get aiRecommended => '推荐';
+
+  @override
+  String get aiLowQuality => '质量较低';
+
+  @override
+  String get aiModelDoesNotFit => '此模型超出手机内存。请选择更小的模型。';
+
+  @override
+  String get aiChooseAnotherModel => '选择其他模型';
+
+  @override
+  String get creatorEmotionsTitle => '情绪';
+
+  @override
+  String get creatorEmotionsAfterSave => '保存后询问';
+
+  @override
+  String get creatorEmotionsButton => '键盘上方的按钮';
+
+  @override
+  String get creatorEmotionsNever => '不询问';
+
+  @override
+  String get insightsWeekAgo => '一周前';
+
+  @override
+  String get insightsMonthAgo => '一个月前';
+
+  @override
+  String get insightsHalfYearAgo => '半年前';
+
+  @override
+  String get insightsYearAgo => '一年前';
+
+  @override
+  String get insightsTwoYearsAgo => '两年前';
+
+  @override
+  String get insightsVoiceAndVideos => '语音和圆形视频';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return '第$number周';
+  }
+
+  @override
+  String get aiNoSessionsHint => '问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的记录。';
+
+  @override
+  String get showInGallery => '在图库中显示';
+
+  @override
+  String get tileEmojiMotion => '表情动效';
+
+  @override
+  String get tileEmojiMotionDrift => '漂移';
+
+  @override
+  String get tileEmojiMotionFloat => '浮动';
+
+  @override
+  String get tileEmojiMotionStill => '静止';
+
+  @override
+  String get gridResizeAnimation => '捏合动画';
+
+  @override
+  String get gridResizeFly => '飞移';
+
+  @override
+  String get gridResizeZoom => '缩放';
+
+  @override
+  String get gridResizeCrossfade => '淡入淡出';
+
+  @override
+  String get feedSortOrder => '顺序';
+
+  @override
+  String get feedSortTime => '按时间';
+
+  @override
+  String get feedSortMindsFirst => '笔记优先';
+
+  @override
+  String get feedSortMediaFirst => '媒体优先';
+
+  @override
+  String get feedGrouping => '分组';
+
+  @override
+  String get feedGroupingNone => '无';
+
+  @override
+  String get feedGroupingType => '类型';
+
+  @override
+  String get feedGroupingTimeOfDay => '时段';
+
+  @override
+  String get feedSectionMinds => '笔记';
+
+  @override
+  String get feedSectionGallery => '图库';
+
+  @override
+  String get removePhotoTitle => '移除照片';
+
+  @override
+  String get removeVideoTitle => '移除视频';
+
+  @override
+  String get hideMedia => '隐藏';
+
+  @override
+  String get hideMediaSubtitle => '仅在keklist中隐藏，图库中保留';
+
+  @override
+  String get deleteFromGallery => '从图库删除';
+
+  @override
+  String get deleteFromGallerySubtitle => '将移至“最近删除”';
+
+  @override
+  String get mediaHidden => '已在keklist中隐藏';
+
+  @override
+  String get mediaShownAgain => '已恢复到keklist';
+
+  @override
+  String get undo => '撤销';
+
+  @override
+  String get hiddenMedia => '隐藏的照片';
+
+  @override
+  String get hiddenMediaHint => '点按照片即可在keklist中重新显示';
+
+  @override
+  String get hiddenMediaEmpty => '没有隐藏的内容';
+
+  @override
+  String get leaveFeedback => '留下反馈';
+
+  @override
+  String get feedbackSend => '发送';
+
+  @override
+  String get feedbackSent => '谢谢！开发者已收到你的消息';
+
+  @override
+  String get feedbackFailed => '发送失败。请检查网络后重试';
+
+  @override
+  String get analytics => '分析';
+
+  @override
+  String get analyticsDescription => '匿名使用统计帮助决定改进方向。你写的任何内容都不会离开设备。';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      '此版本不发送任何数据:分析仅在 App Store 和 Google Play 版本中运行。';
+
+  @override
+  String get analyticsSent => '发送的内容';
+
+  @override
+  String get analyticsSentItems =>
+      '你选择的设置、打开的页面、应用版本、平台和语言、Pro 与打赏购买,以及不含消息内容的崩溃报告。';
+
+  @override
+  String get analyticsNeverSent => '绝不发送';
+
+  @override
+  String get analyticsNeverSentItems =>
+      '你的记录及其文字、情绪和评论,照片、视频和音频,它们的数量,你的名字、位置和 IP 地址。';
+
+  @override
+  String get analyticsResetId => '重置匿名 ID';
+
+  @override
+  String get analyticsResetIdDone => '从现在起使用新的匿名 ID';
+
+  @override
+  String get settingsSupport => '支持';
+
+  @override
+  String get calendarOpenDay => '打开这一天';
+
+  @override
+  String get webVersionEnabled => '镜像到浏览器';
+
+  @override
+  String get viewerComments => '评论';
+
+  @override
+  String get viewerNoComments => '暂无评论';
+
+  @override
+  String get previousDay => '前一天';
+
+  @override
+  String get nextDay => '后一天';
 }

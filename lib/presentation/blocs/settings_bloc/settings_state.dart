@@ -10,8 +10,6 @@ final class SettingsDataState extends SettingsState {
   });
 }
 
-final class SettingsShowWhatsNew extends SettingsState {}
-
 final class SettingsShowMessage extends SettingsState {
   final String title;
   final String message;

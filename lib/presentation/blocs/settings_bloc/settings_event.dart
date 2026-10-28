@@ -34,17 +34,7 @@ enum SettingsImportType { csv }
 
 final class SettingsExportAllMindsToCSV extends SettingsEvent {}
 
-final class SettingsChangeMindContentVisibility extends SettingsEvent {
-  final bool isVisible;
-
-  const SettingsChangeMindContentVisibility({required this.isVisible});
-}
-
-final class SettingsWhatsNewShown extends SettingsEvent {}
-
 final class SettingsUploadMindsFromCacheToServer extends SettingsEvent {}
-
-final class SettingGetWhatsNew extends SettingsEvent {}
 
 final class SettingsChangeThemePreference extends SettingsEvent {
   final KeklistThemeMode themePreference;
@@ -78,11 +68,6 @@ final class SettingsEnableDebugMenu extends SettingsEvent {
   const SettingsEnableDebugMenu();
 }
 
-final class SettingsTogglePhotoVideoSource extends SettingsEvent {
-  final bool isEnabled;
-  const SettingsTogglePhotoVideoSource({required this.isEnabled});
-}
-
 final class SettingsToggleWeatherSource extends SettingsEvent {
   final bool isEnabled;
   const SettingsToggleWeatherSource({required this.isEnabled});
@@ -95,8 +80,72 @@ final class SettingsUpdateWeatherLocation extends SettingsEvent {
 }
 
 final class SettingsUpdateMediaFolderSource extends SettingsEvent {
-  final bool? isEnabled;
   final String? folderPath;
   final bool? isRecursive;
-  const SettingsUpdateMediaFolderSource({this.isEnabled, this.folderPath, this.isRecursive});
+  const SettingsUpdateMediaFolderSource({this.folderPath, this.isRecursive});
+}
+
+final class SettingsUpdateDayFeed extends SettingsEvent {
+  final int? columnCount;
+  final int? mindCellSpan;
+  final bool? isMindTextVisible;
+  const SettingsUpdateDayFeed({
+    this.columnCount,
+    this.mindCellSpan,
+    this.isMindTextVisible,
+  });
+}
+
+final class SettingsUpdateItemHidden extends SettingsEvent {
+  final String id;
+  final bool isHidden;
+  const SettingsUpdateItemHidden({required this.id, required this.isHidden});
+}
+
+final class SettingsUpdateInsights extends SettingsEvent {
+  final InsightsSettings insights;
+  const SettingsUpdateInsights({required this.insights});
+}
+
+final class SettingsUpdateCalendar extends SettingsEvent {
+  final CalendarSettings calendar;
+  const SettingsUpdateCalendar({required this.calendar});
+}
+
+final class SettingsUpdateDayFeedArrangement extends SettingsEvent {
+  final FeedSortOrder? sortOrder;
+  final FeedGrouping? grouping;
+  const SettingsUpdateDayFeedArrangement({this.sortOrder, this.grouping});
+}
+
+final class SettingsSetAnalyticsEnabled extends SettingsEvent {
+  final bool isEnabled;
+  const SettingsSetAnalyticsEnabled({required this.isEnabled});
+}
+
+final class SettingsSetMediaHidden extends SettingsEvent {
+  final Set<String> ids;
+  final bool isHidden;
+  const SettingsSetMediaHidden({required this.ids, required this.isHidden});
+}
+
+final class SettingsUpdateStory extends SettingsEvent {
+  final StorySettings story;
+  const SettingsUpdateStory({required this.story});
+}
+
+final class SettingsUpdateTileMotion extends SettingsEvent {
+  final TileEmojiMotion? emojiMotion;
+  final GridResizeAnimation? resizeAnimation;
+  const SettingsUpdateTileMotion({this.emojiMotion, this.resizeAnimation});
+}
+
+final class SettingsUpdateMindEmotionsPrompt extends SettingsEvent {
+  final MindEmotionsPrompt prompt;
+  const SettingsUpdateMindEmotionsPrompt({required this.prompt});
+}
+
+final class SettingsMarkShakeDiscovered extends SettingsEvent {
+  final String screenId;
+  const SettingsMarkShakeDiscovered({required this.screenId});
 }

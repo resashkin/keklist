@@ -11,6 +11,9 @@ class AppFileRepository {
 
   static const String _userRootFolderName = 'user_files';
   static const String _audioFolderName = 'audio';
+  static const String _videoFolderName = 'video';
+  static const String _avatarFolderName = 'avatar';
+  static const List<String> mediaFolderNames = [_audioFolderName, _videoFolderName];
 
   /// Returns the absolute path to the user root folder, creating it on demand.
   Future<Directory> _ensureUserRoot() async {
@@ -39,6 +42,26 @@ class AppFileRepository {
     final String fileName = '${const Uuid().v4()}.$extension';
     final File file = File('${audioDirectory.path}/$fileName');
     return AppFileHandle(file: file, relativePath: '$_audioFolderName/$fileName');
+  }
+
+  Future<AppFileHandle> createVideoFile({required String extension}) async {
+    final Directory userRoot = await _ensureUserRoot();
+    final Directory videoDirectory = Directory('${userRoot.path}/$_videoFolderName');
+    if (!await videoDirectory.exists()) await videoDirectory.create(recursive: true);
+    final String fileName = '${const Uuid().v4()}.$extension';
+    return AppFileHandle(file: File('${videoDirectory.path}/$fileName'), relativePath: '$_videoFolderName/$fileName');
+  }
+
+  /// Copies the picked photo in as the only avatar file and returns its app-relative path.
+  Future<String> saveAvatarImage(File source) async {
+    final Directory userRoot = await _ensureUserRoot();
+    final Directory avatarDirectory = Directory('${userRoot.path}/$_avatarFolderName');
+    if (await avatarDirectory.exists()) await avatarDirectory.delete(recursive: true);
+    await avatarDirectory.create(recursive: true);
+    final String extension = source.path.split('.').last.toLowerCase();
+    final String fileName = '${const Uuid().v4()}.$extension';
+    await source.copy('${avatarDirectory.path}/$fileName');
+    return '$_avatarFolderName/$fileName';
   }
 
   /// Resolves an app-relative path (obtained from [AppFileHandle.relativePath])

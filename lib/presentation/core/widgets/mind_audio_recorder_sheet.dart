@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:record/record.dart';
 
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 // Path to audio
 typedef AudioRecordingResult = String?;
@@ -14,10 +15,7 @@ typedef AudioRecordingResult = String?;
 /// Records audio into the dedicated user storage folder and returns a relative
 /// path that can be embedded into `MindNoteContent`.
 final class MindAudioRecorderSheet extends StatefulWidget {
-  const MindAudioRecorderSheet({
-    super.key,
-    required this.fileRepository,
-  });
+  const MindAudioRecorderSheet({super.key, required this.fileRepository});
 
   final AppFileRepository fileRepository;
 
@@ -44,40 +42,13 @@ final class _MindAudioRecorderSheetState extends State<MindAudioRecorderSheet> {
 
     return PopScope(
       canPop: !_isRecording,
-      child: Container(
-        decoration: BoxDecoration(
-          color: theme.colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-        ),
+      child: KekSheetScaffold(
+        title: _isRecording ? context.l10n.audioRecordTitleRecording : context.l10n.audioRecordTitle,
+        showsClose: !_isRecording,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Drag handle
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(top: 12, bottom: 8),
-                width: 32,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: _isRecording
-                    ? Colors.red
-                    : theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-
-            // Title
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-              child: Text(
-                _isRecording ? context.l10n.audioRecordTitleRecording : context.l10n.audioRecordTitle,
-                style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ),
-
             Padding(
               padding: const EdgeInsets.only(top: 0, bottom: 24.0, left: 24.0, right: 24.0),
               child: Column(
@@ -136,9 +107,7 @@ final class _MindAudioRecorderSheetState extends State<MindAudioRecorderSheet> {
     final bool hasPermission = await _recorder.hasPermission();
     if (!hasPermission) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.audioRecordPermissionError)),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.audioRecordPermissionError)));
       return;
     }
 
@@ -150,11 +119,7 @@ final class _MindAudioRecorderSheetState extends State<MindAudioRecorderSheet> {
 
     try {
       await _recorder.start(
-        RecordConfig(
-          encoder: AudioEncoder.aacLc,
-          bitRate: 128000,
-          sampleRate: 44100,
-        ),
+        RecordConfig(encoder: AudioEncoder.aacLc, bitRate: 128000, sampleRate: 44100),
         path: handle.file.path,
       );
       _fileHandle = handle;
@@ -168,9 +133,7 @@ final class _MindAudioRecorderSheetState extends State<MindAudioRecorderSheet> {
         _isProcessing = false;
       });
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.audioRecordStartError)),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.audioRecordStartError)));
     }
   }
 
@@ -193,9 +156,7 @@ final class _MindAudioRecorderSheetState extends State<MindAudioRecorderSheet> {
         setState(() {
           _isProcessing = false;
         });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.audioRecordStopError)),
-        );
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.audioRecordStopError)));
         return;
       }
 
@@ -207,9 +168,7 @@ final class _MindAudioRecorderSheetState extends State<MindAudioRecorderSheet> {
         _isRecording = false;
       });
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.audioRecordStopError)),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.audioRecordStopError)));
     }
   }
 

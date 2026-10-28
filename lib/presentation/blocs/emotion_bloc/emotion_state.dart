@@ -51,6 +51,13 @@ final class EmotionsList extends EmotionState {
     return chain;
   }
 
+  /// Root of [emotion]'s tree (itself when top-level).
+  Emotion rootOf(Emotion emotion) => ancestorsOf(emotion).firstOrNull ?? emotion;
+
+  /// Unique top-level emotion emojis behind [emotionIds]; a mind counts fully in each.
+  Set<String> topLevelEmojisOf(Iterable<String> emotionIds) =>
+      emotionIds.map(byId).whereType<Emotion>().map((emotion) => rootOf(emotion).emoji).toSet();
+
   /// Lineage emojis for [emotion]: every ancestor emoji from root down, then its
   /// own — e.g. `['😄', '🕊️', '😌']` for Joy → Serenity → Calm.
   List<String> lineageEmojis(Emotion emotion) => [

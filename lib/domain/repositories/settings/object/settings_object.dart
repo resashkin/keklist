@@ -8,8 +8,7 @@ part 'settings_object.g.dart';
 
 @HiveType(typeId: 0)
 final class SettingsObject extends HiveObject {
-  @HiveField(0, defaultValue: true)
-  late bool isMindContentVisible;
+  // @HiveField(0, defaultValue: true)
 
   @HiveField(1, defaultValue: null)
   late String? previousAppVersion;
@@ -37,8 +36,7 @@ final class SettingsObject extends HiveObject {
   @HiveField(10, defaultValue: false)
   late bool isDebugMenuVisible;
 
-  @HiveField(11, defaultValue: false)
-  late bool isPhotoVideoSourceEnabled;
+  // @HiveField(11, defaultValue: false)
 
   @HiveField(12, defaultValue: false)
   late bool isWeatherSourceEnabled;
@@ -49,8 +47,7 @@ final class SettingsObject extends HiveObject {
   @HiveField(14, defaultValue: null)
   late double? weatherLongitude;
 
-  @HiveField(15, defaultValue: false)
-  late bool isMediaFolderSourceEnabled;
+  // @HiveField(15, defaultValue: false)
 
   @HiveField(16, defaultValue: null)
   late String? mediaFolderPath;
@@ -69,10 +66,92 @@ final class SettingsObject extends HiveObject {
   @HiveField(20, defaultValue: false)
   late bool hasSeededEmotions;
 
+  // @HiveField(21, defaultValue: false)
+
+  @HiveField(22, defaultValue: 4)
+  late int dayFeedColumnCount;
+
+  @HiveField(23, defaultValue: 1)
+  late int dayFeedMindCellSpan;
+
+  @HiveField(24, defaultValue: true)
+  late bool isDayFeedMindTextVisible;
+
+  // @HiveField(25, defaultValue: true)
+
+  @HiveField(26, defaultValue: <String>[])
+  late List<String> hiddenSettingsItemIds;
+
+  @HiveField(27, defaultValue: <String>[])
+  late List<String> shakeDiscoveredScreenIds;
+
+  @HiveField(28, defaultValue: <String>[])
+  late List<String> insightsWidgetOrder;
+
+  @HiveField(29, defaultValue: <String>[])
+  late List<String> hiddenInsightsWidgetIds;
+
+  @HiveField(30, defaultValue: 1)
+  late int insightsPeriodIndex;
+
+  @HiveField(31, defaultValue: 4)
+  late int calendarColumnCount;
+
+  @HiveField(32, defaultValue: true)
+  late bool isCalendarMindTextVisible;
+
+  @HiveField(33, defaultValue: true)
+  late bool isCalendarMediaVisible;
+
+  // @HiveField(34) held the removed "hide empty days" flag; never reuse it.
+  @HiveField(35, defaultValue: 1)
+  late int storyTextureAnimationIndex;
+
+  @HiveField(36, defaultValue: 1)
+  late int storyDateLayoutIndex;
+
+  @HiveField(37, defaultValue: true)
+  late bool isStorySpectrumVisible;
+
+  @HiveField(38, defaultValue: 1.0)
+  late double storySensitivity;
+
+  @HiveField(39)
+  late String? avatarEmoji;
+
+  @HiveField(40)
+  late String? avatarImagePath;
+
+  @HiveField(41, defaultValue: 0)
+  late int mindEmotionsPromptIndex;
+
+  @HiveField(42, defaultValue: 0)
+  late int tileEmojiMotionIndex;
+
+  @HiveField(43, defaultValue: 0)
+  late int gridResizeAnimationIndex;
+
+  @HiveField(44, defaultValue: 0)
+  late int dayFeedSortOrderIndex;
+
+  @HiveField(45, defaultValue: 0)
+  late int dayFeedGroupingIndex;
+
+  @HiveField(46, defaultValue: 0)
+  late int calendarSortOrderIndex;
+
+  @HiveField(47, defaultValue: 0)
+  late int calendarGroupingIndex;
+
+  @HiveField(48, defaultValue: <String>[])
+  late List<String> hiddenMediaIds;
+
+  @HiveField(49, defaultValue: true)
+  late bool isAnalyticsEnabled;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
-        isMindContentVisible: isMindContentVisible,
         previousAppVersion: previousAppVersion,
         shouldShowTitles: shouldShowTitles,
         themePreference: themePreferenceIndex < 0
@@ -84,13 +163,47 @@ final class SettingsObject extends HiveObject {
         dataSchemaVersion: dataSchemaVersion,
         hasSeenLazyOnboarding: hasSeenLazyOnboarding,
         isDebugMenuVisible: isDebugMenuVisible,
-        isPhotoVideoSourceEnabled: isPhotoVideoSourceEnabled,
         isWeatherSourceEnabled: isWeatherSourceEnabled,
         weatherLatitude: weatherLatitude,
         weatherLongitude: weatherLongitude,
-        isMediaFolderSourceEnabled: isMediaFolderSourceEnabled,
         mediaFolderPath: mediaFolderPath,
         isMediaFolderRecursive: isMediaFolderRecursive,
         hasSeededEmotions: hasSeededEmotions,
+        dayFeed: DayFeedSettings(
+          columnCount: dayFeedColumnCount,
+          mindCellSpan: dayFeedMindCellSpan,
+          isMindTextVisible: isDayFeedMindTextVisible,
+          sortOrder: FeedSortOrder.values.elementAtOrNull(dayFeedSortOrderIndex) ?? FeedSortOrder.time,
+          grouping: FeedGrouping.values.elementAtOrNull(dayFeedGroupingIndex) ?? FeedGrouping.none,
+        ),
+        hiddenSettingsItemIds: hiddenSettingsItemIds.toSet(),
+        hiddenMediaIds: hiddenMediaIds.toSet(),
+        isAnalyticsEnabled: isAnalyticsEnabled,
+        shakeDiscoveredScreenIds: shakeDiscoveredScreenIds.toSet(),
+        insights: InsightsSettings(
+          widgetOrder: insightsWidgetOrder,
+          hiddenWidgetIds: hiddenInsightsWidgetIds.toSet(),
+          periodIndex: insightsPeriodIndex,
+        ),
+        calendar: CalendarSettings(
+          columnCount: calendarColumnCount,
+          isMindTextVisible: isCalendarMindTextVisible,
+          isMediaVisible: isCalendarMediaVisible,
+          sortOrder: FeedSortOrder.values.elementAtOrNull(calendarSortOrderIndex) ?? FeedSortOrder.time,
+          grouping: FeedGrouping.values.elementAtOrNull(calendarGroupingIndex) ?? FeedGrouping.none,
+        ),
+        story: StorySettings(
+          textureAnimation:
+              StoryTextureAnimation.values.elementAtOrNull(storyTextureAnimationIndex) ?? StoryTextureAnimation.pulse,
+          dateLayout: StoryDateLayout.values.elementAtOrNull(storyDateLayoutIndex) ?? StoryDateLayout.twoLines,
+          isSpectrumVisible: isStorySpectrumVisible,
+          sensitivity: storySensitivity,
+        ),
+        avatar: UserAvatar(emoji: avatarEmoji, imagePath: avatarImagePath),
+        mindEmotionsPrompt:
+            MindEmotionsPrompt.values.elementAtOrNull(mindEmotionsPromptIndex) ?? MindEmotionsPrompt.afterSave,
+        tileEmojiMotion: TileEmojiMotion.values.elementAtOrNull(tileEmojiMotionIndex) ?? TileEmojiMotion.drift,
+        gridResizeAnimation:
+            GridResizeAnimation.values.elementAtOrNull(gridResizeAnimationIndex) ?? GridResizeAnimation.fly,
       );
 }

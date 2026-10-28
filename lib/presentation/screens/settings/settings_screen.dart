@@ -1,13 +1,16 @@
+import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'dart:async';
 import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/domain/constants.dart';
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/domain/services/export_import/models/import_result.dart';
@@ -25,12 +28,27 @@ import 'package:keklist/presentation/screens/actions/actions_screen.dart';
 import 'package:keklist/presentation/screens/appearance_settings/appearance_settings_screen.dart';
 import 'package:keklist/presentation/screens/debug_menu/debug_menu_screen.dart';
 import 'package:keklist/presentation/screens/language_picker/language_picker_screen.dart';
+import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
+import 'package:keklist/presentation/screens/settings/settings_layout.dart';
+import 'package:keklist/presentation/screens/settings/widgets/web_version_rows.dart';
+import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
+import 'package:keklist/presentation/screens/feedback/feedback_sheet.dart';
+import 'package:keklist/presentation/screens/hidden_media/hidden_media_screen.dart';
+import 'package:keklist/presentation/screens/analytics/analytics_settings_screen.dart';
+import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_bloc.dart';
+import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
+import 'package:keklist/presentation/screens/settings/widgets/gallery_index_tile.dart';
 import 'package:keklist/presentation/screens/settings/widgets/password_input_bottom_sheet.dart';
+import 'package:keklist/presentation/screens/settings/widgets/settings_customize_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/tabs_settings/tabs_settings_screen.dart';
-import 'package:keklist/presentation/screens/web_page/web_page_screen.dart';
 import 'package:keklist/presentation/screens/paywall/paywall_bottom_sheet.dart';
 import 'package:keklist/presentation/core/widgets/settings/settings_section.dart';
+import 'package:keklist/presentation/screens/ai/ai_models_screen.dart';
+import 'package:keklist/presentation/screens/ai/ai_personas_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 
 // TODO: move methods from MindBloc to SettingsBloc
 
@@ -41,7 +59,7 @@ final class SettingsScreen extends StatefulWidget {
   SettingsScreenState createState() => SettingsScreenState();
 }
 
-final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
+final class SettingsScreenState extends KekWidgetState<SettingsScreen> with ShakeToTweakMixin {
   //bool _isSensitiveContentShowed = false;
   String? translateLanguageCode;
   int _appBarTapCount = 0;
@@ -49,6 +67,8 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
   bool _isPro = false;
   DateTime? _proNextRenewalDate;
   String? _proPriceString;
+  Set<String> _hiddenItemIds = {};
+  int _hiddenMediaCount = 0;
 
   @override
   void initState() {
@@ -60,6 +80,8 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
           case SettingsDataState state:
             setState(() {
               _isDebugMenuVisible = state.settings.isDebugMenuVisible;
+              _hiddenItemIds = state.settings.hiddenSettingsItemIds;
+              _hiddenMediaCount = state.settings.hiddenMediaIds.length;
             });
             break;
           case SettingsShowMessage state:
@@ -118,138 +140,270 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
   }
 
   @override
+  String get shakeScreenId => ShakeScreenIds.settings;
+
+  @override
+  void onShakeToTweak() {
+    KekSheet.show(
+      context: context,
+      // Built in the sheet's own build, where the sections may subscribe to blocs.
+      builder: (sheetContext) => SettingsCustomizeBottomSheet(sections: _buildSections(sheetContext)),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: GestureDetector(onTap: _handleAppBarTap, child: Text(context.l10n.settings)),
+      extendBodyBehindAppBar: true,
+      appBar: GlassAppBar(
+        centerTitle: true,
+        onTitleTap: _handleAppBarTap,
+        onTitleLongPress: requestTweak,
+        title: Text(context.l10n.settings),
       ),
-      body: SettingsListView(
-        children: [
-          SettingsSectionHeader(context.l10n.userData.toUpperCase()),
-          SettingsSectionCard(
-            children: [
-              ListTile(
-                title: Text(context.l10n.exportData),
-                leading: const Icon(Icons.upload, color: Colors.redAccent),
-                onTap: () => _handleExport(),
-              ),
-              ListTile(
-                title: Text(context.l10n.importData),
-                leading: const Icon(Icons.download, color: Colors.greenAccent),
-                onTap: () => _handleImport(),
-              ),
+      body: StreamBuilder<GalleryIndexProgress>(
+        stream: context.read<GalleryIndexer>().progress,
+        builder: (context, snapshot) => SettingsListView(
+          children: [
+            for (final SettingsSectionModel section in _buildSections(
+              context,
+              isIndexing: snapshot.data?.status == GalleryIndexStatus.indexing,
+            ).visibleExcept(_hiddenItemIds)) ...[
+              SettingsSectionHeader(section.title.toUpperCase()),
+              SettingsSectionCard(children: [for (final SettingsRowModel row in section.rows) row.tile]),
             ],
-          ),
-          const SettingsSectionHeader('APPLICATION'), // TODO: localize
-          SettingsSectionCard(
-            children: [
-              if (!_isPro)
-                ListTile(
-                  title: const Text('keklist PRO'),
-                  leading: const Icon(Icons.handshake, color: Colors.yellowAccent),
-                  trailing: settingsNavTrailing(context),
-                  onTap: () => _openPaywall(),
-                ),
-              ListTile(
-                title: Text(context.l10n.releaseNotes),
-                leading: const Icon(Icons.new_releases, color: Color.fromARGB(255, 191, 188, 191)),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _showWhatsNew(),
-              ),
-              ListTile(
-                title: const Text('Dev Blog [Telegram] [RU]'), // TODO: move to feedback settings (new screen)
-                leading: const Icon(Icons.newspaper, color: Colors.blue),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _openAppNews(),
-              ),
-              ListTile(
-                title: Text(context.l10n.suggestFeature),
-                leading: const Icon(Icons.handyman, color: Colors.green),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _openSuggestFeature(),
-              ),
-              ListTile(
-                title: Text(context.l10n.emailUs),
-                leading: const Icon(Icons.feedback, color: Colors.blueGrey),
-                trailing: settingsNavTrailing(context),
-                onTap: () async => await _openEmailFeedbackForm(),
-              ),
-              if (_isPro) _buildProFooterTile(context),
-            ],
-          ),
-          SettingsSectionHeader(context.l10n.appearance.toUpperCase()),
-          SettingsSectionCard(
-            children: [
-              ListTile(
-                leading: const Icon(Icons.language),
-                title: Text(context.l10n.language),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _showLanguagePicker(),
-              ),
-              ListTile(
-                leading: const Icon(Icons.brightness_medium, color: Colors.grey),
-                title: Text(context.l10n.appearance),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _showAppearanceSettings(),
-              ),
-              ListTile(
-                title: Text(context.l10n.tabsSettings),
-                leading: const Icon(Icons.dashboard, color: Colors.blue),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _showTabsSettings(),
-              ),
-              if (_isDebugMenuVisible)
-                ListTile(
-                  title: Text(context.l10n.debugMenu),
-                  leading: const Icon(Icons.bug_report, color: Colors.orange),
-                  trailing: settingsNavTrailing(context),
-                  onTap: () => _showDebugMenu(),
-                ),
-            ],
-          ),
-          SettingsSectionHeader(context.l10n.about.toUpperCase()),
-          SettingsSectionCard(
-            children: [
-              ListTile(
-                title: Text(context.l10n.sourceCode),
-                leading: const Icon(Icons.code, color: Colors.yellow),
-                trailing: settingsNavTrailing(context),
-                onTap: () async => await _openSourceCode(),
-              ),
-              ListTile(
-                title: Text(context.l10n.termsOfUse),
-                leading: const Icon(Icons.verified_user, color: Colors.grey),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _openTermsOfUse(),
-              ),
-              ListTile(
-                title: Text(context.l10n.privacyPolicy),
-                leading: const Icon(Icons.privacy_tip, color: Colors.grey),
-                trailing: settingsNavTrailing(context),
-                onTap: () => _openPrivacyPolicy(),
-              ),
-              ListTile(
-                title: Text(context.l10n.licenses),
-                leading: const Icon(Icons.description_outlined, color: Colors.grey),
-                trailing: settingsNavTrailing(context),
-                onTap: () => showLicensePage(context: context),
-              ),
-            ],
-          ),
-          SettingsSectionHeader(context.l10n.dangerZone.toUpperCase()),
-          SettingsSectionCard(
-            children: [
-              ListTile(
-                title: Text(context.l10n.clearOnDeviceData),
-                leading: const Icon(Icons.delete_outline, color: Colors.red),
-                onTap: () async => await _clearCache(),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+
+  /// Running jobs get their own section on top while they run; it is never customizable.
+  List<SettingsSectionModel> _buildSections(BuildContext context, {bool isIndexing = false}) => [
+    if (isIndexing)
+      SettingsSectionModel(
+        id: SettingsItemIds.activeTasksSection,
+        title: context.l10n.activeTasks,
+        rows: [_galleryIndexRow(context)],
+      ),
+    // Export, import and wiping belong to the phone that owns the data.
+    if (!kIsPhoneWeb)
+      SettingsSectionModel(
+        id: SettingsItemIds.userDataSection,
+        title: context.l10n.userData,
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.exportData,
+            title: context.l10n.exportData,
+            leading: const Icon(Icons.upload, color: Colors.redAccent),
+            hasChevron: false,
+            onTap: () => _handleExport(),
+          ),
+          _navigationRow(
+            id: SettingsItemIds.importData,
+            title: context.l10n.importData,
+            leading: const Icon(Icons.download, color: Colors.greenAccent),
+            hasChevron: false,
+            onTap: () => _handleImport(),
+          ),
+          if (!isIndexing && GalleryIndexTile.isAvailable(context)) _galleryIndexRow(context),
+          if (!kIsWeb) _hiddenMediaRow(context),
+        ],
+      ),
+    // Models and roles live on the phone, and only while the Chat tab is available.
+    if (!kIsWeb && _isAiChatAvailable(context))
+      SettingsSectionModel(
+        id: SettingsItemIds.aiSection,
+        title: context.l10n.aiTab,
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.aiModels,
+            title: context.l10n.aiModels,
+            leading: const Icon(Icons.memory_rounded, color: Colors.deepPurpleAccent),
+            onTap: () => AiModelsScreen.open(context),
+          ),
+          _navigationRow(
+            id: SettingsItemIds.aiRoles,
+            title: context.l10n.aiRoles,
+            leading: const Icon(Icons.theater_comedy_outlined, color: Colors.purpleAccent),
+            onTap: () => AiPersonasScreen.open(context),
+          ),
+        ],
+      ),
+    // Only the phone serves the web version.
+    if (!kIsWeb)
+      SettingsSectionModel(
+        id: SettingsItemIds.webVersionSection,
+        title: context.l10n.webVersion,
+        rows: webVersionRows(context, context.watch<KeklistWebServer>()),
+      ),
+    SettingsSectionModel(
+      id: SettingsItemIds.supportSection,
+      title: context.l10n.settingsSupport,
+      rows: [
+        if (!_isPro)
+          _navigationRow(
+            id: SettingsItemIds.pro,
+            title: 'keklist PRO',
+            leading: const Icon(Icons.handshake, color: Colors.yellowAccent),
+            onTap: () => _openPaywall(),
+          )
+        else if (!kIsPhoneWeb)
+          SettingsRowModel(id: SettingsItemIds.proStatus, title: 'keklist PRO', tile: _buildProFooterTile(context)),
+        if (!kIsPhoneWeb)
+          _navigationRow(
+            id: SettingsItemIds.tips,
+            title: 'Support keklist',
+            leading: const Icon(Icons.favorite, color: Colors.amber),
+            onTap: () => PaywallBottomSheet.show(context, tipsOnly: true),
+          ),
+        if (TelegramFeedback.isConfigured)
+          _navigationRow(
+            id: SettingsItemIds.leaveFeedback,
+            title: context.l10n.leaveFeedback,
+            leading: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.lightBlueAccent),
+            onTap: () => FeedbackSheet.show(context),
+          ),
+      ],
+    ),
+    SettingsSectionModel(
+      id: SettingsItemIds.appearanceSection,
+      title: context.l10n.appearance,
+      rows: [
+        _navigationRow(
+          id: SettingsItemIds.language,
+          title: context.l10n.language,
+          leading: const Icon(Icons.language),
+          onTap: () => _showLanguagePicker(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.appearance,
+          title: context.l10n.appearance,
+          leading: const Icon(Icons.brightness_medium, color: Colors.grey),
+          onTap: () => _showAppearanceSettings(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.tabsSettings,
+          title: context.l10n.tabsSettings,
+          leading: const Icon(Icons.dashboard, color: Colors.blue),
+          onTap: () => _showTabsSettings(),
+        ),
+        if (!kIsWeb)
+          _navigationRow(
+            id: SettingsItemIds.analytics,
+            title: context.l10n.analytics,
+            leading: const Icon(Icons.query_stats_rounded, color: Colors.tealAccent),
+            onTap: () => AnalyticsSettingsScreen.show(context),
+          ),
+      ],
+    ),
+    SettingsSectionModel(
+      id: SettingsItemIds.aboutSection,
+      title: context.l10n.about,
+      rows: [
+        _navigationRow(
+          id: SettingsItemIds.sourceCode,
+          title: context.l10n.sourceCode,
+          leading: const Icon(Icons.code, color: Colors.yellow),
+          onTap: () async => await _openSourceCode(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.termsOfUse,
+          title: context.l10n.termsOfUse,
+          leading: const Icon(Icons.verified_user, color: Colors.grey),
+          onTap: () => _openTermsOfUse(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.privacyPolicy,
+          title: context.l10n.privacyPolicy,
+          leading: const Icon(Icons.privacy_tip, color: Colors.grey),
+          onTap: () => _openPrivacyPolicy(),
+        ),
+        _navigationRow(
+          id: SettingsItemIds.licenses,
+          title: context.l10n.licenses,
+          leading: const Icon(Icons.description_outlined, color: Colors.grey),
+          onTap: () => showLicensePage(context: context),
+        ),
+      ],
+    ),
+    if (!kIsPhoneWeb)
+      SettingsSectionModel(
+        id: SettingsItemIds.dangerZoneSection,
+        title: context.l10n.dangerZone,
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.clearOnDeviceData,
+            title: context.l10n.clearOnDeviceData,
+            leading: const Icon(Icons.delete_outline, color: Colors.red),
+            hasChevron: false,
+            onTap: () async => await _clearCache(),
+          ),
+        ],
+      ),
+    if (_isDebugMenuVisible)
+      SettingsSectionModel(
+        id: SettingsItemIds.developerSection,
+        title: context.l10n.debugMenu,
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.debugMenu,
+            title: context.l10n.debugMenu,
+            leading: const Icon(Icons.bug_report, color: Colors.orange),
+            onTap: () => _showDebugMenu(),
+          ),
+        ],
+      ),
+  ];
+
+  SettingsRowModel _hiddenMediaRow(BuildContext context) => SettingsRowModel(
+    id: SettingsItemIds.hiddenMedia,
+    title: context.l10n.hiddenMedia,
+    leading: const Icon(Icons.visibility_off_outlined),
+    tile: ListTile(
+      title: Text(context.l10n.hiddenMedia),
+      leading: const Icon(Icons.visibility_off_outlined),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 4.0,
+        children: [
+          if (_hiddenMediaCount > 0) Text('$_hiddenMediaCount', style: TextStyle(color: Theme.of(context).hintColor)),
+          settingsNavTrailing(context),
+        ],
+      ),
+      onTap: () => Navigator.of(
+        context,
+      ).push<void>(SwipeablePageRoute<void>(builder: (BuildContext context) => const HiddenMediaScreen())),
+    ),
+  );
+
+  SettingsRowModel _galleryIndexRow(BuildContext context) => SettingsRowModel(
+    id: SettingsItemIds.galleryIndex,
+    title: context.l10n.galleryIndex,
+    tile: const GalleryIndexTile(),
+  );
+
+  bool _isAiChatAvailable(BuildContext context) => context.select<TabsContainerBloc, bool>(
+    (bloc) => [...bloc.state.selectedTabs, ...bloc.state.hiddenTabs].any((tab) => tab.type == TabType.ai),
+  );
+
+  SettingsRowModel _navigationRow({
+    required String id,
+    required String title,
+    required Widget leading,
+    required VoidCallback onTap,
+    bool hasChevron = true,
+  }) => SettingsRowModel(
+    id: id,
+    title: title,
+    leading: leading,
+    tile: ListTile(
+      title: Text(title),
+      leading: leading,
+      trailing: hasChevron ? settingsNavTrailing(context) : null,
+      onTap: onTap,
+    ),
+  );
 
   Widget _buildProFooterTile(BuildContext context) {
     final Locale locale = Localizations.localeOf(context);
@@ -271,26 +425,8 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
     Navigator.of(context).push(SwipeablePageRoute(builder: (context) => const LanguagePickerScreen()));
   }
 
-  Future<void> _openEmailFeedbackForm() async {
-    final Uri uri = Uri(
-      scheme: 'mailto',
-      path: KeklistConstants.feedbackEmail,
-      query: 'subject=Feedback about keklist',
-    );
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
-  }
-
   Future<void> _openSourceCode() async {
     final Uri uri = Uri.parse(KeklistConstants.sourceCodeURL);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
-  }
-
-  Future<void> _openSuggestFeature() async {
-    final Uri uri = Uri.parse(KeklistConstants.featureSuggestionsURL);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     }
@@ -310,13 +446,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
     }
   }
 
-  Future<void> _openAppNews() async {
-    final Uri uri = Uri.parse(KeklistConstants.newsTelegramChannelURL);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
-
   Future<void> _openPaywall() async {
     final purchased = await PaywallBottomSheet.show(context);
     if (purchased) sendEventToBloc<MembershipBloc>(const MembershipRefreshEvent());
@@ -331,15 +460,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
   // void _switchShowTitles(bool value) {
   //   sendEventToBloc<SettingsBloc>(SettingsUpdateShouldShowTitlesMode(value: value));
   // }
-
-  void _showWhatsNew() {
-    Navigator.of(context).push<void>(
-      SwipeablePageRoute<void>(
-        builder: (BuildContext context) =>
-            WebPageScreen(title: context.l10n.whatsNew, initialUri: Uri.parse(KeklistConstants.whatsNewURL)),
-      ),
-    );
-  }
 
   void _showTabsSettings() {
     Navigator.of(
@@ -398,7 +518,6 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
 
     final minds = switch (mindState) {
       MindList list => list.values,
-      MindSearching searching => searching.allValues,
       _ => <Mind>[],
     };
 
@@ -408,9 +527,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
     final audioFiles = <String>{};
     for (final mind in minds) {
       final noteContent = MindNoteContent.parse(mind.note);
-      for (final audioPiece in noteContent.audioPieces) {
-        audioFiles.add(audioPiece.appRelativeAbsoulutePath);
-      }
+      audioFiles.addAll(noteContent.mediaFilePaths);
     }
     final audioFilesCount = audioFiles.length;
 
@@ -436,7 +553,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> {
 
       SettingsExportAction? selectedAction;
 
-      await showModalBottomSheet<void>(
+      await KekSheet.show<void>(
         context: context,
         builder: (context) => ActionsScreen(
           actions: [

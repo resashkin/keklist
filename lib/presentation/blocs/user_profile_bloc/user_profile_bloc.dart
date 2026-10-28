@@ -1,126 +1,64 @@
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:keklist/domain/constants.dart';
-import 'package:keklist/domain/repositories/mind/mind_repository.dart';
-import 'package:keklist/domain/repositories/settings/settings_repository.dart';
-import 'package:keklist/domain/services/entities/mind.dart';
-import 'package:keklist/presentation/core/dispose_bag.dart';
-import 'package:uuid/uuid.dart';
+import 'dart:io';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/domain/repositories/settings/settings_repository.dart';
+import 'package:keklist/presentation/core/dispose_bag.dart';
+import 'package:keklist/presentation/core/helpers/media_sources.dart';
+
+/// The name and avatar shown in the insights header; both stay on this device.
 final class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> with DisposeBag {
   final SettingsRepository _settingsRepository;
-  final MindRepository _mindRepository;
+  final AppFileRepository _fileRepository;
 
-  UserProfileBloc({
-    required SettingsRepository settingsRepository,
-    required MindRepository mindRepository,
-  })  : _settingsRepository = settingsRepository,
-        _mindRepository = mindRepository,
-        super(
-          UserProfileState(
-            nickname: '',
-            folders: [],
-          ),
-        ) {
+  UserProfileBloc({required SettingsRepository settingsRepository, required AppFileRepository fileRepository})
+    : _settingsRepository = settingsRepository,
+      _fileRepository = fileRepository,
+      super(const UserProfileState(nickname: null, avatarEmoji: null, avatarImagePath: null)) {
     on<UserProfileGet>(_getUserProfile);
     on<UserProfileUpdateNickName>(_updateNickName);
-    on<UserProfileAddFolderMind>(_addFolderMind);
+    on<UserProfileUpdateAvatar>(_updateAvatar);
 
     _settingsRepository.stream
-        .map((settings) => settings.userName)
+        .map((settings) => (settings.userName, settings.avatar))
         .distinct()
-        .listen((userName) async => add(UserProfileGet()))
+        .listen((_) => add(UserProfileGet()))
         .disposed(by: this);
   }
 
   @override
   Future<void> close() {
     cancelSubscriptions();
-
     return super.close();
   }
 
-  // On-Events
-
   Future<void> _getUserProfile(UserProfileGet event, Emitter<UserProfileState> emit) async {
-    // final List<Mind> folders =
-    //     (await _mindRepository.obtainMindsWhere((mind) => mind.dayIndex == KeklistConstants.foldersDayIndex))
-    //         .toList(growable: false);
+    final KeklistSettings settings = _settingsRepository.value;
+    final String? imagePath = settings.avatar.imagePath;
+    final String? image = imagePath == null ? null : await _fileRepository.resolveAbsolutePath(imagePath);
     emit(
       UserProfileState(
-        nickname: _settingsRepository.value.userName,
-        folders: [],
+        nickname: settings.userName,
+        avatarEmoji: settings.avatar.emoji,
+        avatarImagePath: image != null && (isRemoteMediaPath(image) || File(image).existsSync()) ? image : null,
       ),
     );
   }
 
-  Future<void> _updateNickName(
-    UserProfileUpdateNickName event,
-    Emitter<UserProfileState> emit,
-  ) async {
-    await _settingsRepository.updateUserName(event.nickName);
-    emit(
-      UserProfileState(
-        nickname: state.nickname,
-        folders: state.folders,
-      ),
-    );
+  Future<void> _updateNickName(UserProfileUpdateNickName event, Emitter<UserProfileState> emit) async {
+    await _settingsRepository.updateUserName(event.nickName.trim());
   }
 
-  Future<void> _addFolderMind(
-    UserProfileAddFolderMind event,
-    Emitter<UserProfileState> emit,
-  ) async {
-    final Mind mind = await _mindRepository.createMind(
-      mind: Mind(
-        id: const Uuid().v4(),
-        dayIndex: 0,
-        note: event.note,
-        emoji: event.emoji,
-        creationDate: DateTime.now().toUtc(),
-        sortIndex: 0,
-        rootId: null,
-      ),
-    );
-    emit(
-      UserProfileState(
-        nickname: state.nickname,
-        folders: state.folders.concat([mind]),
-      ),
-    );
+  Future<void> _updateAvatar(UserProfileUpdateAvatar event, Emitter<UserProfileState> emit) async {
+    final File? photo = event.photo;
+    final String? imagePath = photo == null ? null : await _fileRepository.saveAvatarImage(photo);
+    await _settingsRepository.updateUserAvatar(UserAvatar(emoji: event.emoji, imagePath: imagePath));
   }
-
-  // Private functions
-
-  // Future<List<String>> _getSuggestionEmojies() async {
-  //   final Iterable<Mind> minds = await _mindRepository.obtainMinds();
-  //   final List<String> predictedEmojies = minds
-  //       .map((mind) => mind.emoji)
-  //       .toList()
-  //       .distinct()
-  //       .sorted((emoji1, emoji2) => minds
-  //           .where((mind) => mind.emoji == emoji2)
-  //           .length
-  //           .compareTo(minds.where((mind) => mind.emoji == emoji1).length))
-  //       .toList(growable: false);
-  //   return predictedEmojies;
-  // }
 }
-
-// Events.
 
 abstract class UserProfileEvent {}
 
-final class UserProfileGet extends UserProfileEvent {
-  UserProfileGet();
-}
-
-final class UserProfileAddFolderMind extends UserProfileEvent {
-  final String emoji;
-  final String note;
-
-  UserProfileAddFolderMind({required this.emoji, required this.note});
-}
+final class UserProfileGet extends UserProfileEvent {}
 
 final class UserProfileUpdateNickName extends UserProfileEvent {
   final String nickName;
@@ -128,14 +66,19 @@ final class UserProfileUpdateNickName extends UserProfileEvent {
   UserProfileUpdateNickName({required this.nickName});
 }
 
-// State.
+/// A photo, an emoji, or neither to fall back to the name's initial.
+final class UserProfileUpdateAvatar extends UserProfileEvent {
+  final String? emoji;
+  final File? photo;
+
+  UserProfileUpdateAvatar({this.emoji, this.photo});
+}
 
 final class UserProfileState {
   final String? nickname;
-  final List<Mind> folders;
+  final String? avatarEmoji;
+  /// A local file, or a URL in the web version.
+  final String? avatarImagePath;
 
-  UserProfileState({
-    required this.nickname,
-    required this.folders,
-  });
+  const UserProfileState({required this.nickname, required this.avatarEmoji, required this.avatarImagePath});
 }

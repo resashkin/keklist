@@ -9,6 +9,224 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Самый яркий период';
+
+  @override
+  String get insightsPeriodWeek => 'Неделя';
+
+  @override
+  String get insightsPeriodMonth => 'Месяц';
+
+  @override
+  String get insightsPeriodYear => 'Год';
+
+  @override
+  String get insightsPeriodAllTime => 'Всё время';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return '$delta к прошлой неделе';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return '$delta к прошлому месяцу';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return '$delta к прошлому году';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Сводка';
+
+  @override
+  String get insightsCategoryEmotions => 'Эмоции';
+
+  @override
+  String get insightsCategoryActivity => 'Активность';
+
+  @override
+  String get insightsCategoryMemories => 'Воспоминания';
+
+  @override
+  String get insightsCategoryMedia => 'Медиа';
+
+  @override
+  String get insightsCounters => 'В цифрах';
+
+  @override
+  String get insightsMinds => 'Заметки';
+
+  @override
+  String get insightsActiveDays => 'Активные дни';
+
+  @override
+  String get insightsWords => 'Слова';
+
+  @override
+  String get insightsBrightestDay => 'Самый яркий день';
+
+  @override
+  String get insightsBrightestWeek => 'Самая яркая неделя';
+
+  @override
+  String get insightsBrightestMonth => 'Самый яркий месяц';
+
+  @override
+  String get insightsBrightestYear => 'Самый яркий год';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'заметок: $minds · эмоций: $emotions · медиа: $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Эмоции';
+
+  @override
+  String get insightsEmotionTrend => 'Динамика эмоций';
+
+  @override
+  String get insightsEmotionPairs => 'Эмоции вместе';
+
+  @override
+  String get insightsEmotionRhythm => 'Эмоциональный ритм';
+
+  @override
+  String get insightsByWeekday => 'По дням недели';
+
+  @override
+  String get insightsByDayPart => 'По времени суток';
+
+  @override
+  String get insightsNight => 'Ночь';
+
+  @override
+  String get insightsMorning => 'Утро';
+
+  @override
+  String get insightsAfternoon => 'День';
+
+  @override
+  String get insightsEvening => 'Вечер';
+
+  @override
+  String get insightsStreak => 'Серия';
+
+  @override
+  String get insightsStreakLabel => 'дней подряд';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Рекорд: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing =>
+      'Добавьте заметку сегодня, чтобы не прервать серию';
+
+  @override
+  String get insightsHeatmap => 'Карта активности';
+
+  @override
+  String get insightsActivityTime => 'Время суток';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Чаще всего около $hour';
+  }
+
+  @override
+  String get insightsOnThisDay => 'Что было тогда';
+
+  @override
+  String get insightsMediaCounters => 'Медиа';
+
+  @override
+  String get insightsPhotos => 'Фото';
+
+  @override
+  String get insightsVideos => 'Видео';
+
+  @override
+  String get insightsVoiceNotes => 'Голосовые';
+
+  @override
+  String get insightsRoundVideos => 'Кружочки';
+
+  @override
+  String get insightsEmptyPeriod => 'В этом периоде пока нет заметок';
+
+  @override
+  String get insightsEmptyEmotions =>
+      'Отмечайте эмоции в заметках, чтобы увидеть это';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Отметьте в заметке две эмоции, чтобы увидеть пары';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Неделю, месяц, полгода и год назад пока ничего нет';
+
+  @override
+  String get insightsEmptyRoundVideos =>
+      'За этот период нет голосовых и кружков';
+
+  @override
+  String get insightsEmptyStreak =>
+      'Добавьте заметку сегодня, чтобы начать серию';
+
+  @override
+  String get insightsCustomize => 'Настроить аналитику';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Включайте и выключайте карточки, перетаскивайте для порядка';
+
+  @override
+  String get insightsResetLayout => 'Сбросить';
+
+  @override
+  String get activeTasks => 'Активные задачи';
+
+  @override
+  String get galleryIndex => 'Индекс галереи';
+
+  @override
+  String get galleryIndexNoAccess => 'Нет доступа к Фото';
+
+  @override
+  String get galleryIndexNotIndexed => 'Ещё не проиндексировано';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Индексация $done из $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count фото и видео · обновлено $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Кеш миниатюр: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Пересобрать индекс галереи?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Миниатюры будут удалены, а медиатека просканирована заново.';
+
+  @override
+  String get galleryIndexRebuild => 'Пересобрать';
+
+  @override
   String get settings => 'Настройки';
 
   @override
@@ -66,9 +284,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get showDigest => 'Показать сводку для ...';
 
   @override
-  String get showAll => 'Показать все';
-
-  @override
   String get translateToEnglish => 'Перевести на английский';
 
   @override
@@ -99,19 +314,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tabsSettings => 'Настройки вкладок';
 
   @override
-  String get whatsNew => 'Что нового?';
-
-  @override
-  String get releaseNotes => 'История версий';
-
-  @override
-  String get suggestFeature => 'Предложить функцию';
-
-  @override
   String get sendFeedback => 'Отправить отзыв';
-
-  @override
-  String get emailUs => 'Напишите нам на email';
 
   @override
   String get clearOfflineDataWarning =>
@@ -145,13 +348,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile => 'Профиль';
 
   @override
-  String get insights => 'Аналитика';
+  String get insights => 'Профиль';
 
   @override
   String get calendar => 'Календарь';
 
   @override
-  String get debugMenu => 'Меню отладки';
+  String get debugMenu => 'Меню разработчика';
 
   @override
   String get discussion => 'Обсуждение';
@@ -161,9 +364,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get dangerZone => 'Опасная зона';
-
-  @override
-  String get editMind => 'Редактировать заметку';
 
   @override
   String get enterTokenHere => 'Введите токен здесь';
@@ -190,13 +390,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get send => 'ОТПРАВИТЬ';
 
   @override
-  String get updateYourNickname => 'Обновите ваш никнейм';
-
-  @override
-  String get yourNickname => 'Ваш никнейм';
-
-  @override
-  String get create => 'Написать';
+  String get create => 'Создать';
 
   @override
   String get yourFolderName => 'Название вашей папки';
@@ -217,33 +411,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get minds => 'Заметки';
 
   @override
-  String get searchForYourNotes => 'Поиск ваших заметок';
-
-  @override
   String get searchYourEmoji => 'Поиск вашего эмодзи...';
 
   @override
   String get writeSomething => 'Напишите что-нибудь...';
 
   @override
-  String get topMinds => 'Топ заметок';
-
-  @override
   String get todayMinds => 'Сегодняшние заметки';
-
-  @override
-  String get randomMind => 'Случайная заметка';
-
-  @override
-  String get spectrum => 'Спектр';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
       'Вы еще не собрали ни одной записи';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Пожалуйста, пройдите аутентификацию для отображения содержимого вашей заметки';
 
   @override
   String get areYouSure => 'Вы уверены?';
@@ -274,14 +452,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get calendarDescription => 'Главный экран с календарем записей';
 
   @override
-  String get insightsDescription => 'Статистика всех ваших записей';
+  String get insightsDescription => 'Вы и статистика ваших записей';
 
   @override
   String get settingsDescription =>
       'Экран со всеми настройками (темный режим, синхронизация и т.д.)';
-
-  @override
-  String get profileDescription => 'Экран с вашим профилем';
 
   @override
   String get todayDescription => 'Только сегодняшние заметки';
@@ -292,11 +467,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noMindsForThisDay => 'Нет заметок за этот день';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return 'Показать заметки за $period';
-  }
 
   @override
   String get week => 'Неделя';
@@ -428,34 +598,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Чтобы создать новую заметку, нажмите \'Написать\'';
 
   @override
-  String get viewPhotos => 'Посмотреть фото';
-
-  @override
   String get noPhotosForDay => 'Нет фотографий за этот день';
-
-  @override
-  String get dateGallerySubtitle => 'Медиафайлы за этот день';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count медиафайлов за этот день';
-  }
-
-  @override
-  String get sources => 'Источники';
-
-  @override
-  String get sourcesMinds => 'Мысли';
-
-  @override
-  String get sourcesMindsSubtitle => 'Ваши мысли и моменты';
-
-  @override
-  String get sourcesPhotoVideo => 'Фото и видео';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Фотографии и видео устройства за этот день';
 
   @override
   String get sourcesMediaFolder => 'Медиафайлы';
@@ -465,12 +608,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'Медиафайлы';
-
-  @override
-  String get mediaFolderNoPath => 'Папка не выбрана';
-
-  @override
-  String get mediaFolderPickFolder => 'Выбрать папку';
 
   @override
   String get licenses => 'Лицензии';
@@ -492,9 +629,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get weatherSaveLocation => 'Сохранить местоположение';
-
-  @override
-  String get weatherNoLocation => 'Укажите местоположение в настройках погоды';
 
   @override
   String get weatherUseMyLocation => 'Использовать моё местоположение';
@@ -520,21 +654,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Доступ к геолокации заблокирован. Открываю настройки приложения.';
-
-  @override
-  String get weatherTemperature => 'Температура';
-
-  @override
-  String get weatherUvIndex => 'УФ-индекс';
-
-  @override
-  String get weatherHumidity => 'Влажность';
-
-  @override
-  String get weatherWindSpeed => 'Скорость ветра';
-
-  @override
-  String get weatherPrecipitation => 'Осадки';
 
   @override
   String get audioRecordTitle => 'Запись аудио';
@@ -565,12 +684,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'Не удалось остановить запись. Попробуйте ещё раз.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {
@@ -619,12 +732,6 @@ class AppLocalizationsRu extends AppLocalizations {
       'Эта эмоция используется в некоторых миндах. Архивируйте, чтобы сохранить её там, или удалите везде.';
 
   @override
-  String get emotionPickHint => 'Нажмите, чтобы отметить';
-
-  @override
-  String get emotionDrillHint => 'удерживайте, чтобы углубиться';
-
-  @override
   String get noEmotionsYet => 'Пока нет эмоций';
 
   @override
@@ -633,4 +740,573 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get deleteEmotionMessage =>
       'Удалить эту эмоцию? Она будет удалена из всех минд, где используется.';
+
+  @override
+  String get dayFeedTileSettings => 'Настройки плиток';
+
+  @override
+  String get dayFeedColumns => 'Колонки';
+
+  @override
+  String get dayFeedMindTileSize => 'Размер плитки минда';
+
+  @override
+  String get dayFeedMindTileSquare => 'Квадрат';
+
+  @override
+  String get dayFeedMindTileWide => 'Широкая';
+
+  @override
+  String get dayFeedShowMindText => 'Показывать текст';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Разрешите доступ к фото, чтобы видеть здесь фото и видео';
+
+  @override
+  String get dayFeedAllowAccess => 'Разрешить';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Выберите папку с медиа, чтобы видеть здесь фото и видео';
+
+  @override
+  String get dayFeedChooseFolder => 'Выбрать';
+
+  @override
+  String get holdToRecordAudio => 'Удерживайте, чтобы записать голосовое';
+
+  @override
+  String get holdToRecordVideo => 'Удерживайте, чтобы записать видеосообщение';
+
+  @override
+  String get roundVideoRecordError => 'Не удалось записать видео';
+
+  @override
+  String get roundVideoCameraUnavailable =>
+      'Камера недоступна на этом устройстве';
+
+  @override
+  String get roundVideoRetake => 'Переснять';
+
+  @override
+  String get roundVideoUse => 'Использовать';
+
+  @override
+  String get removeMedia => 'Удалить медиа';
+
+  @override
+  String get shakeToCustomize => 'Встряхните, чтобы настроить';
+
+  @override
+  String get shakeToCustomizeHint => 'или удерживайте заголовок';
+
+  @override
+  String get customizeSettings => 'Настройка экрана';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Снятые разделы и пункты скрываются с экрана настроек.';
+
+  @override
+  String get calendarSettings => 'Настройки календаря';
+
+  @override
+  String get calendarShowMedia => 'Показывать фото и видео';
+
+  @override
+  String get calendarWeekTitles => 'Заголовки недель';
+
+  @override
+  String get calendarPlayStories => 'Смотреть истории';
+
+  @override
+  String get storyBackgroundTweak => 'Фон историй';
+
+  @override
+  String get storyAnimationOff => 'Выкл';
+
+  @override
+  String get storyAnimationPulse => 'Пульс';
+
+  @override
+  String get storyAnimationWave => 'Волна';
+
+  @override
+  String get storyAnimationEqualizer => 'Эквалайзер';
+
+  @override
+  String get storyAnimationDrift => 'Дрейф';
+
+  @override
+  String get storyAnimationGlow => 'Свечение';
+
+  @override
+  String get viewerCommentHint => 'Комментарий…';
+
+  @override
+  String get calendarToCurrentWeek => 'К текущей неделе';
+
+  @override
+  String get storyDateLines => 'Строки даты';
+
+  @override
+  String get storyTextureTitle => 'Текстура';
+
+  @override
+  String get storySpectrum => 'Спектр звука';
+
+  @override
+  String get storySensitivity => 'Чувствительность';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Осознанно $count дня',
+      many: 'Осознанно $count дней',
+      few: 'Осознанно $count дня',
+      one: 'Осознанно $count день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Имя';
+
+  @override
+  String get profilePhoto => 'Фото';
+
+  @override
+  String get profileEmoji => 'Эмодзи';
+
+  @override
+  String get profileInitial => 'Буква';
+
+  @override
+  String get webVersion => 'Доступ по Wi‑Fi';
+
+  @override
+  String get webVersionAddressHint =>
+      'Откройте в браузере компьютера в той же Wi‑Fi; keklist должен быть открыт';
+
+  @override
+  String get webVersionCopied => 'Адрес скопирован';
+
+  @override
+  String get webVersionStarting => 'Запуск…';
+
+  @override
+  String get webVersionNoWifi =>
+      'Подключитесь к Wi‑Fi, чтобы открыть keklist в браузере.';
+
+  @override
+  String get webVersionNoBundle => 'В эту сборку не входит веб-версия.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => 'Каждый браузер спрашивает его раз в 30 дней';
+
+  @override
+  String get webVersionPinNotSet => 'Не задан';
+
+  @override
+  String get webVersionPinHint => '4–8 цифр';
+
+  @override
+  String get webVersionRemovePin => 'Удалить PIN';
+
+  @override
+  String get webVersionPort => 'Порт';
+
+  @override
+  String get aiTab => 'Чат';
+
+  @override
+  String get aiTabDescription =>
+      'Обсуждайте свои записи с AI, который работает на телефоне';
+
+  @override
+  String get aiPrivacyNote =>
+      'Работает только на телефоне: записи не покидают устройство.';
+
+  @override
+  String get aiDisclaimer =>
+      'Это не медицинская помощь. Если вы в опасности, обратитесь в экстренные службы.';
+
+  @override
+  String get aiYesterday => 'Вчера';
+
+  @override
+  String get aiNoSessions => 'Сессий пока нет';
+
+  @override
+  String get aiNewSession => 'Новая сессия';
+
+  @override
+  String get aiChooseRole => 'Выберите роль';
+
+  @override
+  String get aiRoleTherapist => 'Терапевт';
+
+  @override
+  String get aiRoleCoach => 'Коуч';
+
+  @override
+  String get aiRoleFriend => 'Друг';
+
+  @override
+  String get aiMessageHint => 'Сообщение';
+
+  @override
+  String get aiStarterWeek => 'Как прошла моя неделя?';
+
+  @override
+  String get aiStarterWorry => 'Что меня тревожит в последнее время?';
+
+  @override
+  String get aiStarterJoy => 'Что меня радовало в последнее время?';
+
+  @override
+  String get aiActionSaveAsMind => 'Сохранить как майнд';
+
+  @override
+  String get aiActionOpenDay => 'Открыть день';
+
+  @override
+  String get aiActionWeekSummary => 'Сводка недели';
+
+  @override
+  String get aiWeekSummaryPrompt =>
+      'Подведи итог моих последних 7 дней: что происходило, что я чувствовал, что выделялось.';
+
+  @override
+  String get aiSavedAsMind => 'Сохранено в сегодня';
+
+  @override
+  String get aiStop => 'Стоп';
+
+  @override
+  String get aiNoModelTitle => 'Выберите модель';
+
+  @override
+  String get aiNoModelMessage =>
+      'Скачайте модель, чтобы начать. Она работает на телефоне, без интернета.';
+
+  @override
+  String get aiNoModelOnPhone =>
+      'Скачайте модель в приложении на телефоне: Настройки → AI → Модели.';
+
+  @override
+  String get aiModels => 'Модели';
+
+  @override
+  String get aiRoles => 'Роли';
+
+  @override
+  String get aiDownloaded => 'Скачанные';
+
+  @override
+  String get aiDownloads => 'Скачиваются';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'Поиск GGUF-моделей';
+
+  @override
+  String get aiDownload => 'Скачать';
+
+  @override
+  String get aiPause => 'Пауза';
+
+  @override
+  String get aiPaused => 'На паузе';
+
+  @override
+  String get aiResume => 'Продолжить';
+
+  @override
+  String get aiDownloadFailed => 'Не удалось скачать';
+
+  @override
+  String get aiCellularTitle => 'Скачать через мобильную сеть?';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '$size будет скачано через мобильную сеть.';
+  }
+
+  @override
+  String get aiDeleteModel => 'Удалить модель?';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'На телефоне: $size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'Память телефона: $size';
+  }
+
+  @override
+  String get aiCatalogFailed =>
+      'Не удалось загрузить список. Проверьте подключение.';
+
+  @override
+  String get aiNoFilesFit =>
+      'Ни один файл этой модели не помещается в память телефона.';
+
+  @override
+  String get aiBuiltInRole => 'Встроенные';
+
+  @override
+  String get aiOwnRoles => 'Ваши роли';
+
+  @override
+  String get aiDuplicate => 'Дублировать';
+
+  @override
+  String get aiNewRole => 'Новая роль';
+
+  @override
+  String get aiRoleName => 'Название';
+
+  @override
+  String get aiRoleEmoji => 'Эмодзи';
+
+  @override
+  String get aiRolePrompt => 'Промпт';
+
+  @override
+  String get aiRolePromptHint =>
+      'Как AI должен разговаривать и на чём сосредоточиться';
+
+  @override
+  String get aiReadOnlyRole =>
+      'Встроенные роли нельзя менять. Продублируйте роль, чтобы сделать свою.';
+
+  @override
+  String get aiDeleteSession => 'Удалить сессию?';
+
+  @override
+  String get aiDeleteRole => 'Удалить роль?';
+
+  @override
+  String get aiRecommended => 'Рекомендуем';
+
+  @override
+  String get aiLowQuality => 'Слабое качество';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Эта модель не помещается в память телефона. Выберите модель поменьше.';
+
+  @override
+  String get aiChooseAnotherModel => 'Выбрать другую модель';
+
+  @override
+  String get creatorEmotionsTitle => 'Эмоции';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Спросить после сохранения';
+
+  @override
+  String get creatorEmotionsButton => 'Кнопка над клавиатурой';
+
+  @override
+  String get creatorEmotionsNever => 'Не спрашивать';
+
+  @override
+  String get insightsWeekAgo => 'Неделю назад';
+
+  @override
+  String get insightsMonthAgo => 'Месяц назад';
+
+  @override
+  String get insightsHalfYearAgo => 'Полгода назад';
+
+  @override
+  String get insightsYearAgo => 'Год назад';
+
+  @override
+  String get insightsTwoYearsAgo => '2 года назад';
+
+  @override
+  String get insightsVoiceAndVideos => 'Голосовые и кружки';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return 'Неделя $number';
+  }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши записи прямо на телефоне.';
+
+  @override
+  String get showInGallery => 'Показать в галерее';
+
+  @override
+  String get tileEmojiMotion => 'Движение эмодзи';
+
+  @override
+  String get tileEmojiMotionDrift => 'Дрейф';
+
+  @override
+  String get tileEmojiMotionFloat => 'Покачивание';
+
+  @override
+  String get tileEmojiMotionStill => 'Без движения';
+
+  @override
+  String get gridResizeAnimation => 'Анимация щипка';
+
+  @override
+  String get gridResizeFly => 'Перелёт';
+
+  @override
+  String get gridResizeZoom => 'Зум';
+
+  @override
+  String get gridResizeCrossfade => 'Растворение';
+
+  @override
+  String get feedSortOrder => 'Порядок';
+
+  @override
+  String get feedSortTime => 'По времени';
+
+  @override
+  String get feedSortMindsFirst => 'Сначала записи';
+
+  @override
+  String get feedSortMediaFirst => 'Сначала медиа';
+
+  @override
+  String get feedGrouping => 'Группы';
+
+  @override
+  String get feedGroupingNone => 'Нет';
+
+  @override
+  String get feedGroupingType => 'По типу';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Время дня';
+
+  @override
+  String get feedSectionMinds => 'Записи';
+
+  @override
+  String get feedSectionGallery => 'Галерея';
+
+  @override
+  String get removePhotoTitle => 'Убрать фото';
+
+  @override
+  String get removeVideoTitle => 'Убрать видео';
+
+  @override
+  String get hideMedia => 'Скрыть';
+
+  @override
+  String get hideMediaSubtitle => 'Только из keklist, в галерее останется';
+
+  @override
+  String get deleteFromGallery => 'Удалить из галереи';
+
+  @override
+  String get deleteFromGallerySubtitle => 'Попадёт в «Недавно удалённые»';
+
+  @override
+  String get mediaHidden => 'Скрыто из keklist';
+
+  @override
+  String get mediaShownAgain => 'Снова в keklist';
+
+  @override
+  String get undo => 'Отменить';
+
+  @override
+  String get hiddenMedia => 'Скрытые фото';
+
+  @override
+  String get hiddenMediaHint => 'Нажми на фото, чтобы вернуть его в keklist';
+
+  @override
+  String get hiddenMediaEmpty => 'Ничего не скрыто';
+
+  @override
+  String get leaveFeedback => 'Оставить отзыв';
+
+  @override
+  String get feedbackSend => 'Отправить';
+
+  @override
+  String get feedbackSent => 'Спасибо! Разработчик получил сообщение';
+
+  @override
+  String get feedbackFailed =>
+      'Не удалось отправить. Проверь интернет и попробуй ещё раз';
+
+  @override
+  String get analytics => 'Аналитика';
+
+  @override
+  String get analyticsDescription =>
+      'Анонимная статистика использования помогает понять, что улучшать. Всё, что вы пишете, остаётся на устройстве.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Эта сборка ничего не отправляет: аналитика работает только в сборках из App Store и Google Play.';
+
+  @override
+  String get analyticsSent => 'Что отправляется';
+
+  @override
+  String get analyticsSentItems =>
+      'Какие настройки и твики вы выбираете, какие экраны открываете, версия приложения, платформа и язык, покупки Pro и чаевых, отчёты о сбоях без текста ошибок.';
+
+  @override
+  String get analyticsNeverSent => 'Никогда не отправляется';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Ваши записи, их текст, эмоции и комментарии, фото, видео и аудио, их количество, ваше имя, местоположение и IP-адрес.';
+
+  @override
+  String get analyticsResetId => 'Сбросить анонимный ID';
+
+  @override
+  String get analyticsResetIdDone => 'Теперь используется новый анонимный ID';
+
+  @override
+  String get settingsSupport => 'Поддержка';
+
+  @override
+  String get calendarOpenDay => 'Открыть день';
+
+  @override
+  String get webVersionEnabled => 'Зеркало в браузере';
+
+  @override
+  String get viewerComments => 'Комментарии';
+
+  @override
+  String get viewerNoComments => 'Пока нет комментариев';
+
+  @override
+  String get previousDay => 'Предыдущий день';
+
+  @override
+  String get nextDay => 'Следующий день';
 }

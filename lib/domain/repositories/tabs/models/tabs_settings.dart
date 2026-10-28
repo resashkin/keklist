@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 
@@ -51,16 +51,16 @@ enum TabType implements Equatable {
   calendar,
   insights,
   settings,
-  profile,
   today,
+  ai,
   debugMenu;
 
   String localizedLabel(BuildContext context) => switch (this) {
         TabType.calendar => context.l10n.calendar,
         TabType.insights => context.l10n.insights,
         TabType.settings => context.l10n.settings,
-        TabType.profile => context.l10n.profile,
         TabType.today => context.l10n.today,
+        TabType.ai => context.l10n.aiTab,
         TabType.debugMenu => context.l10n.debugMenu
       };
 
@@ -68,26 +68,26 @@ enum TabType implements Equatable {
         TabType.calendar => context.l10n.calendarDescription,
         TabType.insights => context.l10n.insightsDescription,
         TabType.settings => context.l10n.settingsDescription,
-        TabType.profile => context.l10n.profileDescription,
         TabType.today => context.l10n.todayDescription,
+        TabType.ai => context.l10n.aiTabDescription,
         TabType.debugMenu => context.l10n.debugMenuDescription
       };
 
   Icon get materialIcon => switch (this) {
         TabType.calendar => Icon(Icons.calendar_month),
-        TabType.insights => Icon(Icons.insights),
-        TabType.profile => Icon(Icons.person),
+        TabType.insights => Icon(Icons.person_rounded),
         TabType.settings => Icon(Icons.settings),
         TabType.today => Icon(Icons.today),
+        TabType.ai => Icon(Icons.auto_awesome),
         TabType.debugMenu => Icon(Icons.bug_report)
       };
 
   String get sfSymbolName => switch (this) {
         TabType.calendar => 'calendar',
-        TabType.insights => 'chart.bar.fill',
-        TabType.profile => 'person.crop.circle',
+        TabType.insights => 'person.crop.circle.fill',
         TabType.settings => 'gearshape',
         TabType.today => 'sun.max',
+        TabType.ai => 'sparkles',
         TabType.debugMenu => 'ant',
       };
 

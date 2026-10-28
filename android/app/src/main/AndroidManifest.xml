@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
         android:dataExtractionRules="@xml/data_extraction_rules">
+        <meta-data android:name="com.posthog.posthog.AUTO_INIT" android:value="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -36,6 +37,8 @@
             android:value="2" />
     </application>
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <!-- Location permission for weather feature -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 

@@ -10,7 +10,6 @@ final class MindGetList extends MindEvent {}
 
 final class MindCreate extends MindEvent {
   final int dayIndex;
-  final String emoji;
   final String? rootId;
   final List<BaseMindNotePiece> mindContent;
   final List<String> emotionIds;
@@ -18,14 +17,13 @@ final class MindCreate extends MindEvent {
   MindCreate({
     required this.dayIndex,
     required List<BaseMindNotePiece> mindContent,
-    required this.emoji,
     required this.rootId,
     List<String> emotionIds = const [],
-  })  : mindContent = List<BaseMindNotePiece>.unmodifiable(mindContent),
-        emotionIds = List<String>.unmodifiable(emotionIds);
+  }) : mindContent = List<BaseMindNotePiece>.unmodifiable(mindContent),
+       emotionIds = List<String>.unmodifiable(emotionIds);
 
   @override
-  List<Object?> get props => [dayIndex, mindContent, emoji, rootId, emotionIds];
+  List<Object?> get props => [dayIndex, mindContent, rootId, emotionIds];
 }
 
 /// Replace the set of emotions tagged on a mind (used by the marking sheet —
@@ -58,6 +56,15 @@ final class MindEdit extends MindEvent {
   MindEdit({required this.mind});
 }
 
+final class MindRemoveMedia extends MindEvent {
+  final Mind mind;
+
+  @override
+  List<Object?> get props => [mind];
+
+  MindRemoveMedia({required this.mind});
+}
+
 final class MindEditNote extends MindEvent {
   final String uuid;
   final String newNote;
@@ -65,10 +72,7 @@ final class MindEditNote extends MindEvent {
   @override
   List<Object?> get props => [uuid, newNote];
 
-  MindEditNote({
-    required this.uuid,
-    required this.newNote,
-  });
+  MindEditNote({required this.uuid, required this.newNote});
 }
 
 final class MindEditEmoji extends MindEvent {
@@ -78,28 +82,12 @@ final class MindEditEmoji extends MindEvent {
   @override
   List<Object?> get props => [uuid, newEmoji];
 
-  MindEditEmoji({
-    required this.uuid,
-    required this.newEmoji,
-  });
+  MindEditEmoji({required this.uuid, required this.newEmoji});
 }
 
 final class MindMove extends MindEvent {}
 
 final class MindCopyToNow extends MindEvent {}
-
-final class MindStartSearch extends MindEvent {}
-
-final class MindEnterSearchText extends MindEvent {
-  final String text;
-
-  MindEnterSearchText({required this.text});
-
-  @override
-  List<Object?> get props => [text];
-}
-
-final class MindStopSearch extends MindEvent {}
 
 final class MindClearCache extends MindEvent {}
 

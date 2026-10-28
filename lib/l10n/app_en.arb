@@ -1,4 +1,317 @@
 {
+    "insightsBrightestPeriod": "Brightest period",
+    "@insightsBrightestPeriod": {
+        "description": "Analytics card name in the customize sheet"
+    },
+    "insightsPeriodWeek": "Week",
+    "@insightsPeriodWeek": {
+        "description": "Analytics screen"
+    },
+    "insightsPeriodMonth": "Month",
+    "@insightsPeriodMonth": {
+        "description": "Analytics screen"
+    },
+    "insightsPeriodYear": "Year",
+    "@insightsPeriodYear": {
+        "description": "Analytics screen"
+    },
+    "insightsPeriodAllTime": "All time",
+    "@insightsPeriodAllTime": {
+        "description": "Analytics screen"
+    },
+    "insightsVsLastWeek": "{delta} vs last week",
+    "@insightsVsLastWeek": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "delta": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsVsLastMonth": "{delta} vs last month",
+    "@insightsVsLastMonth": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "delta": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsVsLastYear": "{delta} vs last year",
+    "@insightsVsLastYear": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "delta": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsCategorySummary": "Summary",
+    "@insightsCategorySummary": {
+        "description": "Analytics screen"
+    },
+    "insightsCategoryEmotions": "Emotions",
+    "@insightsCategoryEmotions": {
+        "description": "Analytics screen"
+    },
+    "insightsCategoryActivity": "Activity",
+    "@insightsCategoryActivity": {
+        "description": "Analytics screen"
+    },
+    "insightsCategoryMemories": "Memories",
+    "@insightsCategoryMemories": {
+        "description": "Analytics screen"
+    },
+    "insightsCategoryMedia": "Media",
+    "@insightsCategoryMedia": {
+        "description": "Analytics screen"
+    },
+    "insightsCounters": "In numbers",
+    "@insightsCounters": {
+        "description": "Analytics screen"
+    },
+    "insightsMinds": "Minds",
+    "@insightsMinds": {
+        "description": "Analytics screen"
+    },
+    "insightsActiveDays": "Active days",
+    "@insightsActiveDays": {
+        "description": "Analytics screen"
+    },
+    "insightsWords": "Words",
+    "@insightsWords": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestDay": "Brightest day",
+    "@insightsBrightestDay": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestWeek": "Brightest week",
+    "@insightsBrightestWeek": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestMonth": "Brightest month",
+    "@insightsBrightestMonth": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestYear": "Brightest year",
+    "@insightsBrightestYear": {
+        "description": "Analytics screen"
+    },
+    "insightsBrightestDetails": "{minds} minds · {emotions} emotions · {media} media",
+    "@insightsBrightestDetails": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "minds": {
+                "type": "String"
+            },
+            "emotions": {
+                "type": "String"
+            },
+            "media": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsEmotionDistribution": "Emotions",
+    "@insightsEmotionDistribution": {
+        "description": "Analytics screen"
+    },
+    "insightsEmotionTrend": "Emotion trend",
+    "@insightsEmotionTrend": {
+        "description": "Analytics screen"
+    },
+    "insightsEmotionPairs": "Emotions together",
+    "@insightsEmotionPairs": {
+        "description": "Analytics screen"
+    },
+    "insightsEmotionRhythm": "Emotional rhythm",
+    "@insightsEmotionRhythm": {
+        "description": "Analytics screen"
+    },
+    "insightsByWeekday": "By weekday",
+    "@insightsByWeekday": {
+        "description": "Analytics screen"
+    },
+    "insightsByDayPart": "By time of day",
+    "@insightsByDayPart": {
+        "description": "Analytics screen"
+    },
+    "insightsNight": "Night",
+    "@insightsNight": {
+        "description": "Analytics screen"
+    },
+    "insightsMorning": "Morning",
+    "@insightsMorning": {
+        "description": "Analytics screen"
+    },
+    "insightsAfternoon": "Afternoon",
+    "@insightsAfternoon": {
+        "description": "Analytics screen"
+    },
+    "insightsEvening": "Evening",
+    "@insightsEvening": {
+        "description": "Analytics screen"
+    },
+    "insightsStreak": "Streak",
+    "@insightsStreak": {
+        "description": "Analytics screen"
+    },
+    "insightsStreakLabel": "days in a row",
+    "@insightsStreakLabel": {
+        "description": "Analytics screen"
+    },
+    "insightsLongestStreak": "Longest: {count}",
+    "@insightsLongestStreak": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "count": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsStreakKeepGoing": "Add a mind today to keep it going",
+    "@insightsStreakKeepGoing": {
+        "description": "Analytics screen"
+    },
+    "insightsHeatmap": "Activity map",
+    "@insightsHeatmap": {
+        "description": "Analytics screen"
+    },
+    "insightsActivityTime": "Time of day",
+    "@insightsActivityTime": {
+        "description": "Analytics screen"
+    },
+    "insightsPeakHour": "Most active around {hour}",
+    "@insightsPeakHour": {
+        "description": "Analytics screen",
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsOnThisDay": "Back then",
+    "@insightsOnThisDay": {
+        "description": "Analytics screen"
+    },
+    "insightsMediaCounters": "Media",
+    "@insightsMediaCounters": {
+        "description": "Analytics screen"
+    },
+    "insightsPhotos": "Photos",
+    "@insightsPhotos": {
+        "description": "Analytics screen"
+    },
+    "insightsVideos": "Videos",
+    "@insightsVideos": {
+        "description": "Analytics screen"
+    },
+    "insightsVoiceNotes": "Voice notes",
+    "@insightsVoiceNotes": {
+        "description": "Analytics screen"
+    },
+    "insightsRoundVideos": "Round videos",
+    "@insightsRoundVideos": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyPeriod": "No minds in this period yet",
+    "@insightsEmptyPeriod": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyEmotions": "Tag minds with emotions to see this",
+    "@insightsEmptyEmotions": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyPairs": "Tag a mind with two emotions to see pairs",
+    "@insightsEmptyPairs": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyOnThisDay": "Nothing from a week, a month, half a year or a year ago yet",
+    "@insightsEmptyOnThisDay": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyRoundVideos": "No voice notes or round videos in this period",
+    "@insightsEmptyRoundVideos": {
+        "description": "Analytics screen"
+    },
+    "insightsEmptyStreak": "Add a mind today to start a streak",
+    "@insightsEmptyStreak": {
+        "description": "Analytics screen"
+    },
+    "insightsCustomize": "Customize analytics",
+    "@insightsCustomize": {
+        "description": "Analytics screen"
+    },
+    "insightsCustomizeDescription": "Turn cards on or off and drag to reorder",
+    "@insightsCustomizeDescription": {
+        "description": "Analytics screen"
+    },
+    "insightsResetLayout": "Reset",
+    "@insightsResetLayout": {
+        "description": "Analytics screen"
+    },
+    "activeTasks": "Active tasks",
+    "@activeTasks": {
+        "description": "Settings section shown on top while a background job runs"
+    },
+    "galleryIndex": "Gallery index",
+    "@galleryIndex": {
+        "description": "Settings row for the photo library index"
+    },
+    "galleryIndexNoAccess": "No access to Photos",
+    "@galleryIndexNoAccess": {
+        "description": "Gallery index subtitle when Photos access is missing"
+    },
+    "galleryIndexNotIndexed": "Not indexed yet",
+    "@galleryIndexNotIndexed": {
+        "description": "Gallery index subtitle before the first scan"
+    },
+    "galleryIndexIndexing": "Indexing {done} of {total}",
+    "@galleryIndexIndexing": {
+        "description": "Gallery index subtitle while scanning",
+        "placeholders": {
+            "done": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "galleryIndexReady": "{count} photos and videos · updated {time}",
+    "@galleryIndexReady": {
+        "description": "Gallery index subtitle after a scan",
+        "placeholders": {
+            "count": {
+                "type": "String"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "galleryIndexThumbnails": "Thumbnail cache: {size}",
+    "@galleryIndexThumbnails": {
+        "description": "Size of the on-disk thumbnail cache",
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "galleryIndexRebuildTitle": "Rebuild the gallery index?",
+    "@galleryIndexRebuildTitle": {
+        "description": "Confirm dialog title for rebuilding the gallery index"
+    },
+    "galleryIndexRebuildMessage": "Thumbnails will be cleared and the library scanned again.",
+    "@galleryIndexRebuildMessage": {
+        "description": "Confirm dialog message for rebuilding the gallery index"
+    },
+    "galleryIndexRebuild": "Rebuild",
+    "@galleryIndexRebuild": {
+        "description": "Confirm button that rebuilds the gallery index"
+    },
     "settings": "Settings",
     "@settings": {
         "description": "Settings screen title"
@@ -75,10 +388,6 @@
     "@showDigest": {
         "description": "Show digest action"
     },
-    "showAll": "Show all",
-    "@showAll": {
-        "description": "Show all action"
-    },
     "translateToEnglish": "Translate to English",
     "@translateToEnglish": {
         "description": "Translate to English action"
@@ -119,25 +428,9 @@
     "@tabsSettings": {
         "description": "Tabs settings navigation"
     },
-    "whatsNew": "What's new?",
-    "@whatsNew": {
-        "description": "What's new navigation"
-    },
-    "releaseNotes": "Release notes",
-    "@releaseNotes": {
-        "description": "Release notes navigation"
-    },
-    "suggestFeature": "Suggest a feature",
-    "@suggestFeature": {
-        "description": "Suggest feature navigation"
-    },
     "sendFeedback": "Send feedback",
     "@sendFeedback": {
         "description": "Send feedback navigation"
-    },
-    "emailUs": "Email us",
-    "@emailUs": {
-        "description": "Email us navigation"
     },
     "clearOfflineDataWarning": "All your offline data will be deleted. Make sure that you have already exported it.",
     "@clearOfflineDataWarning": {
@@ -179,7 +472,7 @@
     "@profile": {
         "description": "Profile screen title"
     },
-    "insights": "Insights",
+    "insights": "Profile",
     "@insights": {
         "description": "Insights screen title"
     },
@@ -187,9 +480,9 @@
     "@calendar": {
         "description": "Calendar title"
     },
-    "debugMenu": "Debug Menu",
+    "debugMenu": "Developer menu",
     "@debugMenu": {
-        "description": "Debug menu title"
+        "description": "Settings row and screen title of the hidden developer menu"
     },
     "discussion": "Discussion",
     "@discussion": {
@@ -202,10 +495,6 @@
     "dangerZone": "Danger Zone",
     "@dangerZone": {
         "description": "Danger zone section title"
-    },
-    "editMind": "Edit mind",
-    "@editMind": {
-        "description": "Edit mind dialog title"
     },
     "enterTokenHere": "Enter token here",
     "@enterTokenHere": {
@@ -239,15 +528,7 @@
     "@send": {
         "description": "Send button"
     },
-    "updateYourNickname": "Update your nickname",
-    "@updateYourNickname": {
-        "description": "Update nickname dialog title"
-    },
-    "yourNickname": "Your nickname",
-    "@yourNickname": {
-        "description": "Nickname input hint"
-    },
-    "create": "Write",
+    "create": "Create",
     "@create": {
         "description": "Create button"
     },
@@ -275,10 +556,6 @@
     "@minds": {
         "description": "Minds title"
     },
-    "searchForYourNotes": "Search for your notes",
-    "@searchForYourNotes": {
-        "description": "Search notes hint"
-    },
     "searchYourEmoji": "Search your emoji...",
     "@searchYourEmoji": {
         "description": "Search emoji hint"
@@ -287,29 +564,13 @@
     "@writeSomething": {
         "description": "Write something hint"
     },
-    "topMinds": "Top minds",
-    "@topMinds": {
-        "description": "Top minds title"
-    },
     "todayMinds": "Today minds",
     "@todayMinds": {
         "description": "Today minds title"
     },
-    "randomMind": "Random mind",
-    "@randomMind": {
-        "description": "Random mind title"
-    },
-    "spectrum": "Spectrum",
-    "@spectrum": {
-        "description": "Spectrum title"
-    },
     "youDidNotCollectAnyEntriesYet": "You did not collect any entries yet",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "No entries collected message"
-    },
-    "pleaseAuthenticateToShowContent": "Please authenticate to show content of your mind",
-    "@pleaseAuthenticateToShowContent": {
-        "description": "Authentication required message"
     },
     "areYouSure": "Are you sure?",
     "@areYouSure": {
@@ -347,17 +608,13 @@
     "@calendarDescription": {
         "description": "Calendar tab description"
     },
-    "insightsDescription": "Statistics all yours entries",
+    "insightsDescription": "You and the statistics of your entries",
     "@insightsDescription": {
         "description": "Insights tab description"
     },
     "settingsDescription": "Screen with all settings (dark mode, sync and etc.)",
     "@settingsDescription": {
         "description": "Settings tab description"
-    },
-    "profileDescription": "Screen with your profile",
-    "@profileDescription": {
-        "description": "Profile tab description"
     },
     "todayDescription": "Only today minds",
     "@todayDescription": {
@@ -370,15 +627,6 @@
     "noMindsForThisDay": "No minds for this day",
     "@noMindsForThisDay": {
         "description": "No minds for this day message"
-    },
-    "showMindsForPeriod": "Show minds for {period}",
-    "@showMindsForPeriod": {
-        "description": "Show minds for period message",
-        "placeholders": {
-            "period": {
-                "type": "String"
-            }
-        }
     },
     "week": "Week",
     "@week": {
@@ -544,46 +792,9 @@
     "@onboardingMind6": {
         "description": "Instruction to create new note"
     },
-    "viewPhotos": "View Photos",
-    "@viewPhotos": {
-        "description": "Button text to open gallery for Mind day"
-    },
     "noPhotosForDay": "No photos found for this day",
     "@noPhotosForDay": {
         "description": "Empty state message when day has no photos"
-    },
-    "dateGallerySubtitle": "Media files for this day",
-    "@dateGallerySubtitle": {
-        "description": "Date gallery screen subtitle"
-    },
-    "dayMediaFilesCount": "{count} media files for this day",
-    "@dayMediaFilesCount": {
-        "description": "Subtitle showing count of media files for the day",
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sources": "Sources",
-    "@sources": {
-        "description": "Sources section title"
-    },
-    "sourcesMinds": "Minds",
-    "@sourcesMinds": {
-        "description": "Minds source item title"
-    },
-    "sourcesMindsSubtitle": "Your thoughts and moments",
-    "@sourcesMindsSubtitle": {
-        "description": "Minds source item subtitle"
-    },
-    "sourcesPhotoVideo": "Photo & video",
-    "@sourcesPhotoVideo": {
-        "description": "Photo and video source item title"
-    },
-    "sourcesPhotoVideoSubtitle": "Device photos and videos for this day",
-    "@sourcesPhotoVideoSubtitle": {
-        "description": "Photo and video source item subtitle"
     },
     "sourcesMediaFolder": "Media Files",
     "@sourcesMediaFolder": {
@@ -596,14 +807,6 @@
     "mediaFolderSettings": "Media Files",
     "@mediaFolderSettings": {
         "description": "Media files settings bottom sheet title"
-    },
-    "mediaFolderNoPath": "No folder selected",
-    "@mediaFolderNoPath": {
-        "description": "Message when no media folder is selected"
-    },
-    "mediaFolderPickFolder": "Pick Folder",
-    "@mediaFolderPickFolder": {
-        "description": "Button to pick a media folder"
     },
     "licenses": "Licenses",
     "@licenses": {
@@ -633,10 +836,6 @@
     "@weatherSaveLocation": {
         "description": "Save location button"
     },
-    "weatherNoLocation": "Set location in weather settings to see weather",
-    "@weatherNoLocation": {
-        "description": "Message shown when weather location is not configured"
-    },
     "weatherUseMyLocation": "Use my location",
     "@weatherUseMyLocation": {
         "description": "Button to detect GPS location automatically"
@@ -664,26 +863,6 @@
     "weatherLocationPermissionPermanentlyDenied": "Location permission is permanently denied. Opening app settings.",
     "@weatherLocationPermissionPermanentlyDenied": {
         "description": "Error when location permission is permanently denied"
-    },
-    "weatherTemperature": "Temperature",
-    "@weatherTemperature": {
-        "description": "Temperature parameter label"
-    },
-    "weatherUvIndex": "UV Index",
-    "@weatherUvIndex": {
-        "description": "UV Index parameter label"
-    },
-    "weatherHumidity": "Humidity",
-    "@weatherHumidity": {
-        "description": "Humidity parameter label"
-    },
-    "weatherWindSpeed": "Wind Speed",
-    "@weatherWindSpeed": {
-        "description": "Wind Speed parameter label"
-    },
-    "weatherPrecipitation": "Precipitation",
-    "@weatherPrecipitation": {
-        "description": "Precipitation parameter label"
     },
     "audioRecordTitle": "Record audio",
     "@audioRecordTitle": {
@@ -721,20 +900,16 @@
     "@audioRecordStopError": {
         "description": "Error when recording fails to stop"
     },
-    "emojiPickerUsedInMinds": "Used in minds",
-    "@emojiPickerUsedInMinds": {
-        "description": "Section header for emojis used in minds in the emoji picker"
-    },
-    "emojiPickerAll": "All",
-    "@emojiPickerAll": {
-        "description": "Section header for all emojis in the emoji picker"
-    },
     "proUserFooter": "You are a PRO user. Next payment {price} will be at {date}.",
     "@proUserFooter": {
         "description": "Footer in APPLICATION settings section when user has active PRO subscription",
         "placeholders": {
-            "price": { "type": "String" },
-            "date": { "type": "String" }
+            "price": {
+                "type": "String"
+            },
+            "date": {
+                "type": "String"
+            }
         }
     },
     "emotions": "Emotions",
@@ -789,11 +964,6 @@
     "@emotionInUseMessage": {
         "description": "Message when removing an emotion used by minds, offering archive or delete"
     },
-    "emotionPickHint": "Tap to tag",
-    "emotionDrillHint": "long-press to go deeper",
-    "@emotionPickHint": {
-        "description": "Hint in the emotion marking sheet explaining tap vs long-press"
-    },
     "noEmotionsYet": "No emotions yet",
     "@noEmotionsYet": {
         "description": "Empty state for the emotions list"
@@ -805,5 +975,689 @@
     "deleteEmotionMessage": "Delete this emotion? It will be removed from any minds using it.",
     "@deleteEmotionMessage": {
         "description": "Confirmation when permanently deleting an emotion"
+    },
+    "dayFeedTileSettings": "Tile settings",
+    "@dayFeedTileSettings": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedColumns": "Columns",
+    "@dayFeedColumns": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedMindTileSize": "Mind tile size",
+    "@dayFeedMindTileSize": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedMindTileSquare": "Square",
+    "@dayFeedMindTileSquare": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedMindTileWide": "Wide",
+    "@dayFeedMindTileWide": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedShowMindText": "Show text",
+    "@dayFeedShowMindText": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedPhotoAccessHint": "Allow photo access to see your photos and videos here",
+    "@dayFeedPhotoAccessHint": {
+        "description": "Banner in the unified day grid when photo access is missing"
+    },
+    "dayFeedAllowAccess": "Allow",
+    "@dayFeedAllowAccess": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "dayFeedFolderHint": "Choose a media folder to see your photos and videos here",
+    "@dayFeedFolderHint": {
+        "description": "Banner in the unified day grid on Android when no media folder is chosen"
+    },
+    "dayFeedChooseFolder": "Choose",
+    "@dayFeedChooseFolder": {
+        "description": "Unified day grid (All mode) label"
+    },
+    "holdToRecordAudio": "Hold to record a voice message",
+    "@holdToRecordAudio": {
+        "description": "Audio/video mind recording"
+    },
+    "holdToRecordVideo": "Hold to record a video message",
+    "@holdToRecordVideo": {
+        "description": "Audio/video mind recording"
+    },
+    "roundVideoRecordError": "Couldn't record the video",
+    "@roundVideoRecordError": {
+        "description": "Audio/video mind recording"
+    },
+    "roundVideoCameraUnavailable": "Camera is unavailable on this device",
+    "@roundVideoCameraUnavailable": {
+        "description": "Audio/video mind recording"
+    },
+    "roundVideoRetake": "Retake",
+    "@roundVideoRetake": {
+        "description": "Audio/video mind recording"
+    },
+    "roundVideoUse": "Use",
+    "@roundVideoUse": {
+        "description": "Audio/video mind recording"
+    },
+    "removeMedia": "Remove media",
+    "@removeMedia": {
+        "description": "Audio/video mind recording"
+    },
+    "shakeToCustomize": "Shake to customize",
+    "@shakeToCustomize": {
+        "description": "Shake-to-customize: shakeToCustomize"
+    },
+    "shakeToCustomizeHint": "or long-press the title",
+    "@shakeToCustomizeHint": {
+        "description": "Shake-to-customize: shakeToCustomizeHint"
+    },
+    "customizeSettings": "Customize settings",
+    "@customizeSettings": {
+        "description": "Shake-to-customize: customizeSettings"
+    },
+    "customizeSettingsDescription": "Unchecked sections and rows are hidden from the Settings screen.",
+    "@customizeSettingsDescription": {
+        "description": "Shake-to-customize: customizeSettingsDescription"
+    },
+    "calendarSettings": "Calendar settings",
+    "@calendarSettings": {
+        "description": "Calendar shake sheet title"
+    },
+    "calendarShowMedia": "Show photos and videos",
+    "@calendarShowMedia": {
+        "description": "Calendar setting: show gallery media in day grids"
+    },
+    "calendarWeekTitles": "Week titles",
+    "@calendarWeekTitles": {
+        "description": "Calendar setting: show week number headers"
+    },
+    "calendarPlayStories": "Play stories",
+    "@calendarPlayStories": {
+        "description": "Calendar: play the stories of a day or a week"
+    },
+    "storyBackgroundTweak": "Story background",
+    "@storyBackgroundTweak": {
+        "description": "Story/viewer shake sheet title"
+    },
+    "storyAnimationOff": "Off",
+    "@storyAnimationOff": {
+        "description": "Texture animation: none"
+    },
+    "storyAnimationPulse": "Pulse",
+    "@storyAnimationPulse": {
+        "description": "Texture animation: emojis grow with loudness"
+    },
+    "storyAnimationWave": "Wave",
+    "@storyAnimationWave": {
+        "description": "Texture animation: rows sway like a wave"
+    },
+    "storyAnimationEqualizer": "Equalizer",
+    "@storyAnimationEqualizer": {
+        "description": "Texture animation: columns bounce like bars"
+    },
+    "storyAnimationDrift": "Drift",
+    "@storyAnimationDrift": {
+        "description": "Texture animation: texture slides, faster when louder"
+    },
+    "storyAnimationGlow": "Glow",
+    "@storyAnimationGlow": {
+        "description": "Texture animation: opacity and blur follow loudness"
+    },
+    "viewerCommentHint": "Comment…",
+    "@viewerCommentHint": {
+        "description": "Viewer: placeholder of the comment field"
+    },
+    "calendarToCurrentWeek": "To current week",
+    "@calendarToCurrentWeek": {
+        "description": "Calendar: bubble that scrolls back to the current week"
+    },
+    "storyDateLines": "Date lines",
+    "@storyDateLines": {
+        "description": "Story tweak: how many lines the date header takes"
+    },
+    "storyTextureTitle": "Texture",
+    "@storyTextureTitle": {
+        "description": "Story tweak: texture animation section"
+    },
+    "storySpectrum": "Sound spectrum",
+    "@storySpectrum": {
+        "description": "Story tweak: rays around audio/video circles"
+    },
+    "storySensitivity": "Sensitivity",
+    "@storySensitivity": {
+        "description": "Story tweak: how strongly visuals react to loudness"
+    },
+    "profileMindfulDays": "{count, plural, one{Mindful for {count} day} other{Mindful for {count} days}}",
+    "@profileMindfulDays": {
+        "description": "Insights header: number of days with at least one mind",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "profileName": "Name",
+    "profilePhoto": "Photo",
+    "profileEmoji": "Emoji",
+    "profileInitial": "Letter",
+    "webVersion": "Wi‑Fi access",
+    "webVersionAddressHint": "Open in a browser on a computer in the same Wi-Fi; keep keklist open",
+    "webVersionCopied": "Address copied",
+    "webVersionStarting": "Starting…",
+    "webVersionNoWifi": "Connect to Wi-Fi to open keklist in a browser.",
+    "webVersionNoBundle": "This build doesn't include the web version.",
+    "webVersionPin": "PIN",
+    "webVersionPinSet": "Each browser asks for it once in 30 days",
+    "webVersionPinNotSet": "Not set",
+    "webVersionPinHint": "4–8 digits",
+    "webVersionRemovePin": "Remove PIN",
+    "webVersionPort": "Port",
+    "aiTab": "Chat",
+    "@aiTab": {
+        "description": "AI tab"
+    },
+    "aiTabDescription": "Talk about your records with an AI that runs on your phone",
+    "@aiTabDescription": {
+        "description": "AI tab"
+    },
+    "aiPrivacyNote": "Runs on your phone only: your records never leave the device.",
+    "@aiPrivacyNote": {
+        "description": "AI tab"
+    },
+    "aiDisclaimer": "Not a medical service. If you are in danger, contact emergency services.",
+    "@aiDisclaimer": {
+        "description": "AI tab"
+    },
+    "aiYesterday": "Yesterday",
+    "@aiYesterday": {
+        "description": "AI tab"
+    },
+    "aiNoSessions": "No sessions yet",
+    "@aiNoSessions": {
+        "description": "AI tab"
+    },
+    "aiNewSession": "New session",
+    "@aiNewSession": {
+        "description": "AI tab"
+    },
+    "aiChooseRole": "Choose a role",
+    "@aiChooseRole": {
+        "description": "AI tab"
+    },
+    "aiRoleTherapist": "Therapist",
+    "@aiRoleTherapist": {
+        "description": "AI tab"
+    },
+    "aiRoleCoach": "Coach",
+    "@aiRoleCoach": {
+        "description": "AI tab"
+    },
+    "aiRoleFriend": "Friend",
+    "@aiRoleFriend": {
+        "description": "AI tab"
+    },
+    "aiMessageHint": "Message",
+    "@aiMessageHint": {
+        "description": "AI tab"
+    },
+    "aiStarterWeek": "How was my week?",
+    "@aiStarterWeek": {
+        "description": "AI tab"
+    },
+    "aiStarterWorry": "What has been bothering me lately?",
+    "@aiStarterWorry": {
+        "description": "AI tab"
+    },
+    "aiStarterJoy": "What brought me joy recently?",
+    "@aiStarterJoy": {
+        "description": "AI tab"
+    },
+    "aiActionSaveAsMind": "Save as mind",
+    "@aiActionSaveAsMind": {
+        "description": "AI tab"
+    },
+    "aiActionOpenDay": "Open day",
+    "@aiActionOpenDay": {
+        "description": "AI tab"
+    },
+    "aiActionWeekSummary": "Week summary",
+    "@aiActionWeekSummary": {
+        "description": "AI tab"
+    },
+    "aiWeekSummaryPrompt": "Summarize my last 7 days: what happened, how I felt, what stood out.",
+    "@aiWeekSummaryPrompt": {
+        "description": "AI tab"
+    },
+    "aiSavedAsMind": "Saved to today",
+    "@aiSavedAsMind": {
+        "description": "AI tab"
+    },
+    "aiStop": "Stop",
+    "@aiStop": {
+        "description": "AI tab"
+    },
+    "aiNoModelTitle": "Choose a model",
+    "@aiNoModelTitle": {
+        "description": "AI tab"
+    },
+    "aiNoModelMessage": "Download a model to start. It runs on your phone, offline.",
+    "@aiNoModelMessage": {
+        "description": "AI tab"
+    },
+    "aiNoModelOnPhone": "Download a model in the phone app: Settings → AI → Models.",
+    "@aiNoModelOnPhone": {
+        "description": "AI tab"
+    },
+    "aiModels": "Models",
+    "@aiModels": {
+        "description": "AI tab"
+    },
+    "aiRoles": "Roles",
+    "@aiRoles": {
+        "description": "AI tab"
+    },
+    "aiDownloaded": "Downloaded",
+    "@aiDownloaded": {
+        "description": "AI tab"
+    },
+    "aiDownloads": "Downloading",
+    "@aiDownloads": {
+        "description": "AI tab"
+    },
+    "aiGalleryCatalog": "Google AI Edge Gallery",
+    "@aiGalleryCatalog": {
+        "description": "AI tab"
+    },
+    "aiHuggingFace": "Hugging Face (GGUF)",
+    "@aiHuggingFace": {
+        "description": "AI tab"
+    },
+    "aiSearchModels": "Search GGUF models",
+    "@aiSearchModels": {
+        "description": "AI tab"
+    },
+    "aiDownload": "Download",
+    "@aiDownload": {
+        "description": "AI tab"
+    },
+    "aiPause": "Pause",
+    "@aiPause": {
+        "description": "AI tab"
+    },
+    "aiPaused": "Paused",
+    "@aiPaused": {
+        "description": "AI tab"
+    },
+    "aiResume": "Resume",
+    "@aiResume": {
+        "description": "AI tab"
+    },
+    "aiDownloadFailed": "Download failed",
+    "@aiDownloadFailed": {
+        "description": "AI tab"
+    },
+    "aiCellularTitle": "Download over mobile data?",
+    "@aiCellularTitle": {
+        "description": "AI tab"
+    },
+    "aiCellularMessage": "{size} will be downloaded over mobile data.",
+    "@aiCellularMessage": {
+        "description": "AI tab",
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "aiDeleteModel": "Delete the model?",
+    "@aiDeleteModel": {
+        "description": "AI tab"
+    },
+    "aiStorageUsed": "On this phone: {size}",
+    "@aiStorageUsed": {
+        "description": "AI tab",
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "aiDeviceMemory": "Phone memory: {size}",
+    "@aiDeviceMemory": {
+        "description": "AI tab",
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "aiCatalogFailed": "Couldn't load the list. Check the connection.",
+    "@aiCatalogFailed": {
+        "description": "AI tab"
+    },
+    "aiNoFilesFit": "None of this model's files fit this phone's memory.",
+    "@aiNoFilesFit": {
+        "description": "AI tab"
+    },
+    "aiBuiltInRole": "Built-in",
+    "@aiBuiltInRole": {
+        "description": "AI tab"
+    },
+    "aiOwnRoles": "Your roles",
+    "@aiOwnRoles": {
+        "description": "AI tab"
+    },
+    "aiDuplicate": "Duplicate",
+    "@aiDuplicate": {
+        "description": "AI tab"
+    },
+    "aiNewRole": "New role",
+    "@aiNewRole": {
+        "description": "AI tab"
+    },
+    "aiRoleName": "Name",
+    "@aiRoleName": {
+        "description": "AI tab"
+    },
+    "aiRoleEmoji": "Emoji",
+    "@aiRoleEmoji": {
+        "description": "AI tab"
+    },
+    "aiRolePrompt": "Prompt",
+    "@aiRolePrompt": {
+        "description": "AI tab"
+    },
+    "aiRolePromptHint": "How the AI should talk and what to focus on",
+    "@aiRolePromptHint": {
+        "description": "AI tab"
+    },
+    "aiReadOnlyRole": "Built-in roles can't be changed. Duplicate one to make your own.",
+    "@aiReadOnlyRole": {
+        "description": "AI tab"
+    },
+    "aiDeleteSession": "Delete the session?",
+    "@aiDeleteSession": {
+        "description": "AI tab"
+    },
+    "aiDeleteRole": "Delete the role?",
+    "@aiDeleteRole": {
+        "description": "AI tab"
+    },
+    "aiRecommended": "Recommended",
+    "@aiRecommended": {
+        "description": "AI models: badge on the recommended model"
+    },
+    "aiLowQuality": "Low quality",
+    "@aiLowQuality": {
+        "description": "AI models: badge on models under 1B parameters"
+    },
+    "aiModelDoesNotFit": "This model doesn't fit in your phone's memory. Choose a smaller one.",
+    "@aiModelDoesNotFit": {
+        "description": "AI chat: the model could not be loaded"
+    },
+    "aiChooseAnotherModel": "Choose another model",
+    "@aiChooseAnotherModel": {
+        "description": "AI chat: button that opens the models screen"
+    },
+    "creatorEmotionsTitle": "Emotions",
+    "@creatorEmotionsTitle": {
+        "description": "Mind creator tweak sheet: title"
+    },
+    "creatorEmotionsAfterSave": "Ask after saving",
+    "@creatorEmotionsAfterSave": {
+        "description": "Mind creator tweak: ask for emotions after Save"
+    },
+    "creatorEmotionsButton": "Button above the keyboard",
+    "@creatorEmotionsButton": {
+        "description": "Mind creator tweak: an emotions button above the keyboard"
+    },
+    "creatorEmotionsNever": "Don't ask",
+    "@creatorEmotionsNever": {
+        "description": "Mind creator tweak: don't ask for emotions"
+    },
+    "insightsWeekAgo": "A week ago",
+    "@insightsWeekAgo": {
+        "description": "Insights memories: a week ago"
+    },
+    "insightsMonthAgo": "A month ago",
+    "@insightsMonthAgo": {
+        "description": "Insights memories: a month ago"
+    },
+    "insightsHalfYearAgo": "Half a year ago",
+    "@insightsHalfYearAgo": {
+        "description": "Insights memories: half a year ago"
+    },
+    "insightsYearAgo": "A year ago",
+    "@insightsYearAgo": {
+        "description": "Insights memories: a year ago"
+    },
+    "insightsTwoYearsAgo": "Two years ago",
+    "@insightsTwoYearsAgo": {
+        "description": "Insights memories: two years ago"
+    },
+    "insightsVoiceAndVideos": "Voice and round videos",
+    "@insightsVoiceAndVideos": {
+        "description": "Insights card: voice notes and round videos"
+    },
+    "insightsWeekNumber": "Week {number}",
+    "@insightsWeekNumber": {
+        "description": "Insights brightest week: week number of the year",
+        "placeholders": {
+            "number": {
+                "type": "String"
+            }
+        }
+    },
+    "aiNoSessionsHint": "Ask about your week, a worry or a good day: the chat reads your records right on the phone.",
+    "@aiNoSessionsHint": {
+        "description": "Hint under the empty list of chat sessions"
+    },
+    "showInGallery": "Show in Gallery",
+    "@showInGallery": {
+        "description": "Context menu item that opens the photo in the system gallery"
+    },
+    "tileEmojiMotion": "Emoji motion",
+    "@tileEmojiMotion": {
+        "description": "Tweak: how emojis move on mind tiles"
+    },
+    "tileEmojiMotionDrift": "Drift",
+    "@tileEmojiMotionDrift": {
+        "description": "Emoji motion option: slow diagonal drift"
+    },
+    "tileEmojiMotionFloat": "Float",
+    "@tileEmojiMotionFloat": {
+        "description": "Emoji motion option: sway in place"
+    },
+    "tileEmojiMotionStill": "Still",
+    "@tileEmojiMotionStill": {
+        "description": "Emoji motion option: no motion"
+    },
+    "gridResizeAnimation": "Pinch animation",
+    "@gridResizeAnimation": {
+        "description": "Tweak: animation when a pinch changes the column count"
+    },
+    "gridResizeFly": "Fly",
+    "@gridResizeFly": {
+        "description": "Pinch animation option: tiles fly to new places"
+    },
+    "gridResizeZoom": "Zoom",
+    "@gridResizeZoom": {
+        "description": "Pinch animation option: live zoom"
+    },
+    "gridResizeCrossfade": "Fade",
+    "@gridResizeCrossfade": {
+        "description": "Pinch animation option: crossfade"
+    },
+    "feedSortOrder": "Order",
+    "@feedSortOrder": {
+        "description": "Tweak sheet: order of day tiles"
+    },
+    "feedSortTime": "Time",
+    "@feedSortTime": {
+        "description": "Order option: by time"
+    },
+    "feedSortMindsFirst": "Notes first",
+    "@feedSortMindsFirst": {
+        "description": "Order option: notes before photos"
+    },
+    "feedSortMediaFirst": "Media first",
+    "@feedSortMediaFirst": {
+        "description": "Order option: photos before notes"
+    },
+    "feedGrouping": "Groups",
+    "@feedGrouping": {
+        "description": "Tweak sheet: grouping of day tiles"
+    },
+    "feedGroupingNone": "None",
+    "@feedGroupingNone": {
+        "description": "Grouping option: none"
+    },
+    "feedGroupingType": "Type",
+    "@feedGroupingType": {
+        "description": "Grouping option: notes and gallery"
+    },
+    "feedGroupingTimeOfDay": "Time of day",
+    "@feedGroupingTimeOfDay": {
+        "description": "Grouping option: morning, afternoon, evening, night"
+    },
+    "feedSectionMinds": "Notes",
+    "@feedSectionMinds": {
+        "description": "Section header over the notes of a day"
+    },
+    "feedSectionGallery": "Gallery",
+    "@feedSectionGallery": {
+        "description": "Section header over the photos and videos of a day"
+    },
+    "removePhotoTitle": "Remove photo",
+    "@removePhotoTitle": {
+        "description": "Title of the sheet shown before removing a photo"
+    },
+    "removeVideoTitle": "Remove video",
+    "@removeVideoTitle": {
+        "description": "Title of the sheet shown before removing a video"
+    },
+    "hideMedia": "Hide",
+    "@hideMedia": {
+        "description": "Hide a photo or video from keklist only"
+    },
+    "hideMediaSubtitle": "Only from keklist, it stays in the gallery",
+    "@hideMediaSubtitle": {
+        "description": "Under Hide: the file stays in the gallery"
+    },
+    "deleteFromGallery": "Delete from gallery",
+    "@deleteFromGallery": {
+        "description": "Delete a photo or video from the phone gallery"
+    },
+    "deleteFromGallerySubtitle": "Moves to Recently Deleted",
+    "@deleteFromGallerySubtitle": {
+        "description": "Under Delete from gallery"
+    },
+    "mediaHidden": "Hidden from keklist",
+    "@mediaHidden": {
+        "description": "Snackbar after hiding a photo"
+    },
+    "mediaShownAgain": "Back in keklist",
+    "@mediaShownAgain": {
+        "description": "Snackbar after showing a hidden photo again"
+    },
+    "undo": "Undo",
+    "@undo": {
+        "description": "Undo the last action"
+    },
+    "hiddenMedia": "Hidden photos",
+    "@hiddenMedia": {
+        "description": "Settings row and screen with photos hidden from keklist"
+    },
+    "hiddenMediaHint": "Tap a photo to show it in keklist again",
+    "@hiddenMediaHint": {
+        "description": "Hint on the hidden photos screen"
+    },
+    "hiddenMediaEmpty": "Nothing is hidden",
+    "@hiddenMediaEmpty": {
+        "description": "Hidden photos screen without photos"
+    },
+    "leaveFeedback": "Leave feedback",
+    "@leaveFeedback": {
+        "description": "Settings row and sheet title for sending feedback to the developer"
+    },
+    "feedbackSend": "Send",
+    "@feedbackSend": {
+        "description": "Send feedback button"
+    },
+    "feedbackSent": "Thanks! The developer got your message",
+    "@feedbackSent": {
+        "description": "Snackbar after feedback was sent"
+    },
+    "feedbackFailed": "Couldn't send. Check the internet and try again",
+    "@feedbackFailed": {
+        "description": "Snackbar when feedback could not be sent"
+    },
+    "analytics": "Analytics",
+    "@analytics": {
+        "description": "Settings row and screen title for anonymous usage analytics"
+    },
+    "analyticsDescription": "Anonymous usage statistics help decide what to improve. Nothing you write ever leaves your device.",
+    "@analyticsDescription": {
+        "description": "Explains what analytics is for on the analytics screen"
+    },
+    "analyticsStoreBuildsOnly": "This build sends nothing: analytics runs only in App Store and Google Play builds.",
+    "@analyticsStoreBuildsOnly": {
+        "description": "Shown on the analytics screen in builds that never send analytics (debug, web)"
+    },
+    "analyticsSent": "What is sent",
+    "@analyticsSent": {
+        "description": "Heading of the list of data analytics sends"
+    },
+    "analyticsSentItems": "Which settings and tweaks you choose, which screens you open, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.",
+    "@analyticsSentItems": {
+        "description": "List of data analytics sends"
+    },
+    "analyticsNeverSent": "Never sent",
+    "@analyticsNeverSent": {
+        "description": "Heading of the list of data analytics never sends"
+    },
+    "analyticsNeverSentItems": "Your minds, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.",
+    "@analyticsNeverSentItems": {
+        "description": "List of data analytics never sends"
+    },
+    "analyticsResetId": "Reset anonymous ID",
+    "@analyticsResetId": {
+        "description": "Button that replaces the anonymous analytics id"
+    },
+    "analyticsResetIdDone": "A new anonymous ID is used from now on",
+    "@analyticsResetIdDone": {
+        "description": "Snackbar after the anonymous analytics id is reset"
+    },
+    "settingsSupport": "Support",
+    "@settingsSupport": {
+        "description": "Settings section with the subscription, tips and feedback"
+    },
+    "calendarOpenDay": "Open day",
+    "@calendarOpenDay": {
+        "description": "Button under a calendar day that opens the day screen"
+    },
+    "webVersionEnabled": "Mirror to browser",
+    "@webVersionEnabled": {
+        "description": "Switch that starts serving keklist to browsers in the same Wi-Fi"
+    },
+    "viewerComments": "Comments",
+    "@viewerComments": {
+        "description": "Title of the bottom sheet with a story mind's comments"
+    },
+    "viewerNoComments": "No comments yet",
+    "@viewerNoComments": {
+        "description": "Shown in the comments sheet when a mind has no comments yet"
+    },
+    "@webVersion": {
+        "description": "Title of the Settings section that lets browsers in the same Wi-Fi open keklist from the phone"
+    },
+    "previousDay": "Previous day",
+    "@previousDay": {
+        "description": "Tooltip of the chevron that opens the previous day"
+    },
+    "nextDay": "Next day",
+    "@nextDay": {
+        "description": "Tooltip of the chevron that opens the next day"
     }
 }
