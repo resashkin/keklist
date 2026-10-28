@@ -27,4 +27,5 @@ enum DebugMenuType {
   useProductionRevenueCat,
   enableBlocLogs,
   forceAiChat,
+  showTouches,
 }
