@@ -11,6 +11,8 @@ out="$PWD/assets/web/keklist_web.zip"
 mkdir -p assets/web
 rm -f "$out"
 cd build/web
+# Browsers get no secrets: the phone keeps the API keys and tokens, the web version only reads its data.
+printf '# The web version keeps no keys.\n' > assets/dotenv
 # The dart2js build loads canvaskit/ (or canvaskit/chromium/); the other engine builds are never requested.
 zip -q -r -9 "$out" . \
   -x 'canvaskit/skwasm*' 'canvaskit/wimp*' 'canvaskit/webparagraph/*' \
