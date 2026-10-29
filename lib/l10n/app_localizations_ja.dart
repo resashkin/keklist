@@ -1265,4 +1265,45 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get nextDay => '次の日';
+
+  @override
+  String whatsNewTitle(String version) {
+    return '$versionの新機能';
+  }
+
+  @override
+  String get whatsNewNext => '次へ';
+
+  @override
+  String get whatsNewStart => 'はじめる';
+
+  @override
+  String get whatsNewWebTitle => 'ブラウザでkeklist';
+
+  @override
+  String get whatsNewWebBody => 'Wi‑Fiアクセスをオンにすれば、ノートPCから書けます。同じアプリを全画面で。';
+
+  @override
+  String get whatsNewGalleryTitle => 'ギャラリーが日記の一部に';
+
+  @override
+  String get whatsNewGalleryBody => '撮った写真や動画が、カレンダーと各日に表示されます。';
+
+  @override
+  String get whatsNewCirclesTitle => '丸い動画とボイスメモ';
+
+  @override
+  String get whatsNewCirclesBody => '書くより、話したり撮ったりする方が早いこともあります。';
+
+  @override
+  String get whatsNewShakeTitle => '振ってカスタマイズ';
+
+  @override
+  String get whatsNewShakeBody => 'スマホを振れば、どの画面もカスタマイズできます。';
+
+  @override
+  String get whatsNewAlsoDesign => 'さらに、新しいデザインとアニメーションも。';
+
+  @override
+  String get rateApp => 'keklistを評価';
 }

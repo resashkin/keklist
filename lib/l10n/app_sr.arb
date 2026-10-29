@@ -402,5 +402,18 @@
     "viewerComments": "Коментари",
     "viewerNoComments": "Још нема коментара",
     "previousDay": "Претходни дан",
-    "nextDay": "Следећи дан"
+    "nextDay": "Следећи дан",
+    "whatsNewTitle": "Шта је ново у {version}",
+    "whatsNewNext": "Даље",
+    "whatsNewStart": "Почни",
+    "whatsNewWebTitle": "keklist у прегледачу",
+    "whatsNewWebBody": "Укључи приступ преко Wi‑Fi мреже и пиши са лаптопа: иста апликација, преко целог екрана.",
+    "whatsNewGalleryTitle": "Галерија је део дневника",
+    "whatsNewGalleryBody": "Свака фотографија и видео које си снимио сада се види у календару и у сваком дану.",
+    "whatsNewCirclesTitle": "Видео кружићи и гласовне белешке",
+    "whatsNewCirclesBody": "Понекад је лакше рећи или снимити него написати.",
+    "whatsNewShakeTitle": "Протреси за подешавање",
+    "whatsNewShakeBody": "Протреси телефон да подесиш било који екран.",
+    "whatsNewAlsoDesign": "И још: нови дизајн и анимације.",
+    "rateApp": "Оцени keklist"
 }

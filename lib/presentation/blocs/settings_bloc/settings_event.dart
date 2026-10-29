@@ -149,3 +149,13 @@ final class SettingsMarkShakeDiscovered extends SettingsEvent {
   final String screenId;
   const SettingsMarkShakeDiscovered({required this.screenId});
 }
+
+final class SettingsMarkWhatsNewSeen extends SettingsEvent {
+  final String release;
+  const SettingsMarkWhatsNewSeen({required this.release});
+}
+
+final class SettingsMarkReviewPrompted extends SettingsEvent {
+  final String release;
+  const SettingsMarkReviewPrompted({required this.release});
+}

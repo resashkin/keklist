@@ -1309,4 +1309,49 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nextDay => 'Следующий день';
+
+  @override
+  String whatsNewTitle(String version) {
+    return 'Что нового в $version';
+  }
+
+  @override
+  String get whatsNewNext => 'Далее';
+
+  @override
+  String get whatsNewStart => 'Начать';
+
+  @override
+  String get whatsNewWebTitle => 'keklist в браузере';
+
+  @override
+  String get whatsNewWebBody =>
+      'Включи «Доступ по Wi‑Fi» и пиши с ноутбука: это то же приложение на весь экран.';
+
+  @override
+  String get whatsNewGalleryTitle => 'Галерея — часть дневника';
+
+  @override
+  String get whatsNewGalleryBody =>
+      'Всё, что ты снимал, теперь видно в календаре и в каждом дне.';
+
+  @override
+  String get whatsNewCirclesTitle => 'Кружочки и голосовые';
+
+  @override
+  String get whatsNewCirclesBody =>
+      'Иногда проще сказать или снять, чем написать.';
+
+  @override
+  String get whatsNewShakeTitle => 'Встряхни, чтобы настроить';
+
+  @override
+  String get whatsNewShakeBody =>
+      'Любой экран настраивается встряхиванием телефона.';
+
+  @override
+  String get whatsNewAlsoDesign => 'А ещё: новый дизайн и анимации.';
+
+  @override
+  String get rateApp => 'Оценить keklist';
 }

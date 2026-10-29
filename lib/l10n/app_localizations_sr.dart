@@ -1305,6 +1305,51 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get nextDay => 'Следећи дан';
+
+  @override
+  String whatsNewTitle(String version) {
+    return 'Шта је ново у $version';
+  }
+
+  @override
+  String get whatsNewNext => 'Даље';
+
+  @override
+  String get whatsNewStart => 'Почни';
+
+  @override
+  String get whatsNewWebTitle => 'keklist у прегледачу';
+
+  @override
+  String get whatsNewWebBody =>
+      'Укључи приступ преко Wi‑Fi мреже и пиши са лаптопа: иста апликација, преко целог екрана.';
+
+  @override
+  String get whatsNewGalleryTitle => 'Галерија је део дневника';
+
+  @override
+  String get whatsNewGalleryBody =>
+      'Свака фотографија и видео које си снимио сада се види у календару и у сваком дану.';
+
+  @override
+  String get whatsNewCirclesTitle => 'Видео кружићи и гласовне белешке';
+
+  @override
+  String get whatsNewCirclesBody =>
+      'Понекад је лакше рећи или снимити него написати.';
+
+  @override
+  String get whatsNewShakeTitle => 'Протреси за подешавање';
+
+  @override
+  String get whatsNewShakeBody =>
+      'Протреси телефон да подесиш било који екран.';
+
+  @override
+  String get whatsNewAlsoDesign => 'И још: нови дизајн и анимације.';
+
+  @override
+  String get rateApp => 'Оцени keklist';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2607,4 +2652,49 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get nextDay => 'Sledeći dan';
+
+  @override
+  String whatsNewTitle(String version) {
+    return 'Šta je novo u $version';
+  }
+
+  @override
+  String get whatsNewNext => 'Dalje';
+
+  @override
+  String get whatsNewStart => 'Počni';
+
+  @override
+  String get whatsNewWebTitle => 'keklist u pregledaču';
+
+  @override
+  String get whatsNewWebBody =>
+      'Uključi pristup preko Wi‑Fi mreže i piši sa laptopa: ista aplikacija, preko celog ekrana.';
+
+  @override
+  String get whatsNewGalleryTitle => 'Galerija je deo dnevnika';
+
+  @override
+  String get whatsNewGalleryBody =>
+      'Svaka fotografija i video koje si snimio sada se vidi u kalendaru i u svakom danu.';
+
+  @override
+  String get whatsNewCirclesTitle => 'Video kružići i glasovne beleške';
+
+  @override
+  String get whatsNewCirclesBody =>
+      'Ponekad je lakše reći ili snimiti nego napisati.';
+
+  @override
+  String get whatsNewShakeTitle => 'Protresi za podešavanje';
+
+  @override
+  String get whatsNewShakeBody =>
+      'Protresi telefon da podesiš bilo koji ekran.';
+
+  @override
+  String get whatsNewAlsoDesign => 'I još: novi dizajn i animacije.';
+
+  @override
+  String get rateApp => 'Oceni keklist';
 }

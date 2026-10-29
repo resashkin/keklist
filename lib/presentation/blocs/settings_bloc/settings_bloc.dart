@@ -40,6 +40,8 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateDayFeed>(_updateDayFeed);
     on<SettingsUpdateItemHidden>(_updateItemHidden);
     on<SettingsMarkShakeDiscovered>(_markShakeDiscovered);
+    on<SettingsMarkWhatsNewSeen>(_markWhatsNewSeen);
+    on<SettingsMarkReviewPrompted>(_markReviewPrompted);
     on<SettingsUpdateInsights>(_updateInsights);
     on<SettingsUpdateCalendar>(_updateCalendar);
     on<SettingsUpdateStory>(_updateStory);
@@ -264,6 +266,16 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _markShakeDiscovered(SettingsMarkShakeDiscovered event, Emitter<SettingsState> emit) async {
     await _repository.markShakeDiscovered(event.screenId);
+  }
+
+  FutureOr<void> _markWhatsNewSeen(SettingsMarkWhatsNewSeen event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(
+      _repository.value.copyWith(whatsNewSeenRelease: event.release, whatsNewSeenAt: DateTime.now()),
+    );
+  }
+
+  FutureOr<void> _markReviewPrompted(SettingsMarkReviewPrompted event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(_repository.value.copyWith(reviewPromptedRelease: event.release));
   }
 
   // FutureOr<void> _exportToEncryptedImage(

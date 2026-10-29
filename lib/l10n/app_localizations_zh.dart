@@ -1258,4 +1258,45 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get nextDay => '后一天';
+
+  @override
+  String whatsNewTitle(String version) {
+    return '$version 新功能';
+  }
+
+  @override
+  String get whatsNewNext => '下一步';
+
+  @override
+  String get whatsNewStart => '开始';
+
+  @override
+  String get whatsNewWebTitle => '在浏览器中使用 keklist';
+
+  @override
+  String get whatsNewWebBody => '打开 Wi‑Fi 访问，就能在笔记本上写：同一个应用，全屏显示。';
+
+  @override
+  String get whatsNewGalleryTitle => '相册就是你的日记';
+
+  @override
+  String get whatsNewGalleryBody => '你拍的每张照片和每段视频，现在都会出现在日历和每一天里。';
+
+  @override
+  String get whatsNewCirclesTitle => '圆形视频和语音笔记';
+
+  @override
+  String get whatsNewCirclesBody => '有时候，说出来或拍下来比打字更容易。';
+
+  @override
+  String get whatsNewShakeTitle => '摇一摇，自定义';
+
+  @override
+  String get whatsNewShakeBody => '摇一摇手机，就能自定义任意页面。';
+
+  @override
+  String get whatsNewAlsoDesign => '另外：全新设计和动画。';
+
+  @override
+  String get rateApp => '给 keklist 评分';
 }

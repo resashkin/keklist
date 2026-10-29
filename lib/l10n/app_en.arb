@@ -1659,5 +1659,62 @@
     "nextDay": "Next day",
     "@nextDay": {
         "description": "Tooltip of the chevron that opens the next day"
+    },
+    "whatsNewTitle": "What's new in {version}",
+    "@whatsNewTitle": {
+        "description": "Title of the What's New sheet shown once after an update",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "whatsNewNext": "Next",
+    "@whatsNewNext": {
+        "description": "Button that moves to the next What's New slide"
+    },
+    "whatsNewStart": "Start",
+    "@whatsNewStart": {
+        "description": "Button on the last What's New slide that closes it"
+    },
+    "whatsNewWebTitle": "keklist in your browser",
+    "@whatsNewWebTitle": {
+        "description": "What's New slide: the app in a desktop browser over Wi-Fi"
+    },
+    "whatsNewWebBody": "Turn on Wi‑Fi access and write from your laptop: it's the same app, full screen.",
+    "@whatsNewWebBody": {
+        "description": "What's New slide text about Wi-Fi access"
+    },
+    "whatsNewGalleryTitle": "Your gallery is your diary",
+    "@whatsNewGalleryTitle": {
+        "description": "What's New slide: photos and videos in the diary"
+    },
+    "whatsNewGalleryBody": "Every photo and video you took now shows up in the calendar and in each day.",
+    "@whatsNewGalleryBody": {
+        "description": "What's New slide text about the gallery"
+    },
+    "whatsNewCirclesTitle": "Video circles and voice notes",
+    "@whatsNewCirclesTitle": {
+        "description": "What's New slide: video circles and voice notes"
+    },
+    "whatsNewCirclesBody": "Sometimes it's easier to say it or show it than to type it.",
+    "@whatsNewCirclesBody": {
+        "description": "What's New slide text about video circles and voice notes"
+    },
+    "whatsNewShakeTitle": "Shake to tweak",
+    "@whatsNewShakeTitle": {
+        "description": "What's New slide: shake the phone to customize a screen"
+    },
+    "whatsNewShakeBody": "Shake your phone to customize any screen.",
+    "@whatsNewShakeBody": {
+        "description": "What's New slide text about shake to tweak"
+    },
+    "whatsNewAlsoDesign": "Plus: a new design and animations.",
+    "@whatsNewAlsoDesign": {
+        "description": "Extra line on the last What's New slide"
+    },
+    "rateApp": "Rate keklist",
+    "@rateApp": {
+        "description": "Settings row that opens the store page to rate the app"
     }
 }

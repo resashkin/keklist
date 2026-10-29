@@ -1307,4 +1307,49 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get nextDay => 'Кийинки күн';
+
+  @override
+  String whatsNewTitle(String version) {
+    return '$version версиясында эмне жаңы';
+  }
+
+  @override
+  String get whatsNewNext => 'Кийинки';
+
+  @override
+  String get whatsNewStart => 'Баштоо';
+
+  @override
+  String get whatsNewWebTitle => 'keklist браузерде';
+
+  @override
+  String get whatsNewWebBody =>
+      'Wi‑Fi аркылуу кирүүнү күйгүзүп, ноутбуктан жаз: бул ошол эле колдонмо, толук экранда.';
+
+  @override
+  String get whatsNewGalleryTitle => 'Галерея — күндөлүктүн бир бөлүгү';
+
+  @override
+  String get whatsNewGalleryBody =>
+      'Тарткан ар бир сүрөт жана видео эми календарда жана ар бир күндө көрүнөт.';
+
+  @override
+  String get whatsNewCirclesTitle => 'Видео-тегерекчелер жана үн жазуулары';
+
+  @override
+  String get whatsNewCirclesBody =>
+      'Кээде жазгандан көрө айтуу же тартуу оңой.';
+
+  @override
+  String get whatsNewShakeTitle => 'Силкип, жөндө';
+
+  @override
+  String get whatsNewShakeBody =>
+      'Каалаган экранды телефонду силкип жөндөсө болот.';
+
+  @override
+  String get whatsNewAlsoDesign => 'Дагы: жаңы дизайн жана анимациялар.';
+
+  @override
+  String get rateApp => 'keklist\'ти баалоо';
 }

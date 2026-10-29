@@ -615,5 +615,18 @@
     "viewerComments": "Izohlar",
     "viewerNoComments": "Hozircha izoh yo'q",
     "previousDay": "Oldingi kun",
-    "nextDay": "Keyingi kun"
+    "nextDay": "Keyingi kun",
+    "whatsNewTitle": "{version} versiyasida nima yangi",
+    "whatsNewNext": "Keyingi",
+    "whatsNewStart": "Boshlash",
+    "whatsNewWebTitle": "keklist brauzerda",
+    "whatsNewWebBody": "Wi‑Fi orqali kirishni yoqing va noutbukdan yozing: bu xuddi shu ilova, to'liq ekranda.",
+    "whatsNewGalleryTitle": "Galereya — kundalikning bir qismi",
+    "whatsNewGalleryBody": "Olgan har bir rasm va videongiz endi kalendarda va har bir kunda ko'rinadi.",
+    "whatsNewCirclesTitle": "Video doiralar va ovozli yozuvlar",
+    "whatsNewCirclesBody": "Ba'zan yozgandan ko'ra aytish yoki suratga olish osonroq.",
+    "whatsNewShakeTitle": "Silkiting va sozlang",
+    "whatsNewShakeBody": "Istalgan ekranni telefonni silkitib sozlash mumkin.",
+    "whatsNewAlsoDesign": "Yana: yangi dizayn va animatsiyalar.",
+    "rateApp": "keklist'ni baholash"
 }

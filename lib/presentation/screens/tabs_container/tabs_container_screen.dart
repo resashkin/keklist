@@ -16,6 +16,7 @@ import 'package:keklist/presentation/screens/insights/insights_screen.dart';
 import 'package:keklist/presentation/screens/mind_collection/mind_collection_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
+import 'package:keklist/presentation/screens/whats_new/release_prompts.dart';
 
 /// Wider screens get the tabs as a rail on the left, like a desktop app.
 const double _kRailMinWidth = 800.0;
@@ -28,7 +29,7 @@ final class TabsContainerScreen extends StatefulWidget {
   State<TabsContainerScreen> createState() => _TabsContainerScreenState();
 }
 
-final class _TabsContainerScreenState extends State<TabsContainerScreen> with DisposeBag {
+final class _TabsContainerScreenState extends State<TabsContainerScreen> with DisposeBag, ReleasePrompts {
   int _selectedTabIndex = 0;
   final List<BottomNavigationBarItem> _items = [];
   final List<Widget> _bodyWidgets = [];
@@ -63,6 +64,7 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
       },
     )?.disposed(by: this);
     sendEventToBloc<TabsContainerBloc>(TabsContainerGetCurrentState());
+    startReleasePrompts();
 
     _useLiquidGlass = _readUseLiquidGlass(context.read<SettingsBloc>().state);
     subscribeToBloc<SettingsBloc>(

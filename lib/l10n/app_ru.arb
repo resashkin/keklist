@@ -402,5 +402,18 @@
     "viewerComments": "Комментарии",
     "viewerNoComments": "Пока нет комментариев",
     "previousDay": "Предыдущий день",
-    "nextDay": "Следующий день"
+    "nextDay": "Следующий день",
+    "whatsNewTitle": "Что нового в {version}",
+    "whatsNewNext": "Далее",
+    "whatsNewStart": "Начать",
+    "whatsNewWebTitle": "keklist в браузере",
+    "whatsNewWebBody": "Включи «Доступ по Wi‑Fi» и пиши с ноутбука: это то же приложение на весь экран.",
+    "whatsNewGalleryTitle": "Галерея — часть дневника",
+    "whatsNewGalleryBody": "Всё, что ты снимал, теперь видно в календаре и в каждом дне.",
+    "whatsNewCirclesTitle": "Кружочки и голосовые",
+    "whatsNewCirclesBody": "Иногда проще сказать или снять, чем написать.",
+    "whatsNewShakeTitle": "Встряхни, чтобы настроить",
+    "whatsNewShakeBody": "Любой экран настраивается встряхиванием телефона.",
+    "whatsNewAlsoDesign": "А ещё: новый дизайн и анимации.",
+    "rateApp": "Оценить keklist"
 }

@@ -402,5 +402,18 @@
     "viewerComments": "コメント",
     "viewerNoComments": "まだコメントはありません",
     "previousDay": "前の日",
-    "nextDay": "次の日"
+    "nextDay": "次の日",
+    "whatsNewTitle": "{version}の新機能",
+    "whatsNewNext": "次へ",
+    "whatsNewStart": "はじめる",
+    "whatsNewWebTitle": "ブラウザでkeklist",
+    "whatsNewWebBody": "Wi‑Fiアクセスをオンにすれば、ノートPCから書けます。同じアプリを全画面で。",
+    "whatsNewGalleryTitle": "ギャラリーが日記の一部に",
+    "whatsNewGalleryBody": "撮った写真や動画が、カレンダーと各日に表示されます。",
+    "whatsNewCirclesTitle": "丸い動画とボイスメモ",
+    "whatsNewCirclesBody": "書くより、話したり撮ったりする方が早いこともあります。",
+    "whatsNewShakeTitle": "振ってカスタマイズ",
+    "whatsNewShakeBody": "スマホを振れば、どの画面もカスタマイズできます。",
+    "whatsNewAlsoDesign": "さらに、新しいデザインとアニメーションも。",
+    "rateApp": "keklistを評価"
 }

@@ -89,6 +89,15 @@ abstract final class Analytics {
 
   static void proPurchased(String productId) => _capture('pro_purchased', {'product_id': productId});
 
+  static void whatsNewShown(String release) => _capture('whats_new_shown', {'release': release});
+
+  static void whatsNewClosed(String release, {required bool isCompleted, required int slide}) =>
+      _capture(isCompleted ? 'whats_new_completed' : 'whats_new_skipped', {'release': release, 'slide': slide});
+
+  static void rateTapped() => _capture('rate_tapped', {});
+
+  static void reviewPrompted(String release) => _capture('review_prompted', {'release': release});
+
   static void _capture(String event, Map<String, Object> properties) {
     if (_isSetUp && _isEnabled) Posthog().capture(eventName: event, properties: properties);
   }

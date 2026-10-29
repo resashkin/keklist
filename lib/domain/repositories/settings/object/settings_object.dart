@@ -148,6 +148,15 @@ final class SettingsObject extends HiveObject {
   @HiveField(49, defaultValue: true)
   late bool isAnalyticsEnabled;
 
+  @HiveField(50, defaultValue: null)
+  late String? whatsNewSeenRelease;
+
+  @HiveField(51, defaultValue: null)
+  late int? whatsNewSeenAtMs;
+
+  @HiveField(52, defaultValue: null)
+  late String? reviewPromptedRelease;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -198,6 +207,9 @@ final class SettingsObject extends HiveObject {
           sensitivity: storySensitivity,
         ),
         avatar: UserAvatar(emoji: avatarEmoji, imagePath: avatarImagePath),
+        whatsNewSeenRelease: whatsNewSeenRelease,
+        whatsNewSeenAt: whatsNewSeenAtMs == null ? null : DateTime.fromMillisecondsSinceEpoch(whatsNewSeenAtMs!),
+        reviewPromptedRelease: reviewPromptedRelease,
         mindEmotionsPrompt:
             MindEmotionsPrompt.values.elementAtOrNull(mindEmotionsPromptIndex) ?? MindEmotionsPrompt.afterSave,
         tileEmojiMotion: TileEmojiMotion.values.elementAtOrNull(tileEmojiMotionIndex) ?? TileEmojiMotion.drift,

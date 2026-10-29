@@ -402,5 +402,18 @@
     "viewerComments": "Kommentare",
     "viewerNoComments": "Noch keine Kommentare",
     "previousDay": "Vorheriger Tag",
-    "nextDay": "Nächster Tag"
+    "nextDay": "Nächster Tag",
+    "whatsNewTitle": "Neu in {version}",
+    "whatsNewNext": "Weiter",
+    "whatsNewStart": "Los geht's",
+    "whatsNewWebTitle": "keklist im Browser",
+    "whatsNewWebBody": "Schalte den WLAN-Zugriff ein und schreib vom Laptop aus: dieselbe App, im Vollbild.",
+    "whatsNewGalleryTitle": "Deine Galerie ist dein Tagebuch",
+    "whatsNewGalleryBody": "Jedes Foto und Video, das du gemacht hast, erscheint jetzt im Kalender und in jedem Tag.",
+    "whatsNewCirclesTitle": "Videokreise und Sprachnotizen",
+    "whatsNewCirclesBody": "Manchmal ist es leichter, es zu sagen oder zu zeigen, als es zu tippen.",
+    "whatsNewShakeTitle": "Schütteln zum Anpassen",
+    "whatsNewShakeBody": "Schüttle dein Handy, um jeden Bildschirm anzupassen.",
+    "whatsNewAlsoDesign": "Außerdem: neues Design und Animationen.",
+    "rateApp": "keklist bewerten"
 }

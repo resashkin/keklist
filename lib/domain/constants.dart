@@ -103,6 +103,7 @@ enum SupportedPlatform { iOS, android, web }
 
 final class KeklistConstants {
   static String demoAccountEmail = dotenv.get('DEMO_ACCOUNT_EMAIL');
+  static const String appStoreId = '1592891224';
   static String termsOfUseURL = 'https://resashkin.github.io/keklist-terms/';
   static String privacyURL = 'https://resashkin.github.io/keklist-privacy/';
   static String sourceCodeURL = 'https://github.com/resashkin/keklist_flutter';

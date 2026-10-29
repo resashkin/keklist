@@ -58,6 +58,10 @@ Settings → Analytics.
 | `tweak_changed` | `key`, `value`, `screen` (the last viewed screen, if any) |
 | `paywall_shown` | `tips_only` |
 | `tip_purchased` / `pro_purchased` | `product_id` |
+| `whats_new_shown` | `release` |
+| `whats_new_completed` / `whats_new_skipped` | `release`, `slide` (1-based, the slide it closed on) |
+| `rate_tapped` | none |
+| `review_prompted` | `release` |
 | `$exception` | type and stack frames, without the message |
 
 PostHog adds its own device properties, such as app version, OS and locale. The project has

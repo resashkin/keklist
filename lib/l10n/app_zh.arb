@@ -402,5 +402,18 @@
     "viewerComments": "评论",
     "viewerNoComments": "暂无评论",
     "previousDay": "前一天",
-    "nextDay": "后一天"
+    "nextDay": "后一天",
+    "whatsNewTitle": "{version} 新功能",
+    "whatsNewNext": "下一步",
+    "whatsNewStart": "开始",
+    "whatsNewWebTitle": "在浏览器中使用 keklist",
+    "whatsNewWebBody": "打开 Wi‑Fi 访问，就能在笔记本上写：同一个应用，全屏显示。",
+    "whatsNewGalleryTitle": "相册就是你的日记",
+    "whatsNewGalleryBody": "你拍的每张照片和每段视频，现在都会出现在日历和每一天里。",
+    "whatsNewCirclesTitle": "圆形视频和语音笔记",
+    "whatsNewCirclesBody": "有时候，说出来或拍下来比打字更容易。",
+    "whatsNewShakeTitle": "摇一摇，自定义",
+    "whatsNewShakeBody": "摇一摇手机，就能自定义任意页面。",
+    "whatsNewAlsoDesign": "另外：全新设计和动画。",
+    "rateApp": "给 keklist 评分"
 }

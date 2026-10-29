@@ -205,6 +205,13 @@ final class KeklistSettings {
   /// Anonymous usage analytics, see `documentation/ANALYTICS_IMPLEMENTATION.md`; on until the user turns it off.
   final bool isAnalyticsEnabled;
 
+  /// The What's New release last shown and when, see `documentation/WHATS_NEW.md`.
+  final String? whatsNewSeenRelease;
+  final DateTime? whatsNewSeenAt;
+
+  /// The release in which the store review prompt was last requested.
+  final String? reviewPromptedRelease;
+
   KeklistSettings({
     required this.themePreference,
     required this.interfaceStyle,
@@ -232,6 +239,9 @@ final class KeklistSettings {
     this.gridResizeAnimation = GridResizeAnimation.fly,
     this.hiddenMediaIds = const {},
     this.isAnalyticsEnabled = true,
+    this.whatsNewSeenRelease,
+    this.whatsNewSeenAt,
+    this.reviewPromptedRelease,
   });
 
   KeklistSettings copyWith({
@@ -261,6 +271,9 @@ final class KeklistSettings {
     GridResizeAnimation? gridResizeAnimation,
     Set<String>? hiddenMediaIds,
     bool? isAnalyticsEnabled,
+    String? whatsNewSeenRelease,
+    DateTime? whatsNewSeenAt,
+    String? reviewPromptedRelease,
   }) {
     return KeklistSettings(
       themePreference: themePreference ?? this.themePreference,
@@ -289,6 +302,9 @@ final class KeklistSettings {
       gridResizeAnimation: gridResizeAnimation ?? this.gridResizeAnimation,
       hiddenMediaIds: hiddenMediaIds ?? this.hiddenMediaIds,
       isAnalyticsEnabled: isAnalyticsEnabled ?? this.isAnalyticsEnabled,
+      whatsNewSeenRelease: whatsNewSeenRelease ?? this.whatsNewSeenRelease,
+      whatsNewSeenAt: whatsNewSeenAt ?? this.whatsNewSeenAt,
+      reviewPromptedRelease: reviewPromptedRelease ?? this.reviewPromptedRelease,
     );
   }
 
@@ -333,7 +349,10 @@ final class KeklistSettings {
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
     ..hiddenMediaIds = hiddenMediaIds.toList()
     ..isAnalyticsEnabled = isAnalyticsEnabled
-    ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
+    ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList()
+    ..whatsNewSeenRelease = whatsNewSeenRelease
+    ..whatsNewSeenAtMs = whatsNewSeenAt?.millisecondsSinceEpoch
+    ..reviewPromptedRelease = reviewPromptedRelease;
 
   factory KeklistSettings.initial() => KeklistSettings(
         themePreference: KeklistThemeMode.system,

@@ -1317,4 +1317,49 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get nextDay => 'Nächster Tag';
+
+  @override
+  String whatsNewTitle(String version) {
+    return 'Neu in $version';
+  }
+
+  @override
+  String get whatsNewNext => 'Weiter';
+
+  @override
+  String get whatsNewStart => 'Los geht\'s';
+
+  @override
+  String get whatsNewWebTitle => 'keklist im Browser';
+
+  @override
+  String get whatsNewWebBody =>
+      'Schalte den WLAN-Zugriff ein und schreib vom Laptop aus: dieselbe App, im Vollbild.';
+
+  @override
+  String get whatsNewGalleryTitle => 'Deine Galerie ist dein Tagebuch';
+
+  @override
+  String get whatsNewGalleryBody =>
+      'Jedes Foto und Video, das du gemacht hast, erscheint jetzt im Kalender und in jedem Tag.';
+
+  @override
+  String get whatsNewCirclesTitle => 'Videokreise und Sprachnotizen';
+
+  @override
+  String get whatsNewCirclesBody =>
+      'Manchmal ist es leichter, es zu sagen oder zu zeigen, als es zu tippen.';
+
+  @override
+  String get whatsNewShakeTitle => 'Schütteln zum Anpassen';
+
+  @override
+  String get whatsNewShakeBody =>
+      'Schüttle dein Handy, um jeden Bildschirm anzupassen.';
+
+  @override
+  String get whatsNewAlsoDesign => 'Außerdem: neues Design und Animationen.';
+
+  @override
+  String get rateApp => 'keklist bewerten';
 }

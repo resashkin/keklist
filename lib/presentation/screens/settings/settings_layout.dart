@@ -18,6 +18,7 @@ abstract final class SettingsItemIds {
   static const String pro = 'row.pro';
   static const String proStatus = 'row.proStatus';
   static const String tips = 'row.tips';
+  static const String rateApp = 'row.rateApp';
   static const String leaveFeedback = 'row.leaveFeedback';
   static const String analytics = 'row.analytics';
   static const String language = 'row.language';

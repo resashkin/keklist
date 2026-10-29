@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/domain/constants.dart';
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
@@ -33,6 +34,7 @@ import 'package:keklist/presentation/screens/settings/settings_layout.dart';
 import 'package:keklist/presentation/screens/settings/widgets/web_version_rows.dart';
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
 import 'package:keklist/presentation/screens/feedback/feedback_sheet.dart';
 import 'package:keklist/presentation/screens/hidden_media/hidden_media_screen.dart';
@@ -179,6 +181,11 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   }
 
   /// Running jobs get their own section on top while they run; it is never customizable.
+  Future<void> _rateApp() {
+    Analytics.rateTapped();
+    return InAppReview.instance.openStoreListing(appStoreId: KeklistConstants.appStoreId);
+  }
+
   List<SettingsSectionModel> _buildSections(BuildContext context, {bool isIndexing = false}) => [
     if (isIndexing)
       SettingsSectionModel(
@@ -256,6 +263,13 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             title: 'Support keklist',
             leading: const Icon(Icons.favorite, color: Colors.amber),
             onTap: () => PaywallBottomSheet.show(context, tipsOnly: true),
+          ),
+        if (!kIsPhoneWeb)
+          _navigationRow(
+            id: SettingsItemIds.rateApp,
+            title: context.l10n.rateApp,
+            leading: const Icon(Icons.star_rounded, color: Colors.orangeAccent),
+            onTap: _rateApp,
           ),
         if (TelegramFeedback.isConfigured)
           _navigationRow(

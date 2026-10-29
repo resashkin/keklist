@@ -2540,6 +2540,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next day'**
   String get nextDay;
+
+  /// Title of the What's New sheet shown once after an update
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s new in {version}'**
+  String whatsNewTitle(String version);
+
+  /// Button that moves to the next What's New slide
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get whatsNewNext;
+
+  /// Button on the last What's New slide that closes it
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get whatsNewStart;
+
+  /// What's New slide: the app in a desktop browser over Wi-Fi
+  ///
+  /// In en, this message translates to:
+  /// **'keklist in your browser'**
+  String get whatsNewWebTitle;
+
+  /// What's New slide text about Wi-Fi access
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Wi‑Fi access and write from your laptop: it\'s the same app, full screen.'**
+  String get whatsNewWebBody;
+
+  /// What's New slide: photos and videos in the diary
+  ///
+  /// In en, this message translates to:
+  /// **'Your gallery is your diary'**
+  String get whatsNewGalleryTitle;
+
+  /// What's New slide text about the gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Every photo and video you took now shows up in the calendar and in each day.'**
+  String get whatsNewGalleryBody;
+
+  /// What's New slide: video circles and voice notes
+  ///
+  /// In en, this message translates to:
+  /// **'Video circles and voice notes'**
+  String get whatsNewCirclesTitle;
+
+  /// What's New slide text about video circles and voice notes
+  ///
+  /// In en, this message translates to:
+  /// **'Sometimes it\'s easier to say it or show it than to type it.'**
+  String get whatsNewCirclesBody;
+
+  /// What's New slide: shake the phone to customize a screen
+  ///
+  /// In en, this message translates to:
+  /// **'Shake to tweak'**
+  String get whatsNewShakeTitle;
+
+  /// What's New slide text about shake to tweak
+  ///
+  /// In en, this message translates to:
+  /// **'Shake your phone to customize any screen.'**
+  String get whatsNewShakeBody;
+
+  /// Extra line on the last What's New slide
+  ///
+  /// In en, this message translates to:
+  /// **'Plus: a new design and animations.'**
+  String get whatsNewAlsoDesign;
+
+  /// Settings row that opens the store page to rate the app
+  ///
+  /// In en, this message translates to:
+  /// **'Rate keklist'**
+  String get rateApp;
 }
 
 class _AppLocalizationsDelegate

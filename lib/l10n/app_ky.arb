@@ -615,5 +615,18 @@
     "viewerComments": "Комментарийлер",
     "viewerNoComments": "Азырынча комментарий жок",
     "previousDay": "Мурунку күн",
-    "nextDay": "Кийинки күн"
+    "nextDay": "Кийинки күн",
+    "whatsNewTitle": "{version} версиясында эмне жаңы",
+    "whatsNewNext": "Кийинки",
+    "whatsNewStart": "Баштоо",
+    "whatsNewWebTitle": "keklist браузерде",
+    "whatsNewWebBody": "Wi‑Fi аркылуу кирүүнү күйгүзүп, ноутбуктан жаз: бул ошол эле колдонмо, толук экранда.",
+    "whatsNewGalleryTitle": "Галерея — күндөлүктүн бир бөлүгү",
+    "whatsNewGalleryBody": "Тарткан ар бир сүрөт жана видео эми календарда жана ар бир күндө көрүнөт.",
+    "whatsNewCirclesTitle": "Видео-тегерекчелер жана үн жазуулары",
+    "whatsNewCirclesBody": "Кээде жазгандан көрө айтуу же тартуу оңой.",
+    "whatsNewShakeTitle": "Силкип, жөндө",
+    "whatsNewShakeBody": "Каалаган экранды телефонду силкип жөндөсө болот.",
+    "whatsNewAlsoDesign": "Дагы: жаңы дизайн жана анимациялар.",
+    "rateApp": "keklist'ти баалоо"
 }

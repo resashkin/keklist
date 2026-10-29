@@ -1302,4 +1302,48 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nextDay => 'Next day';
+
+  @override
+  String whatsNewTitle(String version) {
+    return 'What\'s new in $version';
+  }
+
+  @override
+  String get whatsNewNext => 'Next';
+
+  @override
+  String get whatsNewStart => 'Start';
+
+  @override
+  String get whatsNewWebTitle => 'keklist in your browser';
+
+  @override
+  String get whatsNewWebBody =>
+      'Turn on Wi‑Fi access and write from your laptop: it\'s the same app, full screen.';
+
+  @override
+  String get whatsNewGalleryTitle => 'Your gallery is your diary';
+
+  @override
+  String get whatsNewGalleryBody =>
+      'Every photo and video you took now shows up in the calendar and in each day.';
+
+  @override
+  String get whatsNewCirclesTitle => 'Video circles and voice notes';
+
+  @override
+  String get whatsNewCirclesBody =>
+      'Sometimes it\'s easier to say it or show it than to type it.';
+
+  @override
+  String get whatsNewShakeTitle => 'Shake to tweak';
+
+  @override
+  String get whatsNewShakeBody => 'Shake your phone to customize any screen.';
+
+  @override
+  String get whatsNewAlsoDesign => 'Plus: a new design and animations.';
+
+  @override
+  String get rateApp => 'Rate keklist';
 }
