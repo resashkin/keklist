@@ -170,7 +170,6 @@ final class UserAvatar {
 }
 
 final class KeklistSettings {
-  final String? previousAppVersion;
   final KeklistThemeMode themePreference;
   final KeklistInterfaceStyle interfaceStyle;
   final bool shouldShowTitles;
@@ -207,7 +206,6 @@ final class KeklistSettings {
   final bool isAnalyticsEnabled;
 
   KeklistSettings({
-    required this.previousAppVersion,
     required this.themePreference,
     required this.interfaceStyle,
     required this.shouldShowTitles,
@@ -237,7 +235,6 @@ final class KeklistSettings {
   });
 
   KeklistSettings copyWith({
-    String? previousAppVersion,
     KeklistThemeMode? themePreference,
     KeklistInterfaceStyle? interfaceStyle,
     bool? shouldShowTitles,
@@ -266,7 +263,6 @@ final class KeklistSettings {
     bool? isAnalyticsEnabled,
   }) {
     return KeklistSettings(
-      previousAppVersion: previousAppVersion ?? this.previousAppVersion,
       themePreference: themePreference ?? this.themePreference,
       interfaceStyle: interfaceStyle ?? this.interfaceStyle,
       shouldShowTitles: shouldShowTitles ?? this.shouldShowTitles,
@@ -297,7 +293,6 @@ final class KeklistSettings {
   }
 
   SettingsObject toObject() => SettingsObject()
-    ..previousAppVersion = previousAppVersion
     ..isDarkMode = themePreference == KeklistThemeMode.dark
     ..themePreferenceIndex = themePreference.index
     ..interfaceStyleIndex = interfaceStyle.index
@@ -341,7 +336,6 @@ final class KeklistSettings {
     ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList();
 
   factory KeklistSettings.initial() => KeklistSettings(
-        previousAppVersion: null,
         themePreference: KeklistThemeMode.system,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,
         shouldShowTitles: true,

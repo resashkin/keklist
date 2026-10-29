@@ -10,8 +10,7 @@ part 'settings_object.g.dart';
 final class SettingsObject extends HiveObject {
   // @HiveField(0, defaultValue: true)
 
-  @HiveField(1, defaultValue: null)
-  late String? previousAppVersion;
+  // @HiveField(1, defaultValue: null)
 
   // @HiveField(2, defaultValue: false)
 
@@ -152,7 +151,6 @@ final class SettingsObject extends HiveObject {
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
-        previousAppVersion: previousAppVersion,
         shouldShowTitles: shouldShowTitles,
         themePreference: themePreferenceIndex < 0
             ? (isDarkMode ? KeklistThemeMode.dark : KeklistThemeMode.light)

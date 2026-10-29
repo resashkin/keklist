@@ -56,7 +56,6 @@ void main() {
     // Register fallback values for mocktail
     registerFallbackValue(
       KeklistSettings(
-        previousAppVersion: null,
         themePreference: KeklistThemeMode.dark,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,
         shouldShowTitles: true,
@@ -75,7 +74,6 @@ void main() {
       // Current version matches the latest migration (v4), no migrations needed
       when(() => mockSettingsRepo.value).thenReturn(
         KeklistSettings(
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -96,7 +94,6 @@ void main() {
     test('does not run migrations when no migrations exist', () async {
       when(() => mockSettingsRepo.value).thenReturn(
         KeklistSettings(
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -115,7 +112,6 @@ void main() {
     test('updates schema version after successful migration', () async {
       when(() => mockSettingsRepo.value).thenReturn(
         KeklistSettings(
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,

@@ -40,7 +40,6 @@ void main() {
     // Register fallback values
     registerFallbackValue(
       KeklistSettings(
-        previousAppVersion: null,
         themePreference: KeklistThemeMode.dark,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,
         shouldShowTitles: true,
@@ -62,7 +61,6 @@ void main() {
       // Arrange
       when(() => mockSettingsRepository.value).thenReturn(
         KeklistSettings(
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -89,7 +87,6 @@ void main() {
       // Arrange
       when(() => mockSettingsRepository.value).thenReturn(
         KeklistSettings(
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -125,7 +122,6 @@ void main() {
 
       when(() => mockSettingsRepository.value).thenReturn(
         KeklistSettings(
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -168,7 +164,6 @@ void main() {
 
       when(() => mockSettingsRepository.value).thenReturn(
         KeklistSettings(
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -309,7 +304,6 @@ void main() {
     test('should update settings with hasSeenLazyOnboarding = true', () async {
       // Arrange
       final currentSettings = KeklistSettings(
-        previousAppVersion: null,
         themePreference: KeklistThemeMode.dark,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,
         shouldShowTitles: true,
@@ -337,7 +331,6 @@ void main() {
 
   group('settings preservation', () {
     final populatedSettings = KeklistSettings(
-      previousAppVersion: '1.0.0 1',
       themePreference: KeklistThemeMode.dark,
       interfaceStyle: KeklistInterfaceStyle.liquidGlass,
       shouldShowTitles: true,
