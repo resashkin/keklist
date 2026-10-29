@@ -177,7 +177,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsCustomizeDescription => '开关卡片，拖动以重新排序';
 
   @override
-  String get insightsResetLayout => '重置';
+  String get tweakReset => '重置';
 
   @override
   String get activeTasks => '进行中的任务';
@@ -1306,4 +1306,10 @@ class AppLocalizationsZh extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => '自拍';
+
+  @override
+  String get profileRecentAvatars => '最近';
 }

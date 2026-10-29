@@ -183,7 +183,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Включайте и выключайте карточки, перетаскивайте для порядка';
 
   @override
-  String get insightsResetLayout => 'Сбросить';
+  String get tweakReset => 'Сбросить';
 
   @override
   String get activeTasks => 'Активные задачи';
@@ -1363,4 +1363,10 @@ class AppLocalizationsRu extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Селфи';
+
+  @override
+  String get profileRecentAvatars => 'Недавние';
 }

@@ -56,12 +56,17 @@ class AppFileRepository {
   Future<String> saveAvatarImage(File source) async {
     final Directory userRoot = await _ensureUserRoot();
     final Directory avatarDirectory = Directory('${userRoot.path}/$_avatarFolderName');
-    if (await avatarDirectory.exists()) await avatarDirectory.delete(recursive: true);
     await avatarDirectory.create(recursive: true);
     final String extension = source.path.split('.').last.toLowerCase();
     final String fileName = '${const Uuid().v4()}.$extension';
     await source.copy('${avatarDirectory.path}/$fileName');
     return '$_avatarFolderName/$fileName';
+  }
+
+  /// Removes an avatar that left the history.
+  Future<void> deleteAvatarImage(String relativePath) async {
+    final File file = File(await resolveAbsolutePath(relativePath));
+    if (await file.exists()) await file.delete();
   }
 
   /// Resolves an app-relative path (obtained from [AppFileHandle.relativePath])

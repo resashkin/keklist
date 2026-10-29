@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "Додај белешку данас да започнеш низ",
     "insightsCustomize": "Прилагоди аналитику",
     "insightsCustomizeDescription": "Укључи или искључи картице и превуци их за редослед",
-    "insightsResetLayout": "Ресетуј",
+    "tweakReset": "Ресетуј",
     "activeTasks": "Активни задаци",
     "galleryIndex": "Индекс галерије",
     "galleryIndexNoAccess": "Нема приступа Фотографијама",
@@ -415,5 +415,7 @@
     "rateApp": "Оцени keklist",
     "pinchColumnsHint": "Савет: скупи или рашири прсте на мрежи да промениш број колона",
     "insightsWhatsMissing": "Шта недостаје?",
-    "digestNotesCount": "{count, plural, one{{count} белешка} few{{count} белешке} other{{count} белешки}}"
+    "digestNotesCount": "{count, plural, one{{count} белешка} few{{count} белешке} other{{count} белешки}}",
+    "profileSelfie": "Селфи",
+    "profileRecentAvatars": "Недавни"
 }

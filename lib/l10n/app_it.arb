@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "Aggiungi una nota oggi per iniziare una serie",
     "insightsCustomize": "Personalizza analisi",
     "insightsCustomizeDescription": "Attiva o disattiva le schede e trascinale per riordinarle",
-    "insightsResetLayout": "Ripristina",
+    "tweakReset": "Ripristina",
     "activeTasks": "Attività in corso",
     "galleryIndex": "Indice della galleria",
     "galleryIndexNoAccess": "Nessun accesso a Foto",
@@ -625,5 +625,7 @@
     "rateApp": "Valuta keklist",
     "pinchColumnsHint": "Suggerimento: pizzica la griglia per cambiare il numero di colonne",
     "insightsWhatsMissing": "Cosa manca?",
-    "digestNotesCount": "{count, plural, one{{count} nota} other{{count} note}}"
+    "digestNotesCount": "{count, plural, one{{count} nota} other{{count} note}}",
+    "profileSelfie": "Selfie",
+    "profileRecentAvatars": "Recenti"
 }

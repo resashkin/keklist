@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/widgets/tweak_reset_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/presentation/core/widgets/glass_segmented_switcher.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
@@ -26,6 +27,10 @@ final class StoryTextureTweakSheet extends StatelessWidget {
 
     return KekSheetScaffold(
       title: context.l10n.storyBackgroundTweak,
+      leading: TweakResetButton(
+        isChanged: (settings) => settings.story != const StorySettings(),
+        reset: (settings) => settings.copyWith(story: const StorySettings()),
+      ),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

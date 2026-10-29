@@ -133,8 +133,15 @@ final class GlassBubble extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
   final bool isCircle;
+  final double height;
 
-  const GlassBubble({super.key, required this.child, this.padding = EdgeInsets.zero, this.isCircle = false});
+  const GlassBubble({
+    super.key,
+    required this.child,
+    this.padding = EdgeInsets.zero,
+    this.isCircle = false,
+    this.height = _kBubbleHeight,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -142,20 +149,20 @@ final class GlassBubble extends StatelessWidget {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(_kBubbleHeight / 2),
+        borderRadius: BorderRadius.circular(height / 2),
         boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: isDark ? 0.4 : 0.08), blurRadius: 16.0)],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(_kBubbleHeight / 2),
+        borderRadius: BorderRadius.circular(height / 2),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: _kBlurSigma, sigmaY: _kBlurSigma),
           child: Container(
-            height: _kBubbleHeight,
-            width: isCircle ? _kBubbleHeight : null,
+            height: height,
+            width: isCircle ? height : null,
             padding: padding,
             decoration: BoxDecoration(
               color: colors.surface.withValues(alpha: isDark ? 0.45 : 0.6),
-              borderRadius: BorderRadius.circular(_kBubbleHeight / 2),
+              borderRadius: BorderRadius.circular(height / 2),
               border: Border.all(color: Colors.white.withValues(alpha: isDark ? 0.12 : 0.7)),
             ),
             child: Center(widthFactor: 1.0, child: child),

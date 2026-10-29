@@ -429,11 +429,11 @@ abstract class AppLocalizations {
   /// **'Turn cards on or off and drag to reorder'**
   String get insightsCustomizeDescription;
 
-  /// Analytics screen
+  /// Tweak menu header: puts that menu back to defaults
   ///
   /// In en, this message translates to:
   /// **'Reset'**
-  String get insightsResetLayout;
+  String get tweakReset;
 
   /// Settings section shown on top while a background job runs
   ///
@@ -2618,6 +2618,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, one{{count} note} other{{count} notes}}'**
   String digestNotesCount(int count);
+
+  /// Profile sheet: take a selfie for the avatar
+  ///
+  /// In en, this message translates to:
+  /// **'Selfie'**
+  String get profileSelfie;
+
+  /// Profile sheet: section with previous avatars
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get profileRecentAvatars;
 }
 
 class _AppLocalizationsDelegate

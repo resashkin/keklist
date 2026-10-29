@@ -177,7 +177,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get insightsCustomizeDescription => 'カードのオン・オフを切り替え、ドラッグで並べ替え';
 
   @override
-  String get insightsResetLayout => 'リセット';
+  String get tweakReset => 'リセット';
 
   @override
   String get activeTasks => '実行中のタスク';
@@ -1313,4 +1313,10 @@ class AppLocalizationsJa extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'セルフィー';
+
+  @override
+  String get profileRecentAvatars => '最近';
 }

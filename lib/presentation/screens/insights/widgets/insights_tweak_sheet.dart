@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/widgets/tweak_reset_button.dart';
 import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
@@ -34,9 +35,11 @@ final class InsightsTweakSheet extends StatelessWidget {
 
     return KekSheetScaffold(
       title: context.l10n.insightsCustomize,
-      leading: TextButton(
-        onPressed: () => save(InsightsSettings(periodIndex: insights.periodIndex)),
-        child: Text(context.l10n.insightsResetLayout),
+      leading: TweakResetButton(
+        isChanged: (settings) =>
+            settings.insights.widgetOrder.isNotEmpty || settings.insights.hiddenWidgetIds.isNotEmpty,
+        reset: (settings) =>
+            settings.copyWith(insights: InsightsSettings(periodIndex: settings.insights.periodIndex)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

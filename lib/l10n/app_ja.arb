@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "今日メモを追加して連続記録を始めましょう",
     "insightsCustomize": "分析をカスタマイズ",
     "insightsCustomizeDescription": "カードのオン・オフを切り替え、ドラッグで並べ替え",
-    "insightsResetLayout": "リセット",
+    "tweakReset": "リセット",
     "activeTasks": "実行中のタスク",
     "galleryIndex": "ギャラリーのインデックス",
     "galleryIndexNoAccess": "写真へのアクセスがありません",
@@ -415,5 +415,7 @@
     "rateApp": "keklistを評価",
     "pinchColumnsHint": "ヒント：グリッドをピンチすると列の数を変えられます",
     "insightsWhatsMissing": "何が足りない？",
-    "digestNotesCount": "{count, plural, other{{count} 件のメモ}}"
+    "digestNotesCount": "{count, plural, other{{count} 件のメモ}}",
+    "profileSelfie": "セルフィー",
+    "profileRecentAvatars": "最近"
 }

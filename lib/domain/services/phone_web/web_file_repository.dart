@@ -19,5 +19,8 @@ final class WebFileRepository extends AppFileRepository {
   @override
   Future<String> saveAvatarImage(File source) => throw UnsupportedError(_readOnly);
 
+  @override
+  Future<void> deleteAvatarImage(String relativePath) async {}
+
   static const String _readOnly = "The web version doesn't store files";
 }

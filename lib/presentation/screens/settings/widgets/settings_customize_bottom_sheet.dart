@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/widgets/tweak_reset_button.dart';
 import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
@@ -17,6 +18,10 @@ final class SettingsCustomizeBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return KekSheetScaffold(
       title: context.l10n.customizeSettings,
+      leading: TweakResetButton(
+        isChanged: (settings) => settings.hiddenSettingsItemIds.isNotEmpty,
+        reset: (settings) => settings.copyWith(hiddenSettingsItemIds: const {}),
+      ),
       child: BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (_, current) => current is SettingsDataState,
         builder: (context, state) {

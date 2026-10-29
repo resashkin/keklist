@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "今天添加一条笔记开始连续记录",
     "insightsCustomize": "自定义分析",
     "insightsCustomizeDescription": "开关卡片，拖动以重新排序",
-    "insightsResetLayout": "重置",
+    "tweakReset": "重置",
     "activeTasks": "进行中的任务",
     "galleryIndex": "图库索引",
     "galleryIndexNoAccess": "无法访问照片",
@@ -415,5 +415,7 @@
     "rateApp": "给 keklist 评分",
     "pinchColumnsHint": "提示：在网格上双指捏合即可更改列数",
     "insightsWhatsMissing": "还缺少什么？",
-    "digestNotesCount": "{count, plural, other{{count} 条笔记}}"
+    "digestNotesCount": "{count, plural, other{{count} 条笔记}}",
+    "profileSelfie": "自拍",
+    "profileRecentAvatars": "最近"
 }

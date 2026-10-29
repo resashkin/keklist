@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "Seriyani boshlash uchun bugun yozuv qoʻshing",
     "insightsCustomize": "Analitikani sozlash",
     "insightsCustomizeDescription": "Kartochkalarni yoqing yoki oʻchiring, tartibini sudrab oʻzgartiring",
-    "insightsResetLayout": "Tiklash",
+    "tweakReset": "Tiklash",
     "activeTasks": "Faol vazifalar",
     "galleryIndex": "Galereya indeksi",
     "galleryIndexNoAccess": "Rasmlarga ruxsat yoʻq",
@@ -625,5 +625,7 @@
     "rateApp": "keklist'ni baholash",
     "pinchColumnsHint": "Maslahat: ustunlar sonini o‘zgartirish uchun to‘rni ikki barmoq bilan qisib yoki yoying",
     "insightsWhatsMissing": "Nima yetishmayapti?",
-    "digestNotesCount": "{count, plural, other{{count} ta yozuv}}"
+    "digestNotesCount": "{count, plural, other{{count} ta yozuv}}",
+    "profileSelfie": "Selfi",
+    "profileRecentAvatars": "Oxirgilar"
 }

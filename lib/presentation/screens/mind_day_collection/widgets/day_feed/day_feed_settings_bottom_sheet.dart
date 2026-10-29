@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/widgets/tweak_reset_button.dart';
 import 'package:keklist/presentation/core/widgets/column_count_row.dart';
 import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'dart:io';
@@ -28,6 +29,18 @@ final class DayFeedSettingsBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return KekSheetScaffold(
       title: context.l10n.dayFeedTileSettings,
+      // Weather and the media folder are sources, not looks, so Reset leaves them alone.
+      leading: TweakResetButton(
+        isChanged: (settings) =>
+            settings.dayFeed != const DayFeedSettings() ||
+            settings.tileEmojiMotion != TileEmojiMotion.drift ||
+            settings.gridResizeAnimation != GridResizeAnimation.fly,
+        reset: (settings) => settings.copyWith(
+          dayFeed: const DayFeedSettings(),
+          tileEmojiMotion: TileEmojiMotion.drift,
+          gridResizeAnimation: GridResizeAnimation.fly,
+        ),
+      ),
       child: BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (_, current) => current is SettingsDataState,
         builder: (context, state) {

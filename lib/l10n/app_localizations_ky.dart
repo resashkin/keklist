@@ -182,7 +182,7 @@ class AppLocalizationsKy extends AppLocalizations {
       'Карточкаларды күйгүзүп же өчүрүп, тартып тартибин өзгөртүңүз';
 
   @override
-  String get insightsResetLayout => 'Баштапкы абалга';
+  String get tweakReset => 'Баштапкы абалга';
 
   @override
   String get activeTasks => 'Активдүү тапшырмалар';
@@ -1358,4 +1358,10 @@ class AppLocalizationsKy extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Селфи';
+
+  @override
+  String get profileRecentAvatars => 'Акыркылар';
 }

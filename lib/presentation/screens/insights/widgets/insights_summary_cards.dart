@@ -16,10 +16,13 @@ final class InsightsCountersCard extends StatelessWidget {
     final InsightsCounters counters = data.report.counters;
     final InsightsPeriodKind kind = data.report.period.kind;
     Widget cell(InsightsComparison value, String caption) => Expanded(
-      child: InsightsValue(
-        value: InsightsFormat.number(context, value.value),
-        caption: caption,
-        footnote: InsightsFormat.comparison(context, kind, value),
+      child: AspectRatio(
+        aspectRatio: 1.0,
+        child: InsightsCountTile(
+          value: InsightsFormat.number(context, value.value),
+          caption: caption,
+          footnote: InsightsFormat.comparison(context, kind, value),
+        ),
       ),
     );
     return InsightsCard(
@@ -27,8 +30,7 @@ final class InsightsCountersCard extends StatelessWidget {
       title: context.l10n.insightsCounters,
       trailing: InsightsFormat.periodTitle(context, kind),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 12.0,
+        spacing: 8.0,
         children: [
           cell(counters.minds, context.l10n.insightsMinds),
           cell(counters.activeDays, context.l10n.insightsActiveDays),

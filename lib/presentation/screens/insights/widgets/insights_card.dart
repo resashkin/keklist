@@ -155,3 +155,48 @@ final class InsightsBar extends StatelessWidget {
     );
   }
 }
+
+/// A square-ish tile with a big number, its caption and an optional footnote such as the change since last period.
+final class InsightsCountTile extends StatelessWidget {
+  final String value;
+  final String caption;
+  final String? footnote;
+
+  const InsightsCountTile({super.key, required this.value, required this.caption, this.footnote});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final String? footnote = this.footnote;
+    final TextStyle? small = theme.textTheme.labelSmall?.copyWith(color: theme.hintColor, height: 1.15);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.onSurface.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FittedBox(
+              child: Text(value, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600)),
+            ),
+            Text(caption, textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis, style: small),
+            if (footnote != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 2.0),
+                child: Text(
+                  footnote,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: small?.copyWith(color: theme.hintColor.withValues(alpha: 0.7)),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

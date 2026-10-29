@@ -183,7 +183,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Karten ein- oder ausschalten und zum Sortieren ziehen';
 
   @override
-  String get insightsResetLayout => 'Zurücksetzen';
+  String get tweakReset => 'Zurücksetzen';
 
   @override
   String get activeTasks => 'Aktive Aufgaben';
@@ -1369,4 +1369,10 @@ class AppLocalizationsDe extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Selfie';
+
+  @override
+  String get profileRecentAvatars => 'Zuletzt';
 }

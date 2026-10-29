@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "Серияны бастау үшін бүгін жазба қосыңыз",
     "insightsCustomize": "Аналитиканы баптау",
     "insightsCustomizeDescription": "Карточкаларды қосыңыз не өшіріңіз, ретін сүйреп өзгертіңіз",
-    "insightsResetLayout": "Қалпына келтіру",
+    "tweakReset": "Қалпына келтіру",
     "activeTasks": "Белсенді тапсырмалар",
     "galleryIndex": "Галерея индексі",
     "galleryIndexNoAccess": "Фотоға рұқсат жоқ",
@@ -625,5 +625,7 @@
     "rateApp": "keklist-ті бағалау",
     "pinchColumnsHint": "Кеңес: бағандар санын өзгерту үшін торды екі саусақпен қысып немесе жайыңыз",
     "insightsWhatsMissing": "Не жетіспейді?",
-    "digestNotesCount": "{count, plural, other{{count} жазба}}"
+    "digestNotesCount": "{count, plural, other{{count} жазба}}",
+    "profileSelfie": "Селфи",
+    "profileRecentAvatars": "Соңғылар"
 }

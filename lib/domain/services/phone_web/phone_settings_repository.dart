@@ -59,6 +59,10 @@ final class PhoneSettingsRepository implements SettingsRepository {
     await _api.put('/api/profile', {'emoji': avatar.emoji});
   }
 
+  /// The history lives on the phone.
+  @override
+  FutureOr<void> updateAvatarHistory(List<UserAvatar> history) {}
+
   @override
   FutureOr<void> updateSettings(KeklistSettings settings) => _local.updateSettings(settings);
 

@@ -183,7 +183,7 @@ class AppLocalizationsUz extends AppLocalizations {
       'Kartochkalarni yoqing yoki oʻchiring, tartibini sudrab oʻzgartiring';
 
   @override
-  String get insightsResetLayout => 'Tiklash';
+  String get tweakReset => 'Tiklash';
 
   @override
   String get activeTasks => 'Faol vazifalar';
@@ -1361,4 +1361,10 @@ class AppLocalizationsUz extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Selfi';
+
+  @override
+  String get profileRecentAvatars => 'Oxirgilar';
 }

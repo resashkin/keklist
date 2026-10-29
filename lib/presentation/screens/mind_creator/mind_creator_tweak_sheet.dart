@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/widgets/tweak_reset_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
@@ -21,6 +22,10 @@ final class MindCreatorTweakSheet extends StatelessWidget {
         : MindEmotionsPrompt.afterSave;
     return KekSheetScaffold(
       title: context.l10n.creatorEmotionsTitle,
+      leading: TweakResetButton(
+        isChanged: (settings) => settings.mindEmotionsPrompt != MindEmotionsPrompt.afterSave,
+        reset: (settings) => settings.copyWith(mindEmotionsPrompt: MindEmotionsPrompt.afterSave),
+      ),
       child: RadioGroup<MindEmotionsPrompt>(
         groupValue: selected,
         onChanged: (prompt) {

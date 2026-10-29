@@ -129,6 +129,12 @@ final class SettingsSetMediaHidden extends SettingsEvent {
   const SettingsSetMediaHidden({required this.ids, required this.isHidden});
 }
 
+/// Puts one tweak menu's settings back to their defaults; [reset] returns the settings with them reset.
+final class SettingsResetTweaks extends SettingsEvent {
+  final KeklistSettings Function(KeklistSettings settings) reset;
+  const SettingsResetTweaks({required this.reset});
+}
+
 final class SettingsUpdateStory extends SettingsEvent {
   final StorySettings story;
   const SettingsUpdateStory({required this.story});

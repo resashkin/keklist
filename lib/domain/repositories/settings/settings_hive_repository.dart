@@ -95,6 +95,14 @@ final class SettingsHiveRepository implements SettingsRepository {
   }
 
   @override
+  FutureOr<void> updateAvatarHistory(List<UserAvatar> history) async {
+    final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
+    if (settingsObject == null) return;
+    settingsObject.avatarHistory = [for (final UserAvatar avatar in history) avatar.encode()];
+    await settingsObject.save();
+  }
+
+  @override
   FutureOr<void> updateWeatherSettings({bool? isEnabled, double? latitude, double? longitude}) async {
     final SettingsObject? settingsObject = _hiveBox.get(HiveConstants.globalSettingsIndex);
     if (settingsObject == null) return;

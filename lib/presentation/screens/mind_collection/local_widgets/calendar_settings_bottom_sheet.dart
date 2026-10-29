@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/widgets/tweak_reset_button.dart';
 import 'package:keklist/presentation/core/widgets/column_count_row.dart';
 import 'package:keklist/presentation/core/haptics/tweak_haptics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,10 @@ final class CalendarSettingsBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return KekSheetScaffold(
       title: context.l10n.calendarSettings,
+      leading: TweakResetButton(
+        isChanged: (settings) => settings.calendar != const CalendarSettings() || !settings.shouldShowTitles,
+        reset: (settings) => settings.copyWith(calendar: const CalendarSettings(), shouldShowTitles: true),
+      ),
       child: BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (_, current) => current is SettingsDataState,
         builder: (context, state) {

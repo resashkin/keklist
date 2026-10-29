@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "Füge heute eine Notiz hinzu, um eine Serie zu starten",
     "insightsCustomize": "Analysen anpassen",
     "insightsCustomizeDescription": "Karten ein- oder ausschalten und zum Sortieren ziehen",
-    "insightsResetLayout": "Zurücksetzen",
+    "tweakReset": "Zurücksetzen",
     "activeTasks": "Aktive Aufgaben",
     "galleryIndex": "Galerie-Index",
     "galleryIndexNoAccess": "Kein Zugriff auf Fotos",
@@ -415,5 +415,7 @@
     "rateApp": "keklist bewerten",
     "pinchColumnsHint": "Tipp: Zieh die Finger auf dem Raster zusammen oder auseinander, um die Spaltenzahl zu ändern",
     "insightsWhatsMissing": "Was fehlt?",
-    "digestNotesCount": "{count, plural, one{{count} Notiz} other{{count} Notizen}}"
+    "digestNotesCount": "{count, plural, one{{count} Notiz} other{{count} Notizen}}",
+    "profileSelfie": "Selfie",
+    "profileRecentAvatars": "Zuletzt"
 }

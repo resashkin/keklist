@@ -45,6 +45,7 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateInsights>(_updateInsights);
     on<SettingsUpdateCalendar>(_updateCalendar);
     on<SettingsUpdateStory>(_updateStory);
+    on<SettingsResetTweaks>(_resetTweaks);
     on<SettingsUpdateMindEmotionsPrompt>(_updateMindEmotionsPrompt);
     on<SettingsUpdateTileMotion>(_updateTileMotion);
     on<SettingsUpdateDayFeedArrangement>(_updateDayFeedArrangement);
@@ -262,6 +263,10 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
 
   FutureOr<void> _updateStory(SettingsUpdateStory event, Emitter<SettingsState> emit) async {
     await _repository.updateSettings(_repository.value.copyWith(story: event.story));
+  }
+
+  FutureOr<void> _resetTweaks(SettingsResetTweaks event, Emitter<SettingsState> emit) async {
+    await _repository.updateSettings(event.reset(_repository.value));
   }
 
   FutureOr<void> _markShakeDiscovered(SettingsMarkShakeDiscovered event, Emitter<SettingsState> emit) async {

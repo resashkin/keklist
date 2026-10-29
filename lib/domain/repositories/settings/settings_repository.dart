@@ -11,6 +11,7 @@ abstract class SettingsRepository {
   Stream<KeklistSettings> get stream;
   FutureOr<void> updateUserName(String string);
   FutureOr<void> updateUserAvatar(UserAvatar avatar);
+  FutureOr<void> updateAvatarHistory(List<UserAvatar> history);
   FutureOr<void> updateSettings(KeklistSettings settings);
   FutureOr<void> updateThemePreference(KeklistThemeMode themeMode);
   FutureOr<void> updateInterfaceStyle(KeklistInterfaceStyle style);
@@ -69,6 +70,18 @@ final class DayFeedSettings {
     sortOrder: sortOrder ?? this.sortOrder,
     grouping: grouping ?? this.grouping,
   );
+
+  @override
+  bool operator ==(Object other) =>
+      other is DayFeedSettings &&
+      other.columnCount == columnCount &&
+      other.mindCellSpan == mindCellSpan &&
+      other.isMindTextVisible == isMindTextVisible &&
+      other.sortOrder == sortOrder &&
+      other.grouping == grouping;
+
+  @override
+  int get hashCode => Object.hash(columnCount, mindCellSpan, isMindTextVisible, sortOrder, grouping);
 }
 
 /// Calendar day grids; week titles stay in `KeklistSettings.shouldShowTitles`.
@@ -100,6 +113,18 @@ final class CalendarSettings {
     sortOrder: sortOrder ?? this.sortOrder,
     grouping: grouping ?? this.grouping,
   );
+
+  @override
+  bool operator ==(Object other) =>
+      other is CalendarSettings &&
+      other.columnCount == columnCount &&
+      other.isMindTextVisible == isMindTextVisible &&
+      other.isMediaVisible == isMediaVisible &&
+      other.sortOrder == sortOrder &&
+      other.grouping == grouping;
+
+  @override
+  int get hashCode => Object.hash(columnCount, isMindTextVisible, isMediaVisible, sortOrder, grouping);
 }
 
 /// How the emotion texture behind a story or viewer page moves with the playing audio/video sound.
@@ -137,6 +162,17 @@ final class StorySettings {
     isSpectrumVisible: isSpectrumVisible ?? this.isSpectrumVisible,
     sensitivity: (sensitivity ?? this.sensitivity).clamp(minSensitivity, maxSensitivity),
   );
+
+  @override
+  bool operator ==(Object other) =>
+      other is StorySettings &&
+      other.textureAnimation == textureAnimation &&
+      other.dateLayout == dateLayout &&
+      other.isSpectrumVisible == isSpectrumVisible &&
+      other.sensitivity == sensitivity;
+
+  @override
+  int get hashCode => Object.hash(textureAnimation, dateLayout, isSpectrumVisible, sensitivity);
 }
 
 /// Analytics screen layout: widget order (unknown ids ignored), hidden widgets and the period.
@@ -161,6 +197,17 @@ final class UserAvatar {
   final String? imagePath;
 
   const UserAvatar({this.emoji, this.imagePath});
+
+  bool get isEmpty => emoji == null && imagePath == null;
+
+  /// Stored as `i:<relative path>` or `e:<emoji>`.
+  String encode() => imagePath != null ? 'i:$imagePath' : 'e:${emoji ?? ''}';
+
+  static UserAvatar? decode(String value) => switch (value) {
+    _ when value.startsWith('i:') => UserAvatar(imagePath: value.substring(2)),
+    _ when value.startsWith('e:') && value.length > 2 => UserAvatar(emoji: value.substring(2)),
+    _ => null,
+  };
 
   @override
   bool operator ==(Object other) => other is UserAvatar && other.emoji == emoji && other.imagePath == imagePath;
@@ -193,6 +240,9 @@ final class KeklistSettings {
   final CalendarSettings calendar;
   final StorySettings story;
   final UserAvatar avatar;
+
+  /// Previous avatars, newest first, the current one included; see [UserAvatar.encode].
+  final List<UserAvatar> avatarHistory;
   final Set<String> hiddenSettingsItemIds;
   final Set<String> shakeDiscoveredScreenIds;
   final MindEmotionsPrompt mindEmotionsPrompt;
@@ -232,6 +282,7 @@ final class KeklistSettings {
     this.calendar = const CalendarSettings(),
     this.story = const StorySettings(),
     this.avatar = const UserAvatar(),
+    this.avatarHistory = const [],
     this.hiddenSettingsItemIds = const {},
     this.shakeDiscoveredScreenIds = const {},
     this.mindEmotionsPrompt = MindEmotionsPrompt.afterSave,
@@ -264,6 +315,7 @@ final class KeklistSettings {
     CalendarSettings? calendar,
     StorySettings? story,
     UserAvatar? avatar,
+    List<UserAvatar>? avatarHistory,
     Set<String>? hiddenSettingsItemIds,
     Set<String>? shakeDiscoveredScreenIds,
     MindEmotionsPrompt? mindEmotionsPrompt,
@@ -295,6 +347,7 @@ final class KeklistSettings {
       calendar: calendar ?? this.calendar,
       story: story ?? this.story,
       avatar: avatar ?? this.avatar,
+      avatarHistory: avatarHistory ?? this.avatarHistory,
       hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
       shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
       mindEmotionsPrompt: mindEmotionsPrompt ?? this.mindEmotionsPrompt,
@@ -343,6 +396,7 @@ final class KeklistSettings {
     ..storySensitivity = story.sensitivity
     ..avatarEmoji = avatar.emoji
     ..avatarImagePath = avatar.imagePath
+    ..avatarHistory = [for (final UserAvatar entry in avatarHistory) entry.encode()]
     ..mindEmotionsPromptIndex = mindEmotionsPrompt.index
     ..tileEmojiMotionIndex = tileEmojiMotion.index
     ..gridResizeAnimationIndex = gridResizeAnimation.index

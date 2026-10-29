@@ -180,7 +180,7 @@ class AppLocalizationsSr extends AppLocalizations {
       'Укључи или искључи картице и превуци их за редослед';
 
   @override
-  String get insightsResetLayout => 'Ресетуј';
+  String get tweakReset => 'Ресетуј';
 
   @override
   String get activeTasks => 'Активни задаци';
@@ -1358,6 +1358,12 @@ class AppLocalizationsSr extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Селфи';
+
+  @override
+  String get profileRecentAvatars => 'Недавни';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1536,7 +1542,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
       'Uključi ili isključi kartice i prevuci ih za redosled';
 
   @override
-  String get insightsResetLayout => 'Resetuj';
+  String get tweakReset => 'Resetuj';
 
   @override
   String get activeTasks => 'Aktivni zadaci';
@@ -2713,4 +2719,10 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Selfi';
+
+  @override
+  String get profileRecentAvatars => 'Nedavni';
 }

@@ -157,6 +157,9 @@ final class SettingsObject extends HiveObject {
   @HiveField(52, defaultValue: null)
   late String? reviewPromptedRelease;
 
+  @HiveField(53, defaultValue: <String>[])
+  late List<String> avatarHistory;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -207,6 +210,7 @@ final class SettingsObject extends HiveObject {
           sensitivity: storySensitivity,
         ),
         avatar: UserAvatar(emoji: avatarEmoji, imagePath: avatarImagePath),
+        avatarHistory: avatarHistory.map(UserAvatar.decode).whereType<UserAvatar>().toList(),
         whatsNewSeenRelease: whatsNewSeenRelease,
         whatsNewSeenAt: whatsNewSeenAtMs == null ? null : DateTime.fromMillisecondsSinceEpoch(whatsNewSeenAtMs!),
         reviewPromptedRelease: reviewPromptedRelease,

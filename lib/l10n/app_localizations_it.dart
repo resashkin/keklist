@@ -181,7 +181,7 @@ class AppLocalizationsIt extends AppLocalizations {
       'Attiva o disattiva le schede e trascinale per riordinarle';
 
   @override
-  String get insightsResetLayout => 'Ripristina';
+  String get tweakReset => 'Ripristina';
 
   @override
   String get activeTasks => 'Attività in corso';
@@ -1367,4 +1367,10 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Selfie';
+
+  @override
+  String get profileRecentAvatars => 'Recenti';
 }

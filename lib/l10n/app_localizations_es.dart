@@ -181,7 +181,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'Activa o desactiva tarjetas y arrástralas para ordenarlas';
 
   @override
-  String get insightsResetLayout => 'Restablecer';
+  String get tweakReset => 'Restablecer';
 
   @override
   String get activeTasks => 'Tareas activas';
@@ -1364,4 +1364,10 @@ class AppLocalizationsEs extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Selfie';
+
+  @override
+  String get profileRecentAvatars => 'Recientes';
 }

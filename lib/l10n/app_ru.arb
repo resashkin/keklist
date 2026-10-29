@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "Добавьте заметку сегодня, чтобы начать серию",
     "insightsCustomize": "Настроить аналитику",
     "insightsCustomizeDescription": "Включайте и выключайте карточки, перетаскивайте для порядка",
-    "insightsResetLayout": "Сбросить",
+    "tweakReset": "Сбросить",
     "activeTasks": "Активные задачи",
     "galleryIndex": "Индекс галереи",
     "galleryIndexNoAccess": "Нет доступа к Фото",
@@ -415,5 +415,7 @@
     "rateApp": "Оценить keklist",
     "pinchColumnsHint": "Подсказка: сведи или разведи пальцы на сетке, чтобы поменять число колонок",
     "insightsWhatsMissing": "Чего не хватает?",
-    "digestNotesCount": "{count, plural, one{{count} заметка} few{{count} заметки} many{{count} заметок} other{{count} заметки}}"
+    "digestNotesCount": "{count, plural, one{{count} заметка} few{{count} заметки} many{{count} заметок} other{{count} заметки}}",
+    "profileSelfie": "Селфи",
+    "profileRecentAvatars": "Недавние"
 }

@@ -51,7 +51,7 @@
     "insightsEmptyStreak": "Серияны баштоо үчүн бүгүн жазуу кошуңуз",
     "insightsCustomize": "Аналитиканы ыңгайлаштыруу",
     "insightsCustomizeDescription": "Карточкаларды күйгүзүп же өчүрүп, тартып тартибин өзгөртүңүз",
-    "insightsResetLayout": "Баштапкы абалга",
+    "tweakReset": "Баштапкы абалга",
     "activeTasks": "Активдүү тапшырмалар",
     "galleryIndex": "Галерея индекси",
     "galleryIndexNoAccess": "Сүрөттөргө уруксат жок",
@@ -625,5 +625,7 @@
     "rateApp": "keklist'ти баалоо",
     "pinchColumnsHint": "Кеңеш: мамычалардын санын өзгөртүү үчүн торду эки манжа менен кысып же жайыңыз",
     "insightsWhatsMissing": "Эмне жетишпейт?",
-    "digestNotesCount": "{count, plural, other{{count} жазуу}}"
+    "digestNotesCount": "{count, plural, other{{count} жазуу}}",
+    "profileSelfie": "Селфи",
+    "profileRecentAvatars": "Акыркылар"
 }

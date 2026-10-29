@@ -179,7 +179,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Turn cards on or off and drag to reorder';
 
   @override
-  String get insightsResetLayout => 'Reset';
+  String get tweakReset => 'Reset';
 
   @override
   String get activeTasks => 'Active tasks';
@@ -1353,4 +1353,10 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Selfie';
+
+  @override
+  String get profileRecentAvatars => 'Recent';
 }

@@ -110,46 +110,10 @@ final class InsightsMediaCountersCard extends StatelessWidget {
             Expanded(
               child: AspectRatio(
                 aspectRatio: 1.0,
-                child: _MediaCountTile(value: InsightsFormat.number(context, value), caption: caption),
+                child: InsightsCountTile(value: InsightsFormat.number(context, value), caption: caption),
               ),
             ),
         ],
-      ),
-    );
-  }
-}
-
-final class _MediaCountTile extends StatelessWidget {
-  final String value;
-  final String caption;
-
-  const _MediaCountTile({required this.value, required this.caption});
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.onSurface.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-              child: Text(value, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600)),
-            ),
-            Text(
-              caption,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.labelSmall?.copyWith(color: theme.hintColor, height: 1.15),
-            ),
-          ],
-        ),
       ),
     );
   }

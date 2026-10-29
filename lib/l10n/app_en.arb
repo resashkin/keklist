@@ -243,9 +243,9 @@
     "@insightsCustomizeDescription": {
         "description": "Analytics screen"
     },
-    "insightsResetLayout": "Reset",
-    "@insightsResetLayout": {
-        "description": "Analytics screen"
+    "tweakReset": "Reset",
+    "@tweakReset": {
+        "description": "Tweak menu header: puts that menu back to defaults"
     },
     "activeTasks": "Active tasks",
     "@activeTasks": {
@@ -1721,5 +1721,13 @@
                 "type": "int"
             }
         }
+    },
+    "profileSelfie": "Selfie",
+    "@profileSelfie": {
+        "description": "Profile sheet: take a selfie for the avatar"
+    },
+    "profileRecentAvatars": "Recent",
+    "@profileRecentAvatars": {
+        "description": "Profile sheet: section with previous avatars"
     }
 }

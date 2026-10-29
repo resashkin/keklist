@@ -182,7 +182,7 @@ class AppLocalizationsKk extends AppLocalizations {
       'Карточкаларды қосыңыз не өшіріңіз, ретін сүйреп өзгертіңіз';
 
   @override
-  String get insightsResetLayout => 'Қалпына келтіру';
+  String get tweakReset => 'Қалпына келтіру';
 
   @override
   String get activeTasks => 'Белсенді тапсырмалар';
@@ -1358,4 +1358,10 @@ class AppLocalizationsKk extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get profileSelfie => 'Селфи';
+
+  @override
+  String get profileRecentAvatars => 'Соңғылар';
 }

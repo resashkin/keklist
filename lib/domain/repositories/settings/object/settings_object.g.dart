@@ -106,13 +106,16 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..isAnalyticsEnabled = fields[49] == null ? true : fields[49] as bool
       ..whatsNewSeenRelease = fields[50] as String?
       ..whatsNewSeenAtMs = (fields[51] as num?)?.toInt()
-      ..reviewPromptedRelease = fields[52] as String?;
+      ..reviewPromptedRelease = fields[52] as String?
+      ..avatarHistory = fields[53] == null
+          ? []
+          : (fields[53] as List).cast<String>();
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(44)
+      ..writeByte(45)
       ..writeByte(3)
       ..write(obj.isDarkMode)
       ..writeByte(5)
@@ -200,7 +203,9 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(51)
       ..write(obj.whatsNewSeenAtMs)
       ..writeByte(52)
-      ..write(obj.reviewPromptedRelease);
+      ..write(obj.reviewPromptedRelease)
+      ..writeByte(53)
+      ..write(obj.avatarHistory);
   }
 
   @override
