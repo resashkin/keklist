@@ -146,7 +146,7 @@ final class StorySettings {
 
   const StorySettings({
     this.textureAnimation = StoryTextureAnimation.pulse,
-    this.dateLayout = StoryDateLayout.twoLines,
+    this.dateLayout = StoryDateLayout.oneLine,
     this.isSpectrumVisible = true,
     this.sensitivity = 1.0,
   });

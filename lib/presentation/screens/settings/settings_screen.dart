@@ -1,3 +1,6 @@
+import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
+import 'package:keklist/presentation/screens/whats_new/whats_new_release.dart';
+import 'package:keklist/presentation/screens/whats_new/whats_new_sheet.dart';
 import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'dart:async';
 import 'dart:io';
@@ -171,7 +174,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
               context,
               isIndexing: snapshot.data?.status == GalleryIndexStatus.indexing,
             ).visibleExcept(_hiddenItemIds)) ...[
-              SettingsSectionHeader(section.title.toUpperCase()),
+              if (section.title.isNotEmpty) SettingsSectionHeader(section.title.toUpperCase()),
               SettingsSectionCard(children: [for (final SettingsRowModel row in section.rows) row.tile]),
             ],
           ],
@@ -187,6 +190,20 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   }
 
   List<SettingsSectionModel> _buildSections(BuildContext context, {bool isIndexing = false}) => [
+    // The clips ship only with the phone apps.
+    if (!kIsWeb)
+      SettingsSectionModel(
+        id: SettingsItemIds.whatsNewSection,
+        title: '',
+        rows: [
+          _navigationRow(
+            id: SettingsItemIds.whatsNew,
+            title: context.l10n.whatsNewTitle(WhatsNewRelease.release),
+            leading: const Icon(Icons.auto_awesome, color: Colors.amberAccent),
+            onTap: () => WhatsNewSheet.show(context),
+          ),
+        ],
+      ),
     if (isIndexing)
       SettingsSectionModel(
         id: SettingsItemIds.activeTasksSection,
@@ -214,7 +231,13 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             onTap: () => _handleImport(),
           ),
           if (!isIndexing && GalleryIndexTile.isAvailable(context)) _galleryIndexRow(context),
-          if (!kIsWeb) _hiddenMediaRow(context),
+          _navigationRow(
+            id: SettingsItemIds.emotions,
+            title: context.l10n.emotions,
+            leading: const Icon(Icons.favorite_border_rounded, color: Colors.pinkAccent),
+            onTap: () => EmotionMarkingSheet.pushManager(context),
+          ),
+          if (!kIsWeb && _hiddenMediaCount > 0) _hiddenMediaRow(context),
         ],
       ),
     // Models and roles live on the phone, and only while the Chat tab is available.

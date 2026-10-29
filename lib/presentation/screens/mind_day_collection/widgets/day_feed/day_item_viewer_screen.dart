@@ -101,6 +101,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   double _scrollPull = 0.0;
   bool _isClosing = false;
   bool _isHeld = false;
+  bool _isZoomed = false;
 
 
   DayFeedItem get _currentItem => widget.items[_index];
@@ -164,6 +165,13 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     setState(() => _isHeld = true);
   }
 
+  /// A zoomed photo takes every one-finger drag for panning and holds the story until it is zoomed out.
+  void _onZoomChanged(bool isZoomed) {
+    if (!mounted || isZoomed == _isZoomed) return;
+    setState(() => _isZoomed = isZoomed);
+    isZoomed ? _hold() : _release();
+  }
+
   void _release() {
     if (!_isHeld) return;
     setState(() => _isHeld = false);
@@ -205,9 +213,11 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     final Widget story = NotificationListener<ScrollNotification>(
       onNotification: _onScroll,
       child: GestureDetector(
-        onVerticalDragUpdate: (details) =>
-            setState(() => _dragOffsetY = (_dragOffsetY + details.delta.dy).clamp(0.0, double.infinity)),
-        onVerticalDragEnd: _onVerticalDragEnd,
+        onVerticalDragUpdate: _isZoomed
+            ? null
+            : (details) =>
+                  setState(() => _dragOffsetY = (_dragOffsetY + details.delta.dy).clamp(0.0, double.infinity)),
+        onVerticalDragEnd: _isZoomed ? null : _onVerticalDragEnd,
         onLongPressStart: widget.autoplay ? (_) => _hold() : null,
         onLongPressEnd: widget.autoplay ? (_) => _release() : null,
         child: Opacity(
@@ -219,30 +229,35 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
               Positioned.fill(
                 child: Transform.translate(
                   offset: Offset(0.0, _dragOffsetY),
-                  child: PageView.builder(
-                    controller: _pageController,
-                    itemCount: widget.items.length,
-                    onPageChanged: (index) {
-                      setState(() => _index = index);
-                      _startTimer();
-                    },
-                    itemBuilder: (context, index) =>
-                        _buildPage(widget.items[index], isCurrent: index == _index, insets: contentInsets),
+                  child: _ZoomScope(
+                    onZoomChanged: _onZoomChanged,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      physics: _isZoomed ? const NeverScrollableScrollPhysics() : null,
+                      itemCount: widget.items.length,
+                      onPageChanged: (index) {
+                        setState(() => _index = index);
+                        _startTimer();
+                      },
+                      itemBuilder: (context, index) =>
+                          _buildPage(widget.items[index], isCurrent: index == _index, insets: contentInsets),
+                    ),
                   ),
                 ),
               ),
                 for (final bool isLeft in [true, false])
-                  Positioned(
-                    top: contentInsets.top,
-                    bottom: contentInsets.bottom,
-                    left: isLeft ? 0.0 : null,
-                    right: isLeft ? null : 0.0,
-                    width: MediaQuery.sizeOf(context).width * _kEdgeTapShare,
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: isLeft ? _goPrevious : _goNext,
+                  if (!_isZoomed)
+                    Positioned(
+                      top: contentInsets.top,
+                      bottom: contentInsets.bottom,
+                      left: isLeft ? 0.0 : null,
+                      right: isLeft ? null : 0.0,
+                      width: MediaQuery.sizeOf(context).width * _kEdgeTapShare,
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: isLeft ? _goPrevious : _goNext,
+                      ),
                     ),
-                  ),
                 Positioned(
                   top: 0.0,
                   left: 0.0,
@@ -312,7 +327,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   Widget _buildHeader(BuildContext context, Color foreground) {
     final DayFeedItem item = _currentItem;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -497,7 +512,7 @@ final class _ViewerPage extends StatelessWidget {
     DayFeedMind() => const SizedBox.shrink(),
     DayFeedAsset(isVideo: true) ||
     DayFeedFolderMedia(isVideo: true) => _VideoPage(item: item, isActive: isActive, onDuration: onVideoDuration),
-    DayFeedAsset(:final asset) => InteractiveViewer(
+    DayFeedAsset(:final asset) => _ZoomablePhoto(
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -514,7 +529,7 @@ final class _ViewerPage extends StatelessWidget {
         ],
       ),
     ),
-    DayFeedFolderMedia(item: FolderFileItem(:final file)) => InteractiveViewer(
+    DayFeedFolderMedia(item: FolderFileItem(:final file)) => _ZoomablePhoto(
       child: Image.file(file, fit: BoxFit.contain),
     ),
     DayFeedFolderMedia(item: final FolderSafItem safItem) => _SafPhoto(item: safItem),
@@ -774,6 +789,62 @@ final class _PlayBadge extends StatelessWidget {
   );
 }
 
+/// Tells the viewer when the photo on the current page is zoomed in.
+final class _ZoomScope extends InheritedWidget {
+  final ValueChanged<bool> onZoomChanged;
+
+  const _ZoomScope({required this.onZoomChanged, required super.child});
+
+  static ValueChanged<bool>? of(BuildContext context) =>
+      context.getInheritedWidgetOfExactType<_ZoomScope>()?.onZoomChanged;
+
+  @override
+  bool updateShouldNotify(_ZoomScope oldWidget) => false;
+}
+
+/// Pinch to zoom; once zoomed, one finger pans the photo instead of turning pages or closing the viewer.
+final class _ZoomablePhoto extends StatefulWidget {
+  final Widget child;
+
+  const _ZoomablePhoto({required this.child});
+
+  @override
+  State<_ZoomablePhoto> createState() => _ZoomablePhotoState();
+}
+
+final class _ZoomablePhotoState extends State<_ZoomablePhoto> {
+  static const double _zoomedScale = 1.01;
+
+  final TransformationController _controller = TransformationController();
+  ValueChanged<bool>? _onZoomChanged;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_reportZoom);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _onZoomChanged = _ZoomScope.of(context);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    // The tree is locked while a page is disposed, so the viewer hears about it after the frame.
+    final ValueChanged<bool>? onZoomChanged = _onZoomChanged;
+    if (onZoomChanged != null) WidgetsBinding.instance.addPostFrameCallback((_) => onZoomChanged(false));
+    super.dispose();
+  }
+
+  void _reportZoom() => _onZoomChanged?.call(_controller.value.getMaxScaleOnAxis() > _zoomedScale);
+
+  @override
+  Widget build(BuildContext context) => InteractiveViewer(transformationController: _controller, child: widget.child);
+}
+
 final class _SafPhoto extends StatefulWidget {
   final FolderSafItem item;
 
@@ -792,7 +863,7 @@ final class _SafPhotoState extends State<_SafPhoto> {
       future: _bytes,
       builder: (context, snapshot) {
         final Uint8List? bytes = snapshot.data;
-        if (bytes != null) return InteractiveViewer(child: Image.memory(bytes, fit: BoxFit.contain));
+        if (bytes != null) return _ZoomablePhoto(child: Image.memory(bytes, fit: BoxFit.contain));
         if (snapshot.connectionState == ConnectionState.done) {
           return Center(child: Icon(Icons.broken_image_outlined, color: storyColorsOf(context).foreground, size: 48));
         }

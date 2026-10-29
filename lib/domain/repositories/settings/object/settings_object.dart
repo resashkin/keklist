@@ -106,7 +106,7 @@ final class SettingsObject extends HiveObject {
   @HiveField(35, defaultValue: 1)
   late int storyTextureAnimationIndex;
 
-  @HiveField(36, defaultValue: 1)
+  @HiveField(36, defaultValue: 0)
   late int storyDateLayoutIndex;
 
   @HiveField(37, defaultValue: true)
@@ -205,7 +205,7 @@ final class SettingsObject extends HiveObject {
         story: StorySettings(
           textureAnimation:
               StoryTextureAnimation.values.elementAtOrNull(storyTextureAnimationIndex) ?? StoryTextureAnimation.pulse,
-          dateLayout: StoryDateLayout.values.elementAtOrNull(storyDateLayoutIndex) ?? StoryDateLayout.twoLines,
+          dateLayout: StoryDateLayout.values.elementAtOrNull(storyDateLayoutIndex) ?? StoryDateLayout.oneLine,
           isSpectrumVisible: isStorySpectrumVisible,
           sensitivity: storySensitivity,
         ),

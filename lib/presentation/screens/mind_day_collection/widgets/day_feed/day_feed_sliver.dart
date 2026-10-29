@@ -57,9 +57,10 @@ final class DayFeedSliver extends StatelessWidget {
             SliverToBoxAdapter(
               child: _MediaIssueBanner(issue: mediaIssue, onResolve: () => onResolveMediaIssue(mediaIssue)),
             ),
-          for (final (DayFeedSectionKind? kind, List<_DayFeedCell> cells) in sections)
+          for (final (int sectionIndex, (DayFeedSectionKind? kind, List<_DayFeedCell> cells)) in sections.indexed)
             SliverToBoxAdapter(
-              key: ValueKey(kind),
+              // The ungrouped section and the loading skeletons both have no kind, so the position tells them apart.
+              key: ValueKey(kind ?? 'section-$sectionIndex'),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

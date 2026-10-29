@@ -5,10 +5,12 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_archived_screen.dart';
@@ -38,12 +40,16 @@ final class EmotionMarkingSheet extends StatefulWidget {
   /// Whether a wide Save button closes the sheet, for flows that continue once it is gone.
   final bool showsSaveButton;
 
+  /// A full screen that only manages emotions: always in edit mode, nothing to mark.
+  final bool isManager;
+
   const EmotionMarkingSheet({
     super.key,
     required this.initialSelectedIds,
     required this.onSelectionChanged,
     this.focusEmotionId,
     this.showsSaveButton = false,
+    this.isManager = false,
   });
 
   /// Fraction of the screen the sheet occupies. Fixed — the sheet is not resizable.
@@ -68,6 +74,16 @@ final class EmotionMarkingSheet extends StatefulWidget {
     );
   }
 
+  /// Settings → Emotions: the same editing as the sheet's Edit mode, on its own screen.
+  static Future<void> pushManager(BuildContext context) => Navigator.of(context).push<void>(
+    SwipeablePageRoute<void>(
+      builder: (context) => Scaffold(
+        appBar: GlassAppBar(centerTitle: true, title: Text(context.l10n.emotions)),
+        body: EmotionMarkingSheet(initialSelectedIds: const {}, onSelectionChanged: (_) {}, isManager: true),
+      ),
+    ),
+  );
+
   @override
   State<EmotionMarkingSheet> createState() => _EmotionMarkingSheetState();
 }
@@ -78,7 +94,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
 
   /// Navigation path of parent ids; `null` is the root level.
   final List<String?> _path = [null];
-  bool _editMode = false;
+  late bool _editMode = widget.isManager;
 
   // Latest built level, for the pointer handlers.
   EmotionsList? _state;
@@ -368,107 +384,111 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.isManager) return _buildContent(context);
     return FractionallySizedBox(
       heightFactor: EmotionMarkingSheet._heightFactor,
       alignment: Alignment.bottomCenter,
       child: Container(
         decoration: KekBottomSheetStyle.decoration(context),
         clipBehavior: Clip.antiAlias,
-        child: Column(
-          children: [
-            KekBottomSheetStyle.handle(context),
-            Expanded(
-              child: BlocBuilder<EmotionBloc, EmotionState>(
-                builder: (context, state) {
-                  if (state is! EmotionsList) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  _state = state;
-                  _levelChildren = state.childrenOf(_currentParentId);
-                  final parent = _currentParentId == null ? null : state.byId(_currentParentId!);
-                  if (!_focusApplied) _applyFocus(state);
+        child: Column(children: [KekBottomSheetStyle.handle(context), Expanded(child: _buildContent(context))]),
+      ),
+    );
+  }
 
-                  return GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onLongPressStart: _editMode ? (d) => _onLongPressStart(d.globalPosition) : null,
-                    onLongPressMoveUpdate: _editMode ? (d) => _onLongPressMove(d.globalPosition) : null,
-                    onLongPressEnd: _editMode ? (_) => _onLongPressEnd() : null,
-                    onLongPressCancel: _editMode
-                        ? () {
-                            if (_draggingId != null) _cancelDrag();
-                          }
-                        : null,
-                    child: Column(
-                      children: [
-                        _buildHeader(context, state, parent),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            key: _scrollAreaKey,
-                            controller: _scrollController,
-                            physics: _draggingId != null
-                                ? const NeverScrollableScrollPhysics()
-                                : const AlwaysScrollableScrollPhysics(),
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                if (_levelChildren.isEmpty)
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 24.0),
-                                    child: Center(child: Text(context.l10n.noEmotionsYet)),
-                                  )
-                                else
-                                  _buildChipsArea(
-                                    context,
-                                    state,
-                                    _editMode ? _levelChildren : _selectedFirst(_levelChildren),
-                                  ),
-                              ],
+  Widget _buildContent(BuildContext context) {
+    return Column(
+      children: [
+      Expanded(
+        child: BlocBuilder<EmotionBloc, EmotionState>(
+          builder: (context, state) {
+            if (state is! EmotionsList) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            _state = state;
+            _levelChildren = state.childrenOf(_currentParentId);
+            final parent = _currentParentId == null ? null : state.byId(_currentParentId!);
+            if (!_focusApplied) _applyFocus(state);
+
+            return GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onLongPressStart: _editMode ? (d) => _onLongPressStart(d.globalPosition) : null,
+              onLongPressMoveUpdate: _editMode ? (d) => _onLongPressMove(d.globalPosition) : null,
+              onLongPressEnd: _editMode ? (_) => _onLongPressEnd() : null,
+              onLongPressCancel: _editMode
+                  ? () {
+                      if (_draggingId != null) _cancelDrag();
+                    }
+                  : null,
+              child: Column(
+                children: [
+                  _buildHeader(context, state, parent),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      key: _scrollAreaKey,
+                      controller: _scrollController,
+                      physics: _draggingId != null
+                          ? const NeverScrollableScrollPhysics()
+                          : const AlwaysScrollableScrollPhysics(),
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          if (_levelChildren.isEmpty)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 24.0),
+                              child: Center(child: Text(context.l10n.noEmotionsYet)),
+                            )
+                          else
+                            _buildChipsArea(
+                              context,
+                              state,
+                              _editMode ? _levelChildren : _selectedFirst(_levelChildren),
                             ),
-                          ),
-                        ),
-                        // Creating an emotion is a top-level-only action, so the
-                        // button never offers to nest one inside another.
-                        if (_currentParentId == null)
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-                            child: GlassCapsuleButton(
-                              height: 50.0,
-                              isExpanded: true,
-                              onTap: () => _openEditor(),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                spacing: 8.0,
-                                children: [
-                                  const Icon(Icons.add),
-                                  Text(context.l10n.addEmotion, style: const TextStyle(fontSize: 17.0)),
-                                ],
-                              ),
-                            ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
-                  );
-                },
-              ),
-            ),
-            _buildHint(context),
-            if (widget.showsSaveButton)
-              SafeArea(
-                top: false,
-                minimum: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 12.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 50.0,
-                  child: FilledButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(context.l10n.save, style: const TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600)),
                   ),
-                ),
+                  // Creating an emotion is a top-level-only action, so the
+                  // button never offers to nest one inside another.
+                  if (_currentParentId == null)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+                      child: GlassCapsuleButton(
+                        height: 50.0,
+                        isExpanded: true,
+                        onTap: () => _openEditor(),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          spacing: 8.0,
+                          children: [
+                            const Icon(Icons.add),
+                            Text(context.l10n.addEmotion, style: const TextStyle(fontSize: 17.0)),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
               ),
-          ],
+            );
+          },
         ),
       ),
+      _buildHint(context),
+      if (widget.showsSaveButton)
+        SafeArea(
+          top: false,
+          minimum: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 12.0),
+          child: SizedBox(
+            width: double.infinity,
+            height: 50.0,
+            child: FilledButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(context.l10n.save, style: const TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600)),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -584,6 +604,8 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
     final String title =
         parent == null ? context.l10n.emotions : '${state.lineageEmojis(parent).join(' ')}  ${parent.title}';
 
+    // The manager's app bar already names the screen, and it never leaves edit mode.
+    if (widget.isManager && !_canGoBack) return const SizedBox.shrink();
     final Widget leading = _canGoBack
         ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: _goBack)
         : TextButton(

@@ -71,7 +71,7 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
           ? 1
           : (fields[35] as num).toInt()
       ..storyDateLayoutIndex = fields[36] == null
-          ? 1
+          ? 0
           : (fields[36] as num).toInt()
       ..isStorySpectrumVisible = fields[37] == null ? true : fields[37] as bool
       ..storySensitivity = fields[38] == null

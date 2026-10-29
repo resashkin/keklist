@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 abstract final class SettingsItemIds {
+  static const String whatsNewSection = 'section.whatsNew';
   static const String activeTasksSection = 'section.activeTasks';
   static const String userDataSection = 'section.userData';
   static const String webVersionSection = 'section.webVersion';
@@ -15,6 +16,8 @@ abstract final class SettingsItemIds {
   static const String importData = 'row.importData';
   static const String galleryIndex = 'row.galleryIndex';
   static const String hiddenMedia = 'row.hiddenMedia';
+  static const String emotions = 'row.emotions';
+  static const String whatsNew = 'row.whatsNew';
   static const String pro = 'row.pro';
   static const String proStatus = 'row.proStatus';
   static const String tips = 'row.tips';

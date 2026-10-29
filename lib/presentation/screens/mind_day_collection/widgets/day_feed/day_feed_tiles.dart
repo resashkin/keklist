@@ -68,8 +68,10 @@ final class DayFeedMindTile extends StatelessWidget {
             Padding(
               padding: mediaCircle != null
                   ? const EdgeInsets.all(4.0)
-                  : const EdgeInsets.all(_kTextPadding).copyWith(
-                      bottom: showsReflections ? _kTextPadding + _kReflectionsBadgeHeight + 2.0 : _kTextPadding,
+                  // The badge's room is kept at the top too, so the text stays in the middle of the tile.
+                  : EdgeInsets.symmetric(
+                      horizontal: _kTextPadding,
+                      vertical: showsReflections ? _kTextPadding + _kReflectionsBadgeHeight + 2.0 : _kTextPadding,
                     ),
               child: mediaCircle != null
                   ? Center(child: mediaCircle)
