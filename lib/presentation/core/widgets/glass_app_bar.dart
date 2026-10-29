@@ -49,11 +49,13 @@ final class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
     final Widget? actionsBubble = actions.isEmpty
         ? null
         : GlassBubble(
+            isCircle: actions.length == 1,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 for (final GlassBarAction action in actions)
                   IconButton(
+                    visualDensity: VisualDensity.compact,
                     tooltip: action.tooltip,
                     icon: Icon(action.icon),
                     onPressed: action.onPressed,
@@ -64,7 +66,9 @@ final class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
           );
     final Widget? backBubble = canGoBack
         ? GlassBubble(
+            isCircle: true,
             child: IconButton(
+              visualDensity: VisualDensity.compact,
               tooltip: MaterialLocalizations.of(context).backButtonTooltip,
               icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20.0),
               onPressed: () => Navigator.of(context).maybePop(),
@@ -128,8 +132,9 @@ final class GlassBarAction {
 final class GlassBubble extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
+  final bool isCircle;
 
-  const GlassBubble({super.key, required this.child, this.padding = EdgeInsets.zero});
+  const GlassBubble({super.key, required this.child, this.padding = EdgeInsets.zero, this.isCircle = false});
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +151,7 @@ final class GlassBubble extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: _kBlurSigma, sigmaY: _kBlurSigma),
           child: Container(
             height: _kBubbleHeight,
+            width: isCircle ? _kBubbleHeight : null,
             padding: padding,
             decoration: BoxDecoration(
               color: colors.surface.withValues(alpha: isDark ? 0.45 : 0.6),
