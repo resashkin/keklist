@@ -831,12 +831,6 @@ abstract class AppLocalizations {
   /// **'Your folder name'**
   String get yourFolderName;
 
-  /// No minds in period message
-  ///
-  /// In en, this message translates to:
-  /// **'No notes in selected period'**
-  String get noMindsInSelectedPeriod;
-
   /// No minds for period message
   ///
   /// In en, this message translates to:
@@ -2618,6 +2612,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What\'s missing?'**
   String get insightsWhatsMissing;
+
+  /// Digest title counter
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} note} other{{count} notes}}'**
+  String digestNotesCount(int count);
 }
 
 class _AppLocalizationsDelegate

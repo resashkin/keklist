@@ -262,10 +262,6 @@
     "@yourFolderName": {
         "description": "Папка аты киргизүү көрсөткүчү"
     },
-    "noMindsInSelectedPeriod": "Тандалган мезгилде жазуу жок",
-    "@noMindsInSelectedPeriod": {
-        "description": "Тандалган мезгилде ойлор жок билдирүүсү"
-    },
     "noMindsForPeriod": "Бул мезгилде жазуу жок",
     "@noMindsForPeriod": {
         "description": "Бул мезгил үчүн ойлор жок билдирүүсү"
@@ -628,5 +624,6 @@
     "whatsNewAlsoDesign": "Дагы: жаңы дизайн жана анимациялар.",
     "rateApp": "keklist'ти баалоо",
     "pinchColumnsHint": "Кеңеш: мамычалардын санын өзгөртүү үчүн торду эки манжа менен кысып же жайыңыз",
-    "insightsWhatsMissing": "Эмне жетишпейт?"
+    "insightsWhatsMissing": "Эмне жетишпейт?",
+    "digestNotesCount": "{count, plural, other{{count} жазуу}}"
 }

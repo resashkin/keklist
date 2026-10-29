@@ -11,6 +11,8 @@ final class _MindCollectionBody extends StatelessWidget {
   final int todayIndex;
   final ItemScrollController itemScrollController;
   final ItemPositionsListener itemPositionsListener;
+  final int firstDayIndex;
+  final int? dayCount;
 
   const _MindCollectionBody({
     required this.onTapToDay,
@@ -23,6 +25,8 @@ final class _MindCollectionBody extends StatelessWidget {
     required this.todayIndex,
     required this.itemScrollController,
     required this.itemPositionsListener,
+    this.firstDayIndex = 0,
+    this.dayCount,
   });
 
   static const int _allDaysCount = 99999999999;
@@ -38,10 +42,10 @@ final class _MindCollectionBody extends StatelessWidget {
           top: MediaQuery.paddingOf(context).top + 8.0,
           bottom: MediaQuery.paddingOf(context).bottom + 96.0,
         ),
-        itemCount: _allDaysCount,
+        itemCount: dayCount ?? _allDaysCount,
         itemScrollController: itemScrollController,
         itemPositionsListener: itemPositionsListener,
-        itemBuilder: (context, dayIndex) => _buildDay(context, dayIndex),
+        itemBuilder: (context, index) => _buildDay(context, firstDayIndex + index),
       ),
     );
   }
@@ -51,7 +55,8 @@ final class _MindCollectionBody extends StatelessWidget {
   Widget _buildDay(BuildContext context, int dayIndex) {
     final DateTime date = DateUtils.getDateFromDayIndex(dayIndex);
     final int weekNumber = _getWeekNumber(date);
-    final bool startsWeek = weekNumber != _getWeekNumber(DateUtils.getDateFromDayIndex(dayIndex - 1));
+    final bool startsWeek =
+        dayIndex == firstDayIndex || weekNumber != _getWeekNumber(DateUtils.getDateFromDayIndex(dayIndex - 1));
     final List<DayFeedItem> items = feed.itemsOf(dayIndex);
     final List<int> weekDays = [for (int offset = 0; offset < _daysInWeek; offset++) dayIndex + offset];
     final bool hasWeekItems = weekDays.any((day) => feed.itemsOf(day).isNotEmpty);

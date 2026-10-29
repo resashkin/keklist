@@ -260,10 +260,6 @@
     "@yourFolderName": {
         "description": "Savet za unos imena fascikle"
     },
-    "noMindsInSelectedPeriod": "Nema beleški u izabranom periodu",
-    "@noMindsInSelectedPeriod": {
-        "description": "Poruka nema uma u periodu"
-    },
     "noMindsForPeriod": "Nema beleški za ovaj period",
     "@noMindsForPeriod": {
         "description": "Poruka nema uma za period"
@@ -628,5 +624,6 @@
     "whatsNewAlsoDesign": "I još: novi dizajn i animacije.",
     "rateApp": "Oceni keklist",
     "pinchColumnsHint": "Savet: skupi ili raširi prste na mreži da promeniš broj kolona",
-    "insightsWhatsMissing": "Šta nedostaje?"
+    "insightsWhatsMissing": "Šta nedostaje?",
+    "digestNotesCount": "{count, plural, one{{count} beleška} few{{count} beleške} other{{count} beleški}}"
 }

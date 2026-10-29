@@ -389,9 +389,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get yourFolderName => 'Назив твог фолдера';
 
   @override
-  String get noMindsInSelectedPeriod => 'Нема белешки у изабраном периоду';
-
-  @override
   String get noMindsForPeriod => 'Нема белешки за овај период';
 
   @override
@@ -1349,6 +1346,18 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get insightsWhatsMissing => 'Шта недостаје?';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count белешки',
+      few: '$count белешке',
+      one: '$count белешка',
+    );
+    return '$_temp0';
+  }
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1734,9 +1743,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get yourFolderName => 'Ime tvoje fascikle';
-
-  @override
-  String get noMindsInSelectedPeriod => 'Nema beleški u izabranom periodu';
 
   @override
   String get noMindsForPeriod => 'Nema beleški za ovaj period';
@@ -2695,4 +2701,16 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get insightsWhatsMissing => 'Šta nedostaje?';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count beleški',
+      few: '$count beleške',
+      one: '$count beleška',
+    );
+    return '$_temp0';
+  }
 }

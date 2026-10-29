@@ -391,9 +391,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get yourFolderName => 'Сиздин папка атыңыз';
 
   @override
-  String get noMindsInSelectedPeriod => 'Тандалган мезгилде жазуу жок';
-
-  @override
   String get noMindsForPeriod => 'Бул мезгилде жазуу жок';
 
   @override
@@ -1351,4 +1348,14 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get insightsWhatsMissing => 'Эмне жетишпейт?';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count жазуу',
+    );
+    return '$_temp0';
+  }
 }

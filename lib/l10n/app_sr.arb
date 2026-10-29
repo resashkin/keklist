@@ -150,7 +150,6 @@
     "missingAudioFiles": "Неки аудио фајлови недостају",
     "noMindsForPeriod": "Нема белешки за овај период",
     "noMindsForThisDay": "Нема белешки за овај дан",
-    "noMindsInSelectedPeriod": "Нема белешки у изабраном периоду",
     "ok": "У реду",
     "onboardingMind1": "Здраво!",
     "onboardingMind2": "Ја сам keklist - лични дневник кратких белешки",
@@ -415,5 +414,6 @@
     "whatsNewAlsoDesign": "И још: нови дизајн и анимације.",
     "rateApp": "Оцени keklist",
     "pinchColumnsHint": "Савет: скупи или рашири прсте на мрежи да промениш број колона",
-    "insightsWhatsMissing": "Шта недостаје?"
+    "insightsWhatsMissing": "Шта недостаје?",
+    "digestNotesCount": "{count, plural, one{{count} белешка} few{{count} белешке} other{{count} белешки}}"
 }

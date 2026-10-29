@@ -392,9 +392,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get yourFolderName => 'Название вашей папки';
 
   @override
-  String get noMindsInSelectedPeriod => 'Нет заметок в выбранном периоде';
-
-  @override
   String get noMindsForPeriod => 'Нет заметок за этот период';
 
   @override
@@ -1353,4 +1350,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get insightsWhatsMissing => 'Чего не хватает?';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count заметки',
+      many: '$count заметок',
+      few: '$count заметки',
+      one: '$count заметка',
+    );
+    return '$_temp0';
+  }
 }

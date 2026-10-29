@@ -150,7 +150,6 @@
     "missingAudioFiles": "一部の音声ファイルが見つかりません",
     "noMindsForPeriod": "この期間のメモはありません",
     "noMindsForThisDay": "この日のメモはありません",
-    "noMindsInSelectedPeriod": "選択した期間にメモはありません",
     "ok": "OK",
     "onboardingMind1": "こんにちは！",
     "onboardingMind2": "私はkeklist - 短いメモの個人日記です",
@@ -415,5 +414,6 @@
     "whatsNewAlsoDesign": "さらに、新しいデザインとアニメーションも。",
     "rateApp": "keklistを評価",
     "pinchColumnsHint": "ヒント：グリッドをピンチすると列の数を変えられます",
-    "insightsWhatsMissing": "何が足りない？"
+    "insightsWhatsMissing": "何が足りない？",
+    "digestNotesCount": "{count, plural, other{{count} 件のメモ}}"
 }

@@ -150,7 +150,6 @@
     "missingAudioFiles": "Некоторые аудиофайлы отсутствуют",
     "noMindsForPeriod": "Нет заметок за этот период",
     "noMindsForThisDay": "Нет заметок за этот день",
-    "noMindsInSelectedPeriod": "Нет заметок в выбранном периоде",
     "ok": "OK",
     "onboardingMind1": "Привет!",
     "onboardingMind2": "Я keklist - личный дневник коротких заметок",
@@ -415,5 +414,6 @@
     "whatsNewAlsoDesign": "А ещё: новый дизайн и анимации.",
     "rateApp": "Оценить keklist",
     "pinchColumnsHint": "Подсказка: сведи или разведи пальцы на сетке, чтобы поменять число колонок",
-    "insightsWhatsMissing": "Чего не хватает?"
+    "insightsWhatsMissing": "Чего не хватает?",
+    "digestNotesCount": "{count, plural, one{{count} заметка} few{{count} заметки} many{{count} заметок} other{{count} заметки}}"
 }

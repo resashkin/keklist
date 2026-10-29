@@ -262,10 +262,6 @@
     "@yourFolderName": {
         "description": "Sugerencia de entrada de nombre de carpeta"
     },
-    "noMindsInSelectedPeriod": "No hay notas en el período seleccionado",
-    "@noMindsInSelectedPeriod": {
-        "description": "Mensaje no hay mentes en el período"
-    },
     "noMindsForPeriod": "No hay notas para este período",
     "@noMindsForPeriod": {
         "description": "Mensaje no hay mentes para el período"
@@ -628,5 +624,6 @@
     "whatsNewAlsoDesign": "Además: nuevo diseño y animaciones.",
     "rateApp": "Valorar keklist",
     "pinchColumnsHint": "Consejo: pellizca la cuadrícula para cambiar el número de columnas",
-    "insightsWhatsMissing": "¿Qué falta?"
+    "insightsWhatsMissing": "¿Qué falta?",
+    "digestNotesCount": "{count, plural, one{{count} nota} other{{count} notas}}"
 }

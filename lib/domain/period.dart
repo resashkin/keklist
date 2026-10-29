@@ -1,6 +1,5 @@
-import 'package:material_ui/material_ui.dart';
-import 'package:keklist/domain/services/entities/mind.dart';
-import 'package:keklist/presentation/core/helpers/mind_utils.dart';
+import 'package:material_ui/material_ui.dart' hide DateUtils;
+import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 
 enum PeriodType {
@@ -30,20 +29,17 @@ extension PeriodTypeExtension on PeriodType {
     }
   }
 
-  List<Mind> filterMinds(List<Mind> allMinds) {
-    switch (this) {
-      case PeriodType.today:
-        return MindUtils.findTodayMinds(allMinds: allMinds);
-      case PeriodType.yesterday:
-        return MindUtils.findYesterdayMinds(allMinds: allMinds);
-      case PeriodType.thisWeek:
-        return MindUtils.findThisWeekMinds(allMinds: allMinds);
-      case PeriodType.lastTwoWeeks:
-        return MindUtils.findLastTwoWeeksMinds(allMinds: allMinds);
-      case PeriodType.thisMonth:
-        return MindUtils.findThisMonthMinds(allMinds: allMinds);
-      case PeriodType.thisYear:
-        return MindUtils.findThisYearMinds(allMinds: allMinds);
-    }
+  /// The first and last day of the period; it always ends today or yesterday.
+  (int, int) dayRange() {
+    final DateTime now = DateTime.now();
+    final int today = DateUtils.getDayIndex(from: now);
+    return switch (this) {
+      PeriodType.today => (today, today),
+      PeriodType.yesterday => (today - 1, today - 1),
+      PeriodType.thisWeek => (DateUtils.getDayIndex(from: DateUtils.getWeekStart(now)), today),
+      PeriodType.lastTwoWeeks => (today - 13, today),
+      PeriodType.thisMonth => (DateUtils.getDayIndex(from: DateUtils.getMonthStart(now)), today),
+      PeriodType.thisYear => (DateUtils.getDayIndex(from: DateUtils.getYearStart(now)), today),
+    };
   }
 }

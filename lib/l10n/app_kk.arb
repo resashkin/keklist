@@ -262,10 +262,6 @@
     "@yourFolderName": {
         "description": "Бума атауы енгізу көрсеткіші"
     },
-    "noMindsInSelectedPeriod": "Таңдалған кезеңде жазба жоқ",
-    "@noMindsInSelectedPeriod": {
-        "description": "Таңдалған кезеңде ойлар жоқ хабарламасы"
-    },
     "noMindsForPeriod": "Бұл кезеңде жазба жоқ",
     "@noMindsForPeriod": {
         "description": "Бұл кезең үшін ойлар жоқ хабарламасы"
@@ -628,5 +624,6 @@
     "whatsNewAlsoDesign": "Сондай-ақ: жаңа дизайн мен анимациялар.",
     "rateApp": "keklist-ті бағалау",
     "pinchColumnsHint": "Кеңес: бағандар санын өзгерту үшін торды екі саусақпен қысып немесе жайыңыз",
-    "insightsWhatsMissing": "Не жетіспейді?"
+    "insightsWhatsMissing": "Не жетіспейді?",
+    "digestNotesCount": "{count, plural, other{{count} жазба}}"
 }

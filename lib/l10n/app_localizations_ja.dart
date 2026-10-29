@@ -385,9 +385,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get yourFolderName => 'あなたのフォルダー名';
 
   @override
-  String get noMindsInSelectedPeriod => '選択した期間にメモはありません';
-
-  @override
   String get noMindsForPeriod => 'この期間のメモはありません';
 
   @override
@@ -1306,4 +1303,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get insightsWhatsMissing => '何が足りない？';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 件のメモ',
+    );
+    return '$_temp0';
+  }
 }

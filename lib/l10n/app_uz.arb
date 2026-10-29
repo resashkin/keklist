@@ -262,10 +262,6 @@
     "@yourFolderName": {
         "description": "Papka nomi kiritish ko'rsatkichi"
     },
-    "noMindsInSelectedPeriod": "Tanlangan davrda yozuvlar yoʻq",
-    "@noMindsInSelectedPeriod": {
-        "description": "Tanlangan davrda fikrlar yo'q xabari"
-    },
     "noMindsForPeriod": "Bu davr uchun yozuvlar yoʻq",
     "@noMindsForPeriod": {
         "description": "Bu davr uchun fikrlar yo'q xabari"
@@ -628,5 +624,6 @@
     "whatsNewAlsoDesign": "Yana: yangi dizayn va animatsiyalar.",
     "rateApp": "keklist'ni baholash",
     "pinchColumnsHint": "Maslahat: ustunlar sonini o‘zgartirish uchun to‘rni ikki barmoq bilan qisib yoki yoying",
-    "insightsWhatsMissing": "Nima yetishmayapti?"
+    "insightsWhatsMissing": "Nima yetishmayapti?",
+    "digestNotesCount": "{count, plural, other{{count} ta yozuv}}"
 }

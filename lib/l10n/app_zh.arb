@@ -150,7 +150,6 @@
     "missingAudioFiles": "某些音频文件缺失",
     "noMindsForPeriod": "此期间没有笔记",
     "noMindsForThisDay": "这一天没有笔记",
-    "noMindsInSelectedPeriod": "所选期间没有笔记",
     "ok": "确定",
     "onboardingMind1": "你好！",
     "onboardingMind2": "我是keklist - 一个短笔记的个人日记",
@@ -415,5 +414,6 @@
     "whatsNewAlsoDesign": "另外：全新设计和动画。",
     "rateApp": "给 keklist 评分",
     "pinchColumnsHint": "提示：在网格上双指捏合即可更改列数",
-    "insightsWhatsMissing": "还缺少什么？"
+    "insightsWhatsMissing": "还缺少什么？",
+    "digestNotesCount": "{count, plural, other{{count} 条笔记}}"
 }

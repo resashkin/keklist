@@ -392,9 +392,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get yourFolderName => 'Сіздің бума атауыңыз';
 
   @override
-  String get noMindsInSelectedPeriod => 'Таңдалған кезеңде жазба жоқ';
-
-  @override
   String get noMindsForPeriod => 'Бұл кезеңде жазба жоқ';
 
   @override
@@ -1351,4 +1348,14 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get insightsWhatsMissing => 'Не жетіспейді?';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count жазба',
+    );
+    return '$_temp0';
+  }
 }

@@ -392,9 +392,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get yourFolderName => 'Sizning papka nomingiz';
 
   @override
-  String get noMindsInSelectedPeriod => 'Tanlangan davrda yozuvlar yoʻq';
-
-  @override
   String get noMindsForPeriod => 'Bu davr uchun yozuvlar yoʻq';
 
   @override
@@ -1354,4 +1351,14 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get insightsWhatsMissing => 'Nima yetishmayapti?';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ta yozuv',
+    );
+    return '$_temp0';
+  }
 }

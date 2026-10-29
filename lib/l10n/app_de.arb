@@ -150,7 +150,6 @@
     "missingAudioFiles": "Einige Audiodateien fehlen",
     "noMindsForPeriod": "Keine Notizen für diesen Zeitraum",
     "noMindsForThisDay": "Keine Notizen für diesen Tag",
-    "noMindsInSelectedPeriod": "Keine Notizen im ausgewählten Zeitraum",
     "ok": "OK",
     "onboardingMind1": "Hallo!",
     "onboardingMind2": "Ich bin keklist - ein persönliches Tagebuch für kurze Notizen",
@@ -415,5 +414,6 @@
     "whatsNewAlsoDesign": "Außerdem: neues Design und Animationen.",
     "rateApp": "keklist bewerten",
     "pinchColumnsHint": "Tipp: Zieh die Finger auf dem Raster zusammen oder auseinander, um die Spaltenzahl zu ändern",
-    "insightsWhatsMissing": "Was fehlt?"
+    "insightsWhatsMissing": "Was fehlt?",
+    "digestNotesCount": "{count, plural, one{{count} Notiz} other{{count} Notizen}}"
 }

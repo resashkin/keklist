@@ -384,9 +384,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get yourFolderName => '您的文件夹名称';
 
   @override
-  String get noMindsInSelectedPeriod => '所选期间没有笔记';
-
-  @override
   String get noMindsForPeriod => '此期间没有笔记';
 
   @override
@@ -1299,4 +1296,14 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get insightsWhatsMissing => '还缺少什么？';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 条笔记',
+    );
+    return '$_temp0';
+  }
 }

@@ -532,10 +532,6 @@
     "@yourFolderName": {
         "description": "Folder name input hint"
     },
-    "noMindsInSelectedPeriod": "No notes in selected period",
-    "@noMindsInSelectedPeriod": {
-        "description": "No minds in period message"
-    },
     "noMindsForPeriod": "No notes for this period",
     "@noMindsForPeriod": {
         "description": "No minds for period message"
@@ -1716,5 +1712,14 @@
     "insightsWhatsMissing": "What's missing?",
     "@insightsWhatsMissing": {
         "description": "Small button at the bottom of Insights and title of the feedback sheet it opens"
+    },
+    "digestNotesCount": "{count, plural, one{{count} note} other{{count} notes}}",
+    "@digestNotesCount": {
+        "description": "Digest title counter",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     }
 }

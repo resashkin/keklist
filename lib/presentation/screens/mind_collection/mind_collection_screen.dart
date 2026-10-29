@@ -13,12 +13,10 @@ import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_st
 import 'package:keklist/presentation/blocs/lazy_onboarding_bloc/lazy_onboarding_bloc.dart';
 import 'package:keklist/domain/services/constants/onboarding_constants.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
-import 'package:keklist/presentation/core/helpers/extensions/state_extensions.dart';
 import 'package:keklist/presentation/core/helpers/platform_utils.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/screens/actions/action_model.dart';
 import 'package:keklist/presentation/screens/actions/actions_screen.dart';
-import 'package:keklist/presentation/screens/digest/mind_universal_list_screen.dart';
 import 'package:keklist/presentation/screens/insights/insights_screen.dart';
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
@@ -46,6 +44,7 @@ import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_fee
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 part 'local_widgets/app_bar/mind_collection_app_bar.dart';
 part 'local_widgets/body/mind_collection_body.dart';
+part 'local_widgets/digest/calendar_digest_screen.dart';
 
 final class MindCollectionScreen extends StatefulWidget {
   const MindCollectionScreen({super.key});
@@ -343,12 +342,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
           ...PeriodType.values.map(
             (periodType) => (
               ActionModel.custom(icon: _getPeriodIcon(periodType), title: periodType.localizedTitle(context)),
-              () async {
-                final List<Mind> periodMinds = periodType.filterMinds(_minds.toList());
-                if (periodMinds.isNotEmpty) {
-                  _showDigestForPeriod(periodType, periodMinds);
-                }
-              },
+              () => _showDigest(title: periodType.localizedTitle(context), range: periodType.dayRange()),
             ),
           ),
           (
@@ -377,56 +371,22 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     }
   }
 
-  void _showDigestForPeriod(PeriodType periodType, List<Mind> periodMinds) {
-    if (mountedContext == null) {
-      return;
-    }
-
-    Navigator.push(
-      mountedContext!,
-      SwipeablePageRoute(
-        builder: (context) {
-          return MindUniversalListScreen(
-            allMinds: _minds,
-            filterFunction: (mind) => periodType.filterMinds([mind]).isNotEmpty,
-            title: '${periodType.localizedTitle(context)} (${periodMinds.length} ${context.l10n.minds})',
-            emptyStateMessage: '${context.l10n.noMindsForPeriod} ${periodType.localizedTitle(context).toLowerCase()}',
-            onSelectMind: (mind) => _showMindInfo(mind),
-          );
-        },
-      ),
-    );
+  Future<void> _showDigestForCustomPeriod() async {
+    final (int, int)? range = await _showPeriodPicker();
+    if (range == null || !mounted) return;
+    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final String title = [
+      range.$1,
+      range.$2,
+    ].map((day) => localizations.formatShortMonthDay(DateUtils.getDateFromDayIndex(day))).join(' – ');
+    _showDigest(title: title, range: range);
   }
 
-  void _showDigestForCustomPeriod() async {
-    final (int startDayIndex, int endDayIndex)? period = await _showPeriodPicker();
-    if (period == null) {
-      return;
-    }
-    _showDigest(startDayIndex: period.$1, endDayIndex: period.$2);
-  }
-
-  void _showDigest({required int startDayIndex, required int endDayIndex}) async {
-    if (mountedContext == null) {
-      return;
-    }
-
-    Navigator.push(
-      mountedContext!,
-      SwipeablePageRoute(
-        builder: (context) {
-          bool filterFunction(mind) => mind.dayIndex >= startDayIndex && mind.dayIndex <= endDayIndex;
-          return MindUniversalListScreen(
-            allMinds: _minds,
-            filterFunction: filterFunction,
-            title: '${context.l10n.digest} (${_minds.where(filterFunction).length} ${context.l10n.minds})',
-            emptyStateMessage: context.l10n.noMindsInSelectedPeriod,
-            onSelectMind: (mind) => _showMindInfo(mind),
-          );
-        },
-      ),
-    );
-  }
+  void _showDigest({required String title, required (int, int) range}) => Navigator.of(context).push(
+    SwipeablePageRoute(
+      builder: (_) => _CalendarDigestScreen(title: title, firstDayIndex: range.$1, lastDayIndex: range.$2),
+    ),
+  );
 
   // void _showUserProfile() {
   //   Navigator.push(
@@ -445,5 +405,4 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
     Navigator.push(context, SwipeablePageRoute(builder: (context) => const InsightsScreen()));
   }
 
-  void _showMindInfo(Mind mind) => DayItemViewerScreen.showMind(context, mind);
 }
