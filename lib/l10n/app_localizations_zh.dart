@@ -168,9 +168,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsEmptyOnThisDay => '一周、一个月、半年和一年前还没有记录';
 
   @override
-  String get insightsEmptyRoundVideos => '此期间没有语音或圆形视频';
-
-  @override
   String get insightsEmptyStreak => '今天添加一条笔记开始连续记录';
 
   @override
@@ -1093,9 +1090,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsTwoYearsAgo => '两年前';
 
   @override
-  String get insightsVoiceAndVideos => '语音和圆形视频';
-
-  @override
   String insightsWeekNumber(String number) {
     return '第$number周';
   }
@@ -1302,4 +1296,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get pinchColumnsHint => '提示：在网格上双指捏合即可更改列数';
+
+  @override
+  String get insightsWhatsMissing => '还缺少什么？';
 }

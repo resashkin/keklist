@@ -48,7 +48,6 @@
     "insightsEmptyEmotions": "Отмечайте эмоции в заметках, чтобы увидеть это",
     "insightsEmptyPairs": "Отметьте в заметке две эмоции, чтобы увидеть пары",
     "insightsEmptyOnThisDay": "Неделю, месяц, полгода и год назад пока ничего нет",
-    "insightsEmptyRoundVideos": "За этот период нет голосовых и кружков",
     "insightsEmptyStreak": "Добавьте заметку сегодня, чтобы начать серию",
     "insightsCustomize": "Настроить аналитику",
     "insightsCustomizeDescription": "Включайте и выключайте карточки, перетаскивайте для порядка",
@@ -349,7 +348,6 @@
     "insightsHalfYearAgo": "Полгода назад",
     "insightsYearAgo": "Год назад",
     "insightsTwoYearsAgo": "2 года назад",
-    "insightsVoiceAndVideos": "Голосовые и кружки",
     "insightsWeekNumber": "Неделя {number}",
     "aiNoSessionsHint": "Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши заметки прямо на телефоне.",
     "showInGallery": "Показать в галерее",
@@ -416,5 +414,6 @@
     "whatsNewShakeBody": "Любой экран настраивается встряхиванием телефона.",
     "whatsNewAlsoDesign": "А ещё: новый дизайн и анимации.",
     "rateApp": "Оценить keklist",
-    "pinchColumnsHint": "Подсказка: сведи или разведи пальцы на сетке, чтобы поменять число колонок"
+    "pinchColumnsHint": "Подсказка: сведи или разведи пальцы на сетке, чтобы поменять число колонок",
+    "insightsWhatsMissing": "Чего не хватает?"
 }

@@ -7,10 +7,13 @@ import 'package:material_ui/material_ui.dart';
 /// A sheet with a text field that grows with the text; Send delivers it to the developer's Telegram, see
 /// [TelegramFeedback].
 final class FeedbackSheet extends StatefulWidget {
-  const FeedbackSheet({super.key});
+  final String? title;
+  final String? tag;
 
-  static Future<void> show(BuildContext context) =>
-      KekSheet.show<void>(context: context, builder: (_) => const FeedbackSheet());
+  const FeedbackSheet({super.key, this.title, this.tag});
+
+  static Future<void> show(BuildContext context, {String? title, String? tag}) =>
+      KekSheet.show<void>(context: context, builder: (_) => FeedbackSheet(title: title, tag: tag));
 
   @override
   State<FeedbackSheet> createState() => _FeedbackSheetState();
@@ -30,7 +33,7 @@ final class _FeedbackSheetState extends State<FeedbackSheet> {
     final String text = _controller.text.trim();
     if (text.isEmpty) return;
     setState(() => _isSending = true);
-    final bool isSent = await TelegramFeedback.send(text);
+    final bool isSent = await TelegramFeedback.send(text, tag: widget.tag);
     if (!mounted) return;
     setState(() => _isSending = false);
     ScaffoldMessenger.of(
@@ -42,7 +45,7 @@ final class _FeedbackSheetState extends State<FeedbackSheet> {
   @override
   Widget build(BuildContext context) {
     return KekSheetScaffold(
-      title: context.l10n.leaveFeedback,
+      title: widget.title ?? context.l10n.leaveFeedback,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

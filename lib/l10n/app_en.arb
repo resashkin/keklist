@@ -231,10 +231,6 @@
     "@insightsEmptyOnThisDay": {
         "description": "Analytics screen"
     },
-    "insightsEmptyRoundVideos": "No voice notes or round videos in this period",
-    "@insightsEmptyRoundVideos": {
-        "description": "Analytics screen"
-    },
     "insightsEmptyStreak": "Add a note today to start a streak",
     "@insightsEmptyStreak": {
         "description": "Analytics screen"
@@ -1436,10 +1432,6 @@
     "@insightsTwoYearsAgo": {
         "description": "Insights memories: two years ago"
     },
-    "insightsVoiceAndVideos": "Voice and round videos",
-    "@insightsVoiceAndVideos": {
-        "description": "Insights card: voice notes and round videos"
-    },
     "insightsWeekNumber": "Week {number}",
     "@insightsWeekNumber": {
         "description": "Insights brightest week: week number of the year",
@@ -1720,5 +1712,9 @@
     "pinchColumnsHint": "Tip: pinch the grid to change the number of columns",
     "@pinchColumnsHint": {
         "description": "Tweak sheet hint under the Columns picker: pinching the grid also changes the column count"
+    },
+    "insightsWhatsMissing": "What's missing?",
+    "@insightsWhatsMissing": {
+        "description": "Small button at the bottom of Insights and title of the feedback sheet it opens"
     }
 }

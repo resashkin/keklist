@@ -48,7 +48,6 @@
     "insightsEmptyEmotions": "Etiqueta notas con emociones para ver esto",
     "insightsEmptyPairs": "Etiqueta una nota con dos emociones para ver pares",
     "insightsEmptyOnThisDay": "Aún no hay nada de hace una semana, un mes, medio año o un año",
-    "insightsEmptyRoundVideos": "No hay notas de voz ni videos redondos en este período",
     "insightsEmptyStreak": "Añade una nota hoy para empezar una racha",
     "insightsCustomize": "Personalizar análisis",
     "insightsCustomizeDescription": "Activa o desactiva tarjetas y arrástralas para ordenarlas",
@@ -562,7 +561,6 @@
     "insightsHalfYearAgo": "Hace medio año",
     "insightsYearAgo": "Hace un año",
     "insightsTwoYearsAgo": "Hace dos años",
-    "insightsVoiceAndVideos": "Voz y videos redondos",
     "insightsWeekNumber": "Semana {number}",
     "aiNoSessionsHint": "Pregunta por tu semana, una preocupación o un buen día: el chat lee tus notas en el propio teléfono.",
     "showInGallery": "Mostrar en la galería",
@@ -629,5 +627,6 @@
     "whatsNewShakeBody": "Agita el teléfono para personalizar cualquier pantalla.",
     "whatsNewAlsoDesign": "Además: nuevo diseño y animaciones.",
     "rateApp": "Valorar keklist",
-    "pinchColumnsHint": "Consejo: pellizca la cuadrícula para cambiar el número de columnas"
+    "pinchColumnsHint": "Consejo: pellizca la cuadrícula para cambiar el número de columnas",
+    "insightsWhatsMissing": "¿Qué falta?"
 }

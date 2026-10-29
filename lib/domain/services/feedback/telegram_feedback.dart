@@ -15,13 +15,15 @@ abstract final class TelegramFeedback {
 
   static bool get isConfigured => (_token?.isNotEmpty ?? false) && (_chatId?.isNotEmpty ?? false);
 
-  static Future<bool> send(String text) async {
+  /// [tag] marks where the feedback came from, as a Telegram hashtag.
+  static Future<bool> send(String text, {String? tag}) async {
     final String? token = _token, chatId = _chatId;
     if (token == null || chatId == null) return false;
     final PackageInfo info = await PackageInfo.fromPlatform();
     final String body = text.substring(0, min(_maxLength, text.length));
+    final String header = tag == null ? '' : '#$tag\n';
     final String message =
-        '💬 $body\n\n— keklist ${info.version} (${info.buildNumber}) · ${defaultTargetPlatform.name}';
+        '💬 $header$body\n\n— keklist ${info.version} (${info.buildNumber}) · ${defaultTargetPlatform.name}';
     try {
       final http.Response response = await http
           .post(Uri.parse('https://api.telegram.org/bot$token/sendMessage'), body: {'chat_id': chatId, 'text': message})

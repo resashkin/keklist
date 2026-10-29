@@ -170,10 +170,6 @@ class AppLocalizationsSr extends AppLocalizations {
       'Од пре недељу, месец, пола године и годину још ништа нема';
 
   @override
-  String get insightsEmptyRoundVideos =>
-      'У овом периоду нема гласовних порука ни округлих видеа';
-
-  @override
   String get insightsEmptyStreak => 'Додај белешку данас да започнеш низ';
 
   @override
@@ -1136,9 +1132,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get insightsTwoYearsAgo => 'Пре две године';
 
   @override
-  String get insightsVoiceAndVideos => 'Глас и округли видеи';
-
-  @override
   String insightsWeekNumber(String number) {
     return 'Недеља $number';
   }
@@ -1353,6 +1346,9 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get pinchColumnsHint =>
       'Савет: скупи или рашири прсте на мрежи да промениш број колона';
+
+  @override
+  String get insightsWhatsMissing => 'Шта недостаје?';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1519,10 +1515,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get insightsEmptyOnThisDay =>
       'Od pre nedelju, mesec, pola godine i godinu još ništa nema';
-
-  @override
-  String get insightsEmptyRoundVideos =>
-      'U ovom periodu nema glasovnih poruka ni okruglih videa';
 
   @override
   String get insightsEmptyStreak => 'Dodaj belešku danas da započneš niz';
@@ -2486,9 +2478,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get insightsTwoYearsAgo => 'Pre dve godine';
 
   @override
-  String get insightsVoiceAndVideos => 'Glas i okrugli videi';
-
-  @override
   String insightsWeekNumber(String number) {
     return 'Nedelja $number';
   }
@@ -2703,4 +2692,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get pinchColumnsHint =>
       'Savet: skupi ili raširi prste na mreži da promeniš broj kolona';
+
+  @override
+  String get insightsWhatsMissing => 'Šta nedostaje?';
 }

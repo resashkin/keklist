@@ -172,10 +172,6 @@ class AppLocalizationsKy extends AppLocalizations {
       'Бир жума, ай, жарым жыл жана бир жыл мурун азырынча эч нерсе жок';
 
   @override
-  String get insightsEmptyRoundVideos =>
-      'Бул мезгилде үн жазуулар жана тегерек видеолор жок';
-
-  @override
   String get insightsEmptyStreak => 'Серияны баштоо үчүн бүгүн жазуу кошуңуз';
 
   @override
@@ -1138,9 +1134,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get insightsTwoYearsAgo => 'Эки жыл мурун';
 
   @override
-  String get insightsVoiceAndVideos => 'Үн жана тегерек видеолор';
-
-  @override
   String insightsWeekNumber(String number) {
     return '$number-жума';
   }
@@ -1355,4 +1348,7 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get pinchColumnsHint =>
       'Кеңеш: мамычалардын санын өзгөртүү үчүн торду эки манжа менен кысып же жайыңыз';
+
+  @override
+  String get insightsWhatsMissing => 'Эмне жетишпейт?';
 }

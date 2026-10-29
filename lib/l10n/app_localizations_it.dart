@@ -170,10 +170,6 @@ class AppLocalizationsIt extends AppLocalizations {
       'Ancora niente di una settimana, un mese, sei mesi o un anno fa';
 
   @override
-  String get insightsEmptyRoundVideos =>
-      'Nessun vocale o video circolare in questo periodo';
-
-  @override
   String get insightsEmptyStreak =>
       'Aggiungi una nota oggi per iniziare una serie';
 
@@ -1144,9 +1140,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get insightsTwoYearsAgo => 'Due anni fa';
 
   @override
-  String get insightsVoiceAndVideos => 'Vocali e video circolari';
-
-  @override
   String insightsWeekNumber(String number) {
     return 'Settimana $number';
   }
@@ -1363,4 +1356,7 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get pinchColumnsHint =>
       'Suggerimento: pizzica la griglia per cambiare il numero di colonne';
+
+  @override
+  String get insightsWhatsMissing => 'Cosa manca?';
 }

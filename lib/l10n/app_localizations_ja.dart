@@ -168,9 +168,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get insightsEmptyOnThisDay => '1週間前、1か月前、半年前、1年前の記録はまだありません';
 
   @override
-  String get insightsEmptyRoundVideos => 'この期間のボイスメモや丸い動画はありません';
-
-  @override
   String get insightsEmptyStreak => '今日メモを追加して連続記録を始めましょう';
 
   @override
@@ -1098,9 +1095,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get insightsTwoYearsAgo => '2年前';
 
   @override
-  String get insightsVoiceAndVideos => 'ボイスと丸い動画';
-
-  @override
   String insightsWeekNumber(String number) {
     return '第$number週';
   }
@@ -1309,4 +1303,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get pinchColumnsHint => 'ヒント：グリッドをピンチすると列の数を変えられます';
+
+  @override
+  String get insightsWhatsMissing => '何が足りない？';
 }

@@ -117,15 +117,11 @@ final class MediaInsight {
   final int audioMinds;
   final int videoMinds;
 
-  /// Root minds and reflections with a voice note or a round video, newest first.
-  final List<String> voiceMindIds;
-
   const MediaInsight({
     required this.libraryPhotos,
     required this.libraryVideos,
     required this.audioMinds,
     required this.videoMinds,
-    required this.voiceMindIds,
   });
 }
 

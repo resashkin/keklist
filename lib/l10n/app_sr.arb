@@ -48,7 +48,6 @@
     "insightsEmptyEmotions": "Означи белешке емоцијама да видиш ово",
     "insightsEmptyPairs": "Означи белешку са две емоције да видиш парове",
     "insightsEmptyOnThisDay": "Од пре недељу, месец, пола године и годину још ништа нема",
-    "insightsEmptyRoundVideos": "У овом периоду нема гласовних порука ни округлих видеа",
     "insightsEmptyStreak": "Додај белешку данас да започнеш низ",
     "insightsCustomize": "Прилагоди аналитику",
     "insightsCustomizeDescription": "Укључи или искључи картице и превуци их за редослед",
@@ -349,7 +348,6 @@
     "insightsHalfYearAgo": "Пре пола године",
     "insightsYearAgo": "Пре годину дана",
     "insightsTwoYearsAgo": "Пре две године",
-    "insightsVoiceAndVideos": "Глас и округли видеи",
     "insightsWeekNumber": "Недеља {number}",
     "aiNoSessionsHint": "Питајте о својој недељи, бризи или лепом дану: чет чита ваше белешке директно на телефону.",
     "showInGallery": "Прикажи у галерији",
@@ -416,5 +414,6 @@
     "whatsNewShakeBody": "Протреси телефон да подесиш било који екран.",
     "whatsNewAlsoDesign": "И још: нови дизајн и анимације.",
     "rateApp": "Оцени keklist",
-    "pinchColumnsHint": "Савет: скупи или рашири прсте на мрежи да промениш број колона"
+    "pinchColumnsHint": "Савет: скупи или рашири прсте на мрежи да промениш број колона",
+    "insightsWhatsMissing": "Шта недостаје?"
 }

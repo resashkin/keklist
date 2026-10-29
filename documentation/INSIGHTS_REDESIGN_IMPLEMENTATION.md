@@ -24,7 +24,7 @@ Phase 3 of the main-emoji work; media counts come from the gallery index (`GALLE
   - **Streak**: consecutive days with a root mind. It ends today, or yesterday while today is still empty, so a streak survives until today is over. Longest streak is over all time.
   - **Heatmap**: root minds per day. **Minds by hour**: 24 buckets.
   - **Back then** (`onThisDay`): `MemoryPoint` a week, a month, half a year, a year and two years ago; a date missing in a shorter month falls on its last day. Empty points are left out.
-  - **Media**: library photos/videos in the period, minds with audio, minds with round video; `voiceMindIds` holds the newest 12 minds with a voice note or round video for the "Voice and round videos" strip (audio as a mic circle in the mind's emotion color).
+  - **Media**: library photos/videos in the period, minds with audio, minds with round video.
 
 ### 2. Settings
 - `InsightsSettings` on `KeklistSettings`: `widgetOrder` (Hive field 28), `hiddenWidgetIds` (29), `periodIndex` (30, default Month).

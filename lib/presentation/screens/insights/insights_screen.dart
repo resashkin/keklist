@@ -4,6 +4,7 @@ import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
+import 'package:keklist/domain/services/feedback/telegram_feedback.dart';
 import 'package:keklist/domain/services/insights/insights_calculator.dart';
 import 'package:keklist/domain/services/insights/insights_period.dart';
 import 'package:keklist/domain/services/insights/insights_report.dart';
@@ -20,6 +21,7 @@ import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'package:keklist/presentation/core/widgets/glass_segmented_switcher.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
+import 'package:keklist/presentation/screens/feedback/feedback_sheet.dart';
 import 'package:keklist/presentation/screens/insights/insights_widget_id.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_activity_cards.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_card.dart';
@@ -157,6 +159,16 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
           ),
         ),
         for (final InsightsWidgetId id in visibleIds) _buildCard(id, data),
+        if (TelegramFeedback.isConfigured)
+          Center(
+            child: TextButton.icon(
+              style: TextButton.styleFrom(foregroundColor: Theme.of(context).hintColor),
+              icon: const Icon(Icons.lightbulb_outline_rounded, size: 18.0),
+              label: Text(context.l10n.insightsWhatsMissing),
+              onPressed: () =>
+                  FeedbackSheet.show(context, title: context.l10n.insightsWhatsMissing, tag: 'insights_missing'),
+            ),
+          ),
       ],
     );
   }
@@ -177,7 +189,6 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
     InsightsWidgetId.activityTime => InsightsActivityTimeCard(data: data),
     InsightsWidgetId.onThisDay => InsightsOnThisDayCard(data: data),
     InsightsWidgetId.mediaCounters => InsightsMediaCountersCard(data: data),
-    InsightsWidgetId.roundVideos => InsightsRoundVideosCard(data: data),
   };
 
   /// Each top-level emotion gets a palette color; nested ones inherit their root's.

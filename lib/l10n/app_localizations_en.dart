@@ -169,10 +169,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Nothing from a week, a month, half a year or a year ago yet';
 
   @override
-  String get insightsEmptyRoundVideos =>
-      'No voice notes or round videos in this period';
-
-  @override
   String get insightsEmptyStreak => 'Add a note today to start a streak';
 
   @override
@@ -1133,9 +1129,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insightsTwoYearsAgo => 'Two years ago';
 
   @override
-  String get insightsVoiceAndVideos => 'Voice and round videos';
-
-  @override
   String insightsWeekNumber(String number) {
     return 'Week $number';
   }
@@ -1349,4 +1342,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pinchColumnsHint =>
       'Tip: pinch the grid to change the number of columns';
+
+  @override
+  String get insightsWhatsMissing => 'What\'s missing?';
 }

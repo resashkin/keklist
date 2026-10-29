@@ -172,10 +172,6 @@ class AppLocalizationsDe extends AppLocalizations {
       'Noch nichts von vor einer Woche, einem Monat, einem halben Jahr oder einem Jahr';
 
   @override
-  String get insightsEmptyRoundVideos =>
-      'Keine Sprachnotizen oder runden Videos in diesem Zeitraum';
-
-  @override
   String get insightsEmptyStreak =>
       'Füge heute eine Notiz hinzu, um eine Serie zu starten';
 
@@ -1147,9 +1143,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get insightsTwoYearsAgo => 'Vor zwei Jahren';
 
   @override
-  String get insightsVoiceAndVideos => 'Sprachnotizen und runde Videos';
-
-  @override
   String insightsWeekNumber(String number) {
     return 'Woche $number';
   }
@@ -1366,4 +1359,7 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get pinchColumnsHint =>
       'Tipp: Zieh die Finger auf dem Raster zusammen oder auseinander, um die Spaltenzahl zu ändern';
+
+  @override
+  String get insightsWhatsMissing => 'Was fehlt?';
 }

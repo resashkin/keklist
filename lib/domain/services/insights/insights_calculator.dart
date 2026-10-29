@@ -8,7 +8,6 @@ import 'package:keklist/presentation/core/helpers/date_utils.dart';
 /// See `documentation/INSIGHTS_REDESIGN_IMPLEMENTATION.md`.
 final class InsightsCalculator {
   static const int maxEmotionPairs = 5;
-  static const int maxRoundVideos = 12;
 
   final InsightsPeriod period;
   final List<Mind> _roots;
@@ -275,14 +274,11 @@ final class InsightsCalculator {
       photos += media.photos;
       videos += media.videos;
     }
-    final List<Mind> voiceMinds = minds.where((mind) => mind.noteContent.hasVideo || mind.noteContent.hasAudio).toList()
-      ..sort((a, b) => b.creationDate.compareTo(a.creationDate));
     return MediaInsight(
       libraryPhotos: photos,
       libraryVideos: videos,
       audioMinds: minds.where((mind) => mind.noteContent.hasAudio).length,
       videoMinds: minds.where((mind) => mind.noteContent.hasVideo).length,
-      voiceMindIds: voiceMinds.take(maxRoundVideos).map((mind) => mind.id).toList(),
     );
   }
 }

@@ -48,7 +48,6 @@
     "insightsEmptyEmotions": "Buni koʻrish uchun yozuvlarga hissiyot belgilang",
     "insightsEmptyPairs": "Juftlarni koʻrish uchun yozuvga ikki hissiyot belgilang",
     "insightsEmptyOnThisDay": "Bir hafta, oy, yarim yil va bir yil oldin hozircha hech narsa yo‘q",
-    "insightsEmptyRoundVideos": "Bu davrda ovozli yozuvlar va dumaloq videolar yo‘q",
     "insightsEmptyStreak": "Seriyani boshlash uchun bugun yozuv qoʻshing",
     "insightsCustomize": "Analitikani sozlash",
     "insightsCustomizeDescription": "Kartochkalarni yoqing yoki oʻchiring, tartibini sudrab oʻzgartiring",
@@ -562,7 +561,6 @@
     "insightsHalfYearAgo": "Yarim yil oldin",
     "insightsYearAgo": "Bir yil oldin",
     "insightsTwoYearsAgo": "Ikki yil oldin",
-    "insightsVoiceAndVideos": "Ovoz va dumaloq videolar",
     "insightsWeekNumber": "{number}-hafta",
     "aiNoSessionsHint": "Haftangiz, tashvish yoki yaxshi kun haqida soʻrang: chat yozuvlaringizni telefonning oʻzida oʻqiydi.",
     "showInGallery": "Galereyada ko‘rsatish",
@@ -629,5 +627,6 @@
     "whatsNewShakeBody": "Istalgan ekranni telefonni silkitib sozlash mumkin.",
     "whatsNewAlsoDesign": "Yana: yangi dizayn va animatsiyalar.",
     "rateApp": "keklist'ni baholash",
-    "pinchColumnsHint": "Maslahat: ustunlar sonini o‘zgartirish uchun to‘rni ikki barmoq bilan qisib yoki yoying"
+    "pinchColumnsHint": "Maslahat: ustunlar sonini o‘zgartirish uchun to‘rni ikki barmoq bilan qisib yoki yoying",
+    "insightsWhatsMissing": "Nima yetishmayapti?"
 }

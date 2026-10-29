@@ -61,24 +61,26 @@ final class _InsightsEmotionDistributionCardState extends State<InsightsEmotionD
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 4.0,
                 children: [
-                  Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
+                  Row(
+                    children: [
+                      Expanded(child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis)),
+                      Text(InsightsFormat.number(context, share.count)),
+                      if (share.children.isNotEmpty)
+                        GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () => setState(
+                            () => isExpanded ? _expandedIds.remove(share.emotionId) : _expandedIds.add(share.emotionId),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.only(start: 4.0),
+                            child: Icon(isExpanded ? Icons.expand_less : Icons.expand_more, size: 20.0),
+                          ),
+                        ),
+                    ],
+                  ),
                   InsightsBar(fraction: share.count / max, color: color),
                 ],
               ),
-            ),
-            SizedBox(width: 32.0, child: Text(InsightsFormat.number(context, share.count), textAlign: TextAlign.end)),
-            SizedBox(
-              width: 32.0,
-              child: share.children.isEmpty
-                  ? null
-                  : IconButton(
-                      visualDensity: VisualDensity.compact,
-                      padding: EdgeInsets.zero,
-                      icon: Icon(isExpanded ? Icons.expand_less : Icons.expand_more),
-                      onPressed: () => setState(
-                        () => isExpanded ? _expandedIds.remove(share.emotionId) : _expandedIds.add(share.emotionId),
-                      ),
-                    ),
             ),
           ],
         ),
@@ -216,7 +218,16 @@ final class InsightsEmotionTrendCard extends StatelessWidget {
     alignment: Alignment.center,
     child: height < _minEmojiSegment
         ? null
-        : Text(data.emojiOf(emotionId), style: TextStyle(fontSize: math.min(16.0, height - 4.0), height: 1.0)),
+        : Text(
+            data.emojiOf(emotionId),
+            textAlign: TextAlign.center,
+            // An even leading keeps the emoji glyph in the middle of its line box instead of on the baseline.
+            style: TextStyle(
+              fontSize: math.min(16.0, height - 4.0),
+              height: 1.0,
+              leadingDistribution: TextLeadingDistribution.even,
+            ),
+          ),
   );
 }
 

@@ -414,12 +414,6 @@ abstract class AppLocalizations {
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'No voice notes or round videos in this period'**
-  String get insightsEmptyRoundVideos;
-
-  /// Analytics screen
-  ///
-  /// In en, this message translates to:
   /// **'Add a note today to start a streak'**
   String get insightsEmptyStreak;
 
@@ -2217,12 +2211,6 @@ abstract class AppLocalizations {
   /// **'Two years ago'**
   String get insightsTwoYearsAgo;
 
-  /// Insights card: voice notes and round videos
-  ///
-  /// In en, this message translates to:
-  /// **'Voice and round videos'**
-  String get insightsVoiceAndVideos;
-
   /// Insights brightest week: week number of the year
   ///
   /// In en, this message translates to:
@@ -2624,6 +2612,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tip: pinch the grid to change the number of columns'**
   String get pinchColumnsHint;
+
+  /// Small button at the bottom of Insights and title of the feedback sheet it opens
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s missing?'**
+  String get insightsWhatsMissing;
 }
 
 class _AppLocalizationsDelegate

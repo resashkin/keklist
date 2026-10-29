@@ -34,8 +34,7 @@ enum InsightsWidgetId {
   heatmap(InsightsCategory.activity),
   activityTime(InsightsCategory.activity),
   onThisDay(InsightsCategory.memories),
-  mediaCounters(InsightsCategory.media),
-  roundVideos(InsightsCategory.media);
+  mediaCounters(InsightsCategory.media);
 
   final InsightsCategory category;
 
@@ -53,7 +52,6 @@ enum InsightsWidgetId {
     InsightsWidgetId.activityTime => context.l10n.insightsActivityTime,
     InsightsWidgetId.onThisDay => context.l10n.insightsOnThisDay,
     InsightsWidgetId.mediaCounters => context.l10n.insightsMediaCounters,
-    InsightsWidgetId.roundVideos => context.l10n.insightsVoiceAndVideos,
   };
 
   /// Saved ids first (unknown ones dropped), then any new cards in default order.

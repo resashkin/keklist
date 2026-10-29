@@ -48,7 +48,6 @@
     "insightsEmptyEmotions": "为笔记标记情绪后即可查看",
     "insightsEmptyPairs": "为一条笔记标记两种情绪即可查看组合",
     "insightsEmptyOnThisDay": "一周、一个月、半年和一年前还没有记录",
-    "insightsEmptyRoundVideos": "此期间没有语音或圆形视频",
     "insightsEmptyStreak": "今天添加一条笔记开始连续记录",
     "insightsCustomize": "自定义分析",
     "insightsCustomizeDescription": "开关卡片，拖动以重新排序",
@@ -349,7 +348,6 @@
     "insightsHalfYearAgo": "半年前",
     "insightsYearAgo": "一年前",
     "insightsTwoYearsAgo": "两年前",
-    "insightsVoiceAndVideos": "语音和圆形视频",
     "insightsWeekNumber": "第{number}周",
     "aiNoSessionsHint": "问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的笔记。",
     "showInGallery": "在图库中显示",
@@ -416,5 +414,6 @@
     "whatsNewShakeBody": "摇一摇手机，就能自定义任意页面。",
     "whatsNewAlsoDesign": "另外：全新设计和动画。",
     "rateApp": "给 keklist 评分",
-    "pinchColumnsHint": "提示：在网格上双指捏合即可更改列数"
+    "pinchColumnsHint": "提示：在网格上双指捏合即可更改列数",
+    "insightsWhatsMissing": "还缺少什么？"
 }

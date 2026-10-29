@@ -48,7 +48,6 @@
     "insightsEmptyEmotions": "Муну көрүү үчүн жазууларга эмоция белгилеңиз",
     "insightsEmptyPairs": "Жуптарды көрүү үчүн жазууга эки эмоция белгилеңиз",
     "insightsEmptyOnThisDay": "Бир жума, ай, жарым жыл жана бир жыл мурун азырынча эч нерсе жок",
-    "insightsEmptyRoundVideos": "Бул мезгилде үн жазуулар жана тегерек видеолор жок",
     "insightsEmptyStreak": "Серияны баштоо үчүн бүгүн жазуу кошуңуз",
     "insightsCustomize": "Аналитиканы ыңгайлаштыруу",
     "insightsCustomizeDescription": "Карточкаларды күйгүзүп же өчүрүп, тартып тартибин өзгөртүңүз",
@@ -562,7 +561,6 @@
     "insightsHalfYearAgo": "Жарым жыл мурун",
     "insightsYearAgo": "Бир жыл мурун",
     "insightsTwoYearsAgo": "Эки жыл мурун",
-    "insightsVoiceAndVideos": "Үн жана тегерек видеолор",
     "insightsWeekNumber": "{number}-жума",
     "aiNoSessionsHint": "Жумаңыз, тынчсыздануу же жакшы күн жөнүндө сураңыз: чат жазууларыңызды телефондун өзүндө окуйт.",
     "showInGallery": "Галереяда көрсөтүү",
@@ -629,5 +627,6 @@
     "whatsNewShakeBody": "Каалаган экранды телефонду силкип жөндөсө болот.",
     "whatsNewAlsoDesign": "Дагы: жаңы дизайн жана анимациялар.",
     "rateApp": "keklist'ти баалоо",
-    "pinchColumnsHint": "Кеңеш: мамычалардын санын өзгөртүү үчүн торду эки манжа менен кысып же жайыңыз"
+    "pinchColumnsHint": "Кеңеш: мамычалардын санын өзгөртүү үчүн торду эки манжа менен кысып же жайыңыз",
+    "insightsWhatsMissing": "Эмне жетишпейт?"
 }

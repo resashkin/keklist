@@ -172,10 +172,6 @@ class AppLocalizationsUz extends AppLocalizations {
       'Bir hafta, oy, yarim yil va bir yil oldin hozircha hech narsa yo‘q';
 
   @override
-  String get insightsEmptyRoundVideos =>
-      'Bu davrda ovozli yozuvlar va dumaloq videolar yo‘q';
-
-  @override
   String get insightsEmptyStreak =>
       'Seriyani boshlash uchun bugun yozuv qoʻshing';
 
@@ -1141,9 +1137,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get insightsTwoYearsAgo => 'Ikki yil oldin';
 
   @override
-  String get insightsVoiceAndVideos => 'Ovoz va dumaloq videolar';
-
-  @override
   String insightsWeekNumber(String number) {
     return '$number-hafta';
   }
@@ -1358,4 +1351,7 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get pinchColumnsHint =>
       'Maslahat: ustunlar sonini o‘zgartirish uchun to‘rni ikki barmoq bilan qisib yoki yoying';
+
+  @override
+  String get insightsWhatsMissing => 'Nima yetishmayapti?';
 }

@@ -48,7 +48,6 @@
     "insightsEmptyEmotions": "Markiere Notizen mit Emotionen, um das zu sehen",
     "insightsEmptyPairs": "Markiere eine Notiz mit zwei Emotionen, um Paare zu sehen",
     "insightsEmptyOnThisDay": "Noch nichts von vor einer Woche, einem Monat, einem halben Jahr oder einem Jahr",
-    "insightsEmptyRoundVideos": "Keine Sprachnotizen oder runden Videos in diesem Zeitraum",
     "insightsEmptyStreak": "Füge heute eine Notiz hinzu, um eine Serie zu starten",
     "insightsCustomize": "Analysen anpassen",
     "insightsCustomizeDescription": "Karten ein- oder ausschalten und zum Sortieren ziehen",
@@ -349,7 +348,6 @@
     "insightsHalfYearAgo": "Vor einem halben Jahr",
     "insightsYearAgo": "Vor einem Jahr",
     "insightsTwoYearsAgo": "Vor zwei Jahren",
-    "insightsVoiceAndVideos": "Sprachnotizen und runde Videos",
     "insightsWeekNumber": "Woche {number}",
     "aiNoSessionsHint": "Frag nach deiner Woche, einer Sorge oder einem guten Tag: Der Chat liest deine Notizen direkt auf dem Handy.",
     "showInGallery": "In der Galerie zeigen",
@@ -416,5 +414,6 @@
     "whatsNewShakeBody": "Schüttle dein Handy, um jeden Bildschirm anzupassen.",
     "whatsNewAlsoDesign": "Außerdem: neues Design und Animationen.",
     "rateApp": "keklist bewerten",
-    "pinchColumnsHint": "Tipp: Zieh die Finger auf dem Raster zusammen oder auseinander, um die Spaltenzahl zu ändern"
+    "pinchColumnsHint": "Tipp: Zieh die Finger auf dem Raster zusammen oder auseinander, um die Spaltenzahl zu ändern",
+    "insightsWhatsMissing": "Was fehlt?"
 }

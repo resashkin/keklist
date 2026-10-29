@@ -172,10 +172,6 @@ class AppLocalizationsRu extends AppLocalizations {
       'Неделю, месяц, полгода и год назад пока ничего нет';
 
   @override
-  String get insightsEmptyRoundVideos =>
-      'За этот период нет голосовых и кружков';
-
-  @override
   String get insightsEmptyStreak =>
       'Добавьте заметку сегодня, чтобы начать серию';
 
@@ -1140,9 +1136,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get insightsTwoYearsAgo => '2 года назад';
 
   @override
-  String get insightsVoiceAndVideos => 'Голосовые и кружки';
-
-  @override
   String insightsWeekNumber(String number) {
     return 'Неделя $number';
   }
@@ -1357,4 +1350,7 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get pinchColumnsHint =>
       'Подсказка: сведи или разведи пальцы на сетке, чтобы поменять число колонок';
+
+  @override
+  String get insightsWhatsMissing => 'Чего не хватает?';
 }
