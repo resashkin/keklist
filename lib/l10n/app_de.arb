@@ -406,7 +406,7 @@
     "whatsNewWebTitle": "keklist im Browser",
     "whatsNewWebBody": "Schalte den WLAN-Zugriff ein und schreib vom Laptop aus: dieselbe App, im Vollbild.",
     "whatsNewGalleryTitle": "Deine Galerie ist dein Tagebuch",
-    "whatsNewGalleryBody": "Jedes Foto und Video, das du gemacht hast, erscheint jetzt im Kalender und in jedem Tag.",
+    "whatsNewGalleryBody": "Jedes Foto und Video, das du gemacht hast, erscheint jetzt im Kalender und in jedem Tag. Mit zwei Fingern ziehst du die Kacheln größer oder kleiner.",
     "whatsNewCirclesTitle": "Videokreise und Sprachnotizen",
     "whatsNewCirclesBody": "Manchmal ist es leichter, es zu sagen oder zu zeigen, als es zu tippen.",
     "whatsNewShakeTitle": "Schütteln zum Anpassen",
@@ -417,5 +417,7 @@
     "insightsWhatsMissing": "Was fehlt?",
     "digestNotesCount": "{count, plural, one{{count} Notiz} other{{count} Notizen}}",
     "profileSelfie": "Selfie",
-    "profileRecentAvatars": "Zuletzt"
+    "profileRecentAvatars": "Zuletzt",
+    "whatsNewProfileTitle": "Statistiken sind jetzt dein Profil",
+    "whatsNewProfileBody": "Deine Woche, dein Monat oder Jahr in Karten. Mach ein Selfie als Avatar und wechsle jederzeit zu einem früheren zurück."
 }

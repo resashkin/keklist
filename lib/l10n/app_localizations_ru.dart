@@ -1322,7 +1322,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get whatsNewGalleryBody =>
-      'Всё, что ты снимал, теперь видно в календаре и в каждом дне.';
+      'Всё, что ты снимал, теперь видно в календаре и в каждом дне. Щипком меняй размер плиток.';
 
   @override
   String get whatsNewCirclesTitle => 'Кружочки и голосовые';
@@ -1369,4 +1369,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => 'Недавние';
+
+  @override
+  String get whatsNewProfileTitle => 'Аналитика стала профилем';
+
+  @override
+  String get whatsNewProfileBody =>
+      'Неделя, месяц или год в карточках. Сделай селфи на аватар и в любой момент верни один из прошлых.';
 }

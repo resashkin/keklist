@@ -406,7 +406,7 @@
     "whatsNewWebTitle": "在浏览器中使用 keklist",
     "whatsNewWebBody": "打开 Wi‑Fi 访问，就能在笔记本上写：同一个应用，全屏显示。",
     "whatsNewGalleryTitle": "相册就是你的日记",
-    "whatsNewGalleryBody": "你拍的每张照片和每段视频，现在都会出现在日历和每一天里。",
+    "whatsNewGalleryBody": "你拍的每张照片和每段视频，现在都会出现在日历和每一天里。双指捏合即可放大或缩小格子。",
     "whatsNewCirclesTitle": "圆形视频和语音笔记",
     "whatsNewCirclesBody": "有时候，说出来或拍下来比打字更容易。",
     "whatsNewShakeTitle": "摇一摇，自定义",
@@ -417,5 +417,7 @@
     "insightsWhatsMissing": "还缺少什么？",
     "digestNotesCount": "{count, plural, other{{count} 条笔记}}",
     "profileSelfie": "自拍",
-    "profileRecentAvatars": "最近"
+    "profileRecentAvatars": "最近",
+    "whatsNewProfileTitle": "分析变成了你的个人资料",
+    "whatsNewProfileBody": "用卡片回顾你的一周、一月或一年。拍张自拍当头像，随时换回以前的头像。"
 }

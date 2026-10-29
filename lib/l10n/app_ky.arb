@@ -616,7 +616,7 @@
     "whatsNewWebTitle": "keklist браузерде",
     "whatsNewWebBody": "Wi‑Fi аркылуу кирүүнү күйгүзүп, ноутбуктан жаз: бул ошол эле колдонмо, толук экранда.",
     "whatsNewGalleryTitle": "Галерея — күндөлүктүн бир бөлүгү",
-    "whatsNewGalleryBody": "Тарткан ар бир сүрөт жана видео эми календарда жана ар бир күндө көрүнөт.",
+    "whatsNewGalleryBody": "Тарткан ар бир сүрөт жана видео эми календарда жана ар бир күндө көрүнөт. Чымчып, плиткалардын өлчөмүн өзгөрт.",
     "whatsNewCirclesTitle": "Видео-тегерекчелер жана үн жазуулары",
     "whatsNewCirclesBody": "Кээде жазгандан көрө айтуу же тартуу оңой.",
     "whatsNewShakeTitle": "Силкип, жөндө",
@@ -627,5 +627,7 @@
     "insightsWhatsMissing": "Эмне жетишпейт?",
     "digestNotesCount": "{count, plural, other{{count} жазуу}}",
     "profileSelfie": "Селфи",
-    "profileRecentAvatars": "Акыркылар"
+    "profileRecentAvatars": "Акыркылар",
+    "whatsNewProfileTitle": "Талдоо эми сенин профилиң",
+    "whatsNewProfileBody": "Апта, ай же жыл карточкаларда. Аватарга селфи тарт жана каалаган убакта мурункусуна кайт."
 }

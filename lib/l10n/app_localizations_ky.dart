@@ -1320,7 +1320,7 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get whatsNewGalleryBody =>
-      'Тарткан ар бир сүрөт жана видео эми календарда жана ар бир күндө көрүнөт.';
+      'Тарткан ар бир сүрөт жана видео эми календарда жана ар бир күндө көрүнөт. Чымчып, плиткалардын өлчөмүн өзгөрт.';
 
   @override
   String get whatsNewCirclesTitle => 'Видео-тегерекчелер жана үн жазуулары';
@@ -1364,4 +1364,11 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => 'Акыркылар';
+
+  @override
+  String get whatsNewProfileTitle => 'Талдоо эми сенин профилиң';
+
+  @override
+  String get whatsNewProfileBody =>
+      'Апта, ай же жыл карточкаларда. Аватарга селфи тарт жана каалаган убакта мурункусуна кайт.';
 }

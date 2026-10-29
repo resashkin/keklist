@@ -1278,7 +1278,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get whatsNewGalleryTitle => 'ギャラリーが日記の一部に';
 
   @override
-  String get whatsNewGalleryBody => '撮った写真や動画が、カレンダーと各日に表示されます。';
+  String get whatsNewGalleryBody =>
+      '撮った写真や動画が、カレンダーと各日に表示されます。ピンチでタイルの大きさを変えられます。';
 
   @override
   String get whatsNewCirclesTitle => '丸い動画とボイスメモ';
@@ -1319,4 +1320,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => '最近';
+
+  @override
+  String get whatsNewProfileTitle => '分析がプロフィールになりました';
+
+  @override
+  String get whatsNewProfileBody =>
+      '週・月・年をカードで振り返り。自撮りをアバターにして、いつでも前のアバターに戻せます。';
 }

@@ -36,7 +36,7 @@ sheet has slides with short looping clips. Later the app asks once for a store r
   - The row is hidden in the web version.
 
 ### 4. Assets
-- The clips are in `assets/whats_new/{web,gallery,circles,shake}.mp4`.
+- The clips are in `assets/whats_new/{gallery,profile,circles,shake,web}.mp4`.
 - Each clip is muted H.264, 5–8 s, at most about 1.5 MB, recorded in the English UI on a clean simulator with
   "Show Touches" on.
 - `pubspec.yaml` declares the folder with `platforms: [android, ios]`, so the clips are not in the web bundle.

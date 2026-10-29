@@ -616,7 +616,7 @@
     "whatsNewWebTitle": "keklist en tu navegador",
     "whatsNewWebBody": "Activa el acceso por Wi‑Fi y escribe desde tu portátil: es la misma app, a pantalla completa.",
     "whatsNewGalleryTitle": "Tu galería es tu diario",
-    "whatsNewGalleryBody": "Cada foto y vídeo que tomaste ahora aparece en el calendario y en cada día.",
+    "whatsNewGalleryBody": "Cada foto y vídeo que tomaste ahora aparece en el calendario y en cada día. Pellizca para agrandar o achicar los mosaicos.",
     "whatsNewCirclesTitle": "Videocírculos y notas de voz",
     "whatsNewCirclesBody": "A veces es más fácil decirlo o mostrarlo que escribirlo.",
     "whatsNewShakeTitle": "Agita para ajustar",
@@ -627,5 +627,7 @@
     "insightsWhatsMissing": "¿Qué falta?",
     "digestNotesCount": "{count, plural, one{{count} nota} other{{count} notas}}",
     "profileSelfie": "Selfie",
-    "profileRecentAvatars": "Recientes"
+    "profileRecentAvatars": "Recientes",
+    "whatsNewProfileTitle": "Las estadísticas ahora son tu perfil",
+    "whatsNewProfileBody": "Tu semana, mes o año en tarjetas. Hazte un selfi para el avatar y vuelve a uno anterior cuando quieras."
 }

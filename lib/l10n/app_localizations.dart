@@ -2559,10 +2559,10 @@ abstract class AppLocalizations {
   /// **'Your gallery is your diary'**
   String get whatsNewGalleryTitle;
 
-  /// What's New slide text about the gallery
+  /// What's New slide text about the gallery and pinching to resize tiles
   ///
   /// In en, this message translates to:
-  /// **'Every photo and video you took now shows up in the calendar and in each day.'**
+  /// **'Every photo and video you took now shows up in the calendar and in each day. Pinch to make tiles bigger or smaller.'**
   String get whatsNewGalleryBody;
 
   /// What's New slide: video circles and voice notes
@@ -2630,6 +2630,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent'**
   String get profileRecentAvatars;
+
+  /// What's New slide: Analytics became the Profile tab
+  ///
+  /// In en, this message translates to:
+  /// **'Analytics is now your profile'**
+  String get whatsNewProfileTitle;
+
+  /// What's New slide text about the Profile tab
+  ///
+  /// In en, this message translates to:
+  /// **'Your week, month or year in cards. Take a selfie for your avatar and switch back to an earlier one anytime.'**
+  String get whatsNewProfileBody;
 }
 
 class _AppLocalizationsDelegate

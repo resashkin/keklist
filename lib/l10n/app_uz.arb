@@ -616,7 +616,7 @@
     "whatsNewWebTitle": "keklist brauzerda",
     "whatsNewWebBody": "Wi‑Fi orqali kirishni yoqing va noutbukdan yozing: bu xuddi shu ilova, to'liq ekranda.",
     "whatsNewGalleryTitle": "Galereya — kundalikning bir qismi",
-    "whatsNewGalleryBody": "Olgan har bir rasm va videongiz endi kalendarda va har bir kunda ko'rinadi.",
+    "whatsNewGalleryBody": "Olgan har bir rasm va videongiz endi kalendarda va har bir kunda ko'rinadi. Chimdib, plitkalar o'lchamini o'zgartiring.",
     "whatsNewCirclesTitle": "Video doiralar va ovozli yozuvlar",
     "whatsNewCirclesBody": "Ba'zan yozgandan ko'ra aytish yoki suratga olish osonroq.",
     "whatsNewShakeTitle": "Silkiting va sozlang",
@@ -627,5 +627,7 @@
     "insightsWhatsMissing": "Nima yetishmayapti?",
     "digestNotesCount": "{count, plural, other{{count} ta yozuv}}",
     "profileSelfie": "Selfi",
-    "profileRecentAvatars": "Oxirgilar"
+    "profileRecentAvatars": "Oxirgilar",
+    "whatsNewProfileTitle": "Tahlil endi sizning profilingiz",
+    "whatsNewProfileBody": "Hafta, oy yoki yil kartochkalarda. Avatar uchun selfi oling va istalgan payt avvalgisiga qayting."
 }

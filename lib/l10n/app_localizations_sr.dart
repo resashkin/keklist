@@ -1318,7 +1318,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get whatsNewGalleryBody =>
-      'Свака фотографија и видео које си снимио сада се види у календару и у сваком дану.';
+      'Свака фотографија и видео које си снимио сада се види у календару и у сваком дану. Штипни да повећаш или смањиш плочице.';
 
   @override
   String get whatsNewCirclesTitle => 'Видео кружићи и гласовне белешке';
@@ -1364,6 +1364,13 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => 'Недавни';
+
+  @override
+  String get whatsNewProfileTitle => 'Аналитика је сада твој профил';
+
+  @override
+  String get whatsNewProfileBody =>
+      'Твоја недеља, месец или година у картицама. Направи селфи за аватар и врати неки ранији кад год хоћеш.';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2679,7 +2686,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get whatsNewGalleryBody =>
-      'Svaka fotografija i video koje si snimio sada se vidi u kalendaru i u svakom danu.';
+      'Svaka fotografija i video koje si snimio sada se vidi u kalendaru i u svakom danu. Štipni da povećaš ili smanjiš pločice.';
 
   @override
   String get whatsNewCirclesTitle => 'Video kružići i glasovne beleške';
@@ -2725,4 +2732,11 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get profileRecentAvatars => 'Nedavni';
+
+  @override
+  String get whatsNewProfileTitle => 'Analitika je sada tvoj profil';
+
+  @override
+  String get whatsNewProfileBody =>
+      'Tvoja nedelja, mesec ili godina u karticama. Napravi selfi za avatar i vrati neki raniji kad god hoćeš.';
 }

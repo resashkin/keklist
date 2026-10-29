@@ -1677,9 +1677,9 @@
     "@whatsNewGalleryTitle": {
         "description": "What's New slide: photos and videos in the diary"
     },
-    "whatsNewGalleryBody": "Every photo and video you took now shows up in the calendar and in each day.",
+    "whatsNewGalleryBody": "Every photo and video you took now shows up in the calendar and in each day. Pinch to make tiles bigger or smaller.",
     "@whatsNewGalleryBody": {
-        "description": "What's New slide text about the gallery"
+        "description": "What's New slide text about the gallery and pinching to resize tiles"
     },
     "whatsNewCirclesTitle": "Video circles and voice notes",
     "@whatsNewCirclesTitle": {
@@ -1729,5 +1729,13 @@
     "profileRecentAvatars": "Recent",
     "@profileRecentAvatars": {
         "description": "Profile sheet: section with previous avatars"
+    },
+    "whatsNewProfileTitle": "Analytics is now your profile",
+    "@whatsNewProfileTitle": {
+        "description": "What's New slide: Analytics became the Profile tab"
+    },
+    "whatsNewProfileBody": "Your week, month or year in cards. Take a selfie for your avatar and switch back to an earlier one anytime.",
+    "@whatsNewProfileBody": {
+        "description": "What's New slide text about the Profile tab"
     }
 }

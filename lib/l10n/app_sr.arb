@@ -406,7 +406,7 @@
     "whatsNewWebTitle": "keklist у прегледачу",
     "whatsNewWebBody": "Укључи приступ преко Wi‑Fi мреже и пиши са лаптопа: иста апликација, преко целог екрана.",
     "whatsNewGalleryTitle": "Галерија је део дневника",
-    "whatsNewGalleryBody": "Свака фотографија и видео које си снимио сада се види у календару и у сваком дану.",
+    "whatsNewGalleryBody": "Свака фотографија и видео које си снимио сада се види у календару и у сваком дану. Штипни да повећаш или смањиш плочице.",
     "whatsNewCirclesTitle": "Видео кружићи и гласовне белешке",
     "whatsNewCirclesBody": "Понекад је лакше рећи или снимити него написати.",
     "whatsNewShakeTitle": "Протреси за подешавање",
@@ -417,5 +417,7 @@
     "insightsWhatsMissing": "Шта недостаје?",
     "digestNotesCount": "{count, plural, one{{count} белешка} few{{count} белешке} other{{count} белешки}}",
     "profileSelfie": "Селфи",
-    "profileRecentAvatars": "Недавни"
+    "profileRecentAvatars": "Недавни",
+    "whatsNewProfileTitle": "Аналитика је сада твој профил",
+    "whatsNewProfileBody": "Твоја недеља, месец или година у картицама. Направи селфи за аватар и врати неки ранији кад год хоћеш."
 }

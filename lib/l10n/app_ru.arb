@@ -406,7 +406,7 @@
     "whatsNewWebTitle": "keklist в браузере",
     "whatsNewWebBody": "Включи «Доступ по Wi‑Fi» и пиши с ноутбука: это то же приложение на весь экран.",
     "whatsNewGalleryTitle": "Галерея — часть дневника",
-    "whatsNewGalleryBody": "Всё, что ты снимал, теперь видно в календаре и в каждом дне.",
+    "whatsNewGalleryBody": "Всё, что ты снимал, теперь видно в календаре и в каждом дне. Щипком меняй размер плиток.",
     "whatsNewCirclesTitle": "Кружочки и голосовые",
     "whatsNewCirclesBody": "Иногда проще сказать или снять, чем написать.",
     "whatsNewShakeTitle": "Встряхни, чтобы настроить",
@@ -417,5 +417,7 @@
     "insightsWhatsMissing": "Чего не хватает?",
     "digestNotesCount": "{count, plural, one{{count} заметка} few{{count} заметки} many{{count} заметок} other{{count} заметки}}",
     "profileSelfie": "Селфи",
-    "profileRecentAvatars": "Недавние"
+    "profileRecentAvatars": "Недавние",
+    "whatsNewProfileTitle": "Аналитика стала профилем",
+    "whatsNewProfileBody": "Неделя, месяц или год в карточках. Сделай селфи на аватар и в любой момент верни один из прошлых."
 }

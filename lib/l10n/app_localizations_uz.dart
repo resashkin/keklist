@@ -1323,7 +1323,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get whatsNewGalleryBody =>
-      'Olgan har bir rasm va videongiz endi kalendarda va har bir kunda ko\'rinadi.';
+      'Olgan har bir rasm va videongiz endi kalendarda va har bir kunda ko\'rinadi. Chimdib, plitkalar o\'lchamini o\'zgartiring.';
 
   @override
   String get whatsNewCirclesTitle => 'Video doiralar va ovozli yozuvlar';
@@ -1367,4 +1367,11 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => 'Oxirgilar';
+
+  @override
+  String get whatsNewProfileTitle => 'Tahlil endi sizning profilingiz';
+
+  @override
+  String get whatsNewProfileBody =>
+      'Hafta, oy yoki yil kartochkalarda. Avatar uchun selfi oling va istalgan payt avvalgisiga qayting.';
 }

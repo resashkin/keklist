@@ -1328,7 +1328,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get whatsNewGalleryBody =>
-      'Ogni foto e video che hai fatto ora compare nel calendario e in ogni giorno.';
+      'Ogni foto e video che hai fatto ora compare nel calendario e in ogni giorno. Pizzica per ingrandire o rimpicciolire i riquadri.';
 
   @override
   String get whatsNewCirclesTitle => 'Videocerchi e note vocali';
@@ -1373,4 +1373,11 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => 'Recenti';
+
+  @override
+  String get whatsNewProfileTitle => 'Le statistiche ora sono il tuo profilo';
+
+  @override
+  String get whatsNewProfileBody =>
+      'La tua settimana, il mese o l\'anno in schede. Scatta un selfie per l\'avatar e torna a uno precedente quando vuoi.';
 }

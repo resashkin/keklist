@@ -1320,7 +1320,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get whatsNewGalleryBody =>
-      'Түсірген әр фото мен бейне енді күнтізбеде және әр күнде көрінеді.';
+      'Түсірген әр фото мен бейне енді күнтізбеде және әр күнде көрінеді. Шымшып, плиткалардың өлшемін өзгерт.';
 
   @override
   String get whatsNewCirclesTitle => 'Бейне-шеңберлер мен дауыстық жазбалар';
@@ -1364,4 +1364,11 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => 'Соңғылар';
+
+  @override
+  String get whatsNewProfileTitle => 'Талдау енді сенің профилің';
+
+  @override
+  String get whatsNewProfileBody =>
+      'Апта, ай немесе жыл карточкаларда. Аватарға селфи түсір және кез келген уақытта бұрынғысына қайт.';
 }

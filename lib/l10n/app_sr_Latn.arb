@@ -616,7 +616,7 @@
     "whatsNewWebTitle": "keklist u pregledaču",
     "whatsNewWebBody": "Uključi pristup preko Wi‑Fi mreže i piši sa laptopa: ista aplikacija, preko celog ekrana.",
     "whatsNewGalleryTitle": "Galerija je deo dnevnika",
-    "whatsNewGalleryBody": "Svaka fotografija i video koje si snimio sada se vidi u kalendaru i u svakom danu.",
+    "whatsNewGalleryBody": "Svaka fotografija i video koje si snimio sada se vidi u kalendaru i u svakom danu. Štipni da povećaš ili smanjiš pločice.",
     "whatsNewCirclesTitle": "Video kružići i glasovne beleške",
     "whatsNewCirclesBody": "Ponekad je lakše reći ili snimiti nego napisati.",
     "whatsNewShakeTitle": "Protresi za podešavanje",
@@ -627,5 +627,7 @@
     "insightsWhatsMissing": "Šta nedostaje?",
     "digestNotesCount": "{count, plural, one{{count} beleška} few{{count} beleške} other{{count} beleški}}",
     "profileSelfie": "Selfi",
-    "profileRecentAvatars": "Nedavni"
+    "profileRecentAvatars": "Nedavni",
+    "whatsNewProfileTitle": "Analitika je sada tvoj profil",
+    "whatsNewProfileBody": "Tvoja nedelja, mesec ili godina u karticama. Napravi selfi za avatar i vrati neki raniji kad god hoćeš."
 }

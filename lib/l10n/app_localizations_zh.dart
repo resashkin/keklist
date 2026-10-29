@@ -1271,7 +1271,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get whatsNewGalleryTitle => '相册就是你的日记';
 
   @override
-  String get whatsNewGalleryBody => '你拍的每张照片和每段视频，现在都会出现在日历和每一天里。';
+  String get whatsNewGalleryBody =>
+      '你拍的每张照片和每段视频，现在都会出现在日历和每一天里。双指捏合即可放大或缩小格子。';
 
   @override
   String get whatsNewCirclesTitle => '圆形视频和语音笔记';
@@ -1312,4 +1313,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => '最近';
+
+  @override
+  String get whatsNewProfileTitle => '分析变成了你的个人资料';
+
+  @override
+  String get whatsNewProfileBody => '用卡片回顾你的一周、一月或一年。拍张自拍当头像，随时换回以前的头像。';
 }

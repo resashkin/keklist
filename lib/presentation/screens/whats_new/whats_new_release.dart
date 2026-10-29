@@ -21,6 +21,7 @@ abstract final class WhatsNewRelease {
 
   static List<WhatsNewSlide> slides(AppLocalizations l10n) => [
     WhatsNewSlide(videoAsset: _video('gallery'), title: l10n.whatsNewGalleryTitle, body: l10n.whatsNewGalleryBody),
+    WhatsNewSlide(videoAsset: _video('profile'), title: l10n.whatsNewProfileTitle, body: l10n.whatsNewProfileBody),
     WhatsNewSlide(videoAsset: _video('circles'), title: l10n.whatsNewCirclesTitle, body: l10n.whatsNewCirclesBody),
     WhatsNewSlide(videoAsset: _video('shake'), title: l10n.whatsNewShakeTitle, body: l10n.whatsNewShakeBody),
     WhatsNewSlide(

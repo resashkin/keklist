@@ -406,7 +406,7 @@
     "whatsNewWebTitle": "ブラウザでkeklist",
     "whatsNewWebBody": "Wi‑Fiアクセスをオンにすれば、ノートPCから書けます。同じアプリを全画面で。",
     "whatsNewGalleryTitle": "ギャラリーが日記の一部に",
-    "whatsNewGalleryBody": "撮った写真や動画が、カレンダーと各日に表示されます。",
+    "whatsNewGalleryBody": "撮った写真や動画が、カレンダーと各日に表示されます。ピンチでタイルの大きさを変えられます。",
     "whatsNewCirclesTitle": "丸い動画とボイスメモ",
     "whatsNewCirclesBody": "書くより、話したり撮ったりする方が早いこともあります。",
     "whatsNewShakeTitle": "振ってカスタマイズ",
@@ -417,5 +417,7 @@
     "insightsWhatsMissing": "何が足りない？",
     "digestNotesCount": "{count, plural, other{{count} 件のメモ}}",
     "profileSelfie": "セルフィー",
-    "profileRecentAvatars": "最近"
+    "profileRecentAvatars": "最近",
+    "whatsNewProfileTitle": "分析がプロフィールになりました",
+    "whatsNewProfileBody": "週・月・年をカードで振り返り。自撮りをアバターにして、いつでも前のアバターに戻せます。"
 }

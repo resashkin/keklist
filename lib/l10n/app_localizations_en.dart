@@ -1315,7 +1315,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatsNewGalleryBody =>
-      'Every photo and video you took now shows up in the calendar and in each day.';
+      'Every photo and video you took now shows up in the calendar and in each day. Pinch to make tiles bigger or smaller.';
 
   @override
   String get whatsNewCirclesTitle => 'Video circles and voice notes';
@@ -1359,4 +1359,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileRecentAvatars => 'Recent';
+
+  @override
+  String get whatsNewProfileTitle => 'Analytics is now your profile';
+
+  @override
+  String get whatsNewProfileBody =>
+      'Your week, month or year in cards. Take a selfie for your avatar and switch back to an earlier one anytime.';
 }
