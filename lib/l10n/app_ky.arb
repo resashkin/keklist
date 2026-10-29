@@ -98,7 +98,7 @@
     "@extraActions": {
         "description": "Кошумча аракеттер менюсу"
     },
-    "mindOptions": "Ой варианттары",
+    "mindOptions": "Жазуунун параметрлери",
     "@mindOptions": {
         "description": "Ой варианттары менюсу"
     },
@@ -191,7 +191,7 @@
     "@save": {
         "description": "Сактоо баскычы"
     },
-    "mind": "Ой",
+    "mind": "Жазуу",
     "@mind": {
         "description": "Ой экранынын аталышы"
     },
@@ -263,11 +263,11 @@
     "@yourFolderName": {
         "description": "Папка аты киргизүү көрсөткүчү"
     },
-    "noMindsInSelectedPeriod": "Тандалган мезгилде ойлор жок",
+    "noMindsInSelectedPeriod": "Тандалган мезгилде жазуу жок",
     "@noMindsInSelectedPeriod": {
         "description": "Тандалган мезгилде ойлор жок билдирүүсү"
     },
-    "noMindsForPeriod": "Бул мезгил үчүн ойлор жок",
+    "noMindsForPeriod": "Бул мезгилде жазуу жок",
     "@noMindsForPeriod": {
         "description": "Бул мезгил үчүн ойлор жок билдирүүсү"
     },
@@ -279,7 +279,7 @@
     "@digest": {
         "description": "Жыйынтык аталышы"
     },
-    "minds": "Ойлор",
+    "minds": "Жазуулар",
     "@minds": {
         "description": "Ойлор аталышы"
     },
@@ -291,11 +291,11 @@
     "@writeSomething": {
         "description": "Бир нерсе жазуу көрсөткүчү"
     },
-    "todayMinds": "Бүгүнкү ойлор",
+    "todayMinds": "Бүгүнкү жазуулар",
     "@todayMinds": {
         "description": "Бүгүнкү ойлор аталышы"
     },
-    "youDidNotCollectAnyEntriesYet": "Сиз али эч кандай жазма чогулткан жоксуз",
+    "youDidNotCollectAnyEntriesYet": "Сизде азырынча бир да жазуу жок",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Эч кандай жазма чогултталбаган билдирүүсү"
     },
@@ -331,7 +331,7 @@
     "@thisYear": {
         "description": "Бул жыл мезгилинин аталышы"
     },
-    "calendarDescription": "Жазмалар календары менен негизги экран",
+    "calendarDescription": "Жазуулардын календары бар негизги экран",
     "@calendarDescription": {
         "description": "Календарь таб сүрөттөмөсү"
     },
@@ -343,7 +343,7 @@
     "@settingsDescription": {
         "description": "Сөздүктөр таб сүрөттөмөсү"
     },
-    "todayDescription": "Анткени бүгүнкү ойлор",
+    "todayDescription": "Бүгүнкү жазуулар гана",
     "@todayDescription": {
         "description": "Бүгүн таб сүрөттөмөсү"
     },
@@ -351,7 +351,7 @@
     "@debugMenuDescription": {
         "description": "Debug менюсу таб сүрөттөмөсү"
     },
-    "noMindsForThisDay": "Бул күн үчүн ойлор жок",
+    "noMindsForThisDay": "Бул күнү жазуу жок",
     "@noMindsForThisDay": {
         "description": "Бул күн үчүн ойлор жок билдирүүсү"
     },
@@ -381,12 +381,12 @@
     "exportError": "Экспорт ийгиликсиз",
     "importSuccess": "Импорт ийгиликтүү",
     "importError": "Импорт ийгиликсиз",
-    "mindsToExport": "Ойлор",
+    "mindsToExport": "Жазуулар",
     "audioFilesToExport": "Аудио файлдар",
     "emotionsToExport": "Эмоциялар",
-    "mindsExported": "Ойлор экспортталды",
+    "mindsExported": "Жазуулар экспорттолду",
     "audioFilesExported": "Аудио файлдар экспортталды",
-    "mindsImported": "Ойлор импортталды",
+    "mindsImported": "Жазуулар импорттолду",
     "audioFilesImported": "Аудио файлдар импортталды",
     "onboardingMind1": "Салам!",
     "onboardingMind2": "Мен keklist - кыска жазуулардын жеке күндөлүгүмүн",
@@ -438,11 +438,11 @@
     "addEmotionsToMind": "Эмоция кошуу",
     "doneEditing": "Даяр",
     "emotionEditHint": "Атын өзгөртүү үчүн басыңыз · ✕ өчүрүү үчүн · иреттөө үчүн сүйрөңүз",
-    "emotionInUseMessage": "Бул эмоция кээ бир майндтарда колдонулат. Аны ошол жерде сактоо үчүн архивдеңиз же бардык жерден өчүрүңүз.",
-    "deleteEmotionMessage": "Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык майндтардан өчүрүлөт.",
+    "emotionInUseMessage": "Бул эмоция кээ бир жазууларда колдонулат. Аны ошол жерде сактоо үчүн архивдеңиз же бардык жерден өчүрүңүз.",
+    "deleteEmotionMessage": "Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык жазуулардан өчүрүлөт.",
     "dayFeedTileSettings": "Плитка жөндөөлөрү",
     "dayFeedColumns": "Мамычалар",
-    "dayFeedMindTileSize": "Плитканын өлчөмү",
+    "dayFeedMindTileSize": "Жазуу плиткасынын өлчөмү",
     "dayFeedMindTileSquare": "Чарчы",
     "dayFeedMindTileWide": "Кең",
     "dayFeedShowMindText": "Текстти көрсөтүү",
@@ -510,7 +510,7 @@
     "aiStarterWeek": "Жумам кандай өттү?",
     "aiStarterWorry": "Акыркы убакта мени эмне тынчсыздандырат?",
     "aiStarterJoy": "Акыркы убакта мени эмне кубантты?",
-    "aiActionSaveAsMind": "Майнд катары сактоо",
+    "aiActionSaveAsMind": "Жазуу катары сактоо",
     "aiActionOpenDay": "Күндү ачуу",
     "aiActionWeekSummary": "Жуманын жыйынтыгы",
     "aiWeekSummaryPrompt": "Акыркы 7 күнүмдү жыйынтыкта: эмне болду, эмнени сездим, эмне өзгөчө болду.",
@@ -628,5 +628,6 @@
     "whatsNewShakeTitle": "Силкип, жөндө",
     "whatsNewShakeBody": "Каалаган экранды телефонду силкип жөндөсө болот.",
     "whatsNewAlsoDesign": "Дагы: жаңы дизайн жана анимациялар.",
-    "rateApp": "keklist'ти баалоо"
+    "rateApp": "keklist'ти баалоо",
+    "pinchColumnsHint": "Кеңеш: мамычалардын санын өзгөртүү үчүн торду эки манжа менен кысып же жайыңыз"
 }

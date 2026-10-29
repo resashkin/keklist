@@ -62,7 +62,10 @@ final class SettingsSectionCard extends StatelessWidget {
         child: Material(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
           child: ListTileTheme(
-            data: const ListTileThemeData(contentPadding: EdgeInsets.only(left: 16.0, right: 8.0)),
+            data: ListTileThemeData(
+              contentPadding: const EdgeInsets.only(left: 16.0, right: 8.0),
+              subtitleTextStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).hintColor),
+            ),
             child: Column(children: _withDividers(context, children)),
           ),
         ),

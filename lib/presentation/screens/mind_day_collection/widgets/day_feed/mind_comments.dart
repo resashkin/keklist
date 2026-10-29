@@ -43,7 +43,7 @@ final class MindCommentPreview extends StatelessWidget {
 
   const MindCommentPreview({super.key, required this.root, required this.onTap});
 
-  static const double height = 40.0;
+  static const double height = 52.0;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ final class MindCommentPreview extends StatelessWidget {
         final Color muted = foreground.withValues(alpha: 0.6);
         // Opaque so the emotion texture never runs through the line.
         return Padding(
-          padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(12.0, 4.0, 0.0, 0.0),
           child: Material(
             color: Color.alphaBlend(foreground.withValues(alpha: 0.1), storyColorsOf(context).background),
             shape: const StadiumBorder(),

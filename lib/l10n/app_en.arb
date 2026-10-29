@@ -70,7 +70,7 @@
     "@insightsCounters": {
         "description": "Analytics screen"
     },
-    "insightsMinds": "Minds",
+    "insightsMinds": "Notes",
     "@insightsMinds": {
         "description": "Analytics screen"
     },
@@ -98,7 +98,7 @@
     "@insightsBrightestYear": {
         "description": "Analytics screen"
     },
-    "insightsBrightestDetails": "{minds} minds · {emotions} emotions · {media} media",
+    "insightsBrightestDetails": "{minds} notes · {emotions} emotions · {media} media",
     "@insightsBrightestDetails": {
         "description": "Analytics screen",
         "placeholders": {
@@ -170,7 +170,7 @@
             }
         }
     },
-    "insightsStreakKeepGoing": "Add a mind today to keep it going",
+    "insightsStreakKeepGoing": "Add a note today to keep it going",
     "@insightsStreakKeepGoing": {
         "description": "Analytics screen"
     },
@@ -215,15 +215,15 @@
     "@insightsRoundVideos": {
         "description": "Analytics screen"
     },
-    "insightsEmptyPeriod": "No minds in this period yet",
+    "insightsEmptyPeriod": "No notes in this period yet",
     "@insightsEmptyPeriod": {
         "description": "Analytics screen"
     },
-    "insightsEmptyEmotions": "Tag minds with emotions to see this",
+    "insightsEmptyEmotions": "Tag notes with emotions to see this",
     "@insightsEmptyEmotions": {
         "description": "Analytics screen"
     },
-    "insightsEmptyPairs": "Tag a mind with two emotions to see pairs",
+    "insightsEmptyPairs": "Tag a note with two emotions to see pairs",
     "@insightsEmptyPairs": {
         "description": "Analytics screen"
     },
@@ -235,7 +235,7 @@
     "@insightsEmptyRoundVideos": {
         "description": "Analytics screen"
     },
-    "insightsEmptyStreak": "Add a mind today to start a streak",
+    "insightsEmptyStreak": "Add a note today to start a streak",
     "@insightsEmptyStreak": {
         "description": "Analytics screen"
     },
@@ -356,7 +356,7 @@
     "@extraActions": {
         "description": "Extra actions menu"
     },
-    "mindOptions": "Mind options",
+    "mindOptions": "Note options",
     "@mindOptions": {
         "description": "Mind options menu"
     },
@@ -464,7 +464,7 @@
     "@save": {
         "description": "Save button"
     },
-    "mind": "Mind",
+    "mind": "Note",
     "@mind": {
         "description": "Mind screen title"
     },
@@ -536,11 +536,11 @@
     "@yourFolderName": {
         "description": "Folder name input hint"
     },
-    "noMindsInSelectedPeriod": "No minds in selected period",
+    "noMindsInSelectedPeriod": "No notes in selected period",
     "@noMindsInSelectedPeriod": {
         "description": "No minds in period message"
     },
-    "noMindsForPeriod": "No minds for this period",
+    "noMindsForPeriod": "No notes for this period",
     "@noMindsForPeriod": {
         "description": "No minds for period message"
     },
@@ -552,7 +552,7 @@
     "@digest": {
         "description": "Digest title"
     },
-    "minds": "Minds",
+    "minds": "Notes",
     "@minds": {
         "description": "Minds title"
     },
@@ -564,11 +564,11 @@
     "@writeSomething": {
         "description": "Write something hint"
     },
-    "todayMinds": "Today minds",
+    "todayMinds": "Today's notes",
     "@todayMinds": {
         "description": "Today minds title"
     },
-    "youDidNotCollectAnyEntriesYet": "You did not collect any entries yet",
+    "youDidNotCollectAnyEntriesYet": "You don't have any notes yet",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "No entries collected message"
     },
@@ -604,11 +604,11 @@
     "@thisYear": {
         "description": "This year period title"
     },
-    "calendarDescription": "Main screen with Calendar of entries",
+    "calendarDescription": "Main screen with a calendar of your notes",
     "@calendarDescription": {
         "description": "Calendar tab description"
     },
-    "insightsDescription": "You and the statistics of your entries",
+    "insightsDescription": "You and the statistics of your notes",
     "@insightsDescription": {
         "description": "Insights tab description"
     },
@@ -616,7 +616,7 @@
     "@settingsDescription": {
         "description": "Settings tab description"
     },
-    "todayDescription": "Only today minds",
+    "todayDescription": "Only today's notes",
     "@todayDescription": {
         "description": "Today tab description"
     },
@@ -624,7 +624,7 @@
     "@debugMenuDescription": {
         "description": "Debug Menu tab description"
     },
-    "noMindsForThisDay": "No minds for this day",
+    "noMindsForThisDay": "No notes for this day",
     "@noMindsForThisDay": {
         "description": "No minds for this day message"
     },
@@ -732,7 +732,7 @@
     "@importError": {
         "description": "Import error message title"
     },
-    "mindsToExport": "Minds",
+    "mindsToExport": "Notes",
     "@mindsToExport": {
         "description": "Minds count label for export"
     },
@@ -744,7 +744,7 @@
     "@emotionsToExport": {
         "description": "Emotions count label for export"
     },
-    "mindsExported": "Minds exported",
+    "mindsExported": "Notes exported",
     "@mindsExported": {
         "description": "Minds exported count"
     },
@@ -752,7 +752,7 @@
     "@audioFilesExported": {
         "description": "Audio files exported count"
     },
-    "mindsImported": "Minds imported",
+    "mindsImported": "Notes imported",
     "@mindsImported": {
         "description": "Minds imported count"
     },
@@ -780,7 +780,7 @@
     "@onboardingMind3": {
         "description": "Explanation of Calendar tab"
     },
-    "onboardingMind4": "The 'Analytics' tab shows brief statistics of your entries",
+    "onboardingMind4": "The 'Analytics' tab shows brief statistics of your notes",
     "@onboardingMind4": {
         "description": "Explanation of Analytics tab"
     },
@@ -960,7 +960,7 @@
     "@emotionEditHint": {
         "description": "Hint shown while the emotion marking sheet is in edit mode"
     },
-    "emotionInUseMessage": "This emotion is used by some minds. Archive it to keep it there, or delete it everywhere.",
+    "emotionInUseMessage": "This emotion is used by some notes. Archive it to keep it there, or delete it everywhere.",
     "@emotionInUseMessage": {
         "description": "Message when removing an emotion used by minds, offering archive or delete"
     },
@@ -972,7 +972,7 @@
     "@noArchivedEmotions": {
         "description": "Empty state for the archived emotions screen"
     },
-    "deleteEmotionMessage": "Delete this emotion? It will be removed from any minds using it.",
+    "deleteEmotionMessage": "Delete this emotion? It will be removed from any notes using it.",
     "@deleteEmotionMessage": {
         "description": "Confirmation when permanently deleting an emotion"
     },
@@ -984,7 +984,7 @@
     "@dayFeedColumns": {
         "description": "Unified day grid (All mode) label"
     },
-    "dayFeedMindTileSize": "Mind tile size",
+    "dayFeedMindTileSize": "Note tile size",
     "@dayFeedMindTileSize": {
         "description": "Unified day grid (All mode) label"
     },
@@ -1157,11 +1157,11 @@
     "@aiTab": {
         "description": "AI tab"
     },
-    "aiTabDescription": "Talk about your records with an AI that runs on your phone",
+    "aiTabDescription": "Talk about your notes with an AI that runs on your phone",
     "@aiTabDescription": {
         "description": "AI tab"
     },
-    "aiPrivacyNote": "Runs on your phone only: your records never leave the device.",
+    "aiPrivacyNote": "Runs on your phone only: your notes never leave the device.",
     "@aiPrivacyNote": {
         "description": "AI tab"
     },
@@ -1213,7 +1213,7 @@
     "@aiStarterJoy": {
         "description": "AI tab"
     },
-    "aiActionSaveAsMind": "Save as mind",
+    "aiActionSaveAsMind": "Save as note",
     "@aiActionSaveAsMind": {
         "description": "AI tab"
     },
@@ -1449,7 +1449,7 @@
             }
         }
     },
-    "aiNoSessionsHint": "Ask about your week, a worry or a good day: the chat reads your records right on the phone.",
+    "aiNoSessionsHint": "Ask about your week, a worry or a good day: the chat reads your notes right on the phone.",
     "@aiNoSessionsHint": {
         "description": "Hint under the empty list of chat sessions"
     },
@@ -1617,7 +1617,7 @@
     "@analyticsNeverSent": {
         "description": "Heading of the list of data analytics never sends"
     },
-    "analyticsNeverSentItems": "Your minds, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.",
+    "analyticsNeverSentItems": "Your notes, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.",
     "@analyticsNeverSentItems": {
         "description": "List of data analytics never sends"
     },
@@ -1716,5 +1716,9 @@
     "rateApp": "Rate keklist",
     "@rateApp": {
         "description": "Settings row that opens the store page to rate the app"
+    },
+    "pinchColumnsHint": "Tip: pinch the grid to change the number of columns",
+    "@pinchColumnsHint": {
+        "description": "Tweak sheet hint under the Columns picker: pinching the grid also changes the column count"
     }
 }

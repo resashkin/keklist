@@ -47,8 +47,8 @@ final class DayFeedTileMenu extends StatelessWidget {
       _action(context.l10n.edit, 'pencil', Icons.edit_outlined, () => _editText(context, mind)),
       _action(
         context.l10n.emotions,
-        'face.smiling',
-        Icons.sentiment_satisfied_alt_outlined,
+        'heart',
+        Icons.favorite_border_rounded,
         () => _editEmotions(context, mind),
       ),
       _action(context.l10n.share, 'square.and.arrow.up', Icons.ios_share, () => _shareText(context, mind)),

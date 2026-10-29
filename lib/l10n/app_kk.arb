@@ -98,7 +98,7 @@
     "@extraActions": {
         "description": "Қосымша әрекеттер мәзірі"
     },
-    "mindOptions": "Ой нұсқалары",
+    "mindOptions": "Жазба параметрлері",
     "@mindOptions": {
         "description": "Ой нұсқалары мәзірі"
     },
@@ -191,7 +191,7 @@
     "@save": {
         "description": "Сақтау батырмасы"
     },
-    "mind": "Ой",
+    "mind": "Жазба",
     "@mind": {
         "description": "Ой экранының атауы"
     },
@@ -263,11 +263,11 @@
     "@yourFolderName": {
         "description": "Бума атауы енгізу көрсеткіші"
     },
-    "noMindsInSelectedPeriod": "Таңдалған кезеңде ойлар жоқ",
+    "noMindsInSelectedPeriod": "Таңдалған кезеңде жазба жоқ",
     "@noMindsInSelectedPeriod": {
         "description": "Таңдалған кезеңде ойлар жоқ хабарламасы"
     },
-    "noMindsForPeriod": "Бұл кезең үшін ойлар жоқ",
+    "noMindsForPeriod": "Бұл кезеңде жазба жоқ",
     "@noMindsForPeriod": {
         "description": "Бұл кезең үшін ойлар жоқ хабарламасы"
     },
@@ -279,7 +279,7 @@
     "@digest": {
         "description": "Қорытынды атауы"
     },
-    "minds": "Ойлар",
+    "minds": "Жазбалар",
     "@minds": {
         "description": "Ойлар атауы"
     },
@@ -291,11 +291,11 @@
     "@writeSomething": {
         "description": "Бір нәрсе жазу көрсеткіші"
     },
-    "todayMinds": "Бүгінгі ойлар",
+    "todayMinds": "Бүгінгі жазбалар",
     "@todayMinds": {
         "description": "Бүгінгі ойлар атауы"
     },
-    "youDidNotCollectAnyEntriesYet": "Сіз әлі ешқандай жазба жинаған жоқсыз",
+    "youDidNotCollectAnyEntriesYet": "Сізде әлі бірде-бір жазба жоқ",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Ешқандай жазба жинақталмаған хабарламасы"
     },
@@ -331,7 +331,7 @@
     "@thisYear": {
         "description": "Бұл жыл кезеңінің атауы"
     },
-    "calendarDescription": "Жазбалар күнтізбесімен негізгі экран",
+    "calendarDescription": "Жазбалар күнтізбесі бар негізгі экран",
     "@calendarDescription": {
         "description": "Күнтізбе таб сипаттамасы"
     },
@@ -343,7 +343,7 @@
     "@settingsDescription": {
         "description": "Баптаулар таб сипаттамасы"
     },
-    "todayDescription": "Тек бүгінгі ойлар",
+    "todayDescription": "Тек бүгінгі жазбалар",
     "@todayDescription": {
         "description": "Бүгін таб сипаттамасы"
     },
@@ -351,7 +351,7 @@
     "@debugMenuDescription": {
         "description": "Debug мәзірі таб сипаттамасы"
     },
-    "noMindsForThisDay": "Бұл күн үшін ойлар жоқ",
+    "noMindsForThisDay": "Бұл күні жазба жоқ",
     "@noMindsForThisDay": {
         "description": "Бұл күн үшін ойлар жоқ хабарламасы"
     },
@@ -381,12 +381,12 @@
     "exportError": "Экспорт сәтсіз",
     "importSuccess": "Импорт сәтті",
     "importError": "Импорт сәтсіз",
-    "mindsToExport": "Ойлар",
+    "mindsToExport": "Жазбалар",
     "audioFilesToExport": "Аудио файлдар",
     "emotionsToExport": "Эмоциялар",
-    "mindsExported": "Ойлар экспортталды",
+    "mindsExported": "Жазбалар экспортталды",
     "audioFilesExported": "Аудио файлдар экспортталды",
-    "mindsImported": "Ойлар импортталды",
+    "mindsImported": "Жазбалар импортталды",
     "audioFilesImported": "Аудио файлдар импортталды",
     "onboardingMind1": "Сәлем!",
     "onboardingMind2": "Мен keklist - қысқа жазбалардың жеке күнделігімін",
@@ -438,11 +438,11 @@
     "addEmotionsToMind": "Эмоциялар қосу",
     "doneEditing": "Дайын",
     "emotionEditHint": "Атын өзгерту үшін түртіңіз · ✕ жою үшін · реттеу үшін сүйреңіз",
-    "emotionInUseMessage": "Бұл эмоция кейбір майндтарда қолданылады. Оны сонда сақтау үшін мұрағаттаңыз немесе барлық жерден жойыңыз.",
-    "deleteEmotionMessage": "Бұл эмоцияны жою керек пе? Ол оны пайдаланатын барлық майндтардан жойылады.",
+    "emotionInUseMessage": "Бұл эмоция кейбір жазбаларда қолданылады. Оны сонда сақтау үшін мұрағаттаңыз немесе барлық жерден жойыңыз.",
+    "deleteEmotionMessage": "Бұл эмоцияны жою керек пе? Ол оны пайдаланатын барлық жазбалардан жойылады.",
     "dayFeedTileSettings": "Тақта баптаулары",
     "dayFeedColumns": "Бағандар",
-    "dayFeedMindTileSize": "Тақта өлшемі",
+    "dayFeedMindTileSize": "Жазба тақтасының өлшемі",
     "dayFeedMindTileSquare": "Шаршы",
     "dayFeedMindTileWide": "Кең",
     "dayFeedShowMindText": "Мәтінді көрсету",
@@ -510,7 +510,7 @@
     "aiStarterWeek": "Аптам қалай өтті?",
     "aiStarterWorry": "Соңғы кезде мені не мазалайды?",
     "aiStarterJoy": "Соңғы кезде мені не қуантты?",
-    "aiActionSaveAsMind": "Майнд ретінде сақтау",
+    "aiActionSaveAsMind": "Жазба ретінде сақтау",
     "aiActionOpenDay": "Күнді ашу",
     "aiActionWeekSummary": "Апта қорытындысы",
     "aiWeekSummaryPrompt": "Соңғы 7 күнімді қорытындыла: не болды, не сезіндім, не ерекше болды.",
@@ -628,5 +628,6 @@
     "whatsNewShakeTitle": "Сілкіп, баптау",
     "whatsNewShakeBody": "Кез келген экранды телефонды сілку арқылы баптауға болады.",
     "whatsNewAlsoDesign": "Сондай-ақ: жаңа дизайн мен анимациялар.",
-    "rateApp": "keklist-ті бағалау"
+    "rateApp": "keklist-ті бағалау",
+    "pinchColumnsHint": "Кеңес: бағандар санын өзгерту үшін торды екі саусақпен қысып немесе жайыңыз"
 }

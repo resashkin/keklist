@@ -411,7 +411,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get todayMinds => '今天的笔记';
 
   @override
-  String get youDidNotCollectAnyEntriesYet => '您还没有收集任何条目';
+  String get youDidNotCollectAnyEntriesYet => '你还没有任何笔记';
 
   @override
   String get areYouSure => '您确定吗？';
@@ -438,10 +438,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get thisYear => '今年';
 
   @override
-  String get calendarDescription => '带有条目日历的主屏幕';
+  String get calendarDescription => '带有笔记日历的主屏幕';
 
   @override
-  String get insightsDescription => '你和你的记录统计';
+  String get insightsDescription => '你和你的笔记统计';
 
   @override
   String get settingsDescription => '包含所有设置的屏幕（深色模式、同步等）';
@@ -570,7 +570,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingMind3 => '在\'日历\'标签页中，所有笔记按天、周和月显示';
 
   @override
-  String get onboardingMind4 => '\'分析\'标签页显示您条目的简要统计信息';
+  String get onboardingMind4 => '\'分析\'标签页显示你笔记的简要统计信息';
 
   @override
   String get onboardingMind5 => '所有笔记仅存储在您的手机上';
@@ -702,7 +702,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get emotionEditHint => '点按重命名 · ✕ 删除 · 拖动排序';
 
   @override
-  String get emotionInUseMessage => '此情绪已被一些 mind 使用。归档可将其保留在那里，或彻底删除。';
+  String get emotionInUseMessage => '此情绪已被一些笔记使用。归档可将其保留在那里，或彻底删除。';
 
   @override
   String get noEmotionsYet => '还没有情绪';
@@ -711,7 +711,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get noArchivedEmotions => '没有已归档的情绪';
 
   @override
-  String get deleteEmotionMessage => '删除此情绪？它将从所有使用它的 mind 中移除。';
+  String get deleteEmotionMessage => '删除此情绪？它将从所有使用它的笔记中移除。';
 
   @override
   String get dayFeedTileSettings => '磁贴设置';
@@ -720,7 +720,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dayFeedColumns => '列数';
 
   @override
-  String get dayFeedMindTileSize => '磁贴大小';
+  String get dayFeedMindTileSize => '笔记磁贴大小';
 
   @override
   String get dayFeedMindTileSquare => '方形';
@@ -889,10 +889,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiTab => '聊天';
 
   @override
-  String get aiTabDescription => '与在手机上运行的 AI 聊聊你的记录';
+  String get aiTabDescription => '与在手机上运行的 AI 聊聊你的笔记';
 
   @override
-  String get aiPrivacyNote => '仅在手机上运行：你的记录不会离开设备。';
+  String get aiPrivacyNote => '仅在手机上运行：你的笔记不会离开设备。';
 
   @override
   String get aiDisclaimer => '这不是医疗服务。如果你处于危险中，请联系紧急服务。';
@@ -931,7 +931,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiStarterJoy => '最近什么让我开心？';
 
   @override
-  String get aiActionSaveAsMind => '保存为记录';
+  String get aiActionSaveAsMind => '保存为笔记';
 
   @override
   String get aiActionOpenDay => '打开当天';
@@ -1101,7 +1101,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get aiNoSessionsHint => '问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的记录。';
+  String get aiNoSessionsHint => '问问你的这一周、一件烦心事或美好的一天：聊天直接在手机上读取你的笔记。';
 
   @override
   String get showInGallery => '在图库中显示';
@@ -1230,7 +1230,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get analyticsNeverSentItems =>
-      '你的记录及其文字、情绪和评论,照片、视频和音频,它们的数量,你的名字、位置和 IP 地址。';
+      '你的笔记及其文字、情绪和评论,照片、视频和音频,它们的数量,你的名字、位置和 IP 地址。';
 
   @override
   String get analyticsResetId => '重置匿名 ID';
@@ -1299,4 +1299,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get rateApp => '给 keklist 评分';
+
+  @override
+  String get pinchColumnsHint => '提示：在网格上双指捏合即可更改列数';
 }

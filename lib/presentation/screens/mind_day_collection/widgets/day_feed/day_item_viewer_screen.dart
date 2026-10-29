@@ -370,7 +370,13 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     top: false,
     child: Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
-      child: MindCommentPreview(root: root, onTap: () => _openComments(root)),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Expanded(child: MindCommentPreview(root: root, onTap: () => _openComments(root))),
+          _EmotionsHeartButton(onTap: () => _editEmotions(_liveMind(root.id) ?? root)),
+        ],
+      ),
     ),
   );
 
@@ -417,7 +423,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
         debugState.debugMenuItems.any((item) => item.type == DebugMenuType.translation && item.value);
     return [
       _StoryAction.edit(context, () => _editText(mind)),
-      _StoryAction.emotions(context, () => _editEmotions(mind)),
       if (canTranslate)
         _StoryAction(
           id: 'translate',
@@ -806,6 +811,34 @@ final class _Loading extends StatelessWidget {
 }
 
 /// One entry of a story menu, shown both as the ⋯ menu and as a comment's context menu.
+/// Beside the comment bar, like a like: opens the emotions of the mind.
+final class _EmotionsHeartButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const _EmotionsHeartButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final (:background, :foreground) = storyColorsOf(context);
+    const double size = MindCommentPreview.height - 4.0;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 4.0, 12.0, 0.0),
+      child: Material(
+        color: Color.alphaBlend(foreground.withValues(alpha: 0.1), background),
+        shape: const CircleBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: SizedBox.square(
+            dimension: size,
+            child: Icon(Icons.favorite_border_rounded, color: foreground.withValues(alpha: 0.85), size: 22.0),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 final class _StoryAction {
   final String id;
   final String title;
@@ -829,8 +862,8 @@ final class _StoryAction {
   factory _StoryAction.emotions(BuildContext context, VoidCallback run) => _StoryAction(
     id: 'emotions',
     title: context.l10n.emotions,
-    sfSymbol: 'face.smiling',
-    icon: Icons.sentiment_satisfied_alt_outlined,
+    sfSymbol: 'heart',
+    icon: Icons.favorite_border_rounded,
     run: run,
   );
 

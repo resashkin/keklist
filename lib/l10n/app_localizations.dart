@@ -204,7 +204,7 @@ abstract class AppLocalizations {
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'Minds'**
+  /// **'Notes'**
   String get insightsMinds;
 
   /// Analytics screen
@@ -246,7 +246,7 @@ abstract class AppLocalizations {
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'{minds} minds · {emotions} emotions · {media} media'**
+  /// **'{minds} notes · {emotions} emotions · {media} media'**
   String insightsBrightestDetails(String minds, String emotions, String media);
 
   /// Analytics screen
@@ -330,7 +330,7 @@ abstract class AppLocalizations {
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'Add a mind today to keep it going'**
+  /// **'Add a note today to keep it going'**
   String get insightsStreakKeepGoing;
 
   /// Analytics screen
@@ -390,19 +390,19 @@ abstract class AppLocalizations {
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'No minds in this period yet'**
+  /// **'No notes in this period yet'**
   String get insightsEmptyPeriod;
 
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'Tag minds with emotions to see this'**
+  /// **'Tag notes with emotions to see this'**
   String get insightsEmptyEmotions;
 
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'Tag a mind with two emotions to see pairs'**
+  /// **'Tag a note with two emotions to see pairs'**
   String get insightsEmptyPairs;
 
   /// Analytics screen
@@ -420,7 +420,7 @@ abstract class AppLocalizations {
   /// Analytics screen
   ///
   /// In en, this message translates to:
-  /// **'Add a mind today to start a streak'**
+  /// **'Add a note today to start a streak'**
   String get insightsEmptyStreak;
 
   /// Analytics screen
@@ -570,7 +570,7 @@ abstract class AppLocalizations {
   /// Mind options menu
   ///
   /// In en, this message translates to:
-  /// **'Mind options'**
+  /// **'Note options'**
   String get mindOptions;
 
   /// Edit action
@@ -732,7 +732,7 @@ abstract class AppLocalizations {
   /// Mind screen title
   ///
   /// In en, this message translates to:
-  /// **'Mind'**
+  /// **'Note'**
   String get mind;
 
   /// Profile screen title
@@ -840,13 +840,13 @@ abstract class AppLocalizations {
   /// No minds in period message
   ///
   /// In en, this message translates to:
-  /// **'No minds in selected period'**
+  /// **'No notes in selected period'**
   String get noMindsInSelectedPeriod;
 
   /// No minds for period message
   ///
   /// In en, this message translates to:
-  /// **'No minds for this period'**
+  /// **'No notes for this period'**
   String get noMindsForPeriod;
 
   /// Select period action
@@ -864,7 +864,7 @@ abstract class AppLocalizations {
   /// Minds title
   ///
   /// In en, this message translates to:
-  /// **'Minds'**
+  /// **'Notes'**
   String get minds;
 
   /// Search emoji hint
@@ -882,13 +882,13 @@ abstract class AppLocalizations {
   /// Today minds title
   ///
   /// In en, this message translates to:
-  /// **'Today minds'**
+  /// **'Today\'s notes'**
   String get todayMinds;
 
   /// No entries collected message
   ///
   /// In en, this message translates to:
-  /// **'You did not collect any entries yet'**
+  /// **'You don\'t have any notes yet'**
   String get youDidNotCollectAnyEntriesYet;
 
   /// Confirmation dialog title
@@ -942,13 +942,13 @@ abstract class AppLocalizations {
   /// Calendar tab description
   ///
   /// In en, this message translates to:
-  /// **'Main screen with Calendar of entries'**
+  /// **'Main screen with a calendar of your notes'**
   String get calendarDescription;
 
   /// Insights tab description
   ///
   /// In en, this message translates to:
-  /// **'You and the statistics of your entries'**
+  /// **'You and the statistics of your notes'**
   String get insightsDescription;
 
   /// Settings tab description
@@ -960,7 +960,7 @@ abstract class AppLocalizations {
   /// Today tab description
   ///
   /// In en, this message translates to:
-  /// **'Only today minds'**
+  /// **'Only today\'s notes'**
   String get todayDescription;
 
   /// Debug Menu tab description
@@ -972,7 +972,7 @@ abstract class AppLocalizations {
   /// No minds for this day message
   ///
   /// In en, this message translates to:
-  /// **'No minds for this day'**
+  /// **'No notes for this day'**
   String get noMindsForThisDay;
 
   /// Week label
@@ -1134,7 +1134,7 @@ abstract class AppLocalizations {
   /// Minds count label for export
   ///
   /// In en, this message translates to:
-  /// **'Minds'**
+  /// **'Notes'**
   String get mindsToExport;
 
   /// Audio files count label for export
@@ -1152,7 +1152,7 @@ abstract class AppLocalizations {
   /// Minds exported count
   ///
   /// In en, this message translates to:
-  /// **'Minds exported'**
+  /// **'Notes exported'**
   String get mindsExported;
 
   /// Audio files exported count
@@ -1164,7 +1164,7 @@ abstract class AppLocalizations {
   /// Minds imported count
   ///
   /// In en, this message translates to:
-  /// **'Minds imported'**
+  /// **'Notes imported'**
   String get mindsImported;
 
   /// Audio files imported count
@@ -1206,7 +1206,7 @@ abstract class AppLocalizations {
   /// Explanation of Analytics tab
   ///
   /// In en, this message translates to:
-  /// **'The \'Analytics\' tab shows brief statistics of your entries'**
+  /// **'The \'Analytics\' tab shows brief statistics of your notes'**
   String get onboardingMind4;
 
   /// Privacy explanation
@@ -1464,7 +1464,7 @@ abstract class AppLocalizations {
   /// Message when removing an emotion used by minds, offering archive or delete
   ///
   /// In en, this message translates to:
-  /// **'This emotion is used by some minds. Archive it to keep it there, or delete it everywhere.'**
+  /// **'This emotion is used by some notes. Archive it to keep it there, or delete it everywhere.'**
   String get emotionInUseMessage;
 
   /// Empty state for the emotions list
@@ -1482,7 +1482,7 @@ abstract class AppLocalizations {
   /// Confirmation when permanently deleting an emotion
   ///
   /// In en, this message translates to:
-  /// **'Delete this emotion? It will be removed from any minds using it.'**
+  /// **'Delete this emotion? It will be removed from any notes using it.'**
   String get deleteEmotionMessage;
 
   /// Unified day grid (All mode) label
@@ -1500,7 +1500,7 @@ abstract class AppLocalizations {
   /// Unified day grid (All mode) label
   ///
   /// In en, this message translates to:
-  /// **'Mind tile size'**
+  /// **'Note tile size'**
   String get dayFeedMindTileSize;
 
   /// Unified day grid (All mode) label
@@ -1824,13 +1824,13 @@ abstract class AppLocalizations {
   /// AI tab
   ///
   /// In en, this message translates to:
-  /// **'Talk about your records with an AI that runs on your phone'**
+  /// **'Talk about your notes with an AI that runs on your phone'**
   String get aiTabDescription;
 
   /// AI tab
   ///
   /// In en, this message translates to:
-  /// **'Runs on your phone only: your records never leave the device.'**
+  /// **'Runs on your phone only: your notes never leave the device.'**
   String get aiPrivacyNote;
 
   /// AI tab
@@ -1908,7 +1908,7 @@ abstract class AppLocalizations {
   /// AI tab
   ///
   /// In en, this message translates to:
-  /// **'Save as mind'**
+  /// **'Save as note'**
   String get aiActionSaveAsMind;
 
   /// AI tab
@@ -2232,7 +2232,7 @@ abstract class AppLocalizations {
   /// Hint under the empty list of chat sessions
   ///
   /// In en, this message translates to:
-  /// **'Ask about your week, a worry or a good day: the chat reads your records right on the phone.'**
+  /// **'Ask about your week, a worry or a good day: the chat reads your notes right on the phone.'**
   String get aiNoSessionsHint;
 
   /// Context menu item that opens the photo in the system gallery
@@ -2484,7 +2484,7 @@ abstract class AppLocalizations {
   /// List of data analytics never sends
   ///
   /// In en, this message translates to:
-  /// **'Your minds, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.'**
+  /// **'Your notes, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.'**
   String get analyticsNeverSentItems;
 
   /// Button that replaces the anonymous analytics id
@@ -2618,6 +2618,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rate keklist'**
   String get rateApp;
+
+  /// Tweak sheet hint under the Columns picker: pinching the grid also changes the column count
+  ///
+  /// In en, this message translates to:
+  /// **'Tip: pinch the grid to change the number of columns'**
+  String get pinchColumnsHint;
 }
 
 class _AppLocalizationsDelegate

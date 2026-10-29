@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:material_ui/material_ui.dart';
@@ -8,6 +9,7 @@ import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_archived_screen.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_editor_sheet.dart';
@@ -45,7 +47,7 @@ final class EmotionMarkingSheet extends StatefulWidget {
   });
 
   /// Fraction of the screen the sheet occupies. Fixed — the sheet is not resizable.
-  static const double _heightFactor = 0.5;
+  static const double _heightFactor = 0.7;
   static const Duration _focusRingDuration = Duration(milliseconds: 1800);
 
   static Future<void> show({
@@ -85,6 +87,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
   // Keys for hit-testing during a custom drag.
   final Map<String, GlobalKey> _chipKeys = {};
   final GlobalKey _scrollAreaKey = GlobalKey();
+  final GlobalKey _wrapKey = GlobalKey();
 
   // --- Focus (deep link) state -----------------------------------------------
   bool _focusApplied = false;
@@ -420,23 +423,29 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
                                     state,
                                     _editMode ? _levelChildren : _selectedFirst(_levelChildren),
                                   ),
-                                // Creating an emotion is a top-level-only action, so the
-                                // link never offers to nest one inside another.
-                                if (_currentParentId == null) ...[
-                                  const SizedBox(height: 12.0),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: TextButton.icon(
-                                      onPressed: () => _openEditor(),
-                                      icon: const Icon(Icons.add, size: 18),
-                                      label: Text(context.l10n.addEmotion),
-                                    ),
-                                  ),
-                                ],
                               ],
                             ),
                           ),
                         ),
+                        // Creating an emotion is a top-level-only action, so the
+                        // button never offers to nest one inside another.
+                        if (_currentParentId == null)
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+                            child: GlassCapsuleButton(
+                              height: 50.0,
+                              isExpanded: true,
+                              onTap: () => _openEditor(),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                spacing: 8.0,
+                                children: [
+                                  const Icon(Icons.add),
+                                  Text(context.l10n.addEmotion, style: const TextStyle(fontSize: 17.0)),
+                                ],
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   );
@@ -466,6 +475,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
   Widget _buildChipsArea(BuildContext context, EmotionsList state, List<Emotion> children) {
     if (!_editMode) {
       return Wrap(
+        key: _wrapKey,
         spacing: 10.0,
         runSpacing: 10.0,
         alignment: WrapAlignment.center,
@@ -474,7 +484,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
             _FocusRing(
               key: _chipKey(emotion.id),
               active: _focusedId == emotion.id,
-              child: _staticChip(context, state, emotion),
+              child: _FlyingChip(wrapKey: _wrapKey, child: _staticChip(context, state, emotion)),
             ),
         ],
       );
@@ -591,6 +601,8 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
   /// no longer be authored (ADR-0002) — so the hint promises it only where some
   /// chip on this level can deliver it.
   Widget _buildHint(BuildContext context) {
+    // The archive is part of managing emotions, so it is offered only in edit mode.
+    if (!_editMode) return SizedBox(height: widget.showsSaveButton ? 0.0 : MediaQuery.paddingOf(context).bottom);
     final hintStyle = Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor);
     final linkStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.primary,
@@ -609,12 +621,74 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
         TextSpan(
           style: hintStyle,
           children: [
-            if (_editMode) TextSpan(text: '${context.l10n.emotionEditHint}   ·   '),
+            TextSpan(text: '${context.l10n.emotionEditHint}   ·   '),
             link(context.l10n.archived, _openArchived),
           ],
         ),
         textAlign: TextAlign.center,
       ),
+    );
+  }
+}
+
+/// A chip that glides from where it was to its new place when the selection reorders the wrap: a picked emotion
+/// visibly flies up to the front instead of vanishing and reappearing.
+final class _FlyingChip extends StatefulWidget {
+  final GlobalKey wrapKey;
+  final Widget child;
+
+  const _FlyingChip({required this.wrapKey, required this.child});
+
+  @override
+  State<_FlyingChip> createState() => _FlyingChipState();
+}
+
+final class _FlyingChipState extends State<_FlyingChip> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 420),
+  );
+  Offset? _lastPosition;
+  Offset _from = Offset.zero;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _measure() {
+    if (!mounted) return;
+    final RenderObject? wrap = widget.wrapKey.currentContext?.findRenderObject();
+    final RenderObject? box = context.findRenderObject();
+    if (wrap is! RenderBox || box is! RenderBox || !box.attached) return;
+    final Offset position = box.localToGlobal(Offset.zero, ancestor: wrap);
+    final Offset? last = _lastPosition;
+    _lastPosition = position;
+    if (last == null || (last - position).distance < 1.0) return;
+    // A tap mid-flight starts the next flight from where the chip is drawn now.
+    final Offset drawn = _controller.isAnimating
+        ? _from * (1.0 - Curves.easeOutCubic.transform(_controller.value))
+        : Offset.zero;
+    _from = last - position + drawn;
+    _controller.forward(from: 0.0);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        if (!_controller.isAnimating) return child!;
+        final double progress = Curves.easeOutCubic.transform(_controller.value);
+        final double lift = _from.dy > 0 ? math.sin(progress * math.pi) * 0.12 : 0.0;
+        return Transform.translate(
+          offset: _from * (1.0 - progress),
+          child: Transform.scale(scale: 1.0 + lift, child: child),
+        );
+      },
+      child: widget.child,
     );
   }
 }

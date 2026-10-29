@@ -57,7 +57,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insightsCounters => 'In numbers';
 
   @override
-  String get insightsMinds => 'Minds';
+  String get insightsMinds => 'Notes';
 
   @override
   String get insightsActiveDays => 'Active days';
@@ -79,7 +79,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String insightsBrightestDetails(String minds, String emotions, String media) {
-    return '$minds minds · $emotions emotions · $media media';
+    return '$minds notes · $emotions emotions · $media media';
   }
 
   @override
@@ -124,7 +124,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get insightsStreakKeepGoing => 'Add a mind today to keep it going';
+  String get insightsStreakKeepGoing => 'Add a note today to keep it going';
 
   @override
   String get insightsHeatmap => 'Activity map';
@@ -156,13 +156,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insightsRoundVideos => 'Round videos';
 
   @override
-  String get insightsEmptyPeriod => 'No minds in this period yet';
+  String get insightsEmptyPeriod => 'No notes in this period yet';
 
   @override
-  String get insightsEmptyEmotions => 'Tag minds with emotions to see this';
+  String get insightsEmptyEmotions => 'Tag notes with emotions to see this';
 
   @override
-  String get insightsEmptyPairs => 'Tag a mind with two emotions to see pairs';
+  String get insightsEmptyPairs => 'Tag a note with two emotions to see pairs';
 
   @override
   String get insightsEmptyOnThisDay =>
@@ -173,7 +173,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'No voice notes or round videos in this period';
 
   @override
-  String get insightsEmptyStreak => 'Add a mind today to start a streak';
+  String get insightsEmptyStreak => 'Add a note today to start a streak';
 
   @override
   String get insightsCustomize => 'Customize analytics';
@@ -256,7 +256,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get extraActions => 'Extra actions';
 
   @override
-  String get mindOptions => 'Mind options';
+  String get mindOptions => 'Note options';
 
   @override
   String get edit => 'Edit';
@@ -338,7 +338,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'Save';
 
   @override
-  String get mind => 'Mind';
+  String get mind => 'Note';
 
   @override
   String get profile => 'Profile';
@@ -392,10 +392,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourFolderName => 'Your folder name';
 
   @override
-  String get noMindsInSelectedPeriod => 'No minds in selected period';
+  String get noMindsInSelectedPeriod => 'No notes in selected period';
 
   @override
-  String get noMindsForPeriod => 'No minds for this period';
+  String get noMindsForPeriod => 'No notes for this period';
 
   @override
   String get selectPeriod => 'Select period ...';
@@ -404,7 +404,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get digest => 'Digest';
 
   @override
-  String get minds => 'Minds';
+  String get minds => 'Notes';
 
   @override
   String get searchYourEmoji => 'Search your emoji...';
@@ -413,11 +413,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get writeSomething => 'Write something...';
 
   @override
-  String get todayMinds => 'Today minds';
+  String get todayMinds => 'Today\'s notes';
 
   @override
-  String get youDidNotCollectAnyEntriesYet =>
-      'You did not collect any entries yet';
+  String get youDidNotCollectAnyEntriesYet => 'You don\'t have any notes yet';
 
   @override
   String get areYouSure => 'Are you sure?';
@@ -445,24 +444,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get thisYear => 'This year';
 
   @override
-  String get calendarDescription => 'Main screen with Calendar of entries';
+  String get calendarDescription => 'Main screen with a calendar of your notes';
 
   @override
-  String get insightsDescription => 'You and the statistics of your entries';
+  String get insightsDescription => 'You and the statistics of your notes';
 
   @override
   String get settingsDescription =>
       'Screen with all settings (dark mode, sync and etc.)';
 
   @override
-  String get todayDescription => 'Only today minds';
+  String get todayDescription => 'Only today\'s notes';
 
   @override
   String get debugMenuDescription =>
       'Developer tools for toggling experimental features';
 
   @override
-  String get noMindsForThisDay => 'No minds for this day';
+  String get noMindsForThisDay => 'No notes for this day';
 
   @override
   String get week => 'Week';
@@ -546,7 +545,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get importError => 'Import failed';
 
   @override
-  String get mindsToExport => 'Minds';
+  String get mindsToExport => 'Notes';
 
   @override
   String get audioFilesToExport => 'Audio files';
@@ -555,13 +554,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emotionsToExport => 'Emotions';
 
   @override
-  String get mindsExported => 'Minds exported';
+  String get mindsExported => 'Notes exported';
 
   @override
   String get audioFilesExported => 'Audio files exported';
 
   @override
-  String get mindsImported => 'Minds imported';
+  String get mindsImported => 'Notes imported';
 
   @override
   String get audioFilesImported => 'Audio files imported';
@@ -585,7 +584,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingMind4 =>
-      'The \'Analytics\' tab shows brief statistics of your entries';
+      'The \'Analytics\' tab shows brief statistics of your notes';
 
   @override
   String get onboardingMind5 => 'All notes are stored only on your phone';
@@ -724,7 +723,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'This emotion is used by some minds. Archive it to keep it there, or delete it everywhere.';
+      'This emotion is used by some notes. Archive it to keep it there, or delete it everywhere.';
 
   @override
   String get noEmotionsYet => 'No emotions yet';
@@ -734,7 +733,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage =>
-      'Delete this emotion? It will be removed from any minds using it.';
+      'Delete this emotion? It will be removed from any notes using it.';
 
   @override
   String get dayFeedTileSettings => 'Tile settings';
@@ -743,7 +742,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dayFeedColumns => 'Columns';
 
   @override
-  String get dayFeedMindTileSize => 'Mind tile size';
+  String get dayFeedMindTileSize => 'Note tile size';
 
   @override
   String get dayFeedMindTileSquare => 'Square';
@@ -921,11 +920,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiTabDescription =>
-      'Talk about your records with an AI that runs on your phone';
+      'Talk about your notes with an AI that runs on your phone';
 
   @override
   String get aiPrivacyNote =>
-      'Runs on your phone only: your records never leave the device.';
+      'Runs on your phone only: your notes never leave the device.';
 
   @override
   String get aiDisclaimer =>
@@ -965,7 +964,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aiStarterJoy => 'What brought me joy recently?';
 
   @override
-  String get aiActionSaveAsMind => 'Save as mind';
+  String get aiActionSaveAsMind => 'Save as note';
 
   @override
   String get aiActionOpenDay => 'Open day';
@@ -1143,7 +1142,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiNoSessionsHint =>
-      'Ask about your week, a worry or a good day: the chat reads your records right on the phone.';
+      'Ask about your week, a worry or a good day: the chat reads your notes right on the phone.';
 
   @override
   String get showInGallery => 'Show in Gallery';
@@ -1274,7 +1273,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analyticsNeverSentItems =>
-      'Your minds, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.';
+      'Your notes, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.';
 
   @override
   String get analyticsResetId => 'Reset anonymous ID';
@@ -1346,4 +1345,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rateApp => 'Rate keklist';
+
+  @override
+  String get pinchColumnsHint =>
+      'Tip: pinch the grid to change the number of columns';
 }

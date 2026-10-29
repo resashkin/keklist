@@ -417,8 +417,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get todayMinds => 'Данашње белешке';
 
   @override
-  String get youDidNotCollectAnyEntriesYet =>
-      'Још увек ниси прикупио ниједан унос';
+  String get youDidNotCollectAnyEntriesYet => 'Још немаш ниједну белешку';
 
   @override
   String get areYouSure => 'Да ли сте сигурни?';
@@ -446,10 +445,10 @@ class AppLocalizationsSr extends AppLocalizations {
   String get thisYear => 'Ова година';
 
   @override
-  String get calendarDescription => 'Главни екран са календаром уноса';
+  String get calendarDescription => 'Главни екран са календаром белешки';
 
   @override
-  String get insightsDescription => 'Ви и статистика ваших записа';
+  String get insightsDescription => 'Ви и статистика ваших белешки';
 
   @override
   String get settingsDescription =>
@@ -586,7 +585,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get onboardingMind4 =>
-      'Картица \'Аналитика\' приказује кратку статистику твојих уноса';
+      'Картица \'Аналитика\' приказује кратку статистику твојих белешки';
 
   @override
   String get onboardingMind5 =>
@@ -727,7 +726,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'Ова емоција се користи у неким мислима. Архивирајте је да остане тамо, или је обришите свуда.';
+      'Ова емоција се користи у неким белешкама. Архивирајте је да остане тамо, или је обришите свуда.';
 
   @override
   String get noEmotionsYet => 'Још нема емоција';
@@ -737,7 +736,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage =>
-      'Обрисати ову емоцију? Биће уклоњена из свих мисли које је користе.';
+      'Обрисати ову емоцију? Биће уклоњена из свих белешки које је користе.';
 
   @override
   String get dayFeedTileSettings => 'Подешавања плочица';
@@ -746,7 +745,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get dayFeedColumns => 'Колоне';
 
   @override
-  String get dayFeedMindTileSize => 'Величина плочице';
+  String get dayFeedMindTileSize => 'Величина плочице белешке';
 
   @override
   String get dayFeedMindTileSquare => 'Квадрат';
@@ -924,11 +923,11 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get aiTabDescription =>
-      'Разговарајте о својим записима са AI-ем који ради на телефону';
+      'Разговарајте о својим белешкама са AI-ем који ради на телефону';
 
   @override
   String get aiPrivacyNote =>
-      'Ради само на телефону: записи никада не напуштају уређај.';
+      'Ради само на телефону: белешке никада не напуштају уређај.';
 
   @override
   String get aiDisclaimer =>
@@ -968,7 +967,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get aiStarterJoy => 'Шта ме је радовало у последње време?';
 
   @override
-  String get aiActionSaveAsMind => 'Сачувај као мисао';
+  String get aiActionSaveAsMind => 'Сачувај као белешку';
 
   @override
   String get aiActionOpenDay => 'Отвори дан';
@@ -1146,7 +1145,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get aiNoSessionsHint =>
-      'Питајте о својој недељи, бризи или лепом дану: чет чита ваше записе директно на телефону.';
+      'Питајте о својој недељи, бризи или лепом дану: чет чита ваше белешке директно на телефону.';
 
   @override
   String get showInGallery => 'Прикажи у галерији';
@@ -1277,7 +1276,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get analyticsNeverSentItems =>
-      'Твоји записи, њихов текст, емоције и коментари, фотографије, видео и аудио, колико их имаш, твоје име, локација и IP адреса.';
+      'Твоје белешке, њихов текст, емоције и коментари, фотографије, видео и аудио, колико их имаш, твоје име, локација и IP адреса.';
 
   @override
   String get analyticsResetId => 'Ресетуј анонимни ID';
@@ -1350,6 +1349,10 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get rateApp => 'Оцени keklist';
+
+  @override
+  String get pinchColumnsHint =>
+      'Савет: скупи или рашири прсте на мрежи да промениш број колона';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -1605,7 +1608,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get extraActions => 'Dodatne akcije';
 
   @override
-  String get mindOptions => 'Opcije uma';
+  String get mindOptions => 'Opcije beleške';
 
   @override
   String get edit => 'Uredi';
@@ -1687,7 +1690,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get save => 'Sačuvaj';
 
   @override
-  String get mind => 'Um';
+  String get mind => 'Beleška';
 
   @override
   String get profile => 'Profil';
@@ -1741,10 +1744,10 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get yourFolderName => 'Ime tvoje fascikle';
 
   @override
-  String get noMindsInSelectedPeriod => 'Nema uma u izabranom periodu';
+  String get noMindsInSelectedPeriod => 'Nema beleški u izabranom periodu';
 
   @override
-  String get noMindsForPeriod => 'Nema uma za ovaj period';
+  String get noMindsForPeriod => 'Nema beleški za ovaj period';
 
   @override
   String get selectPeriod => 'Izaberi period ...';
@@ -1753,7 +1756,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get digest => 'Sažetak';
 
   @override
-  String get minds => 'Umovi';
+  String get minds => 'Beleške';
 
   @override
   String get searchYourEmoji => 'Pretraži svoj emoji...';
@@ -1762,11 +1765,10 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get writeSomething => 'Napiši nešto...';
 
   @override
-  String get todayMinds => 'Današnji umovi';
+  String get todayMinds => 'Današnje beleške';
 
   @override
-  String get youDidNotCollectAnyEntriesYet =>
-      'Još uvek niste prikupili nijedan unos';
+  String get youDidNotCollectAnyEntriesYet => 'Još nemaš nijednu belešku';
 
   @override
   String get areYouSure => 'Da li ste sigurni?';
@@ -1794,24 +1796,24 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get thisYear => 'Ova godina';
 
   @override
-  String get calendarDescription => 'Glavni ekran sa kalendarom unosa';
+  String get calendarDescription => 'Glavni ekran sa kalendarom beleški';
 
   @override
-  String get insightsDescription => 'Vi i statistika vaših zapisa';
+  String get insightsDescription => 'Vi i statistika vaših beleški';
 
   @override
   String get settingsDescription =>
       'Ekran sa svim podešavanjima (tamni režim, sinhronizacija i sl.)';
 
   @override
-  String get todayDescription => 'Samo današnji umovi';
+  String get todayDescription => 'Samo današnje beleške';
 
   @override
   String get debugMenuDescription =>
       'Alati za programere za uključivanje eksperimentalnih funkcija';
 
   @override
-  String get noMindsForThisDay => 'Nema uma za ovaj dan';
+  String get noMindsForThisDay => 'Nema beleški za ovaj dan';
 
   @override
   String get week => 'Nedelja';
@@ -1895,7 +1897,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get importError => 'Uvoz neuspešan';
 
   @override
-  String get mindsToExport => 'Umovi';
+  String get mindsToExport => 'Beleške';
 
   @override
   String get audioFilesToExport => 'Audio fajlovi';
@@ -1904,13 +1906,13 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get emotionsToExport => 'Emocije';
 
   @override
-  String get mindsExported => 'Umovi izvezeni';
+  String get mindsExported => 'Beleške izvezene';
 
   @override
   String get audioFilesExported => 'Audio fajlovi izvezeni';
 
   @override
-  String get mindsImported => 'Umovi uvezeni';
+  String get mindsImported => 'Beleške uvezene';
 
   @override
   String get audioFilesImported => 'Audio fajlovi uvezeni';
@@ -1934,7 +1936,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get onboardingMind4 =>
-      'Kartica \'Analitika\' prikazuje kratku statistiku vaših unosa';
+      'Kartica \'Analitika\' prikazuje kratku statistiku tvojih beleški';
 
   @override
   String get onboardingMind5 => 'Sve beleške se čuvaju samo na vašem telefonu';
@@ -2074,7 +2076,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get emotionInUseMessage =>
-      'Ova emocija se koristi u nekim mislima. Arhivirajte je da ostane tamo, ili je obrišite svuda.';
+      'Ova emocija se koristi u nekim beleškama. Arhivirajte je da ostane tamo, ili je obrišite svuda.';
 
   @override
   String get noEmotionsYet => 'Još nema emocija';
@@ -2084,7 +2086,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get deleteEmotionMessage =>
-      'Obrisati ovu emociju? Biće uklonjena iz svih misli koje je koriste.';
+      'Obrisati ovu emociju? Biće uklonjena iz svih beleški koje je koriste.';
 
   @override
   String get dayFeedTileSettings => 'Podešavanja pločica';
@@ -2093,7 +2095,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get dayFeedColumns => 'Kolone';
 
   @override
-  String get dayFeedMindTileSize => 'Veličina pločice';
+  String get dayFeedMindTileSize => 'Veličina pločice beleške';
 
   @override
   String get dayFeedMindTileSquare => 'Kvadrat';
@@ -2271,11 +2273,11 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get aiTabDescription =>
-      'Razgovarajte o svojim zapisima sa AI-em koji radi na telefonu';
+      'Razgovarajte o svojim beleškama sa AI-em koji radi na telefonu';
 
   @override
   String get aiPrivacyNote =>
-      'Radi samo na telefonu: zapisi nikada ne napuštaju uređaj.';
+      'Radi samo na telefonu: beleške nikada ne napuštaju uređaj.';
 
   @override
   String get aiDisclaimer =>
@@ -2315,7 +2317,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get aiStarterJoy => 'Šta me je radovalo u poslednje vreme?';
 
   @override
-  String get aiActionSaveAsMind => 'Sačuvaj kao misao';
+  String get aiActionSaveAsMind => 'Sačuvaj kao belešku';
 
   @override
   String get aiActionOpenDay => 'Otvori dan';
@@ -2493,7 +2495,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get aiNoSessionsHint =>
-      'Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše zapise direktno na telefonu.';
+      'Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše beleške direktno na telefonu.';
 
   @override
   String get showInGallery => 'Prikaži u galeriji';
@@ -2624,7 +2626,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get analyticsNeverSentItems =>
-      'Tvoji zapisi, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.';
+      'Tvoje beleške, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.';
 
   @override
   String get analyticsResetId => 'Resetuj anonimni ID';
@@ -2697,4 +2699,8 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get rateApp => 'Oceni keklist';
+
+  @override
+  String get pinchColumnsHint =>
+      'Savet: skupi ili raširi prste na mreži da promeniš broj kolona';
 }

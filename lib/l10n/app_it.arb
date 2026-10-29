@@ -98,7 +98,7 @@
     "@extraActions": {
         "description": "Menu azioni extra"
     },
-    "mindOptions": "Opzioni mente",
+    "mindOptions": "Opzioni della nota",
     "@mindOptions": {
         "description": "Menu opzioni mente"
     },
@@ -191,7 +191,7 @@
     "@save": {
         "description": "Pulsante salva"
     },
-    "mind": "Mente",
+    "mind": "Nota",
     "@mind": {
         "description": "Titolo schermata mente"
     },
@@ -263,11 +263,11 @@
     "@yourFolderName": {
         "description": "Suggerimento input nome cartella"
     },
-    "noMindsInSelectedPeriod": "Nessuna mente nel periodo selezionato",
+    "noMindsInSelectedPeriod": "Nessuna nota nel periodo selezionato",
     "@noMindsInSelectedPeriod": {
         "description": "Messaggio nessuna mente nel periodo"
     },
-    "noMindsForPeriod": "Nessuna mente per questo periodo",
+    "noMindsForPeriod": "Nessuna nota per questo periodo",
     "@noMindsForPeriod": {
         "description": "Messaggio nessuna mente per il periodo"
     },
@@ -279,7 +279,7 @@
     "@digest": {
         "description": "Titolo riassunto"
     },
-    "minds": "Menti",
+    "minds": "Note",
     "@minds": {
         "description": "Titolo menti"
     },
@@ -291,11 +291,11 @@
     "@writeSomething": {
         "description": "Suggerimento scrivi qualcosa"
     },
-    "todayMinds": "Menti di oggi",
+    "todayMinds": "Note di oggi",
     "@todayMinds": {
         "description": "Titolo menti di oggi"
     },
-    "youDidNotCollectAnyEntriesYet": "Non hai ancora raccolto nessuna voce",
+    "youDidNotCollectAnyEntriesYet": "Non hai ancora nessuna nota",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Messaggio nessuna voce raccolta"
     },
@@ -331,7 +331,7 @@
     "@thisYear": {
         "description": "Titolo periodo quest'anno"
     },
-    "calendarDescription": "Schermata principale con Calendario delle voci",
+    "calendarDescription": "Schermata principale con il calendario delle tue note",
     "@calendarDescription": {
         "description": "Descrizione tab calendario"
     },
@@ -343,7 +343,7 @@
     "@settingsDescription": {
         "description": "Descrizione tab impostazioni"
     },
-    "todayDescription": "Solo menti di oggi",
+    "todayDescription": "Solo note di oggi",
     "@todayDescription": {
         "description": "Descrizione tab oggi"
     },
@@ -351,7 +351,7 @@
     "@debugMenuDescription": {
         "description": "Descrizione tab menu debug"
     },
-    "noMindsForThisDay": "Nessuna mente per questo giorno",
+    "noMindsForThisDay": "Nessuna nota per questo giorno",
     "@noMindsForThisDay": {
         "description": "Messaggio nessuna mente per questo giorno"
     },
@@ -381,19 +381,19 @@
     "exportError": "Esportazione fallita",
     "importSuccess": "Importazione riuscita",
     "importError": "Importazione fallita",
-    "mindsToExport": "Mind",
+    "mindsToExport": "Note",
     "audioFilesToExport": "File audio",
     "emotionsToExport": "Emozioni",
-    "mindsExported": "Mind esportate",
+    "mindsExported": "Note esportate",
     "audioFilesExported": "File audio esportati",
-    "mindsImported": "Mind importate",
+    "mindsImported": "Note importate",
     "audioFilesImported": "File audio importati",
     "onboardingMind1": "Ciao!",
     "onboardingMind2": "Sono keklist - un diario personale di note brevi",
     "onboardingMind2Comment1": "Le note possono essere commentate",
     "onboardingMind2Comment2": "Per aprire una nota, toccala",
     "onboardingMind3": "Nella scheda 'Calendario', tutte le note sono visualizzate per giorni, settimane e mesi",
-    "onboardingMind4": "La scheda 'Statistiche' mostra brevi statistiche delle tue voci",
+    "onboardingMind4": "La scheda 'Statistiche' mostra brevi statistiche delle tue note",
     "onboardingMind5": "Tutte le note sono memorizzate solo sul tuo telefono",
     "onboardingMind6": "Per creare una nuova nota, tocca 'Scrivi'",
     "noPhotosForDay": "Nessuna foto trovata per questo giorno",
@@ -438,11 +438,11 @@
     "addEmotionsToMind": "Aggiungi emozioni",
     "doneEditing": "Fatto",
     "emotionEditHint": "Tocca per rinominare · ✕ per rimuovere · trascina per riordinare",
-    "emotionInUseMessage": "Questa emozione è usata in alcune menti. Archiviala per mantenerla lì, o eliminala ovunque.",
-    "deleteEmotionMessage": "Eliminare questa emozione? Verrà rimossa da tutte le menti che la usano.",
+    "emotionInUseMessage": "Questa emozione è usata in alcune note. Archiviala per mantenerla lì, o eliminala ovunque.",
+    "deleteEmotionMessage": "Eliminare questa emozione? Verrà rimossa da tutte le note che la usano.",
     "dayFeedTileSettings": "Impostazioni riquadri",
     "dayFeedColumns": "Colonne",
-    "dayFeedMindTileSize": "Dimensione riquadro",
+    "dayFeedMindTileSize": "Dimensione del riquadro della nota",
     "dayFeedMindTileSquare": "Quadrato",
     "dayFeedMindTileWide": "Largo",
     "dayFeedShowMindText": "Mostra testo",
@@ -576,7 +576,7 @@
     "gridResizeCrossfade": "Dissolvenza",
     "feedSortOrder": "Ordine",
     "feedSortTime": "Ora",
-    "feedSortMindsFirst": "Prima note",
+    "feedSortMindsFirst": "Prima le note",
     "feedSortMediaFirst": "Prima foto",
     "feedGrouping": "Gruppi",
     "feedGroupingNone": "No",
@@ -628,5 +628,6 @@
     "whatsNewShakeTitle": "Scuoti per personalizzare",
     "whatsNewShakeBody": "Scuoti il telefono per personalizzare qualsiasi schermata.",
     "whatsNewAlsoDesign": "E poi: nuovo design e animazioni.",
-    "rateApp": "Valuta keklist"
+    "rateApp": "Valuta keklist",
+    "pinchColumnsHint": "Suggerimento: pizzica la griglia per cambiare il numero di colonne"
 }

@@ -259,7 +259,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get extraActions => 'Azioni extra';
 
   @override
-  String get mindOptions => 'Opzioni mente';
+  String get mindOptions => 'Opzioni della nota';
 
   @override
   String get edit => 'Modifica';
@@ -341,7 +341,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get save => 'Salva';
 
   @override
-  String get mind => 'Mente';
+  String get mind => 'Nota';
 
   @override
   String get profile => 'Profilo';
@@ -395,10 +395,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get yourFolderName => 'Nome della tua cartella';
 
   @override
-  String get noMindsInSelectedPeriod => 'Nessuna mente nel periodo selezionato';
+  String get noMindsInSelectedPeriod => 'Nessuna nota nel periodo selezionato';
 
   @override
-  String get noMindsForPeriod => 'Nessuna mente per questo periodo';
+  String get noMindsForPeriod => 'Nessuna nota per questo periodo';
 
   @override
   String get selectPeriod => 'Seleziona periodo ...';
@@ -407,7 +407,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get digest => 'Riassunto';
 
   @override
-  String get minds => 'Menti';
+  String get minds => 'Note';
 
   @override
   String get searchYourEmoji => 'Cerca il tuo emoji...';
@@ -416,11 +416,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get writeSomething => 'Scrivi qualcosa...';
 
   @override
-  String get todayMinds => 'Menti di oggi';
+  String get todayMinds => 'Note di oggi';
 
   @override
-  String get youDidNotCollectAnyEntriesYet =>
-      'Non hai ancora raccolto nessuna voce';
+  String get youDidNotCollectAnyEntriesYet => 'Non hai ancora nessuna nota';
 
   @override
   String get areYouSure => 'Sei sicuro?';
@@ -449,7 +448,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get calendarDescription =>
-      'Schermata principale con Calendario delle voci';
+      'Schermata principale con il calendario delle tue note';
 
   @override
   String get insightsDescription => 'Tu e le statistiche delle tue note';
@@ -459,14 +458,14 @@ class AppLocalizationsIt extends AppLocalizations {
       'Schermata con tutte le impostazioni (modalità scura, sincronizzazione e altro)';
 
   @override
-  String get todayDescription => 'Solo menti di oggi';
+  String get todayDescription => 'Solo note di oggi';
 
   @override
   String get debugMenuDescription =>
       'Strumenti per sviluppatori per attivare funzionalità sperimentali';
 
   @override
-  String get noMindsForThisDay => 'Nessuna mente per questo giorno';
+  String get noMindsForThisDay => 'Nessuna nota per questo giorno';
 
   @override
   String get week => 'Settimana';
@@ -550,7 +549,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get importError => 'Importazione fallita';
 
   @override
-  String get mindsToExport => 'Mind';
+  String get mindsToExport => 'Note';
 
   @override
   String get audioFilesToExport => 'File audio';
@@ -559,13 +558,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get emotionsToExport => 'Emozioni';
 
   @override
-  String get mindsExported => 'Mind esportate';
+  String get mindsExported => 'Note esportate';
 
   @override
   String get audioFilesExported => 'File audio esportati';
 
   @override
-  String get mindsImported => 'Mind importate';
+  String get mindsImported => 'Note importate';
 
   @override
   String get audioFilesImported => 'File audio importati';
@@ -589,7 +588,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get onboardingMind4 =>
-      'La scheda \'Statistiche\' mostra brevi statistiche delle tue voci';
+      'La scheda \'Statistiche\' mostra brevi statistiche delle tue note';
 
   @override
   String get onboardingMind5 =>
@@ -732,7 +731,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'Questa emozione è usata in alcune menti. Archiviala per mantenerla lì, o eliminala ovunque.';
+      'Questa emozione è usata in alcune note. Archiviala per mantenerla lì, o eliminala ovunque.';
 
   @override
   String get noEmotionsYet => 'Ancora nessuna emozione';
@@ -742,7 +741,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage =>
-      'Eliminare questa emozione? Verrà rimossa da tutte le menti che la usano.';
+      'Eliminare questa emozione? Verrà rimossa da tutte le note che la usano.';
 
   @override
   String get dayFeedTileSettings => 'Impostazioni riquadri';
@@ -751,7 +750,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get dayFeedColumns => 'Colonne';
 
   @override
-  String get dayFeedMindTileSize => 'Dimensione riquadro';
+  String get dayFeedMindTileSize => 'Dimensione del riquadro della nota';
 
   @override
   String get dayFeedMindTileSquare => 'Quadrato';
@@ -1190,7 +1189,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get feedSortTime => 'Ora';
 
   @override
-  String get feedSortMindsFirst => 'Prima note';
+  String get feedSortMindsFirst => 'Prima le note';
 
   @override
   String get feedSortMediaFirst => 'Prima foto';
@@ -1360,4 +1359,8 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get rateApp => 'Valuta keklist';
+
+  @override
+  String get pinchColumnsHint =>
+      'Suggerimento: pizzica la griglia per cambiare il numero di colonne';
 }

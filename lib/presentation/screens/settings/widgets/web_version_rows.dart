@@ -19,7 +19,10 @@ List<SettingsRowModel> webVersionRows(BuildContext context, KeklistWebServer ser
             leading: const Icon(Icons.computer),
             title: Text(address, style: const TextStyle(fontFeatures: [FontFeature.tabularFigures()])),
             subtitle: address == addresses.first ? Text(context.l10n.webVersionAddressHint) : null,
-            trailing: const Icon(Icons.copy, size: 18.0),
+            trailing: IconButton(
+              icon: const Icon(Icons.copy),
+              onPressed: () => _copy(context, address),
+            ),
             onTap: () => _copy(context, address),
           ),
       ],

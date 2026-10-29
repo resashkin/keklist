@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
@@ -41,11 +43,10 @@ final class InsightsStreakCard extends StatelessWidget {
   }
 }
 
-/// A compact calendar for a week or month, days ahead faded; a scrollable 52-week strip for longer periods.
+/// A calendar for a week or month across the whole card, days ahead faded; a scrollable 52-week strip for longer periods.
 final class InsightsHeatmapCard extends StatelessWidget {
   static const int _calendarMaxDays = 31;
-  static const double _calendarCell = 28.0;
-  static const double _calendarGap = 4.0;
+  static const double _calendarGap = 6.0;
   static const double _stripCell = 12.0;
   static const double _gap = 3.0;
 
@@ -66,7 +67,7 @@ final class InsightsHeatmapCard extends StatelessWidget {
       child: maxCount == 0
           ? InsightsEmptyHint(context.l10n.insightsEmptyPeriod)
           : range.length <= _calendarMaxDays
-          ? Center(child: _calendar(context, period, range, counts, maxCount))
+          ? _calendar(context, period, range, counts, maxCount)
           : _strip(context, period, range, counts, maxCount),
     );
   }
@@ -79,7 +80,8 @@ final class InsightsHeatmapCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final int gridStart = InsightsPeriod.weekStart(range.start, period.firstDayOfWeek);
     final int weekCount = ((range.end - gridStart) / 7).ceil();
-    Widget cell(Widget child) => SizedBox.square(dimension: _calendarCell, child: child);
+    // Seven square cells share the card's width.
+    Widget cell(Widget child) => Expanded(child: AspectRatio(aspectRatio: 1.0, child: child));
     Widget day(int day) {
       if (!range.contains(day)) return cell(const SizedBox.shrink());
       final bool isAhead = day > period.today;
@@ -94,7 +96,7 @@ final class InsightsHeatmapCard extends StatelessWidget {
         ),
         child: Text(
           '${InsightsFormat.dateOf(day).day}',
-          style: theme.textTheme.labelSmall?.copyWith(color: isAhead ? theme.disabledColor : null),
+          style: theme.textTheme.labelLarge?.copyWith(color: isAhead ? theme.disabledColor : null),
         ),
       );
       return cell(
@@ -104,15 +106,15 @@ final class InsightsHeatmapCard extends StatelessWidget {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: _calendarGap,
       children: [
         Row(
-          mainAxisSize: MainAxisSize.min,
           spacing: _calendarGap,
           children: [
             for (int offset = 0; offset < 7; offset++)
-              cell(
-                Center(
+              Expanded(
+                child: Center(
                   child: Text(
                     InsightsFormat.weekdayShort(context, (period.firstDayOfWeek - 1 + offset) % 7 + 1),
                     style: theme.textTheme.labelSmall?.copyWith(color: theme.hintColor),
@@ -123,7 +125,6 @@ final class InsightsHeatmapCard extends StatelessWidget {
         ),
         for (int week = 0; week < weekCount; week++)
           Row(
-            mainAxisSize: MainAxisSize.min,
             spacing: _calendarGap,
             children: [for (int offset = 0; offset < 7; offset++) day(gridStart + week * 7 + offset)],
           ),
@@ -134,34 +135,43 @@ final class InsightsHeatmapCard extends StatelessWidget {
   Widget _strip(BuildContext context, InsightsPeriod period, DayRange range, Map<int, int> counts, int maxCount) {
     final int gridStart = InsightsPeriod.weekStart(range.start, period.firstDayOfWeek);
     final int weekCount = ((range.end - gridStart) / 7).ceil();
-    return SizedBox(
-      height: 7 * (_stripCell + _gap),
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        reverse: true,
-        itemCount: weekCount,
-        separatorBuilder: (_, _) => const SizedBox(width: _gap),
-        itemBuilder: (context, index) {
-          final int weekStart = gridStart + (weekCount - 1 - index) * 7;
-          return Column(
-            spacing: _gap,
-            children: [
-              for (int day = weekStart; day < weekStart + 7; day++)
-                GestureDetector(
-                  onTap: range.contains(day) ? () => data.openDay(day) : null,
-                  child: Container(
-                    width: _stripCell,
-                    height: _stripCell,
-                    decoration: BoxDecoration(
-                      color: range.contains(day) ? _colorFor(context, counts[day] ?? 0, maxCount) : Colors.transparent,
-                      borderRadius: BorderRadius.circular(3.0),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Whole weeks fill the width exactly, so the oldest visible week is never cut in half at the left edge.
+        final int visibleWeeks = math.max(1, ((constraints.maxWidth + _gap) / (_stripCell + _gap)).floor());
+        final double cell = (constraints.maxWidth + _gap) / visibleWeeks - _gap;
+        return SizedBox(
+          height: 7 * cell + 6 * _gap,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            reverse: true,
+            itemCount: weekCount,
+            separatorBuilder: (_, _) => const SizedBox(width: _gap),
+            itemBuilder: (context, index) {
+              final int weekStart = gridStart + (weekCount - 1 - index) * 7;
+              return Column(
+                spacing: _gap,
+                children: [
+                  for (int day = weekStart; day < weekStart + 7; day++)
+                    GestureDetector(
+                      onTap: range.contains(day) ? () => data.openDay(day) : null,
+                      child: Container(
+                        width: cell,
+                        height: cell,
+                        decoration: BoxDecoration(
+                          color: range.contains(day)
+                              ? _colorFor(context, counts[day] ?? 0, maxCount)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(3.0),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-            ],
-          );
-        },
-      ),
+                ],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

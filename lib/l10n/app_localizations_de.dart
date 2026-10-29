@@ -421,8 +421,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get todayMinds => 'Heutige Notizen';
 
   @override
-  String get youDidNotCollectAnyEntriesYet =>
-      'Sie haben noch keine Einträge gesammelt';
+  String get youDidNotCollectAnyEntriesYet => 'Du hast noch keine Notizen';
 
   @override
   String get areYouSure => 'Sind Sie sicher?';
@@ -450,10 +449,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get thisYear => 'Dieses Jahr';
 
   @override
-  String get calendarDescription => 'Hauptbildschirm mit Kalender der Einträge';
+  String get calendarDescription =>
+      'Hauptbildschirm mit einem Kalender deiner Notizen';
 
   @override
-  String get insightsDescription => 'Du und die Statistik deiner Einträge';
+  String get insightsDescription => 'Du und die Statistik deiner Notizen';
 
   @override
   String get settingsDescription =>
@@ -591,7 +591,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingMind4 =>
-      'Der Tab \'Analytik\' zeigt eine kurze Statistik Ihrer Einträge';
+      'Der Tab \'Analytik\' zeigt eine kurze Statistik deiner Notizen';
 
   @override
   String get onboardingMind5 =>
@@ -736,7 +736,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'Diese Emotion wird von einigen Minds verwendet. Archiviere sie, um sie dort zu behalten, oder lösche sie überall.';
+      'Diese Emotion wird in einigen Notizen verwendet. Archiviere sie, um sie dort zu behalten, oder lösche sie überall.';
 
   @override
   String get noEmotionsYet => 'Noch keine Emotionen';
@@ -746,7 +746,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage =>
-      'Diese Emotion löschen? Sie wird aus allen Minds entfernt, die sie verwenden.';
+      'Diese Emotion löschen? Sie wird aus allen Notizen entfernt, die sie verwenden.';
 
   @override
   String get dayFeedTileSettings => 'Kachel-Einstellungen';
@@ -755,7 +755,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dayFeedColumns => 'Spalten';
 
   @override
-  String get dayFeedMindTileSize => 'Kachelgröße';
+  String get dayFeedMindTileSize => 'Größe der Notizkachel';
 
   @override
   String get dayFeedMindTileSquare => 'Quadrat';
@@ -933,11 +933,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get aiTabDescription =>
-      'Sprich mit einer KI auf deinem Handy über deine Einträge';
+      'Sprich mit einer KI auf deinem Handy über deine Notizen';
 
   @override
   String get aiPrivacyNote =>
-      'Läuft nur auf deinem Handy: deine Einträge verlassen das Gerät nie.';
+      'Läuft nur auf deinem Handy: deine Notizen verlassen das Gerät nie.';
 
   @override
   String get aiDisclaimer =>
@@ -977,7 +977,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aiStarterJoy => 'Was hat mir zuletzt Freude gemacht?';
 
   @override
-  String get aiActionSaveAsMind => 'Als Eintrag speichern';
+  String get aiActionSaveAsMind => 'Als Notiz speichern';
 
   @override
   String get aiActionOpenDay => 'Tag öffnen';
@@ -1156,7 +1156,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get aiNoSessionsHint =>
-      'Frag nach deiner Woche, einer Sorge oder einem guten Tag: Der Chat liest deine Einträge direkt auf dem Handy.';
+      'Frag nach deiner Woche, einer Sorge oder einem guten Tag: Der Chat liest deine Notizen direkt auf dem Handy.';
 
   @override
   String get showInGallery => 'In der Galerie zeigen';
@@ -1288,7 +1288,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get analyticsNeverSentItems =>
-      'Deine Einträge, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, wie viele du hast, dein Name, dein Standort und deine IP-Adresse.';
+      'Deine Notizen, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, wie viele du hast, dein Name, dein Standort und deine IP-Adresse.';
 
   @override
   String get analyticsResetId => 'Anonyme ID zurücksetzen';
@@ -1362,4 +1362,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get rateApp => 'keklist bewerten';
+
+  @override
+  String get pinchColumnsHint =>
+      'Tipp: Zieh die Finger auf dem Raster zusammen oder auseinander, um die Spaltenzahl zu ändern';
 }

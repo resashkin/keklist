@@ -260,7 +260,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get extraActions => 'Qo\'shimcha harakatlar';
 
   @override
-  String get mindOptions => 'Fikr variantlari';
+  String get mindOptions => 'Yozuv parametrlari';
 
   @override
   String get edit => 'Tahrirlash';
@@ -342,7 +342,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get save => 'Saqlash';
 
   @override
-  String get mind => 'Fikr';
+  String get mind => 'Yozuv';
 
   @override
   String get profile => 'Profil';
@@ -396,10 +396,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get yourFolderName => 'Sizning papka nomingiz';
 
   @override
-  String get noMindsInSelectedPeriod => 'Tanlangan davrda fikrlar yo\'q';
+  String get noMindsInSelectedPeriod => 'Tanlangan davrda yozuvlar yoʻq';
 
   @override
-  String get noMindsForPeriod => 'Bu davr uchun fikrlar yo\'q';
+  String get noMindsForPeriod => 'Bu davr uchun yozuvlar yoʻq';
 
   @override
   String get selectPeriod => 'Davrni tanlash ...';
@@ -408,7 +408,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get digest => 'Xulosa';
 
   @override
-  String get minds => 'Fikrlar';
+  String get minds => 'Yozuvlar';
 
   @override
   String get searchYourEmoji => 'Emojingizni qidiring...';
@@ -417,11 +417,11 @@ class AppLocalizationsUz extends AppLocalizations {
   String get writeSomething => 'Biror narsa yozing...';
 
   @override
-  String get todayMinds => 'Bugungi fikrlar';
+  String get todayMinds => 'Bugungi yozuvlar';
 
   @override
   String get youDidNotCollectAnyEntriesYet =>
-      'Siz hali hech qanday yozuv yig\'ganingiz yo\'q';
+      'Sizda hali birorta ham yozuv yoʻq';
 
   @override
   String get areYouSure => 'Ishonchingiz komilmi?';
@@ -459,14 +459,14 @@ class AppLocalizationsUz extends AppLocalizations {
       'Barcha sozlamalar ekrani (qorong\'u rejim, sinxronlash va boshqalar)';
 
   @override
-  String get todayDescription => 'Faqat bugungi fikrlar';
+  String get todayDescription => 'Faqat bugungi yozuvlar';
 
   @override
   String get debugMenuDescription =>
       'Eksperimental xususiyatlarni yoqish uchun dasturchi vositalari';
 
   @override
-  String get noMindsForThisDay => 'Bu kun uchun fikrlar yo\'q';
+  String get noMindsForThisDay => 'Bu kun uchun yozuvlar yoʻq';
 
   @override
   String get week => 'Hafta';
@@ -550,7 +550,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get importError => 'Import muvaffaqiyatsiz';
 
   @override
-  String get mindsToExport => 'Fikrlar';
+  String get mindsToExport => 'Yozuvlar';
 
   @override
   String get audioFilesToExport => 'Audio fayllar';
@@ -559,13 +559,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get emotionsToExport => 'Hislar';
 
   @override
-  String get mindsExported => 'Fikrlar eksport qilindi';
+  String get mindsExported => 'Yozuvlar eksport qilindi';
 
   @override
   String get audioFilesExported => 'Audio fayllar eksport qilindi';
 
   @override
-  String get mindsImported => 'Fikrlar import qilindi';
+  String get mindsImported => 'Yozuvlar import qilindi';
 
   @override
   String get audioFilesImported => 'Audio fayllar import qilindi';
@@ -589,7 +589,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get onboardingMind4 =>
-      '\'Analitika\' yorlig\'i yozuvlaringizning qisqacha statistikasini ko\'rsatadi';
+      '\'Analitika\' yorligʻi yozuvlaringizning qisqacha statistikasini koʻrsatadi';
 
   @override
   String get onboardingMind5 =>
@@ -732,7 +732,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'Bu hissiyot ba\'zi maindlarda ishlatiladi. Uni o\'sha yerda saqlash uchun arxivlang yoki hamma joydan o\'chiring.';
+      'Bu hissiyot baʼzi yozuvlarda ishlatiladi. Uni oʻsha yerda saqlash uchun arxivlang yoki hamma joydan oʻchiring.';
 
   @override
   String get noEmotionsYet => 'Hozircha hissiyotlar yo\'q';
@@ -742,7 +742,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage =>
-      'Bu hissiyotni o\'chirasizmi? U undan foydalanadigan barcha maindlardan olib tashlanadi.';
+      'Bu hissiyotni oʻchirasizmi? U undan foydalanadigan barcha yozuvlardan olib tashlanadi.';
 
   @override
   String get dayFeedTileSettings => 'Plitka sozlamalari';
@@ -751,7 +751,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get dayFeedColumns => 'Ustunlar';
 
   @override
-  String get dayFeedMindTileSize => 'Plitka o‘lchami';
+  String get dayFeedMindTileSize => 'Yozuv plitkasi oʻlchami';
 
   @override
   String get dayFeedMindTileSquare => 'Kvadrat';
@@ -971,7 +971,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get aiStarterJoy => 'Oxirgi paytda meni nima xursand qildi?';
 
   @override
-  String get aiActionSaveAsMind => 'Maynd sifatida saqlash';
+  String get aiActionSaveAsMind => 'Yozuv sifatida saqlash';
 
   @override
   String get aiActionOpenDay => 'Kunni ochish';
@@ -1150,7 +1150,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get aiNoSessionsHint =>
-      'Haftangiz, tashvish yoki yaxshi kun haqida so‘rang: chat yozuvlaringizni telefonning o‘zida o‘qiydi.';
+      'Haftangiz, tashvish yoki yaxshi kun haqida soʻrang: chat yozuvlaringizni telefonning oʻzida oʻqiydi.';
 
   @override
   String get showInGallery => 'Galereyada ko‘rsatish';
@@ -1354,4 +1354,8 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get rateApp => 'keklist\'ni baholash';
+
+  @override
+  String get pinchColumnsHint =>
+      'Maslahat: ustunlar sonini o‘zgartirish uchun to‘rni ikki barmoq bilan qisib yoki yoying';
 }

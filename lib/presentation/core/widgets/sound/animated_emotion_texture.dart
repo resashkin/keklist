@@ -11,10 +11,8 @@ import 'package:keklist/presentation/core/extensions/story_settings_extension.da
 import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
 import 'package:material_ui/material_ui.dart';
 
-const double _kAngle = -math.pi / 12;
 const double _kLevelSmoothing = 0.25;
-const double _kDriftBaseSpeed = 6.0;
-const double _kDriftLoudSpeed = 140.0;
+const double _kDriftLoudSpeed = 40.0;
 
 /// The offset and scale of one texture cell at [time] seconds for the current sound [level].
 ({Offset offset, double scale}) textureCellMotion({
@@ -42,8 +40,9 @@ const double _kDriftLoudSpeed = 140.0;
   StoryTextureAnimation.glow => (offset: Offset.zero, scale: 1.0),
 };
 
-/// "😄 Joy" labels of the mind's emotions tiled behind a story or viewer page; moves with the sound that
-/// [SoundPlaybackScope] reports, the way the shake sheet picked. Nothing is drawn for a mind without emotions.
+/// A few "😄 Joy" labels of the mind's emotions floating behind a story like clouds: three layers, the far one
+/// smaller, paler, softer and slower, all drifting very slowly sideways and wrapping around. They react to the sound
+/// that [SoundPlaybackScope] reports, the way the shake sheet picked. Nothing is drawn for a mind without emotions.
 final class AnimatedEmotionTexture extends StatefulWidget {
   final Mind mind;
   final Color color;
@@ -86,6 +85,7 @@ final class _AnimatedEmotionTextureState extends State<AnimatedEmotionTexture> w
     if (widget.mind.emotionIds.isEmpty) return const SizedBox.shrink();
     final StorySettings story = context.watchStorySettings();
     _motion.sensitivity = story.sensitivity;
+    _motion.isStill = MediaQuery.disableAnimationsOf(context);
     final StoryTextureAnimation animation = story.textureAnimation;
     return BlocBuilder<EmotionBloc, EmotionState>(
       builder: (context, state) {
@@ -98,6 +98,7 @@ final class _AnimatedEmotionTextureState extends State<AnimatedEmotionTexture> w
               child: CustomPaint(
                 size: Size.infinite,
                 painter: _TexturePainter(
+                  seed: _seedOf(widget.mind.id),
                   labels: [for (final Emotion emotion in emotions) '${emotion.emoji} ${emotion.title}'],
                   color: widget.color,
                   opacity: widget.opacity,
@@ -113,32 +114,71 @@ final class _AnimatedEmotionTextureState extends State<AnimatedEmotionTexture> w
   }
 }
 
+/// A stable seed per mind, so its clouds keep their places every time the story opens.
+int _seedOf(String id) => id.codeUnits.fold(17, (hash, unit) => (hash * 31 + unit) & 0x7fffffff);
+
+/// One floating label: its layer (0 is the farthest), which emotion it shows and where it starts.
+typedef _Cloud = ({int layer, int label, double x, double y, double phase});
+
+/// Clouds per layer, from the farthest; together they stay sparse, about nine on a phone screen.
+const List<int> _kCloudsPerLayer = [3, 3, 3];
+const List<double> _kLayerScale = [0.8, 1.0, 1.25];
+const List<double> _kLayerAlpha = [0.45, 0.7, 1.0];
+const List<double> _kLayerBlur = [1.6, 0.6, 0.0];
+// Points per second: a cloud needs about a minute to cross the screen.
+const List<double> _kLayerSpeed = [4.0, 6.0, 9.0];
+
+/// Places the clouds: each takes its own horizontal band, so they never pile up, and a random spot along it.
+List<_Cloud> _cloudsFor({required int seed, required int labelCount}) {
+  final math.Random random = math.Random(seed);
+  final int total = _kCloudsPerLayer.fold(0, (sum, count) => sum + count);
+  final List<int> bands = List<int>.generate(total, (index) => index)..shuffle(random);
+  final List<_Cloud> clouds = [];
+  for (int layer = 0; layer < _kCloudsPerLayer.length; layer++) {
+    for (int index = 0; index < _kCloudsPerLayer[layer]; index++) {
+      final int band = bands[clouds.length];
+      clouds.add((
+        layer: layer,
+        label: clouds.length % labelCount,
+        x: random.nextDouble(),
+        y: (band + 0.2 + 0.6 * random.nextDouble()) / total,
+        phase: random.nextDouble() * 2 * math.pi,
+      ));
+    }
+  }
+  return clouds;
+}
+
 /// Smoothed loudness plus the running clocks the animations read; notifies on every frame.
 final class _TextureMotion extends ChangeNotifier {
   double level = 0.0;
   double time = 0.0;
   double drift = 0.0;
   double sensitivity = 1.0;
+  bool isStill = false;
 
   void advance({required double dt, required double target}) {
-    final double previous = level;
     level += ((target * sensitivity).clamp(0.0, 1.0) - level) * _kLevelSmoothing;
-    if (level < 0.001 && previous < 0.001) return;
+    if (isStill) return;
+    // The clouds always float; loud sound only adds to the drift clock.
     time += dt;
-    drift += dt * (_kDriftBaseSpeed + _kDriftLoudSpeed * level);
+    drift += dt * _kDriftLoudSpeed * level;
     notifyListeners();
   }
 }
 
 final class _TexturePainter extends CustomPainter {
+  final int seed;
   final List<String> labels;
   final Color color;
   final double opacity;
   final StoryTextureAnimation animation;
   final _TextureMotion motion;
   final List<TextPainter> _painters;
+  final List<_Cloud> _clouds;
 
   _TexturePainter({
+    required this.seed,
     required this.labels,
     required this.color,
     required this.opacity,
@@ -154,60 +194,59 @@ final class _TexturePainter extends CustomPainter {
              textDirection: TextDirection.ltr,
            )..layout(),
        ],
+       _clouds = _cloudsFor(seed: seed, labelCount: labels.length),
        super(repaint: motion);
 
   @override
   void paint(Canvas canvas, Size size) {
     if (_painters.isEmpty) return;
     final double level = animation == StoryTextureAnimation.off ? 0.0 : motion.level;
-    final double labelWidth = _painters.map((painter) => painter.width).reduce(math.max);
-    final Size step = Size(labelWidth + 28.0, _painters.first.height * 2.2);
-    final double side = math.sqrt(size.width * size.width + size.height * size.height);
-    final int columns = (side / step.width).ceil() + 2;
-    final int rows = (side / step.height).ceil() + 2;
-    final double drift = animation == StoryTextureAnimation.drift ? motion.drift % step.width : 0.0;
-
     final bool isGlow = animation == StoryTextureAnimation.glow;
     final double alpha = (isGlow ? opacity * (0.6 + 1.6 * level) : opacity).clamp(0.0, 1.0);
-    final double blur = isGlow ? (1.0 - level) * 3.0 : 0.0;
+    final double glowBlur = isGlow ? (1.0 - level) * 3.0 : 0.0;
+    final double drift = animation == StoryTextureAnimation.drift ? motion.drift : 0.0;
+    final double labelWidth = _painters.map((painter) => painter.width).reduce(math.max);
     canvas.clipRect(Offset.zero & size);
-    canvas.saveLayer(
-      Offset.zero & size,
-      Paint()
-        ..color = Color.fromRGBO(0, 0, 0, alpha)
-        ..imageFilter = blur > 0.05 ? ui.ImageFilter.blur(sigmaX: blur, sigmaY: blur) : null,
-    );
-    canvas.translate(size.width / 2, size.height / 2);
-    canvas.rotate(_kAngle);
-    int labelIndex = 0;
-    for (int row = 0; row < rows; row++) {
-      final double rowShift = row.isOdd ? step.width / 2 : 0.0;
-      for (int column = 0; column < columns; column++) {
-        final TextPainter painter = _painters[labelIndex++ % _painters.length];
+    for (int layer = 0; layer < _kCloudsPerLayer.length; layer++) {
+      final double blur = _kLayerBlur[layer] + glowBlur;
+      canvas.saveLayer(
+        Offset.zero & size,
+        Paint()
+          ..color = Color.fromRGBO(0, 0, 0, alpha * _kLayerAlpha[layer])
+          ..imageFilter = blur > 0.05 ? ui.ImageFilter.blur(sigmaX: blur, sigmaY: blur) : null,
+      );
+      final double layerScale = _kLayerScale[layer];
+      // A cloud leaves on the right and comes back from the left once it is fully out of sight.
+      final double span = size.width + labelWidth * layerScale * 1.6;
+      int column = 0;
+      for (final _Cloud cloud in _clouds.where((cloud) => cloud.layer == layer)) {
+        final TextPainter painter = _painters[cloud.label];
         final ({Offset offset, double scale}) cell = textureCellMotion(
           animation: animation,
           level: level,
           time: motion.time,
-          row: row,
-          column: column,
-          step: step,
+          row: layer,
+          column: column++,
+          step: Size(painter.width, painter.height * 2.2),
         );
+        final double travelled = cloud.x * span + (motion.time + drift / 10.0) * _kLayerSpeed[layer];
         final Offset center = Offset(
-          -side / 2 + column * step.width + rowShift + drift - step.width,
-          -side / 2 + row * step.height,
+          travelled % span - labelWidth * layerScale * 0.8,
+          cloud.y * size.height + math.sin(motion.time * 0.3 + cloud.phase) * 4.0,
         );
         canvas.save();
         canvas.translate(center.dx + cell.offset.dx, center.dy + cell.offset.dy);
-        canvas.scale(cell.scale);
+        canvas.scale(layerScale * cell.scale);
         painter.paint(canvas, Offset(-painter.width / 2, -painter.height / 2));
         canvas.restore();
       }
+      canvas.restore();
     }
-    canvas.restore();
   }
 
   @override
   bool shouldRepaint(_TexturePainter oldDelegate) =>
+      oldDelegate.seed != seed ||
       oldDelegate.labels.join() != labels.join() ||
       oldDelegate.color != color ||
       oldDelegate.opacity != opacity ||

@@ -96,7 +96,7 @@
     "@extraActions": {
         "description": "Meni dodatnih akcija"
     },
-    "mindOptions": "Opcije uma",
+    "mindOptions": "Opcije beleške",
     "@mindOptions": {
         "description": "Meni opcija uma"
     },
@@ -189,7 +189,7 @@
     "@save": {
         "description": "Dugme sačuvaj"
     },
-    "mind": "Um",
+    "mind": "Beleška",
     "@mind": {
         "description": "Naslov ekrana uma"
     },
@@ -261,11 +261,11 @@
     "@yourFolderName": {
         "description": "Savet za unos imena fascikle"
     },
-    "noMindsInSelectedPeriod": "Nema uma u izabranom periodu",
+    "noMindsInSelectedPeriod": "Nema beleški u izabranom periodu",
     "@noMindsInSelectedPeriod": {
         "description": "Poruka nema uma u periodu"
     },
-    "noMindsForPeriod": "Nema uma za ovaj period",
+    "noMindsForPeriod": "Nema beleški za ovaj period",
     "@noMindsForPeriod": {
         "description": "Poruka nema uma za period"
     },
@@ -277,7 +277,7 @@
     "@digest": {
         "description": "Naslov sažetka"
     },
-    "minds": "Umovi",
+    "minds": "Beleške",
     "@minds": {
         "description": "Naslov umova"
     },
@@ -289,11 +289,11 @@
     "@writeSomething": {
         "description": "Savet za pisanje nečega"
     },
-    "todayMinds": "Današnji umovi",
+    "todayMinds": "Današnje beleške",
     "@todayMinds": {
         "description": "Naslov današnjih umova"
     },
-    "youDidNotCollectAnyEntriesYet": "Još uvek niste prikupili nijedan unos",
+    "youDidNotCollectAnyEntriesYet": "Još nemaš nijednu belešku",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Poruka nijedan unos nije prikupljen"
     },
@@ -329,11 +329,11 @@
     "@thisYear": {
         "description": "Naslov perioda ova godina"
     },
-    "calendarDescription": "Glavni ekran sa kalendarom unosa",
+    "calendarDescription": "Glavni ekran sa kalendarom beleški",
     "@calendarDescription": {
         "description": "Opis taba kalendara"
     },
-    "insightsDescription": "Vi i statistika vaših zapisa",
+    "insightsDescription": "Vi i statistika vaših beleški",
     "@insightsDescription": {
         "description": "Opis taba uvida"
     },
@@ -341,7 +341,7 @@
     "@settingsDescription": {
         "description": "Opis taba podešavanja"
     },
-    "todayDescription": "Samo današnji umovi",
+    "todayDescription": "Samo današnje beleške",
     "@todayDescription": {
         "description": "Opis taba danas"
     },
@@ -349,7 +349,7 @@
     "@debugMenuDescription": {
         "description": "Opis taba debug menija"
     },
-    "noMindsForThisDay": "Nema uma za ovaj dan",
+    "noMindsForThisDay": "Nema beleški za ovaj dan",
     "@noMindsForThisDay": {
         "description": "Poruka nema uma za ovaj dan"
     },
@@ -381,19 +381,19 @@
     "exportError": "Izvoz neuspešan",
     "importSuccess": "Uvoz uspešan",
     "importError": "Uvoz neuspešan",
-    "mindsToExport": "Umovi",
+    "mindsToExport": "Beleške",
     "audioFilesToExport": "Audio fajlovi",
     "emotionsToExport": "Emocije",
-    "mindsExported": "Umovi izvezeni",
+    "mindsExported": "Beleške izvezene",
     "audioFilesExported": "Audio fajlovi izvezeni",
-    "mindsImported": "Umovi uvezeni",
+    "mindsImported": "Beleške uvezene",
     "audioFilesImported": "Audio fajlovi uvezeni",
     "onboardingMind1": "Zdravo!",
     "onboardingMind2": "Ja sam keklist - lični dnevnik kratkih beleški",
     "onboardingMind2Comment1": "Beleške mogu biti komentarisane",
     "onboardingMind2Comment2": "Da otvorite belešku, dotaknite je",
     "onboardingMind3": "U kartici 'Kalendar', sve beleške su prikazane po danima, nedeljama i mesecima",
-    "onboardingMind4": "Kartica 'Analitika' prikazuje kratku statistiku vaših unosa",
+    "onboardingMind4": "Kartica 'Analitika' prikazuje kratku statistiku tvojih beleški",
     "onboardingMind5": "Sve beleške se čuvaju samo na vašem telefonu",
     "onboardingMind6": "Da kreirate novu belešku, dodirnite 'Piši'",
     "noPhotosForDay": "Nema fotografija za ovaj dan",
@@ -438,11 +438,11 @@
     "addEmotionsToMind": "Dodaj emocije",
     "doneEditing": "Gotovo",
     "emotionEditHint": "Dodirnite za preimenovanje · ✕ za uklanjanje · prevucite za preuređivanje",
-    "emotionInUseMessage": "Ova emocija se koristi u nekim mislima. Arhivirajte je da ostane tamo, ili je obrišite svuda.",
-    "deleteEmotionMessage": "Obrisati ovu emociju? Biće uklonjena iz svih misli koje je koriste.",
+    "emotionInUseMessage": "Ova emocija se koristi u nekim beleškama. Arhivirajte je da ostane tamo, ili je obrišite svuda.",
+    "deleteEmotionMessage": "Obrisati ovu emociju? Biće uklonjena iz svih beleški koje je koriste.",
     "dayFeedTileSettings": "Podešavanja pločica",
     "dayFeedColumns": "Kolone",
-    "dayFeedMindTileSize": "Veličina pločice",
+    "dayFeedMindTileSize": "Veličina pločice beleške",
     "dayFeedMindTileSquare": "Kvadrat",
     "dayFeedMindTileWide": "Široka",
     "dayFeedShowMindText": "Prikaži tekst",
@@ -496,8 +496,8 @@
     "webVersionRemovePin": "Ukloni PIN",
     "webVersionPort": "Port",
     "aiTab": "Ćaskanje",
-    "aiTabDescription": "Razgovarajte o svojim zapisima sa AI-em koji radi na telefonu",
-    "aiPrivacyNote": "Radi samo na telefonu: zapisi nikada ne napuštaju uređaj.",
+    "aiTabDescription": "Razgovarajte o svojim beleškama sa AI-em koji radi na telefonu",
+    "aiPrivacyNote": "Radi samo na telefonu: beleške nikada ne napuštaju uređaj.",
     "aiDisclaimer": "Ovo nije medicinska usluga. Ako ste u opasnosti, obratite se hitnim službama.",
     "aiYesterday": "Juče",
     "aiNoSessions": "Još nema sesija",
@@ -510,7 +510,7 @@
     "aiStarterWeek": "Kako je prošla moja nedelja?",
     "aiStarterWorry": "Šta me muči u poslednje vreme?",
     "aiStarterJoy": "Šta me je radovalo u poslednje vreme?",
-    "aiActionSaveAsMind": "Sačuvaj kao misao",
+    "aiActionSaveAsMind": "Sačuvaj kao belešku",
     "aiActionOpenDay": "Otvori dan",
     "aiActionWeekSummary": "Sažetak nedelje",
     "aiWeekSummaryPrompt": "Sažmi mojih poslednjih 7 dana: šta se desilo, kako sam se osećao, šta se istaklo.",
@@ -564,7 +564,7 @@
     "insightsTwoYearsAgo": "Pre dve godine",
     "insightsVoiceAndVideos": "Glas i okrugli videi",
     "insightsWeekNumber": "Nedelja {number}",
-    "aiNoSessionsHint": "Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše zapise direktno na telefonu.",
+    "aiNoSessionsHint": "Pitajte o svojoj nedelji, brizi ili lepom danu: čet čita vaše beleške direktno na telefonu.",
     "showInGallery": "Prikaži u galeriji",
     "tileEmojiMotion": "Kretanje emodžija",
     "tileEmojiMotionDrift": "Plutanje",
@@ -606,7 +606,7 @@
     "analyticsSent": "Šta se šalje",
     "analyticsSentItems": "Koja podešavanja biraš, koje ekrane otvaraš, verzija aplikacije, platforma i jezik, kupovine Pro i napojnica, i izveštaji o padovima bez njihovih poruka.",
     "analyticsNeverSent": "Nikad se ne šalje",
-    "analyticsNeverSentItems": "Tvoji zapisi, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.",
+    "analyticsNeverSentItems": "Tvoje beleške, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.",
     "analyticsResetId": "Resetuj anonimni ID",
     "analyticsResetIdDone": "Od sada se koristi novi anonimni ID",
     "settingsSupport": "Podrška",
@@ -628,5 +628,6 @@
     "whatsNewShakeTitle": "Protresi za podešavanje",
     "whatsNewShakeBody": "Protresi telefon da podesiš bilo koji ekran.",
     "whatsNewAlsoDesign": "I još: novi dizajn i animacije.",
-    "rateApp": "Oceni keklist"
+    "rateApp": "Oceni keklist",
+    "pinchColumnsHint": "Savet: skupi ili raširi prste na mreži da promeniš broj kolona"
 }

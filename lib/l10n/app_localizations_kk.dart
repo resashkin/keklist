@@ -260,7 +260,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get extraActions => 'Қосымша әрекеттер';
 
   @override
-  String get mindOptions => 'Ой нұсқалары';
+  String get mindOptions => 'Жазба параметрлері';
 
   @override
   String get edit => 'Өңдеу';
@@ -342,7 +342,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get save => 'Сақтау';
 
   @override
-  String get mind => 'Ой';
+  String get mind => 'Жазба';
 
   @override
   String get profile => 'Профиль';
@@ -396,10 +396,10 @@ class AppLocalizationsKk extends AppLocalizations {
   String get yourFolderName => 'Сіздің бума атауыңыз';
 
   @override
-  String get noMindsInSelectedPeriod => 'Таңдалған кезеңде ойлар жоқ';
+  String get noMindsInSelectedPeriod => 'Таңдалған кезеңде жазба жоқ';
 
   @override
-  String get noMindsForPeriod => 'Бұл кезең үшін ойлар жоқ';
+  String get noMindsForPeriod => 'Бұл кезеңде жазба жоқ';
 
   @override
   String get selectPeriod => 'Кезеңді таңдау ...';
@@ -408,7 +408,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get digest => 'Қорытынды';
 
   @override
-  String get minds => 'Ойлар';
+  String get minds => 'Жазбалар';
 
   @override
   String get searchYourEmoji => 'Эмоджиңізді іздеу...';
@@ -417,11 +417,10 @@ class AppLocalizationsKk extends AppLocalizations {
   String get writeSomething => 'Бір нәрсе жазыңыз...';
 
   @override
-  String get todayMinds => 'Бүгінгі ойлар';
+  String get todayMinds => 'Бүгінгі жазбалар';
 
   @override
-  String get youDidNotCollectAnyEntriesYet =>
-      'Сіз әлі ешқандай жазба жинаған жоқсыз';
+  String get youDidNotCollectAnyEntriesYet => 'Сізде әлі бірде-бір жазба жоқ';
 
   @override
   String get areYouSure => 'Сенімдісіз бе?';
@@ -449,7 +448,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get thisYear => 'Бұл жыл';
 
   @override
-  String get calendarDescription => 'Жазбалар күнтізбесімен негізгі экран';
+  String get calendarDescription => 'Жазбалар күнтізбесі бар негізгі экран';
 
   @override
   String get insightsDescription => 'Сіз және жазбаларыңыздың статистикасы';
@@ -459,14 +458,14 @@ class AppLocalizationsKk extends AppLocalizations {
       'Барлық баптаулар экраны (қараңғы режим, синхрондау және т.б.)';
 
   @override
-  String get todayDescription => 'Тек бүгінгі ойлар';
+  String get todayDescription => 'Тек бүгінгі жазбалар';
 
   @override
   String get debugMenuDescription =>
       'Тәжірибелік функцияларды іске қосу үшін әзірлеуші құралдары';
 
   @override
-  String get noMindsForThisDay => 'Бұл күн үшін ойлар жоқ';
+  String get noMindsForThisDay => 'Бұл күні жазба жоқ';
 
   @override
   String get week => 'Апта';
@@ -550,7 +549,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get importError => 'Импорт сәтсіз';
 
   @override
-  String get mindsToExport => 'Ойлар';
+  String get mindsToExport => 'Жазбалар';
 
   @override
   String get audioFilesToExport => 'Аудио файлдар';
@@ -559,13 +558,13 @@ class AppLocalizationsKk extends AppLocalizations {
   String get emotionsToExport => 'Эмоциялар';
 
   @override
-  String get mindsExported => 'Ойлар экспортталды';
+  String get mindsExported => 'Жазбалар экспортталды';
 
   @override
   String get audioFilesExported => 'Аудио файлдар экспортталды';
 
   @override
-  String get mindsImported => 'Ойлар импортталды';
+  String get mindsImported => 'Жазбалар импортталды';
 
   @override
   String get audioFilesImported => 'Аудио файлдар импортталды';
@@ -731,7 +730,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'Бұл эмоция кейбір майндтарда қолданылады. Оны сонда сақтау үшін мұрағаттаңыз немесе барлық жерден жойыңыз.';
+      'Бұл эмоция кейбір жазбаларда қолданылады. Оны сонда сақтау үшін мұрағаттаңыз немесе барлық жерден жойыңыз.';
 
   @override
   String get noEmotionsYet => 'Әзірге эмоциялар жоқ';
@@ -741,7 +740,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage =>
-      'Бұл эмоцияны жою керек пе? Ол оны пайдаланатын барлық майндтардан жойылады.';
+      'Бұл эмоцияны жою керек пе? Ол оны пайдаланатын барлық жазбалардан жойылады.';
 
   @override
   String get dayFeedTileSettings => 'Тақта баптаулары';
@@ -750,7 +749,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get dayFeedColumns => 'Бағандар';
 
   @override
-  String get dayFeedMindTileSize => 'Тақта өлшемі';
+  String get dayFeedMindTileSize => 'Жазба тақтасының өлшемі';
 
   @override
   String get dayFeedMindTileSquare => 'Шаршы';
@@ -969,7 +968,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get aiStarterJoy => 'Соңғы кезде мені не қуантты?';
 
   @override
-  String get aiActionSaveAsMind => 'Майнд ретінде сақтау';
+  String get aiActionSaveAsMind => 'Жазба ретінде сақтау';
 
   @override
   String get aiActionOpenDay => 'Күнді ашу';
@@ -1352,4 +1351,8 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get rateApp => 'keklist-ті бағалау';
+
+  @override
+  String get pinchColumnsHint =>
+      'Кеңес: бағандар санын өзгерту үшін торды екі саусақпен қысып немесе жайыңыз';
 }

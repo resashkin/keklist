@@ -105,13 +105,54 @@ final class InsightsMediaCountersCard extends StatelessWidget {
       category: InsightsCategory.media,
       title: context.l10n.insightsMediaCounters,
       trailing: InsightsFormat.periodTitle(context, data.report.period.kind),
+      // One square tile per kind, so every count and caption lines up however long the caption is.
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 12.0,
+        spacing: 8.0,
         children: [
           for (final (int value, String caption) in values)
-            Expanded(child: InsightsValue(value: InsightsFormat.number(context, value), caption: caption)),
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1.0,
+                child: _MediaCountTile(value: InsightsFormat.number(context, value), caption: caption),
+              ),
+            ),
         ],
+      ),
+    );
+  }
+}
+
+final class _MediaCountTile extends StatelessWidget {
+  final String value;
+  final String caption;
+
+  const _MediaCountTile({required this.value, required this.caption});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.onSurface.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FittedBox(
+              child: Text(value, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600)),
+            ),
+            Text(
+              caption,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.labelSmall?.copyWith(color: theme.hintColor, height: 1.15),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -150,7 +191,7 @@ final class InsightsRoundVideosCard extends StatelessWidget {
                     ),
                     MindNoteContent(audioPieces: [final MindNoteAudio audio, ...]) => _AudioCircle(
                       audio: audio,
-                      color: mindAccentColorOf(context, minds[index]),
+                      mind: minds[index],
                       size: _size,
                     ),
                     _ => const SizedBox.shrink(),
@@ -164,10 +205,10 @@ final class InsightsRoundVideosCard extends StatelessWidget {
 
 final class _AudioCircle extends StatelessWidget {
   final MindNoteAudio audio;
-  final Color color;
+  final Mind mind;
   final double size;
 
-  const _AudioCircle({required this.audio, required this.color, required this.size});
+  const _AudioCircle({required this.audio, required this.mind, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +216,8 @@ final class _AudioCircle extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+      // The emotion color is selected here: the list's itemBuilder runs during layout, where select throws.
+      decoration: BoxDecoration(color: mindAccentColorOf(context, mind), shape: BoxShape.circle),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

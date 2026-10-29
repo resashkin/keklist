@@ -420,8 +420,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get todayMinds => 'Сегодняшние заметки';
 
   @override
-  String get youDidNotCollectAnyEntriesYet =>
-      'Вы еще не собрали ни одной записи';
+  String get youDidNotCollectAnyEntriesYet => 'У вас пока нет ни одной заметки';
 
   @override
   String get areYouSure => 'Вы уверены?';
@@ -449,10 +448,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get thisYear => 'Этот год';
 
   @override
-  String get calendarDescription => 'Главный экран с календарем записей';
+  String get calendarDescription => 'Главный экран с календарём заметок';
 
   @override
-  String get insightsDescription => 'Вы и статистика ваших записей';
+  String get insightsDescription => 'Вы и статистика ваших заметок';
 
   @override
   String get settingsDescription =>
@@ -588,7 +587,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onboardingMind4 =>
-      'Вкладка \'Аналитика\' показывает краткую статистику ваших записей';
+      'Вкладка \'Аналитика\' показывает краткую статистику ваших заметок';
 
   @override
   String get onboardingMind5 => 'Все заметки хранятся только на вашем телефоне';
@@ -729,7 +728,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'Эта эмоция используется в некоторых миндах. Архивируйте, чтобы сохранить её там, или удалите везде.';
+      'Эта эмоция используется в некоторых заметках. Архивируйте, чтобы сохранить её там, или удалите везде.';
 
   @override
   String get noEmotionsYet => 'Пока нет эмоций';
@@ -739,7 +738,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage =>
-      'Удалить эту эмоцию? Она будет удалена из всех минд, где используется.';
+      'Удалить эту эмоцию? Она будет удалена из всех заметок, где используется.';
 
   @override
   String get dayFeedTileSettings => 'Настройки плиток';
@@ -748,7 +747,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dayFeedColumns => 'Колонки';
 
   @override
-  String get dayFeedMindTileSize => 'Размер плитки минда';
+  String get dayFeedMindTileSize => 'Размер плитки заметки';
 
   @override
   String get dayFeedMindTileSquare => 'Квадрат';
@@ -927,11 +926,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get aiTabDescription =>
-      'Обсуждайте свои записи с AI, который работает на телефоне';
+      'Обсуждайте свои заметки с AI, который работает на телефоне';
 
   @override
   String get aiPrivacyNote =>
-      'Работает только на телефоне: записи не покидают устройство.';
+      'Работает только на телефоне: заметки не покидают устройство.';
 
   @override
   String get aiDisclaimer =>
@@ -971,7 +970,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get aiStarterJoy => 'Что меня радовало в последнее время?';
 
   @override
-  String get aiActionSaveAsMind => 'Сохранить как майнд';
+  String get aiActionSaveAsMind => 'Сохранить как заметку';
 
   @override
   String get aiActionOpenDay => 'Открыть день';
@@ -1150,7 +1149,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get aiNoSessionsHint =>
-      'Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши записи прямо на телефоне.';
+      'Спросите о своей неделе, тревоге или хорошем дне: чат читает ваши заметки прямо на телефоне.';
 
   @override
   String get showInGallery => 'Показать в галерее';
@@ -1186,7 +1185,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get feedSortTime => 'По времени';
 
   @override
-  String get feedSortMindsFirst => 'Сначала записи';
+  String get feedSortMindsFirst => 'Сначала заметки';
 
   @override
   String get feedSortMediaFirst => 'Сначала медиа';
@@ -1204,7 +1203,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get feedGroupingTimeOfDay => 'Время дня';
 
   @override
-  String get feedSectionMinds => 'Записи';
+  String get feedSectionMinds => 'Заметки';
 
   @override
   String get feedSectionGallery => 'Галерея';
@@ -1281,7 +1280,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get analyticsNeverSentItems =>
-      'Ваши записи, их текст, эмоции и комментарии, фото, видео и аудио, их количество, ваше имя, местоположение и IP-адрес.';
+      'Ваши заметки, их текст, эмоции и комментарии, фото, видео и аудио, их количество, ваше имя, местоположение и IP-адрес.';
 
   @override
   String get analyticsResetId => 'Сбросить анонимный ID';
@@ -1354,4 +1353,8 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get rateApp => 'Оценить keklist';
+
+  @override
+  String get pinchColumnsHint =>
+      'Подсказка: сведи или разведи пальцы на сетке, чтобы поменять число колонок';
 }

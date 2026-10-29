@@ -98,7 +98,7 @@
     "@extraActions": {
         "description": "Qo'shimcha harakatlar menyusi"
     },
-    "mindOptions": "Fikr variantlari",
+    "mindOptions": "Yozuv parametrlari",
     "@mindOptions": {
         "description": "Fikr variantlari menyusi"
     },
@@ -191,7 +191,7 @@
     "@save": {
         "description": "Saqlash tugmasi"
     },
-    "mind": "Fikr",
+    "mind": "Yozuv",
     "@mind": {
         "description": "Fikr ekrani sarlavhasi"
     },
@@ -263,11 +263,11 @@
     "@yourFolderName": {
         "description": "Papka nomi kiritish ko'rsatkichi"
     },
-    "noMindsInSelectedPeriod": "Tanlangan davrda fikrlar yo'q",
+    "noMindsInSelectedPeriod": "Tanlangan davrda yozuvlar yoʻq",
     "@noMindsInSelectedPeriod": {
         "description": "Tanlangan davrda fikrlar yo'q xabari"
     },
-    "noMindsForPeriod": "Bu davr uchun fikrlar yo'q",
+    "noMindsForPeriod": "Bu davr uchun yozuvlar yoʻq",
     "@noMindsForPeriod": {
         "description": "Bu davr uchun fikrlar yo'q xabari"
     },
@@ -279,7 +279,7 @@
     "@digest": {
         "description": "Xulosa sarlavhasi"
     },
-    "minds": "Fikrlar",
+    "minds": "Yozuvlar",
     "@minds": {
         "description": "Fikrlar sarlavhasi"
     },
@@ -291,11 +291,11 @@
     "@writeSomething": {
         "description": "Biror narsa yozish ko'rsatkichi"
     },
-    "todayMinds": "Bugungi fikrlar",
+    "todayMinds": "Bugungi yozuvlar",
     "@todayMinds": {
         "description": "Bugungi fikrlar sarlavhasi"
     },
-    "youDidNotCollectAnyEntriesYet": "Siz hali hech qanday yozuv yig'ganingiz yo'q",
+    "youDidNotCollectAnyEntriesYet": "Sizda hali birorta ham yozuv yoʻq",
     "@youDidNotCollectAnyEntriesYet": {
         "description": "Hech qanday yozuv yig'ilmagan xabari"
     },
@@ -343,7 +343,7 @@
     "@settingsDescription": {
         "description": "Sozlamalar tab tavsifi"
     },
-    "todayDescription": "Faqat bugungi fikrlar",
+    "todayDescription": "Faqat bugungi yozuvlar",
     "@todayDescription": {
         "description": "Bugun tab tavsifi"
     },
@@ -351,7 +351,7 @@
     "@debugMenuDescription": {
         "description": "Debug menyusi tab tavsifi"
     },
-    "noMindsForThisDay": "Bu kun uchun fikrlar yo'q",
+    "noMindsForThisDay": "Bu kun uchun yozuvlar yoʻq",
     "@noMindsForThisDay": {
         "description": "Bu kun uchun fikrlar yo'q xabari"
     },
@@ -381,19 +381,19 @@
     "exportError": "Eksport muvaffaqiyatsiz",
     "importSuccess": "Import muvaffaqiyatli",
     "importError": "Import muvaffaqiyatsiz",
-    "mindsToExport": "Fikrlar",
+    "mindsToExport": "Yozuvlar",
     "audioFilesToExport": "Audio fayllar",
     "emotionsToExport": "Hislar",
-    "mindsExported": "Fikrlar eksport qilindi",
+    "mindsExported": "Yozuvlar eksport qilindi",
     "audioFilesExported": "Audio fayllar eksport qilindi",
-    "mindsImported": "Fikrlar import qilindi",
+    "mindsImported": "Yozuvlar import qilindi",
     "audioFilesImported": "Audio fayllar import qilindi",
     "onboardingMind1": "Salom!",
     "onboardingMind2": "Men keklist - qisqa yozuvlarning shaxsiy kundaligiman",
     "onboardingMind2Comment1": "Yozuvlarga sharh qoldirish mumkin",
     "onboardingMind2Comment2": "Yozuvni ochish uchun uni bosing",
     "onboardingMind3": "'Kalendar' yorlig'ida barcha yozuvlar kunlar, haftalar va oylar bo'yicha ko'rsatiladi",
-    "onboardingMind4": "'Analitika' yorlig'i yozuvlaringizning qisqacha statistikasini ko'rsatadi",
+    "onboardingMind4": "'Analitika' yorligʻi yozuvlaringizning qisqacha statistikasini koʻrsatadi",
     "onboardingMind5": "Barcha yozuvlar faqat telefoningizda saqlanadi",
     "onboardingMind6": "Yangi yozuv yaratish uchun 'Yozish' tugmasini bosing",
     "noPhotosForDay": "Bu kun uchun rasmlar topilmadi",
@@ -438,11 +438,11 @@
     "addEmotionsToMind": "Hislar qo'shish",
     "doneEditing": "Tayyor",
     "emotionEditHint": "Nomini o'zgartirish uchun bosing · ✕ o'chirish uchun · tartiblash uchun torting",
-    "emotionInUseMessage": "Bu hissiyot ba'zi maindlarda ishlatiladi. Uni o'sha yerda saqlash uchun arxivlang yoki hamma joydan o'chiring.",
-    "deleteEmotionMessage": "Bu hissiyotni o'chirasizmi? U undan foydalanadigan barcha maindlardan olib tashlanadi.",
+    "emotionInUseMessage": "Bu hissiyot baʼzi yozuvlarda ishlatiladi. Uni oʻsha yerda saqlash uchun arxivlang yoki hamma joydan oʻchiring.",
+    "deleteEmotionMessage": "Bu hissiyotni oʻchirasizmi? U undan foydalanadigan barcha yozuvlardan olib tashlanadi.",
     "dayFeedTileSettings": "Plitka sozlamalari",
     "dayFeedColumns": "Ustunlar",
-    "dayFeedMindTileSize": "Plitka o‘lchami",
+    "dayFeedMindTileSize": "Yozuv plitkasi oʻlchami",
     "dayFeedMindTileSquare": "Kvadrat",
     "dayFeedMindTileWide": "Keng",
     "dayFeedShowMindText": "Matnni ko‘rsatish",
@@ -510,7 +510,7 @@
     "aiStarterWeek": "Haftam qanday o'tdi?",
     "aiStarterWorry": "Oxirgi paytda meni nima bezovta qilyapti?",
     "aiStarterJoy": "Oxirgi paytda meni nima xursand qildi?",
-    "aiActionSaveAsMind": "Maynd sifatida saqlash",
+    "aiActionSaveAsMind": "Yozuv sifatida saqlash",
     "aiActionOpenDay": "Kunni ochish",
     "aiActionWeekSummary": "Hafta xulosasi",
     "aiWeekSummaryPrompt": "Oxirgi 7 kunimni xulosa qil: nima bo'ldi, nimani his qildim, nima ajralib turdi.",
@@ -564,7 +564,7 @@
     "insightsTwoYearsAgo": "Ikki yil oldin",
     "insightsVoiceAndVideos": "Ovoz va dumaloq videolar",
     "insightsWeekNumber": "{number}-hafta",
-    "aiNoSessionsHint": "Haftangiz, tashvish yoki yaxshi kun haqida so‘rang: chat yozuvlaringizni telefonning o‘zida o‘qiydi.",
+    "aiNoSessionsHint": "Haftangiz, tashvish yoki yaxshi kun haqida soʻrang: chat yozuvlaringizni telefonning oʻzida oʻqiydi.",
     "showInGallery": "Galereyada ko‘rsatish",
     "tileEmojiMotion": "Emoji harakati",
     "tileEmojiMotionDrift": "Suzish",
@@ -628,5 +628,6 @@
     "whatsNewShakeTitle": "Silkiting va sozlang",
     "whatsNewShakeBody": "Istalgan ekranni telefonni silkitib sozlash mumkin.",
     "whatsNewAlsoDesign": "Yana: yangi dizayn va animatsiyalar.",
-    "rateApp": "keklist'ni baholash"
+    "rateApp": "keklist'ni baholash",
+    "pinchColumnsHint": "Maslahat: ustunlar sonini o‘zgartirish uchun to‘rni ikki barmoq bilan qisib yoki yoying"
 }

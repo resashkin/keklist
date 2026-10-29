@@ -1,4 +1,5 @@
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
+import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/glass_segmented_switcher.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -24,6 +25,10 @@ final class ColumnCountRow extends StatelessWidget {
             selected: selected.clamp(DayFeedSettings.minColumnCount, DayFeedSettings.maxColumnCount),
             labelOf: (count) => '$count',
             onChanged: onChanged,
+          ),
+          Text(
+            context.l10n.pinchColumnsHint,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor),
           ),
         ],
       ),

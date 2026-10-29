@@ -412,7 +412,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get todayMinds => '今日のメモ';
 
   @override
-  String get youDidNotCollectAnyEntriesYet => 'まだエントリーを収集していません';
+  String get youDidNotCollectAnyEntriesYet => 'まだメモがありません';
 
   @override
   String get areYouSure => 'よろしいですか？';
@@ -439,10 +439,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get thisYear => '今年';
 
   @override
-  String get calendarDescription => 'エントリーのカレンダーがあるメイン画面';
+  String get calendarDescription => 'メモのカレンダーがあるメイン画面';
 
   @override
-  String get insightsDescription => 'あなたと記録の統計';
+  String get insightsDescription => 'あなたとメモの統計';
 
   @override
   String get settingsDescription => 'すべての設定の画面（ダークモード、同期など）';
@@ -573,7 +573,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get onboardingMind3 => '「カレンダー」タブでは、すべてのメモが日、週、月ごとに表示されます';
 
   @override
-  String get onboardingMind4 => '「分析」タブでは、エントリーの簡単な統計が表示されます';
+  String get onboardingMind4 => '「分析」タブでは、メモの簡単な統計が表示されます';
 
   @override
   String get onboardingMind5 => 'すべてのメモはあなたのスマートフォンにのみ保存されます';
@@ -706,7 +706,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'この感情は一部のマインドで使われています。アーカイブしてそこに残すか、すべてから削除します。';
+      'この感情は一部のメモで使われています。アーカイブしてそこに残すか、すべてから削除します。';
 
   @override
   String get noEmotionsYet => '感情がまだありません';
@@ -715,7 +715,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get noArchivedEmotions => 'アーカイブされた感情はありません';
 
   @override
-  String get deleteEmotionMessage => 'この感情を削除しますか？使用しているすべてのマインドから削除されます。';
+  String get deleteEmotionMessage => 'この感情を削除しますか？使用しているすべてのメモから削除されます。';
 
   @override
   String get dayFeedTileSettings => 'タイル設定';
@@ -724,7 +724,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dayFeedColumns => '列数';
 
   @override
-  String get dayFeedMindTileSize => 'タイルのサイズ';
+  String get dayFeedMindTileSize => 'メモのタイルのサイズ';
 
   @override
   String get dayFeedMindTileSquare => '正方形';
@@ -894,10 +894,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aiTab => 'チャット';
 
   @override
-  String get aiTabDescription => 'スマホ上で動くAIと記録について話す';
+  String get aiTabDescription => 'スマホ上で動くAIとメモについて話す';
 
   @override
-  String get aiPrivacyNote => 'スマホの中だけで動作し、記録が端末の外に出ることはありません。';
+  String get aiPrivacyNote => 'スマホの中だけで動作し、メモが端末の外に出ることはありません。';
 
   @override
   String get aiDisclaimer => '医療サービスではありません。危険な状況にある場合は緊急サービスに連絡してください。';
@@ -1107,7 +1107,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get aiNoSessionsHint =>
-      '今週のこと、心配ごと、良かった日について聞いてみましょう。チャットはスマホの中で記録を読みます。';
+      '今週のこと、心配ごと、良かった日について聞いてみましょう。チャットはスマホの中でメモを読みます。';
 
   @override
   String get showInGallery => 'ギャラリーで表示';
@@ -1237,7 +1237,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get analyticsNeverSentItems =>
-      'あなたの記録とそのテキスト・感情・コメント、写真・動画・音声、その数、名前、位置情報、IP アドレス。';
+      'あなたのメモとそのテキスト・感情・コメント、写真・動画・音声、その数、名前、位置情報、IP アドレス。';
 
   @override
   String get analyticsResetId => '匿名 ID をリセット';
@@ -1306,4 +1306,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get rateApp => 'keklistを評価';
+
+  @override
+  String get pinchColumnsHint => 'ヒント：グリッドをピンチすると列の数を変えられます';
 }

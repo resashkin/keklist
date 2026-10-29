@@ -20,13 +20,13 @@ abstract final class WhatsNewRelease {
   static const int mindsBeforeReviewPrompt = 5;
 
   static List<WhatsNewSlide> slides(AppLocalizations l10n) => [
-    WhatsNewSlide(videoAsset: _video('web'), title: l10n.whatsNewWebTitle, body: l10n.whatsNewWebBody),
     WhatsNewSlide(videoAsset: _video('gallery'), title: l10n.whatsNewGalleryTitle, body: l10n.whatsNewGalleryBody),
     WhatsNewSlide(videoAsset: _video('circles'), title: l10n.whatsNewCirclesTitle, body: l10n.whatsNewCirclesBody),
+    WhatsNewSlide(videoAsset: _video('shake'), title: l10n.whatsNewShakeTitle, body: l10n.whatsNewShakeBody),
     WhatsNewSlide(
-      videoAsset: _video('shake'),
-      title: l10n.whatsNewShakeTitle,
-      body: l10n.whatsNewShakeBody,
+      videoAsset: _video('web'),
+      title: l10n.whatsNewWebTitle,
+      body: l10n.whatsNewWebBody,
       footnote: l10n.whatsNewAlsoDesign,
     ),
   ];

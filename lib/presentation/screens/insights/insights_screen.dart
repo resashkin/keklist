@@ -161,7 +161,9 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
     );
   }
 
-  int get _mindfulDays => _minds.map((mind) => mind.dayIndex).toSet().length;
+  // A day counts only with a written note: a voice note or round video alone does not make it mindful.
+  int get _mindfulDays =>
+      _minds.where((mind) => mind.plainNote.trim().isNotEmpty).map((mind) => mind.dayIndex).toSet().length;
 
   Widget _buildCard(InsightsWidgetId id, InsightsCardContext data) => switch (id) {
     InsightsWidgetId.counters => InsightsCountersCard(data: data),

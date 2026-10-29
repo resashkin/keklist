@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/insights/insights_period.dart';
@@ -90,6 +92,8 @@ final class InsightsEmotionTrendCard extends StatelessWidget {
   static const double _chartHeight = 120.0;
   static const double _axisHeight = 24.0;
   static const double _maxColumnWidth = 36.0;
+  // Below this a segment is too thin for its emoji.
+  static const double _minEmojiSegment = 14.0;
 
   final InsightsCardContext data;
 
@@ -141,7 +145,10 @@ final class InsightsEmotionTrendCard extends StatelessWidget {
                             height: 8.0,
                             decoration: BoxDecoration(color: data.colorOf(id), shape: BoxShape.circle),
                           ),
-                          Text(data.emojiOf(id)),
+                          Text(
+                            data.emotionById[id]?.title ?? '',
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
                         ],
                       ),
                   ],
@@ -168,16 +175,24 @@ final class InsightsEmotionTrendCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          // A grey track of the full height, filled from the bottom with the emotions of the bucket.
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: _maxColumnWidth),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(4.0),
-              child: Column(
-                children: [
-                  for (final String id in order.reversed)
-                    if ((bucket.counts[id] ?? 0) > 0)
-                      Container(height: _chartHeight * bucket.counts[id]! / maxTotal, color: data.colorOf(id)),
-                ],
+              borderRadius: BorderRadius.circular(6.0),
+              child: ColoredBox(
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.06),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: _chartHeight,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      for (final String id in order.reversed)
+                        if ((bucket.counts[id] ?? 0) > 0) _segment(id, _chartHeight * bucket.counts[id]! / maxTotal),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -193,6 +208,16 @@ final class InsightsEmotionTrendCard extends StatelessWidget {
       ),
     );
   }
+
+  Widget _segment(String emotionId, double height) => Container(
+    height: height,
+    width: double.infinity,
+    color: data.colorOf(emotionId),
+    alignment: Alignment.center,
+    child: height < _minEmojiSegment
+        ? null
+        : Text(data.emojiOf(emotionId), style: TextStyle(fontSize: math.min(16.0, height - 4.0), height: 1.0)),
+  );
 }
 
 final class InsightsEmotionPairsCard extends StatelessWidget {
