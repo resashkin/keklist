@@ -2,6 +2,7 @@ import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/constants.dart';
@@ -97,8 +98,8 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
       await Purchases.purchase(PurchaseParams.storeProduct(product));
       Analytics.tipPurchased(product.identifier);
       if (mounted) _showThanks();
-    } on PurchasesError catch (e) {
-      if (e.code != PurchasesErrorCode.purchaseCancelledError && mounted) _showError(e.message);
+    } on PlatformException catch (e) {
+      if (!_isCancelled(e) && mounted) _showError(e.message ?? e.code);
     } catch (e) {
       if (mounted) _showError(e.toString());
     } finally {
@@ -162,10 +163,8 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
       await Purchases.purchase(PurchaseParams.package(pkg));
       Analytics.proPurchased(pkg.storeProduct.identifier);
       if (mounted) Navigator.of(context).pop(true);
-    } on PurchasesError catch (e) {
-      if (e.code != PurchasesErrorCode.purchaseCancelledError && mounted) {
-        _showError(e.message);
-      }
+    } on PlatformException catch (e) {
+      if (!_isCancelled(e) && mounted) _showError(e.message ?? e.code);
     } catch (e) {
       if (mounted) _showError(e.toString());
     } finally {
@@ -184,12 +183,18 @@ final class _PaywallBottomSheetState extends State<PaywallBottomSheet> {
           _showError('No active subscriptions found.');
         }
       }
+    } on PlatformException catch (e) {
+      if (mounted) _showError(e.message ?? e.code);
     } catch (e) {
       if (mounted) _showError(e.toString());
     } finally {
       if (mounted) setState(() => _purchasing = false);
     }
   }
+
+  /// RevenueCat throws a [PlatformException] when the user closes the store's purchase sheet.
+  static bool _isCancelled(PlatformException error) =>
+      PurchasesErrorHelper.getErrorCode(error) == PurchasesErrorCode.purchaseCancelledError;
 
   void _showError(String message) {
     showDialog<void>(

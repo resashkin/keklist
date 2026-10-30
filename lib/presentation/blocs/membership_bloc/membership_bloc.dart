@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
@@ -13,6 +14,7 @@ part 'membership_state.dart';
 
 final class MembershipBloc extends Bloc<MembershipEvent, MembershipState> {
   final DebugMenuRepository _debugMenuRepository;
+  MembershipDataState? _lastData;
 
   MembershipBloc({required DebugMenuRepository debugMenuRepository})
       : _debugMenuRepository = debugMenuRepository,
@@ -74,9 +76,24 @@ final class MembershipBloc extends Bloc<MembershipEvent, MembershipState> {
       emit(MembershipDataState(isPro: true, nextRenewalDate: renewalDate, priceString: priceString));
     } catch (e, stack) {
       debugPrint('[RevenueCat] error: $e');
-      _sendToTelegram('🔴 RevenueCat error\n\n$e\n\n$stack');
-      emit(MembershipDataState(isPro: false));
+      // A flaky network says nothing about the app, so only real failures are reported.
+      if (!_isNetworkError(e)) _sendToTelegram('🔴 RevenueCat error\n\n$e\n\n$stack');
+      emit(_lastData ?? MembershipDataState(isPro: false));
     }
+  }
+
+  static bool _isNetworkError(Object error) =>
+      error is PlatformException &&
+      const {
+        PurchasesErrorCode.networkError,
+        PurchasesErrorCode.offlineConnectionError,
+      }.contains(PurchasesErrorHelper.getErrorCode(error));
+
+  @override
+  void onChange(Change<MembershipState> change) {
+    super.onChange(change);
+    final MembershipState next = change.nextState;
+    if (next is MembershipDataState) _lastData = next;
   }
 
   Future<void> _sendToTelegram(String message) async {
