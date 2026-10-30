@@ -92,7 +92,7 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
           ? 0
           : (fields[44] as num).toInt()
       ..dayFeedGroupingIndex = fields[45] == null
-          ? 0
+          ? 1
           : (fields[45] as num).toInt()
       ..calendarSortOrderIndex = fields[46] == null
           ? 0

@@ -60,7 +60,7 @@ final class DayFeedSettings {
     this.mindCellSpan = 1,
     this.isMindTextVisible = true,
     this.sortOrder = FeedSortOrder.time,
-    this.grouping = FeedGrouping.none,
+    this.grouping = FeedGrouping.type,
   });
 
   DayFeedSettings copyWith({FeedSortOrder? sortOrder, FeedGrouping? grouping}) => DayFeedSettings(

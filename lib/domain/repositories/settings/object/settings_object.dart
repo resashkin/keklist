@@ -133,7 +133,7 @@ final class SettingsObject extends HiveObject {
   @HiveField(44, defaultValue: 0)
   late int dayFeedSortOrderIndex;
 
-  @HiveField(45, defaultValue: 0)
+  @HiveField(45, defaultValue: 1)
   late int dayFeedGroupingIndex;
 
   @HiveField(46, defaultValue: 0)
@@ -184,7 +184,7 @@ final class SettingsObject extends HiveObject {
           mindCellSpan: dayFeedMindCellSpan,
           isMindTextVisible: isDayFeedMindTextVisible,
           sortOrder: FeedSortOrder.values.elementAtOrNull(dayFeedSortOrderIndex) ?? FeedSortOrder.time,
-          grouping: FeedGrouping.values.elementAtOrNull(dayFeedGroupingIndex) ?? FeedGrouping.none,
+          grouping: FeedGrouping.values.elementAtOrNull(dayFeedGroupingIndex) ?? FeedGrouping.type,
         ),
         hiddenSettingsItemIds: hiddenSettingsItemIds.toSet(),
         hiddenMediaIds: hiddenMediaIds.toSet(),
