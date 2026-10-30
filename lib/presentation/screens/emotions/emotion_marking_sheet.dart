@@ -1,20 +1,17 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
-import 'package:swipeable_page_route/swipeable_page_route.dart';
-import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
-import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_archived_screen.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_editor_sheet.dart';
+import 'package:keklist/presentation/screens/emotions/emotion_manager_screen.dart';
 import 'package:keklist/presentation/screens/emotions/widgets/emotion_chip.dart';
 
 /// Bottom sheet for tagging a mind with emotions, and — via its edit mode — the
@@ -40,16 +37,12 @@ final class EmotionMarkingSheet extends StatefulWidget {
   /// Whether a wide Save button closes the sheet, for flows that continue once it is gone.
   final bool showsSaveButton;
 
-  /// A full screen that only manages emotions: always in edit mode, nothing to mark.
-  final bool isManager;
-
   const EmotionMarkingSheet({
     super.key,
     required this.initialSelectedIds,
     required this.onSelectionChanged,
     this.focusEmotionId,
     this.showsSaveButton = false,
-    this.isManager = false,
   });
 
   /// Fraction of the screen the sheet occupies. Fixed — the sheet is not resizable.
@@ -74,16 +67,6 @@ final class EmotionMarkingSheet extends StatefulWidget {
     );
   }
 
-  /// Settings → Emotions: the same editing as the sheet's Edit mode, on its own screen.
-  static Future<void> pushManager(BuildContext context) => Navigator.of(context).push<void>(
-    SwipeablePageRoute<void>(
-      builder: (context) => Scaffold(
-        appBar: GlassAppBar(centerTitle: true, title: Text(context.l10n.emotions)),
-        body: EmotionMarkingSheet(initialSelectedIds: const {}, onSelectionChanged: (_) {}, isManager: true),
-      ),
-    ),
-  );
-
   @override
   State<EmotionMarkingSheet> createState() => _EmotionMarkingSheetState();
 }
@@ -94,7 +77,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
 
   /// Navigation path of parent ids; `null` is the root level.
   final List<String?> _path = [null];
-  late bool _editMode = widget.isManager;
+  bool _editMode = false;
 
   // Latest built level, for the pointer handlers.
   EmotionsList? _state;
@@ -213,29 +196,7 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
     });
   }
 
-  Future<void> _onCross(Emotion emotion, EmotionsList state) async {
-    final referenced = context.read<MindRepository>().values.expand((mind) => mind.emotionIds).toSet();
-    final subtree = {emotion.id, ...state.descendantIdsOf(emotion.id)};
-    if (!subtree.any(referenced.contains)) {
-      context.read<EmotionBloc>().add(EmotionDelete(id: emotion.id));
-      return;
-    }
-    final action = await showModalActionSheet<String>(
-      context: context,
-      title: emotion.title,
-      message: context.l10n.emotionInUseMessage,
-      actions: [
-        SheetAction(key: 'archive', label: context.l10n.archive),
-        SheetAction(key: 'delete', label: context.l10n.delete, isDestructiveAction: true),
-      ],
-    );
-    if (!mounted) return;
-    if (action == 'archive') {
-      context.read<EmotionBloc>().add(EmotionArchive(id: emotion.id));
-    } else if (action == 'delete') {
-      context.read<EmotionBloc>().add(EmotionDelete(id: emotion.id));
-    }
-  }
+  Future<void> _onCross(Emotion emotion, EmotionsList state) => removeEmotion(context, emotion, state);
 
   /// Two-step delete: first tap arms the cross (turns red), second removes.
   void _onCrossTap(Emotion emotion, EmotionsList state) {
@@ -384,7 +345,6 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isManager) return _buildContent(context);
     return FractionallySizedBox(
       heightFactor: EmotionMarkingSheet._heightFactor,
       alignment: Alignment.bottomCenter,
@@ -604,8 +564,6 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
     final String title =
         parent == null ? context.l10n.emotions : '${state.lineageEmojis(parent).join(' ')}  ${parent.title}';
 
-    // The manager's app bar already names the screen, and it never leaves edit mode.
-    if (widget.isManager && !_canGoBack) return const SizedBox.shrink();
     final Widget leading = _canGoBack
         ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: _goBack)
         : TextButton(

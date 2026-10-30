@@ -1,4 +1,4 @@
-import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
+import 'package:keklist/presentation/screens/emotions/emotion_manager_screen.dart';
 import 'package:keklist/presentation/screens/whats_new/whats_new_release.dart';
 import 'package:keklist/presentation/screens/whats_new/whats_new_sheet.dart';
 import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
@@ -235,7 +235,7 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
             id: SettingsItemIds.emotions,
             title: context.l10n.emotions,
             leading: const Icon(Icons.favorite_border_rounded, color: Colors.pinkAccent),
-            onTap: () => EmotionMarkingSheet.pushManager(context),
+            onTap: () => EmotionManagerScreen.push(context),
           ),
           if (!kIsWeb && _hiddenMediaCount > 0) _hiddenMediaRow(context),
         ],
