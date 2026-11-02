@@ -120,3 +120,7 @@ No automated tests added — the widget is a thin wrapper around a platform view
 - **Localization**: Tab labels come from `TabType.localizedLabel(context)` (existing ARB keys), so all 11 languages remain supported. The debug-menu title/description are hardcoded English consistent with the rest of the debug menu.
 
 - **Why not first-party Flutter support**: As of June 2026, `CupertinoTabBar` does not implement Liquid Glass and the Flutter team is not accepting contributions toward it until the Material/Cupertino split lands (issue [#101479](https://github.com/flutter/flutter/issues/101479)). Realistic ship window for first-party support is late 2026 at earliest. This implementation can be removed when that ships.
+
+- **Dark mode**: the native bar stayed light whatever the theme, because UIKit re-resolves the style from the window.
+  `InterfaceStyleChannel.sync` (`lib/native/ios/interface_style_channel.dart`) sends the app brightness from
+  `MaterialApp.builder` to `AppDelegate`, which sets `overrideUserInterfaceStyle` on every window. Needs a full rebuild.

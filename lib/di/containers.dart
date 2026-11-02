@@ -1,6 +1,5 @@
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:hive_ce/hive.dart';
-import 'package:keklist/domain/constants.dart';
 import 'package:keklist/domain/hive_constants.dart';
 import 'package:keklist/domain/repositories/tabs/tabs_settings_repository.dart';
 import 'package:keklist/domain/repositories/tabs/tabs_settings_shared_preferences_repository.dart';
@@ -19,50 +18,50 @@ import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dar
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_hive_repository.dart';
 import 'package:keklist/domain/repositories/debug_menu/object/debug_menu_object.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/domain/repositories/media_index/media_index_hive_repository.dart';
+import 'package:keklist/domain/repositories/media_index/object/media_day_index_object.dart';
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
+import 'package:keklist/domain/services/media_index/photo_library_gallery_source.dart';
 import 'package:keklist/domain/repositories/weather/object/weather_cache_object.dart';
 import 'package:keklist/domain/repositories/weather/weather_hive_repository.dart';
 import 'package:keklist/domain/repositories/weather/weather_repository.dart';
 import 'package:keklist/domain/services/export_import/export_import_service.dart';
+import 'package:keklist/domain/services/phone_web/emotion_api_repository.dart';
+import 'package:keklist/domain/services/phone_web/mind_api_repository.dart';
+import 'package:keklist/domain/services/phone_web/phone_api.dart';
+import 'package:keklist/domain/services/phone_web/phone_gallery.dart';
+import 'package:keklist/domain/services/phone_web/phone_settings_repository.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:keklist/domain/services/phone_web/web_file_repository.dart';
 import 'package:keklist/domain/services/weather/weather_api_service.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
-import 'package:keklist/presentation/core/helpers/platform_utils.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
-import 'package:keklist/presentation/cubits/used_emoji/used_emoji_cubit.dart';
-import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
-import 'package:keklist/presentation/native/ios/watch/watch_communication_manager.dart';
 
 final class MainContainer {
   final StreamingSharedPreferences _streamingSharedPreferences;
+  final HiveAesCipher _hiveCipher;
 
-  MainContainer({required StreamingSharedPreferences streamingSharedPreferences})
-      : _streamingSharedPreferences = streamingSharedPreferences;
+  MainContainer({required StreamingSharedPreferences streamingSharedPreferences, required HiveAesCipher hiveCipher})
+    : _streamingSharedPreferences = streamingSharedPreferences,
+      _hiveCipher = hiveCipher;
 
   Injector initialize(Injector injector) {
-    injector.map<MindSearcherCubit>(
-      (injector) => MindSearcherCubit(repository: injector.get<MindRepository>()),
-    );
-    injector.map<UsedEmojiCubit>(
-      (injector) => UsedEmojiCubit(repository: injector.get<MindRepository>()),
-    );
-    if (DeviceUtils.safeGetPlatform() == SupportedPlatform.iOS) {
-      injector.map<WatchCommunicationManager>(
-        (injector) => (AppleWatchCommunicationManager(
-          mindRepository: injector.get<MindRepository>(),
-        )),
+    if (kIsPhoneWeb) {
+      _mapPhoneRepositories(injector);
+    } else {
+      injector.map<MindRepository>(
+        (injector) => MindHiveRepository(box: Hive.box<MindObject>(HiveConstants.mindBoxName)),
+      );
+      injector.map<EmotionRepository>(
+        (injector) => EmotionHiveRepository(box: Hive.box<EmotionObject>(HiveConstants.emotionBoxName)),
         isSingleton: true,
       );
+      injector.map<SettingsRepository>(
+        (injector) => SettingsHiveRepository(box: Hive.box<SettingsObject>(HiveConstants.settingsBoxName)),
+      );
+      injector.map<AppFileRepository>((_) => const AppFileRepository(), isSingleton: true);
     }
-    injector.map<MindRepository>(
-      (injector) => MindHiveRepository(box: Hive.box<MindObject>(HiveConstants.mindBoxName)),
-    );
-    injector.map<EmotionRepository>(
-      (injector) => EmotionHiveRepository(box: Hive.box<EmotionObject>(HiveConstants.emotionBoxName)),
-      isSingleton: true,
-    );
-    injector.map<SettingsRepository>(
-      (injector) => SettingsHiveRepository(box: Hive.box<SettingsObject>(HiveConstants.settingsBoxName)),
-    );
     injector.map<DebugMenuRepository>(
       (injector) => DebugMenuHiveRepository(box: Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName)),
       isSingleton: true,
@@ -71,10 +70,21 @@ final class MainContainer {
       (injector) => BlocLogSettingsHiveRepository(box: Hive.box(HiveConstants.blocLogSettingsBoxName)),
       isSingleton: true,
     );
-    injector.map<AppFileRepository>(
-      (_) => const AppFileRepository(),
-      isSingleton: true,
-    );
+    if (!kIsPhoneWeb) {
+      injector.map<GalleryIndexer>(
+        (_) => GalleryIndexer(
+          repository: MediaIndexHiveRepository(
+            daysBox: Hive.openBox<MediaDayIndexObject>(
+              HiveConstants.mediaDayIndexBoxName,
+              encryptionCipher: _hiveCipher,
+            ),
+            metaBox: Hive.openBox(HiveConstants.mediaIndexMetaBoxName, encryptionCipher: _hiveCipher),
+          ),
+          source: const PhotoLibraryGallerySource(),
+        ),
+        isSingleton: true,
+      );
+    }
     injector.map<ExportImportService>(
       (injector) => ExportImportService(
         mindRepository: injector.get<MindRepository>(),
@@ -97,10 +107,7 @@ final class MainContainer {
     // are registered here as singletons so sendEventTo can fall back to DI
     // when the originating widget's State has unmounted.
     injector.map<SettingsBloc>(
-      (i) => SettingsBloc(
-        repository: i.get<SettingsRepository>(),
-        exportImportService: i.get<ExportImportService>(),
-      ),
+      (i) => SettingsBloc(repository: i.get<SettingsRepository>(), exportImportService: i.get<ExportImportService>()),
       isSingleton: true,
     );
     injector.map<EmotionBloc>(
@@ -112,5 +119,31 @@ final class MainContainer {
       isSingleton: true,
     );
     return injector;
+  }
+
+  /// The web version served by the phone reads and writes the phone's data; only UI settings stay in the browser.
+  void _mapPhoneRepositories(Injector injector) {
+    final PhoneApi api = PhoneApi();
+    injector.map<PhoneApi>((_) => api, isSingleton: true);
+    injector.map<MindRepository>((_) => MindApiRepository(api: api), isSingleton: true);
+    injector.map<EmotionRepository>((_) => EmotionApiRepository(api: api), isSingleton: true);
+    injector.map<SettingsRepository>(
+      (_) => PhoneSettingsRepository(
+        local: SettingsHiveRepository(box: Hive.box<SettingsObject>(HiveConstants.settingsBoxName)),
+        api: api,
+      ),
+      isSingleton: true,
+    );
+    injector.map<AppFileRepository>((_) => const WebFileRepository(), isSingleton: true);
+    final PhoneMediaIndexRepository galleryIndex = PhoneMediaIndexRepository(api: api);
+    final GalleryIndexer indexer = GalleryIndexer(
+      repository: galleryIndex,
+      source: PhoneGallerySource(api: api, index: galleryIndex),
+    );
+    api.events
+        .where((event) => event == 'gallery')
+        .asyncMap((_) => galleryIndex.reload())
+        .listen((_) => indexer.sync());
+    injector.map<GalleryIndexer>((_) => indexer, isSingleton: true);
   }
 }

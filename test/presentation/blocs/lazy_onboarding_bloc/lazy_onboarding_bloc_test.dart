@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/settings/keklist_interface_style.dart';
 import 'package:keklist/domain/repositories/settings/keklist_theme_mode.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/constants/onboarding_constants.dart';
+import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/language_manager.dart';
 import 'package:keklist/presentation/blocs/lazy_onboarding_bloc/lazy_onboarding_bloc.dart';
@@ -14,27 +16,30 @@ class MockMindRepository extends Mock implements MindRepository {}
 
 class MockSettingsRepository extends Mock implements SettingsRepository {}
 
+class MockEmotionRepository extends Mock implements EmotionRepository {}
+
 class MockBuildContext extends Mock implements BuildContext {}
 
 void main() {
   late MockMindRepository mockMindRepository;
   late MockSettingsRepository mockSettingsRepository;
+  late MockEmotionRepository mockEmotionRepository;
   late LazyOnboardingBloc bloc;
 
   setUp(() {
     mockMindRepository = MockMindRepository();
     mockSettingsRepository = MockSettingsRepository();
+    mockEmotionRepository = MockEmotionRepository();
 
     bloc = LazyOnboardingBloc(
       mindRepository: mockMindRepository,
       settingsRepository: mockSettingsRepository,
+      emotionRepository: mockEmotionRepository,
     );
 
     // Register fallback values
     registerFallbackValue(
       KeklistSettings(
-        isMindContentVisible: true,
-        previousAppVersion: null,
         themePreference: KeklistThemeMode.dark,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,
         shouldShowTitles: true,
@@ -43,7 +48,6 @@ void main() {
         dataSchemaVersion: 0,
         hasSeenLazyOnboarding: false,
         isDebugMenuVisible: false,
-        isPhotoVideoSourceEnabled: false,
       ),
     );
   });
@@ -57,8 +61,6 @@ void main() {
       // Arrange
       when(() => mockSettingsRepository.value).thenReturn(
         KeklistSettings(
-          isMindContentVisible: true,
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -67,7 +69,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: true,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -86,8 +87,6 @@ void main() {
       // Arrange
       when(() => mockSettingsRepository.value).thenReturn(
         KeklistSettings(
-          isMindContentVisible: true,
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -96,7 +95,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -124,8 +122,6 @@ void main() {
 
       when(() => mockSettingsRepository.value).thenReturn(
         KeklistSettings(
-          isMindContentVisible: true,
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -134,7 +130,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -169,8 +164,6 @@ void main() {
 
       when(() => mockSettingsRepository.value).thenReturn(
         KeklistSettings(
-          isMindContentVisible: true,
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -179,7 +172,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -221,6 +213,9 @@ void main() {
       // This will cause the extension to use AppLocalizationsEn() as fallback
       when(() => mockContext.dependOnInheritedWidgetOfExactType<InheritedWidget>()).thenReturn(null);
 
+      when(() => mockSettingsRepository.value).thenReturn(KeklistSettings.initial().copyWith(hasSeededEmotions: true));
+      when(() => mockEmotionRepository.values).thenReturn([_emotion('joy', '😄'), _emotion('love', '❤️')]);
+
       List<Mind> createdMinds = [];
       when(() => mockMindRepository.createMinds(minds: any(named: 'minds'))).thenAnswer((invocation) async {
         createdMinds = (invocation.namedArguments[const Symbol('minds')] as Iterable<Mind>).toList();
@@ -246,6 +241,16 @@ void main() {
         expect(parent.id.startsWith(OnboardingConstants.onboardingIdPrefix), true);
         expect(parent.rootId, null);
       }
+
+      expect(parentMinds.map((m) => m.emotionIds).toList(), [
+        ['joy'],
+        ['love'],
+        <String>[],
+        <String>[],
+        <String>[],
+        ['joy'],
+      ]);
+      expect(createdMinds.every((m) => m.legacyEmoji == null), true);
 
       // Verify comment minds have correct structure
       final commentMinds = createdMinds.where((m) => m.rootId != null).toList();
@@ -299,8 +304,6 @@ void main() {
     test('should update settings with hasSeenLazyOnboarding = true', () async {
       // Arrange
       final currentSettings = KeklistSettings(
-        isMindContentVisible: true,
-        previousAppVersion: null,
         themePreference: KeklistThemeMode.dark,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,
         shouldShowTitles: true,
@@ -309,7 +312,6 @@ void main() {
         dataSchemaVersion: 0,
         hasSeenLazyOnboarding: false,
         isDebugMenuVisible: false,
-        isPhotoVideoSourceEnabled: false,
       );
 
       when(() => mockSettingsRepository.value).thenReturn(currentSettings);
@@ -324,6 +326,69 @@ void main() {
       expect(captured.length, 1);
       final updatedSettings = captured.first as KeklistSettings;
       expect(updatedSettings.hasSeenLazyOnboarding, true);
+    });
+  });
+
+  group('settings preservation', () {
+    final populatedSettings = KeklistSettings(
+      themePreference: KeklistThemeMode.dark,
+      interfaceStyle: KeklistInterfaceStyle.liquidGlass,
+      shouldShowTitles: true,
+      userName: 'kek',
+      language: SupportedLanguage.english,
+      dataSchemaVersion: 3,
+      hasSeenLazyOnboarding: false,
+      isDebugMenuVisible: true,
+      isWeatherSourceEnabled: true,
+      weatherLatitude: 1.5,
+      weatherLongitude: 2.5,
+      mediaFolderPath: '/media',
+      isMediaFolderRecursive: true,
+      hasSeededEmotions: true,
+      dayFeed: const DayFeedSettings(columnCount: 5, mindCellSpan: 2, isMindTextVisible: false),
+      hiddenSettingsItemIds: const {'weather'},
+      shakeDiscoveredScreenIds: const {'day'},
+    );
+
+    void expectOtherFieldsKept(KeklistSettings updated) {
+      expect(updated.hasSeededEmotions, isTrue);
+      expect(updated.dayFeed, same(populatedSettings.dayFeed));
+      expect(updated.hiddenSettingsItemIds, {'weather'});
+      expect(updated.shakeDiscoveredScreenIds, {'day'});
+      expect(updated.isWeatherSourceEnabled, isTrue);
+      expect(updated.weatherLatitude, 1.5);
+      expect(updated.weatherLongitude, 2.5);
+      expect(updated.mediaFolderPath, '/media');
+      expect(updated.isMediaFolderRecursive, isTrue);
+      expect(updated.isDebugMenuVisible, isTrue);
+    }
+
+    setUp(() {
+      when(() => mockSettingsRepository.value).thenReturn(populatedSettings);
+      when(() => mockSettingsRepository.updateSettings(any())).thenAnswer((_) async {});
+    });
+
+    test('marking onboarding as seen keeps every other field', () async {
+      bloc.add(LazyOnboardingMarkAsSeen());
+      await Future.delayed(const Duration(milliseconds: 100));
+
+      final updated =
+          verify(() => mockSettingsRepository.updateSettings(captureAny())).captured.single as KeklistSettings;
+      expect(updated.hasSeenLazyOnboarding, isTrue);
+      expectOtherFieldsKept(updated);
+    });
+
+    test('resetting onboarding keeps every other field', () async {
+      when(() => mockMindRepository.deleteMindsWhere(any())).thenAnswer((_) async {});
+      when(() => mockMindRepository.obtainMinds()).thenAnswer((_) async => []);
+
+      bloc.add(LazyOnboardingReset());
+      await Future.delayed(const Duration(milliseconds: 100));
+
+      final updated =
+          verify(() => mockSettingsRepository.updateSettings(captureAny())).captured.single as KeklistSettings;
+      expect(updated.hasSeenLazyOnboarding, isFalse);
+      expectOtherFieldsKept(updated);
     });
   });
 
@@ -352,6 +417,16 @@ void main() {
 }
 
 // Helper functions
+Emotion _emotion(String id, String emoji) => Emotion(
+  id: id,
+  title: id,
+  emoji: emoji,
+  parentId: null,
+  isArchived: false,
+  orderIndex: 0,
+  creationDate: DateTime.utc(2026),
+);
+
 Mind _createMind({
   required String id,
   required int dayIndex,
@@ -359,7 +434,7 @@ Mind _createMind({
 }) {
   return Mind(
     id: id,
-    emoji: '😊',
+    legacyEmoji: '😊',
     note: 'Test note',
     dayIndex: dayIndex,
     creationDate: DateTime.now(),

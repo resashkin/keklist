@@ -18,12 +18,12 @@ class OnboardingConstants {
 
   // Parent minds (main educational minds)
   static List<OnboardingMindData> parentMinds = [
-    OnboardingMindData(emoji: '👋', translation: (l10n) => l10n.onboardingMind1, sortIndex: 0),
-    OnboardingMindData(emoji: '😊', translation: (l10n) => l10n.onboardingMind2, sortIndex: 1),
-    OnboardingMindData(emoji: '📅', translation: (l10n) => l10n.onboardingMind3, sortIndex: 2),
-    OnboardingMindData(emoji: '🧙', translation: (l10n) => l10n.onboardingMind4, sortIndex: 3),
-    OnboardingMindData(emoji: '🔒', translation: (l10n) => l10n.onboardingMind5, sortIndex: 4),
-    OnboardingMindData(emoji: '👇', translation: (l10n) => l10n.onboardingMind6, sortIndex: 5),
+    OnboardingMindData(emotionEmoji: '😄', translation: (l10n) => l10n.onboardingMind1, sortIndex: 0),
+    OnboardingMindData(emotionEmoji: '❤️', translation: (l10n) => l10n.onboardingMind2, sortIndex: 1),
+    OnboardingMindData(translation: (l10n) => l10n.onboardingMind3, sortIndex: 2),
+    OnboardingMindData(translation: (l10n) => l10n.onboardingMind4, sortIndex: 3),
+    OnboardingMindData(emotionEmoji: '😨', translation: (l10n) => l10n.onboardingMind5, sortIndex: 4),
+    OnboardingMindData(emotionEmoji: '😄', translation: (l10n) => l10n.onboardingMind6, sortIndex: 5),
   ];
 
   // Comment minds (children of parent minds) - indexed by parent sortIndex
@@ -36,12 +36,13 @@ class OnboardingConstants {
 }
 
 class OnboardingMindData {
-  final String emoji;
+  /// Emoji of the starter emotion (see `EmotionSeed.emojis`) the mind is tagged with.
+  final String? emotionEmoji;
   final String Function(AppLocalizations) translation;
   final int sortIndex;
 
   OnboardingMindData({
-    required this.emoji,
+    this.emotionEmoji,
     required this.translation,
     required this.sortIndex,
   });

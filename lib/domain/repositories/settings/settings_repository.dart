@@ -10,22 +10,213 @@ abstract class SettingsRepository {
   KeklistSettings get value;
   Stream<KeklistSettings> get stream;
   FutureOr<void> updateUserName(String string);
+  FutureOr<void> updateUserAvatar(UserAvatar avatar);
+  FutureOr<void> updateAvatarHistory(List<UserAvatar> history);
   FutureOr<void> updateSettings(KeklistSettings settings);
   FutureOr<void> updateThemePreference(KeklistThemeMode themeMode);
   FutureOr<void> updateInterfaceStyle(KeklistInterfaceStyle style);
-  FutureOr<void> updateMindContentVisibility(bool isVisible);
   FutureOr<void> updateShouldShowTitles(bool shouldShowTitles);
-  FutureOr<void> updatePreviousAppVersion(String? previousAppVersion);
   FutureOr<void> updateLanguage(SupportedLanguage language);
-  FutureOr<void> updateIsPhotoVideoSourceEnabled(bool value);
   FutureOr<void> updateWeatherSettings({bool? isEnabled, double? latitude, double? longitude});
-  FutureOr<void> updateMediaFolderSource({bool? isEnabled, String? folderPath, bool? isRecursive});
+  FutureOr<void> updateMediaFolderSource({String? folderPath, bool? isRecursive});
   FutureOr<void> updateHasSeededEmotions(bool value);
+  FutureOr<void> updateDayFeedSettings({
+    int? columnCount,
+    int? mindCellSpan,
+    bool? isMindTextVisible,
+  });
+  FutureOr<void> updateSettingsItemHidden(String id, {required bool isHidden});
+  FutureOr<void> markShakeDiscovered(String screenId);
+}
+
+/// How the mind creator asks for emotions; see `documentation/MIND_CREATOR_EMOTIONS.md`.
+enum MindEmotionsPrompt { afterSave, button, never }
+
+/// How the emojis of a mind tile move: a slow diagonal drift, a gentle sway in place, or not at all.
+enum TileEmojiMotion { drift, float, still }
+
+/// How a grid changes when a pinch changes its column count.
+enum GridResizeAnimation { fly, zoom, crossfade }
+
+/// The order of a day's tiles; within each kind they stay in time order.
+enum FeedSortOrder { time, mindsFirst, mediaFirst }
+
+/// How a day's tiles are split under small headers.
+enum FeedGrouping { none, type, timeOfDay }
+
+final class DayFeedSettings {
+  static const int minColumnCount = 2;
+  static const int maxColumnCount = 7;
+  static const List<int> columnCountOptions = [2, 3, 4, 5, 6, 7];
+
+  final int columnCount;
+  final int mindCellSpan;
+  final bool isMindTextVisible;
+  final FeedSortOrder sortOrder;
+  final FeedGrouping grouping;
+
+  const DayFeedSettings({
+    this.columnCount = 4,
+    this.mindCellSpan = 1,
+    this.isMindTextVisible = true,
+    this.sortOrder = FeedSortOrder.time,
+    this.grouping = FeedGrouping.type,
+  });
+
+  DayFeedSettings copyWith({FeedSortOrder? sortOrder, FeedGrouping? grouping}) => DayFeedSettings(
+    columnCount: columnCount,
+    mindCellSpan: mindCellSpan,
+    isMindTextVisible: isMindTextVisible,
+    sortOrder: sortOrder ?? this.sortOrder,
+    grouping: grouping ?? this.grouping,
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      other is DayFeedSettings &&
+      other.columnCount == columnCount &&
+      other.mindCellSpan == mindCellSpan &&
+      other.isMindTextVisible == isMindTextVisible &&
+      other.sortOrder == sortOrder &&
+      other.grouping == grouping;
+
+  @override
+  int get hashCode => Object.hash(columnCount, mindCellSpan, isMindTextVisible, sortOrder, grouping);
+}
+
+/// Calendar day grids; week titles stay in `KeklistSettings.shouldShowTitles`.
+final class CalendarSettings {
+  final int columnCount;
+  final bool isMindTextVisible;
+  final bool isMediaVisible;
+  final FeedSortOrder sortOrder;
+  final FeedGrouping grouping;
+
+  const CalendarSettings({
+    this.columnCount = 4,
+    this.isMindTextVisible = true,
+    this.isMediaVisible = true,
+    this.sortOrder = FeedSortOrder.time,
+    this.grouping = FeedGrouping.none,
+  });
+
+  CalendarSettings copyWith({
+    int? columnCount,
+    bool? isMindTextVisible,
+    bool? isMediaVisible,
+    FeedSortOrder? sortOrder,
+    FeedGrouping? grouping,
+  }) => CalendarSettings(
+    columnCount: columnCount ?? this.columnCount,
+    isMindTextVisible: isMindTextVisible ?? this.isMindTextVisible,
+    isMediaVisible: isMediaVisible ?? this.isMediaVisible,
+    sortOrder: sortOrder ?? this.sortOrder,
+    grouping: grouping ?? this.grouping,
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      other is CalendarSettings &&
+      other.columnCount == columnCount &&
+      other.isMindTextVisible == isMindTextVisible &&
+      other.isMediaVisible == isMediaVisible &&
+      other.sortOrder == sortOrder &&
+      other.grouping == grouping;
+
+  @override
+  int get hashCode => Object.hash(columnCount, isMindTextVisible, isMediaVisible, sortOrder, grouping);
+}
+
+/// How the emotion texture behind a story or viewer page moves with the playing audio/video sound.
+enum StoryTextureAnimation { off, pulse, wave, equalizer, drift, glow }
+
+/// The date header of a story or viewer page: "21 October · Wednesday · 07:14" on one, two or three lines.
+enum StoryDateLayout { oneLine, twoLines, threeLines }
+
+/// Stories and viewer tweaks: texture animation, date header, sound spectrum around circles and how strongly
+/// both react to loudness.
+final class StorySettings {
+  static const double minSensitivity = 0.5;
+  static const double maxSensitivity = 3.0;
+
+  final StoryTextureAnimation textureAnimation;
+  final StoryDateLayout dateLayout;
+  final bool isSpectrumVisible;
+  final double sensitivity;
+
+  const StorySettings({
+    this.textureAnimation = StoryTextureAnimation.pulse,
+    this.dateLayout = StoryDateLayout.oneLine,
+    this.isSpectrumVisible = true,
+    this.sensitivity = 1.0,
+  });
+
+  StorySettings copyWith({
+    StoryTextureAnimation? textureAnimation,
+    StoryDateLayout? dateLayout,
+    bool? isSpectrumVisible,
+    double? sensitivity,
+  }) => StorySettings(
+    textureAnimation: textureAnimation ?? this.textureAnimation,
+    dateLayout: dateLayout ?? this.dateLayout,
+    isSpectrumVisible: isSpectrumVisible ?? this.isSpectrumVisible,
+    sensitivity: (sensitivity ?? this.sensitivity).clamp(minSensitivity, maxSensitivity),
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      other is StorySettings &&
+      other.textureAnimation == textureAnimation &&
+      other.dateLayout == dateLayout &&
+      other.isSpectrumVisible == isSpectrumVisible &&
+      other.sensitivity == sensitivity;
+
+  @override
+  int get hashCode => Object.hash(textureAnimation, dateLayout, isSpectrumVisible, sensitivity);
+}
+
+/// Analytics screen layout: widget order (unknown ids ignored), hidden widgets and the period.
+final class InsightsSettings {
+  final List<String> widgetOrder;
+  final Set<String> hiddenWidgetIds;
+  final int periodIndex;
+
+  const InsightsSettings({this.widgetOrder = const [], this.hiddenWidgetIds = const {}, this.periodIndex = 1});
+
+  InsightsSettings copyWith({List<String>? widgetOrder, Set<String>? hiddenWidgetIds, int? periodIndex}) =>
+      InsightsSettings(
+        widgetOrder: widgetOrder ?? this.widgetOrder,
+        hiddenWidgetIds: hiddenWidgetIds ?? this.hiddenWidgetIds,
+        periodIndex: periodIndex ?? this.periodIndex,
+      );
+}
+
+/// The profile picture kept only on this device: a photo in the app folder, an emoji, or neither (the name's initial).
+final class UserAvatar {
+  final String? emoji;
+  final String? imagePath;
+
+  const UserAvatar({this.emoji, this.imagePath});
+
+  bool get isEmpty => emoji == null && imagePath == null;
+
+  /// Stored as `i:<relative path>` or `e:<emoji>`.
+  String encode() => imagePath != null ? 'i:$imagePath' : 'e:${emoji ?? ''}';
+
+  static UserAvatar? decode(String value) => switch (value) {
+    _ when value.startsWith('i:') => UserAvatar(imagePath: value.substring(2)),
+    _ when value.startsWith('e:') && value.length > 2 => UserAvatar(emoji: value.substring(2)),
+    _ => null,
+  };
+
+  @override
+  bool operator ==(Object other) => other is UserAvatar && other.emoji == emoji && other.imagePath == imagePath;
+
+  @override
+  int get hashCode => Object.hash(emoji, imagePath);
 }
 
 final class KeklistSettings {
-  final bool isMindContentVisible;
-  final String? previousAppVersion;
   final KeklistThemeMode themePreference;
   final KeklistInterfaceStyle interfaceStyle;
   final bool shouldShowTitles;
@@ -34,11 +225,9 @@ final class KeklistSettings {
   final int dataSchemaVersion;
   final bool hasSeenLazyOnboarding;
   final bool isDebugMenuVisible;
-  final bool isPhotoVideoSourceEnabled;
   final bool isWeatherSourceEnabled;
   final double? weatherLatitude;
   final double? weatherLongitude;
-  final bool isMediaFolderSourceEnabled;
   final String? mediaFolderPath;
   final bool isMediaFolderRecursive;
 
@@ -46,9 +235,34 @@ final class KeklistSettings {
   /// twice — including after the user deletes them all. See ADR-0003.
   final bool hasSeededEmotions;
 
+  final DayFeedSettings dayFeed;
+  final InsightsSettings insights;
+  final CalendarSettings calendar;
+  final StorySettings story;
+  final UserAvatar avatar;
+
+  /// Previous avatars, newest first, the current one included; see [UserAvatar.encode].
+  final List<UserAvatar> avatarHistory;
+  final Set<String> hiddenSettingsItemIds;
+  final Set<String> shakeDiscoveredScreenIds;
+  final MindEmotionsPrompt mindEmotionsPrompt;
+  final TileEmojiMotion tileEmojiMotion;
+  final GridResizeAnimation gridResizeAnimation;
+
+  /// Feed ids (`DayFeedItem.id`) of photos and videos hidden from keklist but kept in the gallery.
+  final Set<String> hiddenMediaIds;
+
+  /// Anonymous usage analytics, see `documentation/ANALYTICS_IMPLEMENTATION.md`; on until the user turns it off.
+  final bool isAnalyticsEnabled;
+
+  /// The What's New release last shown and when, see `documentation/WHATS_NEW.md`.
+  final String? whatsNewSeenRelease;
+  final DateTime? whatsNewSeenAt;
+
+  /// The release in which the store review prompt was last requested.
+  final String? reviewPromptedRelease;
+
   KeklistSettings({
-    required this.isMindContentVisible,
-    required this.previousAppVersion,
     required this.themePreference,
     required this.interfaceStyle,
     required this.shouldShowTitles,
@@ -57,19 +271,97 @@ final class KeklistSettings {
     required this.dataSchemaVersion,
     required this.hasSeenLazyOnboarding,
     required this.isDebugMenuVisible,
-    required this.isPhotoVideoSourceEnabled,
     this.isWeatherSourceEnabled = false,
     this.weatherLatitude,
     this.weatherLongitude,
-    this.isMediaFolderSourceEnabled = false,
     this.mediaFolderPath,
     this.isMediaFolderRecursive = false,
     this.hasSeededEmotions = false,
+    this.dayFeed = const DayFeedSettings(),
+    this.insights = const InsightsSettings(),
+    this.calendar = const CalendarSettings(),
+    this.story = const StorySettings(),
+    this.avatar = const UserAvatar(),
+    this.avatarHistory = const [],
+    this.hiddenSettingsItemIds = const {},
+    this.shakeDiscoveredScreenIds = const {},
+    this.mindEmotionsPrompt = MindEmotionsPrompt.afterSave,
+    this.tileEmojiMotion = TileEmojiMotion.drift,
+    this.gridResizeAnimation = GridResizeAnimation.fly,
+    this.hiddenMediaIds = const {},
+    this.isAnalyticsEnabled = true,
+    this.whatsNewSeenRelease,
+    this.whatsNewSeenAt,
+    this.reviewPromptedRelease,
   });
 
+  KeklistSettings copyWith({
+    KeklistThemeMode? themePreference,
+    KeklistInterfaceStyle? interfaceStyle,
+    bool? shouldShowTitles,
+    String? userName,
+    SupportedLanguage? language,
+    int? dataSchemaVersion,
+    bool? hasSeenLazyOnboarding,
+    bool? isDebugMenuVisible,
+    bool? isWeatherSourceEnabled,
+    double? weatherLatitude,
+    double? weatherLongitude,
+    String? mediaFolderPath,
+    bool? isMediaFolderRecursive,
+    bool? hasSeededEmotions,
+    DayFeedSettings? dayFeed,
+    InsightsSettings? insights,
+    CalendarSettings? calendar,
+    StorySettings? story,
+    UserAvatar? avatar,
+    List<UserAvatar>? avatarHistory,
+    Set<String>? hiddenSettingsItemIds,
+    Set<String>? shakeDiscoveredScreenIds,
+    MindEmotionsPrompt? mindEmotionsPrompt,
+    TileEmojiMotion? tileEmojiMotion,
+    GridResizeAnimation? gridResizeAnimation,
+    Set<String>? hiddenMediaIds,
+    bool? isAnalyticsEnabled,
+    String? whatsNewSeenRelease,
+    DateTime? whatsNewSeenAt,
+    String? reviewPromptedRelease,
+  }) {
+    return KeklistSettings(
+      themePreference: themePreference ?? this.themePreference,
+      interfaceStyle: interfaceStyle ?? this.interfaceStyle,
+      shouldShowTitles: shouldShowTitles ?? this.shouldShowTitles,
+      userName: userName ?? this.userName,
+      language: language ?? this.language,
+      dataSchemaVersion: dataSchemaVersion ?? this.dataSchemaVersion,
+      hasSeenLazyOnboarding: hasSeenLazyOnboarding ?? this.hasSeenLazyOnboarding,
+      isDebugMenuVisible: isDebugMenuVisible ?? this.isDebugMenuVisible,
+      isWeatherSourceEnabled: isWeatherSourceEnabled ?? this.isWeatherSourceEnabled,
+      weatherLatitude: weatherLatitude ?? this.weatherLatitude,
+      weatherLongitude: weatherLongitude ?? this.weatherLongitude,
+      mediaFolderPath: mediaFolderPath ?? this.mediaFolderPath,
+      isMediaFolderRecursive: isMediaFolderRecursive ?? this.isMediaFolderRecursive,
+      hasSeededEmotions: hasSeededEmotions ?? this.hasSeededEmotions,
+      dayFeed: dayFeed ?? this.dayFeed,
+      insights: insights ?? this.insights,
+      calendar: calendar ?? this.calendar,
+      story: story ?? this.story,
+      avatar: avatar ?? this.avatar,
+      avatarHistory: avatarHistory ?? this.avatarHistory,
+      hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
+      shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
+      mindEmotionsPrompt: mindEmotionsPrompt ?? this.mindEmotionsPrompt,
+      tileEmojiMotion: tileEmojiMotion ?? this.tileEmojiMotion,
+      gridResizeAnimation: gridResizeAnimation ?? this.gridResizeAnimation,
+      hiddenMediaIds: hiddenMediaIds ?? this.hiddenMediaIds,
+      isAnalyticsEnabled: isAnalyticsEnabled ?? this.isAnalyticsEnabled,
+      whatsNewSeenRelease: whatsNewSeenRelease ?? this.whatsNewSeenRelease,
+      whatsNewSeenAt: whatsNewSeenAt ?? this.whatsNewSeenAt,
+      reviewPromptedRelease: reviewPromptedRelease ?? this.reviewPromptedRelease,
+    );
+  }
+
   SettingsObject toObject() => SettingsObject()
-    ..isMindContentVisible = isMindContentVisible
-    ..previousAppVersion = previousAppVersion
     ..isDarkMode = themePreference == KeklistThemeMode.dark
     ..themePreferenceIndex = themePreference.index
     ..interfaceStyleIndex = interfaceStyle.index
@@ -79,18 +371,44 @@ final class KeklistSettings {
     ..dataSchemaVersion = dataSchemaVersion
     ..hasSeenLazyOnboarding = hasSeenLazyOnboarding
     ..isDebugMenuVisible = isDebugMenuVisible
-    ..isPhotoVideoSourceEnabled = isPhotoVideoSourceEnabled
     ..isWeatherSourceEnabled = isWeatherSourceEnabled
     ..weatherLatitude = weatherLatitude
     ..weatherLongitude = weatherLongitude
-    ..isMediaFolderSourceEnabled = isMediaFolderSourceEnabled
     ..mediaFolderPath = mediaFolderPath
     ..isMediaFolderRecursive = isMediaFolderRecursive
-    ..hasSeededEmotions = hasSeededEmotions;
+    ..hasSeededEmotions = hasSeededEmotions
+    ..dayFeedColumnCount = dayFeed.columnCount
+    ..dayFeedMindCellSpan = dayFeed.mindCellSpan
+    ..isDayFeedMindTextVisible = dayFeed.isMindTextVisible
+    ..dayFeedSortOrderIndex = dayFeed.sortOrder.index
+    ..dayFeedGroupingIndex = dayFeed.grouping.index
+    ..insightsWidgetOrder = insights.widgetOrder
+    ..hiddenInsightsWidgetIds = insights.hiddenWidgetIds.toList()
+    ..insightsPeriodIndex = insights.periodIndex
+    ..calendarColumnCount = calendar.columnCount
+    ..isCalendarMindTextVisible = calendar.isMindTextVisible
+    ..isCalendarMediaVisible = calendar.isMediaVisible
+    ..calendarSortOrderIndex = calendar.sortOrder.index
+    ..calendarGroupingIndex = calendar.grouping.index
+    ..storyTextureAnimationIndex = story.textureAnimation.index
+    ..storyDateLayoutIndex = story.dateLayout.index
+    ..isStorySpectrumVisible = story.isSpectrumVisible
+    ..storySensitivity = story.sensitivity
+    ..avatarEmoji = avatar.emoji
+    ..avatarImagePath = avatar.imagePath
+    ..avatarHistory = [for (final UserAvatar entry in avatarHistory) entry.encode()]
+    ..mindEmotionsPromptIndex = mindEmotionsPrompt.index
+    ..tileEmojiMotionIndex = tileEmojiMotion.index
+    ..gridResizeAnimationIndex = gridResizeAnimation.index
+    ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()
+    ..hiddenMediaIds = hiddenMediaIds.toList()
+    ..isAnalyticsEnabled = isAnalyticsEnabled
+    ..shakeDiscoveredScreenIds = shakeDiscoveredScreenIds.toList()
+    ..whatsNewSeenRelease = whatsNewSeenRelease
+    ..whatsNewSeenAtMs = whatsNewSeenAt?.millisecondsSinceEpoch
+    ..reviewPromptedRelease = reviewPromptedRelease;
 
   factory KeklistSettings.initial() => KeklistSettings(
-        isMindContentVisible: true,
-        previousAppVersion: null,
         themePreference: KeklistThemeMode.system,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,
         shouldShowTitles: true,
@@ -99,11 +417,9 @@ final class KeklistSettings {
         dataSchemaVersion: 0,
         hasSeenLazyOnboarding: false,
         isDebugMenuVisible: false,
-        isPhotoVideoSourceEnabled: false,
         isWeatherSourceEnabled: false,
         weatherLatitude: null,
         weatherLongitude: null,
-        isMediaFolderSourceEnabled: false,
         mediaFolderPath: null,
         isMediaFolderRecursive: false,
         hasSeededEmotions: false,

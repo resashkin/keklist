@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_print
 
+import 'package:keklist/domain/services/analytics/analytics.dart';
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as developer;
-import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:crypto/crypto.dart';
@@ -13,6 +14,11 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
+import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
+import 'package:keklist/domain/repositories/media_index/object/media_day_index_object.dart';
+import 'package:keklist/domain/services/media_index/gallery_indexer.dart';
+import 'package:keklist/domain/services/media_index/photo_library_gallery_source.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:keklist/domain/repositories/tabs/tabs_settings_repository.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
@@ -31,7 +37,6 @@ import 'package:keklist/domain/hive_constants.dart';
 import 'package:keklist/domain/repositories/settings/object/settings_object.dart';
 import 'package:keklist/domain/repositories/debug_menu/object/debug_menu_object.dart';
 import 'package:keklist/presentation/blocs/audio_player_bloc/audio_player_bloc.dart';
-import 'package:keklist/presentation/blocs/mind_creator_bloc/mind_creator_bloc.dart';
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_bloc.dart';
 import 'package:keklist/presentation/blocs/user_profile_bloc/user_profile_bloc.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
@@ -43,20 +48,25 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
-import 'package:keklist/presentation/cubits/used_emoji/used_emoji_cubit.dart';
-import 'package:keklist/presentation/cubits/mind_searcher/mind_searcher_cubit.dart';
 import 'package:keklist/presentation/cubits/weather/weather_cubit.dart';
-import 'package:keklist/presentation/screens/date_gallery/bloc/date_gallery_bloc.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_media_tile/day_folder_media_preview_cubit.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_media_tile/day_media_preview_cubit.dart';
 import 'package:keklist/di/containers.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
+import 'package:keklist/domain/services/ai/ai_backend.dart';
+import 'package:keklist/domain/services/ai/ai_model_store.dart';
+import 'package:keklist/domain/services/ai/ai_storage.dart';
+import 'package:keklist/domain/services/ai/local_ai_backend.dart';
+import 'package:keklist/domain/services/phone_web/phone_ai_backend.dart';
+import 'package:keklist/domain/services/phone_web/phone_api.dart';
+import 'package:keklist/domain/services/web_server/ai_routes.dart';
+import 'package:keklist/domain/services/web_server/gallery_routes.dart';
+import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
+import 'package:keklist/domain/services/web_server/web_access.dart';
 
-import 'presentation/native/ios/watch/watch_communication_manager.dart';
 
 // TODO: fix or exclude home_widget for android only
 
@@ -81,6 +91,8 @@ final class _AppRoot extends StatefulWidget {
 final class _AppRootState extends State<_AppRoot> {
   final _stepNotifier = ValueNotifier<String>('');
   Widget? _app;
+  AppLifecycleListener? _galleryIndexLifecycle;
+  StreamSubscription<void>? _libraryChanges;
 
   @override
   void initState() {
@@ -100,29 +112,39 @@ final class _AppRootState extends State<_AppRoot> {
 
     _stepNotifier.value = 'Finishing up...';
     final streamingPrefs = await StreamingSharedPreferences.instance;
-    final injector = MainContainer(streamingSharedPreferences: streamingPrefs).initialize(Injector());
+    final injector = MainContainer(streamingSharedPreferences: streamingPrefs, hiveCipher: cipher).initialize(Injector());
 
-    _connectToWatchCommunicationManager(injector);
     _enableDebugBLOCLogs(injector);
+    await Analytics.setUp(injector.get<SettingsRepository>().value);
 
-    final debugBox = Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName);
-    final useProductionRC = debugBox.get(DebugMenuType.useProductionRevenueCat.name)?.value ?? false;
-    final String revenueCatApiKey = (!kDebugMode || useProductionRC)
-        ? switch (defaultTargetPlatform) {
-            TargetPlatform.iOS => dotenv.env['REVENUE_CAT_PROD_API_IOS_KEY']!,
-            TargetPlatform.android => dotenv.env['REVENUE_CAT_PROD_API_ANDROID_KEY']!,
-            _ => dotenv.env['REVENUE_CAT_TEST_API_KEY']!,
-          }
-        : dotenv.env['REVENUE_CAT_TEST_API_KEY']!;
-    await Purchases.configure(PurchasesConfiguration(revenueCatApiKey));
+    // The web version's dotenv carries no keys; purchases happen on the phone.
+    if (!kIsPhoneWeb) await Purchases.configure(PurchasesConfiguration(_revenueCatApiKey()));
 
-    final app = _getApplication(injector);
+    final (AiBackend?, AiModelStore?) ai = await _createAi(injector, cipher);
+    final KeklistWebServer? webServer = kIsWeb ? null : await _startWebServer(injector, ai.$1);
+    final app = _getApplication(injector, webServer, ai);
     setState(() => _app = app);
+    _startGalleryIndexing(injector.get<GalleryIndexer>());
+  }
+
+  void _startGalleryIndexing(GalleryIndexer indexer) {
+    indexer.sync();
+    _galleryIndexLifecycle = AppLifecycleListener(onResume: indexer.sync);
+    if (indexer.currentProgress.status == GalleryIndexStatus.unsupported) return;
+    // Watching starts once access is known, so it never prompts for photo access by itself.
+    indexer.progress.firstWhere((progress) => progress.status == GalleryIndexStatus.ready).then((_) {
+      if (!mounted) return;
+      _libraryChanges = PhotoLibraryGallerySource.libraryChanges()
+          .debounceTime(const Duration(seconds: 1))
+          .listen((_) => indexer.sync());
+    });
   }
 
   @override
   void dispose() {
     _stepNotifier.dispose();
+    _galleryIndexLifecycle?.dispose();
+    _libraryChanges?.cancel();
     super.dispose();
   }
 
@@ -133,6 +155,18 @@ final class _AppRootState extends State<_AppRoot> {
       child: _app ?? PreparationScreen(key: const ValueKey('prep'), stepNotifier: _stepNotifier),
     );
   }
+}
+
+String _revenueCatApiKey() {
+  final debugBox = Hive.box<DebugMenuObject>(HiveConstants.debugMenuBoxName);
+  final useProductionRC = debugBox.get(DebugMenuType.useProductionRevenueCat.name)?.value ?? false;
+  return (!kDebugMode || useProductionRC)
+      ? switch (defaultTargetPlatform) {
+          TargetPlatform.iOS => dotenv.env['REVENUE_CAT_PROD_API_IOS_KEY']!,
+          TargetPlatform.android => dotenv.env['REVENUE_CAT_PROD_API_ANDROID_KEY']!,
+          _ => dotenv.env['REVENUE_CAT_TEST_API_KEY']!,
+        }
+      : dotenv.env['REVENUE_CAT_TEST_API_KEY']!;
 }
 
 // ---------------------------------------------------------------------------
@@ -235,6 +269,9 @@ Future<void> _initHive(HiveAesCipher cipher) async {
   if (!Hive.isAdapterRegistered(EmotionObjectAdapter().typeId)) {
     Hive.registerAdapter<EmotionObject>(EmotionObjectAdapter());
   }
+  if (!Hive.isAdapterRegistered(MediaDayIndexObjectAdapter().typeId)) {
+    Hive.registerAdapter<MediaDayIndexObject>(MediaDayIndexObjectAdapter());
+  }
 
   await Hive.initFlutter();
 
@@ -254,7 +291,8 @@ Future<void> _initHive(HiveAesCipher cipher) async {
   final Box<EmotionObject> emotionBox =
       await Hive.openBox<EmotionObject>(HiveConstants.emotionBoxName, encryptionCipher: cipher);
 
-  await _runMigrations(settingsBox, mindBox, emotionBox);
+  // The phone migrates its own data; the web version only shows it.
+  if (!kIsPhoneWeb) await _runMigrations(settingsBox, mindBox, emotionBox);
 }
 
 Future<void> _runMigrations(
@@ -279,31 +317,62 @@ Future<void> _runMigrations(
 // App widget tree
 // ---------------------------------------------------------------------------
 
-Widget _getApplication(Injector mainInjector) => MultiProvider(
+/// The phone runs models itself; the web version served by the phone asks it. The Telegram web build has no AI.
+Future<(AiBackend?, AiModelStore?)> _createAi(Injector injector, HiveAesCipher cipher) async {
+  if (kIsPhoneWeb) return (PhoneAiBackend(api: injector.get<PhoneApi>()), null);
+  if (kIsWeb) return (null, null);
+  final AiStorage storage = await AiStorage.open(cipher);
+  final AiModelStore models = AiModelStore(storage: storage);
+  await models.start();
+  final AiBackend backend = LocalAiBackend(
+    storage: storage,
+    models: models,
+    minds: injector.get<MindRepository>(),
+    emotions: injector.get<EmotionRepository>(),
+  );
+  return (backend, models);
+}
+
+/// The phone serves the web version to browsers in its Wi-Fi, by its address, once a PIN is set.
+Future<KeklistWebServer> _startWebServer(Injector injector, AiBackend? ai) async {
+  final KeklistWebServer server = KeklistWebServer(
+    access: await WebAccess.load(),
+    mindRepository: injector.get<MindRepository>(),
+    emotionRepository: injector.get<EmotionRepository>(),
+    settingsRepository: injector.get<SettingsRepository>(),
+    fileRepository: injector.get<AppFileRepository>(),
+    gallery: GalleryRoutes(indexer: injector.get<GalleryIndexer>(), settings: injector.get<SettingsRepository>()),
+    ai: ai == null ? null : AiRoutes(backend: ai),
+  );
+  unawaited(server.start());
+  return server;
+}
+
+Widget _getApplication(Injector mainInjector, KeklistWebServer? webServer, (AiBackend?, AiModelStore?) ai) => MultiProvider(
   providers: [
+    if (webServer != null) ChangeNotifierProvider<KeklistWebServer>.value(value: webServer),
+    if (ai.$1 case final AiBackend backend) ChangeNotifierProvider<AiBackend>.value(value: backend),
+    if (ai.$2 case final AiModelStore models) ChangeNotifierProvider<AiModelStore>.value(value: models),
     RepositoryProvider(create: (context) => mainInjector.get<MindRepository>()),
     RepositoryProvider(create: (context) => mainInjector.get<AppFileRepository>()),
     RepositoryProvider(create: (context) => mainInjector.get<WeatherRepository>()),
+    RepositoryProvider(create: (context) => mainInjector.get<GalleryIndexer>()),
   ],
   child: MultiBlocProvider(
     providers: [
       BlocProvider(
         create: (context) => MindBloc(
-          mindSearcherCubit: mainInjector.get<MindSearcherCubit>(),
           mindRepository: mainInjector.get<MindRepository>(),
           fileRepository: mainInjector.get<AppFileRepository>(),
         ),
       ),
-      BlocProvider(create: (context) => mainInjector.get<MindSearcherCubit>()),
-      BlocProvider(create: (context) => mainInjector.get<UsedEmojiCubit>()),
-      BlocProvider(create: (context) => MindCreatorBloc(mindRepository: mainInjector.get<MindRepository>())),
       BlocProvider<SettingsBloc>.value(value: mainInjector.get<SettingsBloc>()),
       BlocProvider<EmotionBloc>.value(value: mainInjector.get<EmotionBloc>()..add(EmotionGetList())),
       BlocProvider(
         create: (context) => UserProfileBloc(
-          mindRepository: mainInjector.get<MindRepository>(),
           settingsRepository: mainInjector.get<SettingsRepository>(),
-        ),
+          fileRepository: mainInjector.get<AppFileRepository>(),
+        )..add(UserProfileGet()),
       ),
       BlocProvider(create: (context) => DebugMenuBloc(repository: mainInjector.get<DebugMenuRepository>())),
       BlocProvider(
@@ -322,6 +391,7 @@ Widget _getApplication(Injector mainInjector) => MultiProvider(
         create: (context) => LazyOnboardingBloc(
           mindRepository: mainInjector.get<MindRepository>(),
           settingsRepository: mainInjector.get<SettingsRepository>(),
+          emotionRepository: mainInjector.get<EmotionRepository>(),
         ),
       ),
     ],
@@ -361,18 +431,8 @@ void _enableDebugBLOCLogs(Injector injector) {
   );
 }
 
-void _connectToWatchCommunicationManager(Injector mainInjector) {
-  if (kIsWeb) {
-    // no-op
-  } else if (Platform.isIOS) {
-    mainInjector.get<WatchCommunicationManager>().connect();
-  }
-}
-
 const Map<Type, String> _kBlocEmojis = {
   MindBloc: '🧠',
-  MindCreatorBloc: '✍️',
-  MindSearcherCubit: '🔎',
   SettingsBloc: '⚙️',
   DebugMenuBloc: '🐞',
   MembershipBloc: '💎',
@@ -380,11 +440,7 @@ const Map<Type, String> _kBlocEmojis = {
   LazyOnboardingBloc: '🚀',
   AudioPlayerBloc: '🎧',
   UserProfileBloc: '👤',
-  UsedEmojiCubit: '🎨',
   WeatherCubit: '🌤️',
-  DayMediaPreviewCubit: '🖼️',
-  DayFolderMediaPreviewCubit: '📁',
-  DateGalleryBloc: '🗓️',
 };
 
 // Stable fallback pool for BLoCs not explicitly mapped above.

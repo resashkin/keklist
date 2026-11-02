@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:gap/gap.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
-import 'package:keklist/presentation/core/widgets/sensitive_widget.dart';
+import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/audio/audio_track_widget.dart';
 
 final class MindBulletWidget extends StatelessWidget {
@@ -17,21 +17,19 @@ final class MindBulletWidget extends StatelessWidget {
 
     final List<Widget> contentWidgets = pieces.isEmpty
         ? <Widget>[
-            SensitiveWidget(
-              child: Text(model.content.plainText, maxLines: null, style: const TextStyle(fontSize: 15.0)),
-            ),
+            Text(model.content.plainText, maxLines: null, style: const TextStyle(fontSize: 15.0)),
           ]
         : <Widget>[];
 
     if (contentWidgets.isEmpty) {
       for (final BaseMindNotePiece piece in pieces) {
+        if (piece is MindNoteText && piece.value.trim().isEmpty) continue;
         if (contentWidgets.isNotEmpty) {
           contentWidgets.add(const Gap(12.0));
         }
         contentWidgets.add(
           piece.map(
-            text: (MindNoteText textPiece) => SensitiveWidget(
-              child: Align(
+            text: (MindNoteText textPiece) => Align(
                 alignment: .centerRight,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: maxBubbleWidth),
@@ -40,7 +38,7 @@ final class MindBulletWidget extends StatelessWidget {
                     child: Padding(
                       padding: .symmetric(horizontal: 14.0, vertical: 10.0),
                       child: Text(
-                        textPiece.value,
+                        textPiece.value.trim(),
                         maxLines: null,
                         style: TextStyle(fontSize: 15.0, color: colorScheme.onPrimaryContainer),
                       ),
@@ -48,10 +46,8 @@ final class MindBulletWidget extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            audio: (MindNoteAudio audioPiece) => SensitiveWidget(
-              child: AudioTrackWidget(audio: audioPiece, emoji: model.emoji),
-            ),
+            audio: (MindNoteAudio audioPiece) => AudioTrackWidget(audio: audioPiece),
+            video: (MindNoteVideo videoPiece) => Align(alignment: .centerRight, child: RoundVideoMessage(video: videoPiece, size: 200.0)),
             unknown: () => Padding(
               padding: .symmetric(horizontal: 14.0, vertical: 8.0),
               child: Text('Not supported media :(', style: const TextStyle(fontSize: 15.0)),
@@ -65,12 +61,6 @@ final class MindBulletWidget extends StatelessWidget {
       crossAxisAlignment: .start,
       mainAxisSize: .max,
       children: [
-        // TODO: just wathing how it goes without emoji on start...
-        // const Gap(10.0),
-        // Text(
-        //   model.emoji,
-        //   style: const TextStyle(fontSize: 25.0),
-        // ),
         const Gap(10.0),
         Flexible(
           fit: .tight,
@@ -87,8 +77,7 @@ final class MindBulletWidget extends StatelessWidget {
 
 final class MindBulletModel {
   final String entityId;
-  final String emoji;
   final MindNoteContent content;
 
-  const MindBulletModel({required this.entityId, required this.emoji, required this.content});
+  const MindBulletModel({required this.entityId, required this.content});
 }

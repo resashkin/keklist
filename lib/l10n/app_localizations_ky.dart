@@ -9,6 +9,219 @@ class AppLocalizationsKy extends AppLocalizations {
   AppLocalizationsKy([String locale = 'ky']) : super(locale);
 
   @override
+  String get insightsBrightestPeriod => 'Эң жаркын мезгил';
+
+  @override
+  String get insightsPeriodWeek => 'Апта';
+
+  @override
+  String get insightsPeriodMonth => 'Ай';
+
+  @override
+  String get insightsPeriodYear => 'Жыл';
+
+  @override
+  String get insightsPeriodAllTime => 'Бардык убакыт';
+
+  @override
+  String insightsVsLastWeek(String delta) {
+    return 'Өткөн жумага салыштырмалуу $delta';
+  }
+
+  @override
+  String insightsVsLastMonth(String delta) {
+    return 'Өткөн айга салыштырмалуу $delta';
+  }
+
+  @override
+  String insightsVsLastYear(String delta) {
+    return 'Өткөн жылга салыштырмалуу $delta';
+  }
+
+  @override
+  String get insightsCategorySummary => 'Сереп';
+
+  @override
+  String get insightsCategoryEmotions => 'Эмоциялар';
+
+  @override
+  String get insightsCategoryActivity => 'Активдүүлүк';
+
+  @override
+  String get insightsCategoryMemories => 'Эскерүүлөр';
+
+  @override
+  String get insightsCategoryMedia => 'Медиа';
+
+  @override
+  String get insightsCounters => 'Сандар менен';
+
+  @override
+  String get insightsMinds => 'Жазуулар';
+
+  @override
+  String get insightsActiveDays => 'Активдүү күндөр';
+
+  @override
+  String get insightsWords => 'Сөздөр';
+
+  @override
+  String get insightsBrightestDay => 'Эң жаркын күн';
+
+  @override
+  String get insightsBrightestWeek => 'Эң жаркын жума';
+
+  @override
+  String get insightsBrightestMonth => 'Эң жаркын ай';
+
+  @override
+  String get insightsBrightestYear => 'Эң жаркын жыл';
+
+  @override
+  String insightsBrightestDetails(String minds, String emotions, String media) {
+    return 'жазуу: $minds · эмоция: $emotions · медиа: $media';
+  }
+
+  @override
+  String get insightsEmotionDistribution => 'Эмоциялар';
+
+  @override
+  String get insightsEmotionTrend => 'Эмоциялардын динамикасы';
+
+  @override
+  String get insightsEmotionPairs => 'Бирге кездешкен эмоциялар';
+
+  @override
+  String get insightsEmotionRhythm => 'Эмоционалдык ритм';
+
+  @override
+  String get insightsByWeekday => 'Жуманын күндөрү боюнча';
+
+  @override
+  String get insightsByDayPart => 'Суткалык убакыт боюнча';
+
+  @override
+  String get insightsNight => 'Түн';
+
+  @override
+  String get insightsMorning => 'Эртең менен';
+
+  @override
+  String get insightsAfternoon => 'Күндүз';
+
+  @override
+  String get insightsEvening => 'Кечинде';
+
+  @override
+  String get insightsStreak => 'Серия';
+
+  @override
+  String get insightsStreakLabel => 'күн катары менен';
+
+  @override
+  String insightsLongestStreak(String count) {
+    return 'Рекорд: $count';
+  }
+
+  @override
+  String get insightsStreakKeepGoing =>
+      'Серияны үзбөө үчүн бүгүн жазуу кошуңуз';
+
+  @override
+  String get insightsHeatmap => 'Активдүүлүк картасы';
+
+  @override
+  String get insightsActivityTime => 'Суткалык убакыт';
+
+  @override
+  String insightsPeakHour(String hour) {
+    return 'Көбүнчө $hour чамасында';
+  }
+
+  @override
+  String get insightsOnThisDay => 'Ошол кезде';
+
+  @override
+  String get insightsMediaCounters => 'Медиа';
+
+  @override
+  String get insightsPhotos => 'Сүрөттөр';
+
+  @override
+  String get insightsVideos => 'Видеолор';
+
+  @override
+  String get insightsVoiceNotes => 'Үн жазуулары';
+
+  @override
+  String get insightsRoundVideos => 'Тегерек видеолор';
+
+  @override
+  String get insightsEmptyPeriod => 'Бул мезгилде азырынча жазуу жок';
+
+  @override
+  String get insightsEmptyEmotions =>
+      'Муну көрүү үчүн жазууларга эмоция белгилеңиз';
+
+  @override
+  String get insightsEmptyPairs =>
+      'Жуптарды көрүү үчүн жазууга эки эмоция белгилеңиз';
+
+  @override
+  String get insightsEmptyOnThisDay =>
+      'Бир жума, ай, жарым жыл жана бир жыл мурун азырынча эч нерсе жок';
+
+  @override
+  String get insightsEmptyStreak => 'Серияны баштоо үчүн бүгүн жазуу кошуңуз';
+
+  @override
+  String get insightsCustomize => 'Аналитиканы ыңгайлаштыруу';
+
+  @override
+  String get insightsCustomizeDescription =>
+      'Карточкаларды күйгүзүп же өчүрүп, тартып тартибин өзгөртүңүз';
+
+  @override
+  String get tweakReset => 'Баштапкы абалга';
+
+  @override
+  String get activeTasks => 'Активдүү тапшырмалар';
+
+  @override
+  String get galleryIndex => 'Галерея индекси';
+
+  @override
+  String get galleryIndexNoAccess => 'Сүрөттөргө уруксат жок';
+
+  @override
+  String get galleryIndexNotIndexed => 'Азырынча индекстелген жок';
+
+  @override
+  String galleryIndexIndexing(String done, String total) {
+    return 'Индекстөө $done / $total';
+  }
+
+  @override
+  String galleryIndexReady(String count, String time) {
+    return '$count сүрөт жана видео · жаңыртылды $time';
+  }
+
+  @override
+  String galleryIndexThumbnails(String size) {
+    return 'Миниатюралар кеши: $size';
+  }
+
+  @override
+  String get galleryIndexRebuildTitle => 'Галерея индексин кайра түзөбүзбү?';
+
+  @override
+  String get galleryIndexRebuildMessage =>
+      'Миниатюралар өчүрүлүп, медиатека кайра текшерилет.';
+
+  @override
+  String get galleryIndexRebuild => 'Кайра түзүү';
+
+  @override
   String get settings => 'Сөздүктөр';
 
   @override
@@ -42,7 +255,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get extraActions => 'Кошумча аракеттер';
 
   @override
-  String get mindOptions => 'Ой варианттары';
+  String get mindOptions => 'Жазуунун параметрлери';
 
   @override
   String get edit => 'Түзөтүү';
@@ -64,9 +277,6 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get showDigest => '... үчүн жыйынтык көрсөтүү';
-
-  @override
-  String get showAll => 'Баарын көрсөтүү';
 
   @override
   String get translateToEnglish => 'Англис тилине которуу';
@@ -99,19 +309,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get tabsSettings => 'Таб жөндөөлөрү';
 
   @override
-  String get whatsNew => 'Жаңы нерселер?';
-
-  @override
-  String get releaseNotes => 'Релиз жазмалары';
-
-  @override
-  String get suggestFeature => 'Өзгөчөлүктү сунуш кылуу';
-
-  @override
   String get sendFeedback => 'Пикир-божомол жөнөтүү';
-
-  @override
-  String get emailUs => 'Бизге email жазыңыз';
 
   @override
   String get clearOfflineDataWarning =>
@@ -139,19 +337,19 @@ class AppLocalizationsKy extends AppLocalizations {
   String get save => 'Сактоо';
 
   @override
-  String get mind => 'Ой';
+  String get mind => 'Жазуу';
 
   @override
   String get profile => 'Профиль';
 
   @override
-  String get insights => 'Талдоо';
+  String get insights => 'Профиль';
 
   @override
   String get calendar => 'Календарь';
 
   @override
-  String get debugMenu => 'Debug менюсу';
+  String get debugMenu => 'Иштеп чыгуучунун менюсу';
 
   @override
   String get discussion => 'Талкуулоо';
@@ -161,9 +359,6 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get dangerZone => 'Кооптуу зона';
-
-  @override
-  String get editMind => 'Ойду түзөтүү';
 
   @override
   String get enterTokenHere => 'Токенди бул жерге киргизиңиз';
@@ -190,22 +385,13 @@ class AppLocalizationsKy extends AppLocalizations {
   String get send => 'ЖӨНӨТҮҮ';
 
   @override
-  String get updateYourNickname => 'Никнэмиңизди жаңылоо';
-
-  @override
-  String get yourNickname => 'Сиздин никнэмиңиз';
-
-  @override
-  String get create => 'Жазуу';
+  String get create => 'Түзүү';
 
   @override
   String get yourFolderName => 'Сиздин папка атыңыз';
 
   @override
-  String get noMindsInSelectedPeriod => 'Тандалган мезгилде ойлор жок';
-
-  @override
-  String get noMindsForPeriod => 'Бул мезгил үчүн ойлор жок';
+  String get noMindsForPeriod => 'Бул мезгилде жазуу жок';
 
   @override
   String get selectPeriod => 'Мезгилди тандоо ...';
@@ -214,10 +400,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get digest => 'Жыйынтык';
 
   @override
-  String get minds => 'Ойлор';
-
-  @override
-  String get searchForYourNotes => 'Эскертмелериңизди издөө';
+  String get minds => 'Жазуулар';
 
   @override
   String get searchYourEmoji => 'Эмоджиңизди издөө...';
@@ -226,24 +409,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get writeSomething => 'Бир нерсе жазыңыз...';
 
   @override
-  String get topMinds => 'Эң жакшы ойлор';
+  String get todayMinds => 'Бүгүнкү жазуулар';
 
   @override
-  String get todayMinds => 'Бүгүнкү ойлор';
-
-  @override
-  String get randomMind => 'Туш келди ой';
-
-  @override
-  String get spectrum => 'Спектр';
-
-  @override
-  String get youDidNotCollectAnyEntriesYet =>
-      'Сиз али эч кандай жазма чогулткан жоксуз';
-
-  @override
-  String get pleaseAuthenticateToShowContent =>
-      'Ойдуңуздун мазмунун көрсөтүү үчүн аутентификациядан өтүңүз';
+  String get youDidNotCollectAnyEntriesYet => 'Сизде азырынча бир да жазуу жок';
 
   @override
   String get areYouSure => 'Ишенимиңиз келип турабы?';
@@ -271,32 +440,24 @@ class AppLocalizationsKy extends AppLocalizations {
   String get thisYear => 'Бул жыл';
 
   @override
-  String get calendarDescription => 'Жазмалар календары менен негизги экран';
+  String get calendarDescription => 'Жазуулардын календары бар негизги экран';
 
   @override
-  String get insightsDescription => 'Бардык жазмаларыңыздын статистикасы';
+  String get insightsDescription => 'Сиз жана жазууларыңыздын статистикасы';
 
   @override
   String get settingsDescription =>
       'Бардык жөндөөлөр экраны (караңгы режим, синхрондоштуруу жана башкалар)';
 
   @override
-  String get profileDescription => 'Профилиңиз менен экран';
-
-  @override
-  String get todayDescription => 'Анткени бүгүнкү ойлор';
+  String get todayDescription => 'Бүгүнкү жазуулар гана';
 
   @override
   String get debugMenuDescription =>
       'Эксперименталдык өзгөчөлүктөрдү иштетүү үчүн өнүктүрүүчү куралдары';
 
   @override
-  String get noMindsForThisDay => 'Бул күн үчүн ойлор жок';
-
-  @override
-  String showMindsForPeriod(String period) {
-    return '$period үчүн ойлорду көрсөтүү';
-  }
+  String get noMindsForThisDay => 'Бул күнү жазуу жок';
 
   @override
   String get week => 'Жума';
@@ -380,7 +541,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get importError => 'Импорт ийгиликсиз';
 
   @override
-  String get mindsToExport => 'Ойлор';
+  String get mindsToExport => 'Жазуулар';
 
   @override
   String get audioFilesToExport => 'Аудио файлдар';
@@ -389,13 +550,13 @@ class AppLocalizationsKy extends AppLocalizations {
   String get emotionsToExport => 'Эмоциялар';
 
   @override
-  String get mindsExported => 'Ойлор экспортталды';
+  String get mindsExported => 'Жазуулар экспорттолду';
 
   @override
   String get audioFilesExported => 'Аудио файлдар экспортталды';
 
   @override
-  String get mindsImported => 'Ойлор импортталды';
+  String get mindsImported => 'Жазуулар импорттолду';
 
   @override
   String get audioFilesImported => 'Аудио файлдар импортталды';
@@ -429,34 +590,7 @@ class AppLocalizationsKy extends AppLocalizations {
       'Жаңы жазуу жасоо үчүн \'Жазуу\' баскычын басыңыз';
 
   @override
-  String get viewPhotos => 'Сүрөттөрдү көрүү';
-
-  @override
   String get noPhotosForDay => 'Бул күндө сүрөттөр табылган жок';
-
-  @override
-  String get dateGallerySubtitle => 'Бул күндүн медиа файлдары';
-
-  @override
-  String dayMediaFilesCount(int count) {
-    return '$count медиа файл бул күнгө';
-  }
-
-  @override
-  String get sources => 'Булактар';
-
-  @override
-  String get sourcesMinds => 'Ойлор';
-
-  @override
-  String get sourcesMindsSubtitle => 'Сиздин ойлоруңуз жана учурларыңыз';
-
-  @override
-  String get sourcesPhotoVideo => 'Сүрөт жана видео';
-
-  @override
-  String get sourcesPhotoVideoSubtitle =>
-      'Бул күн үчүн түзмөктүн сүрөттөрү жана видеолору';
 
   @override
   String get sourcesMediaFolder => 'Медиа файлдар';
@@ -467,12 +601,6 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get mediaFolderSettings => 'Медиа файлдар';
-
-  @override
-  String get mediaFolderNoPath => 'Папка тандалган жок';
-
-  @override
-  String get mediaFolderPickFolder => 'Папканы тандоо';
 
   @override
   String get licenses => 'Лицензиялар';
@@ -495,9 +623,6 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get weatherSaveLocation => 'Жерди сактоо';
-
-  @override
-  String get weatherNoLocation => 'Аба ырайын көрүү үчүн жерди коюңуз';
 
   @override
   String get weatherUseMyLocation => 'Менин жеримди колдонуу';
@@ -523,21 +648,6 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get weatherLocationPermissionPermanentlyDenied =>
       'Геолокацияга уруксат туруктуу берилген жок. Колдонмо жөндөөлөрү ачылууда.';
-
-  @override
-  String get weatherTemperature => 'Температура';
-
-  @override
-  String get weatherUvIndex => 'УК-индекс';
-
-  @override
-  String get weatherHumidity => 'Нымдуулук';
-
-  @override
-  String get weatherWindSpeed => 'Шамалдын ылдамдыгы';
-
-  @override
-  String get weatherPrecipitation => 'Жаан-чачын';
 
   @override
   String get audioRecordTitle => 'Аудио жаздыруу';
@@ -568,12 +678,6 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get audioRecordStopError =>
       'Жаздырууну токтотуу мүмкүн болмоду. Кайталап аракет кылыңыз.';
-
-  @override
-  String get emojiPickerUsedInMinds => 'Used in minds';
-
-  @override
-  String get emojiPickerAll => 'All';
 
   @override
   String proUserFooter(String price, String date) {
@@ -619,13 +723,7 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get emotionInUseMessage =>
-      'Бул эмоция кээ бир майндтарда колдонулат. Аны ошол жерде сактоо үчүн архивдеңиз же бардык жерден өчүрүңүз.';
-
-  @override
-  String get emotionPickHint => 'Белгилөө үчүн басыңыз';
-
-  @override
-  String get emotionDrillHint => 'тереңдөө үчүн кармап туруңуз';
+      'Бул эмоция кээ бир жазууларда колдонулат. Аны ошол жерде сактоо үчүн архивдеңиз же бардык жерден өчүрүңүз.';
 
   @override
   String get noEmotionsYet => 'Азырынча эмоциялар жок';
@@ -635,5 +733,642 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get deleteEmotionMessage =>
-      'Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык майндтардан өчүрүлөт.';
+      'Бул эмоцияны өчүрөсүзбү? Ал аны колдонгон бардык жазуулардан өчүрүлөт.';
+
+  @override
+  String get dayFeedTileSettings => 'Плитка жөндөөлөрү';
+
+  @override
+  String get dayFeedColumns => 'Мамычалар';
+
+  @override
+  String get dayFeedMindTileSize => 'Жазуу плиткасынын өлчөмү';
+
+  @override
+  String get dayFeedMindTileSquare => 'Чарчы';
+
+  @override
+  String get dayFeedMindTileWide => 'Кең';
+
+  @override
+  String get dayFeedShowMindText => 'Текстти көрсөтүү';
+
+  @override
+  String get dayFeedPhotoAccessHint =>
+      'Бул жерде сүрөт жана видеолорду көрүү үчүн сүрөткө уруксат бериңиз';
+
+  @override
+  String get dayFeedAllowAccess => 'Уруксат берүү';
+
+  @override
+  String get dayFeedFolderHint =>
+      'Бул жерде сүрөт жана видеолорду көрүү үчүн медиа папканы тандаңыз';
+
+  @override
+  String get dayFeedChooseFolder => 'Тандоо';
+
+  @override
+  String get holdToRecordAudio => 'Үн билдирүү жазуу үчүн басып туруңуз';
+
+  @override
+  String get holdToRecordVideo => 'Видео билдирүү жазуу үчүн басып туруңуз';
+
+  @override
+  String get roundVideoRecordError => 'Видеону жазуу мүмкүн болбоду';
+
+  @override
+  String get roundVideoCameraUnavailable => 'Бул түзмөктө камера жеткиликсиз';
+
+  @override
+  String get roundVideoRetake => 'Кайра тартуу';
+
+  @override
+  String get roundVideoUse => 'Колдонуу';
+
+  @override
+  String get removeMedia => 'Медианы өчүрүү';
+
+  @override
+  String get shakeToCustomize => 'Ыңгайлаштыруу үчүн силкиңиз';
+
+  @override
+  String get shakeToCustomizeHint => 'же аталышты басып туруңуз';
+
+  @override
+  String get customizeSettings => 'Жөндөөлөрдү ыңгайлаштыруу';
+
+  @override
+  String get customizeSettingsDescription =>
+      'Белгиси алынган бөлүмдөр жана саптар жөндөөлөр экранында жашырылат.';
+
+  @override
+  String get calendarSettings => 'Календардын жөндөөлөрү';
+
+  @override
+  String get calendarShowMedia => 'Сүрөт жана видеолорду көрсөтүү';
+
+  @override
+  String get calendarWeekTitles => 'Жуманын аталыштары';
+
+  @override
+  String get calendarPlayStories => 'Окуяларды көрүү';
+
+  @override
+  String get storyBackgroundTweak => 'Окуялардын фону';
+
+  @override
+  String get storyAnimationOff => 'Өчүк';
+
+  @override
+  String get storyAnimationPulse => 'Пульс';
+
+  @override
+  String get storyAnimationWave => 'Толкун';
+
+  @override
+  String get storyAnimationEqualizer => 'Эквалайзер';
+
+  @override
+  String get storyAnimationDrift => 'Дрейф';
+
+  @override
+  String get storyAnimationGlow => 'Жаркыроо';
+
+  @override
+  String get viewerCommentHint => 'Комментарий…';
+
+  @override
+  String get calendarToCurrentWeek => 'Учурдагы жумага';
+
+  @override
+  String get storyDateLines => 'Дата саптары';
+
+  @override
+  String get storyTextureTitle => 'Текстура';
+
+  @override
+  String get storySpectrum => 'Үн спектри';
+
+  @override
+  String get storySensitivity => 'Сезгичтик';
+
+  @override
+  String profileMindfulDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Аң-сезимдүү $count күн',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileName => 'Аты';
+
+  @override
+  String get profilePhoto => 'Сүрөт';
+
+  @override
+  String get profileEmoji => 'Эмодзи';
+
+  @override
+  String get profileInitial => 'Тамга';
+
+  @override
+  String get webVersion => 'Wi‑Fi аркылуу кирүү';
+
+  @override
+  String get webVersionAddressHint =>
+      'Ошол эле Wi‑Fi\'дагы компьютердин браузеринде ачыңыз; keklist ачык турушу керек';
+
+  @override
+  String get webVersionCopied => 'Дарек көчүрүлдү';
+
+  @override
+  String get webVersionStarting => 'Иштетилүүдө…';
+
+  @override
+  String get webVersionNoWifi =>
+      'keklist\'ти браузерде ачуу үчүн Wi‑Fi\'га туташыңыз.';
+
+  @override
+  String get webVersionNoBundle => 'Бул курамада веб-версия жок.';
+
+  @override
+  String get webVersionPin => 'PIN';
+
+  @override
+  String get webVersionPinSet => 'Ар бир браузер аны 30 күндө бир жолу сурайт';
+
+  @override
+  String get webVersionPinNotSet => 'Коюлган эмес';
+
+  @override
+  String get webVersionPinHint => '4–8 сан';
+
+  @override
+  String get webVersionRemovePin => 'PIN\'ди өчүрүү';
+
+  @override
+  String get webVersionPort => 'Порт';
+
+  @override
+  String get aiTab => 'Чат';
+
+  @override
+  String get aiTabDescription =>
+      'Жазууларыңызды телефондо иштеген AI менен талкулаңыз';
+
+  @override
+  String get aiPrivacyNote =>
+      'Телефондо гана иштейт: жазуулар түзмөктөн чыкпайт.';
+
+  @override
+  String get aiDisclaimer =>
+      'Бул медициналык кызмат эмес. Коркунучта болсоңуз, тез жардам кызматына кайрылыңыз.';
+
+  @override
+  String get aiYesterday => 'Кечээ';
+
+  @override
+  String get aiNoSessions => 'Азырынча сессия жок';
+
+  @override
+  String get aiNewSession => 'Жаңы сессия';
+
+  @override
+  String get aiChooseRole => 'Ролду тандаңыз';
+
+  @override
+  String get aiRoleTherapist => 'Терапевт';
+
+  @override
+  String get aiRoleCoach => 'Коуч';
+
+  @override
+  String get aiRoleFriend => 'Дос';
+
+  @override
+  String get aiMessageHint => 'Билдирүү';
+
+  @override
+  String get aiStarterWeek => 'Жумам кандай өттү?';
+
+  @override
+  String get aiStarterWorry => 'Акыркы убакта мени эмне тынчсыздандырат?';
+
+  @override
+  String get aiStarterJoy => 'Акыркы убакта мени эмне кубантты?';
+
+  @override
+  String get aiActionSaveAsMind => 'Жазуу катары сактоо';
+
+  @override
+  String get aiActionOpenDay => 'Күндү ачуу';
+
+  @override
+  String get aiActionWeekSummary => 'Жуманын жыйынтыгы';
+
+  @override
+  String get aiWeekSummaryPrompt =>
+      'Акыркы 7 күнүмдү жыйынтыкта: эмне болду, эмнени сездим, эмне өзгөчө болду.';
+
+  @override
+  String get aiSavedAsMind => 'Бүгүнгө сакталды';
+
+  @override
+  String get aiStop => 'Токтотуу';
+
+  @override
+  String get aiNoModelTitle => 'Моделди тандаңыз';
+
+  @override
+  String get aiNoModelMessage =>
+      'Баштоо үчүн моделди жүктөп алыңыз. Ал телефондо, интернетсиз иштейт.';
+
+  @override
+  String get aiNoModelOnPhone =>
+      'Моделди телефондогу колдонмодон жүктөңүз: Жөндөөлөр → AI → Моделдер.';
+
+  @override
+  String get aiModels => 'Моделдер';
+
+  @override
+  String get aiRoles => 'Ролдор';
+
+  @override
+  String get aiDownloaded => 'Жүктөлгөндөр';
+
+  @override
+  String get aiDownloads => 'Жүктөлүүдө';
+
+  @override
+  String get aiGalleryCatalog => 'Google AI Edge Gallery';
+
+  @override
+  String get aiHuggingFace => 'Hugging Face (GGUF)';
+
+  @override
+  String get aiSearchModels => 'GGUF моделдерин издөө';
+
+  @override
+  String get aiDownload => 'Жүктөө';
+
+  @override
+  String get aiPause => 'Тыным';
+
+  @override
+  String get aiPaused => 'Тынымда';
+
+  @override
+  String get aiResume => 'Улантуу';
+
+  @override
+  String get aiDownloadFailed => 'Жүктөө ишке ашкан жок';
+
+  @override
+  String get aiCellularTitle => 'Мобилдик интернет аркылуу жүктөйсүзбү?';
+
+  @override
+  String aiCellularMessage(String size) {
+    return '$size мобилдик интернет аркылуу жүктөлөт.';
+  }
+
+  @override
+  String get aiDeleteModel => 'Моделди өчүрөсүзбү?';
+
+  @override
+  String aiStorageUsed(String size) {
+    return 'Бул телефондо: $size';
+  }
+
+  @override
+  String aiDeviceMemory(String size) {
+    return 'Телефондун эс тутуму: $size';
+  }
+
+  @override
+  String get aiCatalogFailed =>
+      'Тизмени жүктөө мүмкүн болбоду. Байланышты текшериңиз.';
+
+  @override
+  String get aiNoFilesFit =>
+      'Бул моделдин бир да файлы телефондун эс тутумуна батпайт.';
+
+  @override
+  String get aiBuiltInRole => 'Орнотулган';
+
+  @override
+  String get aiOwnRoles => 'Сиздин ролдоруңуз';
+
+  @override
+  String get aiDuplicate => 'Көчүрмөсүн жасоо';
+
+  @override
+  String get aiNewRole => 'Жаңы роль';
+
+  @override
+  String get aiRoleName => 'Аталышы';
+
+  @override
+  String get aiRoleEmoji => 'Эмодзи';
+
+  @override
+  String get aiRolePrompt => 'Промпт';
+
+  @override
+  String get aiRolePromptHint =>
+      'AI кантип сүйлөшү жана эмнеге көңүл бурушу керек';
+
+  @override
+  String get aiReadOnlyRole =>
+      'Орнотулган ролдорду өзгөртүүгө болбойт. Өз ролуңузду жасоо үчүн көчүрмөсүн жасаңыз.';
+
+  @override
+  String get aiDeleteSession => 'Сессияны өчүрөсүзбү?';
+
+  @override
+  String get aiDeleteRole => 'Ролду өчүрөсүзбү?';
+
+  @override
+  String get aiRecommended => 'Сунушталат';
+
+  @override
+  String get aiLowQuality => 'Сапаты төмөн';
+
+  @override
+  String get aiModelDoesNotFit =>
+      'Бул модель телефондун эсине батпайт. Кичирээк моделди тандаңыз.';
+
+  @override
+  String get aiChooseAnotherModel => 'Башка модель тандоо';
+
+  @override
+  String get creatorEmotionsTitle => 'Эмоциялар';
+
+  @override
+  String get creatorEmotionsAfterSave => 'Сактагандан кийин суроо';
+
+  @override
+  String get creatorEmotionsButton => 'Баскычтоптун үстүндөгү баскыч';
+
+  @override
+  String get creatorEmotionsNever => 'Сурабоо';
+
+  @override
+  String get insightsWeekAgo => 'Бир жума мурун';
+
+  @override
+  String get insightsMonthAgo => 'Бир ай мурун';
+
+  @override
+  String get insightsHalfYearAgo => 'Жарым жыл мурун';
+
+  @override
+  String get insightsYearAgo => 'Бир жыл мурун';
+
+  @override
+  String get insightsTwoYearsAgo => 'Эки жыл мурун';
+
+  @override
+  String insightsWeekNumber(String number) {
+    return '$number-жума';
+  }
+
+  @override
+  String get aiNoSessionsHint =>
+      'Жумаңыз, тынчсыздануу же жакшы күн жөнүндө сураңыз: чат жазууларыңызды телефондун өзүндө окуйт.';
+
+  @override
+  String get showInGallery => 'Галереяда көрсөтүү';
+
+  @override
+  String get tileEmojiMotion => 'Эмодзи кыймылы';
+
+  @override
+  String get tileEmojiMotionDrift => 'Дрейф';
+
+  @override
+  String get tileEmojiMotionFloat => 'Термелүү';
+
+  @override
+  String get tileEmojiMotionStill => 'Кыймылсыз';
+
+  @override
+  String get gridResizeAnimation => 'Чымчуу анимациясы';
+
+  @override
+  String get gridResizeFly => 'Учуу';
+
+  @override
+  String get gridResizeZoom => 'Зум';
+
+  @override
+  String get gridResizeCrossfade => 'Эрүү';
+
+  @override
+  String get feedSortOrder => 'Тартиби';
+
+  @override
+  String get feedSortTime => 'Убакыт';
+
+  @override
+  String get feedSortMindsFirst => 'Адегенде жазуулар';
+
+  @override
+  String get feedSortMediaFirst => 'Адегенде медиа';
+
+  @override
+  String get feedGrouping => 'Топтор';
+
+  @override
+  String get feedGroupingNone => 'Жок';
+
+  @override
+  String get feedGroupingType => 'Түрү';
+
+  @override
+  String get feedGroupingTimeOfDay => 'Күн убагы';
+
+  @override
+  String get feedSectionMinds => 'Жазуулар';
+
+  @override
+  String get feedSectionGallery => 'Галерея';
+
+  @override
+  String get removePhotoTitle => 'Сүрөттү алып салуу';
+
+  @override
+  String get removeVideoTitle => 'Видеону алып салуу';
+
+  @override
+  String get hideMedia => 'Жашыруу';
+
+  @override
+  String get hideMediaSubtitle => 'keklist\'тен гана, галереяда калат';
+
+  @override
+  String get deleteFromGallery => 'Галереядан өчүрүү';
+
+  @override
+  String get deleteFromGallerySubtitle => '«Жакында өчүрүлгөндөргө» түшөт';
+
+  @override
+  String get mediaHidden => 'keklist\'тен жашырылды';
+
+  @override
+  String get mediaShownAgain => 'Кайра keklist\'те';
+
+  @override
+  String get undo => 'Жокко чыгаруу';
+
+  @override
+  String get hiddenMedia => 'Жашыруун сүрөттөр';
+
+  @override
+  String get hiddenMediaHint => 'Сүрөттү keklist\'ке кайтаруу үчүн басыңыз';
+
+  @override
+  String get hiddenMediaEmpty => 'Эч нерсе жашырылган жок';
+
+  @override
+  String get leaveFeedback => 'Пикир калтыруу';
+
+  @override
+  String get feedbackSend => 'Жөнөтүү';
+
+  @override
+  String get feedbackSent => 'Рахмат! Иштеп чыгуучу билдирүүнү алды';
+
+  @override
+  String get feedbackFailed =>
+      'Жөнөтүү мүмкүн болбоду. Интернетти текшерип, кайра аракет кылыңыз';
+
+  @override
+  String get analytics => 'Аналитика';
+
+  @override
+  String get analyticsDescription =>
+      'Анонимдүү колдонуу статистикасы эмнени жакшыртуу керектигин түшүнүүгө жардам берет. Сиз жазгандын баары түзмөктө калат.';
+
+  @override
+  String get analyticsStoreBuildsOnly =>
+      'Бул версия эч нерсе жибербейт: аналитика App Store жана Google Play версияларында гана иштейт.';
+
+  @override
+  String get analyticsSent => 'Эмне жөнөтүлөт';
+
+  @override
+  String get analyticsSentItems =>
+      'Кайсы жөндөөлөрдү тандайсыз, кайсы экрандарды ачасыз, колдонмонун версиясы, платформа жана тил, Pro жана чай пул сатып алуулар, ката текстисиз кыйроо отчеттору.';
+
+  @override
+  String get analyticsNeverSent => 'Эч качан жөнөтүлбөйт';
+
+  @override
+  String get analyticsNeverSentItems =>
+      'Жазууларыңыз, алардын тексти, эмоциялары жана комментарийлери, сүрөт, видео жана аудио, алардын саны, атыңыз, жайгашкан жериңиз жана IP дарегиңиз.';
+
+  @override
+  String get analyticsResetId => 'Анонимдүү ID\'ни баштапкы абалга келтирүү';
+
+  @override
+  String get analyticsResetIdDone => 'Эми жаңы анонимдүү ID колдонулат';
+
+  @override
+  String get settingsSupport => 'Колдоо';
+
+  @override
+  String get calendarOpenDay => 'Күндү ачуу';
+
+  @override
+  String get webVersionEnabled => 'Браузерге чагылдыруу';
+
+  @override
+  String get viewerComments => 'Комментарийлер';
+
+  @override
+  String get viewerNoComments => 'Азырынча комментарий жок';
+
+  @override
+  String get previousDay => 'Мурунку күн';
+
+  @override
+  String get nextDay => 'Кийинки күн';
+
+  @override
+  String whatsNewTitle(String version) {
+    return '$version версиясында эмне жаңы';
+  }
+
+  @override
+  String get whatsNewNext => 'Кийинки';
+
+  @override
+  String get whatsNewStart => 'Баштоо';
+
+  @override
+  String get whatsNewWebTitle => 'keklist браузерде';
+
+  @override
+  String get whatsNewWebBody =>
+      'Wi‑Fi аркылуу кирүүнү күйгүзүп, ноутбуктан жаз: бул ошол эле колдонмо, толук экранда.';
+
+  @override
+  String get whatsNewGalleryTitle => 'Галерея — күндөлүктүн бир бөлүгү';
+
+  @override
+  String get whatsNewGalleryBody =>
+      'Тарткан ар бир сүрөт жана видео эми календарда жана ар бир күндө көрүнөт. Чымчып, плиткалардын өлчөмүн өзгөрт.';
+
+  @override
+  String get whatsNewCirclesTitle => 'Видео-тегерекчелер жана үн жазуулары';
+
+  @override
+  String get whatsNewCirclesBody =>
+      'Кээде жазгандан көрө айтуу же тартуу оңой.';
+
+  @override
+  String get whatsNewShakeTitle => 'Силкип, жөндө';
+
+  @override
+  String get whatsNewShakeBody =>
+      'Каалаган экранды телефонду силкип жөндөсө болот.';
+
+  @override
+  String get whatsNewAlsoDesign => 'Дагы: жаңы дизайн жана анимациялар.';
+
+  @override
+  String get rateApp => 'keklist\'ти баалоо';
+
+  @override
+  String get pinchColumnsHint =>
+      'Кеңеш: мамычалардын санын өзгөртүү үчүн торду эки манжа менен кысып же жайыңыз';
+
+  @override
+  String get insightsWhatsMissing => 'Эмне жетишпейт?';
+
+  @override
+  String digestNotesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count жазуу',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileSelfie => 'Селфи';
+
+  @override
+  String get profileRecentAvatars => 'Акыркылар';
+
+  @override
+  String get whatsNewProfileTitle => 'Талдоо эми сенин профилиң';
+
+  @override
+  String get whatsNewProfileBody =>
+      'Апта, ай же жыл карточкаларда. Аватарга селфи тарт жана каалаган убакта мурункусуна кайт.';
 }

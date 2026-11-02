@@ -53,7 +53,7 @@ Mind(
 ### ✅ Type-Safe Translation Functions (Current)
 ```dart
 class OnboardingMindData {
-  final String emoji;
+  final String? emotionEmoji; // Starter emotion the mind is tagged with
   final String Function(AppLocalizations) translation; // Direct function reference!
   final int sortIndex;
 }
@@ -61,7 +61,7 @@ class OnboardingMindData {
 // Usage in constants:
 static List<OnboardingMindData> parentMinds = [
   OnboardingMindData(
-    emoji: '👋',
+    emotionEmoji: '😄',
     translation: (l10n) => l10n.onboardingMind1, // Type-safe!
     sortIndex: 0,
   ),

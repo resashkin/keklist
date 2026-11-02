@@ -163,6 +163,7 @@ platform :ios do
     )
     next_build = latest_build + 1
     UI.message("📈 Build number: #{next_build} (latest on TestFlight: #{latest_build})")
+    sh("../../scripts/build_web_bundle.sh")
     sh("fvm flutter build ios --config-only --release --build-number=#{next_build}")
     build_app(
       workspace: "Runner.xcworkspace", 

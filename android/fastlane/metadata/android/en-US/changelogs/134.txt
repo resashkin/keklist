@@ -1,0 +1,6 @@
+* Gallery in the diary
+* Profile with avatar
+* Video circles and voice notes
+* Shake to tweak
+* keklist in your browser
+* Fixes and improvements

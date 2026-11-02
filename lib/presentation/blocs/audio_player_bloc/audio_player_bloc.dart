@@ -9,6 +9,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_waveform/just_waveform.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/dispose_bag.dart';
+import 'package:keklist/presentation/core/helpers/media_sources.dart';
 
 part 'audio_player_event.dart';
 part 'audio_player_state.dart';
@@ -69,7 +70,7 @@ final class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> wit
     emit(AudioPlayerLoading(audio: event.audio));
 
     try {
-      await _player.setFilePath(event.absolutePath);
+      await setAudioSource(_player, event.absolutePath);
 
       final Duration duration = _player.duration ?? Duration.zero;
 
@@ -169,6 +170,7 @@ final class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> wit
   }
 
   Future<void> _loadWaveform(String absolutePath) async {
+    if (isRemoteMediaPath(absolutePath)) return;
     final File audioFile = File(absolutePath);
     if (!await audioFile.exists()) {
       return;

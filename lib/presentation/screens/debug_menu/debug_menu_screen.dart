@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
@@ -148,22 +148,23 @@ final class _DebugMenuScreenState extends KekWidgetState<DebugMenuScreen> {
 
   String _getDebugMenuItemTitle(DebugMenuType type) => switch (type) {
         DebugMenuType.translation => 'Translate Content',
-        DebugMenuType.sensitiveContent => 'Sensitive Content',
         DebugMenuType.simulatePro => 'Simulate Pro Subscription',
         DebugMenuType.useProductionRevenueCat => 'Use Production RevenueCat',
         DebugMenuType.enableBlocLogs => 'Enable BLoC Logs',
+        DebugMenuType.forceAiChat => 'Force AI Chat',
+        DebugMenuType.showTouches => 'Show Touches',
       };
 
   String _getDebugMenuItemDescription(DebugMenuType type) => switch (type) {
         DebugMenuType.translation =>
           'Showing/Hiding Translate action, that just opens Alert with translation on English.',
-        DebugMenuType.sensitiveContent =>
-          'Showing/Hiding Eye button that allows to hide content for users when you showing phone to others.',
         DebugMenuType.simulatePro =>
           'Forces isPro=true in MembershipBloc, bypassing RevenueCat. Password required to enable.',
         DebugMenuType.useProductionRevenueCat =>
           'Use production RevenueCat API keys instead of test keys. Restart required to take effect.',
         DebugMenuType.enableBlocLogs =>
           'Master switch for BLoC console logs (events, transitions, errors, lifecycle). Configure verbosity and per-BLoC silencing in BLoC Log Settings.',
+        DebugMenuType.forceAiChat => 'Shows the Chat tab even while the ai-chat flag in PostHog is off.',
+        DebugMenuType.showTouches => 'Draws a circle under every finger on the screen, for screen recordings.',
       };
 }

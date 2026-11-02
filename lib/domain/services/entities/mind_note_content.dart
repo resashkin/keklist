@@ -1,4 +1,7 @@
 const String kMindAudioTag = 'kekaudio';
+const String kMindVideoTag = 'kekvideo';
+
+String videoThumbnailPathFor(String videoPath) => '${videoPath.substring(0, videoPath.lastIndexOf('.'))}.jpg';
 
 sealed class BaseMindNotePiece {
   const BaseMindNotePiece();
@@ -6,6 +9,7 @@ sealed class BaseMindNotePiece {
   T map<T>({
     required T Function(MindNoteText text) text,
     required T Function(MindNoteAudio audio) audio,
+    required T Function(MindNoteVideo video) video,
     required T Function() unknown,
   }) {
     final BaseMindNotePiece self = this;
@@ -14,6 +18,9 @@ sealed class BaseMindNotePiece {
     }
     if (self is MindNoteAudio) {
       return audio(self);
+    }
+    if (self is MindNoteVideo) {
+      return video(self);
     }
     return unknown();
   }
@@ -50,9 +57,32 @@ final class MindNoteAudio extends BaseMindNotePiece {
   String toString() => 'MindNoteAudio($appRelativeAbsoulutePath${hasDuration ? ', duration: ${durationSeconds}s' : ''})';
 }
 
+final class MindNoteVideo extends BaseMindNotePiece {
+  const MindNoteVideo({required this.appRelativePath, required this.durationSeconds});
+
+  final String appRelativePath;
+  final double durationSeconds;
+
+  // Saved next to the video when recording starts.
+  String get thumbnailRelativePath => videoThumbnailPathFor(appRelativePath);
+
+  Duration get duration => Duration(milliseconds: (durationSeconds * 1000).round());
+
+  @override
+  String toString() => 'MindNoteVideo($appRelativePath, duration: ${durationSeconds}s)';
+}
+
 final class MindNoteContent {
   List<MindNoteAudio> get audioPieces => _pieces.whereType<MindNoteAudio>().toList(growable: false);
   bool get hasAudio => audioPieces.isNotEmpty;
+  List<MindNoteVideo> get videoPieces => _pieces.whereType<MindNoteVideo>().toList(growable: false);
+  bool get hasVideo => videoPieces.isNotEmpty;
+  bool get hasMedia => hasAudio || hasVideo;
+
+  List<String> get mediaFilePaths => [
+        for (final MindNoteAudio audio in audioPieces) audio.appRelativeAbsoulutePath,
+        for (final MindNoteVideo video in videoPieces) ...[video.appRelativePath, video.thumbnailRelativePath],
+      ];
 
   const MindNoteContent._(this._pieces);
 
@@ -81,8 +111,26 @@ final class MindNoteContent {
       dotAll: true,
     );
 
+    final RegExp videoRegExp = RegExp(
+      '<$kMindVideoTag\\s+path="([^"]+)"\\s+duration="([^"]+)"\\s*/>',
+      caseSensitive: false,
+    );
+
     // Collect all matches (both old and new formats) with their positions
-    final List<_AudioMatch> allMatches = [];
+    final List<_MediaMatch> allMatches = [];
+
+    for (final match in videoRegExp.allMatches(note)) {
+      final String path = match.group(1)?.trim() ?? '';
+      final double? duration = double.tryParse(match.group(2)?.trim() ?? '');
+      if (path.isEmpty || duration == null) continue;
+      allMatches.add(
+        _MediaMatch(
+          start: match.start,
+          end: match.end,
+          piece: MindNoteVideo(appRelativePath: path, durationSeconds: duration),
+        ),
+      );
+    }
 
     // Find new format matches
     for (final match in newFormatRegExp.allMatches(note)) {
@@ -90,10 +138,10 @@ final class MindNoteContent {
       final durationStr = match.group(2)?.trim() ?? '';
       final duration = double.tryParse(durationStr);
       if (path.isNotEmpty && duration != null) {
-        allMatches.add(_AudioMatch(
+        allMatches.add(_MediaMatch(
           start: match.start,
           end: match.end,
-          audio: MindNoteAudio(
+          piece: MindNoteAudio(
             appRelativeAbsoulutePath: path,
             durationSeconds: duration,
           ),
@@ -105,10 +153,10 @@ final class MindNoteContent {
     for (final match in oldFormatRegExp.allMatches(note)) {
       final path = match.group(1)?.trim() ?? '';
       if (path.isNotEmpty) {
-        allMatches.add(_AudioMatch(
+        allMatches.add(_MediaMatch(
           start: match.start,
           end: match.end,
-          audio: MindNoteAudio(
+          piece: MindNoteAudio(
             appRelativeAbsoulutePath: path,
             durationSeconds: null, // Legacy format has no duration
           ),
@@ -125,7 +173,7 @@ final class MindNoteContent {
       if (match.start > cursor) {
         pieces.add(MindNoteText(note.substring(cursor, match.start)));
       }
-      pieces.add(match.audio);
+      pieces.add(match.piece);
       cursor = match.end;
     }
     if (cursor < note.length) {
@@ -152,10 +200,22 @@ final class MindNoteContent {
               return '<$kMindAudioTag>${audioPiece.appRelativeAbsoulutePath}</$kMindAudioTag>';
             }
           },
+          video: (MindNoteVideo videoPiece) =>
+              '<$kMindVideoTag path="${videoPiece.appRelativePath}" duration="${videoPiece.durationSeconds}"/>',
           unknown: () => '',
         ),
       )
       .join();
+
+  MindNoteContent copyWithAppendedVideo(String path, {required double durationSeconds, String? separator}) {
+    final List<BaseMindNotePiece> updated = List<BaseMindNotePiece>.of(_pieces);
+    if (separator != null && separator.isNotEmpty) updated.add(MindNoteText(separator));
+    updated.add(MindNoteVideo(appRelativePath: path, durationSeconds: durationSeconds));
+    return MindNoteContent._(updated);
+  }
+
+  MindNoteContent withoutMedia() =>
+      MindNoteContent._(_pieces.whereType<MindNoteText>().toList(growable: false));
 
   MindNoteContent copyWithAppendedAudio(String path, {String? separator, double? durationSeconds}) {
     final List<BaseMindNotePiece> updated = List<BaseMindNotePiece>.of(_pieces);
@@ -193,15 +253,10 @@ final class MindNoteContent {
   String toString() => 'MindNoteContent($_pieces)';
 }
 
-/// Helper class to track audio matches during parsing
-class _AudioMatch {
+final class _MediaMatch {
   final int start;
   final int end;
-  final MindNoteAudio audio;
+  final BaseMindNotePiece piece;
 
-  _AudioMatch({
-    required this.start,
-    required this.end,
-    required this.audio,
-  });
+  _MediaMatch({required this.start, required this.end, required this.piece});
 }

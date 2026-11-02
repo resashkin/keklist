@@ -43,6 +43,9 @@ void main() {
       ),
     ]);
 
+    when(() => mockMindRepo.obtainMinds()).thenAnswer((_) async => []);
+    when(() => mockSettingsRepo.updateHasSeededEmotions(any())).thenAnswer((_) async {});
+
     runner = MigrationRunner(
       settingsRepository: mockSettingsRepo,
       mindRepository: mockMindRepo,
@@ -53,8 +56,6 @@ void main() {
     // Register fallback values for mocktail
     registerFallbackValue(
       KeklistSettings(
-        isMindContentVisible: true,
-        previousAppVersion: null,
         themePreference: KeklistThemeMode.dark,
         interfaceStyle: KeklistInterfaceStyle.liquidGlass,
         shouldShowTitles: true,
@@ -63,7 +64,6 @@ void main() {
         dataSchemaVersion: 0,
         hasSeenLazyOnboarding: false,
         isDebugMenuVisible: false,
-        isPhotoVideoSourceEnabled: false,
       ),
     );
     registerFallbackValue(KeklistThemeMode.system);
@@ -71,20 +71,17 @@ void main() {
 
   group('MigrationRunner', () {
     test('runs no migrations when schema version is up to date', () async {
-      // Current version matches the latest migration (v3), no migrations needed
+      // Current version matches the latest migration (v4), no migrations needed
       when(() => mockSettingsRepo.value).thenReturn(
         KeklistSettings(
-          isMindContentVisible: true,
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
           userName: null,
           language: SupportedLanguage.english,
-          dataSchemaVersion: 3,
+          dataSchemaVersion: 4,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -97,8 +94,6 @@ void main() {
     test('does not run migrations when no migrations exist', () async {
       when(() => mockSettingsRepo.value).thenReturn(
         KeklistSettings(
-          isMindContentVisible: true,
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -107,7 +102,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
@@ -118,8 +112,6 @@ void main() {
     test('updates schema version after successful migration', () async {
       when(() => mockSettingsRepo.value).thenReturn(
         KeklistSettings(
-          isMindContentVisible: true,
-          previousAppVersion: null,
           themePreference: KeklistThemeMode.dark,
           interfaceStyle: KeklistInterfaceStyle.liquidGlass,
           shouldShowTitles: true,
@@ -128,7 +120,6 @@ void main() {
           dataSchemaVersion: 0,
           hasSeenLazyOnboarding: false,
           isDebugMenuVisible: false,
-          isPhotoVideoSourceEnabled: false,
         ),
       );
 
