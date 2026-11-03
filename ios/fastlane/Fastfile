@@ -213,7 +213,8 @@ platform :ios do
     # deliver uploads the whole listing in metadata/ (name, subtitle, keywords,
     # description, promo text, release notes) for every locale; screenshots and
     # the binary are skipped.
-    notes_file = File.join(__dir__, "metadata", "en-US", "release_notes.txt")
+    metadata_dir = File.expand_path("metadata", __dir__)
+    notes_file = File.join(metadata_dir, "en-US", "release_notes.txt")
     FileUtils.mkdir_p(File.dirname(notes_file))
     File.write(notes_file, "#{notes}\n")
     UI.message("📝 Release notes → #{notes_file}")
@@ -224,7 +225,7 @@ platform :ios do
       platform: "ios",
       app_version: version,
       build_number: build.to_s,
-      metadata_path: File.join(__dir__, "metadata"),
+      metadata_path: metadata_dir,
       skip_binary_upload: true,
       skip_screenshots: true,
       submit_for_review: true,
