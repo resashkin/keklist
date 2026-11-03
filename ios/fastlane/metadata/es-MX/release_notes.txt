@@ -1,0 +1,2 @@
+* keklist en el App Store ahora habla tu idioma
+* Correcciones y mejoras
