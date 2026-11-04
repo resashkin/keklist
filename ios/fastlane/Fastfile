@@ -210,10 +210,11 @@ platform :ios do
     build = latest_testflight_build_number(api_key: api_key, app_identifier: APP_IDENTIFIER, initial_build_number: 0)
     UI.message("🚀 Submitting #{version} (build #{build}) for review — live is #{live_version}")
 
-    # deliver manages the WHOLE store listing. This tree deliberately holds only
-    # release notes, and screenshots/binary upload are skipped, so a submission
-    # can never overwrite the live description, keywords or screenshots.
-    notes_file = File.join(__dir__, "metadata", "en-US", "release_notes.txt")
+    # deliver uploads the whole listing in metadata/ (name, subtitle, keywords,
+    # description, promo text, release notes) for every locale; screenshots and
+    # the binary are skipped.
+    metadata_dir = File.expand_path("metadata", __dir__)
+    notes_file = File.join(metadata_dir, "en-US", "release_notes.txt")
     FileUtils.mkdir_p(File.dirname(notes_file))
     File.write(notes_file, "#{notes}\n")
     UI.message("📝 Release notes → #{notes_file}")
@@ -224,7 +225,7 @@ platform :ios do
       platform: "ios",
       app_version: version,
       build_number: build.to_s,
-      metadata_path: File.join(__dir__, "metadata"),
+      metadata_path: metadata_dir,
       skip_binary_upload: true,
       skip_screenshots: true,
       submit_for_review: true,

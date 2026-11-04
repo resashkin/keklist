@@ -1,0 +1,21 @@
+Your whole life in the palm of your hand. keklist is a private journal and mood diary: every moment is one emoji and a few words, with photos, videos and voice notes alongside.
+
+Private and offline. No account, no cloud, no ads. Everything you write and shoot stays on your phone and never leaves your device.
+
+WHAT YOU CAN DO
+• Capture a moment in seconds: pick an emoji, write a line, done
+• Add photos, videos, video circles and voice notes
+• See your life as a gallery and a calendar
+• Track your mood with your own emotions
+• Grow your emotional intelligence: build a personal tree of emotions (Joy → Serenity → Calm) and learn what you feel and why
+• Look back with reflections; use it as a gratitude journal, reflection journal or daily log
+• Open keklist on your computer: your phone works as the server on your local network, protected by a PIN code, and nothing goes to the cloud
+• Search every entry; export and import CSV
+
+PRIVATE BY DESIGN
+Your notes, photos and videos are stored only on your device. keklist never uploads your journal.
+
+Start your journal today: write your first moment.
+
+Privacy Policy: https://resashkin.github.io/keklist-privacy
+Terms of Use: https://resashkin.github.io/keklist-terms
