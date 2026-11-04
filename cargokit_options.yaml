@@ -1,0 +1,3 @@
+# Build Rust plugins from source: irondash_engine_context's precompiled
+# Android binary is 4 KB page aligned, which Google Play rejects.
+use_precompiled_binaries: false
