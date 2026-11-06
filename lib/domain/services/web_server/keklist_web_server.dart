@@ -9,6 +9,7 @@ import 'package:keklist/domain/repositories/emotion/emotion_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/web_server/ai_routes.dart';
@@ -418,6 +419,9 @@ final class KeklistWebServer extends ChangeNotifier {
     final List<Mind> created = minds.where((mind) => !existing.containsKey(mind.id)).toList();
     final List<Mind> updated = minds.where((mind) => existing.containsKey(mind.id)).toList();
     if (created.isNotEmpty) await _minds.createMinds(minds: created);
+    for (final Mind _ in created) {
+      Analytics.mindCreated();
+    }
     if (updated.isNotEmpty) await _minds.updateMinds(minds: updated);
     for (final String id in delete) {
       await _minds.deleteMind(mindId: id);

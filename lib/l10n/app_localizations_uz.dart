@@ -1264,14 +1264,14 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Qaysi sozlamalarni tanlaysiz, qaysi ekranlarni ochasiz, ilova versiyasi, platforma va til, Pro va choychaqa xaridlari hamda xabarlarsiz nosozlik hisobotlari.';
+      'Qaysi sozlamalarni tanlaysiz, qaysi ekranlarni ochasiz, qancha yozuv yaratasiz, ilova versiyasi, platforma va til, Pro va choychaqa xaridlari hamda xabarlarsiz nosozlik hisobotlari.';
 
   @override
   String get analyticsNeverSent => 'Hech qachon yuborilmaydi';
 
   @override
   String get analyticsNeverSentItems =>
-      'Yozuvlaringiz, ularning matni, hissiyotlari va izohlari, rasm, video va audio, ularning soni, ismingiz, joylashuvingiz va IP manzilingiz.';
+      'Yozuvlaringiz, ularning matni, hissiyotlari va izohlari, rasm, video va audio, ismingiz, joylashuvingiz va IP manzilingiz.';
 
   @override
   String get analyticsResetId => 'Anonim ID ni tiklash';

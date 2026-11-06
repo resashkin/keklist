@@ -1270,14 +1270,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Welche Einstellungen du wählst, welche Bildschirme du öffnest, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.';
+      'Welche Einstellungen du wählst, welche Bildschirme du öffnest, wie viele Notizen du erstellst, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.';
 
   @override
   String get analyticsNeverSent => 'Wird nie gesendet';
 
   @override
   String get analyticsNeverSentItems =>
-      'Deine Notizen, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, wie viele du hast, dein Name, dein Standort und deine IP-Adresse.';
+      'Deine Notizen, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, dein Name, dein Standort und deine IP-Adresse.';
 
   @override
   String get analyticsResetId => 'Anonyme ID zurücksetzen';

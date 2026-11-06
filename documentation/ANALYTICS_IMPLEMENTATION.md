@@ -3,9 +3,9 @@
 ## Overview
 
 Anonymous usage analytics and remote feature flags through PostHog (EU cloud, project `keklist`).
-Analytics collects which tweaks people choose, which screens they open, paywall and tip events, and crashes.
-It never sends minds or anything derived from them. It is on by default and can be turned off in
-Settings → Analytics.
+Analytics collects which tweaks people choose, which screens they open, how many notes they create, paywall and
+tip events, and crashes. It never sends the content of minds or anything derived from it. It is on by default and
+can be turned off in Settings → Analytics.
 
 ## Implementation Details
 
@@ -61,6 +61,7 @@ Settings → Analytics.
 | `whats_new_shown` | `release` |
 | `whats_new_completed` / `whats_new_skipped` | `release`, `slide` (1-based, the slide it closed on) |
 | `rate_tapped` | none |
+| `mind_created` | none |
 | `review_prompted` | `release` |
 | `$exception` | type and stack frames, without the message |
 
@@ -103,4 +104,7 @@ PostHog adds its own device properties, such as app version, OS and locale. The 
   like `media_folder_enabled`.
 - Turning analytics off calls `optOut` and also turns the AI flag off, so the Chat tab hides.
 - "Reset anonymous ID" calls `Posthog().reset()`, so later events can't be linked to earlier ones.
+- `mind_created` fires once per note written in the app or in the browser through the phone server, and comments
+  count as notes. Import, restore and onboarding samples don't fire it. Keep it free of properties, so it reveals
+  only how many notes a device created, never their content, emotions or kind.
 - Web is never supported; the web build has no PostHog setup.

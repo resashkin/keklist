@@ -1221,14 +1221,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      '選んだ設定、開いた画面、アプリのバージョン・プラットフォーム・言語、Pro とチップの購入、メッセージを除いたクラッシュレポート。';
+      '選んだ設定、開いた画面、作成したメモの数、アプリのバージョン・プラットフォーム・言語、Pro とチップの購入、メッセージを除いたクラッシュレポート。';
 
   @override
   String get analyticsNeverSent => '送信されないもの';
 
   @override
   String get analyticsNeverSentItems =>
-      'あなたのメモとそのテキスト・感情・コメント、写真・動画・音声、その数、名前、位置情報、IP アドレス。';
+      'あなたのメモとそのテキスト・感情・コメント、写真・動画・音声、名前、位置情報、IP アドレス。';
 
   @override
   String get analyticsResetId => '匿名 ID をリセット';

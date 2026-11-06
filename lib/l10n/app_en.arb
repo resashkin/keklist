@@ -1597,7 +1597,7 @@
     "@analyticsSent": {
         "description": "Heading of the list of data analytics sends"
     },
-    "analyticsSentItems": "Which settings and tweaks you choose, which screens you open, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.",
+    "analyticsSentItems": "Which settings and tweaks you choose, which screens you open, how many notes you create, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.",
     "@analyticsSentItems": {
         "description": "List of data analytics sends"
     },
@@ -1605,7 +1605,7 @@
     "@analyticsNeverSent": {
         "description": "Heading of the list of data analytics never sends"
     },
-    "analyticsNeverSentItems": "Your notes, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.",
+    "analyticsNeverSentItems": "Your notes, their text, emotions and comments, photos, videos and audio, your name, your location and your IP address.",
     "@analyticsNeverSentItems": {
         "description": "List of data analytics never sends"
     },

@@ -8,6 +8,7 @@ import 'package:keklist/presentation/core/dispose_bag.dart';
 import 'package:keklist/presentation/core/helpers/mind_utils.dart';
 import 'package:keklist/domain/repositories/mind/mind_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:equatable/equatable.dart';
@@ -91,6 +92,7 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
       emotionIds: event.emotionIds,
     );
     _mindRepository.createMind(mind: mind);
+    Analytics.mindCreated();
   }
 
   Future<void> _setMindEmotions(MindSetEmotions event, Emitter<MindState> emit) async {

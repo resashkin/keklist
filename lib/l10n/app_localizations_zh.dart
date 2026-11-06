@@ -1214,14 +1214,14 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      '你选择的设置、打开的页面、应用版本、平台和语言、Pro 与打赏购买,以及不含消息内容的崩溃报告。';
+      '你选择的设置、打开的页面、创建的笔记数量、应用版本、平台和语言、Pro 与打赏购买,以及不含消息内容的崩溃报告。';
 
   @override
   String get analyticsNeverSent => '绝不发送';
 
   @override
   String get analyticsNeverSentItems =>
-      '你的笔记及其文字、情绪和评论,照片、视频和音频,它们的数量,你的名字、位置和 IP 地址。';
+      '你的笔记及其文字、情绪和评论,照片、视频和音频,你的名字、位置和 IP 地址。';
 
   @override
   String get analyticsResetId => '重置匿名 ID';

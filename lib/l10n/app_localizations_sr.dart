@@ -1259,14 +1259,14 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Која подешавања бираш, које екране отвараш, верзија апликације, платформа и језик, куповине Pro и напојница, и извештаји о падовима без њихових порука.';
+      'Која подешавања бираш, које екране отвараш, колико белешки правиш, верзија апликације, платформа и језик, куповине Pro и напојница, и извештаји о падовима без њихових порука.';
 
   @override
   String get analyticsNeverSent => 'Никад се не шаље';
 
   @override
   String get analyticsNeverSentItems =>
-      'Твоје белешке, њихов текст, емоције и коментари, фотографије, видео и аудио, колико их имаш, твоје име, локација и IP адреса.';
+      'Твоје белешке, њихов текст, емоције и коментари, фотографије, видео и аудио, твоје име, локација и IP адреса.';
 
   @override
   String get analyticsResetId => 'Ресетуј анонимни ID';
@@ -2627,14 +2627,14 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get analyticsSentItems =>
-      'Koja podešavanja biraš, koje ekrane otvaraš, verzija aplikacije, platforma i jezik, kupovine Pro i napojnica, i izveštaji o padovima bez njihovih poruka.';
+      'Koja podešavanja biraš, koje ekrane otvaraš, koliko beleški praviš, verzija aplikacije, platforma i jezik, kupovine Pro i napojnica, i izveštaji o padovima bez njihovih poruka.';
 
   @override
   String get analyticsNeverSent => 'Nikad se ne šalje';
 
   @override
   String get analyticsNeverSentItems =>
-      'Tvoje beleške, njihov tekst, emocije i komentari, fotografije, video i audio, koliko ih imaš, tvoje ime, lokacija i IP adresa.';
+      'Tvoje beleške, njihov tekst, emocije i komentari, fotografije, video i audio, tvoje ime, lokacija i IP adresa.';
 
   @override
   String get analyticsResetId => 'Resetuj anonimni ID';

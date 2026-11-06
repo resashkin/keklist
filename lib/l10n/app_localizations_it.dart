@@ -1268,14 +1268,14 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Quali impostazioni scegli, quali schermate apri, la versione dell\'app, la piattaforma e la lingua, gli acquisti di Pro e mance, e i report di crash senza i loro messaggi.';
+      'Quali impostazioni scegli, quali schermate apri, quante note crei, la versione dell\'app, la piattaforma e la lingua, gli acquisti di Pro e mance, e i report di crash senza i loro messaggi.';
 
   @override
   String get analyticsNeverSent => 'Mai inviato';
 
   @override
   String get analyticsNeverSentItems =>
-      'Le tue note, il loro testo, emozioni e commenti, foto, video e audio, quanti ne hai, il tuo nome, la tua posizione e il tuo indirizzo IP.';
+      'Le tue note, il loro testo, emozioni e commenti, foto, video e audio, il tuo nome, la tua posizione e il tuo indirizzo IP.';
 
   @override
   String get analyticsResetId => 'Reimposta ID anonimo';

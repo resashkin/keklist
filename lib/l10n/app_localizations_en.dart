@@ -1256,14 +1256,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Which settings and tweaks you choose, which screens you open, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.';
+      'Which settings and tweaks you choose, which screens you open, how many notes you create, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.';
 
   @override
   String get analyticsNeverSent => 'Never sent';
 
   @override
   String get analyticsNeverSentItems =>
-      'Your notes, their text, emotions and comments, photos, videos and audio, how many of them you have, your name, your location and your IP address.';
+      'Your notes, their text, emotions and comments, photos, videos and audio, your name, your location and your IP address.';
 
   @override
   String get analyticsResetId => 'Reset anonymous ID';

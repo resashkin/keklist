@@ -96,6 +96,9 @@ abstract final class Analytics {
 
   static void rateTapped() => _capture('rate_tapped', {});
 
+  /// Only the fact that a note was created: never its content, emotions or kind.
+  static void mindCreated() => _capture('mind_created', {});
+
   static void reviewPrompted(String release) => _capture('review_prompted', {'release': release});
 
   static void _capture(String event, Map<String, Object> properties) {
