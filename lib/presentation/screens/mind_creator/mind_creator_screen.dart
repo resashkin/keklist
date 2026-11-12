@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/presentation/core/helpers/keyboard_shortcuts.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
@@ -108,76 +110,81 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
   Widget build(BuildContext context) {
     final MindEmotionsPrompt emotionsPrompt = _emotionsPrompt;
     final bool canRecord = _attachedMedia == null && !_hasText && !kIsPhoneWeb && !_isEditing;
-    return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () {
-            _removeAttachedMedia();
-            Navigator.of(context).pop();
-          },
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => _save(emotionsPrompt),
-            child: Text(context.l10n.save, style: const TextStyle(fontSize: 16.0, color: Colors.blueAccent)),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (_attachedMedia case final BaseMindNotePiece media)
-                    _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
-                  TextField(
-                    autofocus: true,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    textCapitalization: TextCapitalization.sentences,
-                    controller: _textEditingController,
-                    style: const TextStyle(fontSize: 20.0),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(12.0),
-                      border: InputBorder.none,
-                      hintText: widget.hintText ?? context.l10n.writeSomething,
-                    ),
-                  ),
-                ],
-              ),
+    return CallbackShortcuts(
+      bindings: {
+        commandShortcut(LogicalKeyboardKey.enter): () => _save(emotionsPrompt),
+        const SingleActivator(LogicalKeyboardKey.escape): _close,
+      },
+      child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          leading: IconButton(icon: const Icon(Icons.close), onPressed: _close),
+          actions: [
+            TextButton(
+              onPressed: () => _save(emotionsPrompt),
+              child: Text(context.l10n.save, style: const TextStyle(fontSize: 16.0, color: Colors.blueAccent)),
             ),
-          ),
-          // Right above the keyboard, or clear of the rounded corners and the home indicator without it.
-          SafeArea(
-            top: false,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 4.0, 20.0, 12.0),
-              child: SizedBox(
-                height: 52.0,
-                child: Row(
+          ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    if (emotionsPrompt == MindEmotionsPrompt.button && !_isEditing)
-                      _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
-                    const Spacer(),
-                    if (canRecord)
-                      MediaRecordToggleButton(
-                        isFilled: true,
-                        onRecordAudio: () => _attach(MediaRecording.recordAudio),
-                        onRecordVideo: () => _attach(MediaRecording.recordVideo),
+                    if (_attachedMedia case final BaseMindNotePiece media)
+                      _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
+                    TextField(
+                      autofocus: true,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: _textEditingController,
+                      style: const TextStyle(fontSize: 20.0),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(12.0),
+                        border: InputBorder.none,
+                        hintText: widget.hintText ?? context.l10n.writeSomething,
                       ),
+                    ),
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+            // Right above the keyboard, or clear of the rounded corners and the home indicator without it.
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 4.0, 20.0, 12.0),
+                child: SizedBox(
+                  height: 52.0,
+                  child: Row(
+                    children: [
+                      if (emotionsPrompt == MindEmotionsPrompt.button && !_isEditing)
+                        _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
+                      const Spacer(),
+                      if (canRecord)
+                        MediaRecordToggleButton(
+                          isFilled: true,
+                          onRecordAudio: () => _attach(MediaRecording.recordAudio),
+                          onRecordVideo: () => _attach(MediaRecording.recordVideo),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  void _close() {
+    _removeAttachedMedia();
+    Navigator.of(context).pop();
   }
 
   void _openMarkingSheet() {
@@ -253,9 +260,9 @@ final class _AttachedMediaPreview extends StatelessWidget {
     final Widget preview = switch (media) {
       MindNoteVideo video => RoundVideoMessage(video: video, size: 180.0),
       MindNoteAudio audio => Chip(
-          avatar: const Icon(Icons.mic, size: 18.0),
-          label: Text(_formatDuration(audio.duration ?? Duration.zero)),
-        ),
+        avatar: const Icon(Icons.mic, size: 18.0),
+        label: Text(_formatDuration(audio.duration ?? Duration.zero)),
+      ),
       _ => const SizedBox.shrink(),
     };
     return Padding(

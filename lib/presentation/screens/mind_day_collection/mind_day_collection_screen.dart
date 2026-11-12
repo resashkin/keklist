@@ -57,7 +57,8 @@ final class MindDayCollectionScreen extends StatefulWidget {
   State<MindDayCollectionScreen> createState() => MindDayCollectionScreenState(dayIndex: initialDayIndex);
 }
 
-final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectionScreen> with ShakeToTweakMixin, SingleTickerProviderStateMixin {
+final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectionScreen>
+    with ShakeToTweakMixin, SingleTickerProviderStateMixin {
   int dayIndex;
   final List<Mind> allMinds = [];
 
@@ -81,10 +82,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
   void initState() {
     super.initState();
 
-    _weatherCubit = WeatherCubit(
-      repository: context.read<WeatherRepository>(),
-      apiService: WeatherApiService(),
-    );
+    _weatherCubit = WeatherCubit(repository: context.read<WeatherRepository>(), apiService: WeatherApiService());
 
     DayFeedTileMenu.mediaDeleted.listen((_) => _reloadDayFeedMedia(dayIndex)).disposed(by: this);
     context
@@ -243,7 +241,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     return Padding(
       padding: EdgeInsets.only(bottom: widget.fabBottomOffset),
       child: KekFloatingButton(
-        onPressed: () => _showMindCreator(),
+        onPressed: () => showMindCreator(),
         label: context.l10n.create,
         fallbackIcon: Icons.add,
         sfSymbol: 'plus',
@@ -269,11 +267,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
           builder: (context, state) => DayFeedSliver(
             state: state,
             settings: _dayFeedSettings,
-            onOpenItem: (index) => DayItemViewerScreen.show(
-              context,
-              items: _arrangedItems(state),
-              initialIndex: index,
-            ),
+            onOpenItem: (index) => DayItemViewerScreen.show(context, items: _arrangedItems(state), initialIndex: index),
             onResolveMediaIssue: (issue) => _resolveDayFeedMediaIssue(issue),
           ),
         ),
@@ -361,6 +355,10 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
 
   void goToToday() => _slideToDay(DateUtils.getTodayIndex());
 
+  void goToPreviousDay() => _slideToDay(dayIndex - 1);
+
+  void goToNextDay() => _slideToDay(dayIndex + 1);
+
   // The day slides out towards where it is in time and the new one slides in from the other side.
   Future<void> _slideToDay(int newDayIndex) async {
     if (newDayIndex == dayIndex || _daySlide.isSliding) return;
@@ -433,7 +431,7 @@ final class MindDayCollectionScreenState extends KekWidgetState<MindDayCollectio
     grouping: _dayFeedSettings.grouping,
   );
 
-  void _showMindCreator() {
+  void showMindCreator() {
     // Pushed as a full-screen route (not a bottom sheet) so a stray swipe can't
     // dismiss it; fullscreenDialog disables the iOS back-swipe — close/save only.
     Navigator.of(context).push(

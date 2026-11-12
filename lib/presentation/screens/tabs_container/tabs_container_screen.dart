@@ -9,6 +9,8 @@ import 'package:keklist/presentation/core/dispose_bag.dart';
 import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/helpers/interface_style_utils.dart';
+import 'package:keklist/presentation/core/helpers/keyboard_shortcuts.dart';
+import 'package:flutter/services.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/presentation/core/widgets/bottom_navigation_bar.dart';
 import 'package:keklist/presentation/screens/ai/ai_screen.dart';
@@ -18,8 +20,8 @@ import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collec
 import 'package:keklist/presentation/screens/settings/settings_screen.dart';
 import 'package:keklist/presentation/screens/whats_new/release_prompts.dart';
 
-/// Wider screens get the tabs as a rail on the left, like a desktop app.
-const double _kRailMinWidth = 800.0;
+/// Medium windows and wider (inner iPhone Duo, tablets, Googlebook) get the tabs as a rail on the left.
+const double _kRailMinWidth = 600.0;
 const double _kContentMaxWidth = 840.0;
 
 final class TabsContainerScreen extends StatefulWidget {
@@ -37,6 +39,8 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
   bool _useLiquidGlass = false;
   bool _isWide = false;
   final GlobalKey<MindDayCollectionScreenState> _todayKey = GlobalKey();
+  // Folding an iPhone Duo or resizing a window switches rail and tab bar; the key keeps the tabs' state.
+  final GlobalKey _bodyKey = GlobalKey();
 
   @override
   void initState() {
@@ -115,9 +119,38 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
     final Widget body = Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: _kContentMaxWidth),
-        child: IndexedStack(index: _selectedTabIndex, children: _bodyWidgets),
+        child: IndexedStack(key: _bodyKey, index: _selectedTabIndex, children: _bodyWidgets),
       ),
     );
+    return CallbackShortcuts(
+      bindings: _shortcuts,
+      child: Focus(
+        autofocus: true,
+        child: _layout(isWide: isWide, body: body),
+      ),
+    );
+  }
+
+  Map<ShortcutActivator, VoidCallback> get _shortcuts => {
+    for (int i = 0; i < _tabTypes.length && i < kTabDigitKeys.length; i++)
+      commandShortcut(kTabDigitKeys[i]): () => _onTap(i),
+    commandShortcut(LogicalKeyboardKey.keyN): _createMindToday,
+    if (_isTodaySelected) ...{
+      const SingleActivator(LogicalKeyboardKey.arrowLeft): () => _todayKey.currentState?.goToPreviousDay(),
+      const SingleActivator(LogicalKeyboardKey.arrowRight): () => _todayKey.currentState?.goToNextDay(),
+    },
+  };
+
+  bool get _isTodaySelected => _selectedTabIndex < _tabTypes.length && _tabTypes[_selectedTabIndex] == TabType.today;
+
+  void _createMindToday() {
+    final int todayTab = _tabTypes.indexOf(TabType.today);
+    if (todayTab < 0) return;
+    if (todayTab != _selectedTabIndex) _onTap(todayTab);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _todayKey.currentState?.showMindCreator());
+  }
+
+  Widget _layout({required bool isWide, required Widget body}) {
     if (isWide) {
       return Scaffold(
         body: Row(

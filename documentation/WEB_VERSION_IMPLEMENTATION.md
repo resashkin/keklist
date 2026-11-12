@@ -45,7 +45,7 @@ When a web edit or delete drops a mind's media, the server deletes those files, 
 
 ### 3. UI
 - Settings → «Web version» (phone only, `widgets/web_version_rows.dart`): addresses with copy, PIN (set/remove) and port.
-- At 800px and wider, the tabs become a `NavigationRail` on the left (`tabs_container_screen.dart`). Stories become a centered 9:16 card with ‹ › arrows; ←/→, space and Esc work too (`day_stories_screen.dart`).
+- At 600px and wider, the tabs become a `NavigationRail` on the left (`tabs_container_screen.dart`). Stories become a centered 9:16 card with ‹ › arrows; ←/→, space and Esc work too (`day_stories_screen.dart`).
 - In the light theme, the emotion texture on mind tiles is half as strong and the tile text is semibold.
 - `lib/presentation/core/helpers/media_sources.dart`: players and images take a URL when the path is remote (`videoControllerFor`, `setAudioSource`, `imageFor`). Waveforms are skipped for URLs.
 - In web mode:
