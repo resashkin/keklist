@@ -66,6 +66,7 @@ import 'package:keklist/domain/services/web_server/ai_routes.dart';
 import 'package:keklist/domain/services/web_server/gallery_routes.dart';
 import 'package:keklist/domain/services/web_server/keklist_web_server.dart';
 import 'package:keklist/domain/services/web_server/web_access.dart';
+import 'package:keklist/domain/services/screenshots/screenshot_demo.dart';
 
 
 // TODO: fix or exclude home_widget for android only
@@ -115,6 +116,13 @@ final class _AppRootState extends State<_AppRoot> {
     final injector = MainContainer(streamingSharedPreferences: streamingPrefs, hiveCipher: cipher).initialize(Injector());
 
     _enableDebugBLOCLogs(injector);
+    if (kScreenshotMode && kDebugMode) {
+      await seedScreenshotDemo(
+        settings: injector.get<SettingsRepository>(),
+        minds: injector.get<MindRepository>(),
+        emotions: injector.get<EmotionRepository>(),
+      );
+    }
     await Analytics.setUp(injector.get<SettingsRepository>().value);
 
     // The web version's dotenv carries no keys; purchases happen on the phone.

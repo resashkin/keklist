@@ -1,0 +1,44 @@
+{
+  "iphone_69": {
+    "store": "ios",
+    "size": [1320, 2868],
+    "frame": "iphone",
+    "capture": { "platform": "ios", "simulator": "iPhone 17 Pro Max" }
+  },
+  "ipad_13": {
+    "store": "ios",
+    "size": [2064, 2752],
+    "frame": "tablet",
+    "capture": { "platform": "ios", "simulator": "iPad Pro 13-inch (M5)" }
+  },
+  "iphone_duo_outer": {
+    "store": "ios",
+    "size": [1398, 2034],
+    "frame": "iphone",
+    "capture": { "platform": "ios", "simulator": "iPhone Duo", "pending": "no iPhone Duo simulator in Xcode 27.0" }
+  },
+  "iphone_duo_inner": {
+    "store": "ios",
+    "size": [2007, 2853],
+    "frame": "foldable",
+    "capture": { "platform": "ios", "simulator": "iPhone Duo", "pending": "no iPhone Duo simulator in Xcode 27.0" }
+  },
+  "android_phone": {
+    "store": "android",
+    "size": [1080, 1920],
+    "frame": "android",
+    "capture": { "platform": "android", "avd": "keklist_phone" }
+  },
+  "android_tablet_10": {
+    "store": "android",
+    "size": [1600, 2560],
+    "frame": "tablet",
+    "capture": { "platform": "android", "avd": "keklist_tablet" }
+  },
+  "googlebook": {
+    "store": "android",
+    "size": [2560, 1440],
+    "frame": "laptop",
+    "capture": { "platform": "android", "avd": "keklist_desktop" }
+  }
+}
