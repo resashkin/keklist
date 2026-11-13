@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
 import 'package:keklist/presentation/core/widgets/touch_indicators.dart';
+import 'package:keklist/presentation/core/helpers/legacy_theme_bridge.dart';
 
 final class KeklistApp extends StatefulWidget {
   const KeklistApp({super.key});
@@ -73,7 +74,7 @@ final class KeklistAppState extends KekWidgetState<KeklistApp> {
           builder: (context, state) => TouchIndicators(
             isEnabled: state is DebugMenuDataState &&
                 state.debugMenuItems.any((item) => item.type == DebugMenuType.showTouches && item.value),
-            child: _easyLoadingBuilder(context, child),
+            child: LegacyThemeBridge(child: _easyLoadingBuilder(context, child)),
           ),
         );
       },
