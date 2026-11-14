@@ -21,11 +21,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-BACKGROUND = '#0a0a0a'
 ACCENT = '#7C5CFC'
-TEXT = '#F5F5F5'
-MARKER = ACCENT
-MARKER_TEXT = '#FFFFFF'
+BACKGROUND_TOP = '#8B6CFF'
+BACKGROUND_BOTTOM = '#4A25D9'
+TEXT = '#FFFFFF'
+MARKER = '#FFFFFF'
+MARKER_TEXT = '#4A25D9'
 
 
 def caption_html(caption: str) -> str:
@@ -91,7 +92,8 @@ def page(caption: str, image: str, size: tuple[int, int], frame: str, image_size
     frame_w = min(area_w, area_h / ratio)
     return f'''<!doctype html><html><head><meta charset="utf-8"><style>
       html, body {{ margin:0; width:{canvas_w}px; height:{canvas_h}px; overflow:hidden; }}
-      body {{ background: radial-gradient(ellipse at 50% 85%, {ACCENT}40 0%, {BACKGROUND} 62%);
+      body {{ background: radial-gradient(ellipse at 50% 0%, #ffffff33 0%, transparent 55%),
+                          linear-gradient(170deg, {BACKGROUND_TOP} 0%, {ACCENT} 40%, {BACKGROUND_BOTTOM} 100%);
               font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; }}
       #caption {{ position:absolute; left:{side}px; right:{side}px; top:{caption_top}px; height:{caption_h}px;
                   display:flex; align-items:center; justify-content:center; text-align:center;

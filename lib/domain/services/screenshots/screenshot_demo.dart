@@ -31,7 +31,7 @@ Future<void> seedScreenshotDemo({
     settings.value.copyWith(
       userName: 'Alex',
       language: SupportedLanguage.english,
-      themePreference: KeklistThemeMode.dark,
+      themePreference: KeklistThemeMode.light,
       hasSeenLazyOnboarding: true,
       hasSeededEmotions: true,
       isAnalyticsEnabled: false,
