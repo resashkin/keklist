@@ -24,7 +24,7 @@ CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 BACKGROUND = '#0a0a0a'
 ACCENT = '#7C5CFC'
 TEXT = '#F5F5F5'
-MARKER = '#FFD84D'
+MARKER = '#F2F2F2'
 MARKER_TEXT = '#111111'
 
 
