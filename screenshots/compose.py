@@ -24,6 +24,16 @@ CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 BACKGROUND = '#0a0a0a'
 ACCENT = '#7C5CFC'
 TEXT = '#F5F5F5'
+MARKER = '#FFD84D'
+MARKER_TEXT = '#111111'
+
+
+def caption_html(caption: str) -> str:
+    """`**word**` becomes a highlighter mark; everything else is escaped text."""
+    parts = caption.split('**')
+    if len(parts) % 2 == 0:
+        raise ValueError(f'unbalanced ** in caption: {caption}')
+    return ''.join(f'<mark>{html.escape(part)}</mark>' if i % 2 else html.escape(part) for i, part in enumerate(parts))
 
 
 def read_strings(lang: str) -> list[tuple[str, str]]:
@@ -88,6 +98,9 @@ def page(caption: str, image: str, size: tuple[int, int], frame: str, image_size
                   color:{TEXT}; font-size:{font}px; font-weight:700; line-height:1.15; letter-spacing:-0.02em;
                   overflow:hidden; overflow-wrap:normal; word-break:keep-all; hyphens:none; }}
       #caption span {{ display:block; max-width:100%; }}
+      mark {{ color:{MARKER_TEXT}; padding:0 0.14em; margin:0 -0.04em; border-radius:0.18em 0.32em 0.22em 0.4em;
+              background: linear-gradient(98deg, transparent 0.4%, {MARKER}d9 1.6%, {MARKER} 45%, {MARKER}e6 97%, transparent 99.4%);
+              box-decoration-break:clone; -webkit-box-decoration-break:clone; }}
       .stage {{ position:absolute; left:0; right:0; top:{area_top}px; height:{area_h}px;
                 display:flex; align-items:center; justify-content:center; }}
       .device {{ background:#1c1c1e; box-shadow: 0 0 0 {canvas_w * 0.002}px #3a3a3c, 0 {canvas_h * 0.02}px {canvas_h * 0.05}px #0009;
@@ -98,7 +111,7 @@ def page(caption: str, image: str, size: tuple[int, int], frame: str, image_size
       .lid {{ background:#1c1c1e; box-sizing:border-box; width:100%; box-shadow: 0 0 0 {canvas_w * 0.0015}px #3a3a3c; }}
       .base {{ background:linear-gradient(#3a3a3c, #232325); width:116%; }}
     </style></head><body>
-      <div id="caption"><span>{html.escape(caption)}</span></div>
+      <div id="caption"><span>{caption_html(caption)}</span></div>
       <div class="stage">{frame_html(frame, image, frame_w)}</div>
       <script>
         const box = document.getElementById('caption');

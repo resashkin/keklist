@@ -1,9 +1,10 @@
 # Store screenshot captions. Order = screenshot order. Keep each to one short line.
-day: Your private journal
-emotions: Name what you feel
-insights: Understand your emotions
-voice: Say it or film it
-gallery: Your photos are your diary
-calendar: Look back at any day
-web: Open it on your computer. Your phone is the server.
-privacy: Stays on your phone only
+# **word** gets the yellow marker; mark the search keyword of each screen.
+day: Your **private** journal
+emotions: Name what you **feel**
+insights: Understand your **emotions**
+voice: **Say it** or film it
+gallery: Your photos are your **diary**
+calendar: Look back at any **day**
+web: Open it on your computer. **Your phone** is the server.
+privacy: **Stays on your phone** only
