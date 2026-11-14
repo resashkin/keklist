@@ -24,8 +24,8 @@ CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 BACKGROUND = '#0a0a0a'
 ACCENT = '#7C5CFC'
 TEXT = '#F5F5F5'
-MARKER = '#F2F2F2'
-MARKER_TEXT = '#111111'
+MARKER = ACCENT
+MARKER_TEXT = '#FFFFFF'
 
 
 def caption_html(caption: str) -> str:
