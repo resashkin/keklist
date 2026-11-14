@@ -25,3 +25,16 @@ has finished opening and only then focuses the field.
 ## Edge Cases & Considerations
 - New text fields that should open with the keyboard use `DeferredAutofocus` instead of `autofocus: true`.
 - The keyboard now appears about 250–300 ms later (the route's transition time).
+
+## Performance Test
+`integration_test/keyboard_sheet_perf_test.dart` opens a sheet with a text field over the demo Today screen and
+slides a simulated keyboard in, either together with the sheet or after it, five times each. It reports frame
+times and widget rebuilds to `build/integration_response_data.json`:
+```bash
+fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/keyboard_sheet_perf_test.dart \
+  -d <simulator> --dart-define=KEKLIST_SCREENSHOTS=true
+```
+First run (debug, iPhone 17 Pro Max simulator): both ways about 9,300 widget rebuilds and about 5 frames over
+16.7 ms per opening; worst build 48 ms together, 40 ms deferred. Deferring moves the rebuilds out of the sheet's
+slide but doesn't reduce them: the screen under the sheet rebuilds on every keyboard frame. Debug numbers are only
+good for comparing the two runs.
