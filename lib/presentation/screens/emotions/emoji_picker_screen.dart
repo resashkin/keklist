@@ -3,6 +3,7 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/widgets/mind_widget.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
+import 'package:keklist/presentation/core/widgets/deferred_autofocus.dart';
 
 final class EmojiPickerScreen extends StatefulWidget {
   final ValueChanged<String> onSelect;
@@ -51,13 +52,15 @@ final class _EmojiPickerScreenState extends State<EmojiPickerScreen> {
       heightFactor: 0.8,
       child: Column(
         children: [
-          TextField(
-            autofocus: true,
-            controller: _textEditingController,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(8),
-              border: const UnderlineInputBorder(),
-              hintText: context.l10n.searchYourEmoji,
+          DeferredAutofocus(
+            builder: (_, focusNode) => TextField(
+              focusNode: focusNode,
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(8),
+                border: const UnderlineInputBorder(),
+                hintText: context.l10n.searchYourEmoji,
+              ),
             ),
           ),
           Flexible(

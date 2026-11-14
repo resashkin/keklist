@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
+import 'package:keklist/presentation/core/widgets/deferred_autofocus.dart';
 
 /// Result from password input bottom sheet
 class PasswordInputResult {
@@ -125,24 +126,26 @@ class _PasswordInputBottomSheetState extends State<PasswordInputBottomSheet> {
               const SizedBox(height: 24),
 
               // Password field
-              TextField(
-                controller: _passwordController,
-                obscureText: !_isPasswordVisible,
-                autofocus: true,
-                decoration: InputDecoration(
-                  labelText: widget.mindsCount != null ? context.l10n.archivePassword : context.l10n.password,
-                  hintText: context.l10n.enterPassword,
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(_isPasswordVisible ? Icons.visibility_off : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
+              DeferredAutofocus(
+                builder: (_, focusNode) => TextField(
+                  controller: _passwordController,
+                  obscureText: !_isPasswordVisible,
+                  focusNode: focusNode,
+                  decoration: InputDecoration(
+                    labelText: widget.mindsCount != null ? context.l10n.archivePassword : context.l10n.password,
+                    hintText: context.l10n.enterPassword,
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(_isPasswordVisible ? Icons.visibility_off : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                    ),
                   ),
+                  onSubmitted: (_) => _onContinue(),
                 ),
-                onSubmitted: (_) => _onContinue(),
               ),
 
               const SizedBox(height: 24),

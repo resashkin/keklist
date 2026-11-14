@@ -6,6 +6,7 @@ import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emoji_picker_screen.dart';
+import 'package:keklist/presentation/core/widgets/deferred_autofocus.dart';
 
 /// Small nested bottom sheet to create or rename a single [Emotion] (emoji +
 /// title). Dispatches to [EmotionBloc] and pops on save. Replaces the old
@@ -94,14 +95,16 @@ class _EmotionEditorSheetState extends KekWidgetState<EmotionEditorSheet> {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: TextField(
-                    controller: _titleController,
-                    autofocus: true,
-                    textCapitalization: TextCapitalization.sentences,
-                    onSubmitted: (_) => _save(),
-                    decoration: InputDecoration(
-                      labelText: context.l10n.emotionNameHint,
-                      border: const OutlineInputBorder(),
+                  child: DeferredAutofocus(
+                    builder: (_, focusNode) => TextField(
+                      controller: _titleController,
+                      focusNode: focusNode,
+                      textCapitalization: TextCapitalization.sentences,
+                      onSubmitted: (_) => _save(),
+                      decoration: InputDecoration(
+                        labelText: context.l10n.emotionNameHint,
+                        border: const OutlineInputBorder(),
+                      ),
                     ),
                   ),
                 ),

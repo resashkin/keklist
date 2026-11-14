@@ -10,6 +10,7 @@ import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/screens/bloc_log_settings/bloc_log_settings_screen.dart';
 import 'package:keklist/presentation/core/widgets/settings/settings_section.dart';
+import 'package:keklist/presentation/core/widgets/deferred_autofocus.dart';
 
 final class DebugMenuScreen extends StatefulWidget {
   const DebugMenuScreen({super.key});
@@ -100,12 +101,14 @@ final class _DebugMenuScreenState extends KekWidgetState<DebugMenuScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Developer Password'),
-        content: TextField(
-          controller: controller,
-          obscureText: true,
-          autofocus: true,
-          decoration: const InputDecoration(hintText: 'Enter password'),
-          onSubmitted: (_) => Navigator.of(context).pop(true),
+        content: DeferredAutofocus(
+          builder: (_, focusNode) => TextField(
+            controller: controller,
+            obscureText: true,
+            focusNode: focusNode,
+            decoration: const InputDecoration(hintText: 'Enter password'),
+            onSubmitted: (_) => Navigator.of(context).pop(true),
+          ),
         ),
         actions: [
           TextButton(

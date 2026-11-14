@@ -3,6 +3,7 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/deferred_autofocus.dart';
 
 /// A sheet with a text field that grows with the text; Send delivers it to the developer's Telegram, see
 /// [TelegramFeedback].
@@ -12,8 +13,10 @@ final class FeedbackSheet extends StatefulWidget {
 
   const FeedbackSheet({super.key, this.title, this.tag});
 
-  static Future<void> show(BuildContext context, {String? title, String? tag}) =>
-      KekSheet.show<void>(context: context, builder: (_) => FeedbackSheet(title: title, tag: tag));
+  static Future<void> show(BuildContext context, {String? title, String? tag}) => KekSheet.show<void>(
+    context: context,
+    builder: (_) => FeedbackSheet(title: title, tag: tag),
+  );
 
   @override
   State<FeedbackSheet> createState() => _FeedbackSheetState();
@@ -51,20 +54,22 @@ final class _FeedbackSheetState extends State<FeedbackSheet> {
         children: [
           Flexible(
             child: SingleChildScrollView(
-              child: TextField(
-                controller: _controller,
-                autofocus: true,
-                enabled: !_isSending,
-                keyboardType: TextInputType.multiline,
-                minLines: 5,
-                maxLines: null,
-                maxLength: 4000,
-                textCapitalization: TextCapitalization.sentences,
-                style: const TextStyle(fontSize: 20.0),
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                  border: InputBorder.none,
-                  counterText: '',
+              child: DeferredAutofocus(
+                builder: (_, focusNode) => TextField(
+                  controller: _controller,
+                  focusNode: focusNode,
+                  enabled: !_isSending,
+                  keyboardType: TextInputType.multiline,
+                  minLines: 5,
+                  maxLines: null,
+                  maxLength: 4000,
+                  textCapitalization: TextCapitalization.sentences,
+                  style: const TextStyle(fontSize: 20.0),
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                    border: InputBorder.none,
+                    counterText: '',
+                  ),
                 ),
               ),
             ),
