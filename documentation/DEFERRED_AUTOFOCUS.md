@@ -34,7 +34,26 @@ times and widget rebuilds to `build/integration_response_data.json`:
 fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/keyboard_sheet_perf_test.dart \
   -d <simulator> --dart-define=KEKLIST_SCREENSHOTS=true
 ```
-First run (debug, iPhone 17 Pro Max simulator): both ways about 9,300 widget rebuilds and about 5 frames over
-16.7 ms per opening; worst build 48 ms together, 40 ms deferred. Deferring moves the rebuilds out of the sheet's
-slide but doesn't reduce them: the screen under the sheet rebuilds on every keyboard frame. Debug numbers are only
-good for comparing the two runs.
+The test fails if more than 100 widgets outside the sheet rebuild per opening while the keyboard moves.
+
+## Keyboard Insets Barrier
+The keyboard's bottom inset changes on every frame of its animation. Before the fix the whole Today screen under
+the sheet rebuilt on each of those frames (about 7,500 widgets per opening): the tabs' `Scaffold` shrank its body to
+avoid the keyboard and everything reading `MediaQuery` below it followed. The tabs have no text fields of their own
+(they open sheets and pages for input), so `TabsContainerScreen` wraps its layout in `KeyboardInsetsBarrier`
+(`lib/presentation/core/widgets/keyboard_insets_barrier.dart`), which shows the tabs a `MediaQuery` without the
+keyboard. Sheets and pushed pages are separate routes and still see the keyboard.
+
+Debug, iPhone 17 Pro Max simulator, per opening (keyboard after the sheet):
+
+| | Before | After |
+|---|---|---|
+| Widget rebuilds outside the sheet | ~7,500 | ~80 (root `MediaQuery`, the barrier, the sheet route's wrappers) |
+| All widget rebuilds | ~8,500 | ~1,100 |
+| Frames over 16.7 ms (5 openings) | 32 | 2 |
+| Worst frame build | 47 ms | 24 ms |
+
+Debug numbers are only good for comparing runs; check smoothness on a device in a release build.
+
+A new screen that has a text field directly in a tab body (not in a sheet or a pushed page) would need its own
+keyboard handling, since the barrier hides the keyboard from it.

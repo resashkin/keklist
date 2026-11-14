@@ -11,6 +11,7 @@ import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/helpers/interface_style_utils.dart';
 import 'package:keklist/presentation/core/helpers/keyboard_shortcuts.dart';
 import 'package:flutter/services.dart';
+import 'package:keklist/presentation/core/widgets/keyboard_insets_barrier.dart';
 import 'package:keklist/presentation/core/widgets/bool_widget.dart';
 import 'package:keklist/presentation/core/widgets/bottom_navigation_bar.dart';
 import 'package:keklist/presentation/screens/ai/ai_screen.dart';
@@ -126,7 +127,7 @@ final class _TabsContainerScreenState extends State<TabsContainerScreen> with Di
       bindings: _shortcuts,
       child: Focus(
         autofocus: true,
-        child: _layout(isWide: isWide, body: body),
+        child: KeyboardInsetsBarrier(child: _layout(isWide: isWide, body: body)),
       ),
     );
   }

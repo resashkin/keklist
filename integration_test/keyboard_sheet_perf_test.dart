@@ -36,11 +36,19 @@ void main() {
       report[entry.key] = summary.toJson();
       print('KEKLIST_PERF ${entry.key}: $summary');
     }
+    final List<MapEntry<String, int>> outside = _outsideSheetByType.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    report['outside_sheet_rebuilds_while_keyboard_slides'] = {
+      'total_per_open': outside.fold<int>(0, (sum, e) => sum + e.value) / _repeats,
+      for (final MapEntry<String, int> e in outside.take(40)) e.key: e.value / _repeats,
+    };
     binding.reportData = report;
 
     final _Summary together = _Summary(runs['together']!);
     final _Summary deferred = _Summary(runs['deferred']!);
     expect(deferred.rebuildsInOverlap, lessThanOrEqualTo(together.rebuildsInOverlap));
+    final num outsideSheet = (report['outside_sheet_rebuilds_while_keyboard_slides']! as Map)['total_per_open'];
+    expect(outsideSheet, lessThan(100), reason: 'the screen under a sheet must not rebuild while the keyboard moves');
   }, timeout: const Timeout(Duration(minutes: 5)));
 }
 
@@ -49,6 +57,19 @@ const double _keyboardHeight = 336.0;
 const Duration _keyboardDuration = Duration(milliseconds: 300);
 const Duration _routeDuration = Duration(milliseconds: 350);
 const Duration _step = Duration(milliseconds: 16);
+
+/// Rebuilds outside the sheet while only the keyboard moves, by widget type; these should be zero.
+final Map<String, int> _outsideSheetByType = {};
+
+bool _isInsideSheet(Element element) {
+  if (element.widget is KekSheetScaffold) return true;
+  bool inside = false;
+  element.visitAncestorElements((ancestor) {
+    inside = ancestor.widget is KekSheetScaffold;
+    return !inside;
+  });
+  return inside;
+}
 
 final class _Run {
   final List<FrameTiming> frames;
@@ -65,9 +86,13 @@ Future<_Run> _open(WidgetTester tester, {required bool deferKeyboard}) async {
   int rebuilds = 0;
   int rebuildsInOverlap = 0;
   bool routeAnimating = true;
-  debugOnRebuildDirtyWidget = (_, _) {
+  debugOnRebuildDirtyWidget = (element, _) {
     rebuilds++;
     if (routeAnimating) rebuildsInOverlap++;
+    if (deferKeyboard && !routeAnimating && !_isInsideSheet(element)) {
+      final String type = element.widget.runtimeType.toString();
+      _outsideSheetByType[type] = (_outsideSheetByType[type] ?? 0) + 1;
+    }
   };
   WidgetsBinding.instance.addTimingsCallback(onTimings);
 
