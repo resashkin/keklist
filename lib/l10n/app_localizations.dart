@@ -2493,18 +2493,6 @@ abstract class AppLocalizations {
   /// **'Mirror to browser'**
   String get webVersionEnabled;
 
-  /// Title of the bottom sheet with a story mind's comments
-  ///
-  /// In en, this message translates to:
-  /// **'Comments'**
-  String get viewerComments;
-
-  /// Shown in the comments sheet when a mind has no comments yet
-  ///
-  /// In en, this message translates to:
-  /// **'No comments yet'**
-  String get viewerNoComments;
-
   /// Tooltip of the chevron that opens the previous day
   ///
   /// In en, this message translates to:
@@ -2636,6 +2624,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your week, month or year in cards. Take a selfie for your avatar and switch back to an earlier one anytime.'**
   String get whatsNewProfileBody;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Emotions in the background'**
+  String get storyTextureOpacity;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Replies'**
+  String get storyReplies;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Replies visible'**
+  String get storyReplyCount;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Bubble brightness'**
+  String get storyReplyOpacity;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Text size'**
+  String get storyReplyTextSize;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar size'**
+  String get storyReplyAvatarSize;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Side'**
+  String get storyReplySide;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Left'**
+  String get storyReplySideLeft;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get storyReplySideRight;
+
+  /// Story shake tweaks: replies over a story and the emotion texture
+  ///
+  /// In en, this message translates to:
+  /// **'Show time'**
+  String get storyReplyTime;
 }
 
 class _AppLocalizationsDelegate

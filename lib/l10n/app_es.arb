@@ -605,8 +605,6 @@
     "settingsSupport": "Soporte",
     "calendarOpenDay": "Abrir día",
     "webVersionEnabled": "Reflejar en el navegador",
-    "viewerComments": "Comentarios",
-    "viewerNoComments": "Aún no hay comentarios",
     "previousDay": "Día anterior",
     "nextDay": "Día siguiente",
     "whatsNewTitle": "Novedades de {version}",
@@ -628,5 +626,15 @@
     "profileSelfie": "Selfie",
     "profileRecentAvatars": "Recientes",
     "whatsNewProfileTitle": "Las estadísticas ahora son tu perfil",
-    "whatsNewProfileBody": "Tu semana, mes o año en tarjetas. Hazte un selfi para el avatar y vuelve a uno anterior cuando quieras."
+    "whatsNewProfileBody": "Tu semana, mes o año en tarjetas. Hazte un selfi para el avatar y vuelve a uno anterior cuando quieras.",
+    "storyTextureOpacity": "Emociones de fondo",
+    "storyReplies": "Respuestas",
+    "storyReplyCount": "Respuestas visibles",
+    "storyReplyOpacity": "Brillo de la burbuja",
+    "storyReplyTextSize": "Tamaño del texto",
+    "storyReplyAvatarSize": "Tamaño del avatar",
+    "storyReplySide": "Lado",
+    "storyReplySideLeft": "Izquierda",
+    "storyReplySideRight": "Derecha",
+    "storyReplyTime": "Mostrar hora"
 }

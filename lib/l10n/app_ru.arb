@@ -395,8 +395,6 @@
     "settingsSupport": "Поддержка",
     "calendarOpenDay": "Открыть день",
     "webVersionEnabled": "Зеркало в браузере",
-    "viewerComments": "Комментарии",
-    "viewerNoComments": "Пока нет комментариев",
     "previousDay": "Предыдущий день",
     "nextDay": "Следующий день",
     "whatsNewTitle": "Что нового в {version}",
@@ -418,5 +416,15 @@
     "profileSelfie": "Селфи",
     "profileRecentAvatars": "Недавние",
     "whatsNewProfileTitle": "Аналитика стала профилем",
-    "whatsNewProfileBody": "Неделя, месяц или год в карточках. Сделай селфи на аватар и в любой момент верни один из прошлых."
+    "whatsNewProfileBody": "Неделя, месяц или год в карточках. Сделай селфи на аватар и в любой момент верни один из прошлых.",
+    "storyTextureOpacity": "Эмоции на фоне",
+    "storyReplies": "Ответы",
+    "storyReplyCount": "Видно ответов",
+    "storyReplyOpacity": "Яркость пузыря",
+    "storyReplyTextSize": "Размер текста",
+    "storyReplyAvatarSize": "Размер аватара",
+    "storyReplySide": "Сторона",
+    "storyReplySideLeft": "Слева",
+    "storyReplySideRight": "Справа",
+    "storyReplyTime": "Показывать время"
 }

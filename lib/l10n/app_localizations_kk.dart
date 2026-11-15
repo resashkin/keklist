@@ -1283,12 +1283,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get webVersionEnabled => 'Браузерге көрсету';
 
   @override
-  String get viewerComments => 'Пікірлер';
-
-  @override
-  String get viewerNoComments => 'Әзірге пікір жоқ';
-
-  @override
   String get previousDay => 'Алдыңғы күн';
 
   @override
@@ -1368,4 +1362,34 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get whatsNewProfileBody =>
       'Апта, ай немесе жыл карточкаларда. Аватарға селфи түсір және кез келген уақытта бұрынғысына қайт.';
+
+  @override
+  String get storyTextureOpacity => 'Фондағы эмоциялар';
+
+  @override
+  String get storyReplies => 'Жауаптар';
+
+  @override
+  String get storyReplyCount => 'Көрінетін жауаптар';
+
+  @override
+  String get storyReplyOpacity => 'Көпіршік жарықтығы';
+
+  @override
+  String get storyReplyTextSize => 'Мәтін өлшемі';
+
+  @override
+  String get storyReplyAvatarSize => 'Аватар өлшемі';
+
+  @override
+  String get storyReplySide => 'Жағы';
+
+  @override
+  String get storyReplySideLeft => 'Сол';
+
+  @override
+  String get storyReplySideRight => 'Оң';
+
+  @override
+  String get storyReplyTime => 'Уақытты көрсету';
 }

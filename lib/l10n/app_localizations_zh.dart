@@ -1236,12 +1236,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get webVersionEnabled => '镜像到浏览器';
 
   @override
-  String get viewerComments => '评论';
-
-  @override
-  String get viewerNoComments => '暂无评论';
-
-  @override
   String get previousDay => '前一天';
 
   @override
@@ -1316,4 +1310,34 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get whatsNewProfileBody => '用卡片回顾你的一周、一月或一年。拍张自拍当头像，随时换回以前的头像。';
+
+  @override
+  String get storyTextureOpacity => '背景中的情绪';
+
+  @override
+  String get storyReplies => '回复';
+
+  @override
+  String get storyReplyCount => '可见回复';
+
+  @override
+  String get storyReplyOpacity => '气泡亮度';
+
+  @override
+  String get storyReplyTextSize => '文字大小';
+
+  @override
+  String get storyReplyAvatarSize => '头像大小';
+
+  @override
+  String get storyReplySide => '位置';
+
+  @override
+  String get storyReplySideLeft => '左侧';
+
+  @override
+  String get storyReplySideRight => '右侧';
+
+  @override
+  String get storyReplyTime => '显示时间';
 }

@@ -605,8 +605,6 @@
     "settingsSupport": "Колдоо",
     "calendarOpenDay": "Күндү ачуу",
     "webVersionEnabled": "Браузерге чагылдыруу",
-    "viewerComments": "Комментарийлер",
-    "viewerNoComments": "Азырынча комментарий жок",
     "previousDay": "Мурунку күн",
     "nextDay": "Кийинки күн",
     "whatsNewTitle": "{version} версиясында эмне жаңы",
@@ -628,5 +626,15 @@
     "profileSelfie": "Селфи",
     "profileRecentAvatars": "Акыркылар",
     "whatsNewProfileTitle": "Талдоо эми сенин профилиң",
-    "whatsNewProfileBody": "Апта, ай же жыл карточкаларда. Аватарга селфи тарт жана каалаган убакта мурункусуна кайт."
+    "whatsNewProfileBody": "Апта, ай же жыл карточкаларда. Аватарга селфи тарт жана каалаган убакта мурункусуна кайт.",
+    "storyTextureOpacity": "Фондогу эмоциялар",
+    "storyReplies": "Жооптор",
+    "storyReplyCount": "Көрүнгөн жооптор",
+    "storyReplyOpacity": "Көбүкчөнүн жарыктыгы",
+    "storyReplyTextSize": "Тексттин өлчөмү",
+    "storyReplyAvatarSize": "Аватардын өлчөмү",
+    "storyReplySide": "Тарап",
+    "storyReplySideLeft": "Сол",
+    "storyReplySideRight": "Оң",
+    "storyReplyTime": "Убакытты көрсөтүү"
 }

@@ -160,6 +160,27 @@ final class SettingsObject extends HiveObject {
   @HiveField(53, defaultValue: <String>[])
   late List<String> avatarHistory;
 
+  @HiveField(54, defaultValue: 3)
+  late int storyReplyCount;
+
+  @HiveField(55, defaultValue: 0.14)
+  late double storyReplyOpacity;
+
+  @HiveField(56, defaultValue: 15.0)
+  late double storyReplyTextSize;
+
+  @HiveField(57, defaultValue: 28.0)
+  late double storyReplyAvatarSize;
+
+  @HiveField(58, defaultValue: 0)
+  late int storyReplySideIndex;
+
+  @HiveField(59, defaultValue: true)
+  late bool isStoryReplyTimeVisible;
+
+  @HiveField(60, defaultValue: 0.45)
+  late double storyTextureOpacity;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -208,6 +229,13 @@ final class SettingsObject extends HiveObject {
           dateLayout: StoryDateLayout.values.elementAtOrNull(storyDateLayoutIndex) ?? StoryDateLayout.oneLine,
           isSpectrumVisible: isStorySpectrumVisible,
           sensitivity: storySensitivity,
+          textureOpacity: storyTextureOpacity,
+          replyCount: storyReplyCount,
+          replyOpacity: storyReplyOpacity,
+          replyTextSize: storyReplyTextSize,
+          replyAvatarSize: storyReplyAvatarSize,
+          replySide: StoryReplySide.values.elementAtOrNull(storyReplySideIndex) ?? StoryReplySide.left,
+          isReplyTimeVisible: isStoryReplyTimeVisible,
         ),
         avatar: UserAvatar(emoji: avatarEmoji, imagePath: avatarImagePath),
         avatarHistory: avatarHistory.map(UserAvatar.decode).whereType<UserAvatar>().toList(),

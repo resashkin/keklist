@@ -1286,12 +1286,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get webVersionEnabled => 'Brauzerda aks ettirish';
 
   @override
-  String get viewerComments => 'Izohlar';
-
-  @override
-  String get viewerNoComments => 'Hozircha izoh yo\'q';
-
-  @override
   String get previousDay => 'Oldingi kun';
 
   @override
@@ -1371,4 +1365,34 @@ class AppLocalizationsUz extends AppLocalizations {
   @override
   String get whatsNewProfileBody =>
       'Hafta, oy yoki yil kartochkalarda. Avatar uchun selfi oling va istalgan payt avvalgisiga qayting.';
+
+  @override
+  String get storyTextureOpacity => 'Fondagi hissiyotlar';
+
+  @override
+  String get storyReplies => 'Javoblar';
+
+  @override
+  String get storyReplyCount => 'Ko‘rinadigan javoblar';
+
+  @override
+  String get storyReplyOpacity => 'Pufak yorqinligi';
+
+  @override
+  String get storyReplyTextSize => 'Matn o‘lchami';
+
+  @override
+  String get storyReplyAvatarSize => 'Avatar o‘lchami';
+
+  @override
+  String get storyReplySide => 'Tomon';
+
+  @override
+  String get storyReplySideLeft => 'Chap';
+
+  @override
+  String get storyReplySideRight => 'O‘ng';
+
+  @override
+  String get storyReplyTime => 'Vaqtni ko‘rsatish';
 }

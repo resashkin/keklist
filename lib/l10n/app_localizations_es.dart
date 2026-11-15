@@ -1287,12 +1287,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get webVersionEnabled => 'Reflejar en el navegador';
 
   @override
-  String get viewerComments => 'Comentarios';
-
-  @override
-  String get viewerNoComments => 'Aún no hay comentarios';
-
-  @override
   String get previousDay => 'Día anterior';
 
   @override
@@ -1373,4 +1367,34 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get whatsNewProfileBody =>
       'Tu semana, mes o año en tarjetas. Hazte un selfi para el avatar y vuelve a uno anterior cuando quieras.';
+
+  @override
+  String get storyTextureOpacity => 'Emociones de fondo';
+
+  @override
+  String get storyReplies => 'Respuestas';
+
+  @override
+  String get storyReplyCount => 'Respuestas visibles';
+
+  @override
+  String get storyReplyOpacity => 'Brillo de la burbuja';
+
+  @override
+  String get storyReplyTextSize => 'Tamaño del texto';
+
+  @override
+  String get storyReplyAvatarSize => 'Tamaño del avatar';
+
+  @override
+  String get storyReplySide => 'Lado';
+
+  @override
+  String get storyReplySideLeft => 'Izquierda';
+
+  @override
+  String get storyReplySideRight => 'Derecha';
+
+  @override
+  String get storyReplyTime => 'Mostrar hora';
 }

@@ -109,13 +109,30 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..reviewPromptedRelease = fields[52] as String?
       ..avatarHistory = fields[53] == null
           ? []
-          : (fields[53] as List).cast<String>();
+          : (fields[53] as List).cast<String>()
+      ..storyReplyCount = fields[54] == null ? 3 : (fields[54] as num).toInt()
+      ..storyReplyOpacity = fields[55] == null
+          ? 0.14
+          : (fields[55] as num).toDouble()
+      ..storyReplyTextSize = fields[56] == null
+          ? 15.0
+          : (fields[56] as num).toDouble()
+      ..storyReplyAvatarSize = fields[57] == null
+          ? 28.0
+          : (fields[57] as num).toDouble()
+      ..storyReplySideIndex = fields[58] == null
+          ? 0
+          : (fields[58] as num).toInt()
+      ..isStoryReplyTimeVisible = fields[59] == null ? true : fields[59] as bool
+      ..storyTextureOpacity = fields[60] == null
+          ? 0.45
+          : (fields[60] as num).toDouble();
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(45)
+      ..writeByte(52)
       ..writeByte(3)
       ..write(obj.isDarkMode)
       ..writeByte(5)
@@ -205,7 +222,21 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(52)
       ..write(obj.reviewPromptedRelease)
       ..writeByte(53)
-      ..write(obj.avatarHistory);
+      ..write(obj.avatarHistory)
+      ..writeByte(54)
+      ..write(obj.storyReplyCount)
+      ..writeByte(55)
+      ..write(obj.storyReplyOpacity)
+      ..writeByte(56)
+      ..write(obj.storyReplyTextSize)
+      ..writeByte(57)
+      ..write(obj.storyReplyAvatarSize)
+      ..writeByte(58)
+      ..write(obj.storyReplySideIndex)
+      ..writeByte(59)
+      ..write(obj.isStoryReplyTimeVisible)
+      ..writeByte(60)
+      ..write(obj.storyTextureOpacity);
   }
 
   @override

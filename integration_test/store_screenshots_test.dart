@@ -12,7 +12,9 @@ import 'package:keklist/main.dart' as app;
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_bloc.dart';
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_event.dart';
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_state.dart';
+import 'package:keklist/presentation/screens/emotions/emotion_editor_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
+import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/presentation/screens/tabs_container/tabs_container_screen.dart';
 import 'package:material_ui/material_ui.dart';
@@ -33,9 +35,30 @@ void main() {
     await _openTab(tester, TabType.today);
     await _snap(tester, 'day');
 
+    final MindDayCollectionScreenState today = tester.state(find.byType(MindDayCollectionScreen));
+    today.showMindCreator();
+    await _wait(tester, 2);
+    await tester.enterText(find.byType(TextField).last, 'Dinner with Anna. We planned the trip to Lisbon in May');
+    await _snap(tester, 'typing');
+    Navigator.of(tester.element(find.byType(MindCreatorScreen))).pop();
+    await _wait(tester, 1);
+
     final BuildContext context = tester.element(find.byType(TabsContainerScreen));
-    EmotionMarkingSheet.show(context: context, initialSelectedIds: {'calm', 'grateful'}, onSelectionChanged: (_) {});
+    EmotionMarkingSheet.show(
+      context: context,
+      initialSelectedIds: {'calm', 'grateful', 'hopeful'},
+      onSelectionChanged: (_) {},
+    );
     await _snap(tester, 'emotions');
+    EmotionEditorSheet.show(context: tester.element(find.byType(EmotionMarkingSheet)));
+    await _wait(tester, 2);
+    await tester.enterText(
+      find.descendant(of: find.byType(EmotionEditorSheet), matching: find.byType(TextField)),
+      'Peaceful',
+    );
+    await _snap(tester, 'new_emotion');
+    Navigator.of(context).pop();
+    await _wait(tester, 1);
     Navigator.of(context).pop();
     await _wait(tester, 1);
 
@@ -63,7 +86,8 @@ void main() {
 Future<void> _waitForDemoMedia() async {
   const AppFileRepository files = AppFileRepository();
   for (int i = 0; i < 120; i++) {
-    final bool ready = await File(await files.resolveAbsolutePath(kDemoAudioPath)).exists() &&
+    final bool ready =
+        await File(await files.resolveAbsolutePath(kDemoAudioPath)).exists() &&
         await File(await files.resolveAbsolutePath(kDemoVideoPath)).exists();
     if (ready) return;
     print('KEKLIST_WAIT_MEDIA');

@@ -1625,14 +1625,6 @@
     "@webVersionEnabled": {
         "description": "Switch that starts serving keklist to browsers in the same Wi-Fi"
     },
-    "viewerComments": "Comments",
-    "@viewerComments": {
-        "description": "Title of the bottom sheet with a story mind's comments"
-    },
-    "viewerNoComments": "No comments yet",
-    "@viewerNoComments": {
-        "description": "Shown in the comments sheet when a mind has no comments yet"
-    },
     "@webVersion": {
         "description": "Title of the Settings section that lets browsers in the same Wi-Fi open keklist from the phone"
     },
@@ -1733,5 +1725,45 @@
     "whatsNewProfileBody": "Your week, month or year in cards. Take a selfie for your avatar and switch back to an earlier one anytime.",
     "@whatsNewProfileBody": {
         "description": "What's New slide text about the Profile tab"
+    },
+    "storyTextureOpacity": "Emotions in the background",
+    "@storyTextureOpacity": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplies": "Replies",
+    "@storyReplies": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplyCount": "Replies visible",
+    "@storyReplyCount": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplyOpacity": "Bubble brightness",
+    "@storyReplyOpacity": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplyTextSize": "Text size",
+    "@storyReplyTextSize": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplyAvatarSize": "Avatar size",
+    "@storyReplyAvatarSize": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplySide": "Side",
+    "@storyReplySide": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplySideLeft": "Left",
+    "@storyReplySideLeft": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplySideRight": "Right",
+    "@storyReplySideRight": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "storyReplyTime": "Show time",
+    "@storyReplyTime": {
+        "description": "Story shake tweaks: replies over a story and the emotion texture"
     }
 }

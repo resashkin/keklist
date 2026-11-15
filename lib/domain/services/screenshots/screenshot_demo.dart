@@ -56,11 +56,11 @@ Future<void> seedScreenshotDemo({
 
 final DateTime _created = DateTime(2026, 1, 1);
 
-Emotion _emotion(String id, String emoji, String title, {String? parent, int order = 0}) => Emotion(
+Emotion _emotion(String id, String emoji, String title, {int order = 0}) => Emotion(
   id: id,
   title: title,
   emoji: emoji,
-  parentId: parent,
+  parentId: null,
   isArchived: false,
   orderIndex: order,
   creationDate: _created,
@@ -68,19 +68,27 @@ Emotion _emotion(String id, String emoji, String title, {String? parent, int ord
 
 final List<Emotion> _emotions = [
   _emotion('joy', '😄', 'Joy', order: 0),
-  _emotion('calm', '😌', 'Calm', parent: 'joy', order: 0),
-  _emotion('grateful', '🙏', 'Grateful', parent: 'joy', order: 1),
-  _emotion('proud', '💪', 'Proud', parent: 'joy', order: 2),
-  _emotion('inspired', '✨', 'Inspired', parent: 'joy', order: 3),
-  _emotion('love', '❤️', 'Love', order: 1),
-  _emotion('warmth', '🤗', 'Warmth', parent: 'love', order: 0),
-  _emotion('sad', '😢', 'Sad', order: 2),
-  _emotion('tired', '🥱', 'Tired', parent: 'sad', order: 0),
-  _emotion('lonely', '🌧️', 'Lonely', parent: 'sad', order: 1),
-  _emotion('fear', '😨', 'Fear', order: 3),
-  _emotion('anxious', '😬', 'Anxious', parent: 'fear', order: 0),
-  _emotion('angry', '😠', 'Angry', order: 4),
-  _emotion('annoyed', '😤', 'Annoyed', parent: 'angry', order: 0),
+  _emotion('calm', '😌', 'Calm', order: 1),
+  _emotion('grateful', '🙏', 'Grateful', order: 2),
+  _emotion('proud', '💪', 'Proud', order: 3),
+  _emotion('inspired', '✨', 'Inspired', order: 4),
+  _emotion('love', '❤️', 'Love', order: 5),
+  _emotion('warmth', '🤗', 'Warmth', order: 6),
+  _emotion('excited', '🤩', 'Excited', order: 7),
+  _emotion('hopeful', '🌱', 'Hopeful', order: 8),
+  _emotion('curious', '🧐', 'Curious', order: 9),
+  _emotion('relaxed', '🛁', 'Relaxed', order: 10),
+  _emotion('nostalgic', '📷', 'Nostalgic', order: 11),
+  _emotion('sad', '😢', 'Sad', order: 12),
+  _emotion('tired', '🥱', 'Tired', order: 13),
+  _emotion('lonely', '🌧️', 'Lonely', order: 14),
+  _emotion('fear', '😨', 'Fear', order: 15),
+  _emotion('anxious', '😬', 'Anxious', order: 16),
+  _emotion('stressed', '🤯', 'Stressed', order: 17),
+  _emotion('angry', '😠', 'Angry', order: 18),
+  _emotion('annoyed', '😤', 'Annoyed', order: 19),
+  _emotion('bored', '🙄', 'Bored', order: 20),
+  _emotion('confused', '😵‍💫', 'Confused', order: 21),
 ];
 
 typedef _Entry = (int daysAgo, String text, List<String> emotions);
@@ -131,8 +139,24 @@ List<Mind> _minds() {
   String withText(BaseMindNotePiece media, String text) =>
       MindNoteContent.fromPieces([MindNoteText(text), media]).toRawNoteString();
 
-  return [
+  final List<Mind> textMinds = [
     for (final (daysAgo, text, emotionIds) in _textEntries) mind(daysAgo, text, emotionIds),
+  ];
+  final Mind talk = textMinds.firstWhere((mind) => mind.note.startsWith('A bit anxious'));
+  Mind reply(int index, String note, int minutesLater) => Mind(
+    id: '${talk.id}-reply-$index',
+    note: note,
+    dayIndex: talk.dayIndex,
+    creationDate: talk.creationDate.add(Duration(minutes: minutesLater)),
+    sortIndex: index,
+    rootId: talk.id,
+    emotionIds: const [],
+  );
+
+  return [
+    ...textMinds,
+    reply(0, 'Practiced it twice, it flows now', 40),
+    reply(1, 'Going to bed early tonight', 150),
     mind(
       kDemoVoiceDayOffset,
       withText(const MindNoteAudio(appRelativeAbsoulutePath: kDemoAudioPath, durationSeconds: 14), 'Thoughts on the way home'),

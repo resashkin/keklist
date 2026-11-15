@@ -133,22 +133,55 @@ enum StoryTextureAnimation { off, pulse, wave, equalizer, drift, glow }
 /// The date header of a story or viewer page: "21 October · Wednesday · 07:14" on one, two or three lines.
 enum StoryDateLayout { oneLine, twoLines, threeLines }
 
+/// Which side of a story its replies sit on.
+enum StoryReplySide { left, right }
+
 /// Stories and viewer tweaks: texture animation, date header, sound spectrum around circles and how strongly
-/// both react to loudness.
+/// both react to loudness, and how the replies over a story look.
 final class StorySettings {
   static const double minSensitivity = 0.5;
   static const double maxSensitivity = 3.0;
+  static const int minReplyCount = 1;
+  static const int maxReplyCount = 6;
+  static const double minReplyOpacity = 0.05;
+  static const double maxReplyOpacity = 0.6;
+  static const double minReplyTextSize = 12.0;
+  static const double maxReplyTextSize = 20.0;
+  static const double minReplyAvatarSize = 0.0;
+  static const double maxReplyAvatarSize = 44.0;
+  static const double minTextureOpacity = 0.05;
+  static const double maxTextureOpacity = 0.8;
 
   final StoryTextureAnimation textureAnimation;
   final StoryDateLayout dateLayout;
   final bool isSpectrumVisible;
   final double sensitivity;
 
+  /// How strongly the emotions behind a story show.
+  final double textureOpacity;
+
+  /// How many replies fit over the story before older ones scroll up under the fade.
+  final int replyCount;
+  final double replyOpacity;
+  final double replyTextSize;
+
+  /// 0 hides the avatar.
+  final double replyAvatarSize;
+  final StoryReplySide replySide;
+  final bool isReplyTimeVisible;
+
   const StorySettings({
     this.textureAnimation = StoryTextureAnimation.pulse,
     this.dateLayout = StoryDateLayout.oneLine,
     this.isSpectrumVisible = true,
     this.sensitivity = 1.0,
+    this.textureOpacity = 0.45,
+    this.replyCount = 3,
+    this.replyOpacity = 0.14,
+    this.replyTextSize = 15.0,
+    this.replyAvatarSize = 28.0,
+    this.replySide = StoryReplySide.left,
+    this.isReplyTimeVisible = true,
   });
 
   StorySettings copyWith({
@@ -156,11 +189,25 @@ final class StorySettings {
     StoryDateLayout? dateLayout,
     bool? isSpectrumVisible,
     double? sensitivity,
+    double? textureOpacity,
+    int? replyCount,
+    double? replyOpacity,
+    double? replyTextSize,
+    double? replyAvatarSize,
+    StoryReplySide? replySide,
+    bool? isReplyTimeVisible,
   }) => StorySettings(
     textureAnimation: textureAnimation ?? this.textureAnimation,
     dateLayout: dateLayout ?? this.dateLayout,
     isSpectrumVisible: isSpectrumVisible ?? this.isSpectrumVisible,
     sensitivity: (sensitivity ?? this.sensitivity).clamp(minSensitivity, maxSensitivity),
+    textureOpacity: (textureOpacity ?? this.textureOpacity).clamp(minTextureOpacity, maxTextureOpacity),
+    replyCount: (replyCount ?? this.replyCount).clamp(minReplyCount, maxReplyCount),
+    replyOpacity: (replyOpacity ?? this.replyOpacity).clamp(minReplyOpacity, maxReplyOpacity),
+    replyTextSize: (replyTextSize ?? this.replyTextSize).clamp(minReplyTextSize, maxReplyTextSize),
+    replyAvatarSize: (replyAvatarSize ?? this.replyAvatarSize).clamp(minReplyAvatarSize, maxReplyAvatarSize),
+    replySide: replySide ?? this.replySide,
+    isReplyTimeVisible: isReplyTimeVisible ?? this.isReplyTimeVisible,
   );
 
   @override
@@ -169,10 +216,29 @@ final class StorySettings {
       other.textureAnimation == textureAnimation &&
       other.dateLayout == dateLayout &&
       other.isSpectrumVisible == isSpectrumVisible &&
-      other.sensitivity == sensitivity;
+      other.sensitivity == sensitivity &&
+      other.textureOpacity == textureOpacity &&
+      other.replyCount == replyCount &&
+      other.replyOpacity == replyOpacity &&
+      other.replyTextSize == replyTextSize &&
+      other.replyAvatarSize == replyAvatarSize &&
+      other.replySide == replySide &&
+      other.isReplyTimeVisible == isReplyTimeVisible;
 
   @override
-  int get hashCode => Object.hash(textureAnimation, dateLayout, isSpectrumVisible, sensitivity);
+  int get hashCode => Object.hash(
+    textureAnimation,
+    dateLayout,
+    isSpectrumVisible,
+    sensitivity,
+    textureOpacity,
+    replyCount,
+    replyOpacity,
+    replyTextSize,
+    replyAvatarSize,
+    replySide,
+    isReplyTimeVisible,
+  );
 }
 
 /// Analytics screen layout: widget order (unknown ids ignored), hidden widgets and the period.
@@ -394,6 +460,13 @@ final class KeklistSettings {
     ..storyDateLayoutIndex = story.dateLayout.index
     ..isStorySpectrumVisible = story.isSpectrumVisible
     ..storySensitivity = story.sensitivity
+    ..storyTextureOpacity = story.textureOpacity
+    ..storyReplyCount = story.replyCount
+    ..storyReplyOpacity = story.replyOpacity
+    ..storyReplyTextSize = story.replyTextSize
+    ..storyReplyAvatarSize = story.replyAvatarSize
+    ..storyReplySideIndex = story.replySide.index
+    ..isStoryReplyTimeVisible = story.isReplyTimeVisible
     ..avatarEmoji = avatar.emoji
     ..avatarImagePath = avatar.imagePath
     ..avatarHistory = [for (final UserAvatar entry in avatarHistory) entry.encode()]

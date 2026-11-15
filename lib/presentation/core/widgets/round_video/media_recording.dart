@@ -79,7 +79,13 @@ final class _MediaRecordToggleButtonState extends State<MediaRecordToggleButton>
           ),
         ),
         style: widget.isFilled
-            ? IconButton.styleFrom(backgroundColor: Colors.white, fixedSize: const Size.square(52.0))
+            ? IconButton.styleFrom(
+                backgroundColor: Colors.white,
+                fixedSize: const Size.square(52.0),
+                minimumSize: const Size.square(52.0),
+                padding: EdgeInsets.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              )
             : null,
       ),
     );

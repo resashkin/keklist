@@ -1285,12 +1285,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get webVersionEnabled => 'Зеркало в браузере';
 
   @override
-  String get viewerComments => 'Комментарии';
-
-  @override
-  String get viewerNoComments => 'Пока нет комментариев';
-
-  @override
   String get previousDay => 'Предыдущий день';
 
   @override
@@ -1373,4 +1367,34 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get whatsNewProfileBody =>
       'Неделя, месяц или год в карточках. Сделай селфи на аватар и в любой момент верни один из прошлых.';
+
+  @override
+  String get storyTextureOpacity => 'Эмоции на фоне';
+
+  @override
+  String get storyReplies => 'Ответы';
+
+  @override
+  String get storyReplyCount => 'Видно ответов';
+
+  @override
+  String get storyReplyOpacity => 'Яркость пузыря';
+
+  @override
+  String get storyReplyTextSize => 'Размер текста';
+
+  @override
+  String get storyReplyAvatarSize => 'Размер аватара';
+
+  @override
+  String get storyReplySide => 'Сторона';
+
+  @override
+  String get storyReplySideLeft => 'Слева';
+
+  @override
+  String get storyReplySideRight => 'Справа';
+
+  @override
+  String get storyReplyTime => 'Показывать время';
 }

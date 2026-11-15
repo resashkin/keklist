@@ -14,7 +14,9 @@ import 'package:keklist/native/android/media_folder_channel.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
+import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
+import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
@@ -47,6 +49,7 @@ const double _kHeaderSpace = 100.0;
 const double _kEdgeTapShare = 0.22;
 const Duration _kVideoFallbackDuration = Duration(seconds: 5);
 const double _kWideMinWidth = 800.0;
+const double _kReplyBarHeight = 64.0;
 
 /// The day's items as stories: segments on top, a tap on an edge or a swipe moves between them. Opened from a tile it
 /// stands still; with [autoplay] (▶ on a day or a week) a timer moves on and holding pauses it.
@@ -102,6 +105,10 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   bool _isClosing = false;
   bool _isHeld = false;
   bool _isZoomed = false;
+  final TextEditingController _replyController = TextEditingController();
+  final FocusNode _replyFocus = FocusNode();
+  bool _isReplying = false;
+  bool _wasHeldBeforeReply = false;
 
 
   DayFeedItem get _currentItem => widget.items[_index];
@@ -116,12 +123,28 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   void initState() {
     super.initState();
     _startTimer();
+    _replyFocus.addListener(_onReplyFocus);
+  }
+
+  /// Like Instagram, the story waits while a reply is typed.
+  void _onReplyFocus() {
+    final bool isReplying = _replyFocus.hasFocus;
+    if (isReplying == _isReplying) return;
+    if (isReplying) {
+      _wasHeldBeforeReply = _isHeld;
+      _hold();
+    } else if (!_wasHeldBeforeReply) {
+      _release();
+    }
+    setState(() => _isReplying = isReplying);
   }
 
   @override
   void dispose() {
     _progress.dispose();
     _pageController.dispose();
+    _replyController.dispose();
+    _replyFocus.dispose();
     super.dispose();
   }
 
@@ -208,7 +231,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     final DayFeedItem item = _currentItem;
     final EdgeInsets safe = MediaQuery.paddingOf(context);
     // Pages fill the whole screen so the texture runs behind the header and the comment bar.
-    final double commentSpace = item is DayFeedMind ? MindCommentPreview.height + 8.0 : 0.0;
+    final double commentSpace = item is DayFeedMind ? _kReplyBarHeight : 0.0;
     final EdgeInsets contentInsets = EdgeInsets.only(top: safe.top + _kHeaderSpace, bottom: safe.bottom + commentSpace);
     final Widget story = NotificationListener<ScrollNotification>(
       onNotification: _onScroll,
@@ -236,6 +259,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                       physics: _isZoomed ? const NeverScrollableScrollPhysics() : null,
                       itemCount: widget.items.length,
                       onPageChanged: (index) {
+                        _replyController.clear();
+                        _replyFocus.unfocus();
                         setState(() => _index = index);
                         _startTimer();
                       },
@@ -267,8 +292,13 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                     child: Column(children: [_buildSegments(foreground), _buildHeader(context, foreground)]),
                   ),
                 ),
+                // While typing, a tap on the story only hides the keyboard.
+                if (_isReplying)
+                  Positioned.fill(
+                    child: GestureDetector(behavior: HitTestBehavior.opaque, onTap: _replyFocus.unfocus),
+                  ),
                 if (item is DayFeedMind)
-                  Positioned(left: 0.0, right: 0.0, bottom: 0.0, child: _buildComments(item.mind)),
+                  Positioned(left: 0.0, right: 0.0, bottom: 0.0, child: _buildReplies(item.mind)),
               ],
             ),
         ),
@@ -285,6 +315,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       child: Focus(
         autofocus: true,
         child: Scaffold(
+          // Only the reply panel follows the keyboard; the story stays where it is.
+          resizeToAvoidBottomInset: false,
           backgroundColor: (isWide ? Colors.black : background).withValues(alpha: 1.0 - dismissProgress),
           body: isWide ? _buildWide(story, background) : story,
         ),
@@ -381,27 +413,47 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     ),
   );
 
-  Widget _buildComments(Mind root) => SafeArea(
-    top: false,
-    child: Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Expanded(child: MindCommentPreview(root: root, onTap: () => _openComments(root))),
-          _EmotionsHeartButton(onTap: () => _editEmotions(_liveMind(root.id) ?? root)),
-        ],
-      ),
-    ),
-  );
-
-  Future<void> _openComments(Mind root) => _whileHeld(
-    () => MindCommentsSheet.show(
-      context,
-      root: root,
-      menu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
-    ),
-  );
+  Widget _buildReplies(Mind root) {
+    final Widget panel = Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        MindReplies(
+          root: root,
+          menu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: MindCommentBar(
+                controller: _replyController,
+                focusNode: _replyFocus,
+                onSend: () {
+                  MindComments.save(context, root, _replyController.text);
+                  _replyController.clear();
+                },
+                onRecordAudio: () =>
+                    _whileHeld(() => MindComments.record(context, root, MediaRecording.recordAudio)),
+                onRecordVideo: () =>
+                    _whileHeld(() => MindComments.record(context, root, MediaRecording.recordVideo)),
+              ),
+            ),
+            SafeArea(
+              top: false,
+              left: false,
+              child: _EmotionsHeartButton(onTap: () => _editEmotions(_liveMind(root.id) ?? root)),
+            ),
+          ],
+        ),
+      ],
+    );
+    // Only this padding rebuilds while the keyboard moves.
+    return Builder(
+      builder: (context) =>
+          Padding(padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom), child: panel),
+    );
+  }
 
   // Text of the mind
 
@@ -585,7 +637,7 @@ final class _MindPageState extends State<_MindPage> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          AnimatedEmotionTexture(mind: mind, color: foreground),
+          AnimatedEmotionTexture(mind: mind, color: foreground, opacity: context.watchStorySettings().textureOpacity),
           LayoutBuilder(
             builder: (context, constraints) => SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -891,9 +943,9 @@ final class _EmotionsHeartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (:background, :foreground) = storyColorsOf(context);
-    const double size = MindCommentPreview.height - 4.0;
+    const double size = 48.0;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8.0, 4.0, 12.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 4.0, 12.0, 10.0),
       child: Material(
         color: Color.alphaBlend(foreground.withValues(alpha: 0.1), background),
         shape: const CircleBorder(),

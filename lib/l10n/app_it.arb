@@ -605,8 +605,6 @@
     "settingsSupport": "Supporto",
     "calendarOpenDay": "Apri giorno",
     "webVersionEnabled": "Duplica nel browser",
-    "viewerComments": "Commenti",
-    "viewerNoComments": "Ancora nessun commento",
     "previousDay": "Giorno precedente",
     "nextDay": "Giorno successivo",
     "whatsNewTitle": "Novità della {version}",
@@ -628,5 +626,15 @@
     "profileSelfie": "Selfie",
     "profileRecentAvatars": "Recenti",
     "whatsNewProfileTitle": "Le statistiche ora sono il tuo profilo",
-    "whatsNewProfileBody": "La tua settimana, il mese o l'anno in schede. Scatta un selfie per l'avatar e torna a uno precedente quando vuoi."
+    "whatsNewProfileBody": "La tua settimana, il mese o l'anno in schede. Scatta un selfie per l'avatar e torna a uno precedente quando vuoi.",
+    "storyTextureOpacity": "Emozioni sullo sfondo",
+    "storyReplies": "Risposte",
+    "storyReplyCount": "Risposte visibili",
+    "storyReplyOpacity": "Luminosità del fumetto",
+    "storyReplyTextSize": "Dimensione del testo",
+    "storyReplyAvatarSize": "Dimensione avatar",
+    "storyReplySide": "Lato",
+    "storyReplySideLeft": "Sinistra",
+    "storyReplySideRight": "Destra",
+    "storyReplyTime": "Mostra ora"
 }

@@ -395,8 +395,6 @@
     "settingsSupport": "支持",
     "calendarOpenDay": "打开这一天",
     "webVersionEnabled": "镜像到浏览器",
-    "viewerComments": "评论",
-    "viewerNoComments": "暂无评论",
     "previousDay": "前一天",
     "nextDay": "后一天",
     "whatsNewTitle": "{version} 新功能",
@@ -418,5 +416,15 @@
     "profileSelfie": "自拍",
     "profileRecentAvatars": "最近",
     "whatsNewProfileTitle": "分析变成了你的个人资料",
-    "whatsNewProfileBody": "用卡片回顾你的一周、一月或一年。拍张自拍当头像，随时换回以前的头像。"
+    "whatsNewProfileBody": "用卡片回顾你的一周、一月或一年。拍张自拍当头像，随时换回以前的头像。",
+    "storyTextureOpacity": "背景中的情绪",
+    "storyReplies": "回复",
+    "storyReplyCount": "可见回复",
+    "storyReplyOpacity": "气泡亮度",
+    "storyReplyTextSize": "文字大小",
+    "storyReplyAvatarSize": "头像大小",
+    "storyReplySide": "位置",
+    "storyReplySideLeft": "左侧",
+    "storyReplySideRight": "右侧",
+    "storyReplyTime": "显示时间"
 }

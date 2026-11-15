@@ -38,7 +38,9 @@ Output: `screenshots/out/<lang>/<device>/NN_<scene>.png`. `raw/`, `out/` and the
 | Scene | What the test shows |
 |---|---|
 | day | Today: notes and today's photos |
-| emotions | the emotion sheet over Today |
+| typing | the note editor with a note being written (no keyboard) |
+| emotions | the emotion sheet over Today, 22 flat demo emotions |
+| new_emotion | the new-emotion sheet over the emotion sheet |
 | insights | the Profile (insights) tab |
 | voice | yesterday: a voice note and a round video |
 | gallery | the trip day, three days ago, with 8 photos |

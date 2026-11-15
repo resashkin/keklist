@@ -1281,12 +1281,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get webVersionEnabled => 'Пресликај у прегледач';
 
   @override
-  String get viewerComments => 'Коментари';
-
-  @override
-  String get viewerNoComments => 'Још нема коментара';
-
-  @override
   String get previousDay => 'Претходни дан';
 
   @override
@@ -1368,6 +1362,36 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get whatsNewProfileBody =>
       'Твоја недеља, месец или година у картицама. Направи селфи за аватар и врати неки ранији кад год хоћеш.';
+
+  @override
+  String get storyTextureOpacity => 'Емоције у позадини';
+
+  @override
+  String get storyReplies => 'Одговори';
+
+  @override
+  String get storyReplyCount => 'Видљиви одговори';
+
+  @override
+  String get storyReplyOpacity => 'Светлина облачића';
+
+  @override
+  String get storyReplyTextSize => 'Величина текста';
+
+  @override
+  String get storyReplyAvatarSize => 'Величина аватара';
+
+  @override
+  String get storyReplySide => 'Страна';
+
+  @override
+  String get storyReplySideLeft => 'Лево';
+
+  @override
+  String get storyReplySideRight => 'Десно';
+
+  @override
+  String get storyReplyTime => 'Прикажи време';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2646,12 +2670,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   String get webVersionEnabled => 'Preslikaj u pregledač';
 
   @override
-  String get viewerComments => 'Komentari';
-
-  @override
-  String get viewerNoComments => 'Još nema komentara';
-
-  @override
   String get previousDay => 'Prethodni dan';
 
   @override
@@ -2733,4 +2751,34 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get whatsNewProfileBody =>
       'Tvoja nedelja, mesec ili godina u karticama. Napravi selfi za avatar i vrati neki raniji kad god hoćeš.';
+
+  @override
+  String get storyTextureOpacity => 'Emocije u pozadini';
+
+  @override
+  String get storyReplies => 'Odgovori';
+
+  @override
+  String get storyReplyCount => 'Vidljivi odgovori';
+
+  @override
+  String get storyReplyOpacity => 'Svetlina oblačića';
+
+  @override
+  String get storyReplyTextSize => 'Veličina teksta';
+
+  @override
+  String get storyReplyAvatarSize => 'Veličina avatara';
+
+  @override
+  String get storyReplySide => 'Strana';
+
+  @override
+  String get storyReplySideLeft => 'Levo';
+
+  @override
+  String get storyReplySideRight => 'Desno';
+
+  @override
+  String get storyReplyTime => 'Prikaži vreme';
 }

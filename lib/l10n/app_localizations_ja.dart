@@ -1243,12 +1243,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get webVersionEnabled => 'ブラウザにミラーリング';
 
   @override
-  String get viewerComments => 'コメント';
-
-  @override
-  String get viewerNoComments => 'まだコメントはありません';
-
-  @override
   String get previousDay => '前の日';
 
   @override
@@ -1324,4 +1318,34 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get whatsNewProfileBody =>
       '週・月・年をカードで振り返り。自撮りをアバターにして、いつでも前のアバターに戻せます。';
+
+  @override
+  String get storyTextureOpacity => '背景の感情';
+
+  @override
+  String get storyReplies => '返信';
+
+  @override
+  String get storyReplyCount => '表示する返信';
+
+  @override
+  String get storyReplyOpacity => '吹き出しの明るさ';
+
+  @override
+  String get storyReplyTextSize => '文字サイズ';
+
+  @override
+  String get storyReplyAvatarSize => 'アバターのサイズ';
+
+  @override
+  String get storyReplySide => '位置';
+
+  @override
+  String get storyReplySideLeft => '左';
+
+  @override
+  String get storyReplySideRight => '右';
+
+  @override
+  String get storyReplyTime => '時刻を表示';
 }

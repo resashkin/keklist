@@ -605,8 +605,6 @@
     "settingsSupport": "Podrška",
     "calendarOpenDay": "Otvori dan",
     "webVersionEnabled": "Preslikaj u pregledač",
-    "viewerComments": "Komentari",
-    "viewerNoComments": "Još nema komentara",
     "previousDay": "Prethodni dan",
     "nextDay": "Sledeći dan",
     "whatsNewTitle": "Šta je novo u {version}",
@@ -628,5 +626,15 @@
     "profileSelfie": "Selfi",
     "profileRecentAvatars": "Nedavni",
     "whatsNewProfileTitle": "Analitika je sada tvoj profil",
-    "whatsNewProfileBody": "Tvoja nedelja, mesec ili godina u karticama. Napravi selfi za avatar i vrati neki raniji kad god hoćeš."
+    "whatsNewProfileBody": "Tvoja nedelja, mesec ili godina u karticama. Napravi selfi za avatar i vrati neki raniji kad god hoćeš.",
+    "storyTextureOpacity": "Emocije u pozadini",
+    "storyReplies": "Odgovori",
+    "storyReplyCount": "Vidljivi odgovori",
+    "storyReplyOpacity": "Svetlina oblačića",
+    "storyReplyTextSize": "Veličina teksta",
+    "storyReplyAvatarSize": "Veličina avatara",
+    "storyReplySide": "Strana",
+    "storyReplySideLeft": "Levo",
+    "storyReplySideRight": "Desno",
+    "storyReplyTime": "Prikaži vreme"
 }

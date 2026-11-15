@@ -395,8 +395,6 @@
     "settingsSupport": "サポート",
     "calendarOpenDay": "日を開く",
     "webVersionEnabled": "ブラウザにミラーリング",
-    "viewerComments": "コメント",
-    "viewerNoComments": "まだコメントはありません",
     "previousDay": "前の日",
     "nextDay": "次の日",
     "whatsNewTitle": "{version}の新機能",
@@ -418,5 +416,15 @@
     "profileSelfie": "セルフィー",
     "profileRecentAvatars": "最近",
     "whatsNewProfileTitle": "分析がプロフィールになりました",
-    "whatsNewProfileBody": "週・月・年をカードで振り返り。自撮りをアバターにして、いつでも前のアバターに戻せます。"
+    "whatsNewProfileBody": "週・月・年をカードで振り返り。自撮りをアバターにして、いつでも前のアバターに戻せます。",
+    "storyTextureOpacity": "背景の感情",
+    "storyReplies": "返信",
+    "storyReplyCount": "表示する返信",
+    "storyReplyOpacity": "吹き出しの明るさ",
+    "storyReplyTextSize": "文字サイズ",
+    "storyReplyAvatarSize": "アバターのサイズ",
+    "storyReplySide": "位置",
+    "storyReplySideLeft": "左",
+    "storyReplySideRight": "右",
+    "storyReplyTime": "時刻を表示"
 }

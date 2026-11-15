@@ -605,8 +605,6 @@
     "settingsSupport": "Қолдау",
     "calendarOpenDay": "Күнді ашу",
     "webVersionEnabled": "Браузерге көрсету",
-    "viewerComments": "Пікірлер",
-    "viewerNoComments": "Әзірге пікір жоқ",
     "previousDay": "Алдыңғы күн",
     "nextDay": "Келесі күн",
     "whatsNewTitle": "{version} нұсқасында не жаңа",
@@ -628,5 +626,15 @@
     "profileSelfie": "Селфи",
     "profileRecentAvatars": "Соңғылар",
     "whatsNewProfileTitle": "Талдау енді сенің профилің",
-    "whatsNewProfileBody": "Апта, ай немесе жыл карточкаларда. Аватарға селфи түсір және кез келген уақытта бұрынғысына қайт."
+    "whatsNewProfileBody": "Апта, ай немесе жыл карточкаларда. Аватарға селфи түсір және кез келген уақытта бұрынғысына қайт.",
+    "storyTextureOpacity": "Фондағы эмоциялар",
+    "storyReplies": "Жауаптар",
+    "storyReplyCount": "Көрінетін жауаптар",
+    "storyReplyOpacity": "Көпіршік жарықтығы",
+    "storyReplyTextSize": "Мәтін өлшемі",
+    "storyReplyAvatarSize": "Аватар өлшемі",
+    "storyReplySide": "Жағы",
+    "storyReplySideLeft": "Сол",
+    "storyReplySideRight": "Оң",
+    "storyReplyTime": "Уақытты көрсету"
 }

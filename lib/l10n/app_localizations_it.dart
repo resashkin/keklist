@@ -1289,12 +1289,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get webVersionEnabled => 'Duplica nel browser';
 
   @override
-  String get viewerComments => 'Commenti';
-
-  @override
-  String get viewerNoComments => 'Ancora nessun commento';
-
-  @override
   String get previousDay => 'Giorno precedente';
 
   @override
@@ -1375,4 +1369,34 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get whatsNewProfileBody =>
       'La tua settimana, il mese o l\'anno in schede. Scatta un selfie per l\'avatar e torna a uno precedente quando vuoi.';
+
+  @override
+  String get storyTextureOpacity => 'Emozioni sullo sfondo';
+
+  @override
+  String get storyReplies => 'Risposte';
+
+  @override
+  String get storyReplyCount => 'Risposte visibili';
+
+  @override
+  String get storyReplyOpacity => 'Luminosità del fumetto';
+
+  @override
+  String get storyReplyTextSize => 'Dimensione del testo';
+
+  @override
+  String get storyReplyAvatarSize => 'Dimensione avatar';
+
+  @override
+  String get storyReplySide => 'Lato';
+
+  @override
+  String get storyReplySideLeft => 'Sinistra';
+
+  @override
+  String get storyReplySideRight => 'Destra';
+
+  @override
+  String get storyReplyTime => 'Mostra ora';
 }

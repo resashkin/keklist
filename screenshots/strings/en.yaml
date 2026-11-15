@@ -1,7 +1,9 @@
 # Store screenshot captions. Order = screenshot order. Keep each to one short line.
 # **word** gets the white marker; mark the search keyword of each screen.
 day: Your **private** journal
+typing: Just **write** what happened
 emotions: Name what you **feel**
+new_emotion: Add your **own** emotions
 insights: Understand your **emotions**
 voice: **Say it** or film it
 gallery: Your photos are your **diary**

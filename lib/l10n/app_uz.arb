@@ -605,8 +605,6 @@
     "settingsSupport": "Qo'llab-quvvatlash",
     "calendarOpenDay": "Kunni ochish",
     "webVersionEnabled": "Brauzerda aks ettirish",
-    "viewerComments": "Izohlar",
-    "viewerNoComments": "Hozircha izoh yo'q",
     "previousDay": "Oldingi kun",
     "nextDay": "Keyingi kun",
     "whatsNewTitle": "{version} versiyasida nima yangi",
@@ -628,5 +626,15 @@
     "profileSelfie": "Selfi",
     "profileRecentAvatars": "Oxirgilar",
     "whatsNewProfileTitle": "Tahlil endi sizning profilingiz",
-    "whatsNewProfileBody": "Hafta, oy yoki yil kartochkalarda. Avatar uchun selfi oling va istalgan payt avvalgisiga qayting."
+    "whatsNewProfileBody": "Hafta, oy yoki yil kartochkalarda. Avatar uchun selfi oling va istalgan payt avvalgisiga qayting.",
+    "storyTextureOpacity": "Fondagi hissiyotlar",
+    "storyReplies": "Javoblar",
+    "storyReplyCount": "Ko‘rinadigan javoblar",
+    "storyReplyOpacity": "Pufak yorqinligi",
+    "storyReplyTextSize": "Matn o‘lchami",
+    "storyReplyAvatarSize": "Avatar o‘lchami",
+    "storyReplySide": "Tomon",
+    "storyReplySideLeft": "Chap",
+    "storyReplySideRight": "O‘ng",
+    "storyReplyTime": "Vaqtni ko‘rsatish"
 }

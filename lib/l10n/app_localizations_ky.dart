@@ -1283,12 +1283,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get webVersionEnabled => 'Браузерге чагылдыруу';
 
   @override
-  String get viewerComments => 'Комментарийлер';
-
-  @override
-  String get viewerNoComments => 'Азырынча комментарий жок';
-
-  @override
   String get previousDay => 'Мурунку күн';
 
   @override
@@ -1368,4 +1362,34 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String get whatsNewProfileBody =>
       'Апта, ай же жыл карточкаларда. Аватарга селфи тарт жана каалаган убакта мурункусуна кайт.';
+
+  @override
+  String get storyTextureOpacity => 'Фондогу эмоциялар';
+
+  @override
+  String get storyReplies => 'Жооптор';
+
+  @override
+  String get storyReplyCount => 'Көрүнгөн жооптор';
+
+  @override
+  String get storyReplyOpacity => 'Көбүкчөнүн жарыктыгы';
+
+  @override
+  String get storyReplyTextSize => 'Тексттин өлчөмү';
+
+  @override
+  String get storyReplyAvatarSize => 'Аватардын өлчөмү';
+
+  @override
+  String get storyReplySide => 'Тарап';
+
+  @override
+  String get storyReplySideLeft => 'Сол';
+
+  @override
+  String get storyReplySideRight => 'Оң';
+
+  @override
+  String get storyReplyTime => 'Убакытты көрсөтүү';
 }
