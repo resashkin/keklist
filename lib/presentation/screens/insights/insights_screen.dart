@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart' hide DateUtils;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
@@ -208,5 +207,5 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
 
   void _openDay(int dayIndex) => Navigator.of(
     context,
-  ).push(SwipeablePageRoute(builder: (_) => MindDayCollectionScreen(initialDayIndex: dayIndex)));
+  ).push(MindDayCollectionScreen.route(dayIndex: dayIndex));
 }

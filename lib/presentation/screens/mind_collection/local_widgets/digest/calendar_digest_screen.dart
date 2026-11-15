@@ -86,7 +86,7 @@ final class _CalendarDigestScreenState extends KekWidgetState<_CalendarDigestScr
       body: _MindCollectionBody(
         onTapToDay: (dayIndex) => Navigator.of(
           context,
-        ).push(SwipeablePageRoute(builder: (_) => MindDayCollectionScreen(initialDayIndex: dayIndex))),
+        ).push(MindDayCollectionScreen.route(dayIndex: dayIndex)),
         onOpenItem: (dayIndex, itemIndex) =>
             DayItemViewerScreen.show(context, items: _feed.itemsOf(dayIndex), initialIndex: itemIndex),
         onPlay: _playStories,

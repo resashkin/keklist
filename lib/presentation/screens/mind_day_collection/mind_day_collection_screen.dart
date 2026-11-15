@@ -1,3 +1,4 @@
+import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_item_viewer_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
@@ -51,6 +52,12 @@ final class MindDayCollectionScreen extends StatefulWidget {
   final double fabBottomOffset;
 
   const MindDayCollectionScreen({super.key, required this.initialDayIndex, this.fabBottomOffset = 0.0});
+
+  /// A pushed day goes back only from the screen's edge: a swipe across the content steps a day instead.
+  static Route<void> route({required int dayIndex}) => SwipeablePageRoute<void>(
+    canOnlySwipeFromEdge: true,
+    builder: (_) => MindDayCollectionScreen(initialDayIndex: dayIndex),
+  );
 
   @override
   // ignore: no_logic_in_create_state

@@ -217,7 +217,7 @@ final class _MindCollectionScreenState extends KekWidgetState<MindCollectionScre
   void _showDayCollectionScreen({required int groupDayIndex}) {
     Navigator.of(
       context,
-    ).push(SwipeablePageRoute(builder: (context) => MindDayCollectionScreen(initialDayIndex: groupDayIndex)));
+    ).push(MindDayCollectionScreen.route(dayIndex: groupDayIndex));
   }
 
   void _rebuildFeed() {

@@ -58,7 +58,7 @@ final class _AiChatScreenState extends State<AiChatScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.aiSavedAsMind)));
   }
 
-  void _openDay(int dayIndex) => pushAiRoute<void>(context, (_) => MindDayCollectionScreen(initialDayIndex: dayIndex));
+  void _openDay(int dayIndex) => Navigator.of(context).push(MindDayCollectionScreen.route(dayIndex: dayIndex));
 
   void _keepAtBottom(int length) {
     if (length == _shownLength) return;
