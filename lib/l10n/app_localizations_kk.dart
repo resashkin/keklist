@@ -685,6 +685,9 @@ class AppLocalizationsKk extends AppLocalizations {
   }
 
   @override
+  String get proUserLifetimeFooter => 'Сіз мәңгілік PRO қолданушысыз.';
+
+  @override
   String get emotions => 'Эмоциялар';
 
   @override
@@ -766,12 +769,6 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get dayFeedChooseFolder => 'Таңдау';
-
-  @override
-  String get holdToRecordAudio => 'Дауыстық хабар жазу үшін басып тұрыңыз';
-
-  @override
-  String get holdToRecordVideo => 'Бейнехабар жазу үшін басып тұрыңыз';
 
   @override
   String get roundVideoRecordError => 'Бейнені жазу мүмкін болмады';

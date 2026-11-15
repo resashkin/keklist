@@ -15,6 +15,9 @@ final class KekFloatingButton extends StatelessWidget {
   /// glass capsule and the Material fallback read as the same size.
   static const double _fabHeight = 56.0;
 
+  /// A wide pill: 60% of the screen, at most 320.
+  static double widthOf(BuildContext context) => (MediaQuery.sizeOf(context).width * 0.6).clamp(0.0, 320.0);
+
   final VoidCallback? onPressed;
   final String label;
 
@@ -34,6 +37,7 @@ final class KekFloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width = widthOf(context);
     return BlocBuilder<SettingsBloc, SettingsState>(
       // Only data states carry the interface style; ignore transient states.
       buildWhen: (_, state) => state is SettingsDataState,
@@ -44,6 +48,7 @@ final class KekFloatingButton extends StatelessWidget {
             onPressed: onPressed,
             icon: NativeLiquidGlassIcon.sfSymbol(sfSymbol),
             style: LiquidGlassButtonStyle.glass,
+            width: width,
             height: _fabHeight,
             iconSize: 24.0,
             // Must match the package's hardcoded wrap-content estimate (32px total
@@ -53,6 +58,7 @@ final class KekFloatingButton extends StatelessWidget {
           );
         }
         return SizedBox(
+          width: width,
           height: _fabHeight,
           child: FloatingActionButton.extended(
             onPressed: onPressed,

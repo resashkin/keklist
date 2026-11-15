@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/audio_duration_extractor.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
-import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/widgets/mind_audio_recorder_sheet.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_recorder_screen.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
@@ -57,20 +56,8 @@ final class MediaRecordToggleButton extends StatefulWidget {
 final class _MediaRecordToggleButtonState extends State<MediaRecordToggleButton> {
   MediaRecordMode _mode = MediaRecordMode.audio;
 
-  void _switchMode() {
-    final MediaRecordMode next = _mode == MediaRecordMode.audio ? MediaRecordMode.video : MediaRecordMode.audio;
-    setState(() => _mode = next);
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 2),
-          content: Text(
-            next == MediaRecordMode.audio ? context.l10n.holdToRecordAudio : context.l10n.holdToRecordVideo,
-          ),
-        ),
-      );
-  }
+  void _switchMode() =>
+      setState(() => _mode = _mode == MediaRecordMode.audio ? MediaRecordMode.video : MediaRecordMode.audio);
 
   void _record() => _mode == MediaRecordMode.audio ? widget.onRecordAudio() : widget.onRecordVideo();
 

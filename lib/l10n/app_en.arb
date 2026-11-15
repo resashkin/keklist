@@ -904,6 +904,10 @@
             }
         }
     },
+    "proUserLifetimeFooter": "You are a PRO user for life.",
+    "@proUserLifetimeFooter": {
+        "description": "Footer in settings when the user bought PRO for life, so there is no next payment"
+    },
     "emotions": "Emotions",
     "@emotions": {
         "description": "Emotions feature title"
@@ -1007,14 +1011,6 @@
     "dayFeedChooseFolder": "Choose",
     "@dayFeedChooseFolder": {
         "description": "Unified day grid (All mode) label"
-    },
-    "holdToRecordAudio": "Hold to record a voice message",
-    "@holdToRecordAudio": {
-        "description": "Audio/video mind recording"
-    },
-    "holdToRecordVideo": "Hold to record a video message",
-    "@holdToRecordVideo": {
-        "description": "Audio/video mind recording"
     },
     "roundVideoRecordError": "Couldn't record the video",
     "@roundVideoRecordError": {

@@ -681,6 +681,9 @@ class AppLocalizationsSr extends AppLocalizations {
   }
 
   @override
+  String get proUserLifetimeFooter => 'Ви сте доживотни PRO корисник.';
+
+  @override
   String get emotions => 'Емоције';
 
   @override
@@ -762,12 +765,6 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get dayFeedChooseFolder => 'Изабери';
-
-  @override
-  String get holdToRecordAudio => 'Држи за гласовну поруку';
-
-  @override
-  String get holdToRecordVideo => 'Држи за видео поруку';
 
   @override
   String get roundVideoRecordError => 'Снимање видеа није успело';
@@ -2049,6 +2046,9 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   }
 
   @override
+  String get proUserLifetimeFooter => 'Vi ste doživotni PRO korisnik.';
+
+  @override
   String get emotions => 'Emocije';
 
   @override
@@ -2130,12 +2130,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get dayFeedChooseFolder => 'Izaberi';
-
-  @override
-  String get holdToRecordAudio => 'Drži za glasovnu poruku';
-
-  @override
-  String get holdToRecordVideo => 'Drži za video poruku';
 
   @override
   String get roundVideoRecordError => 'Snimanje videa nije uspelo';

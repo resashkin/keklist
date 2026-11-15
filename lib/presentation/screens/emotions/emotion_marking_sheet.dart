@@ -7,7 +7,7 @@ import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
-import 'package:keklist/presentation/core/widgets/glass_capsule_button.dart';
+import 'package:keklist/presentation/core/widgets/kek_floating_button.dart';
 import 'package:keklist/presentation/core/widgets/kek_bottom_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_archived_screen.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_editor_sheet.dart';
@@ -414,17 +414,12 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
                   if (_currentParentId == null)
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-                      child: GlassCapsuleButton(
-                        height: 50.0,
-                        isExpanded: true,
-                        onTap: () => _openEditor(),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          spacing: 8.0,
-                          children: [
-                            const Icon(Icons.add),
-                            Text(context.l10n.addEmotion, style: const TextStyle(fontSize: 17.0)),
-                          ],
+                      child: Center(
+                        child: KekFloatingButton(
+                          onPressed: () => _openEditor(),
+                          label: context.l10n.addEmotion,
+                          fallbackIcon: Icons.add,
+                          sfSymbol: 'plus',
                         ),
                       ),
                     ),

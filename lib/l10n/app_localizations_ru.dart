@@ -683,6 +683,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get proUserLifetimeFooter => 'Вы PRO пользователь навсегда.';
+
+  @override
   String get emotions => 'Эмоции';
 
   @override
@@ -764,12 +767,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get dayFeedChooseFolder => 'Выбрать';
-
-  @override
-  String get holdToRecordAudio => 'Удерживайте, чтобы записать голосовое';
-
-  @override
-  String get holdToRecordVideo => 'Удерживайте, чтобы записать видеосообщение';
 
   @override
   String get roundVideoRecordError => 'Не удалось записать видео';

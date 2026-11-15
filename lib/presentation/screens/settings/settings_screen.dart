@@ -443,18 +443,18 @@ final class SettingsScreenState extends KekWidgetState<SettingsScreen> with Shak
   );
 
   Widget _buildProFooterTile(BuildContext context) {
-    final Locale locale = Localizations.localeOf(context);
-    final String dateStr = _proNextRenewalDate != null
-        ? DateFormatters.dayMonthAndYearFormat(locale).format(_proNextRenewalDate!)
-        : '—';
-    final String priceStr = _proPriceString ?? '—';
+    final DateTime? renewal = _proNextRenewalDate;
+    // A lifetime purchase never renews, so it has no next payment to show.
+    final String text = renewal == null
+        ? context.l10n.proUserLifetimeFooter
+        : context.l10n.proUserFooter(
+            _proPriceString ?? '—',
+            DateFormatters.dayMonthAndYearFormat(Localizations.localeOf(context)).format(renewal),
+          );
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-      child: Text(
-        context.l10n.proUserFooter(priceStr, dateStr),
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor),
-      ),
+      child: Text(text, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor)),
     );
   }
 

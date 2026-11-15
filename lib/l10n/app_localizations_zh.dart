@@ -660,6 +660,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get proUserLifetimeFooter => '您是终身PRO用户。';
+
+  @override
   String get emotions => '情绪';
 
   @override
@@ -736,12 +739,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get dayFeedChooseFolder => '选择';
-
-  @override
-  String get holdToRecordAudio => '按住录制语音消息';
-
-  @override
-  String get holdToRecordVideo => '按住录制视频消息';
 
   @override
   String get roundVideoRecordError => '无法录制视频';

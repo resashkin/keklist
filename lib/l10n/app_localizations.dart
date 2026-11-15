@@ -1377,6 +1377,12 @@ abstract class AppLocalizations {
   /// **'You are a PRO user. Next payment {price} will be at {date}.'**
   String proUserFooter(String price, String date);
 
+  /// Footer in settings when the user bought PRO for life, so there is no next payment
+  ///
+  /// In en, this message translates to:
+  /// **'You are a PRO user for life.'**
+  String get proUserLifetimeFooter;
+
   /// Emotions feature title
   ///
   /// In en, this message translates to:
@@ -1532,18 +1538,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose'**
   String get dayFeedChooseFolder;
-
-  /// Audio/video mind recording
-  ///
-  /// In en, this message translates to:
-  /// **'Hold to record a voice message'**
-  String get holdToRecordAudio;
-
-  /// Audio/video mind recording
-  ///
-  /// In en, this message translates to:
-  /// **'Hold to record a video message'**
-  String get holdToRecordVideo;
 
   /// Audio/video mind recording
   ///

@@ -687,6 +687,9 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
+  String get proUserLifetimeFooter => 'Siz umrbod PRO foydalanuvchisiz.';
+
+  @override
   String get emotions => 'Hissiyotlar';
 
   @override
@@ -768,12 +771,6 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get dayFeedChooseFolder => 'Tanlash';
-
-  @override
-  String get holdToRecordAudio => 'Ovozli xabar yozish uchun bosib turing';
-
-  @override
-  String get holdToRecordVideo => 'Video xabar yozish uchun bosib turing';
 
   @override
   String get roundVideoRecordError => 'Videoni yozib bo‘lmadi';

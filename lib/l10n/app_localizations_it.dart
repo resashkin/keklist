@@ -686,6 +686,9 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
+  String get proUserLifetimeFooter => 'Sei un utente PRO a vita.';
+
+  @override
   String get emotions => 'Emozioni';
 
   @override
@@ -767,14 +770,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get dayFeedChooseFolder => 'Scegli';
-
-  @override
-  String get holdToRecordAudio =>
-      'Tieni premuto per registrare un messaggio vocale';
-
-  @override
-  String get holdToRecordVideo =>
-      'Tieni premuto per registrare un videomessaggio';
 
   @override
   String get roundVideoRecordError => 'Impossibile registrare il video';

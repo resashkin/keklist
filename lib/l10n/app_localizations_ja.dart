@@ -663,6 +663,9 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get proUserLifetimeFooter => 'あなたは永久PROユーザーです。';
+
+  @override
   String get emotions => '感情';
 
   @override
@@ -740,12 +743,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get dayFeedChooseFolder => '選択';
-
-  @override
-  String get holdToRecordAudio => '長押しで音声メッセージを録音';
-
-  @override
-  String get holdToRecordVideo => '長押しでビデオメッセージを録画';
 
   @override
   String get roundVideoRecordError => 'ビデオを録画できませんでした';
