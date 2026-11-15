@@ -47,7 +47,7 @@ Output: `screenshots/out/<lang>/<device>/NN_<scene>.png`. `raw/`, `out/` and the
 | privacy | Settings |
 
 ### Captions
-`**word**` puts a white highlighter mark (purple text) on the purple brand background on that word; each caption marks the search keyword of its
+`**word**` puts a white highlighter mark (purple text); the dark app sits on the purple brand background on that word; each caption marks the search keyword of its
 screen. The marks live in the string files, so translators keep them.
 
 A caption must fit two lines at the fixed font size. If it doesn't, `compose.py` prints an error and skips that
