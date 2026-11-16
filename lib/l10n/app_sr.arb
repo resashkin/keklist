@@ -426,5 +426,9 @@
     "storyReplySide": "Страна",
     "storyReplySideLeft": "Лево",
     "storyReplySideRight": "Десно",
-    "storyReplyTime": "Прикажи време"
+    "storyReplyTime": "Прикажи време",
+    "imageFromGallery": "Галерија",
+    "imageFromCamera": "Камера",
+    "attachImages": "Додај фотографије",
+    "newMindWithPhoto": "Нова белешка са овом фотографијом"
 }

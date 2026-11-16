@@ -1387,4 +1387,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get storyReplyTime => 'Show time';
+
+  @override
+  String get imageFromGallery => 'Photo library';
+
+  @override
+  String get imageFromCamera => 'Camera';
+
+  @override
+  String get attachImages => 'Add photos';
+
+  @override
+  String get newMindWithPhoto => 'New note with this photo';
 }

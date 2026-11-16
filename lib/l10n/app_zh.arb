@@ -426,5 +426,9 @@
     "storyReplySide": "位置",
     "storyReplySideLeft": "左侧",
     "storyReplySideRight": "右侧",
-    "storyReplyTime": "显示时间"
+    "storyReplyTime": "显示时间",
+    "imageFromGallery": "照片图库",
+    "imageFromCamera": "相机",
+    "attachImages": "添加照片",
+    "newMindWithPhoto": "用这张照片新建笔记"
 }

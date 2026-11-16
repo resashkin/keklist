@@ -1397,4 +1397,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get storyReplyTime => 'Mostrar hora';
+
+  @override
+  String get imageFromGallery => 'Galería';
+
+  @override
+  String get imageFromCamera => 'Cámara';
+
+  @override
+  String get attachImages => 'Añadir fotos';
+
+  @override
+  String get newMindWithPhoto => 'Nueva nota con esta foto';
 }

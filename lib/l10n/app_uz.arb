@@ -636,5 +636,9 @@
     "storyReplySide": "Tomon",
     "storyReplySideLeft": "Chap",
     "storyReplySideRight": "O‘ng",
-    "storyReplyTime": "Vaqtni ko‘rsatish"
+    "storyReplyTime": "Vaqtni ko‘rsatish",
+    "imageFromGallery": "Galereya",
+    "imageFromCamera": "Kamera",
+    "attachImages": "Rasm qo‘shish",
+    "newMindWithPhoto": "Shu rasm bilan yangi yozuv"
 }

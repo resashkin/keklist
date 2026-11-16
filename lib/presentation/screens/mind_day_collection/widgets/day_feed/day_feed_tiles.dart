@@ -1,3 +1,4 @@
+import 'package:keklist/presentation/core/widgets/images/mind_images.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:keklist/presentation/core/widgets/mind_emotion_emojis.dart';
 import 'package:keklist/presentation/core/widgets/mind_emotion_texture.dart';
@@ -56,6 +57,9 @@ final class DayFeedMindTile extends StatelessWidget {
     final String text = item.mind.plainNote.trim();
     final bool showText = isTextVisible && text.isNotEmpty;
     final bool showsReflections = item.reflections.total > 0 && size >= _kMinReflectionsTileSize;
+    final List<MindNoteImage> images = content.imagePieces;
+    // Without text the first image stands in for it; with text the text stays the point and images get a badge.
+    final MindNoteImage? coverImage = mediaCircle == null && !showText && text.isEmpty ? images.firstOrNull : null;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(_kTileRadius),
@@ -65,32 +69,35 @@ final class DayFeedMindTile extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             if (mediaCircle != null || showText) MindEmotionTexture(mind: item.mind, emojiSize: size * 0.2),
-            Padding(
-              padding: mediaCircle != null
-                  ? const EdgeInsets.all(4.0)
-                  // The badge's room is kept at the top too, so the text stays in the middle of the tile.
-                  : EdgeInsets.symmetric(
-                      horizontal: _kTextPadding,
-                      vertical: showsReflections ? _kTextPadding + _kReflectionsBadgeHeight + 2.0 : _kTextPadding,
-                    ),
-              child: mediaCircle != null
-                  ? Center(child: mediaCircle)
-                  : showText
-                  ? _FittedTileText(
-                      text: text,
-                      style: theme.brightness == Brightness.light
-                          ? theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600)
-                          : theme.textTheme.bodySmall,
-                    )
-                  : Center(
-                      child: MindEmotionEmojis(
-                        mind: item.mind,
-                        fontSize: size * 0.3,
-                        maxCount: 3,
-                        placeholder: Icon(Icons.notes, size: size * 0.3, color: theme.disabledColor),
+            if (coverImage != null)
+              MindImageView(image: coverImage, cacheWidth: (size * MediaQuery.devicePixelRatioOf(context)).round())
+            else
+              Padding(
+                padding: mediaCircle != null
+                    ? const EdgeInsets.all(4.0)
+                    // The badge's room is kept at the top too, so the text stays in the middle of the tile.
+                    : EdgeInsets.symmetric(
+                        horizontal: _kTextPadding,
+                        vertical: showsReflections ? _kTextPadding + _kReflectionsBadgeHeight + 2.0 : _kTextPadding,
                       ),
-                    ),
-            ),
+                child: mediaCircle != null
+                    ? Center(child: mediaCircle)
+                    : showText
+                    ? _FittedTileText(
+                        text: text,
+                        style: theme.brightness == Brightness.light
+                            ? theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600)
+                            : theme.textTheme.bodySmall,
+                      )
+                    : Center(
+                        child: MindEmotionEmojis(
+                          mind: item.mind,
+                          fontSize: size * 0.3,
+                          maxCount: 3,
+                          placeholder: Icon(Icons.notes, size: size * 0.3, color: theme.disabledColor),
+                        ),
+                      ),
+              ),
             // Centered under the text, clear of the frame's rounded corners.
             if (showsReflections)
               Positioned(
@@ -100,6 +107,19 @@ final class DayFeedMindTile extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: _ReflectionsBadge(reflections: item.reflections),
+                ),
+              ),
+            if (images.isNotEmpty && (coverImage == null || images.length > 1))
+              Positioned(
+                top: 5,
+                right: 5,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.55),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: MindImageBadge(count: images.length, color: Colors.white, size: 10.0),
                 ),
               ),
             if (mediaCircle != null && mediaDuration != null)

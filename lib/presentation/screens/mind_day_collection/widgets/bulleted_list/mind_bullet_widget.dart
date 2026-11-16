@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:gap/gap.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/presentation/core/widgets/images/mind_images.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/bulleted_list/audio/audio_track_widget.dart';
 
@@ -22,8 +23,15 @@ final class MindBulletWidget extends StatelessWidget {
         : <Widget>[];
 
     if (contentWidgets.isEmpty) {
+      final List<MindNoteImage> images = model.content.imagePieces;
+      if (images.isNotEmpty) {
+        contentWidgets.add(
+          Align(alignment: .centerRight, child: MindImageGrid(images: images, width: 200.0)),
+        );
+      }
       for (final BaseMindNotePiece piece in pieces) {
         if (piece is MindNoteText && piece.value.trim().isEmpty) continue;
+        if (piece is MindNoteImage) continue;
         if (contentWidgets.isNotEmpty) {
           contentWidgets.add(const Gap(12.0));
         }
@@ -48,6 +56,7 @@ final class MindBulletWidget extends StatelessWidget {
               ),
             audio: (MindNoteAudio audioPiece) => AudioTrackWidget(audio: audioPiece),
             video: (MindNoteVideo videoPiece) => Align(alignment: .centerRight, child: RoundVideoMessage(video: videoPiece, size: 200.0)),
+            image: (MindNoteImage imagePiece) => const SizedBox.shrink(),
             unknown: () => Padding(
               padding: .symmetric(horizontal: 14.0, vertical: 8.0),
               child: Text('Not supported media :(', style: const TextStyle(fontSize: 15.0)),

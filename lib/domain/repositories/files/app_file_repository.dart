@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
@@ -12,8 +13,9 @@ class AppFileRepository {
   static const String _userRootFolderName = 'user_files';
   static const String _audioFolderName = 'audio';
   static const String _videoFolderName = 'video';
+  static const String _imageFolderName = 'image';
   static const String _avatarFolderName = 'avatar';
-  static const List<String> mediaFolderNames = [_audioFolderName, _videoFolderName];
+  static const List<String> mediaFolderNames = [_audioFolderName, _videoFolderName, _imageFolderName];
 
   /// Returns the absolute path to the user root folder, creating it on demand.
   Future<Directory> _ensureUserRoot() async {
@@ -50,6 +52,16 @@ class AppFileRepository {
     if (!await videoDirectory.exists()) await videoDirectory.create(recursive: true);
     final String fileName = '${const Uuid().v4()}.$extension';
     return AppFileHandle(file: File('${videoDirectory.path}/$fileName'), relativePath: '$_videoFolderName/$fileName');
+  }
+
+  /// Saves an image attached to a mind and returns its app-relative path.
+  Future<String> saveImage(Uint8List bytes, {String extension = 'jpg'}) async {
+    final Directory userRoot = await _ensureUserRoot();
+    final Directory imageDirectory = Directory('${userRoot.path}/$_imageFolderName');
+    await imageDirectory.create(recursive: true);
+    final String fileName = '${const Uuid().v4()}.$extension';
+    await File('${imageDirectory.path}/$fileName').writeAsBytes(bytes, flush: true);
+    return '$_imageFolderName/$fileName';
   }
 
   /// Copies the picked photo in as the only avatar file and returns its app-relative path.

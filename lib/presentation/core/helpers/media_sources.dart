@@ -14,7 +14,29 @@ VideoPlayerController videoControllerFor(String path) => isRemoteMediaPath(path)
 Future<Duration?> setAudioSource(AudioPlayer player, String path) =>
     isRemoteMediaPath(path) ? player.setUrl(path) : player.setFilePath(path);
 
-Widget imageFor(String path, {BoxFit? fit, double? width, double? height, ImageErrorWidgetBuilder? errorBuilder}) =>
-    isRemoteMediaPath(path)
-    ? Image.network(path, fit: fit, width: width, height: height, gaplessPlayback: true, errorBuilder: errorBuilder)
-    : Image.file(File(path), fit: fit, width: width, height: height, gaplessPlayback: true, errorBuilder: errorBuilder);
+Widget imageFor(
+  String path, {
+  BoxFit? fit,
+  double? width,
+  double? height,
+  int? cacheWidth,
+  ImageErrorWidgetBuilder? errorBuilder,
+}) => isRemoteMediaPath(path)
+    ? Image.network(
+        path,
+        fit: fit,
+        width: width,
+        height: height,
+        cacheWidth: cacheWidth,
+        gaplessPlayback: true,
+        errorBuilder: errorBuilder,
+      )
+    : Image.file(
+        File(path),
+        fit: fit,
+        width: width,
+        height: height,
+        cacheWidth: cacheWidth,
+        gaplessPlayback: true,
+        errorBuilder: errorBuilder,
+      );

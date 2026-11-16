@@ -636,5 +636,9 @@
     "storyReplySide": "Lato",
     "storyReplySideLeft": "Sinistra",
     "storyReplySideRight": "Destra",
-    "storyReplyTime": "Mostra ora"
+    "storyReplyTime": "Mostra ora",
+    "imageFromGallery": "Galleria",
+    "imageFromCamera": "Fotocamera",
+    "attachImages": "Aggiungi foto",
+    "newMindWithPhoto": "Nuova nota con questa foto"
 }

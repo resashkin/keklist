@@ -4,7 +4,11 @@ import 'dart:io';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
+import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/presentation/core/helpers/date_utils.dart' as kek_date;
+import 'package:keklist/presentation/core/widgets/images/mind_images.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
@@ -55,7 +59,14 @@ final class DayFeedTileMenu extends StatelessWidget {
       MenuSeparator(),
       _action(context.l10n.delete, 'trash', Icons.delete_outline, () => _deleteMind(context, mind), destructive: true),
     ],
-    DayFeedAsset(:final asset) => [
+    DayFeedAsset(:final asset, :final isVideo) => [
+      if (!isVideo)
+        _action(
+          context.l10n.newMindWithPhoto,
+          'square.and.pencil',
+          Icons.edit_note,
+          () => _newMindWithPhoto(context, asset),
+        ),
       _action(context.l10n.share, 'square.and.arrow.up', Icons.ios_share, () => _shareAsset(context, asset)),
       _action(
         context.l10n.showInGallery,
@@ -122,6 +133,30 @@ final class DayFeedTileMenu extends StatelessWidget {
   }
 
   // Photos and videos
+
+  /// The gallery photo stays in the feed; the new mind gets its own copy.
+  static Future<void> _newMindWithPhoto(BuildContext context, AssetEntity asset) async {
+    final MindBloc minds = context.read<MindBloc>();
+    final MindNoteImage? image = await MindImageAttaching.fromAsset(context.read<AppFileRepository>(), asset);
+    if (image == null || !context.mounted) return;
+    final int dayIndex = kek_date.DateUtils.getDayIndex(from: asset.createDateTime);
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (_) => MindCreatorScreen(
+          initialImages: [image],
+          onDone: (text, emotionIds) => minds.add(
+            MindCreate(
+              dayIndex: dayIndex,
+              mindContent: MindNoteContent.parse(text.trim()).pieces,
+              rootId: null,
+              emotionIds: emotionIds,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   static Future<void> _shareAsset(BuildContext context, AssetEntity asset) async {
     final Rect? origin = _originOf(context);

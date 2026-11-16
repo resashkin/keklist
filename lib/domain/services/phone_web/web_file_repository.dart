@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/phone_web/phone_api.dart';
@@ -15,6 +16,9 @@ final class WebFileRepository extends AppFileRepository {
 
   @override
   Future<AppFileHandle> createVideoFile({required String extension}) => throw UnsupportedError(_readOnly);
+
+  @override
+  Future<String> saveImage(Uint8List bytes, {String extension = 'jpg'}) => throw UnsupportedError(_readOnly);
 
   @override
   Future<String> saveAvatarImage(File source) => throw UnsupportedError(_readOnly);

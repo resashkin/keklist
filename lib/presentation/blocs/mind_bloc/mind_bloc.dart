@@ -74,6 +74,10 @@ final class MindBloc extends Bloc<MindEvent, MindState> with DisposeBag {
           if (videoPiece.appRelativePath.trim().isEmpty) return;
           sanitizedPieces.add(videoPiece);
         },
+        image: (MindNoteImage imagePiece) {
+          if (imagePiece.appRelativePath.trim().isEmpty) return;
+          sanitizedPieces.add(imagePiece);
+        },
         unknown: () => null,
       );
     }

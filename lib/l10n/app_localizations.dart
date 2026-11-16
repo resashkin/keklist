@@ -2684,6 +2684,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show time'**
   String get storyReplyTime;
+
+  /// No description provided for @imageFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo library'**
+  String get imageFromGallery;
+
+  /// No description provided for @imageFromCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get imageFromCamera;
+
+  /// No description provided for @attachImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photos'**
+  String get attachImages;
+
+  /// Images attached to minds: photo source, editor button, day feed photo menu
+  ///
+  /// In en, this message translates to:
+  /// **'New note with this photo'**
+  String get newMindWithPhoto;
 }
 
 class _AppLocalizationsDelegate

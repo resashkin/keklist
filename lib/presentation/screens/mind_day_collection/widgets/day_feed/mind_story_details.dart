@@ -184,7 +184,11 @@ final class MindReflectionsList extends StatelessWidget {
                         Text(reflection.plainNote.trim(), style: TextStyle(color: foreground, fontSize: 16.0)),
                       if (reflection.noteContent.hasMedia)
                         Icon(
-                          reflection.noteContent.hasVideo ? Icons.videocam_outlined : Icons.graphic_eq,
+                          reflection.noteContent.hasVideo
+                              ? Icons.videocam_outlined
+                              : reflection.noteContent.hasAudio
+                              ? Icons.graphic_eq
+                              : Icons.photo_outlined,
                           size: 18.0,
                           color: foreground.withValues(alpha: 0.55),
                         ),

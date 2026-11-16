@@ -1403,4 +1403,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get storyReplyTime => 'Uhrzeit anzeigen';
+
+  @override
+  String get imageFromGallery => 'Mediathek';
+
+  @override
+  String get imageFromCamera => 'Kamera';
+
+  @override
+  String get attachImages => 'Fotos hinzufügen';
+
+  @override
+  String get newMindWithPhoto => 'Neue Notiz mit diesem Foto';
 }

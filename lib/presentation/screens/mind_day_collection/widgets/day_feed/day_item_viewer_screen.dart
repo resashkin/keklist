@@ -10,12 +10,14 @@ import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dar
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/native/android/media_folder_channel.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
+import 'package:keklist/presentation/core/widgets/images/mind_images.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture.dart';
@@ -109,6 +111,9 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   final FocusNode _replyFocus = FocusNode();
   bool _isReplying = false;
   bool _wasHeldBeforeReply = false;
+  List<MindNoteImage> _replyImages = const [];
+  // Read up front: dispose can no longer look it up.
+  late final AppFileRepository _files;
 
 
   DayFeedItem get _currentItem => widget.items[_index];
@@ -122,6 +127,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   @override
   void initState() {
     super.initState();
+    _files = context.read<AppFileRepository>();
     _startTimer();
     _replyFocus.addListener(_onReplyFocus);
   }
@@ -139,8 +145,24 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     setState(() => _isReplying = isReplying);
   }
 
+  /// Photos never sent with a reply are removed with the page or the viewer.
+  void _setReplyImages(List<MindNoteImage> images) {
+    final List<MindNoteImage> removed = _replyImages.where((image) => !images.contains(image)).toList();
+    if (mounted) setState(() => _replyImages = images);
+    MindImageAttaching.discard(_files, removed);
+  }
+
+  Future<void> _addReplyImages() async {
+    final List<MindNoteImage> picked = await _whileHeld(
+      () => pickMindImages(context, limit: kMaxMindImages - _replyImages.length),
+    ) ?? const [];
+    if (picked.isEmpty || !mounted) return;
+    setState(() => _replyImages = [..._replyImages, ...picked]);
+  }
+
   @override
   void dispose() {
+    MindImageAttaching.discard(_files, _replyImages);
     _progress.dispose();
     _pageController.dispose();
     _replyController.dispose();
@@ -157,8 +179,12 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
 
   Duration _durationOf(DayFeedItem item) => switch (item) {
     DayFeedMind(:final mind) when mind.noteContent.hasVideo => _kVideoFallbackDuration,
-    DayFeedMind(:final mind) =>
-      mind.noteContent.audioPieces.firstOrNull?.duration ?? DayFeedLayout.mindStoryDuration(mind),
+    DayFeedMind(:final mind) when mind.noteContent.hasAudio => mind.noteContent.audioPieces.first.duration ??
+        DayFeedLayout.mindStoryDuration(mind),
+    // Time to read the text, plus a look at the images.
+    DayFeedMind(:final mind) when mind.noteContent.hasImages =>
+      DayFeedLayout.mindStoryDuration(mind) + DayFeedLayout.photoStoryDuration,
+    DayFeedMind(:final mind) => DayFeedLayout.mindStoryDuration(mind),
     DayFeedAsset(isVideo: true) || DayFeedFolderMedia(isVideo: true) => _kVideoFallbackDuration,
     _ => DayFeedLayout.photoStoryDuration,
   };
@@ -207,6 +233,17 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     final T? result = await action();
     if (mounted && !wasHeld) _release();
     return result;
+  }
+
+  bool _wasHeldBeforeImages = false;
+
+  void _onImagesOpened() {
+    _wasHeldBeforeImages = _isHeld;
+    _hold();
+  }
+
+  void _onImagesClosed() {
+    if (mounted && !_wasHeldBeforeImages) _release();
   }
 
   void _goNext() {
@@ -260,6 +297,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                       itemCount: widget.items.length,
                       onPageChanged: (index) {
                         _replyController.clear();
+                        _setReplyImages(const []);
                         _replyFocus.unfocus();
                         setState(() => _index = index);
                         _startTimer();
@@ -347,6 +385,9 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       insets: insets,
       onEditText: _editText,
       onVideoDuration: (duration) => _onMediaDuration(item.id, duration),
+      onSwipePastImages: (direction) => direction == AxisDirection.right ? _goNext() : _goPrevious(),
+      onImagesOpened: _onImagesOpened,
+      onImagesClosed: _onImagesClosed,
     ),
     _ => _ViewerPage(
       key: ValueKey(item.id),
@@ -421,6 +462,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
         MindReplies(
           root: root,
           menu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
+          onImagesOpened: _onImagesOpened,
+          onImagesClosed: _onImagesClosed,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -429,9 +472,13 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
               child: MindCommentBar(
                 controller: _replyController,
                 focusNode: _replyFocus,
+                images: _replyImages,
+                onAddImages: kIsPhoneWeb ? null : _addReplyImages,
+                onImagesChanged: _setReplyImages,
                 onSend: () {
-                  MindComments.save(context, root, _replyController.text);
+                  MindComments.save(context, root, _replyController.text, images: _replyImages);
                   _replyController.clear();
+                  setState(() => _replyImages = const []);
                 },
                 onRecordAudio: () =>
                     _whileHeld(() => MindComments.record(context, root, MediaRecording.recordAudio)),
@@ -596,6 +643,9 @@ final class _MindPage extends StatefulWidget {
   final EdgeInsets insets;
   final ValueChanged<Mind> onEditText;
   final ValueChanged<Duration> onVideoDuration;
+  final ValueChanged<AxisDirection> onSwipePastImages;
+  final VoidCallback onImagesOpened;
+  final VoidCallback onImagesClosed;
 
   const _MindPage({
     super.key,
@@ -605,6 +655,9 @@ final class _MindPage extends StatefulWidget {
     required this.insets,
     required this.onEditText,
     required this.onVideoDuration,
+    required this.onSwipePastImages,
+    required this.onImagesOpened,
+    required this.onImagesClosed,
   });
 
   @override
@@ -631,7 +684,49 @@ final class _MindPageState extends State<_MindPage> {
     final Color foreground = storyColorsOf(context).foreground;
     final MindNoteVideo? video = mind.noteContent.videoPieces.firstOrNull;
     final MindNoteAudio? audio = mind.noteContent.audioPieces.firstOrNull;
+    final List<MindNoteImage> images = mind.noteContent.imagePieces;
     final Color accent = mindAccentColorOf(context, mind);
+    final Widget? sound = video != null
+        ? SoundSpectrumRing(
+            diameter: _kRoundVideoSize,
+            color: accent,
+            child: _RoundVideoPlayer(
+              key: ValueKey(video.appRelativePath),
+              video: video,
+              isActive: widget.isActive,
+              onDuration: widget.onVideoDuration,
+            ),
+          )
+        : audio != null
+        ? MindAudioCircle(
+            key: ValueKey(audio.appRelativeAbsoulutePath),
+            audio: audio,
+            color: accent,
+            diameter: _kAudioCircleSize,
+            isPlaying: widget.autoplayAudio,
+          )
+        : null;
+    final Widget? imageCard = images.isEmpty
+        ? null
+        : LayoutBuilder(
+            builder: (context, constraints) {
+              // A 4:5 card, kept short enough to leave the text room on small screens.
+              final double width = math.min(constraints.maxWidth, MediaQuery.sizeOf(context).height * 0.5 * 4 / 5);
+              return Center(
+                child: SizedBox(
+                  width: width,
+                  height: width * 5 / 4,
+                  child: MindImageCarousel(
+                    key: ValueKey(mind.id),
+                    images: images,
+                    onSwipePastEdge: widget.onSwipePastImages,
+                    onOpen: widget.onImagesOpened,
+                    onClose: widget.onImagesClosed,
+                  ),
+                ),
+              );
+            },
+          );
     return SoundPlaybackScope(
       notifier: _sound,
       child: Stack(
@@ -648,26 +743,9 @@ final class _MindPageState extends State<_MindPage> {
                 child: Center(
                   child: MindStoryDetails(
                     mind: mind,
-                    media: video != null
-                        ? SoundSpectrumRing(
-                            diameter: _kRoundVideoSize,
-                            color: accent,
-                            child: _RoundVideoPlayer(
-                              key: ValueKey(video.appRelativePath),
-                              video: video,
-                              isActive: widget.isActive,
-                              onDuration: widget.onVideoDuration,
-                            ),
-                          )
-                        : audio != null
-                        ? MindAudioCircle(
-                            key: ValueKey(audio.appRelativeAbsoulutePath),
-                            audio: audio,
-                            color: accent,
-                            diameter: _kAudioCircleSize,
-                            isPlaying: widget.autoplayAudio,
-                          )
-                        : null,
+                    media: imageCard != null && sound != null
+                        ? Column(mainAxisSize: MainAxisSize.min, spacing: 16.0, children: [imageCard, sound])
+                        : imageCard ?? sound,
                     onLongPressText: () => widget.onEditText(mind),
                   ),
                 ),

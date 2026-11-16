@@ -101,7 +101,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>keklist uses the camera to record round video messages and to attach photos or videos to entries</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>keklist needs access to photo library to import your backups from files</string>
+	<string>keklist shows the photos of each day next to your notes and lets you attach them to entries</string>
 	<key>NSMotionUsageDescription</key>
 	<string>keklist detects a shake of the phone to open screen customization</string>
 	<key>NSMicrophoneUsageDescription</key>

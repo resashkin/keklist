@@ -426,5 +426,9 @@
     "storyReplySide": "Сторона",
     "storyReplySideLeft": "Слева",
     "storyReplySideRight": "Справа",
-    "storyReplyTime": "Показывать время"
+    "storyReplyTime": "Показывать время",
+    "imageFromGallery": "Галерея",
+    "imageFromCamera": "Камера",
+    "attachImages": "Добавить фото",
+    "newMindWithPhoto": "Новая заметка с этим фото"
 }

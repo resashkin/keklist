@@ -13,6 +13,7 @@ import 'package:keklist/presentation/blocs/user_profile_bloc/user_profile_bloc.d
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:keklist/presentation/core/helpers/media_sources.dart';
+import 'package:keklist/presentation/core/widgets/images/mind_images.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_profile_header.dart';
@@ -28,11 +29,14 @@ abstract final class MindComments {
     return state is MindList ? mindReflectionsOf(state.values, rootId) : const [];
   }
 
-  static void save(BuildContext context, Mind root, String text) {
-    if (text.trim().isEmpty) return;
-    context.read<MindBloc>().add(
-      MindCreate(dayIndex: root.dayIndex, mindContent: MindNoteContent.parse(text.trim()).pieces, rootId: root.id),
-    );
+  static void save(BuildContext context, Mind root, String text, {List<MindNoteImage> images = const []}) {
+    final String trimmed = text.trim();
+    if (trimmed.isEmpty && images.isEmpty) return;
+    final List<BaseMindNotePiece> pieces = [
+      ...images,
+      if (trimmed.isNotEmpty) MindNoteText(images.isEmpty ? trimmed : '\n$trimmed'),
+    ];
+    context.read<MindBloc>().add(MindCreate(dayIndex: root.dayIndex, mindContent: pieces, rootId: root.id));
   }
 
   static Future<void> record(
@@ -51,8 +55,10 @@ abstract final class MindComments {
 final class MindReplies extends StatelessWidget {
   final Mind root;
   final List<MenuElement> Function(Mind comment) menu;
+  final VoidCallback? onImagesOpened;
+  final VoidCallback? onImagesClosed;
 
-  const MindReplies({super.key, required this.root, required this.menu});
+  const MindReplies({super.key, required this.root, required this.menu, this.onImagesOpened, this.onImagesClosed});
 
   static const double _fadeSpace = 48.0;
 
@@ -91,7 +97,13 @@ final class MindReplies extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: ContextMenuWidget(
                     menuProvider: (_) => Menu(children: menu(comment)),
-                    child: _ReplyRow(key: ValueKey(comment.id), comment: comment, story: story),
+                    child: _ReplyRow(
+                      key: ValueKey(comment.id),
+                      comment: comment,
+                      story: story,
+                      onImagesOpened: onImagesOpened,
+                      onImagesClosed: onImagesClosed,
+                    ),
                   ),
                 );
               },
@@ -107,8 +119,10 @@ final class MindReplies extends StatelessWidget {
 final class _ReplyRow extends StatelessWidget {
   final Mind comment;
   final StorySettings story;
+  final VoidCallback? onImagesOpened;
+  final VoidCallback? onImagesClosed;
 
-  const _ReplyRow({super.key, required this.comment, required this.story});
+  const _ReplyRow({super.key, required this.comment, required this.story, this.onImagesOpened, this.onImagesClosed});
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +132,7 @@ final class _ReplyRow extends StatelessWidget {
     final String time = (isToday ? DateFormat.Hm(locale) : DateFormat.MMMd(locale).add_Hm()).format(date);
     final MindNoteVideo? video = comment.noteContent.videoPieces.firstOrNull;
     final MindNoteAudio? audio = comment.noteContent.audioPieces.firstOrNull;
+    final List<MindNoteImage> images = comment.noteContent.imagePieces;
     final String text = comment.plainNote.trim();
     final Color foreground = storyColorsOf(context).foreground;
     final bool isRight = story.replySide == StoryReplySide.right;
@@ -132,11 +147,20 @@ final class _ReplyRow extends StatelessWidget {
             child: Text(time, style: TextStyle(color: foreground.withValues(alpha: 0.6), fontSize: 11.0)),
           ),
         if (video != null) RoundVideoMessage(video: video, size: 120.0),
-        if (audio != null) _ReplyBubble(opacity: story.replyOpacity, child: _AudioReply(audio: audio)),
+        if (images.isNotEmpty)
+          MindImageGrid(images: images, width: 120.0, onOpen: onImagesOpened, onClose: onImagesClosed),
+        if (audio != null)
+          _ReplyBubble(
+            opacity: story.replyOpacity,
+            child: _AudioReply(audio: audio),
+          ),
         if (text.isNotEmpty)
           _ReplyBubble(
             opacity: story.replyOpacity,
-            child: Text(text, style: TextStyle(color: foreground, fontSize: story.replyTextSize, height: 1.3)),
+            child: Text(
+              text,
+              style: TextStyle(color: foreground, fontSize: story.replyTextSize, height: 1.3),
+            ),
           ),
       ],
     );
@@ -256,6 +280,11 @@ final class MindCommentBar extends StatelessWidget {
   final VoidCallback onRecordVideo;
   final bool autofocus;
 
+  /// Photos picked for the next reply, shown above the field; [onAddImages] is null where photos can't be added.
+  final List<MindNoteImage> images;
+  final VoidCallback? onAddImages;
+  final ValueChanged<List<MindNoteImage>>? onImagesChanged;
+
   const MindCommentBar({
     super.key,
     required this.controller,
@@ -264,62 +293,88 @@ final class MindCommentBar extends StatelessWidget {
     required this.onRecordAudio,
     required this.onRecordVideo,
     this.autofocus = false,
+    this.images = const [],
+    this.onAddImages,
+    this.onImagesChanged,
   });
 
   @override
-  Widget build(BuildContext context) => ListenableBuilder(listenable: controller, builder: (context, _) => _build(context));
+  Widget build(BuildContext context) =>
+      ListenableBuilder(listenable: controller, builder: (context, _) => _build(context));
 
   Widget _build(BuildContext context) {
-    final bool hasText = controller.text.trim().isNotEmpty;
+    final bool canSend = controller.text.trim().isNotEmpty || images.isNotEmpty;
+    final VoidCallback? onAddImages = images.length < kMaxMindImages ? this.onAddImages : null;
     return SafeArea(
       top: false,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(12.0, 4.0, 8.0, 8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          spacing: 4.0,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: 8.0,
           children: [
-            Expanded(
-              child: TextField(
-                controller: controller,
-                focusNode: focusNode,
-                autofocus: autofocus,
-                minLines: 1,
-                maxLines: 5,
-                keyboardType: TextInputType.multiline,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  hintText: context.l10n.viewerCommentHint,
-                  filled: true,
-                  // Opaque, so the emotion texture never runs through the field.
-                  fillColor: Color.alphaBlend(
-                    storyColorsOf(context).foreground.withValues(alpha: 0.1),
-                    storyColorsOf(context).background,
-                  ),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(24.0), borderSide: BorderSide.none),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                ),
-              ),
-            ),
-            SizedBox.square(
-              dimension: 52.0,
-              child: hasText
-                  ? IconButton.filled(
-                      onPressed: onSend,
-                      style: IconButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.black,
-                        fixedSize: const Size.square(52.0),
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      icon: const Icon(Icons.arrow_upward_rounded),
-                    )
-                  : MediaRecordToggleButton(isFilled: true, onRecordAudio: onRecordAudio, onRecordVideo: onRecordVideo),
-            ),
+            if (images.isNotEmpty && onImagesChanged != null)
+              MindImageStrip(images: images, onChanged: onImagesChanged!, padding: EdgeInsets.zero),
+            _buildRow(context, canSend: canSend, onAddImages: onAddImages),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildRow(BuildContext context, {required bool canSend, required VoidCallback? onAddImages}) => Row(
+    crossAxisAlignment: CrossAxisAlignment.end,
+    spacing: 4.0,
+    children: [
+      Expanded(
+        child: TextField(
+          controller: controller,
+          focusNode: focusNode,
+          autofocus: autofocus,
+          minLines: 1,
+          maxLines: 5,
+          keyboardType: TextInputType.multiline,
+          textCapitalization: TextCapitalization.sentences,
+          decoration: InputDecoration(
+            hintText: context.l10n.viewerCommentHint,
+            filled: true,
+            // Opaque, so the emotion texture never runs through the field.
+            fillColor: Color.alphaBlend(
+              storyColorsOf(context).foreground.withValues(alpha: 0.1),
+              storyColorsOf(context).background,
+            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(24.0), borderSide: BorderSide.none),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            suffixIcon: onAddImages == null
+                ? null
+                : IconButton(
+                    onPressed: onAddImages,
+                    tooltip: context.l10n.attachImages,
+                    icon: Icon(
+                      Icons.add_photo_alternate_outlined,
+                      color: storyColorsOf(context).foreground.withValues(alpha: 0.7),
+                    ),
+                  ),
+          ),
+        ),
+      ),
+      SizedBox.square(
+        dimension: 52.0,
+        child: canSend
+            ? IconButton.filled(
+                onPressed: onSend,
+                style: IconButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  fixedSize: const Size.square(52.0),
+                  padding: EdgeInsets.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                icon: const Icon(Icons.arrow_upward_rounded),
+              )
+            : MediaRecordToggleButton(isFilled: true, onRecordAudio: onRecordAudio, onRecordVideo: onRecordVideo),
+      ),
+    ],
+  );
 }

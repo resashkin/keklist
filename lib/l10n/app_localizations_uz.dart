@@ -1395,4 +1395,16 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get storyReplyTime => 'Vaqtni ko‘rsatish';
+
+  @override
+  String get imageFromGallery => 'Galereya';
+
+  @override
+  String get imageFromCamera => 'Kamera';
+
+  @override
+  String get attachImages => 'Rasm qo‘shish';
+
+  @override
+  String get newMindWithPhoto => 'Shu rasm bilan yangi yozuv';
 }

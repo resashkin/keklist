@@ -1,5 +1,9 @@
 const String kMindAudioTag = 'kekaudio';
 const String kMindVideoTag = 'kekvideo';
+const String kMindImageTag = 'kekimage';
+
+/// A note holds at most this many images.
+const int kMaxMindImages = 10;
 
 String videoThumbnailPathFor(String videoPath) => '${videoPath.substring(0, videoPath.lastIndexOf('.'))}.jpg';
 
@@ -10,6 +14,7 @@ sealed class BaseMindNotePiece {
     required T Function(MindNoteText text) text,
     required T Function(MindNoteAudio audio) audio,
     required T Function(MindNoteVideo video) video,
+    required T Function(MindNoteImage image) image,
     required T Function() unknown,
   }) {
     final BaseMindNotePiece self = this;
@@ -21,6 +26,9 @@ sealed class BaseMindNotePiece {
     }
     if (self is MindNoteVideo) {
       return video(self);
+    }
+    if (self is MindNoteImage) {
+      return image(self);
     }
     return unknown();
   }
@@ -72,16 +80,34 @@ final class MindNoteVideo extends BaseMindNotePiece {
   String toString() => 'MindNoteVideo($appRelativePath, duration: ${durationSeconds}s)';
 }
 
+final class MindNoteImage extends BaseMindNotePiece {
+  const MindNoteImage({required this.appRelativePath});
+
+  final String appRelativePath;
+
+  @override
+  bool operator ==(Object other) => other is MindNoteImage && other.appRelativePath == appRelativePath;
+
+  @override
+  int get hashCode => appRelativePath.hashCode;
+
+  @override
+  String toString() => 'MindNoteImage($appRelativePath)';
+}
+
 final class MindNoteContent {
   List<MindNoteAudio> get audioPieces => _pieces.whereType<MindNoteAudio>().toList(growable: false);
   bool get hasAudio => audioPieces.isNotEmpty;
   List<MindNoteVideo> get videoPieces => _pieces.whereType<MindNoteVideo>().toList(growable: false);
   bool get hasVideo => videoPieces.isNotEmpty;
-  bool get hasMedia => hasAudio || hasVideo;
+  List<MindNoteImage> get imagePieces => _pieces.whereType<MindNoteImage>().toList(growable: false);
+  bool get hasImages => imagePieces.isNotEmpty;
+  bool get hasMedia => hasAudio || hasVideo || hasImages;
 
   List<String> get mediaFilePaths => [
         for (final MindNoteAudio audio in audioPieces) audio.appRelativeAbsoulutePath,
         for (final MindNoteVideo video in videoPieces) ...[video.appRelativePath, video.thumbnailRelativePath],
+        for (final MindNoteImage image in imagePieces) image.appRelativePath,
       ];
 
   const MindNoteContent._(this._pieces);
@@ -116,8 +142,16 @@ final class MindNoteContent {
       caseSensitive: false,
     );
 
+    final RegExp imageRegExp = RegExp('<$kMindImageTag\\s+path="([^"]+)"\\s*/>', caseSensitive: false);
+
     // Collect all matches (both old and new formats) with their positions
     final List<_MediaMatch> allMatches = [];
+
+    for (final match in imageRegExp.allMatches(note)) {
+      final String path = match.group(1)?.trim() ?? '';
+      if (path.isEmpty) continue;
+      allMatches.add(_MediaMatch(start: match.start, end: match.end, piece: MindNoteImage(appRelativePath: path)));
+    }
 
     for (final match in videoRegExp.allMatches(note)) {
       final String path = match.group(1)?.trim() ?? '';
@@ -202,6 +236,7 @@ final class MindNoteContent {
           },
           video: (MindNoteVideo videoPiece) =>
               '<$kMindVideoTag path="${videoPiece.appRelativePath}" duration="${videoPiece.durationSeconds}"/>',
+          image: (MindNoteImage imagePiece) => '<$kMindImageTag path="${imagePiece.appRelativePath}"/>',
           unknown: () => '',
         ),
       )

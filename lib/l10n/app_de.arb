@@ -426,5 +426,9 @@
     "storyReplySide": "Seite",
     "storyReplySideLeft": "Links",
     "storyReplySideRight": "Rechts",
-    "storyReplyTime": "Uhrzeit anzeigen"
+    "storyReplyTime": "Uhrzeit anzeigen",
+    "imageFromGallery": "Mediathek",
+    "imageFromCamera": "Kamera",
+    "attachImages": "Fotos hinzufügen",
+    "newMindWithPhoto": "Neue Notiz mit diesem Foto"
 }

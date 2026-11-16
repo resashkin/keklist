@@ -1392,6 +1392,18 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get storyReplyTime => 'Прикажи време';
+
+  @override
+  String get imageFromGallery => 'Галерија';
+
+  @override
+  String get imageFromCamera => 'Камера';
+
+  @override
+  String get attachImages => 'Додај фотографије';
+
+  @override
+  String get newMindWithPhoto => 'Нова белешка са овом фотографијом';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2781,4 +2793,16 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get storyReplyTime => 'Prikaži vreme';
+
+  @override
+  String get imageFromGallery => 'Galerija';
+
+  @override
+  String get imageFromCamera => 'Kamera';
+
+  @override
+  String get attachImages => 'Dodaj fotografije';
+
+  @override
+  String get newMindWithPhoto => 'Nova beleška sa ovom fotografijom';
 }

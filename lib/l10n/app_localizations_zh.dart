@@ -1340,4 +1340,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get storyReplyTime => '显示时间';
+
+  @override
+  String get imageFromGallery => '照片图库';
+
+  @override
+  String get imageFromCamera => '相机';
+
+  @override
+  String get attachImages => '添加照片';
+
+  @override
+  String get newMindWithPhoto => '用这张照片新建笔记';
 }

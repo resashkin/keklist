@@ -1392,4 +1392,16 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get storyReplyTime => 'Уақытты көрсету';
+
+  @override
+  String get imageFromGallery => 'Галерея';
+
+  @override
+  String get imageFromCamera => 'Камера';
+
+  @override
+  String get attachImages => 'Фото қосу';
+
+  @override
+  String get newMindWithPhoto => 'Осы фотомен жаңа жазба';
 }

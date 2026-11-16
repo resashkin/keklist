@@ -1399,4 +1399,16 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get storyReplyTime => 'Mostra ora';
+
+  @override
+  String get imageFromGallery => 'Galleria';
+
+  @override
+  String get imageFromCamera => 'Fotocamera';
+
+  @override
+  String get attachImages => 'Aggiungi foto';
+
+  @override
+  String get newMindWithPhoto => 'Nuova nota con questa foto';
 }

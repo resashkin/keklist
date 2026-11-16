@@ -1348,4 +1348,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get storyReplyTime => '時刻を表示';
+
+  @override
+  String get imageFromGallery => '写真ライブラリ';
+
+  @override
+  String get imageFromCamera => 'カメラ';
+
+  @override
+  String get attachImages => '写真を追加';
+
+  @override
+  String get newMindWithPhoto => 'この写真で新しいメモ';
 }

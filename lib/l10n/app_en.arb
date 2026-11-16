@@ -1765,5 +1765,12 @@
     "storyReplyTime": "Show time",
     "@storyReplyTime": {
         "description": "Story shake tweaks: replies over a story and the emotion texture"
+    },
+    "imageFromGallery": "Photo library",
+    "imageFromCamera": "Camera",
+    "attachImages": "Add photos",
+    "newMindWithPhoto": "New note with this photo",
+    "@newMindWithPhoto": {
+        "description": "Images attached to minds: photo source, editor button, day feed photo menu"
     }
 }

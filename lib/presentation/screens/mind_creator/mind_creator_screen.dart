@@ -20,6 +20,7 @@ import 'package:keklist/presentation/core/widgets/round_video/media_recording.da
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/presentation/core/widgets/deferred_autofocus.dart';
+import 'package:keklist/presentation/core/widgets/images/mind_images.dart';
 
 final class MindCreatorScreen extends StatefulWidget {
   final Function(String text, List<String> emotionIds) onDone;
@@ -28,7 +29,16 @@ final class MindCreatorScreen extends StatefulWidget {
   /// Set when editing: the text is prefilled, and recording and emotions are hidden.
   final String? initialText;
 
-  const MindCreatorScreen({super.key, required this.onDone, this.hintText, this.initialText});
+  /// Images the new mind starts with, already saved in the app files.
+  final List<MindNoteImage> initialImages;
+
+  const MindCreatorScreen({
+    super.key,
+    required this.onDone,
+    this.hintText,
+    this.initialText,
+    this.initialImages = const [],
+  });
 
   /// Edits an existing text full-screen; resolves to the new text, or null when closed without saving.
   static Future<String?> editText(BuildContext context, {required String initialText}) async {
@@ -51,6 +61,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
     ..selection = TextSelection.collapsed(offset: widget.initialText?.length ?? 0);
   final List<String> _selectedEmotionIds = [];
   BaseMindNotePiece? _attachedMedia;
+  late List<MindNoteImage> _images = List.of(widget.initialImages);
 
   @override
   void initState() {
@@ -111,6 +122,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
   Widget build(BuildContext context) {
     final MindEmotionsPrompt emotionsPrompt = _emotionsPrompt;
     final bool canRecord = _attachedMedia == null && !_hasText && !kIsPhoneWeb && !_isEditing;
+    final bool canAddImages = _images.length < kMaxMindImages && !kIsPhoneWeb && !_isEditing;
     return CallbackShortcuts(
       bindings: {
         commandShortcut(LogicalKeyboardKey.enter): () => _save(emotionsPrompt),
@@ -137,6 +149,11 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
                   children: [
                     if (_attachedMedia case final BaseMindNotePiece media)
                       _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
+                    if (_images.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: MindImageStrip(images: _images, onChanged: _setImages),
+                      ),
                     DeferredAutofocus(
                       builder: (_, focusNode) => TextField(
                         focusNode: focusNode,
@@ -168,6 +185,22 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
                       if (emotionsPrompt == MindEmotionsPrompt.button && !_isEditing)
                         _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
                       const Spacer(),
+                      if (canAddImages)
+                        Padding(
+                          padding: EdgeInsets.only(right: canRecord ? 12.0 : 0.0),
+                          child: IconButton.filled(
+                            onPressed: _addImages,
+                            tooltip: context.l10n.attachImages,
+                            icon: const Icon(Icons.add_photo_alternate_outlined, color: Colors.black),
+                            style: IconButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              fixedSize: const Size.square(52.0),
+                              minimumSize: const Size.square(52.0),
+                              padding: EdgeInsets.zero,
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                          ),
+                        ),
                       if (canRecord)
                         MediaRecordToggleButton(
                           isFilled: true,
@@ -187,7 +220,21 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
 
   void _close() {
     _removeAttachedMedia();
+    _setImages(const []);
     Navigator.of(context).pop();
+  }
+
+  Future<void> _addImages() async {
+    final List<MindNoteImage> picked = await pickMindImages(context, limit: kMaxMindImages - _images.length);
+    if (picked.isEmpty || !mounted) return;
+    setState(() => _images = [..._images, ...picked]);
+  }
+
+  // Images taken out before saving never reach a mind, so their files go right away.
+  void _setImages(List<MindNoteImage> images) {
+    final Iterable<MindNoteImage> removed = _images.where((image) => !images.contains(image)).toList();
+    setState(() => _images = List.of(images));
+    MindImageAttaching.discard(context.read<AppFileRepository>(), removed);
   }
 
   void _openMarkingSheet() {
@@ -222,10 +269,11 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
 
   String _composeNote() {
     final String text = _textEditingController.text.trim();
-    final BaseMindNotePiece? media = _attachedMedia;
+    final List<BaseMindNotePiece> attachments = [?_attachedMedia, ..._images];
+    _images = const [];
     return MindNoteContent.fromPieces([
-      ?media,
-      if (text.isNotEmpty) MindNoteText(media == null ? text : '\n$text'),
+      ...attachments,
+      if (text.isNotEmpty) MindNoteText(attachments.isEmpty ? text : '\n$text'),
     ]).toRawNoteString();
   }
 }

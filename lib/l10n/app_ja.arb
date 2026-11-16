@@ -426,5 +426,9 @@
     "storyReplySide": "位置",
     "storyReplySideLeft": "左",
     "storyReplySideRight": "右",
-    "storyReplyTime": "時刻を表示"
+    "storyReplyTime": "時刻を表示",
+    "imageFromGallery": "写真ライブラリ",
+    "imageFromCamera": "カメラ",
+    "attachImages": "写真を追加",
+    "newMindWithPhoto": "この写真で新しいメモ"
 }
