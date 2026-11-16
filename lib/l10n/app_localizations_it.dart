@@ -1263,7 +1263,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Quali impostazioni scegli, quali schermate apri, quante note crei, la versione dell\'app, la piattaforma e la lingua, gli acquisti di Pro e mance, e i report di crash senza i loro messaggi.';
+      'Quali impostazioni scegli, quali schermate apri, quante note crei e quante foto alleghi, la versione dell\'app, la piattaforma e la lingua, gli acquisti di Pro e mance, e i report di crash senza i loro messaggi.';
 
   @override
   String get analyticsNeverSent => 'Mai inviato';

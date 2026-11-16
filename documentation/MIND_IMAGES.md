@@ -42,5 +42,10 @@ text. Images are free for everyone.
 - Older app versions show `<kekimage …/>` as text, as they did with video.
 - The Apple Watch app does not show images.
 
+## Analytics
+
+`pickMindImages` and "New note with this photo" send `images_attached {count, source, target}`. No paths, EXIF or
+pixels are sent. See `ANALYTICS_IMPLEMENTATION.md`.
+
 ## Testing
 - `test/domain/services/entities/mind_note_image_test.dart`: parsing, serialization, file paths, text edits.

@@ -1218,7 +1218,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      '選んだ設定、開いた画面、作成したメモの数、アプリのバージョン・プラットフォーム・言語、Pro とチップの購入、メッセージを除いたクラッシュレポート。';
+      '選んだ設定、開いた画面、作成したメモと添付した写真の数、アプリのバージョン・プラットフォーム・言語、Pro とチップの購入、メッセージを除いたクラッシュレポート。';
 
   @override
   String get analyticsNeverSent => '送信されないもの';

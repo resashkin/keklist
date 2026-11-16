@@ -387,7 +387,7 @@
     "analyticsDescription": "匿名の利用統計は改善点を決めるのに役立ちます。あなたが書いた内容は端末から出ません。",
     "analyticsStoreBuildsOnly": "このビルドは何も送信しません。分析は App Store と Google Play のビルドでのみ動作します。",
     "analyticsSent": "送信されるもの",
-    "analyticsSentItems": "選んだ設定、開いた画面、作成したメモの数、アプリのバージョン・プラットフォーム・言語、Pro とチップの購入、メッセージを除いたクラッシュレポート。",
+    "analyticsSentItems": "選んだ設定、開いた画面、作成したメモと添付した写真の数、アプリのバージョン・プラットフォーム・言語、Pro とチップの購入、メッセージを除いたクラッシュレポート。",
     "analyticsNeverSent": "送信されないもの",
     "analyticsNeverSentItems": "あなたのメモとそのテキスト・感情・コメント、写真・動画・音声、名前、位置情報、IP アドレス。",
     "analyticsResetId": "匿名 ID をリセット",

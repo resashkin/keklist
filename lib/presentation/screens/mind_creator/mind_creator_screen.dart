@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/presentation/core/helpers/keyboard_shortcuts.dart';
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
@@ -225,7 +226,11 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
   }
 
   Future<void> _addImages() async {
-    final List<MindNoteImage> picked = await pickMindImages(context, limit: kMaxMindImages - _images.length);
+    final List<MindNoteImage> picked = await pickMindImages(
+      context,
+      limit: kMaxMindImages - _images.length,
+      target: ImageAttachTarget.mind,
+    );
     if (picked.isEmpty || !mounted) return;
     setState(() => _images = [..._images, ...picked]);
   }

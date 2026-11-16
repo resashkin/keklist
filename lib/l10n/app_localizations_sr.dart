@@ -1256,7 +1256,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Која подешавања бираш, које екране отвараш, колико белешки правиш, верзија апликације, платформа и језик, куповине Pro и напојница, и извештаји о падовима без њихових порука.';
+      'Која подешавања бираш, које екране отвараш, колико белешки правиш и колико фотографија прилажеш, верзија апликације, платформа и језик, куповине Pro и напојница, и извештаји о падовима без њихових порука.';
 
   @override
   String get analyticsNeverSent => 'Никад се не шаље';
@@ -2657,7 +2657,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get analyticsSentItems =>
-      'Koja podešavanja biraš, koje ekrane otvaraš, koliko beleški praviš, verzija aplikacije, platforma i jezik, kupovine Pro i napojnica, i izveštaji o padovima bez njihovih poruka.';
+      'Koja podešavanja biraš, koje ekrane otvaraš, koliko beleški praviš i koliko fotografija prilažeš, verzija aplikacije, platforma i jezik, kupovine Pro i napojnica, i izveštaji o padovima bez njihovih poruka.';
 
   @override
   String get analyticsNeverSent => 'Nikad se ne šalje';

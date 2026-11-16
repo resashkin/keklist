@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
@@ -49,12 +50,7 @@ final class DayFeedTileMenu extends StatelessWidget {
   List<MenuElement> _actions(BuildContext context) => switch (item) {
     DayFeedMind(:final mind) => [
       _action(context.l10n.edit, 'pencil', Icons.edit_outlined, () => _editText(context, mind)),
-      _action(
-        context.l10n.emotions,
-        'heart',
-        Icons.favorite_border_rounded,
-        () => _editEmotions(context, mind),
-      ),
+      _action(context.l10n.emotions, 'heart', Icons.favorite_border_rounded, () => _editEmotions(context, mind)),
       _action(context.l10n.share, 'square.and.arrow.up', Icons.ios_share, () => _shareText(context, mind)),
       MenuSeparator(),
       _action(context.l10n.delete, 'trash', Icons.delete_outline, () => _deleteMind(context, mind), destructive: true),
@@ -139,6 +135,7 @@ final class DayFeedTileMenu extends StatelessWidget {
     final MindBloc minds = context.read<MindBloc>();
     final MindNoteImage? image = await MindImageAttaching.fromAsset(context.read<AppFileRepository>(), asset);
     if (image == null || !context.mounted) return;
+    Analytics.imagesAttached(1, source: ImageAttachSource.dayFeed, target: ImageAttachTarget.mind);
     final int dayIndex = kek_date.DateUtils.getDayIndex(from: asset.createDateTime);
     await Navigator.of(context).push<void>(
       MaterialPageRoute<void>(

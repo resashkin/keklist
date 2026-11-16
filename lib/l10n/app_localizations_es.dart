@@ -1261,7 +1261,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Qué ajustes eliges, qué pantallas abres, cuántas notas creas, la versión de la app, la plataforma y el idioma, las compras de Pro y propinas, e informes de fallos sin sus mensajes.';
+      'Qué ajustes eliges, qué pantallas abres, cuántas notas creas y cuántas fotos adjuntas, la versión de la app, la plataforma y el idioma, las compras de Pro y propinas, e informes de fallos sin sus mensajes.';
 
   @override
   String get analyticsNeverSent => 'Nunca se envía';

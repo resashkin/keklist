@@ -1261,7 +1261,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Qaysi sozlamalarni tanlaysiz, qaysi ekranlarni ochasiz, qancha yozuv yaratasiz, ilova versiyasi, platforma va til, Pro va choychaqa xaridlari hamda xabarlarsiz nosozlik hisobotlari.';
+      'Qaysi sozlamalarni tanlaysiz, qaysi ekranlarni ochasiz, qancha yozuv yaratasiz va qancha rasm biriktirasiz, ilova versiyasi, platforma va til, Pro va choychaqa xaridlari hamda xabarlarsiz nosozlik hisobotlari.';
 
   @override
   String get analyticsNeverSent => 'Hech qachon yuborilmaydi';

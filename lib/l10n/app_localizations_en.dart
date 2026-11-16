@@ -1253,7 +1253,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Which settings and tweaks you choose, which screens you open, how many notes you create, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.';
+      'Which settings and tweaks you choose, which screens you open, how many notes you create and how many photos you attach, the app version, platform and language, Pro and tip purchases, and crash reports without their messages.';
 
   @override
   String get analyticsNeverSent => 'Never sent';

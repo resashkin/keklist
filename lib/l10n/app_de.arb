@@ -387,7 +387,7 @@
     "analyticsDescription": "Anonyme Nutzungsstatistiken helfen zu entscheiden, was verbessert wird. Nichts, was du schreibst, verlässt dein Gerät.",
     "analyticsStoreBuildsOnly": "Dieser Build sendet nichts: Analyse läuft nur in Builds aus dem App Store und Google Play.",
     "analyticsSent": "Was gesendet wird",
-    "analyticsSentItems": "Welche Einstellungen du wählst, welche Bildschirme du öffnest, wie viele Notizen du erstellst, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.",
+    "analyticsSentItems": "Welche Einstellungen du wählst, welche Bildschirme du öffnest, wie viele Notizen du erstellst und wie viele Fotos du anhängst, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.",
     "analyticsNeverSent": "Wird nie gesendet",
     "analyticsNeverSentItems": "Deine Notizen, ihr Text, Gefühle und Kommentare, Fotos, Videos und Audio, dein Name, dein Standort und deine IP-Adresse.",
     "analyticsResetId": "Anonyme ID zurücksetzen",

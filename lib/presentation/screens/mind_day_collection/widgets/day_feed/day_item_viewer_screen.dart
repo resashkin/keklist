@@ -6,6 +6,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/entities/mind.dart';
@@ -115,7 +116,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   // Read up front: dispose can no longer look it up.
   late final AppFileRepository _files;
 
-
   DayFeedItem get _currentItem => widget.items[_index];
 
   @override
@@ -153,9 +153,11 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   }
 
   Future<void> _addReplyImages() async {
-    final List<MindNoteImage> picked = await _whileHeld(
-      () => pickMindImages(context, limit: kMaxMindImages - _replyImages.length),
-    ) ?? const [];
+    final List<MindNoteImage> picked =
+        await _whileHeld(
+          () => pickMindImages(context, limit: kMaxMindImages - _replyImages.length, target: ImageAttachTarget.reply),
+        ) ??
+        const [];
     if (picked.isEmpty || !mounted) return;
     setState(() => _replyImages = [..._replyImages, ...picked]);
   }
@@ -179,8 +181,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
 
   Duration _durationOf(DayFeedItem item) => switch (item) {
     DayFeedMind(:final mind) when mind.noteContent.hasVideo => _kVideoFallbackDuration,
-    DayFeedMind(:final mind) when mind.noteContent.hasAudio => mind.noteContent.audioPieces.first.duration ??
-        DayFeedLayout.mindStoryDuration(mind),
+    DayFeedMind(:final mind) when mind.noteContent.hasAudio =>
+      mind.noteContent.audioPieces.first.duration ?? DayFeedLayout.mindStoryDuration(mind),
     // Time to read the text, plus a look at the images.
     DayFeedMind(:final mind) when mind.noteContent.hasImages =>
       DayFeedLayout.mindStoryDuration(mind) + DayFeedLayout.photoStoryDuration,
@@ -275,8 +277,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       child: GestureDetector(
         onVerticalDragUpdate: _isZoomed
             ? null
-            : (details) =>
-                  setState(() => _dragOffsetY = (_dragOffsetY + details.delta.dy).clamp(0.0, double.infinity)),
+            : (details) => setState(() => _dragOffsetY = (_dragOffsetY + details.delta.dy).clamp(0.0, double.infinity)),
         onVerticalDragEnd: _isZoomed ? null : _onVerticalDragEnd,
         onLongPressStart: widget.autoplay ? (_) => _hold() : null,
         onLongPressEnd: widget.autoplay ? (_) => _release() : null,
@@ -308,37 +309,36 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                   ),
                 ),
               ),
-                for (final bool isLeft in [true, false])
-                  if (!_isZoomed)
-                    Positioned(
-                      top: contentInsets.top,
-                      bottom: contentInsets.bottom,
-                      left: isLeft ? 0.0 : null,
-                      right: isLeft ? null : 0.0,
-                      width: MediaQuery.sizeOf(context).width * _kEdgeTapShare,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: isLeft ? _goPrevious : _goNext,
-                      ),
+              for (final bool isLeft in [true, false])
+                if (!_isZoomed)
+                  Positioned(
+                    top: contentInsets.top,
+                    bottom: contentInsets.bottom,
+                    left: isLeft ? 0.0 : null,
+                    right: isLeft ? null : 0.0,
+                    width: MediaQuery.sizeOf(context).width * _kEdgeTapShare,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: isLeft ? _goPrevious : _goNext,
                     ),
-                Positioned(
-                  top: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: SafeArea(
-                    bottom: false,
-                    child: Column(children: [_buildSegments(foreground), _buildHeader(context, foreground)]),
                   ),
+              Positioned(
+                top: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: SafeArea(
+                  bottom: false,
+                  child: Column(children: [_buildSegments(foreground), _buildHeader(context, foreground)]),
                 ),
-                // While typing, a tap on the story only hides the keyboard.
-                if (_isReplying)
-                  Positioned.fill(
-                    child: GestureDetector(behavior: HitTestBehavior.opaque, onTap: _replyFocus.unfocus),
-                  ),
-                if (item is DayFeedMind)
-                  Positioned(left: 0.0, right: 0.0, bottom: 0.0, child: _buildReplies(item.mind)),
-              ],
-            ),
+              ),
+              // While typing, a tap on the story only hides the keyboard.
+              if (_isReplying)
+                Positioned.fill(
+                  child: GestureDetector(behavior: HitTestBehavior.opaque, onTap: _replyFocus.unfocus),
+                ),
+              if (item is DayFeedMind) Positioned(left: 0.0, right: 0.0, bottom: 0.0, child: _buildReplies(item.mind)),
+            ],
+          ),
         ),
       ),
     );
@@ -480,10 +480,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                   _replyController.clear();
                   setState(() => _replyImages = const []);
                 },
-                onRecordAudio: () =>
-                    _whileHeld(() => MindComments.record(context, root, MediaRecording.recordAudio)),
-                onRecordVideo: () =>
-                    _whileHeld(() => MindComments.record(context, root, MediaRecording.recordVideo)),
+                onRecordAudio: () => _whileHeld(() => MindComments.record(context, root, MediaRecording.recordAudio)),
+                onRecordVideo: () => _whileHeld(() => MindComments.record(context, root, MediaRecording.recordVideo)),
               ),
             ),
             SafeArea(
@@ -497,8 +495,10 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     );
     // Only this padding rebuilds while the keyboard moves.
     return Builder(
-      builder: (context) =>
-          Padding(padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom), child: panel),
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+        child: panel,
+      ),
     );
   }
 

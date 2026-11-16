@@ -99,6 +99,11 @@ abstract final class Analytics {
   /// Only the fact that a note was created: never its content, emotions or kind.
   static void mindCreated() => _capture('mind_created', {});
 
+  /// How many photos were attached, from where and to what: never the photos, paths or places.
+  static void imagesAttached(int count, {required ImageAttachSource source, required ImageAttachTarget target}) {
+    if (count > 0) _capture('images_attached', {'count': count, 'source': source.key, 'target': target.name});
+  }
+
   static void reviewPrompted(String release) => _capture('review_prompted', {'release': release});
 
   static void _capture(String event, Map<String, Object> properties) {
@@ -112,3 +117,15 @@ abstract final class Analytics {
   static Map<String, Object>? _scrubbed(Map<String, Object>? properties) =>
       properties == null ? null : withoutExceptionMessages(properties);
 }
+
+enum ImageAttachSource {
+  gallery('gallery'),
+  camera('camera'),
+  dayFeed('day_feed');
+
+  final String key;
+
+  const ImageAttachSource(this.key);
+}
+
+enum ImageAttachTarget { mind, reply }

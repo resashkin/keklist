@@ -5,6 +5,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
+import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/helpers/media_sources.dart';
@@ -21,7 +22,14 @@ final class MindImageAttaching {
     final AppFileRepository files = context.read<AppFileRepository>();
     final ImagePicker picker = ImagePicker();
     final List<XFile> picked = limit == 1
-        ? [?await picker.pickImage(source: ImageSource.gallery, maxWidth: _maxSide, maxHeight: _maxSide, imageQuality: _quality)]
+        ? [
+            ?await picker.pickImage(
+              source: ImageSource.gallery,
+              maxWidth: _maxSide,
+              maxHeight: _maxSide,
+              imageQuality: _quality,
+            ),
+          ]
         : await picker.pickMultiImage(maxWidth: _maxSide, maxHeight: _maxSide, imageQuality: _quality, limit: limit);
     return _save(files, picked.take(limit));
   }
@@ -71,7 +79,11 @@ final class MindImageAttaching {
 }
 
 /// Asks where the photos come from and returns the saved ones.
-Future<List<MindNoteImage>> pickMindImages(BuildContext context, {required int limit}) async {
+Future<List<MindNoteImage>> pickMindImages(
+  BuildContext context, {
+  required int limit,
+  required ImageAttachTarget target,
+}) async {
   final ImageSource? source = await showModalActionSheet<ImageSource>(
     context: context,
     cancelLabel: context.l10n.cancel,
@@ -81,10 +93,16 @@ Future<List<MindNoteImage>> pickMindImages(BuildContext context, {required int l
     ],
   );
   if (source == null || !context.mounted) return const [];
-  return switch (source) {
+  final List<MindNoteImage> images = await switch (source) {
     ImageSource.gallery => MindImageAttaching.pickFromGallery(context, limit: limit),
     ImageSource.camera => MindImageAttaching.takePhoto(context),
   };
+  Analytics.imagesAttached(
+    images.length,
+    source: source == ImageSource.camera ? ImageAttachSource.camera : ImageAttachSource.gallery,
+    target: target,
+  );
+  return images;
 }
 
 /// One attached image, loaded from the app files (or the phone, in the web version).
@@ -394,7 +412,10 @@ final class MindImageGrid extends StatelessWidget {
       1 => _tile(context, 0, width: width, height: width),
       2 => Row(
         spacing: _gap,
-        children: [_tile(context, 0, width: half, height: width), _tile(context, 1, width: half, height: width)],
+        children: [
+          _tile(context, 0, width: half, height: width),
+          _tile(context, 1, width: half, height: width),
+        ],
       ),
       3 => Row(
         spacing: _gap,
@@ -402,7 +423,10 @@ final class MindImageGrid extends StatelessWidget {
           _tile(context, 0, width: half, height: width),
           Column(
             spacing: _gap,
-            children: [_tile(context, 1, width: half, height: half), _tile(context, 2, width: half, height: half)],
+            children: [
+              _tile(context, 1, width: half, height: half),
+              _tile(context, 2, width: half, height: half),
+            ],
           ),
         ],
       ),
@@ -413,8 +437,7 @@ final class MindImageGrid extends StatelessWidget {
             Row(
               spacing: _gap,
               children: [
-                for (int column = 0; column < 2; column++)
-                  _tile(context, row * 2 + column, width: half, height: half),
+                for (int column = 0; column < 2; column++) _tile(context, row * 2 + column, width: half, height: half),
               ],
             ),
         ],
@@ -511,7 +534,10 @@ final class MindImageBadge extends StatelessWidget {
     spacing: 3.0,
     children: [
       Icon(Icons.photo_outlined, size: size + 2.0, color: color),
-      Text('$count', style: TextStyle(fontSize: size, color: color)),
+      Text(
+        '$count',
+        style: TextStyle(fontSize: size, color: color),
+      ),
     ],
   );
 }

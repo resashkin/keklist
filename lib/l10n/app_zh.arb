@@ -387,7 +387,7 @@
     "analyticsDescription": "匿名使用统计帮助决定改进方向。你写的任何内容都不会离开设备。",
     "analyticsStoreBuildsOnly": "此版本不发送任何数据:分析仅在 App Store 和 Google Play 版本中运行。",
     "analyticsSent": "发送的内容",
-    "analyticsSentItems": "你选择的设置、打开的页面、创建的笔记数量、应用版本、平台和语言、Pro 与打赏购买,以及不含消息内容的崩溃报告。",
+    "analyticsSentItems": "你选择的设置、打开的页面、创建的笔记数量和附加的照片数量、应用版本、平台和语言、Pro 与打赏购买,以及不含消息内容的崩溃报告。",
     "analyticsNeverSent": "绝不发送",
     "analyticsNeverSentItems": "你的笔记及其文字、情绪和评论,照片、视频和音频,你的名字、位置和 IP 地址。",
     "analyticsResetId": "重置匿名 ID",

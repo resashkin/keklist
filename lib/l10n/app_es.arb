@@ -597,7 +597,7 @@
     "analyticsDescription": "Las estadísticas de uso anónimas ayudan a decidir qué mejorar. Nada de lo que escribes sale de tu dispositivo.",
     "analyticsStoreBuildsOnly": "Esta versión no envía nada: la analítica solo funciona en las versiones de App Store y Google Play.",
     "analyticsSent": "Qué se envía",
-    "analyticsSentItems": "Qué ajustes eliges, qué pantallas abres, cuántas notas creas, la versión de la app, la plataforma y el idioma, las compras de Pro y propinas, e informes de fallos sin sus mensajes.",
+    "analyticsSentItems": "Qué ajustes eliges, qué pantallas abres, cuántas notas creas y cuántas fotos adjuntas, la versión de la app, la plataforma y el idioma, las compras de Pro y propinas, e informes de fallos sin sus mensajes.",
     "analyticsNeverSent": "Nunca se envía",
     "analyticsNeverSentItems": "Tus notas, su texto, emociones y comentarios, fotos, vídeos y audio, tu nombre, tu ubicación y tu dirección IP.",
     "analyticsResetId": "Restablecer ID anónimo",

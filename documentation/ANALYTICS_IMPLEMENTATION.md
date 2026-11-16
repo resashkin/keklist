@@ -62,6 +62,7 @@ can be turned off in Settings → Analytics.
 | `whats_new_completed` / `whats_new_skipped` | `release`, `slide` (1-based, the slide it closed on) |
 | `rate_tapped` | none |
 | `mind_created` | none |
+| `images_attached` | `count`, `source` (`gallery`, `camera`, `day_feed`), `target` (`mind`, `reply`) |
 | `review_prompted` | `release` |
 | `$exception` | type and stack frames, without the message |
 
@@ -107,4 +108,7 @@ PostHog adds its own device properties, such as app version, OS and locale. The 
 - `mind_created` fires once per note written in the app or in the browser through the phone server, and comments
   count as notes. Import, restore and onboarding samples don't fire it. Keep it free of properties, so it reveals
   only how many notes a device created, never their content, emotions or kind.
+- `images_attached` fires when photos land in the editor or the reply bar, before the note is saved: it counts
+  attaching, not saved photos. "New note with this photo" from the day feed sends `count: 1`. It is a separate event
+  so `mind_created` stays free of properties.
 - Web is never supported; the web build has no PostHog setup.

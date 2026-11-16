@@ -1267,7 +1267,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      'Welche Einstellungen du wählst, welche Bildschirme du öffnest, wie viele Notizen du erstellst, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.';
+      'Welche Einstellungen du wählst, welche Bildschirme du öffnest, wie viele Notizen du erstellst und wie viele Fotos du anhängst, App-Version, Plattform und Sprache, Käufe von Pro und Trinkgeld sowie Absturzberichte ohne ihre Meldungen.';
 
   @override
   String get analyticsNeverSent => 'Wird nie gesendet';

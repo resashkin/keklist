@@ -1211,7 +1211,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get analyticsSentItems =>
-      '你选择的设置、打开的页面、创建的笔记数量、应用版本、平台和语言、Pro 与打赏购买,以及不含消息内容的崩溃报告。';
+      '你选择的设置、打开的页面、创建的笔记数量和附加的照片数量、应用版本、平台和语言、Pro 与打赏购买,以及不含消息内容的崩溃报告。';
 
   @override
   String get analyticsNeverSent => '绝不发送';
