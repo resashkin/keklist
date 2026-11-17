@@ -9,6 +9,7 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/sound/audio_waveform.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
@@ -310,7 +311,23 @@ final class _AttachedMediaPreview extends StatelessWidget {
       MindNoteVideo video => RoundVideoMessage(video: video, size: 180.0),
       MindNoteAudio audio => Chip(
         avatar: const Icon(Icons.mic, size: 18.0),
-        label: Text(_formatDuration(audio.duration ?? Duration.zero)),
+        label: Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 8.0,
+          children: [
+            SizedBox(
+              width: 120.0,
+              height: 22.0,
+              child: AudioWaveform(
+                path: audio.appRelativeAbsoulutePath,
+                color: Theme.of(context).colorScheme.onSurface,
+                barWidth: 2.0,
+                gap: 1.5,
+              ),
+            ),
+            Text(_formatDuration(audio.duration ?? Duration.zero)),
+          ],
+        ),
       ),
       _ => const SizedBox.shrink(),
     };

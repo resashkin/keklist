@@ -19,6 +19,7 @@ import 'package:keklist/presentation/core/widgets/round_video/round_video_views.
 import 'package:keklist/presentation/screens/insights/widgets/insights_profile_header.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_story_details.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/sound/audio_waveform.dart';
 import 'package:super_context_menu/super_context_menu.dart';
 
 /// Comments of a story mind, like replies to an Instagram story: the last ones float over the story above the input,
@@ -192,7 +193,7 @@ final class _ReplyBubble extends StatelessWidget {
   }
 }
 
-/// ▶ and the length of a voice comment; a tap plays or pauses it.
+/// ▶, the waveform and the length of a voice comment; a tap plays or pauses it.
 final class _AudioReply extends StatefulWidget {
   final MindNoteAudio audio;
 
@@ -226,6 +227,12 @@ final class _AudioReplyState extends State<_AudioReply> {
     super.dispose();
   }
 
+  double _progressOf(Duration? position) {
+    final int total = (_duration ?? Duration.zero).inMilliseconds;
+    if (total <= 0 || position == null || position == Duration.zero) return 1.0;
+    return (position.inMilliseconds / total).clamp(0.0, 1.0);
+  }
+
   void _toggle(PlayerState? state) {
     if (state?.processingState == ProcessingState.completed) {
       unawaited(_player.seek(Duration.zero));
@@ -253,7 +260,20 @@ final class _AudioReplyState extends State<_AudioReply> {
             spacing: 8.0,
             children: [
               Icon(isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded, color: foreground, size: 22.0),
-              Icon(Icons.graphic_eq, color: foreground.withValues(alpha: 0.7), size: 18.0),
+              SizedBox(
+                width: 72.0,
+                height: 22.0,
+                child: StreamBuilder<Duration>(
+                  stream: _player.positionStream,
+                  builder: (context, position) => AudioWaveform(
+                    path: widget.audio.appRelativeAbsoulutePath,
+                    color: foreground,
+                    progress: _progressOf(position.data),
+                    barWidth: 2.0,
+                    gap: 1.5,
+                  ),
+                ),
+              ),
               Text(label, style: TextStyle(color: foreground, fontSize: 14.0)),
             ],
           ),

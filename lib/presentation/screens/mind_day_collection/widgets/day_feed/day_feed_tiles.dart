@@ -1,5 +1,6 @@
 import 'package:keklist/presentation/core/widgets/images/mind_images.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/sound/audio_waveform.dart';
 import 'package:keklist/presentation/core/widgets/mind_emotion_emojis.dart';
 import 'package:keklist/presentation/core/widgets/mind_emotion_texture.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -46,14 +47,15 @@ final class DayFeedMindTile extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final MindNoteContent content = item.mind.noteContent;
     final MindNoteVideo? video = content.videoPieces.firstOrNull;
+    final MindNoteAudio? audio = content.audioPieces.firstOrNull;
     final double circleSize = size * 0.7;
     // Media minds show just their circle; text stays for the story view.
     final Widget? mediaCircle = video != null
         ? RoundVideoThumbnail(video: video, size: circleSize, showsPlayIcon: false)
-        : content.hasAudio
-        ? _AudioCircle(size: circleSize)
+        : audio != null
+        ? _AudioPreview(audio: audio, size: circleSize)
         : null;
-    final Duration? mediaDuration = video?.duration ?? content.audioPieces.firstOrNull?.duration;
+    final Duration? mediaDuration = video?.duration ?? audio?.duration;
     final String text = item.mind.plainNote.trim();
     final bool showText = isTextVisible && text.isNotEmpty;
     final bool showsReflections = item.reflections.total > 0 && size >= _kMinReflectionsTileSize;
@@ -176,19 +178,24 @@ final class _FittedTileText extends StatelessWidget {
   }
 }
 
-/// Audio minds: just the waveform icon, sized like a video circle.
-final class _AudioCircle extends StatelessWidget {
+/// Audio minds: the recording's waveform, as wide as a video circle.
+final class _AudioPreview extends StatelessWidget {
+  final MindNoteAudio audio;
   final double size;
 
-  const _AudioCircle({required this.size});
+  const _AudioPreview({required this.audio, required this.size});
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox.square(
-      dimension: size,
-      child: Icon(Icons.graphic_eq, size: size * 0.6, color: Theme.of(context).colorScheme.onSurface),
-    );
-  }
+  Widget build(BuildContext context) => SizedBox(
+    width: size,
+    height: size * 0.5,
+    child: AudioWaveform(
+      path: audio.appRelativeAbsoulutePath,
+      color: Theme.of(context).colorScheme.onSurface,
+      barWidth: 2.5,
+      gap: 2.0,
+    ),
+  );
 }
 
 final class DayFeedAssetTile extends StatelessWidget {

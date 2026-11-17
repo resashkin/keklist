@@ -24,6 +24,13 @@ Audio and round video are recorded like voice messages in Telegram. The round re
   - `MindCreatorScreen` attaches the piece to the note, so text can be added before saving.
   - The story (`DayItemViewerScreen` → `MindCommentBar`) sends it as a reply right away (`MindComments.sendRecording`). It holds the story while recording.
 
+### Waveform previews
+`AudioWaveform` (`lib/presentation/core/widgets/sound/audio_waveform.dart`) draws a recording's loudness as bars from `SoundEnvelope`. Each bar is the average level of its slice, so narrow previews keep their shape. It is used:
+- in the story's audio player (`MindAudioWave`), filled as it plays;
+- on day-feed tiles of audio minds;
+- in voice replies under a story, filled as they play;
+- on the recording attached in the editor.
+
 ## Edge Cases & Considerations
 - The first hold only asks for the microphone, because the system prompt would sit under the finger. That hold records nothing.
 - Recordings shorter than 0.7 s are deleted.
