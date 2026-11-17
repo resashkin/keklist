@@ -52,6 +52,7 @@ const double _kFadeDistance = 320.0;
 const double _kHeaderSpace = 100.0;
 const double _kEdgeTapShare = 0.22;
 const Duration _kVideoFallbackDuration = Duration(seconds: 5);
+const int _kMaxSegments = 15;
 const double _kWideMinWidth = 800.0;
 const double _kReplyBarHeight = 64.0;
 
@@ -104,6 +105,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       if (status == AnimationStatus.completed) _goNext();
     });
   late int _index = widget.initialIndex;
+  // Real lengths of audio and video, reported once loaded, even by the neighbours of the current story.
+  final Map<String, Duration> _mediaDurations = {};
   double _dragOffsetY = 0.0;
   double _scrollPull = 0.0;
   // How far the finger itself moved down while the mind was pulled past its top.
@@ -192,21 +195,23 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
 
   // The timer of ▶
 
-  Duration _durationOf(DayFeedItem item) => switch (item) {
-    DayFeedMind(:final mind) when mind.noteContent.hasVideo => _kVideoFallbackDuration,
-    DayFeedMind(:final mind) when mind.noteContent.hasAudio =>
-      mind.noteContent.audioPieces.first.duration ?? DayFeedLayout.mindStoryDuration(mind),
-    // Time to read the text, plus a look at the collage or at every photo of the slideshow.
-    DayFeedMind(:final mind) when mind.noteContent.hasImages =>
-      DayFeedLayout.mindStoryDuration(mind) +
-          switch (context.readStorySettings().imageLayout) {
-            StoryImageLayout.collage => DayFeedLayout.photoStoryDuration,
-            StoryImageLayout.carousel => MindImageCarousel.autoplayInterval * mind.noteContent.imagePieces.length,
-          },
-    DayFeedMind(:final mind) => DayFeedLayout.mindStoryDuration(mind),
-    DayFeedAsset(isVideo: true) || DayFeedFolderMedia(isVideo: true) => _kVideoFallbackDuration,
-    _ => DayFeedLayout.photoStoryDuration,
-  };
+  Duration _durationOf(DayFeedItem item) =>
+      _mediaDurations[item.id] ??
+      switch (item) {
+        DayFeedMind(:final mind) when mind.noteContent.hasVideo => _kVideoFallbackDuration,
+        DayFeedMind(:final mind) when mind.noteContent.hasAudio =>
+          mind.noteContent.audioPieces.first.duration ?? DayFeedLayout.mindStoryDuration(mind),
+        // Time to read the text, plus a look at the collage or at every photo of the slideshow.
+        DayFeedMind(:final mind) when mind.noteContent.hasImages =>
+          DayFeedLayout.mindStoryDuration(mind) +
+              switch (context.readStorySettings().imageLayout) {
+                StoryImageLayout.collage => DayFeedLayout.photoStoryDuration,
+                StoryImageLayout.carousel => MindImageCarousel.autoplayInterval * mind.noteContent.imagePieces.length,
+              },
+        DayFeedMind(:final mind) => DayFeedLayout.mindStoryDuration(mind),
+        DayFeedAsset(isVideo: true) || DayFeedFolderMedia(isVideo: true) => _kVideoFallbackDuration,
+        _ => DayFeedLayout.photoStoryDuration,
+      };
 
   void _startTimer() {
     if (!widget.autoplay) return;
@@ -217,9 +222,12 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     if (!_isHeld) _progress.forward();
   }
 
-  /// Videos know their length only once loaded; the current one restarts the timer with it.
+  /// Audio and video know their length only once loaded: it is kept for when the story comes up, and the current
+  /// one restarts the timer with it, as its playback starts right then too.
   void _onMediaDuration(String itemId, Duration duration) {
-    if (!widget.autoplay || itemId != _currentItem.id || duration <= Duration.zero) return;
+    if (duration <= Duration.zero) return;
+    _mediaDurations[itemId] = duration;
+    if (!widget.autoplay || itemId != _currentItem.id) return;
     _progress
       ..stop()
       ..value = 0.0
@@ -276,17 +284,22 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     if (mounted && !_wasHeldBeforeImages) _release();
   }
 
-  void _goNext() {
+  /// Taps, keys and the timer cut straight to the next story; only swipes slide, following the finger.
+  void _goNext({bool animated = false}) {
     if (_index < widget.items.length - 1) {
-      _pageController.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
+      _goTo(_index + 1, animated: animated);
     } else if (widget.autoplay) {
       _close();
     }
   }
 
-  void _goPrevious() {
-    if (_index > 0) _pageController.previousPage(duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
+  void _goPrevious({bool animated = false}) {
+    if (_index > 0) _goTo(_index - 1, animated: animated);
   }
+
+  void _goTo(int index, {required bool animated}) => animated
+      ? _pageController.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.easeOut)
+      : _pageController.jumpToPage(index);
 
   /// How far the page is pulled down, by a drag or by overscrolling a mind past its top.
   double get _pullDistance => math.max(_dragOffsetY, _scrollPull);
@@ -347,7 +360,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                     width: MediaQuery.sizeOf(context).width * _kEdgeTapShare,
                     child: GestureDetector(
                       behavior: HitTestBehavior.translucent,
-                      onTap: isLeft ? _goPrevious : _goNext,
+                      onTap: isLeft ? () => _goPrevious() : () => _goNext(),
                     ),
                   ),
               Positioned(
@@ -374,8 +387,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     return NativeGlassCover(
       child: CallbackShortcuts(
         bindings: {
-          const SingleActivator(LogicalKeyboardKey.arrowLeft): _goPrevious,
-          const SingleActivator(LogicalKeyboardKey.arrowRight): _goNext,
+          const SingleActivator(LogicalKeyboardKey.arrowLeft): () => _goPrevious(),
+          const SingleActivator(LogicalKeyboardKey.arrowRight): () => _goNext(),
           const SingleActivator(LogicalKeyboardKey.escape): _close,
           if (widget.autoplay) const SingleActivator(LogicalKeyboardKey.space): () => _isHeld ? _release() : _hold(),
         },
@@ -415,8 +428,9 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       autoplayImages: widget.autoplay && isCurrent && !_isHeld,
       insets: insets,
       onEditText: _editText,
-      onVideoDuration: (duration) => _onMediaDuration(item.id, duration),
-      onSwipePastImages: (direction) => direction == AxisDirection.right ? _goNext() : _goPrevious(),
+      onMediaDuration: (duration) => _onMediaDuration(item.id, duration),
+      onSwipePastImages: (direction) =>
+          direction == AxisDirection.right ? _goNext(animated: true) : _goPrevious(animated: true),
       onImagesOpened: _onImagesOpened,
       onImagesClosed: _onImagesClosed,
     ),
@@ -456,32 +470,58 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     );
   }
 
-  /// One segment per item; with the timer the current one fills up, otherwise it is simply lit.
+  /// One segment per item; with the timer the current one fills up, otherwise it is simply lit. Past
+  /// [_kMaxSegments] the dashes get too thin, so one bar shows how far through the day the viewer is.
   Widget _buildSegments(Color foreground) => Padding(
     padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
     child: AnimatedBuilder(
       animation: _progress,
-      builder: (context, _) => Row(
-        spacing: 3.0,
-        children: [
-          for (int index = 0; index < widget.items.length; index++)
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(2.0),
-                child: LinearProgressIndicator(
-                  minHeight: 2.5,
-                  value: index < _index
+      builder: (context, _) {
+        final double current = widget.autoplay ? _progress.value : 1.0;
+        if (widget.items.length > _kMaxSegments) {
+          final double share = (_index + current) / widget.items.length;
+          return Row(
+            spacing: 8.0,
+            children: [
+              Expanded(child: _segment(share, foreground)),
+              Text(
+                '${(share * 100).floor()}%',
+                style: TextStyle(
+                  color: foreground.withValues(alpha: 0.8),
+                  fontSize: 11.0,
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
+              ),
+            ],
+          );
+        }
+        return Row(
+          spacing: 3.0,
+          children: [
+            for (int index = 0; index < widget.items.length; index++)
+              Expanded(
+                child: _segment(
+                  index < _index
                       ? 1.0
                       : index > _index
                       ? 0.0
-                      : (widget.autoplay ? _progress.value : 1.0),
-                  backgroundColor: foreground.withValues(alpha: 0.25),
-                  valueColor: AlwaysStoppedAnimation<Color>(foreground),
+                      : current,
+                  foreground,
                 ),
               ),
-            ),
-        ],
-      ),
+          ],
+        );
+      },
+    ),
+  );
+
+  static Widget _segment(double value, Color foreground) => ClipRRect(
+    borderRadius: BorderRadius.circular(2.0),
+    child: LinearProgressIndicator(
+      minHeight: 2.5,
+      value: value,
+      backgroundColor: foreground.withValues(alpha: 0.25),
+      valueColor: AlwaysStoppedAnimation<Color>(foreground),
     ),
   );
 
@@ -682,7 +722,7 @@ final class _MindPage extends StatefulWidget {
   final bool autoplayImages;
   final EdgeInsets insets;
   final ValueChanged<Mind> onEditText;
-  final ValueChanged<Duration> onVideoDuration;
+  final ValueChanged<Duration> onMediaDuration;
   final ValueChanged<AxisDirection> onSwipePastImages;
   final VoidCallback onImagesOpened;
   final VoidCallback onImagesClosed;
@@ -695,7 +735,7 @@ final class _MindPage extends StatefulWidget {
     required this.autoplayImages,
     required this.insets,
     required this.onEditText,
-    required this.onVideoDuration,
+    required this.onMediaDuration,
     required this.onSwipePastImages,
     required this.onImagesOpened,
     required this.onImagesClosed,
@@ -735,7 +775,7 @@ final class _MindPageState extends State<_MindPage> {
               key: ValueKey(video.appRelativePath),
               video: video,
               isActive: widget.isActive,
-              onDuration: widget.onVideoDuration,
+              onDuration: widget.onMediaDuration,
             ),
           )
         : audio != null
@@ -744,6 +784,7 @@ final class _MindPageState extends State<_MindPage> {
             audio: audio,
             color: accent,
             isPlaying: widget.autoplayAudio,
+            onDuration: widget.onMediaDuration,
           )
         : null;
     final StoryImageLayout imageLayout = context.watchStorySettings().imageLayout;

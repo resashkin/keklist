@@ -9,7 +9,8 @@ import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 
 import 'package:material_ui/material_ui.dart';
-import 'package:keklist/presentation/core/widgets/sound/audio_waveform.dart';
+import 'package:keklist/presentation/core/helpers/emotion_colors.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_audio_wave.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
@@ -150,7 +151,11 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     if (_attachedMedia case final BaseMindNotePiece media)
-                      _AttachedMediaPreview(media: media, onRemove: _removeAttachedMedia),
+                      _AttachedMediaPreview(
+                        media: media,
+                        onRemove: _removeAttachedMedia,
+                        emotionId: _selectedEmotionIds.firstOrNull,
+                      ),
                     if (_images.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
@@ -303,46 +308,51 @@ final class _AttachedMediaPreview extends StatelessWidget {
   final BaseMindNotePiece media;
   final VoidCallback onRemove;
 
-  const _AttachedMediaPreview({required this.media, required this.onRemove});
+  /// The first chosen emotion, which colors the audio's ▶ as in the story.
+  final String? emotionId;
+
+  const _AttachedMediaPreview({required this.media, required this.onRemove, this.emotionId});
 
   @override
   Widget build(BuildContext context) {
-    final Widget preview = switch (media) {
-      MindNoteVideo video => RoundVideoMessage(video: video, size: 180.0),
-      MindNoteAudio audio => Chip(
-        avatar: const Icon(Icons.mic, size: 18.0),
-        label: Row(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 8.0,
+    final Widget delete = IconButton(
+      icon: const Icon(Icons.delete_outline),
+      tooltip: context.l10n.removeMedia,
+      onPressed: onRemove,
+    );
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12.0, 8.0, 4.0, 8.0),
+      child: switch (media) {
+        // As in the story: ▶ on the left, the waveform across the width and the time, then delete.
+        MindNoteAudio audio => Row(
+          spacing: 4.0,
           children: [
-            SizedBox(
-              width: 120.0,
-              height: 22.0,
-              child: AudioWaveform(
-                path: audio.appRelativeAbsoulutePath,
-                color: Theme.of(context).colorScheme.onSurface,
-                barWidth: 2.0,
-                gap: 1.5,
+            Expanded(
+              child: MindAudioWave(
+                key: ValueKey(audio.appRelativeAbsoulutePath),
+                audio: audio,
+                color: _accentOf(context),
               ),
             ),
-            Text(_formatDuration(audio.duration ?? Duration.zero)),
+            delete,
           ],
         ),
-      ),
-      _ => const SizedBox.shrink(),
-    };
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          preview,
-          IconButton(icon: const Icon(Icons.delete_outline), tooltip: context.l10n.removeMedia, onPressed: onRemove),
-        ],
-      ),
+        MindNoteVideo video => Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RoundVideoMessage(video: video, size: 180.0),
+            delete,
+          ],
+        ),
+        _ => const SizedBox.shrink(),
+      },
     );
   }
 
-  String _formatDuration(Duration duration) =>
-      '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+  Color _accentOf(BuildContext context) => context.select<EmotionBloc, Color>((bloc) {
+    final EmotionState state = bloc.state;
+    final String? id = emotionId;
+    if (state is! EmotionsList || id == null) return kEmotionPalette.last;
+    return emotionColorsOf(state.emotions)[id] ?? kEmotionPalette.last;
+  });
 }

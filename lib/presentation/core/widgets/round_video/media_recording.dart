@@ -561,6 +561,8 @@ final class _VideoHoldRecorder extends _HoldRecorder {
         return _StartResult.failed;
       }
       camera.value = controller;
+      // The front camera's auto flash would light the whole screen white for the thumbnail still.
+      await controller.setFlashMode(FlashMode.off).catchError((_) {});
       final XFile still = await controller.takePicture();
       final AppFileHandle file = await files.createVideoFile(extension: 'mp4');
       _file = file;

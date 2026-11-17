@@ -34,6 +34,11 @@ Audio and round video are recorded like voice messages in Telegram. The round re
 ## Edge Cases & Considerations
 - The first hold only asks for the microphone, because the system prompt would sit under the finger. That hold records nothing.
 - Recordings shorter than 0.7 s are deleted.
+- The thumbnail still is taken with the flash off. The front camera's auto flash would otherwise flash the whole screen white right before the circle starts.
+- In the editor the attached audio uses the story's player (`MindAudioWave`):
+  - full width, no frame;
+  - ▶ in the first chosen emotion's color;
+  - playable before saving.
 - A cancelled or failed recording deletes its files, including the video thumbnail.
 - Letting go while the recorder is still starting cancels the recording.
 - The old tap-to-start `MindAudioRecorderSheet` and `RoundVideoRecorderScreen` were removed, together with their strings.

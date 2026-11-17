@@ -21,6 +21,17 @@ Every tab uses a transparent top bar with frosted "glass" bubbles, title centere
   (`InteractiveViewer`, cached thumbnail then original), SAF photo via `MediaFolderChannel.getDocumentContent`.
 - Dismiss by dragging down or overscrolling at the top.
 
+- Moving between stories:
+  - A tap on an edge, the arrow keys and the timer jump straight to the next story.
+  - Only swipes slide, following the finger.
+- Story length:
+  - Audio and video report their real length once loaded (`_mediaDurations`, kept per item).
+  - This includes neighbouring pages that load before they come up.
+  - The timer uses that length instead of the stored one or the 5 s fallback, so a story no longer ends before its recording.
+- Progress on top:
+  - Up to 15 stories it shows one dash each.
+  - Past that it shows one bar with the percent of the day viewed, counting the current story's progress.
+
 ### Mind details — `day_feed/mind_story_details.dart`
 - `StoryDateHeader`: "21 October · Wednesday · 14:05" on 1, 2 (default) or 3 lines (`StoryDateLayout`, Hive field 36);
   the first line is larger. `storyDateLines` builds the lines and is unit-tested.

@@ -30,7 +30,10 @@ final class MindAudioWave extends StatefulWidget {
   /// Plays from outside, e.g. while ▶ runs through the stories.
   final bool isPlaying;
 
-  const MindAudioWave({super.key, required this.audio, required this.color, this.isPlaying = false});
+  /// The real length, once the file is loaded.
+  final ValueChanged<Duration>? onDuration;
+
+  const MindAudioWave({super.key, required this.audio, required this.color, this.isPlaying = false, this.onDuration});
 
   @override
   State<MindAudioWave> createState() => _MindAudioWaveState();
@@ -56,7 +59,10 @@ final class _MindAudioWaveState extends State<MindAudioWave> {
     );
     final Duration? loaded = await setAudioSource(_player, path).catchError((_) => null);
     if (!mounted) return;
-    if (loaded != null) setState(() => _duration = loaded);
+    if (loaded != null) {
+      setState(() => _duration = loaded);
+      widget.onDuration?.call(loaded);
+    }
     // The scope lives on the same page as this player, so it is never cleared.
     SoundPlaybackScope.maybeOf(context)?.value = SoundPlayback.audio(_player).withEnvelopeOf(path);
     if (widget.isPlaying) unawaited(_player.play());
@@ -66,7 +72,13 @@ final class _MindAudioWaveState extends State<MindAudioWave> {
   void didUpdateWidget(MindAudioWave oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isPlaying == oldWidget.isPlaying) return;
-    widget.isPlaying ? unawaited(_player.play()) : unawaited(_player.pause());
+    if (!widget.isPlaying) {
+      unawaited(_player.pause());
+      return;
+    }
+    // Coming back to a story that already played through starts it over.
+    if (_player.processingState == ProcessingState.completed) unawaited(_player.seek(Duration.zero));
+    unawaited(_player.play());
   }
 
   @override
