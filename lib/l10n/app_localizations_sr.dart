@@ -1370,6 +1370,15 @@ class AppLocalizationsSr extends AppLocalizations {
   String get storyReplies => 'Одговори';
 
   @override
+  String get storyImages => 'Фотографије';
+
+  @override
+  String get storyImageCollage => 'Колаж';
+
+  @override
+  String get storyImageCarousel => 'Слајдшоу';
+
+  @override
   String get storyReplyCount => 'Видљиви одговори';
 
   @override
@@ -2769,6 +2778,15 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get storyReplies => 'Odgovori';
+
+  @override
+  String get storyImages => 'Fotografije';
+
+  @override
+  String get storyImageCollage => 'Kolaž';
+
+  @override
+  String get storyImageCarousel => 'Slajdšou';
 
   @override
   String get storyReplyCount => 'Vidljivi odgovori';

@@ -126,13 +126,16 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..isStoryReplyTimeVisible = fields[59] == null ? true : fields[59] as bool
       ..storyTextureOpacity = fields[60] == null
           ? 0.45
-          : (fields[60] as num).toDouble();
+          : (fields[60] as num).toDouble()
+      ..storyImageLayoutIndex = fields[61] == null
+          ? 0
+          : (fields[61] as num).toInt();
   }
 
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(52)
+      ..writeByte(53)
       ..writeByte(3)
       ..write(obj.isDarkMode)
       ..writeByte(5)
@@ -236,7 +239,9 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..writeByte(59)
       ..write(obj.isStoryReplyTimeVisible)
       ..writeByte(60)
-      ..write(obj.storyTextureOpacity);
+      ..write(obj.storyTextureOpacity)
+      ..writeByte(61)
+      ..write(obj.storyImageLayoutIndex);
   }
 
   @override

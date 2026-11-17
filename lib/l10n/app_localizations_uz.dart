@@ -1373,6 +1373,15 @@ class AppLocalizationsUz extends AppLocalizations {
   String get storyReplies => 'Javoblar';
 
   @override
+  String get storyImages => 'Rasmlar';
+
+  @override
+  String get storyImageCollage => 'Kollaj';
+
+  @override
+  String get storyImageCarousel => 'Slayd-shou';
+
+  @override
   String get storyReplyCount => 'Ko‘rinadigan javoblar';
 
   @override

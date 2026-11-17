@@ -6,6 +6,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/presentation/core/widgets/native_glass_cover.dart';
+import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/repositories/debug_menu/debug_menu_repository.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
@@ -15,6 +17,7 @@ import 'package:keklist/domain/services/phone_web/phone_web_mode.dart';
 import 'package:keklist/native/android/media_folder_channel.dart';
 import 'package:keklist/presentation/blocs/debug_menu_bloc/debug_menu_bloc.dart';
 import 'package:keklist/presentation/blocs/mind_bloc/mind_bloc.dart';
+import 'package:keklist/presentation/core/helpers/phone_orientation.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
@@ -115,6 +118,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   List<MindNoteImage> _replyImages = const [];
   // Read up front: dispose can no longer look it up.
   late final AppFileRepository _files;
+  bool? _locksPortrait;
+  final VoidCallback _uncoverGlass = NativeGlassCover.cover();
 
   DayFeedItem get _currentItem => widget.items[_index];
 
@@ -130,6 +135,14 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     _files = context.read<AppFileRepository>();
     _startTimer();
     _replyFocus.addListener(_onReplyFocus);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_locksPortrait != null) return;
+    _locksPortrait = PhoneOrientation.isPhone(context);
+    if (_locksPortrait!) PhoneOrientation.lockPortrait();
   }
 
   /// Like Instagram, the story waits while a reply is typed.
@@ -165,6 +178,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   @override
   void dispose() {
     MindImageAttaching.discard(_files, _replyImages);
+    if (_locksPortrait ?? false) PhoneOrientation.unlockPortrait();
+    _uncoverGlass();
     _progress.dispose();
     _pageController.dispose();
     _replyController.dispose();
@@ -183,9 +198,13 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     DayFeedMind(:final mind) when mind.noteContent.hasVideo => _kVideoFallbackDuration,
     DayFeedMind(:final mind) when mind.noteContent.hasAudio =>
       mind.noteContent.audioPieces.first.duration ?? DayFeedLayout.mindStoryDuration(mind),
-    // Time to read the text, plus a look at the images.
+    // Time to read the text, plus a look at the collage or at every photo of the slideshow.
     DayFeedMind(:final mind) when mind.noteContent.hasImages =>
-      DayFeedLayout.mindStoryDuration(mind) + DayFeedLayout.photoStoryDuration,
+      DayFeedLayout.mindStoryDuration(mind) +
+          switch (context.readStorySettings().imageLayout) {
+            StoryImageLayout.collage => DayFeedLayout.photoStoryDuration,
+            StoryImageLayout.carousel => MindImageCarousel.autoplayInterval * mind.noteContent.imagePieces.length,
+          },
     DayFeedMind(:final mind) => DayFeedLayout.mindStoryDuration(mind),
     DayFeedAsset(isVideo: true) || DayFeedFolderMedia(isVideo: true) => _kVideoFallbackDuration,
     _ => DayFeedLayout.photoStoryDuration,
@@ -382,6 +401,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       initialMind: mind,
       isActive: isCurrent && !_isHeld,
       autoplayAudio: widget.autoplay && isCurrent && !_isHeld,
+      autoplayImages: widget.autoplay && isCurrent && !_isHeld,
       insets: insets,
       onEditText: _editText,
       onVideoDuration: (duration) => _onMediaDuration(item.id, duration),
@@ -497,7 +517,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     return Builder(
       builder: (context) => Padding(
         padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-        child: panel,
+        // Scrolling replies past their ends must not pull the story closed.
+        child: NotificationListener<ScrollNotification>(onNotification: (_) => true, child: panel),
       ),
     );
   }
@@ -640,6 +661,7 @@ final class _MindPage extends StatefulWidget {
   final Mind initialMind;
   final bool isActive;
   final bool autoplayAudio;
+  final bool autoplayImages;
   final EdgeInsets insets;
   final ValueChanged<Mind> onEditText;
   final ValueChanged<Duration> onVideoDuration;
@@ -652,6 +674,7 @@ final class _MindPage extends StatefulWidget {
     required this.initialMind,
     required this.isActive,
     required this.autoplayAudio,
+    required this.autoplayImages,
     required this.insets,
     required this.onEditText,
     required this.onVideoDuration,
@@ -706,24 +729,43 @@ final class _MindPageState extends State<_MindPage> {
             isPlaying: widget.autoplayAudio,
           )
         : null;
+    final StoryImageLayout imageLayout = context.watchStorySettings().imageLayout;
     final Widget? imageCard = images.isEmpty
         ? null
         : LayoutBuilder(
             builder: (context, constraints) {
-              // A 4:5 card, kept short enough to leave the text room on small screens.
-              final double width = math.min(constraints.maxWidth, MediaQuery.sizeOf(context).height * 0.5 * 4 / 5);
+              final double screenHeight = MediaQuery.sizeOf(context).height;
               return Center(
-                child: SizedBox(
-                  width: width,
-                  height: width * 5 / 4,
-                  child: MindImageCarousel(
-                    key: ValueKey(mind.id),
-                    images: images,
-                    onSwipePastEdge: widget.onSwipePastImages,
-                    onOpen: widget.onImagesOpened,
-                    onClose: widget.onImagesClosed,
+                child: switch (imageLayout) {
+                  // Square, and short enough to leave the text room on small screens.
+                  StoryImageLayout.collage => ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: MindImageGrid(
+                      images: images,
+                      width: math.min(constraints.maxWidth, screenHeight * 0.42),
+                      onOpen: widget.onImagesOpened,
+                      onClose: widget.onImagesClosed,
+                    ),
                   ),
-                ),
+                  // A 4:5 card.
+                  StoryImageLayout.carousel => Builder(
+                    builder: (context) {
+                      final double width = math.min(constraints.maxWidth, screenHeight * 0.5 * 4 / 5);
+                      return SizedBox(
+                        width: width,
+                        height: width * 5 / 4,
+                        child: MindImageCarousel(
+                          key: ValueKey(mind.id),
+                          images: images,
+                          isAutoplaying: widget.autoplayImages,
+                          onSwipePastEdge: widget.onSwipePastImages,
+                          onOpen: widget.onImagesOpened,
+                          onClose: widget.onImagesClosed,
+                        ),
+                      );
+                    },
+                  ),
+                },
               );
             },
           );
@@ -1105,19 +1147,21 @@ final class _StoryMenuButton extends StatelessWidget {
     final List<_StoryAction> items = actions();
     void select(String id) => items.firstWhereOrNull((action) => action.id == id)?.run();
     if (NativeLiquidGlassUtils.supportsLiquidGlass) {
-      return LiquidGlassMenu.icon(
-        icon: const NativeLiquidGlassIcon.sfSymbol('ellipsis'),
-        color: color,
-        items: [
-          for (final _StoryAction action in items)
-            LiquidGlassMenuItem(
-              id: action.id,
-              title: action.title,
-              icon: NativeLiquidGlassIcon.sfSymbol(action.sfSymbol),
-              isDestructive: action.isDestructive,
-            ),
-        ],
-        onItemSelected: select,
+      return NativeGlassHider(
+        child: LiquidGlassMenu.icon(
+          icon: const NativeLiquidGlassIcon.sfSymbol('ellipsis'),
+          color: color,
+          items: [
+            for (final _StoryAction action in items)
+              LiquidGlassMenuItem(
+                id: action.id,
+                title: action.title,
+                icon: NativeLiquidGlassIcon.sfSymbol(action.sfSymbol),
+                isDestructive: action.isDestructive,
+              ),
+          ],
+          onItemSelected: select,
+        ),
       );
     }
     final Color destructive = Theme.of(context).colorScheme.error;

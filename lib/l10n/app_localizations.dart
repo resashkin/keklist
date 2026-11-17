@@ -2637,6 +2637,24 @@ abstract class AppLocalizations {
   /// **'Replies'**
   String get storyReplies;
 
+  /// Story shake tweaks: how the photos of a mind show in a story
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get storyImages;
+
+  /// Story shake tweaks: how the photos of a mind show in a story
+  ///
+  /// In en, this message translates to:
+  /// **'Collage'**
+  String get storyImageCollage;
+
+  /// Story shake tweaks: how the photos of a mind show in a story
+  ///
+  /// In en, this message translates to:
+  /// **'Slideshow'**
+  String get storyImageCarousel;
+
   /// Story shake tweaks: replies over a story and the emotion texture
   ///
   /// In en, this message translates to:

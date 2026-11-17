@@ -181,6 +181,9 @@ final class SettingsObject extends HiveObject {
   @HiveField(60, defaultValue: 0.45)
   late double storyTextureOpacity;
 
+  @HiveField(61, defaultValue: 0)
+  late int storyImageLayoutIndex;
+
   SettingsObject();
 
   KeklistSettings toSettings() => KeklistSettings(
@@ -236,6 +239,7 @@ final class SettingsObject extends HiveObject {
           replyAvatarSize: storyReplyAvatarSize,
           replySide: StoryReplySide.values.elementAtOrNull(storyReplySideIndex) ?? StoryReplySide.left,
           isReplyTimeVisible: isStoryReplyTimeVisible,
+          imageLayout: StoryImageLayout.values.elementAtOrNull(storyImageLayoutIndex) ?? StoryImageLayout.collage,
         ),
         avatar: UserAvatar(emoji: avatarEmoji, imagePath: avatarImagePath),
         avatarHistory: avatarHistory.map(UserAvatar.decode).whereType<UserAvatar>().toList(),

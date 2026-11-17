@@ -1,14 +1,17 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:keklist/presentation/core/widgets/native_glass_cover.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:keklist/presentation/core/helpers/media_sources.dart';
+import 'package:keklist/presentation/core/helpers/phone_orientation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -160,6 +163,8 @@ final class _MindImagesFullscreenState extends State<MindImagesFullscreen> {
   final List<TransformationController> _zooms = [];
   bool _isZoomed = false;
   double _dragY = 0.0;
+  final VoidCallback _endRotation = PhoneOrientation.allowRotation();
+  final VoidCallback _uncoverGlass = NativeGlassCover.cover();
 
   TransformationController _zoomAt(int index) {
     while (_zooms.length <= index) {
@@ -170,6 +175,8 @@ final class _MindImagesFullscreenState extends State<MindImagesFullscreen> {
 
   @override
   void dispose() {
+    _endRotation();
+    _uncoverGlass();
     _pages.dispose();
     for (final TransformationController zoom in _zooms) {
       zoom.dispose();
@@ -247,12 +254,25 @@ final class _MindImagesFullscreenState extends State<MindImagesFullscreen> {
 
 /// The images of a story: a card to swipe through, with dots; past the last image the swipe goes on to [onSwipePastEdge].
 final class MindImageCarousel extends StatefulWidget {
+  /// How long each photo stays before the next one turns in by itself.
+  static const Duration autoplayInterval = Duration(seconds: 3);
+
   final List<MindNoteImage> images;
+
+  /// Turns the photos by themselves while true, stopping on the last one.
+  final bool isAutoplaying;
   final ValueChanged<AxisDirection>? onSwipePastEdge;
   final VoidCallback? onOpen;
   final VoidCallback? onClose;
 
-  const MindImageCarousel({super.key, required this.images, this.onSwipePastEdge, this.onOpen, this.onClose});
+  const MindImageCarousel({
+    super.key,
+    required this.images,
+    this.isAutoplaying = false,
+    this.onSwipePastEdge,
+    this.onOpen,
+    this.onClose,
+  });
 
   @override
   State<MindImageCarousel> createState() => _MindImageCarouselState();
@@ -265,11 +285,39 @@ final class _MindImageCarouselState extends State<MindImageCarousel> {
   int _index = 0;
   double _overscroll = 0.0;
   bool _handedOver = false;
+  Timer? _autoplay;
+
+  @override
+  void initState() {
+    super.initState();
+    _scheduleNext();
+  }
+
+  @override
+  void didUpdateWidget(MindImageCarousel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isAutoplaying != widget.isAutoplaying) _scheduleNext();
+  }
 
   @override
   void dispose() {
+    _autoplay?.cancel();
     _pages.dispose();
     super.dispose();
+  }
+
+  void _scheduleNext() {
+    _autoplay?.cancel();
+    if (!widget.isAutoplaying || _index >= widget.images.length - 1) return;
+    _autoplay = Timer(MindImageCarousel.autoplayInterval, () {
+      if (!_pages.hasClients) return;
+      _pages.nextPage(duration: const Duration(milliseconds: 350), curve: Curves.easeInOut);
+    });
+  }
+
+  void _onPageChanged(int index) {
+    setState(() => _index = index);
+    _scheduleNext();
   }
 
   bool _onScroll(ScrollNotification notification) {
@@ -312,7 +360,7 @@ final class _MindImageCarouselState extends State<MindImageCarousel> {
                     controller: _pages,
                     physics: const ClampingScrollPhysics(),
                     itemCount: widget.images.length,
-                    onPageChanged: (index) => setState(() => _index = index),
+                    onPageChanged: _onPageChanged,
                     itemBuilder: (_, index) => MindImageView(image: widget.images[index], cacheWidth: 1200),
                   ),
                 )

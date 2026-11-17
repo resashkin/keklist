@@ -1318,6 +1318,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get storyReplies => '回复';
 
   @override
+  String get storyImages => '照片';
+
+  @override
+  String get storyImageCollage => '拼贴';
+
+  @override
+  String get storyImageCarousel => '幻灯片';
+
+  @override
   String get storyReplyCount => '可见回复';
 
   @override

@@ -26,6 +26,7 @@ Map<String, Object> analyticsTweaksOf(KeklistSettings settings) => {
   'story_date_layout': settings.story.dateLayout.name,
   'story_spectrum_visible': settings.story.isSpectrumVisible,
   'story_sensitivity': settings.story.sensitivity,
+  'story_image_layout': settings.story.imageLayout.name,
   'mind_emotions_prompt': settings.mindEmotionsPrompt.name,
   'tile_emoji_motion': settings.tileEmojiMotion.name,
   'grid_resize_animation': settings.gridResizeAnimation.name,

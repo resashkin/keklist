@@ -1365,6 +1365,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get storyReplies => 'Replies';
 
   @override
+  String get storyImages => 'Photos';
+
+  @override
+  String get storyImageCollage => 'Collage';
+
+  @override
+  String get storyImageCarousel => 'Slideshow';
+
+  @override
   String get storyReplyCount => 'Replies visible';
 
   @override

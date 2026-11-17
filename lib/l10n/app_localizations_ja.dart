@@ -1326,6 +1326,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get storyReplies => '返信';
 
   @override
+  String get storyImages => '写真';
+
+  @override
+  String get storyImageCollage => 'コラージュ';
+
+  @override
+  String get storyImageCarousel => 'スライドショー';
+
+  @override
   String get storyReplyCount => '表示する返信';
 
   @override

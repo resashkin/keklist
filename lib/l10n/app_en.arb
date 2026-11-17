@@ -1734,6 +1734,18 @@
     "@storyReplies": {
         "description": "Story shake tweaks: replies over a story and the emotion texture"
     },
+    "storyImages": "Photos",
+    "@storyImages": {
+        "description": "Story shake tweaks: how the photos of a mind show in a story"
+    },
+    "storyImageCollage": "Collage",
+    "@storyImageCollage": {
+        "description": "Story shake tweaks: how the photos of a mind show in a story"
+    },
+    "storyImageCarousel": "Slideshow",
+    "@storyImageCarousel": {
+        "description": "Story shake tweaks: how the photos of a mind show in a story"
+    },
     "storyReplyCount": "Replies visible",
     "@storyReplyCount": {
         "description": "Story shake tweaks: replies over a story and the emotion texture"

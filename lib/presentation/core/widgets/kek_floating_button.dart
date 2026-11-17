@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keklist/presentation/core/widgets/native_glass_cover.dart';
 import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/helpers/interface_style_utils.dart';
 import 'package:native_liquid_glass/native_liquid_glass.dart';
@@ -43,18 +44,20 @@ final class KekFloatingButton extends StatelessWidget {
       buildWhen: (_, state) => state is SettingsDataState,
       builder: (context, state) {
         if (_readUseLiquidGlass(state) && NativeLiquidGlassUtils.supportsLiquidGlass) {
-          return LiquidGlassButton(
-            label: label,
-            onPressed: onPressed,
-            icon: NativeLiquidGlassIcon.sfSymbol(sfSymbol),
-            style: LiquidGlassButtonStyle.glass,
-            width: width,
-            height: _fabHeight,
-            iconSize: 24.0,
-            // Must match the package's hardcoded wrap-content estimate (32px total
-            // horizontal insets); a wider padding here clips the native label.
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            labelTextStyle: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+          return NativeGlassHider(
+            child: LiquidGlassButton(
+              label: label,
+              onPressed: onPressed,
+              icon: NativeLiquidGlassIcon.sfSymbol(sfSymbol),
+              style: LiquidGlassButtonStyle.glass,
+              width: width,
+              height: _fabHeight,
+              iconSize: 24.0,
+              // Must match the package's hardcoded wrap-content estimate (32px total
+              // horizontal insets); a wider padding here clips the native label.
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              labelTextStyle: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+            ),
           );
         }
         return SizedBox(

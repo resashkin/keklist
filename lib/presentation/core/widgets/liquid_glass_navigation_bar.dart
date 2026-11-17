@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:keklist/presentation/core/widgets/native_glass_cover.dart';
 import 'package:keklist/domain/repositories/tabs/models/tabs_settings.dart';
 import 'package:native_liquid_glass/native_liquid_glass.dart';
 
@@ -7,12 +8,7 @@ final class LiquidGlassNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int> onTap;
 
-  const LiquidGlassNavigationBar({
-    super.key,
-    required this.tabTypes,
-    required this.selectedIndex,
-    required this.onTap,
-  });
+  const LiquidGlassNavigationBar({super.key, required this.tabTypes, required this.selectedIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +22,14 @@ final class LiquidGlassNavigationBar extends StatelessWidget {
         )
         .toList(growable: false);
 
-    return LiquidGlassTabBar(
-      key: ValueKey(_itemsSignature),
-      items: items,
-      currentIndex: selectedIndex,
-      onTabSelected: onTap,
-      selectedItemColor: colors.primary,
+    return NativeGlassHider(
+      child: LiquidGlassTabBar(
+        key: ValueKey(_itemsSignature),
+        items: items,
+        currentIndex: selectedIndex,
+        onTabSelected: onTap,
+        selectedItemColor: colors.primary,
+      ),
     );
   }
 

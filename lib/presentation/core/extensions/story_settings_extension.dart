@@ -9,4 +9,9 @@ extension StorySettingsWatch on BuildContext {
     final SettingsState state = bloc.state;
     return state is SettingsDataState ? state.settings.story : const StorySettings();
   });
+
+  StorySettings readStorySettings() {
+    final SettingsState state = read<SettingsBloc>().state;
+    return state is SettingsDataState ? state.settings.story : const StorySettings();
+  }
 }

@@ -43,9 +43,21 @@ final class StoryTextureTweakSheet extends StatelessWidget {
                 values: StoryDateLayout.values,
                 selected: story.dateLayout,
                 labelOf: (layout) => '${layout.index + 1}',
-                onChanged: (layout) => context.read<SettingsBloc>().add(
-                  SettingsUpdateStory(story: story.copyWith(dateLayout: layout)),
-                ),
+                onChanged: (layout) =>
+                    context.read<SettingsBloc>().add(SettingsUpdateStory(story: story.copyWith(dateLayout: layout))),
+              ),
+            ),
+            _SectionTitle(context.l10n.storyImages),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: GlassSegmentedSwitcher<StoryImageLayout>(
+                values: StoryImageLayout.values,
+                selected: story.imageLayout,
+                labelOf: (layout) => switch (layout) {
+                  StoryImageLayout.collage => context.l10n.storyImageCollage,
+                  StoryImageLayout.carousel => context.l10n.storyImageCarousel,
+                },
+                onChanged: (layout) => update(story.copyWith(imageLayout: layout)),
               ),
             ),
             _SectionTitle(context.l10n.storyTextureTitle),

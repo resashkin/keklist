@@ -1375,6 +1375,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get storyReplies => 'Ответы';
 
   @override
+  String get storyImages => 'Фото';
+
+  @override
+  String get storyImageCollage => 'Коллаж';
+
+  @override
+  String get storyImageCarousel => 'Слайд-шоу';
+
+  @override
   String get storyReplyCount => 'Видно ответов';
 
   @override

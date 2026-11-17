@@ -1370,6 +1370,15 @@ class AppLocalizationsKy extends AppLocalizations {
   String get storyReplies => 'Жооптор';
 
   @override
+  String get storyImages => 'Сүрөттөр';
+
+  @override
+  String get storyImageCollage => 'Коллаж';
+
+  @override
+  String get storyImageCarousel => 'Слайд-шоу';
+
+  @override
   String get storyReplyCount => 'Көрүнгөн жооптор';
 
   @override

@@ -136,6 +136,9 @@ enum StoryDateLayout { oneLine, twoLines, threeLines }
 /// Which side of a story its replies sit on.
 enum StoryReplySide { left, right }
 
+/// How a story shows the photos of a mind: all at once, or one by one, turning by themselves.
+enum StoryImageLayout { collage, carousel }
+
 /// Stories and viewer tweaks: texture animation, date header, sound spectrum around circles and how strongly
 /// both react to loudness, and how the replies over a story look.
 final class StorySettings {
@@ -169,6 +172,7 @@ final class StorySettings {
   final double replyAvatarSize;
   final StoryReplySide replySide;
   final bool isReplyTimeVisible;
+  final StoryImageLayout imageLayout;
 
   const StorySettings({
     this.textureAnimation = StoryTextureAnimation.pulse,
@@ -182,6 +186,7 @@ final class StorySettings {
     this.replyAvatarSize = 28.0,
     this.replySide = StoryReplySide.left,
     this.isReplyTimeVisible = true,
+    this.imageLayout = StoryImageLayout.collage,
   });
 
   StorySettings copyWith({
@@ -196,6 +201,7 @@ final class StorySettings {
     double? replyAvatarSize,
     StoryReplySide? replySide,
     bool? isReplyTimeVisible,
+    StoryImageLayout? imageLayout,
   }) => StorySettings(
     textureAnimation: textureAnimation ?? this.textureAnimation,
     dateLayout: dateLayout ?? this.dateLayout,
@@ -208,6 +214,7 @@ final class StorySettings {
     replyAvatarSize: (replyAvatarSize ?? this.replyAvatarSize).clamp(minReplyAvatarSize, maxReplyAvatarSize),
     replySide: replySide ?? this.replySide,
     isReplyTimeVisible: isReplyTimeVisible ?? this.isReplyTimeVisible,
+    imageLayout: imageLayout ?? this.imageLayout,
   );
 
   @override
@@ -223,7 +230,8 @@ final class StorySettings {
       other.replyTextSize == replyTextSize &&
       other.replyAvatarSize == replyAvatarSize &&
       other.replySide == replySide &&
-      other.isReplyTimeVisible == isReplyTimeVisible;
+      other.isReplyTimeVisible == isReplyTimeVisible &&
+      other.imageLayout == imageLayout;
 
   @override
   int get hashCode => Object.hash(
@@ -238,6 +246,7 @@ final class StorySettings {
     replyAvatarSize,
     replySide,
     isReplyTimeVisible,
+    imageLayout,
   );
 }
 
@@ -467,6 +476,7 @@ final class KeklistSettings {
     ..storyReplyAvatarSize = story.replyAvatarSize
     ..storyReplySideIndex = story.replySide.index
     ..isStoryReplyTimeVisible = story.isReplyTimeVisible
+    ..storyImageLayoutIndex = story.imageLayout.index
     ..avatarEmoji = avatar.emoji
     ..avatarImagePath = avatar.imagePath
     ..avatarHistory = [for (final UserAvatar entry in avatarHistory) entry.encode()]
