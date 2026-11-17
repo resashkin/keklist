@@ -409,15 +409,7 @@
     "weatherLocationServicesDisabled": "Геолокация кызматтары өчүрүлгөн. Жөндөөлөрдө иштетиңиз.",
     "weatherLocationPermissionDenied": "Геолокацияга уруксат берилген жок.",
     "weatherLocationPermissionPermanentlyDenied": "Геолокацияга уруксат туруктуу берилген жок. Колдонмо жөндөөлөрү ачылууда.",
-    "audioRecordTitle": "Аудио жаздыруу",
-    "audioRecordTitleRecording": "Жазылууда…",
-    "audioRecordHint": "Сактоо үчүн «Токтотуу» баскычын басыңыз.",
-    "audioRecordStart": "Баштоо",
-    "audioRecordStop": "Токтотуу",
-    "audioRecordCancel": "Жокко чыгаруу",
     "audioRecordPermissionError": "Аудио жаздыруу үчүн микрофон уруксаты керек.",
-    "audioRecordStartError": "Жаздырууну баштоо мүмкүн болмоду. Кайталап аракет кылыңыз.",
-    "audioRecordStopError": "Жаздырууну токтотуу мүмкүн болмоду. Кайталап аракет кылыңыз.",
     "proUserFooter": "Сиз PRO колдонуучусуз. Кийинки {price} төлөм {date} болот.",
     "proUserLifetimeFooter": "Сиз түбөлүк PRO колдонуучусуз.",
     "emotions": "Эмоциялар",
@@ -448,8 +440,6 @@
     "dayFeedChooseFolder": "Тандоо",
     "roundVideoRecordError": "Видеону жазуу мүмкүн болбоду",
     "roundVideoCameraUnavailable": "Бул түзмөктө камера жеткиликсиз",
-    "roundVideoRetake": "Кайра тартуу",
-    "roundVideoUse": "Колдонуу",
     "removeMedia": "Медианы өчүрүү",
     "shakeToCustomize": "Ыңгайлаштыруу үчүн силкиңиз",
     "shakeToCustomizeHint": "же аталышты басып туруңуз",
@@ -643,5 +633,6 @@
     "imageFromGallery": "Галерея",
     "imageFromCamera": "Камера",
     "attachImages": "Сүрөт кошуу",
-    "newMindWithPhoto": "Ушул сүрөт менен жаңы жазуу"
+    "newMindWithPhoto": "Ушул сүрөт менен жаңы жазуу",
+    "recordSlideToCancel": "Жокко чыгаруу үчүн сүрүңүз"
 }

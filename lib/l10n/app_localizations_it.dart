@@ -651,34 +651,8 @@ class AppLocalizationsIt extends AppLocalizations {
       'Autorizzazione di localizzazione negata in modo permanente. Apertura impostazioni app.';
 
   @override
-  String get audioRecordTitle => 'Registra audio';
-
-  @override
-  String get audioRecordTitleRecording => 'Registrazione…';
-
-  @override
-  String get audioRecordHint => 'Tocca Stop per salvare sul tuo dispositivo.';
-
-  @override
-  String get audioRecordStart => 'Avvia';
-
-  @override
-  String get audioRecordStop => 'Ferma';
-
-  @override
-  String get audioRecordCancel => 'Annulla';
-
-  @override
   String get audioRecordPermissionError =>
       'Il permesso per il microfono è necessario per registrare audio.';
-
-  @override
-  String get audioRecordStartError =>
-      'Impossibile avviare la registrazione. Riprova.';
-
-  @override
-  String get audioRecordStopError =>
-      'Impossibile fermare la registrazione. Riprova.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -777,12 +751,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get roundVideoCameraUnavailable =>
       'Fotocamera non disponibile su questo dispositivo';
-
-  @override
-  String get roundVideoRetake => 'Rifai';
-
-  @override
-  String get roundVideoUse => 'Usa';
 
   @override
   String get removeMedia => 'Rimuovi media';
@@ -1420,4 +1388,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'Nuova nota con questa foto';
+
+  @override
+  String get recordSlideToCancel => 'Scorri per annullare';
 }

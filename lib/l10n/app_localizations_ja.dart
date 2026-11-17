@@ -631,31 +631,7 @@ class AppLocalizationsJa extends AppLocalizations {
       '位置情報の許可が恒久的に拒否されています。アプリ設定を開きます。';
 
   @override
-  String get audioRecordTitle => '音声を録音';
-
-  @override
-  String get audioRecordTitleRecording => '録音中…';
-
-  @override
-  String get audioRecordHint => '「停止」をタップして保存します。';
-
-  @override
-  String get audioRecordStart => '開始';
-
-  @override
-  String get audioRecordStop => '停止';
-
-  @override
-  String get audioRecordCancel => 'キャンセル';
-
-  @override
   String get audioRecordPermissionError => '音声を録音するにはマイクの権限が必要です。';
-
-  @override
-  String get audioRecordStartError => '録音を開始できませんでした。もう一度お試しください。';
-
-  @override
-  String get audioRecordStopError => '録音を停止できませんでした。もう一度お試しください。';
 
   @override
   String proUserFooter(String price, String date) {
@@ -749,12 +725,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get roundVideoCameraUnavailable => 'このデバイスではカメラを利用できません';
-
-  @override
-  String get roundVideoRetake => '撮り直す';
-
-  @override
-  String get roundVideoUse => '使用する';
 
   @override
   String get removeMedia => 'メディアを削除';
@@ -1369,4 +1339,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'この写真で新しいメモ';
+
+  @override
+  String get recordSlideToCancel => 'スライドでキャンセル';
 }

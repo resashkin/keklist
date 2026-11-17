@@ -646,34 +646,8 @@ class AppLocalizationsSr extends AppLocalizations {
       'Дозвола за локацију је трајно одбијена. Отварање подешавања апликације.';
 
   @override
-  String get audioRecordTitle => 'Сними аудио';
-
-  @override
-  String get audioRecordTitleRecording => 'Снима се…';
-
-  @override
-  String get audioRecordHint => 'Тапните Стоп да сачувате на уређај.';
-
-  @override
-  String get audioRecordStart => 'Почни';
-
-  @override
-  String get audioRecordStop => 'Стоп';
-
-  @override
-  String get audioRecordCancel => 'Откажи';
-
-  @override
   String get audioRecordPermissionError =>
       'Потребна је дозвола за микрофон за снимање звука.';
-
-  @override
-  String get audioRecordStartError =>
-      'Није могуће покренути снимање. Покушајте поново.';
-
-  @override
-  String get audioRecordStopError =>
-      'Није могуће зауставити снимање. Покушајте поново.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -772,12 +746,6 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get roundVideoCameraUnavailable =>
       'Камера није доступна на овом уређају';
-
-  @override
-  String get roundVideoRetake => 'Сними поново';
-
-  @override
-  String get roundVideoUse => 'Користи';
 
   @override
   String get removeMedia => 'Уклони медије';
@@ -1413,6 +1381,9 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'Нова белешка са овом фотографијом';
+
+  @override
+  String get recordSlideToCancel => 'Превуци за отказивање';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2056,34 +2027,8 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
       'Dozvola za lokaciju je trajno odbijena. Otvaranje podešavanja aplikacije.';
 
   @override
-  String get audioRecordTitle => 'Snimi audio';
-
-  @override
-  String get audioRecordTitleRecording => 'Snima se…';
-
-  @override
-  String get audioRecordHint => 'Tapnite Stop da sačuvate na uređaj.';
-
-  @override
-  String get audioRecordStart => 'Počni';
-
-  @override
-  String get audioRecordStop => 'Stop';
-
-  @override
-  String get audioRecordCancel => 'Otkaži';
-
-  @override
   String get audioRecordPermissionError =>
       'Potrebna je dozvola za mikrofon za snimanje zvuka.';
-
-  @override
-  String get audioRecordStartError =>
-      'Nije moguće pokrenuti snimanje. Pokušajte ponovo.';
-
-  @override
-  String get audioRecordStopError =>
-      'Nije moguće zaustaviti snimanje. Pokušajte ponovo.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -2182,12 +2127,6 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
   @override
   String get roundVideoCameraUnavailable =>
       'Kamera nije dostupna na ovom uređaju';
-
-  @override
-  String get roundVideoRetake => 'Snimi ponovo';
-
-  @override
-  String get roundVideoUse => 'Koristi';
 
   @override
   String get removeMedia => 'Ukloni medije';
@@ -2823,4 +2762,7 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get newMindWithPhoto => 'Nova beleška sa ovom fotografijom';
+
+  @override
+  String get recordSlideToCancel => 'Prevuci za otkazivanje';
 }

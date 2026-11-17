@@ -26,15 +26,9 @@ A mind (root or reflection) can carry **one** voice message **or** one Telegram-
 
 ### 3. UI Layer
 
-- `MediaRecordToggleButton` (`core/widgets/round_video/media_recording.dart`): **tap** switches between mic and camera (it always starts on mic), and a snackbar hint shows. **Long-press** opens the recorder for the current mode. It has no tooltip on purpose, because a tooltip would capture the long-press.
-- `MediaRecording.recordAudio` / `recordVideo` wrap the existing `MindAudioRecorderSheet` and the new `RoundVideoRecorderScreen`, and return note pieces.
-- `RoundVideoRecorderScreen`:
-  - Front camera by default, with a flip button, recording at 720p (`ResolutionPreset.high`).
-  - The live preview is center-cropped into a circle.
-  - Tap to start and tap to stop, with no length limit. Then a looping round preview with **Retake** / **Use**.
-  - A still is captured right before recording starts and saved as the thumbnail.
+- `MediaRecordToggleButton` (`core/widgets/round_video/media_recording.dart`): **tap** switches between mic and camera, **hold** records, letting go saves. Slide left cancels, slide up locks. See [HOLD_TO_RECORD.md](HOLD_TO_RECORD.md).
 - `MindCreatorScreen`: the toggle is the text field's suffix. An attached recording shows above the text with a delete button. Closing without saving deletes the recording. The saved note is `media tag` + `\n` + text.
-- MindInfo comment bar (`MindCreatorBottomBar`): the same toggle (`onRecordAudio` / `onRecordVideo`). Recording creates the reflection immediately.
+- Story comment bar (`MindCommentBar`): the same toggle (`onRecorded`). Letting go creates the reply immediately.
 - Editing keeps the mind's media and only changes the text. "Remove media" is a separate action.
 - Display:
   - `RoundVideoThumbnail` (static circle) and `RoundVideoMessage` (tap to play or pause, with a progress ring).
@@ -53,7 +47,7 @@ A mind (root or reflection) can carry **one** voice message **or** one Telegram-
 
 - **Domain:** `mind_note_content.dart`, `app_file_repository.dart`, `export_import_service.dart`
 - **BLoC:** `mind_bloc.dart`, `mind_event.dart`
-- **UI (new):** `core/widgets/round_video/round_video_recorder_screen.dart`, `round_video_views.dart`, `media_recording.dart`
+- **UI (new):** `round_video_views.dart`, `media_recording.dart`
 - **UI (changed):** `mind_creator_screen.dart`, `mind_creator_bottom_bar.dart`, `mind_info_screen.dart`, `mind_message_widget.dart`, `mind_bullet_widget.dart`, `day_feed_tiles.dart`, `day_stories_screen.dart`, `settings_screen.dart`
 - **Platform:** `ios/Runner/Info.plist` (camera and mic texts), `AndroidManifest.xml` (`CAMERA`, `RECORD_AUDIO`)
 - **Dependencies:** `camera`

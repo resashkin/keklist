@@ -164,7 +164,6 @@ final class _MindImagesFullscreenState extends State<MindImagesFullscreen> {
   bool _isZoomed = false;
   double _dragY = 0.0;
   final VoidCallback _endRotation = PhoneOrientation.allowRotation();
-  final VoidCallback _uncoverGlass = NativeGlassCover.cover();
 
   TransformationController _zoomAt(int index) {
     while (_zooms.length <= index) {
@@ -176,7 +175,6 @@ final class _MindImagesFullscreenState extends State<MindImagesFullscreen> {
   @override
   void dispose() {
     _endRotation();
-    _uncoverGlass();
     _pages.dispose();
     for (final TransformationController zoom in _zooms) {
       zoom.dispose();
@@ -204,49 +202,51 @@ final class _MindImagesFullscreenState extends State<MindImagesFullscreen> {
   @override
   Widget build(BuildContext context) {
     final double fade = (1.0 - _dragY.abs() / (_dismissDistance * 3)).clamp(0.3, 1.0);
-    return Scaffold(
-      backgroundColor: Colors.black.withValues(alpha: fade),
-      body: Stack(
-        children: [
-          Transform.translate(
-            offset: Offset(0.0, _dragY),
-            child: PageView.builder(
-              controller: _pages,
-              physics: _isZoomed ? const NeverScrollableScrollPhysics() : null,
-              itemCount: widget.images.length,
-              onPageChanged: (index) => setState(() {
-                _index = index;
-                _isZoomed = false;
-              }),
-              itemBuilder: (_, index) => InteractiveViewer(
-                transformationController: _zoomAt(index),
-                maxScale: 5.0,
-                onInteractionUpdate: _onInteractionUpdate,
-                onInteractionEnd: (_) => _onInteractionEnd(index),
-                child: MindImageView(image: widget.images[index], fit: BoxFit.contain),
+    return NativeGlassCover(
+      child: Scaffold(
+        backgroundColor: Colors.black.withValues(alpha: fade),
+        body: Stack(
+          children: [
+            Transform.translate(
+              offset: Offset(0.0, _dragY),
+              child: PageView.builder(
+                controller: _pages,
+                physics: _isZoomed ? const NeverScrollableScrollPhysics() : null,
+                itemCount: widget.images.length,
+                onPageChanged: (index) => setState(() {
+                  _index = index;
+                  _isZoomed = false;
+                }),
+                itemBuilder: (_, index) => InteractiveViewer(
+                  transformationController: _zoomAt(index),
+                  maxScale: 5.0,
+                  onInteractionUpdate: _onInteractionUpdate,
+                  onInteractionEnd: (_) => _onInteractionEnd(index),
+                  child: MindImageView(image: widget.images[index], fit: BoxFit.contain),
+                ),
               ),
             ),
-          ),
-          SafeArea(
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.close, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                const Spacer(),
-                if (widget.images.length > 1)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: Text(
-                      '${_index + 1}/${widget.images.length}',
-                      style: const TextStyle(color: Colors.white, fontSize: 15.0),
-                    ),
+            SafeArea(
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
-              ],
+                  const Spacer(),
+                  if (widget.images.length > 1)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: Text(
+                        '${_index + 1}/${widget.images.length}',
+                        style: const TextStyle(color: Colors.white, fontSize: 15.0),
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

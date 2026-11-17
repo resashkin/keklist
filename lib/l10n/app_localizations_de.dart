@@ -654,35 +654,8 @@ class AppLocalizationsDe extends AppLocalizations {
       'Standortberechtigung dauerhaft verweigert. App-Einstellungen werden geöffnet.';
 
   @override
-  String get audioRecordTitle => 'Audio aufnehmen';
-
-  @override
-  String get audioRecordTitleRecording => 'Aufnahme läuft…';
-
-  @override
-  String get audioRecordHint =>
-      'Tippe auf Stopp, um die Aufnahme zu speichern.';
-
-  @override
-  String get audioRecordStart => 'Starten';
-
-  @override
-  String get audioRecordStop => 'Stopp';
-
-  @override
-  String get audioRecordCancel => 'Abbrechen';
-
-  @override
   String get audioRecordPermissionError =>
       'Mikrofonberechtigung ist erforderlich, um Audio aufzunehmen.';
-
-  @override
-  String get audioRecordStartError =>
-      'Aufnahme konnte nicht gestartet werden. Bitte versuche es erneut.';
-
-  @override
-  String get audioRecordStopError =>
-      'Aufnahme konnte nicht gestoppt werden. Bitte versuche es erneut.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -781,12 +754,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get roundVideoCameraUnavailable =>
       'Kamera auf diesem Gerät nicht verfügbar';
-
-  @override
-  String get roundVideoRetake => 'Neu aufnehmen';
-
-  @override
-  String get roundVideoUse => 'Verwenden';
 
   @override
   String get removeMedia => 'Medien entfernen';
@@ -1424,4 +1391,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'Neue Notiz mit diesem Foto';
+
+  @override
+  String get recordSlideToCancel => 'Zum Abbrechen wischen';
 }

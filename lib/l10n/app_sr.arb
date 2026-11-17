@@ -199,15 +199,7 @@
     "weatherLocationServicesDisabled": "Услуге локације су онемогућене. Омогућите их у подешавањима.",
     "weatherLocationPermissionDenied": "Дозвола за локацију одбијена.",
     "weatherLocationPermissionPermanentlyDenied": "Дозвола за локацију је трајно одбијена. Отварање подешавања апликације.",
-    "audioRecordTitle": "Сними аудио",
-    "audioRecordTitleRecording": "Снима се…",
-    "audioRecordHint": "Тапните Стоп да сачувате на уређај.",
-    "audioRecordStart": "Почни",
-    "audioRecordStop": "Стоп",
-    "audioRecordCancel": "Откажи",
     "audioRecordPermissionError": "Потребна је дозвола за микрофон за снимање звука.",
-    "audioRecordStartError": "Није могуће покренути снимање. Покушајте поново.",
-    "audioRecordStopError": "Није могуће зауставити снимање. Покушајте поново.",
     "proUserFooter": "Ви сте PRO корисник. Следећа уплата {price} биће {date}.",
     "proUserLifetimeFooter": "Ви сте доживотни PRO корисник.",
     "emotions": "Емоције",
@@ -238,8 +230,6 @@
     "dayFeedChooseFolder": "Изабери",
     "roundVideoRecordError": "Снимање видеа није успело",
     "roundVideoCameraUnavailable": "Камера није доступна на овом уређају",
-    "roundVideoRetake": "Сними поново",
-    "roundVideoUse": "Користи",
     "removeMedia": "Уклони медије",
     "shakeToCustomize": "Протресите за прилагођавање",
     "shakeToCustomizeHint": "или дуго притисните наслов",
@@ -433,5 +423,6 @@
     "imageFromGallery": "Галерија",
     "imageFromCamera": "Камера",
     "attachImages": "Додај фотографије",
-    "newMindWithPhoto": "Нова белешка са овом фотографијом"
+    "newMindWithPhoto": "Нова белешка са овом фотографијом",
+    "recordSlideToCancel": "Превуци за отказивање"
 }

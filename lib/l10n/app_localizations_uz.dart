@@ -652,34 +652,8 @@ class AppLocalizationsUz extends AppLocalizations {
       'Joylashuv ruxsati doimiy ravishda rad etildi. Ilova sozlamalari ochilmoqda.';
 
   @override
-  String get audioRecordTitle => 'Audio yozish';
-
-  @override
-  String get audioRecordTitleRecording => 'Yozilmoqda…';
-
-  @override
-  String get audioRecordHint => 'Saqlash uchun «To\'xtatish»ni bosing.';
-
-  @override
-  String get audioRecordStart => 'Boshlash';
-
-  @override
-  String get audioRecordStop => 'To\'xtatish';
-
-  @override
-  String get audioRecordCancel => 'Bekor qilish';
-
-  @override
   String get audioRecordPermissionError =>
       'Audio yozish uchun mikrofon ruxsati talab qilinadi.';
-
-  @override
-  String get audioRecordStartError =>
-      'Yozishni boshlash imkoni bo\'lmadi. Qayta urinib ko\'ring.';
-
-  @override
-  String get audioRecordStopError =>
-      'Yozishni to\'xtatish imkoni bo\'lmadi. Qayta urinib ko\'ring.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -777,12 +751,6 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get roundVideoCameraUnavailable => 'Bu qurilmada kamera mavjud emas';
-
-  @override
-  String get roundVideoRetake => 'Qayta olish';
-
-  @override
-  String get roundVideoUse => 'Foydalanish';
 
   @override
   String get removeMedia => 'Mediani o‘chirish';
@@ -1416,4 +1384,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'Shu rasm bilan yangi yozuv';
+
+  @override
+  String get recordSlideToCancel => 'Bekor qilish uchun suring';
 }

@@ -199,15 +199,7 @@
     "weatherLocationServicesDisabled": "Службы геолокации отключены. Включите их в настройках.",
     "weatherLocationPermissionDenied": "Разрешение на геолокацию отклонено.",
     "weatherLocationPermissionPermanentlyDenied": "Доступ к геолокации заблокирован. Открываю настройки приложения.",
-    "audioRecordTitle": "Запись аудио",
-    "audioRecordTitleRecording": "Запись…",
-    "audioRecordHint": "Нажмите «Стоп», чтобы сохранить запись.",
-    "audioRecordStart": "Начать",
-    "audioRecordStop": "Стоп",
-    "audioRecordCancel": "Отмена",
     "audioRecordPermissionError": "Для записи аудио необходимо разрешение на использование микрофона.",
-    "audioRecordStartError": "Не удалось начать запись. Попробуйте ещё раз.",
-    "audioRecordStopError": "Не удалось остановить запись. Попробуйте ещё раз.",
     "proUserFooter": "Вы PRO пользователь. Следующий платёж {price} будет {date}.",
     "proUserLifetimeFooter": "Вы PRO пользователь навсегда.",
     "emotions": "Эмоции",
@@ -238,8 +230,6 @@
     "dayFeedChooseFolder": "Выбрать",
     "roundVideoRecordError": "Не удалось записать видео",
     "roundVideoCameraUnavailable": "Камера недоступна на этом устройстве",
-    "roundVideoRetake": "Переснять",
-    "roundVideoUse": "Использовать",
     "removeMedia": "Удалить медиа",
     "shakeToCustomize": "Встряхните, чтобы настроить",
     "shakeToCustomizeHint": "или удерживайте заголовок",
@@ -433,5 +423,6 @@
     "imageFromGallery": "Галерея",
     "imageFromCamera": "Камера",
     "attachImages": "Добавить фото",
-    "newMindWithPhoto": "Новая заметка с этим фото"
+    "newMindWithPhoto": "Новая заметка с этим фото",
+    "recordSlideToCancel": "Влево — отмена"
 }

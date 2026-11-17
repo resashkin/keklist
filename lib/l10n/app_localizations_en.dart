@@ -644,34 +644,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Location permission is permanently denied. Opening app settings.';
 
   @override
-  String get audioRecordTitle => 'Record audio';
-
-  @override
-  String get audioRecordTitleRecording => 'Recording…';
-
-  @override
-  String get audioRecordHint => 'Tap Stop to save to your device.';
-
-  @override
-  String get audioRecordStart => 'Start';
-
-  @override
-  String get audioRecordStop => 'Stop';
-
-  @override
-  String get audioRecordCancel => 'Cancel';
-
-  @override
   String get audioRecordPermissionError =>
       'Microphone permission is required to record audio.';
-
-  @override
-  String get audioRecordStartError =>
-      'Unable to start recording. Please try again.';
-
-  @override
-  String get audioRecordStopError =>
-      'Unable to stop the recording. Please try again.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -769,12 +743,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get roundVideoCameraUnavailable =>
       'Camera is unavailable on this device';
-
-  @override
-  String get roundVideoRetake => 'Retake';
-
-  @override
-  String get roundVideoUse => 'Use';
 
   @override
   String get removeMedia => 'Remove media';
@@ -1408,4 +1376,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'New note with this photo';
+
+  @override
+  String get recordSlideToCancel => 'Slide to cancel';
 }

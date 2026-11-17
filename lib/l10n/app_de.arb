@@ -199,15 +199,7 @@
     "weatherLocationServicesDisabled": "Standortdienste sind deaktiviert. Bitte in den Einstellungen aktivieren.",
     "weatherLocationPermissionDenied": "Standortberechtigung verweigert.",
     "weatherLocationPermissionPermanentlyDenied": "Standortberechtigung dauerhaft verweigert. App-Einstellungen werden geöffnet.",
-    "audioRecordTitle": "Audio aufnehmen",
-    "audioRecordTitleRecording": "Aufnahme läuft…",
-    "audioRecordHint": "Tippe auf Stopp, um die Aufnahme zu speichern.",
-    "audioRecordStart": "Starten",
-    "audioRecordStop": "Stopp",
-    "audioRecordCancel": "Abbrechen",
     "audioRecordPermissionError": "Mikrofonberechtigung ist erforderlich, um Audio aufzunehmen.",
-    "audioRecordStartError": "Aufnahme konnte nicht gestartet werden. Bitte versuche es erneut.",
-    "audioRecordStopError": "Aufnahme konnte nicht gestoppt werden. Bitte versuche es erneut.",
     "proUserFooter": "Du bist PRO-Nutzer. Die nächste Zahlung von {price} erfolgt am {date}.",
     "proUserLifetimeFooter": "Du bist PRO-Nutzer auf Lebenszeit.",
     "emotions": "Emotionen",
@@ -238,8 +230,6 @@
     "dayFeedChooseFolder": "Wählen",
     "roundVideoRecordError": "Video konnte nicht aufgenommen werden",
     "roundVideoCameraUnavailable": "Kamera auf diesem Gerät nicht verfügbar",
-    "roundVideoRetake": "Neu aufnehmen",
-    "roundVideoUse": "Verwenden",
     "removeMedia": "Medien entfernen",
     "shakeToCustomize": "Schütteln zum Anpassen",
     "shakeToCustomizeHint": "oder Titel lange drücken",
@@ -433,5 +423,6 @@
     "imageFromGallery": "Mediathek",
     "imageFromCamera": "Kamera",
     "attachImages": "Fotos hinzufügen",
-    "newMindWithPhoto": "Neue Notiz mit diesem Foto"
+    "newMindWithPhoto": "Neue Notiz mit diesem Foto",
+    "recordSlideToCancel": "Zum Abbrechen wischen"
 }

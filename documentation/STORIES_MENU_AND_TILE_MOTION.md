@@ -68,7 +68,7 @@ scroll physics to `NeverScrollableScrollPhysics` while two fingers are down.
 - Core widgets: `mind_emotion_texture.dart`, `pinch_columns_detector.dart`, `resizable_tile_grid.dart` (new),
   `tile_motion_tweaks.dart` (new), `helpers/mind_text_edit.dart` (new).
 - Day feed: `day_item_viewer_screen.dart`, `day_feed_tile_menu.dart` (new), `day_feed_sliver.dart`,
-  `day_feed_grid.dart`, `day_feed_settings_bottom_sheet.dart`, `mind_audio_circle.dart`, `mind_story_details.dart`;
+  `day_feed_grid.dart`, `day_feed_settings_bottom_sheet.dart`, `mind_audio_wave.dart`, `mind_story_details.dart`;
   `day_stories_screen.dart` and `creator_bottom_bar/` deleted.
 - Screens: `mind_day_collection_screen.dart`, `mind_collection_screen.dart`, `mind_collection_body.dart`,
   `calendar_settings_bottom_sheet.dart`.

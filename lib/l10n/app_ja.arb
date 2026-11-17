@@ -199,15 +199,7 @@
     "weatherLocationServicesDisabled": "位置情報サービスが無効です。設定で有効にしてください。",
     "weatherLocationPermissionDenied": "位置情報の許可が拒否されました。",
     "weatherLocationPermissionPermanentlyDenied": "位置情報の許可が恒久的に拒否されています。アプリ設定を開きます。",
-    "audioRecordTitle": "音声を録音",
-    "audioRecordTitleRecording": "録音中…",
-    "audioRecordHint": "「停止」をタップして保存します。",
-    "audioRecordStart": "開始",
-    "audioRecordStop": "停止",
-    "audioRecordCancel": "キャンセル",
     "audioRecordPermissionError": "音声を録音するにはマイクの権限が必要です。",
-    "audioRecordStartError": "録音を開始できませんでした。もう一度お試しください。",
-    "audioRecordStopError": "録音を停止できませんでした。もう一度お試しください。",
     "proUserFooter": "あなたはPROユーザーです。次の支払い {price} は {date} に予定されています。",
     "proUserLifetimeFooter": "あなたは永久PROユーザーです。",
     "emotions": "感情",
@@ -238,8 +230,6 @@
     "dayFeedChooseFolder": "選択",
     "roundVideoRecordError": "ビデオを録画できませんでした",
     "roundVideoCameraUnavailable": "このデバイスではカメラを利用できません",
-    "roundVideoRetake": "撮り直す",
-    "roundVideoUse": "使用する",
     "removeMedia": "メディアを削除",
     "shakeToCustomize": "振ってカスタマイズ",
     "shakeToCustomizeHint": "またはタイトルを長押し",
@@ -433,5 +423,6 @@
     "imageFromGallery": "写真ライブラリ",
     "imageFromCamera": "カメラ",
     "attachImages": "写真を追加",
-    "newMindWithPhoto": "この写真で新しいメモ"
+    "newMindWithPhoto": "この写真で新しいメモ",
+    "recordSlideToCancel": "スライドでキャンセル"
 }

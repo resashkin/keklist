@@ -17,7 +17,7 @@ Every tab uses a transparent top bar with frosted "glass" bubbles, title centere
   Delete sheet; Edit loads it into the bar.
 - Pulling a page down past its top (80pt) closes the viewer; the page fades (up to 85%) and slides with the pull.
 - The emotion texture fills the whole screen; the header and comment bar float over it.
-- Pages: mind details (audio as `MindAudioCircle`), round video (inside `SoundSpectrumRing`), video (looping, tap to pause), photo
+- Pages: mind details (audio as `MindAudioWave`), round video (inside `SoundSpectrumRing`), video (looping, tap to pause), photo
   (`InteractiveViewer`, cached thumbnail then original), SAF photo via `MediaFolderChannel.getDocumentContent`.
 - Dismiss by dragging down or overscrolling at the top.
 
@@ -29,8 +29,8 @@ Every tab uses a transparent top bar with frosted "glass" bubbles, title centere
 - `storyColorsOf(context)`: black background on dark theme, white on light; used by stories and viewer.
 - `MindStoryDetails`: content first (media, then text), then `MindEmotionsPill` (overlapping emojis), then reflections.
 - `MindEmotionChips` ("😄 Root › Child") stays for reflections, read-only.
-- `MindAudioCircle` (`day_feed/mind_audio_circle.dart`): a circle filled with the first emotion's color, ▶/⏸ in the
-  center, a progress ring and a horizontal seek bar under it. In stories it only shows the story's own player.
+- `MindAudioWave` (`day_feed/mind_audio_wave.dart`): a ▶/⏸ circle in the first emotion's color, the recording's
+  waveform (played bars bright, the rest dim; tap or drag to seek) and the time. It plays when the story autoplays.
 
 ### Calendar headers — `mind_collection/local_widgets/calendar_day_header.dart`
 - `CalendarDayPill`: centered stadium pill — date, "No activity" caption on empty days, chevron, and a ▶ segment

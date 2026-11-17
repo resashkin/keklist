@@ -39,15 +39,8 @@ abstract final class MindComments {
     context.read<MindBloc>().add(MindCreate(dayIndex: root.dayIndex, mindContent: pieces, rootId: root.id));
   }
 
-  static Future<void> record(
-    BuildContext context,
-    Mind root,
-    Future<BaseMindNotePiece?> Function(BuildContext) record,
-  ) async {
-    final BaseMindNotePiece? media = await record(context);
-    if (media == null || !context.mounted) return;
-    context.read<MindBloc>().add(MindCreate(dayIndex: root.dayIndex, mindContent: [media], rootId: root.id));
-  }
+  static void sendRecording(BuildContext context, Mind root, BaseMindNotePiece media) =>
+      context.read<MindBloc>().add(MindCreate(dayIndex: root.dayIndex, mindContent: [media], rootId: root.id));
 }
 
 /// The mind's comments over the story, newest at the bottom: about three show, older ones scroll up and fade out
@@ -276,8 +269,8 @@ final class MindCommentBar extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final VoidCallback onSend;
-  final VoidCallback onRecordAudio;
-  final VoidCallback onRecordVideo;
+  final ValueChanged<BaseMindNotePiece> onRecorded;
+  final ValueChanged<bool>? onRecordingChanged;
   final bool autofocus;
 
   /// Photos picked for the next reply, shown above the field; [onAddImages] is null where photos can't be added.
@@ -290,8 +283,8 @@ final class MindCommentBar extends StatelessWidget {
     required this.controller,
     required this.focusNode,
     required this.onSend,
-    required this.onRecordAudio,
-    required this.onRecordVideo,
+    required this.onRecorded,
+    this.onRecordingChanged,
     this.autofocus = false,
     this.images = const [],
     this.onAddImages,
@@ -373,7 +366,7 @@ final class MindCommentBar extends StatelessWidget {
                 ),
                 icon: const Icon(Icons.arrow_upward_rounded),
               )
-            : MediaRecordToggleButton(isFilled: true, onRecordAudio: onRecordAudio, onRecordVideo: onRecordVideo),
+            : MediaRecordToggleButton(isFilled: true, onRecorded: onRecorded, onRecordingChanged: onRecordingChanged),
       ),
     ],
   );

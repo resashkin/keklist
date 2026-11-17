@@ -205,8 +205,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
                       if (canRecord)
                         MediaRecordToggleButton(
                           isFilled: true,
-                          onRecordAudio: () => _attach(MediaRecording.recordAudio),
-                          onRecordVideo: () => _attach(MediaRecording.recordVideo),
+                          onRecorded: (media) => setState(() => _attachedMedia = media),
                         ),
                     ],
                   ),
@@ -252,12 +251,6 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
           ..addAll(ids),
       ),
     );
-  }
-
-  Future<void> _attach(Future<BaseMindNotePiece?> Function(BuildContext) record) async {
-    final BaseMindNotePiece? media = await record(context);
-    if (media == null || !mounted) return;
-    setState(() => _attachedMedia = media);
   }
 
   // A discarded recording is never saved into a mind, so its file can go right away.

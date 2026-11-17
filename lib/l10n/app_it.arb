@@ -409,15 +409,7 @@
     "weatherLocationServicesDisabled": "I servizi di localizzazione sono disabilitati. Attivali nelle impostazioni.",
     "weatherLocationPermissionDenied": "Autorizzazione di localizzazione negata.",
     "weatherLocationPermissionPermanentlyDenied": "Autorizzazione di localizzazione negata in modo permanente. Apertura impostazioni app.",
-    "audioRecordTitle": "Registra audio",
-    "audioRecordTitleRecording": "Registrazione…",
-    "audioRecordHint": "Tocca Stop per salvare sul tuo dispositivo.",
-    "audioRecordStart": "Avvia",
-    "audioRecordStop": "Ferma",
-    "audioRecordCancel": "Annulla",
     "audioRecordPermissionError": "Il permesso per il microfono è necessario per registrare audio.",
-    "audioRecordStartError": "Impossibile avviare la registrazione. Riprova.",
-    "audioRecordStopError": "Impossibile fermare la registrazione. Riprova.",
     "proUserFooter": "Sei un utente PRO. Il prossimo pagamento di {price} sarà il {date}.",
     "proUserLifetimeFooter": "Sei un utente PRO a vita.",
     "emotions": "Emozioni",
@@ -448,8 +440,6 @@
     "dayFeedChooseFolder": "Scegli",
     "roundVideoRecordError": "Impossibile registrare il video",
     "roundVideoCameraUnavailable": "Fotocamera non disponibile su questo dispositivo",
-    "roundVideoRetake": "Rifai",
-    "roundVideoUse": "Usa",
     "removeMedia": "Rimuovi media",
     "shakeToCustomize": "Scuoti per personalizzare",
     "shakeToCustomizeHint": "o tieni premuto il titolo",
@@ -643,5 +633,6 @@
     "imageFromGallery": "Galleria",
     "imageFromCamera": "Fotocamera",
     "attachImages": "Aggiungi foto",
-    "newMindWithPhoto": "Nuova nota con questa foto"
+    "newMindWithPhoto": "Nuova nota con questa foto",
+    "recordSlideToCancel": "Scorri per annullare"
 }

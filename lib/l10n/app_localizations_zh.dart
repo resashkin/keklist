@@ -628,31 +628,7 @@ class AppLocalizationsZh extends AppLocalizations {
       '位置权限被永久拒绝，正在打开应用设置。';
 
   @override
-  String get audioRecordTitle => '录制音频';
-
-  @override
-  String get audioRecordTitleRecording => '录制中…';
-
-  @override
-  String get audioRecordHint => '点击停止以保存到设备。';
-
-  @override
-  String get audioRecordStart => '开始';
-
-  @override
-  String get audioRecordStop => '停止';
-
-  @override
-  String get audioRecordCancel => '取消';
-
-  @override
   String get audioRecordPermissionError => '需要麦克风权限才能录制音频。';
-
-  @override
-  String get audioRecordStartError => '无法开始录制。请重试。';
-
-  @override
-  String get audioRecordStopError => '无法停止录制。请重试。';
 
   @override
   String proUserFooter(String price, String date) {
@@ -745,12 +721,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get roundVideoCameraUnavailable => '此设备上的相机不可用';
-
-  @override
-  String get roundVideoRetake => '重拍';
-
-  @override
-  String get roundVideoUse => '使用';
 
   @override
   String get removeMedia => '移除媒体';
@@ -1361,4 +1331,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => '用这张照片新建笔记';
+
+  @override
+  String get recordSlideToCancel => '滑动取消';
 }

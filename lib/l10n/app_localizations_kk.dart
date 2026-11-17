@@ -650,34 +650,8 @@ class AppLocalizationsKk extends AppLocalizations {
       'Геолокацияға рұқсат тұрақты түрде берілмеді. Қолданба параметрлері ашылуда.';
 
   @override
-  String get audioRecordTitle => 'Аудио жазу';
-
-  @override
-  String get audioRecordTitleRecording => 'Жазылуда…';
-
-  @override
-  String get audioRecordHint => 'Сақтау үшін «Тоқтату» батырмасын басыңыз.';
-
-  @override
-  String get audioRecordStart => 'Бастау';
-
-  @override
-  String get audioRecordStop => 'Тоқтату';
-
-  @override
-  String get audioRecordCancel => 'Болдырмау';
-
-  @override
   String get audioRecordPermissionError =>
       'Аудио жазу үшін микрофон рұқсаты қажет.';
-
-  @override
-  String get audioRecordStartError =>
-      'Жазуды бастау мүмкін болмады. Қайталап көріңіз.';
-
-  @override
-  String get audioRecordStopError =>
-      'Жазуды тоқтату мүмкін болмады. Қайталап көріңіз.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -775,12 +749,6 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get roundVideoCameraUnavailable => 'Бұл құрылғыда камера қолжетімсіз';
-
-  @override
-  String get roundVideoRetake => 'Қайта түсіру';
-
-  @override
-  String get roundVideoUse => 'Пайдалану';
 
   @override
   String get removeMedia => 'Медианы жою';
@@ -1413,4 +1381,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'Осы фотомен жаңа жазба';
+
+  @override
+  String get recordSlideToCancel => 'Бас тарту үшін сырғытыңыз';
 }

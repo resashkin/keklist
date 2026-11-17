@@ -409,15 +409,7 @@
     "weatherLocationServicesDisabled": "Joylashuv xizmatlari o'chirilgan. Sozlamalarda yoqing.",
     "weatherLocationPermissionDenied": "Joylashuv ruxsati rad etildi.",
     "weatherLocationPermissionPermanentlyDenied": "Joylashuv ruxsati doimiy ravishda rad etildi. Ilova sozlamalari ochilmoqda.",
-    "audioRecordTitle": "Audio yozish",
-    "audioRecordTitleRecording": "Yozilmoqda…",
-    "audioRecordHint": "Saqlash uchun «To'xtatish»ni bosing.",
-    "audioRecordStart": "Boshlash",
-    "audioRecordStop": "To'xtatish",
-    "audioRecordCancel": "Bekor qilish",
     "audioRecordPermissionError": "Audio yozish uchun mikrofon ruxsati talab qilinadi.",
-    "audioRecordStartError": "Yozishni boshlash imkoni bo'lmadi. Qayta urinib ko'ring.",
-    "audioRecordStopError": "Yozishni to'xtatish imkoni bo'lmadi. Qayta urinib ko'ring.",
     "proUserFooter": "Siz PRO foydalanuvchisiz. Keyingi {price} to'lov {date} da bo'ladi.",
     "proUserLifetimeFooter": "Siz umrbod PRO foydalanuvchisiz.",
     "emotions": "Hissiyotlar",
@@ -448,8 +440,6 @@
     "dayFeedChooseFolder": "Tanlash",
     "roundVideoRecordError": "Videoni yozib bo‘lmadi",
     "roundVideoCameraUnavailable": "Bu qurilmada kamera mavjud emas",
-    "roundVideoRetake": "Qayta olish",
-    "roundVideoUse": "Foydalanish",
     "removeMedia": "Mediani o‘chirish",
     "shakeToCustomize": "Sozlash uchun silkiting",
     "shakeToCustomizeHint": "yoki sarlavhani bosib turing",
@@ -643,5 +633,6 @@
     "imageFromGallery": "Galereya",
     "imageFromCamera": "Kamera",
     "attachImages": "Rasm qo‘shish",
-    "newMindWithPhoto": "Shu rasm bilan yangi yozuv"
+    "newMindWithPhoto": "Shu rasm bilan yangi yozuv",
+    "recordSlideToCancel": "Bekor qilish uchun suring"
 }

@@ -648,34 +648,8 @@ class AppLocalizationsRu extends AppLocalizations {
       'Доступ к геолокации заблокирован. Открываю настройки приложения.';
 
   @override
-  String get audioRecordTitle => 'Запись аудио';
-
-  @override
-  String get audioRecordTitleRecording => 'Запись…';
-
-  @override
-  String get audioRecordHint => 'Нажмите «Стоп», чтобы сохранить запись.';
-
-  @override
-  String get audioRecordStart => 'Начать';
-
-  @override
-  String get audioRecordStop => 'Стоп';
-
-  @override
-  String get audioRecordCancel => 'Отмена';
-
-  @override
   String get audioRecordPermissionError =>
       'Для записи аудио необходимо разрешение на использование микрофона.';
-
-  @override
-  String get audioRecordStartError =>
-      'Не удалось начать запись. Попробуйте ещё раз.';
-
-  @override
-  String get audioRecordStopError =>
-      'Не удалось остановить запись. Попробуйте ещё раз.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -774,12 +748,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get roundVideoCameraUnavailable =>
       'Камера недоступна на этом устройстве';
-
-  @override
-  String get roundVideoRetake => 'Переснять';
-
-  @override
-  String get roundVideoUse => 'Использовать';
 
   @override
   String get removeMedia => 'Удалить медиа';
@@ -1418,4 +1386,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'Новая заметка с этим фото';
+
+  @override
+  String get recordSlideToCancel => 'Влево — отмена';
 }

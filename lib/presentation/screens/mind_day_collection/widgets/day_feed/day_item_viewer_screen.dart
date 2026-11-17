@@ -22,12 +22,11 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/extensions/story_settings_extension.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/core/widgets/images/mind_images.dart';
-import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
 import 'package:keklist/presentation/core/widgets/sound/animated_emotion_texture.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_playback.dart';
 import 'package:keklist/presentation/core/widgets/sound/sound_spectrum_ring.dart';
-import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_audio_circle.dart';
+import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_audio_wave.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
 import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/day_feed_item.dart';
@@ -49,7 +48,6 @@ const double _kDismissDragDistance = 120.0;
 const double _kDismissDragVelocity = 700.0;
 const double _kDismissOverscroll = 80.0;
 const double _kRoundVideoSize = 260.0;
-const double _kAudioCircleSize = 200.0;
 const double _kFadeDistance = 320.0;
 const double _kHeaderSpace = 100.0;
 const double _kEdgeTapShare = 0.22;
@@ -108,6 +106,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   late int _index = widget.initialIndex;
   double _dragOffsetY = 0.0;
   double _scrollPull = 0.0;
+  // How far the finger itself moved down while the mind was pulled past its top.
+  double _fingerPull = 0.0;
   bool _isClosing = false;
   bool _isHeld = false;
   bool _isZoomed = false;
@@ -119,7 +119,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   // Read up front: dispose can no longer look it up.
   late final AppFileRepository _files;
   bool? _locksPortrait;
-  final VoidCallback _uncoverGlass = NativeGlassCover.cover();
 
   DayFeedItem get _currentItem => widget.items[_index];
 
@@ -179,7 +178,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   void dispose() {
     MindImageAttaching.discard(_files, _replyImages);
     if (_locksPortrait ?? false) PhoneOrientation.unlockPortrait();
-    _uncoverGlass();
     _progress.dispose();
     _pageController.dispose();
     _replyController.dispose();
@@ -254,6 +252,17 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     final T? result = await action();
     if (mounted && !wasHeld) _release();
     return result;
+  }
+
+  bool _wasHeldBeforeRecording = false;
+
+  void _onRecordingChanged(bool isRecording) {
+    if (isRecording) {
+      _wasHeldBeforeRecording = _isHeld;
+      _hold();
+    } else if (mounted && !_wasHeldBeforeRecording) {
+      _release();
+    }
   }
 
   bool _wasHeldBeforeImages = false;
@@ -362,20 +371,22 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       ),
     );
     final bool isWide = MediaQuery.sizeOf(context).width >= _kWideMinWidth;
-    return CallbackShortcuts(
-      bindings: {
-        const SingleActivator(LogicalKeyboardKey.arrowLeft): _goPrevious,
-        const SingleActivator(LogicalKeyboardKey.arrowRight): _goNext,
-        const SingleActivator(LogicalKeyboardKey.escape): _close,
-        if (widget.autoplay) const SingleActivator(LogicalKeyboardKey.space): () => _isHeld ? _release() : _hold(),
-      },
-      child: Focus(
-        autofocus: true,
-        child: Scaffold(
-          // Only the reply panel follows the keyboard; the story stays where it is.
-          resizeToAvoidBottomInset: false,
-          backgroundColor: (isWide ? Colors.black : background).withValues(alpha: 1.0 - dismissProgress),
-          body: isWide ? _buildWide(story, background) : story,
+    return NativeGlassCover(
+      child: CallbackShortcuts(
+        bindings: {
+          const SingleActivator(LogicalKeyboardKey.arrowLeft): _goPrevious,
+          const SingleActivator(LogicalKeyboardKey.arrowRight): _goNext,
+          const SingleActivator(LogicalKeyboardKey.escape): _close,
+          if (widget.autoplay) const SingleActivator(LogicalKeyboardKey.space): () => _isHeld ? _release() : _hold(),
+        },
+        child: Focus(
+          autofocus: true,
+          child: Scaffold(
+            // Only the reply panel follows the keyboard; the story stays where it is.
+            resizeToAvoidBottomInset: false,
+            backgroundColor: (isWide ? Colors.black : background).withValues(alpha: 1.0 - dismissProgress),
+            body: isWide ? _buildWide(story, background) : story,
+          ),
         ),
       ),
     );
@@ -500,8 +511,8 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                   _replyController.clear();
                   setState(() => _replyImages = const []);
                 },
-                onRecordAudio: () => _whileHeld(() => MindComments.record(context, root, MediaRecording.recordAudio)),
-                onRecordVideo: () => _whileHeld(() => MindComments.record(context, root, MediaRecording.recordVideo)),
+                onRecorded: (media) => MindComments.sendRecording(context, root, media),
+                onRecordingChanged: _onRecordingChanged,
               ),
             ),
             SafeArea(
@@ -592,13 +603,20 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   /// threshold: bouncing scroll views report the pull as negative pixels, clamping ones as overscroll.
   bool _onScroll(ScrollNotification notification) {
     if (notification.metrics.axis != Axis.vertical) return false;
+    final ScrollMetrics metrics = notification.metrics;
     switch (notification) {
-      case ScrollUpdateNotification(dragDetails: _?):
-        _setScrollPull(notification.metrics.minScrollExtent - notification.metrics.pixels);
-      case OverscrollNotification(dragDetails: _?, :final overscroll):
-        if (overscroll < 0) _setScrollPull(_scrollPull - overscroll);
+      case ScrollUpdateNotification(dragDetails: final DragUpdateDetails drag):
+        _setScrollPull(metrics.minScrollExtent - metrics.pixels);
+        _fingerPull = metrics.pixels < metrics.minScrollExtent ? _fingerPull + drag.delta.dy : 0.0;
+      case OverscrollNotification(dragDetails: final DragUpdateDetails drag, :final overscroll):
+        if (overscroll < 0) {
+          _setScrollPull(_scrollPull - overscroll);
+          _fingerPull += drag.delta.dy;
+        }
       case ScrollUpdateNotification() || ScrollEndNotification():
-        if (_scrollPull >= _kDismissOverscroll) _close();
+        // Bouncing lists hold the page back hard, so the finger's own travel decides, not the page's.
+        if (_scrollPull >= _kDismissOverscroll || _fingerPull >= _kDismissDragDistance) _close();
+        _fingerPull = 0.0;
         _setScrollPull(0.0);
       default:
         break;
@@ -721,11 +739,10 @@ final class _MindPageState extends State<_MindPage> {
             ),
           )
         : audio != null
-        ? MindAudioCircle(
+        ? MindAudioWave(
             key: ValueKey(audio.appRelativeAbsoulutePath),
             audio: audio,
             color: accent,
-            diameter: _kAudioCircleSize,
             isPlaying: widget.autoplayAudio,
           )
         : null;

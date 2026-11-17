@@ -650,34 +650,8 @@ class AppLocalizationsKy extends AppLocalizations {
       'Геолокацияга уруксат туруктуу берилген жок. Колдонмо жөндөөлөрү ачылууда.';
 
   @override
-  String get audioRecordTitle => 'Аудио жаздыруу';
-
-  @override
-  String get audioRecordTitleRecording => 'Жазылууда…';
-
-  @override
-  String get audioRecordHint => 'Сактоо үчүн «Токтотуу» баскычын басыңыз.';
-
-  @override
-  String get audioRecordStart => 'Баштоо';
-
-  @override
-  String get audioRecordStop => 'Токтотуу';
-
-  @override
-  String get audioRecordCancel => 'Жокко чыгаруу';
-
-  @override
   String get audioRecordPermissionError =>
       'Аудио жаздыруу үчүн микрофон уруксаты керек.';
-
-  @override
-  String get audioRecordStartError =>
-      'Жаздырууну баштоо мүмкүн болмоду. Кайталап аракет кылыңыз.';
-
-  @override
-  String get audioRecordStopError =>
-      'Жаздырууну токтотуу мүмкүн болмоду. Кайталап аракет кылыңыз.';
 
   @override
   String proUserFooter(String price, String date) {
@@ -775,12 +749,6 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get roundVideoCameraUnavailable => 'Бул түзмөктө камера жеткиликсиз';
-
-  @override
-  String get roundVideoRetake => 'Кайра тартуу';
-
-  @override
-  String get roundVideoUse => 'Колдонуу';
 
   @override
   String get removeMedia => 'Медианы өчүрүү';
@@ -1413,4 +1381,7 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get newMindWithPhoto => 'Ушул сүрөт менен жаңы жазуу';
+
+  @override
+  String get recordSlideToCancel => 'Жокко чыгаруу үчүн сүрүңүз';
 }

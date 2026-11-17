@@ -1317,59 +1317,11 @@ abstract class AppLocalizations {
   /// **'Location permission is permanently denied. Opening app settings.'**
   String get weatherLocationPermissionPermanentlyDenied;
 
-  /// Title of the audio recorder bottom sheet
-  ///
-  /// In en, this message translates to:
-  /// **'Record audio'**
-  String get audioRecordTitle;
-
-  /// Title shown while audio is being recorded
-  ///
-  /// In en, this message translates to:
-  /// **'Recording…'**
-  String get audioRecordTitleRecording;
-
-  /// Hint shown while recording is in progress
-  ///
-  /// In en, this message translates to:
-  /// **'Tap Stop to save to your device.'**
-  String get audioRecordHint;
-
-  /// Button to start recording
-  ///
-  /// In en, this message translates to:
-  /// **'Start'**
-  String get audioRecordStart;
-
-  /// Button to stop recording
-  ///
-  /// In en, this message translates to:
-  /// **'Stop'**
-  String get audioRecordStop;
-
-  /// Button to cancel and dismiss the recorder
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get audioRecordCancel;
-
   /// Error when microphone permission is missing
   ///
   /// In en, this message translates to:
   /// **'Microphone permission is required to record audio.'**
   String get audioRecordPermissionError;
-
-  /// Error when recording fails to start
-  ///
-  /// In en, this message translates to:
-  /// **'Unable to start recording. Please try again.'**
-  String get audioRecordStartError;
-
-  /// Error when recording fails to stop
-  ///
-  /// In en, this message translates to:
-  /// **'Unable to stop the recording. Please try again.'**
-  String get audioRecordStopError;
 
   /// Footer in APPLICATION settings section when user has active PRO subscription
   ///
@@ -1550,18 +1502,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Camera is unavailable on this device'**
   String get roundVideoCameraUnavailable;
-
-  /// Audio/video mind recording
-  ///
-  /// In en, this message translates to:
-  /// **'Retake'**
-  String get roundVideoRetake;
-
-  /// Audio/video mind recording
-  ///
-  /// In en, this message translates to:
-  /// **'Use'**
-  String get roundVideoUse;
 
   /// Audio/video mind recording
   ///
@@ -2726,6 +2666,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New note with this photo'**
   String get newMindWithPhoto;
+
+  /// Hint on the bar while holding the record button: slide left to throw the recording away
+  ///
+  /// In en, this message translates to:
+  /// **'Slide to cancel'**
+  String get recordSlideToCancel;
 }
 
 class _AppLocalizationsDelegate
