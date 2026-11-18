@@ -1071,18 +1071,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get aiChooseAnotherModel => 'Elegir otro modelo';
 
   @override
-  String get creatorEmotionsTitle => 'Emociones';
-
-  @override
-  String get creatorEmotionsAfterSave => 'Preguntar al guardar';
-
-  @override
-  String get creatorEmotionsButton => 'Botón sobre el teclado';
-
-  @override
-  String get creatorEmotionsNever => 'No preguntar';
-
-  @override
   String get insightsWeekAgo => 'Hace una semana';
 
   @override

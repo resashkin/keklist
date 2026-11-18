@@ -1069,18 +1069,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get aiChooseAnotherModel => 'Басқа модель таңдау';
 
   @override
-  String get creatorEmotionsTitle => 'Эмоциялар';
-
-  @override
-  String get creatorEmotionsAfterSave => 'Сақтағаннан кейін сұрау';
-
-  @override
-  String get creatorEmotionsButton => 'Пернетақта үстіндегі түйме';
-
-  @override
-  String get creatorEmotionsNever => 'Сұрамау';
-
-  @override
   String get insightsWeekAgo => 'Бір апта бұрын';
 
   @override

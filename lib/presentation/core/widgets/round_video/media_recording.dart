@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui' show ImageFilter;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/gestures.dart';
@@ -441,10 +442,23 @@ final class _CameraCircle extends StatelessWidget {
         ),
         child: ClipOval(
           child: isReady
-              // The camera reports its preview size in landscape, while the phone is held upright.
-              ? FittedBox(
-                  fit: BoxFit.cover,
-                  child: SizedBox(width: preview.height, height: preview.width, child: CameraPreview(camera!)),
+              // Blurred until the recording really starts, so the sharp picture tells when it does.
+              ? TweenAnimationBuilder<double>(
+                  tween: Tween(end: isRecording ? 0.0 : 16.0),
+                  duration: const Duration(milliseconds: 250),
+                  builder: (_, sigma, child) => ImageFiltered(
+                    imageFilter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma, tileMode: TileMode.decal),
+                    child: child,
+                  ),
+                  // The camera reports its preview size in landscape, while the phone is held upright;
+                  // the front preview comes mirrored, unlike the recorded video, so it's flipped back.
+                  child: Transform.flip(
+                    flipX: true,
+                    child: FittedBox(
+                      fit: BoxFit.cover,
+                      child: SizedBox(width: preview.height, height: preview.width, child: CameraPreview(camera!)),
+                    ),
+                  ),
                 )
               : const Center(child: CircularProgressIndicator(color: Colors.white)),
         ),

@@ -44,7 +44,6 @@ Future<void> seedScreenshotDemo({
         ShakeScreenIds.insights,
         ShakeScreenIds.calendar,
         ShakeScreenIds.story,
-        ShakeScreenIds.creator,
       },
     ),
   );

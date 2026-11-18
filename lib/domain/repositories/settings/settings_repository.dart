@@ -29,9 +29,6 @@ abstract class SettingsRepository {
   FutureOr<void> markShakeDiscovered(String screenId);
 }
 
-/// How the mind creator asks for emotions; see `documentation/MIND_CREATOR_EMOTIONS.md`.
-enum MindEmotionsPrompt { afterSave, button, never }
-
 /// How the emojis of a mind tile move: a slow diagonal drift, a gentle sway in place, or not at all.
 enum TileEmojiMotion { drift, float, still }
 
@@ -320,7 +317,6 @@ final class KeklistSettings {
   final List<UserAvatar> avatarHistory;
   final Set<String> hiddenSettingsItemIds;
   final Set<String> shakeDiscoveredScreenIds;
-  final MindEmotionsPrompt mindEmotionsPrompt;
   final TileEmojiMotion tileEmojiMotion;
   final GridResizeAnimation gridResizeAnimation;
 
@@ -360,7 +356,6 @@ final class KeklistSettings {
     this.avatarHistory = const [],
     this.hiddenSettingsItemIds = const {},
     this.shakeDiscoveredScreenIds = const {},
-    this.mindEmotionsPrompt = MindEmotionsPrompt.afterSave,
     this.tileEmojiMotion = TileEmojiMotion.drift,
     this.gridResizeAnimation = GridResizeAnimation.fly,
     this.hiddenMediaIds = const {},
@@ -393,7 +388,6 @@ final class KeklistSettings {
     List<UserAvatar>? avatarHistory,
     Set<String>? hiddenSettingsItemIds,
     Set<String>? shakeDiscoveredScreenIds,
-    MindEmotionsPrompt? mindEmotionsPrompt,
     TileEmojiMotion? tileEmojiMotion,
     GridResizeAnimation? gridResizeAnimation,
     Set<String>? hiddenMediaIds,
@@ -425,7 +419,6 @@ final class KeklistSettings {
       avatarHistory: avatarHistory ?? this.avatarHistory,
       hiddenSettingsItemIds: hiddenSettingsItemIds ?? this.hiddenSettingsItemIds,
       shakeDiscoveredScreenIds: shakeDiscoveredScreenIds ?? this.shakeDiscoveredScreenIds,
-      mindEmotionsPrompt: mindEmotionsPrompt ?? this.mindEmotionsPrompt,
       tileEmojiMotion: tileEmojiMotion ?? this.tileEmojiMotion,
       gridResizeAnimation: gridResizeAnimation ?? this.gridResizeAnimation,
       hiddenMediaIds: hiddenMediaIds ?? this.hiddenMediaIds,
@@ -480,7 +473,6 @@ final class KeklistSettings {
     ..avatarEmoji = avatar.emoji
     ..avatarImagePath = avatar.imagePath
     ..avatarHistory = [for (final UserAvatar entry in avatarHistory) entry.encode()]
-    ..mindEmotionsPromptIndex = mindEmotionsPrompt.index
     ..tileEmojiMotionIndex = tileEmojiMotion.index
     ..gridResizeAnimationIndex = gridResizeAnimation.index
     ..hiddenSettingsItemIds = hiddenSettingsItemIds.toList()

@@ -1076,18 +1076,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aiChooseAnotherModel => 'Anderes Modell wählen';
 
   @override
-  String get creatorEmotionsTitle => 'Emotionen';
-
-  @override
-  String get creatorEmotionsAfterSave => 'Nach dem Speichern fragen';
-
-  @override
-  String get creatorEmotionsButton => 'Taste über der Tastatur';
-
-  @override
-  String get creatorEmotionsNever => 'Nicht fragen';
-
-  @override
   String get insightsWeekAgo => 'Vor einer Woche';
 
   @override

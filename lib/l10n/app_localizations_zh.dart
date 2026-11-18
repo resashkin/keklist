@@ -1027,18 +1027,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiChooseAnotherModel => '选择其他模型';
 
   @override
-  String get creatorEmotionsTitle => '情绪';
-
-  @override
-  String get creatorEmotionsAfterSave => '保存后询问';
-
-  @override
-  String get creatorEmotionsButton => '键盘上方的按钮';
-
-  @override
-  String get creatorEmotionsNever => '不询问';
-
-  @override
   String get insightsWeekAgo => '一周前';
 
   @override

@@ -1069,18 +1069,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get aiChooseAnotherModel => 'Башка модель тандоо';
 
   @override
-  String get creatorEmotionsTitle => 'Эмоциялар';
-
-  @override
-  String get creatorEmotionsAfterSave => 'Сактагандан кийин суроо';
-
-  @override
-  String get creatorEmotionsButton => 'Баскычтоптун үстүндөгү баскыч';
-
-  @override
-  String get creatorEmotionsNever => 'Сурабоо';
-
-  @override
   String get insightsWeekAgo => 'Бир жума мурун';
 
   @override

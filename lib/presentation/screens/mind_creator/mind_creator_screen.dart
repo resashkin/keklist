@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/presentation/core/helpers/keyboard_shortcuts.dart';
 import 'package:keklist/domain/services/analytics/analytics.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
-import 'package:keklist/domain/repositories/settings/settings_repository.dart';
 import 'package:keklist/domain/services/entities/emotion.dart';
 
 import 'package:material_ui/material_ui.dart';
@@ -13,11 +12,8 @@ import 'package:keklist/presentation/core/helpers/emotion_colors.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/widgets/day_feed/mind_audio_wave.dart';
 import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
-import 'package:keklist/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
-import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
-import 'package:keklist/presentation/screens/mind_creator/mind_creator_tweak_sheet.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
 import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/core/widgets/round_video/round_video_views.dart';
@@ -59,7 +55,7 @@ final class MindCreatorScreen extends StatefulWidget {
   State<MindCreatorScreen> createState() => _MindCreatorScreenState();
 }
 
-final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> with ShakeToTweakMixin {
+final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
   late final TextEditingController _textEditingController = TextEditingController(text: widget.initialText)
     ..selection = TextSelection.collapsed(offset: widget.initialText?.length ?? 0);
   final List<String> _selectedEmotionIds = [];
@@ -87,35 +83,11 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
     if (hasText != _hasText) setState(() => _hasText = hasText);
   }
 
-  @override
-  String get shakeScreenId => ShakeScreenIds.creator;
-
-  @override
-  void onShakeToTweak() => MindCreatorTweakSheet.show(context);
-
-  MindEmotionsPrompt get _emotionsPrompt => switch (context.watch<SettingsBloc>().state) {
-    SettingsDataState(:final settings) => settings.mindEmotionsPrompt,
-    _ => MindEmotionsPrompt.afterSave,
-  };
-
-  /// In the "after save" mode the emotions come right after Save, before the mind is created.
-  Future<void> _save(MindEmotionsPrompt prompt) async {
+  void _save() {
     if (_isEditing) {
       Navigator.of(context).pop();
       widget.onDone(_textEditingController.text.trim(), const []);
       return;
-    }
-    if (prompt == MindEmotionsPrompt.afterSave && _selectedEmotionIds.isEmpty) {
-      FocusScope.of(context).unfocus();
-      await EmotionMarkingSheet.show(
-        context: context,
-        initialSelectedIds: const {},
-        showsSaveButton: true,
-        onSelectionChanged: (ids) => _selectedEmotionIds
-          ..clear()
-          ..addAll(ids),
-      );
-      if (!mounted) return;
     }
     Navigator.of(context).pop();
     widget.onDone(_composeNote(), List.of(_selectedEmotionIds));
@@ -123,12 +95,12 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
 
   @override
   Widget build(BuildContext context) {
-    final MindEmotionsPrompt emotionsPrompt = _emotionsPrompt;
     final bool canRecord = _attachedMedia == null && !_hasText && !kIsPhoneWeb && !_isEditing;
     final bool canAddImages = _images.length < kMaxMindImages && !kIsPhoneWeb && !_isEditing;
+    final bool canMarkEmotions = !_isEditing;
     return CallbackShortcuts(
       bindings: {
-        commandShortcut(LogicalKeyboardKey.enter): () => _save(emotionsPrompt),
+        commandShortcut(LogicalKeyboardKey.enter): _save,
         const SingleActivator(LogicalKeyboardKey.escape): _close,
       },
       child: Scaffold(
@@ -138,7 +110,7 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
           leading: IconButton(icon: const Icon(Icons.close), onPressed: _close),
           actions: [
             TextButton(
-              onPressed: () => _save(emotionsPrompt),
+              onPressed: _save,
               child: Text(context.l10n.save, style: const TextStyle(fontSize: 16.0, color: Colors.blueAccent)),
             ),
           ],
@@ -189,9 +161,12 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
                   height: 52.0,
                   child: Row(
                     children: [
-                      if (emotionsPrompt == MindEmotionsPrompt.button && !_isEditing)
-                        _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
                       const Spacer(),
+                      if (canMarkEmotions)
+                        Padding(
+                          padding: EdgeInsets.only(right: canAddImages || canRecord ? 12.0 : 0.0),
+                          child: _EmotionsButton(selectedIds: _selectedEmotionIds, onTap: _openMarkingSheet),
+                        ),
                       if (canAddImages)
                         Padding(
                           padding: EdgeInsets.only(right: canRecord ? 12.0 : 0.0),
@@ -282,8 +257,12 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> wi
   }
 }
 
-/// Opens the emotion sheet; shows the chosen emojis once there are some.
+/// Opens the emotion sheet. A round button beside the attach ones, set apart by a ring in the emotion colors;
+/// once emotions are chosen it grows into a pill of their emojis.
 final class _EmotionsButton extends StatelessWidget {
+  static const double _size = 52.0;
+  static const double _ring = 2.5;
+
   final List<String> selectedIds;
   final VoidCallback onTap;
 
@@ -295,11 +274,32 @@ final class _EmotionsButton extends StatelessWidget {
     final List<String> emojis = state is EmotionsList
         ? selectedIds.map(state.byId).whereType<Emotion>().map((emotion) => emotion.emoji).toList()
         : const [];
-    return OutlinedButton.icon(
-      onPressed: onTap,
-      style: OutlinedButton.styleFrom(minimumSize: const Size(52.0, 52.0), shape: const StadiumBorder()),
-      icon: emojis.isEmpty ? const Icon(Icons.add_reaction_outlined) : null,
-      label: Text(emojis.isEmpty ? context.l10n.emotions : emojis.join(' ')),
+    return Tooltip(
+      message: context.l10n.emotions,
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedSize(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+          child: Container(
+            height: _size,
+            constraints: const BoxConstraints(minWidth: _size),
+            padding: const EdgeInsets.all(_ring),
+            decoration: ShapeDecoration(
+              shape: const StadiumBorder(),
+              gradient: SweepGradient(colors: [...kEmotionPalette.take(7), kEmotionPalette.first]),
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: emojis.isEmpty ? 0.0 : 12.0),
+              alignment: Alignment.center,
+              decoration: const ShapeDecoration(shape: StadiumBorder(), color: Colors.white),
+              child: emojis.isEmpty
+                  ? const Icon(Icons.add_reaction_outlined, color: Colors.black)
+                  : Text(emojis.join(' '), style: const TextStyle(fontSize: 22.0)),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

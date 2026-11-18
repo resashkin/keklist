@@ -146,11 +146,6 @@ final class SettingsUpdateTileMotion extends SettingsEvent {
   const SettingsUpdateTileMotion({this.emojiMotion, this.resizeAnimation});
 }
 
-final class SettingsUpdateMindEmotionsPrompt extends SettingsEvent {
-  final MindEmotionsPrompt prompt;
-  const SettingsUpdateMindEmotionsPrompt({required this.prompt});
-}
-
 final class SettingsMarkShakeDiscovered extends SettingsEvent {
   final String screenId;
   const SettingsMarkShakeDiscovered({required this.screenId});

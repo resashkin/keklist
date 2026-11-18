@@ -46,7 +46,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
     on<SettingsUpdateCalendar>(_updateCalendar);
     on<SettingsUpdateStory>(_updateStory);
     on<SettingsResetTweaks>(_resetTweaks);
-    on<SettingsUpdateMindEmotionsPrompt>(_updateMindEmotionsPrompt);
     on<SettingsUpdateTileMotion>(_updateTileMotion);
     on<SettingsUpdateDayFeedArrangement>(_updateDayFeedArrangement);
     on<SettingsSetMediaHidden>(_setMediaHidden);
@@ -255,10 +254,6 @@ final class SettingsBloc extends Bloc<SettingsEvent, SettingsState> with Dispose
         gridResizeAnimation: event.resizeAnimation,
       ),
     );
-  }
-
-  FutureOr<void> _updateMindEmotionsPrompt(SettingsUpdateMindEmotionsPrompt event, Emitter<SettingsState> emit) async {
-    await _repository.updateSettings(_repository.value.copyWith(mindEmotionsPrompt: event.prompt));
   }
 
   FutureOr<void> _updateStory(SettingsUpdateStory event, Emitter<SettingsState> emit) async {

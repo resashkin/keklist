@@ -1071,18 +1071,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get aiChooseAnotherModel => 'Выбрать другую модель';
 
   @override
-  String get creatorEmotionsTitle => 'Эмоции';
-
-  @override
-  String get creatorEmotionsAfterSave => 'Спросить после сохранения';
-
-  @override
-  String get creatorEmotionsButton => 'Кнопка над клавиатурой';
-
-  @override
-  String get creatorEmotionsNever => 'Не спрашивать';
-
-  @override
   String get insightsWeekAgo => 'Неделю назад';
 
   @override

@@ -121,9 +121,6 @@ final class SettingsObject extends HiveObject {
   @HiveField(40)
   late String? avatarImagePath;
 
-  @HiveField(41, defaultValue: 0)
-  late int mindEmotionsPromptIndex;
-
   @HiveField(42, defaultValue: 0)
   late int tileEmojiMotionIndex;
 
@@ -246,8 +243,6 @@ final class SettingsObject extends HiveObject {
         whatsNewSeenRelease: whatsNewSeenRelease,
         whatsNewSeenAt: whatsNewSeenAtMs == null ? null : DateTime.fromMillisecondsSinceEpoch(whatsNewSeenAtMs!),
         reviewPromptedRelease: reviewPromptedRelease,
-        mindEmotionsPrompt:
-            MindEmotionsPrompt.values.elementAtOrNull(mindEmotionsPromptIndex) ?? MindEmotionsPrompt.afterSave,
         tileEmojiMotion: TileEmojiMotion.values.elementAtOrNull(tileEmojiMotionIndex) ?? TileEmojiMotion.drift,
         gridResizeAnimation:
             GridResizeAnimation.values.elementAtOrNull(gridResizeAnimationIndex) ?? GridResizeAnimation.fly,

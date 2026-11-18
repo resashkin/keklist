@@ -1032,18 +1032,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aiChooseAnotherModel => '別のモデルを選ぶ';
 
   @override
-  String get creatorEmotionsTitle => '感情';
-
-  @override
-  String get creatorEmotionsAfterSave => '保存後に尋ねる';
-
-  @override
-  String get creatorEmotionsButton => 'キーボードの上のボタン';
-
-  @override
-  String get creatorEmotionsNever => '尋ねない';
-
-  @override
   String get insightsWeekAgo => '1週間前';
 
   @override

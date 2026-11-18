@@ -2085,30 +2085,6 @@ abstract class AppLocalizations {
   /// **'Choose another model'**
   String get aiChooseAnotherModel;
 
-  /// Mind creator tweak sheet: title
-  ///
-  /// In en, this message translates to:
-  /// **'Emotions'**
-  String get creatorEmotionsTitle;
-
-  /// Mind creator tweak: ask for emotions after Save
-  ///
-  /// In en, this message translates to:
-  /// **'Ask after saving'**
-  String get creatorEmotionsAfterSave;
-
-  /// Mind creator tweak: an emotions button above the keyboard
-  ///
-  /// In en, this message translates to:
-  /// **'Button above the keyboard'**
-  String get creatorEmotionsButton;
-
-  /// Mind creator tweak: don't ask for emotions
-  ///
-  /// In en, this message translates to:
-  /// **'Don\'t ask'**
-  String get creatorEmotionsNever;
-
   /// Insights memories: a week ago
   ///
   /// In en, this message translates to:

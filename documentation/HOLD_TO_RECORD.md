@@ -17,6 +17,7 @@ Audio and round video are recorded like voice messages in Telegram. The round re
   - the lock hint above the button;
   - the send button over the button when locked;
   - for video, a dim scrim and the front-camera circle. There is no preview afterwards.
+    The circle is flipped horizontally so it matches the recorded (unmirrored) video, and stays blurred until `startVideoRecording` returns, so the sharp picture marks the real start.
 - Recorders:
   - `_AudioHoldRecorder` uses `record` with AAC 128 kbps 44.1 kHz into `createAudioFile()`. The duration comes from `AudioDurationExtractor`.
   - `_VideoHoldRecorder` uses `camera` (front, `ResolutionPreset.high`, with audio). It takes a still first and saves it as the thumbnail (`videoThumbnailPathFor`), then records into `createVideoFile(extension: 'mp4')`.

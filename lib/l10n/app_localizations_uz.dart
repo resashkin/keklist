@@ -1072,18 +1072,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get aiChooseAnotherModel => 'Boshqa model tanlash';
 
   @override
-  String get creatorEmotionsTitle => 'Hissiyotlar';
-
-  @override
-  String get creatorEmotionsAfterSave => 'Saqlagandan keyin so‘rash';
-
-  @override
-  String get creatorEmotionsButton => 'Klaviatura ustidagi tugma';
-
-  @override
-  String get creatorEmotionsNever => 'So‘ramaslik';
-
-  @override
   String get insightsWeekAgo => 'Bir hafta oldin';
 
   @override

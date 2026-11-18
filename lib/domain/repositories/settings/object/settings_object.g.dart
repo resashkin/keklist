@@ -79,9 +79,6 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
           : (fields[38] as num).toDouble()
       ..avatarEmoji = fields[39] as String?
       ..avatarImagePath = fields[40] as String?
-      ..mindEmotionsPromptIndex = fields[41] == null
-          ? 0
-          : (fields[41] as num).toInt()
       ..tileEmojiMotionIndex = fields[42] == null
           ? 0
           : (fields[42] as num).toInt()
@@ -135,7 +132,7 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
   @override
   void write(BinaryWriter writer, SettingsObject obj) {
     writer
-      ..writeByte(53)
+      ..writeByte(52)
       ..writeByte(3)
       ..write(obj.isDarkMode)
       ..writeByte(5)
@@ -200,8 +197,6 @@ class SettingsObjectAdapter extends TypeAdapter<SettingsObject> {
       ..write(obj.avatarEmoji)
       ..writeByte(40)
       ..write(obj.avatarImagePath)
-      ..writeByte(41)
-      ..write(obj.mindEmotionsPromptIndex)
       ..writeByte(42)
       ..write(obj.tileEmojiMotionIndex)
       ..writeByte(43)
