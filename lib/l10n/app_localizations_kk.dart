@@ -665,6 +665,9 @@ class AppLocalizationsKk extends AppLocalizations {
   String get emotions => 'Эмоциялар';
 
   @override
+  String get chooseEmotion => 'Эмоцияны таңдау';
+
+  @override
   String get archived => 'Мұрағат';
 
   @override

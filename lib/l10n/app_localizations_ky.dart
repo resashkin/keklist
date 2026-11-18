@@ -665,6 +665,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get emotions => 'Эмоциялар';
 
   @override
+  String get chooseEmotion => 'Эмоцияны тандоо';
+
+  @override
   String get archived => 'Архив';
 
   @override

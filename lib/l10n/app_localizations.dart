@@ -1341,6 +1341,12 @@ abstract class AppLocalizations {
   /// **'Emotions'**
   String get emotions;
 
+  /// Title of the emotion sheet when picking emotions for a mind
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an emotion'**
+  String get chooseEmotion;
+
   /// Title for the archived emotions screen and section
   ///
   /// In en, this message translates to:

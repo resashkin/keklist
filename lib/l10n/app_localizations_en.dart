@@ -659,6 +659,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emotions => 'Emotions';
 
   @override
+  String get chooseEmotion => 'Choose an emotion';
+
+  @override
   String get archived => 'Archived';
 
   @override

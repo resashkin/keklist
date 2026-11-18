@@ -642,6 +642,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get emotions => '情绪';
 
   @override
+  String get chooseEmotion => '选择情绪';
+
+  @override
   String get archived => '已归档';
 
   @override

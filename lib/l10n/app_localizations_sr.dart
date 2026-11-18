@@ -661,6 +661,9 @@ class AppLocalizationsSr extends AppLocalizations {
   String get emotions => 'Емоције';
 
   @override
+  String get chooseEmotion => 'Изабери емоцију';
+
+  @override
   String get archived => 'Архивирано';
 
   @override
@@ -2028,6 +2031,9 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get emotions => 'Emocije';
+
+  @override
+  String get chooseEmotion => 'Izaberi emociju';
 
   @override
   String get archived => 'Arhivirano';

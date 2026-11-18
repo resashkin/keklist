@@ -663,6 +663,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get emotions => 'Эмоции';
 
   @override
+  String get chooseEmotion => 'Выбрать эмоцию';
+
+  @override
   String get archived => 'Архив';
 
   @override

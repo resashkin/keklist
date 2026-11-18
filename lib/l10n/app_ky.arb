@@ -413,6 +413,7 @@
     "proUserFooter": "Сиз PRO колдонуучусуз. Кийинки {price} төлөм {date} болот.",
     "proUserLifetimeFooter": "Сиз түбөлүк PRO колдонуучусуз.",
     "emotions": "Эмоциялар",
+    "chooseEmotion": "Эмоцияны тандоо",
     "archived": "Архив",
     "archive": "Архивдөө",
     "restore": "Калыбына келтирүү",

@@ -413,6 +413,7 @@
     "proUserFooter": "Sei un utente PRO. Il prossimo pagamento di {price} sarà il {date}.",
     "proUserLifetimeFooter": "Sei un utente PRO a vita.",
     "emotions": "Emozioni",
+    "chooseEmotion": "Scegli un'emozione",
     "archived": "Archiviate",
     "archive": "Archivia",
     "restore": "Ripristina",

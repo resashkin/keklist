@@ -413,6 +413,7 @@
     "proUserFooter": "Siz PRO foydalanuvchisiz. Keyingi {price} to'lov {date} da bo'ladi.",
     "proUserLifetimeFooter": "Siz umrbod PRO foydalanuvchisiz.",
     "emotions": "Hissiyotlar",
+    "chooseEmotion": "Hissiyotni tanlash",
     "archived": "Arxivlangan",
     "archive": "Arxivlash",
     "restore": "Tiklash",

@@ -203,6 +203,7 @@
     "proUserFooter": "Ви сте PRO корисник. Следећа уплата {price} биће {date}.",
     "proUserLifetimeFooter": "Ви сте доживотни PRO корисник.",
     "emotions": "Емоције",
+    "chooseEmotion": "Изабери емоцију",
     "archived": "Архивирано",
     "archive": "Архивирај",
     "restore": "Врати",

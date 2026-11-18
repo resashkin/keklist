@@ -28,12 +28,16 @@ final class KekFloatingButton extends StatelessWidget {
   /// SF Symbol name for the native glass button (e.g. 'plus', 'arrow.up').
   final String sfSymbol;
 
+  /// Native glass wherever the platform has it, whatever the interface theme.
+  final bool alwaysGlass;
+
   const KekFloatingButton({
     super.key,
     required this.onPressed,
     required this.label,
     required this.fallbackIcon,
     required this.sfSymbol,
+    this.alwaysGlass = false,
   });
 
   @override
@@ -43,7 +47,7 @@ final class KekFloatingButton extends StatelessWidget {
       // Only data states carry the interface style; ignore transient states.
       buildWhen: (_, state) => state is SettingsDataState,
       builder: (context, state) {
-        if (_readUseLiquidGlass(state) && NativeLiquidGlassUtils.supportsLiquidGlass) {
+        if ((alwaysGlass || _readUseLiquidGlass(state)) && NativeLiquidGlassUtils.supportsLiquidGlass) {
           return NativeGlassHider(
             child: LiquidGlassButton(
               label: label,

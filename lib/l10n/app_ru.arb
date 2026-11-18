@@ -203,6 +203,7 @@
     "proUserFooter": "Вы PRO пользователь. Следующий платёж {price} будет {date}.",
     "proUserLifetimeFooter": "Вы PRO пользователь навсегда.",
     "emotions": "Эмоции",
+    "chooseEmotion": "Выбрать эмоцию",
     "archived": "Архив",
     "archive": "Архивировать",
     "restore": "Восстановить",

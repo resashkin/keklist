@@ -413,6 +413,7 @@
     "proUserFooter": "Сіз PRO қолданушысысыз. Келесі {price} төлем {date} күні болады.",
     "proUserLifetimeFooter": "Сіз мәңгілік PRO қолданушысыз.",
     "emotions": "Эмоциялар",
+    "chooseEmotion": "Эмоцияны таңдау",
     "archived": "Мұрағат",
     "archive": "Мұрағаттау",
     "restore": "Қалпына келтіру",

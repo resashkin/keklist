@@ -645,6 +645,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get emotions => '感情';
 
   @override
+  String get chooseEmotion => '感情を選ぶ';
+
+  @override
   String get archived => 'アーカイブ';
 
   @override

@@ -66,6 +66,9 @@ afterwards; the user builds depth by adding sub-emotions.
   the tag, **long-press** to drill into its children (chevron badge marks parents).
   A "Selected" section shows tagged emotions with full-lineage chips; a breadcrumb
   header + back button navigate up; "Setup emotions" opens management.
+  Current look: the root title reads "Choose an emotion" (`chooseEmotion`; "Emotions" in edit mode), edit mode
+  toggles from a pencil icon (a check while editing), and "Add emotion" is a native glass capsule
+  (`KekFloatingButton(alwaysGlass: true)`) floating over the end of the chips with no bar behind it.
 - **`EmotionsScreen`** — expandable tree. Parents expand inline; per-node overflow
   menu: add sub-emotion / edit / archive / delete. Each sibling group is a
   non-scrolling `ReorderableListView` for drag-reorder; overflow → Archived.

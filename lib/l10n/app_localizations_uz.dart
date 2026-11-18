@@ -667,6 +667,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get emotions => 'Hissiyotlar';
 
   @override
+  String get chooseEmotion => 'Hissiyotni tanlash';
+
+  @override
   String get archived => 'Arxivlangan';
 
   @override

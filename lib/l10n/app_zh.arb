@@ -203,6 +203,7 @@
     "proUserFooter": "您是PRO用户。下一次 {price} 的付款将于 {date} 进行。",
     "proUserLifetimeFooter": "您是终身PRO用户。",
     "emotions": "情绪",
+    "chooseEmotion": "选择情绪",
     "archived": "已归档",
     "archive": "归档",
     "restore": "恢复",

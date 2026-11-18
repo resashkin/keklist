@@ -880,6 +880,10 @@
     "@emotions": {
         "description": "Emotions feature title"
     },
+    "chooseEmotion": "Choose an emotion",
+    "@chooseEmotion": {
+        "description": "Title of the emotion sheet when picking emotions for a mind"
+    },
     "archived": "Archived",
     "@archived": {
         "description": "Title for the archived emotions screen and section"

@@ -203,6 +203,7 @@
     "proUserFooter": "あなたはPROユーザーです。次の支払い {price} は {date} に予定されています。",
     "proUserLifetimeFooter": "あなたは永久PROユーザーです。",
     "emotions": "感情",
+    "chooseEmotion": "感情を選ぶ",
     "archived": "アーカイブ",
     "archive": "アーカイブ",
     "restore": "復元",
