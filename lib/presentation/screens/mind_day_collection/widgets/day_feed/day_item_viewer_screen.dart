@@ -537,6 +537,15 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // A gallery item's emotions sit above its comments, so picking them never squeezes the input row.
+        if (root == null)
+          _GalleryEmotionsBuilder(
+            find: () => _emotionTagOf(rootId),
+            builder: (context, tag) => _GalleryEmotionsRow(
+              emotionIds: tag?.emotionIds ?? const [],
+              onTap: () => _editGalleryEmotions(rootId: rootId, dayIndex: dayIndex, tag: tag),
+            ),
+          ),
         MindReplies(
           rootId: rootId,
           menu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
@@ -574,15 +583,12 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
               left: false,
               child: root != null
                   ? _EmotionsHeartButton(onTap: () => _editEmotions(_liveMind(root.id) ?? root))
-                  : BlocBuilder<MindBloc, MindState>(
-                      buildWhen: (_, current) => current is MindList,
-                      builder: (context, _) {
-                        final Mind? tag = _emotionTagOf(rootId);
-                        return _EmotionsHeartButton(
-                          emotionIds: tag?.emotionIds ?? const [],
-                          onTap: () => _editGalleryEmotions(rootId: rootId, dayIndex: dayIndex, tag: tag),
-                        );
-                      },
+                  : _GalleryEmotionsBuilder(
+                      find: () => _emotionTagOf(rootId),
+                      builder: (context, tag) => _EmotionsHeartButton(
+                        isFilled: tag?.emotionIds.isNotEmpty ?? false,
+                        onTap: () => _editGalleryEmotions(rootId: rootId, dayIndex: dayIndex, tag: tag),
+                      ),
                     ),
             ),
           ],
@@ -1169,47 +1175,90 @@ final class _Loading extends StatelessWidget {
 
 /// One entry of a story menu, shown both as the ⋯ menu and as a comment's context menu.
 /// Beside the comment bar, like a like: opens the emotions of the mind.
+/// Rebuilds with the emotion tag of a gallery item whenever the minds change.
+final class _GalleryEmotionsBuilder extends StatelessWidget {
+  final Mind? Function() find;
+  final Widget Function(BuildContext context, Mind? tag) builder;
+
+  const _GalleryEmotionsBuilder({required this.find, required this.builder});
+
+  @override
+  Widget build(BuildContext context) => BlocBuilder<MindBloc, MindState>(
+    buildWhen: (_, current) => current is MindList,
+    builder: (context, _) => builder(context, find()),
+  );
+}
+
+/// The emojis of a gallery photo's emotions above its comments; a tap changes them.
+final class _GalleryEmotionsRow extends StatelessWidget {
+  final List<String> emotionIds;
+  final VoidCallback onTap;
+
+  const _GalleryEmotionsRow({required this.emotionIds, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final EmotionState state = context.watch<EmotionBloc>().state;
+    final List<Emotion> emotions = state is EmotionsList
+        ? emotionIds.map(state.byId).whereType<Emotion>().toList()
+        : const [];
+    if (emotions.isEmpty) return const SizedBox.shrink();
+    final (:background, :foreground) = storyColorsOf(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Wrap(
+            spacing: 6.0,
+            runSpacing: 6.0,
+            children: [
+              for (final Emotion emotion in emotions)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                  decoration: ShapeDecoration(
+                    shape: const StadiumBorder(),
+                    color: Color.alphaBlend(foreground.withValues(alpha: 0.1), background).withValues(alpha: 0.85),
+                  ),
+                  child: Text('${emotion.emoji} ${emotion.title}', style: TextStyle(color: foreground, fontSize: 13.0)),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 final class _EmotionsHeartButton extends StatelessWidget {
   final VoidCallback onTap;
 
-  /// Shown as emojis in place of the heart, for a gallery item whose emotions aren't drawn anywhere else.
-  final List<String> emotionIds;
+  /// Filled once a gallery item has emotions, which show above its comments.
+  final bool isFilled;
 
-  const _EmotionsHeartButton({required this.onTap, this.emotionIds = const []});
+  const _EmotionsHeartButton({required this.onTap, this.isFilled = false});
 
   @override
   Widget build(BuildContext context) {
     final (:background, :foreground) = storyColorsOf(context);
     const double size = 48.0;
-    final EmotionState emotionState = context.watch<EmotionBloc>().state;
-    final List<String> emojis = emotionState is EmotionsList
-        ? emotionIds.map(emotionState.byId).whereType<Emotion>().map((emotion) => emotion.emoji).toList()
-        : const [];
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 4.0, 12.0, 10.0),
       child: Material(
         color: Color.alphaBlend(foreground.withValues(alpha: 0.1), background),
-        shape: const StadiumBorder(),
+        shape: const CircleBorder(),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,
-          child: emojis.isEmpty
-              ? SizedBox.square(
-                  dimension: size,
-                  child: Icon(Icons.favorite_border_rounded, color: foreground.withValues(alpha: 0.85), size: 22.0),
-                )
-              : Container(
-                  height: size,
-                  constraints: const BoxConstraints(minWidth: size, maxWidth: 140.0),
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  alignment: Alignment.center,
-                  child: Text(
-                    emojis.join(' '),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 20.0),
-                  ),
-                ),
+          child: SizedBox.square(
+            dimension: size,
+            child: Icon(
+              isFilled ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+              color: foreground.withValues(alpha: 0.85),
+              size: 22.0,
+            ),
+          ),
         ),
       ),
     );

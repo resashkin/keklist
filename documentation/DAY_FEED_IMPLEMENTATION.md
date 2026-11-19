@@ -65,8 +65,9 @@ Hive like any comment, so backups, export and the web version carry them with no
 A gallery photo or video can be marked with emotions from the heart button. They are stored as an **emotion tag**: an
 empty reflection mind on the item's feed id carrying `emotionIds` (`Mind.isEmotionTag`: empty note and a root id
 starting with `asset_`, `file_` or `saf_`). Tags are left out of comment lists and reflection counts. The sheet's picks
-are applied once it closes: create the tag, update it, or delete it when nothing is left picked. The heart shows the
-picked emojis instead of the icon. Insights don't count tags yet (they only look at root minds).
+are applied once it closes: create the tag, update it, or delete it when nothing is left picked. The heart keeps its
+size (filled once there are emotions); the picked emotions show as chips above the comments, and a tap on them opens
+the sheet again. Insights don't count tags yet (they only look at root minds).
 
 A tap anywhere outside the comment bar hides the keyboard (`TextField.onTapOutside`); the bar's own buttons share its
 `TapRegion` group, so sending or attaching keeps it up. Code that counts or groups reflections by `rootId` treats these like reflections of a missing mind
