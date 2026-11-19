@@ -64,6 +64,23 @@ class AppFileRepository {
     return '$_imageFolderName/$fileName';
   }
 
+  /// Moves a file (a compressed gallery video, its preview) in with the images and returns its app-relative path.
+  /// [name] keeps a preview next to its video; a fresh one is made otherwise.
+  Future<String> moveIntoImages(File source, {required String extension, String? name}) async {
+    final Directory userRoot = await _ensureUserRoot();
+    final Directory imageDirectory = Directory('${userRoot.path}/$_imageFolderName');
+    await imageDirectory.create(recursive: true);
+    final String fileName = '${name ?? const Uuid().v4()}.$extension';
+    final String target = '${imageDirectory.path}/$fileName';
+    try {
+      await source.rename(target);
+    } on FileSystemException {
+      await source.copy(target);
+      await source.delete();
+    }
+    return '$_imageFolderName/$fileName';
+  }
+
   /// Copies the picked photo in as the only avatar file and returns its app-relative path.
   Future<String> saveAvatarImage(File source) async {
     final Directory userRoot = await _ensureUserRoot();

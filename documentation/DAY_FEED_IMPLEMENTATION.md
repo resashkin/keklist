@@ -54,6 +54,16 @@ There used to be a second "Sources" mode (a stack of minds, photo, folder and we
 
 Voice and round-video minds last as long as their recording (see `MEDIA_MINDS_IMPLEMENTATION.md`).
 
+### Comments on gallery photos and videos
+
+Every story page has the reply bar, not only minds. A phone photo or video has no mind of its own, so its comments are
+ordinary reflection minds whose `rootId` is the item's feed id (`DayFeedAsset.id` = `asset_<localIdentifier>`,
+`DayFeedFolderMedia.id` = `file_<path>` / `saf_<uri>`) and whose `dayIndex` is the day the photo was taken. They live in
+Hive like any comment, so backups, export and the web version carry them with no new model. `MindComments.save` /
+`sendRecording` and `MindReplies` take a `rootId` and a `dayIndex` instead of a root mind. Gallery pages have no
+emotions heart. Code that counts or groups reflections by `rootId` treats these like reflections of a missing mind
+(none of it assumes the root exists). If the photo is deleted from the phone, its comments stay in the data unseen.
+
 ### Video sound
 
 Videos start muted. They are unmuted by the speaker icon or by pressing a hardware volume button (`flutter_volume_controller` listener). The mute state lives in a static field, so it is remembered until the app restarts. iOS exposes no API for the ring/silent switch, so it is not consulted.

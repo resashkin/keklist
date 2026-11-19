@@ -421,5 +421,7 @@
     "imageFromCamera": "Kamera",
     "attachImages": "Fotos hinzufügen",
     "newMindWithPhoto": "Neue Notiz mit diesem Foto",
-    "recordSlideToCancel": "Zum Abbrechen wischen"
+    "recordSlideToCancel": "Zum Abbrechen wischen",
+    "videoCompressing": "Video wird komprimiert…",
+    "videoTooLong": "Videos über {seconds} s werden nicht angehängt"
 }

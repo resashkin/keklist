@@ -1385,4 +1385,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recordSlideToCancel => 'Zum Abbrechen wischen';
+
+  @override
+  String get videoCompressing => 'Video wird komprimiert…';
+
+  @override
+  String videoTooLong(int seconds) {
+    return 'Videos über $seconds s werden nicht angehängt';
+  }
 }

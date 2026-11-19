@@ -65,5 +65,21 @@ void main() {
       expect(content.hasImages, isFalse);
       expect(content.plainText.trim(), 'text');
     });
+
+    test('a gallery video is told apart by its extension and keeps a preview next to it', () {
+      const MindNoteImage video = MindNoteImage(appRelativePath: 'image/v.mp4');
+      const MindNoteImage photo = MindNoteImage(appRelativePath: 'image/p.jpg');
+
+      expect(video.isVideo, isTrue);
+      expect(video.previewRelativePath, 'image/v.jpg');
+      expect(photo.isVideo, isFalse);
+      expect(photo.previewRelativePath, 'image/p.jpg');
+    });
+
+    test('media file paths include a video preview', () {
+      final MindNoteContent content = MindNoteContent.parse('<kekimage path="image/v.mov"/><kekimage path="image/p.jpg"/>');
+
+      expect(content.mediaFilePaths, ['image/v.mov', 'image/v.jpg', 'image/p.jpg']);
+    });
   });
 }

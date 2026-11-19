@@ -30,29 +30,40 @@ abstract final class MindComments {
     return state is MindList ? mindReflectionsOf(state.values, rootId) : const [];
   }
 
-  static void save(BuildContext context, Mind root, String text, {List<MindNoteImage> images = const []}) {
+  /// [rootId] is a mind's id, or a gallery item's day feed id (`asset_…`, `file_…`) for comments on a phone photo.
+  static void save(
+    BuildContext context, {
+    required String rootId,
+    required int dayIndex,
+    required String text,
+    List<MindNoteImage> images = const [],
+  }) {
     final String trimmed = text.trim();
     if (trimmed.isEmpty && images.isEmpty) return;
     final List<BaseMindNotePiece> pieces = [
       ...images,
       if (trimmed.isNotEmpty) MindNoteText(images.isEmpty ? trimmed : '\n$trimmed'),
     ];
-    context.read<MindBloc>().add(MindCreate(dayIndex: root.dayIndex, mindContent: pieces, rootId: root.id));
+    context.read<MindBloc>().add(MindCreate(dayIndex: dayIndex, mindContent: pieces, rootId: rootId));
   }
 
-  static void sendRecording(BuildContext context, Mind root, BaseMindNotePiece media) =>
-      context.read<MindBloc>().add(MindCreate(dayIndex: root.dayIndex, mindContent: [media], rootId: root.id));
+  static void sendRecording(
+    BuildContext context, {
+    required String rootId,
+    required int dayIndex,
+    required BaseMindNotePiece media,
+  }) => context.read<MindBloc>().add(MindCreate(dayIndex: dayIndex, mindContent: [media], rootId: rootId));
 }
 
 /// The mind's comments over the story, newest at the bottom: about three show, older ones scroll up and fade out
 /// at the top. Long-press a comment for its [menu].
 final class MindReplies extends StatelessWidget {
-  final Mind root;
+  final String rootId;
   final List<MenuElement> Function(Mind comment) menu;
   final VoidCallback? onImagesOpened;
   final VoidCallback? onImagesClosed;
 
-  const MindReplies({super.key, required this.root, required this.menu, this.onImagesOpened, this.onImagesClosed});
+  const MindReplies({super.key, required this.rootId, required this.menu, this.onImagesOpened, this.onImagesClosed});
 
   static const double _fadeSpace = 48.0;
 
@@ -68,7 +79,7 @@ final class MindReplies extends StatelessWidget {
     return BlocBuilder<MindBloc, MindState>(
       buildWhen: (_, current) => current is MindList,
       builder: (context, state) {
-        final List<Mind> comments = state is MindList ? mindReflectionsOf(state.values, root.id) : const [];
+        final List<Mind> comments = state is MindList ? mindReflectionsOf(state.values, rootId) : const [];
         if (comments.isEmpty) return const SizedBox.shrink();
         return ConstrainedBox(
           constraints: BoxConstraints(maxHeight: _maxHeight(story)),

@@ -421,5 +421,7 @@
     "imageFromCamera": "カメラ",
     "attachImages": "写真を追加",
     "newMindWithPhoto": "この写真で新しいメモ",
-    "recordSlideToCancel": "スライドでキャンセル"
+    "recordSlideToCancel": "スライドでキャンセル",
+    "videoCompressing": "動画を圧縮中…",
+    "videoTooLong": "{seconds}秒より長い動画は添付できません"
 }

@@ -421,5 +421,7 @@
     "imageFromCamera": "相机",
     "attachImages": "添加照片",
     "newMindWithPhoto": "用这张照片新建笔记",
-    "recordSlideToCancel": "滑动取消"
+    "recordSlideToCancel": "滑动取消",
+    "videoCompressing": "正在压缩视频…",
+    "videoTooLong": "超过 {seconds} 秒的视频无法添加"
 }

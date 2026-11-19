@@ -1378,4 +1378,12 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get recordSlideToCancel => 'Bekor qilish uchun suring';
+
+  @override
+  String get videoCompressing => 'Video siqilmoqda…';
+
+  @override
+  String videoTooLong(int seconds) {
+    return '$seconds soniyadan uzun videolar biriktirilmaydi';
+  }
 }

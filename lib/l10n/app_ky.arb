@@ -631,5 +631,7 @@
     "imageFromCamera": "Камера",
     "attachImages": "Сүрөт кошуу",
     "newMindWithPhoto": "Ушул сүрөт менен жаңы жазуу",
-    "recordSlideToCancel": "Жокко чыгаруу үчүн сүрүңүз"
+    "recordSlideToCancel": "Жокко чыгаруу үчүн сүрүңүз",
+    "videoCompressing": "Видео кысылууда…",
+    "videoTooLong": "{seconds} сек узун видеолор тиркелбейт"
 }

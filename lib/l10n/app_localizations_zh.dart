@@ -1325,4 +1325,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get recordSlideToCancel => '滑动取消';
+
+  @override
+  String get videoCompressing => '正在压缩视频…';
+
+  @override
+  String videoTooLong(int seconds) {
+    return '超过 $seconds 秒的视频无法添加';
+  }
 }

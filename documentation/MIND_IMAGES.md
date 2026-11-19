@@ -1,7 +1,7 @@
 # Images in Minds
 
 ## Overview
-A mind (and a reply in a story) can carry up to 10 photos from the photo library or the camera. Text stays the
+A mind (and a reply in a story) can carry up to 10 photos and videos from the photo library, or photos from the camera. Text stays the
 main part of a mind: the day feed only marks that a mind has images, and the story shows them as a card above the
 text. Images are free for everyone.
 
@@ -14,6 +14,20 @@ text. Images are free for everyone.
   and export/import and the web server pick them up.
 - `AppFileRepository.saveImage(bytes)` writes to `user_files/image`; `image` is in `mediaFolderNames` (backups).
   `WebFileRepository` (phone web) refuses it: the web version shows images but can't add them.
+
+### Gallery videos
+- A video is a `MindNoteImage` whose path ends in `.mp4` / `.mov` / `.m4v` (`isVideo`), stored in the same
+  `<kekimage path="image/<uuid>.mp4"/>` tag, so it shares the 10-item limit, the strip, the grid and the carousel.
+  Older app versions see it as a broken image instead of raw text.
+- Its first frame is saved next to it as `image/<uuid>.jpg` (`previewRelativePath`, `videoThumbnailPathFor`);
+  `mediaFilePaths` lists both, so deleting, backups and the web server carry the preview along.
+- Picking: the gallery picker (`pickMedia` / `pickMultipleMedia`) offers photos and videos. Videos longer than
+  `kMaxAttachedVideoLength` (60 s) are skipped with a snackbar (`videoTooLong`). The rest are re-encoded to 720p by
+  `video_compress` (`VideoQuality.Res1280x720Quality`, audio kept) under a "Compressing video…" dialog, then moved into
+  `user_files/image` (`AppFileRepository.moveIntoImages`). The camera option still takes photos only.
+- Showing: `MindImageView` draws the preview with a ▶ badge everywhere. `MindImagesFullscreen` plays the video
+  (`_FullscreenVideo`) with sound, looping, tap to pause, drag down to close. The story carousel shows the preview;
+  a tap opens it full-screen.
 
 ### 2. Picking (`lib/presentation/core/widgets/images/mind_images.dart`)
 - `pickMindImages` asks "Photo library / Camera" (adaptive action sheet) and saves copies.

@@ -631,5 +631,7 @@
     "imageFromCamera": "Kamera",
     "attachImages": "Dodaj fotografije",
     "newMindWithPhoto": "Nova beleška sa ovom fotografijom",
-    "recordSlideToCancel": "Prevuci za otkazivanje"
+    "recordSlideToCancel": "Prevuci za otkazivanje",
+    "videoCompressing": "Sažimam video…",
+    "videoTooLong": "Video duži od {seconds} s se ne prilaže"
 }

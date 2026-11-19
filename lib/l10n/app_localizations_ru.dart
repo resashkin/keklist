@@ -1380,4 +1380,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get recordSlideToCancel => 'Влево — отмена';
+
+  @override
+  String get videoCompressing => 'Сжимаю видео…';
+
+  @override
+  String videoTooLong(int seconds) {
+    return 'Видео длиннее $seconds с не прикрепляются';
+  }
 }

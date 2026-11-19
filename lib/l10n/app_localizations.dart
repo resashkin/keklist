@@ -2654,6 +2654,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Slide to cancel'**
   String get recordSlideToCancel;
+
+  /// Shown while picked gallery videos are compressed before attaching
+  ///
+  /// In en, this message translates to:
+  /// **'Compressing video…'**
+  String get videoCompressing;
+
+  /// Snackbar when picked gallery videos are too long to attach
+  ///
+  /// In en, this message translates to:
+  /// **'Videos longer than {seconds} s are not attached'**
+  String videoTooLong(int seconds);
 }
 
 class _AppLocalizationsDelegate

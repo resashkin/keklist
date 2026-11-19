@@ -14,27 +14,102 @@ import 'package:keklist/presentation/core/helpers/media_sources.dart';
 import 'package:keklist/presentation/core/helpers/phone_orientation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:uuid/uuid.dart';
+import 'package:video_compress/video_compress.dart';
+import 'package:video_player/video_player.dart';
 
-/// Picks photos for a mind and keeps copies in `user_files/image`. See `documentation/MIND_IMAGES.md`.
+/// What came of a gallery pick: the saved photos and videos, and how many videos were too long to attach.
+typedef GalleryPick = ({List<MindNoteImage> images, int tooLongVideos});
+
+/// Picks photos and videos for a mind and keeps copies in `user_files/image`. See `documentation/MIND_IMAGES.md`.
 final class MindImageAttaching {
   static const double _maxSide = 2048.0;
   static const int _quality = 85;
 
-  static Future<List<MindNoteImage>> pickFromGallery(BuildContext context, {required int limit}) async {
-    if (limit <= 0) return const [];
+  static Future<GalleryPick> pickFromGallery(BuildContext context, {required int limit}) async {
+    if (limit <= 0) return (images: const <MindNoteImage>[], tooLongVideos: 0);
     final AppFileRepository files = context.read<AppFileRepository>();
     final ImagePicker picker = ImagePicker();
     final List<XFile> picked = limit == 1
-        ? [
-            ?await picker.pickImage(
-              source: ImageSource.gallery,
-              maxWidth: _maxSide,
-              maxHeight: _maxSide,
-              imageQuality: _quality,
+        ? [?await picker.pickMedia(maxWidth: _maxSide, maxHeight: _maxSide, imageQuality: _quality)]
+        : await picker.pickMultipleMedia(maxWidth: _maxSide, maxHeight: _maxSide, imageQuality: _quality, limit: limit);
+    final List<XFile> chosen = picked.take(limit).toList();
+    if (!chosen.any(_isVideo) || !context.mounted) return (images: await _save(files, chosen), tooLongVideos: 0);
+    // Compressing takes a few seconds per video, so the screen says so meanwhile.
+    final NavigatorState navigator = Navigator.of(context, rootNavigator: true);
+    unawaited(
+      showDialog<void>(
+        context: context,
+        useRootNavigator: true,
+        barrierDismissible: false,
+        builder: (context) => PopScope(
+          canPop: false,
+          child: AlertDialog(
+            content: Row(
+              spacing: 16.0,
+              children: [
+                const CircularProgressIndicator.adaptive(),
+                Expanded(child: Text(context.l10n.videoCompressing)),
+              ],
             ),
-          ]
-        : await picker.pickMultiImage(maxWidth: _maxSide, maxHeight: _maxSide, imageQuality: _quality, limit: limit);
-    return _save(files, picked.take(limit));
+          ),
+        ),
+      ),
+    );
+    final List<MindNoteImage> images = [];
+    int tooLong = 0;
+    try {
+      for (final XFile file in chosen) {
+        if (!_isVideo(file)) {
+          images.addAll(await _save(files, [file]));
+          continue;
+        }
+        final MindNoteImage? video = await _saveVideo(files, file);
+        if (video == null) {
+          tooLong += await _isTooLong(file) ? 1 : 0;
+        } else {
+          images.add(video);
+        }
+      }
+    } finally {
+      navigator.pop();
+    }
+    return (images: images, tooLongVideos: tooLong);
+  }
+
+  static bool _isVideo(XFile file) =>
+      MindNoteImage(appRelativePath: file.name).isVideo || (file.mimeType?.startsWith('video/') ?? false);
+
+  static Future<bool> _isTooLong(XFile file) async {
+    final MediaInfo info = await VideoCompress.getMediaInfo(file.path);
+    return (info.duration ?? 0.0) > kMaxAttachedVideoLength.inMilliseconds + 500;
+  }
+
+  /// Squeezes the video to 720p and keeps its first frame next to it; null when it is too long or fails.
+  static Future<MindNoteImage?> _saveVideo(AppFileRepository files, XFile file) async {
+    try {
+      if (await _isTooLong(file)) return null;
+      final MediaInfo? compressed = await VideoCompress.compressVideo(
+        file.path,
+        quality: VideoQuality.Res1280x720Quality,
+        includeAudio: true,
+      );
+      final String? output = compressed?.path;
+      if (output == null) return null;
+      final Uint8List? frame = await VideoCompress.getByteThumbnail(output, quality: 85, position: 0);
+      final String name = const Uuid().v4();
+      final String path = await files.moveIntoImages(File(output), extension: output.split('.').last, name: name);
+      if (frame != null) {
+        final File temporary = File('${Directory.systemTemp.path}/$name.jpg');
+        await temporary.writeAsBytes(frame, flush: true);
+        await files.moveIntoImages(temporary, extension: 'jpg', name: name);
+      }
+      return MindNoteImage(appRelativePath: path);
+    } catch (_) {
+      return null;
+    } finally {
+      unawaited(VideoCompress.deleteAllCache());
+    }
   }
 
   static Future<List<MindNoteImage>> takePhoto(BuildContext context) async {
@@ -61,8 +136,10 @@ final class MindImageAttaching {
   /// Images never saved into a mind are removed right away.
   static Future<void> discard(AppFileRepository files, Iterable<MindNoteImage> images) async {
     for (final MindNoteImage image in images) {
-      final File file = File(await files.resolveAbsolutePath(image.appRelativePath));
-      if (await file.exists()) await file.delete();
+      for (final String path in {image.appRelativePath, image.previewRelativePath}) {
+        final File file = File(await files.resolveAbsolutePath(path));
+        if (await file.exists()) await file.delete();
+      }
     }
   }
 
@@ -81,7 +158,7 @@ final class MindImageAttaching {
   }
 }
 
-/// Asks where the photos come from and returns the saved ones.
+/// Asks where the photos come from and returns the saved ones; gallery videos come along, squeezed.
 Future<List<MindNoteImage>> pickMindImages(
   BuildContext context, {
   required int limit,
@@ -96,10 +173,16 @@ Future<List<MindNoteImage>> pickMindImages(
     ],
   );
   if (source == null || !context.mounted) return const [];
-  final List<MindNoteImage> images = await switch (source) {
-    ImageSource.gallery => MindImageAttaching.pickFromGallery(context, limit: limit),
-    ImageSource.camera => MindImageAttaching.takePhoto(context),
+  final GalleryPick pick = switch (source) {
+    ImageSource.gallery => await MindImageAttaching.pickFromGallery(context, limit: limit),
+    ImageSource.camera => (images: await MindImageAttaching.takePhoto(context), tooLongVideos: 0),
   };
+  final List<MindNoteImage> images = pick.images;
+  if (pick.tooLongVideos > 0 && context.mounted) {
+    ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+      SnackBar(content: Text(context.l10n.videoTooLong(kMaxAttachedVideoLength.inSeconds))),
+    );
+  }
   Analytics.imagesAttached(
     images.length,
     source: source == ImageSource.camera ? ImageAttachSource.camera : ImageAttachSource.gallery,
@@ -117,21 +200,44 @@ final class MindImageView extends StatelessWidget {
   const MindImageView({super.key, required this.image, this.fit = BoxFit.cover, this.cacheWidth});
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<String>(
-    future: context.read<AppFileRepository>().resolveAbsolutePath(image.appRelativePath),
-    builder: (context, snapshot) {
-      final String? path = snapshot.data;
-      if (path == null) return const SizedBox.shrink();
-      return imageFor(
-        path,
-        fit: fit,
-        width: double.infinity,
-        height: double.infinity,
-        cacheWidth: cacheWidth,
-        errorBuilder: (_, _, _) => const Center(child: Icon(Icons.broken_image_outlined, color: Colors.white38)),
-      );
-    },
-  );
+  Widget build(BuildContext context) {
+    final Widget preview = FutureBuilder<String>(
+      future: context.read<AppFileRepository>().resolveAbsolutePath(image.previewRelativePath),
+      builder: (context, snapshot) {
+        final String? path = snapshot.data;
+        if (path == null) return const SizedBox.shrink();
+        return imageFor(
+          path,
+          fit: fit,
+          width: double.infinity,
+          height: double.infinity,
+          cacheWidth: cacheWidth,
+          errorBuilder: (_, _, _) => const Center(child: Icon(Icons.broken_image_outlined, color: Colors.white38)),
+        );
+      },
+    );
+    if (!image.isVideo) return preview;
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        preview,
+        const Center(
+          child: FractionallySizedBox(
+            widthFactor: 0.28,
+            child: FittedBox(
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.black45, shape: BoxShape.circle),
+                child: Padding(
+                  padding: EdgeInsets.all(6.0),
+                  child: Icon(Icons.play_arrow_rounded, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 /// Images full-screen: swipe between them, pinch to zoom, drag down to close.
@@ -217,13 +323,19 @@ final class _MindImagesFullscreenState extends State<MindImagesFullscreen> {
                   _index = index;
                   _isZoomed = false;
                 }),
-                itemBuilder: (_, index) => InteractiveViewer(
-                  transformationController: _zoomAt(index),
-                  maxScale: 5.0,
-                  onInteractionUpdate: _onInteractionUpdate,
-                  onInteractionEnd: (_) => _onInteractionEnd(index),
-                  child: MindImageView(image: widget.images[index], fit: BoxFit.contain),
-                ),
+                itemBuilder: (_, index) => widget.images[index].isVideo
+                    ? GestureDetector(
+                        onVerticalDragUpdate: (details) => setState(() => _dragY += details.delta.dy),
+                        onVerticalDragEnd: (_) => _onInteractionEnd(index),
+                        child: _FullscreenVideo(video: widget.images[index], isCurrent: index == _index),
+                      )
+                    : InteractiveViewer(
+                        transformationController: _zoomAt(index),
+                        maxScale: 5.0,
+                        onInteractionUpdate: _onInteractionUpdate,
+                        onInteractionEnd: (_) => _onInteractionEnd(index),
+                        child: MindImageView(image: widget.images[index], fit: BoxFit.contain),
+                      ),
               ),
             ),
             SafeArea(
@@ -247,6 +359,84 @@ final class _MindImagesFullscreenState extends State<MindImagesFullscreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// An attached gallery video full-screen: plays with sound and loops while its page is showing; a tap pauses it.
+final class _FullscreenVideo extends StatefulWidget {
+  final MindNoteImage video;
+  final bool isCurrent;
+
+  const _FullscreenVideo({required this.video, required this.isCurrent});
+
+  @override
+  State<_FullscreenVideo> createState() => _FullscreenVideoState();
+}
+
+final class _FullscreenVideoState extends State<_FullscreenVideo> {
+  VideoPlayerController? _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    unawaited(_load());
+  }
+
+  Future<void> _load() async {
+    final String path = await context.read<AppFileRepository>().resolveAbsolutePath(widget.video.appRelativePath);
+    final VideoPlayerController controller = videoControllerFor(path);
+    try {
+      await controller.initialize();
+      await controller.setLooping(true);
+    } catch (_) {
+      await controller.dispose();
+      return;
+    }
+    if (!mounted) {
+      await controller.dispose();
+      return;
+    }
+    setState(() => _controller = controller);
+    if (widget.isCurrent) await controller.play();
+  }
+
+  @override
+  void didUpdateWidget(_FullscreenVideo oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isCurrent == widget.isCurrent) return;
+    widget.isCurrent ? _controller?.play() : _controller?.pause();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final VideoPlayerController? controller = _controller;
+    if (controller == null) return MindImageView(image: widget.video, fit: BoxFit.contain);
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => controller.value.isPlaying ? controller.pause() : controller.play(),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          AspectRatio(aspectRatio: controller.value.aspectRatio, child: VideoPlayer(controller)),
+          ValueListenableBuilder<VideoPlayerValue>(
+            valueListenable: controller,
+            builder: (_, value, _) => value.isPlaying
+                ? const SizedBox.shrink()
+                : Container(
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle),
+                    child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 40.0),
+                  ),
+          ),
+        ],
       ),
     );
   }

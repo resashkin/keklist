@@ -631,5 +631,7 @@
     "imageFromCamera": "Kamera",
     "attachImages": "Rasm qo‘shish",
     "newMindWithPhoto": "Shu rasm bilan yangi yozuv",
-    "recordSlideToCancel": "Bekor qilish uchun suring"
+    "recordSlideToCancel": "Bekor qilish uchun suring",
+    "videoCompressing": "Video siqilmoqda…",
+    "videoTooLong": "{seconds} soniyadan uzun videolar biriktirilmaydi"
 }

@@ -421,5 +421,7 @@
     "imageFromCamera": "Камера",
     "attachImages": "Добавить фото",
     "newMindWithPhoto": "Новая заметка с этим фото",
-    "recordSlideToCancel": "Влево — отмена"
+    "recordSlideToCancel": "Влево — отмена",
+    "videoCompressing": "Сжимаю видео…",
+    "videoTooLong": "Видео длиннее {seconds} с не прикрепляются"
 }

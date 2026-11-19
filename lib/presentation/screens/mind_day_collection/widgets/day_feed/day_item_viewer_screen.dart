@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
+import 'package:keklist/presentation/core/helpers/date_utils.dart' as kek_date;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -311,7 +312,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     final DayFeedItem item = _currentItem;
     final EdgeInsets safe = MediaQuery.paddingOf(context);
     // Pages fill the whole screen so the texture runs behind the header and the comment bar.
-    final double commentSpace = item is DayFeedMind ? _kReplyBarHeight : 0.0;
+    const double commentSpace = _kReplyBarHeight;
     final EdgeInsets contentInsets = EdgeInsets.only(top: safe.top + _kHeaderSpace, bottom: safe.bottom + commentSpace);
     final Widget story = NotificationListener<ScrollNotification>(
       onNotification: _onScroll,
@@ -377,7 +378,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                 Positioned.fill(
                   child: GestureDetector(behavior: HitTestBehavior.opaque, onTap: _replyFocus.unfocus),
                 ),
-              if (item is DayFeedMind) Positioned(left: 0.0, right: 0.0, bottom: 0.0, child: _buildReplies(item.mind)),
+              Positioned(left: 0.0, right: 0.0, bottom: 0.0, child: _buildReplies(item)),
             ],
           ),
         ),
@@ -525,13 +526,17 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     ),
   );
 
-  Widget _buildReplies(Mind root) {
+  /// A gallery photo or video has no mind of its own, so its comments hang on its feed id, on the day it was taken.
+  Widget _buildReplies(DayFeedItem item) {
+    final Mind? root = item is DayFeedMind ? item.mind : null;
+    final String rootId = root?.id ?? item.id;
+    final int dayIndex = root?.dayIndex ?? kek_date.DateUtils.getDayIndex(from: item.timestamp);
     final Widget panel = Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         MindReplies(
-          root: root,
+          rootId: rootId,
           menu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
           onImagesOpened: _onImagesOpened,
           onImagesClosed: _onImagesClosed,
@@ -547,19 +552,27 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                 onAddImages: kIsPhoneWeb ? null : _addReplyImages,
                 onImagesChanged: _setReplyImages,
                 onSend: () {
-                  MindComments.save(context, root, _replyController.text, images: _replyImages);
+                  MindComments.save(
+                    context,
+                    rootId: rootId,
+                    dayIndex: dayIndex,
+                    text: _replyController.text,
+                    images: _replyImages,
+                  );
                   _replyController.clear();
                   setState(() => _replyImages = const []);
                 },
-                onRecorded: (media) => MindComments.sendRecording(context, root, media),
+                onRecorded: (media) =>
+                    MindComments.sendRecording(context, rootId: rootId, dayIndex: dayIndex, media: media),
                 onRecordingChanged: _onRecordingChanged,
               ),
             ),
-            SafeArea(
-              top: false,
-              left: false,
-              child: _EmotionsHeartButton(onTap: () => _editEmotions(_liveMind(root.id) ?? root)),
-            ),
+            if (root != null)
+              SafeArea(
+                top: false,
+                left: false,
+                child: _EmotionsHeartButton(onTap: () => _editEmotions(_liveMind(root.id) ?? root)),
+              ),
           ],
         ),
       ],

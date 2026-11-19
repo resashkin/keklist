@@ -1375,6 +1375,14 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get recordSlideToCancel => 'Превуци за отказивање';
+
+  @override
+  String get videoCompressing => 'Сажимам видео…';
+
+  @override
+  String videoTooLong(int seconds) {
+    return 'Видео дужи од $seconds с се не прилаже';
+  }
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -2747,4 +2755,12 @@ class AppLocalizationsSrLatn extends AppLocalizationsSr {
 
   @override
   String get recordSlideToCancel => 'Prevuci za otkazivanje';
+
+  @override
+  String get videoCompressing => 'Sažimam video…';
+
+  @override
+  String videoTooLong(int seconds) {
+    return 'Video duži od $seconds s se ne prilaže';
+  }
 }

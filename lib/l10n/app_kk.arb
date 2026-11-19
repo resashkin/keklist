@@ -631,5 +631,7 @@
     "imageFromCamera": "Камера",
     "attachImages": "Фото қосу",
     "newMindWithPhoto": "Осы фотомен жаңа жазба",
-    "recordSlideToCancel": "Бас тарту үшін сырғытыңыз"
+    "recordSlideToCancel": "Бас тарту үшін сырғытыңыз",
+    "videoCompressing": "Бейне сығылуда…",
+    "videoTooLong": "{seconds} с-тан ұзын бейнелер тіркелмейді"
 }

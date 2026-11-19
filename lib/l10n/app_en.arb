@@ -1736,5 +1736,18 @@
     "recordSlideToCancel": "Slide to cancel",
     "@recordSlideToCancel": {
         "description": "Hint on the bar while holding the record button: slide left to throw the recording away"
+    },
+    "videoCompressing": "Compressing video…",
+    "@videoCompressing": {
+        "description": "Shown while picked gallery videos are compressed before attaching"
+    },
+    "videoTooLong": "Videos longer than {seconds} s are not attached",
+    "@videoTooLong": {
+        "description": "Snackbar when picked gallery videos are too long to attach",
+        "placeholders": {
+            "seconds": {
+                "type": "int"
+            }
+        }
     }
 }

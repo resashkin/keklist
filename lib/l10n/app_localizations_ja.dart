@@ -1333,4 +1333,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get recordSlideToCancel => 'スライドでキャンセル';
+
+  @override
+  String get videoCompressing => '動画を圧縮中…';
+
+  @override
+  String videoTooLong(int seconds) {
+    return '$seconds秒より長い動画は添付できません';
+  }
 }

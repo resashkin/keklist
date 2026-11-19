@@ -21,6 +21,10 @@ final class WebFileRepository extends AppFileRepository {
   Future<String> saveImage(Uint8List bytes, {String extension = 'jpg'}) => throw UnsupportedError(_readOnly);
 
   @override
+  Future<String> moveIntoImages(File source, {required String extension, String? name}) =>
+      throw UnsupportedError(_readOnly);
+
+  @override
   Future<String> saveAvatarImage(File source) => throw UnsupportedError(_readOnly);
 
   @override

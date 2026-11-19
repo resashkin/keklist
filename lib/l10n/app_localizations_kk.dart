@@ -1375,4 +1375,12 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get recordSlideToCancel => 'Бас тарту үшін сырғытыңыз';
+
+  @override
+  String get videoCompressing => 'Бейне сығылуда…';
+
+  @override
+  String videoTooLong(int seconds) {
+    return '$seconds с-тан ұзын бейнелер тіркелмейді';
+  }
 }

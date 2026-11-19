@@ -631,5 +631,7 @@
     "imageFromCamera": "Fotocamera",
     "attachImages": "Aggiungi foto",
     "newMindWithPhoto": "Nuova nota con questa foto",
-    "recordSlideToCancel": "Scorri per annullare"
+    "recordSlideToCancel": "Scorri per annullare",
+    "videoCompressing": "Compressione del video…",
+    "videoTooLong": "I video più lunghi di {seconds} s non vengono allegati"
 }

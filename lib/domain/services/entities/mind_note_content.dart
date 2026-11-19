@@ -2,8 +2,13 @@ const String kMindAudioTag = 'kekaudio';
 const String kMindVideoTag = 'kekvideo';
 const String kMindImageTag = 'kekimage';
 
-/// A note holds at most this many images.
+/// A note holds at most this many images (photos and gallery videos together).
 const int kMaxMindImages = 10;
+
+/// Gallery videos longer than this are not attached.
+const Duration kMaxAttachedVideoLength = Duration(seconds: 60);
+
+const Set<String> _kVideoExtensions = {'mp4', 'mov', 'm4v'};
 
 String videoThumbnailPathFor(String videoPath) => '${videoPath.substring(0, videoPath.lastIndexOf('.'))}.jpg';
 
@@ -80,10 +85,17 @@ final class MindNoteVideo extends BaseMindNotePiece {
   String toString() => 'MindNoteVideo($appRelativePath, duration: ${durationSeconds}s)';
 }
 
+/// A photo, or a video picked from the gallery (told apart by its extension), kept in `user_files/image`.
+/// A video keeps its first frame as a `.jpg` next to it.
 final class MindNoteImage extends BaseMindNotePiece {
   const MindNoteImage({required this.appRelativePath});
 
   final String appRelativePath;
+
+  bool get isVideo => _kVideoExtensions.contains(appRelativePath.split('.').last.toLowerCase());
+
+  /// What to draw for it: the photo itself, or the video's first frame.
+  String get previewRelativePath => isVideo ? videoThumbnailPathFor(appRelativePath) : appRelativePath;
 
   @override
   bool operator ==(Object other) => other is MindNoteImage && other.appRelativePath == appRelativePath;
@@ -107,7 +119,10 @@ final class MindNoteContent {
   List<String> get mediaFilePaths => [
         for (final MindNoteAudio audio in audioPieces) audio.appRelativeAbsoulutePath,
         for (final MindNoteVideo video in videoPieces) ...[video.appRelativePath, video.thumbnailRelativePath],
-        for (final MindNoteImage image in imagePieces) image.appRelativePath,
+        for (final MindNoteImage image in imagePieces) ...[
+          image.appRelativePath,
+          if (image.isVideo) image.previewRelativePath,
+        ],
       ];
 
   const MindNoteContent._(this._pieces);
