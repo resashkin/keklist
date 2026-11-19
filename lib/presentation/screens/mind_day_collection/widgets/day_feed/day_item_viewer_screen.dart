@@ -3,8 +3,6 @@ import 'dart:math' as math;
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
-import 'package:keklist/domain/services/entities/emotion.dart';
-import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart' as kek_date;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -437,11 +435,27 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       onImagesOpened: _onImagesOpened,
       onImagesClosed: _onImagesClosed,
     ),
-    _ => _ViewerPage(
+    // A gallery photo's emotions float behind it like a mind's, from its emotion tag.
+    _ => Stack(
       key: ValueKey(item.id),
-      item: item,
-      isActive: isCurrent && !_isHeld,
-      onVideoDuration: (duration) => _onMediaDuration(item.id, duration),
+      fit: StackFit.expand,
+      children: [
+        _GalleryEmotionsBuilder(
+          find: () => _emotionTagOf(item.id),
+          builder: (context, tag) => tag == null
+              ? const SizedBox.shrink()
+              : AnimatedEmotionTexture(
+                  mind: tag,
+                  color: storyColorsOf(context).foreground,
+                  opacity: context.watchStorySettings().textureOpacity,
+                ),
+        ),
+        _ViewerPage(
+          item: item,
+          isActive: isCurrent && !_isHeld,
+          onVideoDuration: (duration) => _onMediaDuration(item.id, duration),
+        ),
+      ],
     ),
   };
 
@@ -537,15 +551,6 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // A gallery item's emotions sit above its comments, so picking them never squeezes the input row.
-        if (root == null)
-          _GalleryEmotionsBuilder(
-            find: () => _emotionTagOf(rootId),
-            builder: (context, tag) => _GalleryEmotionsRow(
-              emotionIds: tag?.emotionIds ?? const [],
-              onTap: () => _editGalleryEmotions(rootId: rootId, dayIndex: dayIndex, tag: tag),
-            ),
-          ),
         MindReplies(
           rootId: rootId,
           menu: (comment) => [for (final _StoryAction action in _commentActions(comment)) action.toMenuAction()],
@@ -745,7 +750,7 @@ final class _ViewerPage extends StatelessWidget {
   final bool isActive;
   final ValueChanged<Duration> onVideoDuration;
 
-  const _ViewerPage({super.key, required this.item, required this.isActive, required this.onVideoDuration});
+  const _ViewerPage({required this.item, required this.isActive, required this.onVideoDuration});
 
   @override
   Widget build(BuildContext context) => switch (item) {
@@ -1189,52 +1194,10 @@ final class _GalleryEmotionsBuilder extends StatelessWidget {
   );
 }
 
-/// The emojis of a gallery photo's emotions above its comments; a tap changes them.
-final class _GalleryEmotionsRow extends StatelessWidget {
-  final List<String> emotionIds;
-  final VoidCallback onTap;
-
-  const _GalleryEmotionsRow({required this.emotionIds, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    final EmotionState state = context.watch<EmotionBloc>().state;
-    final List<Emotion> emotions = state is EmotionsList
-        ? emotionIds.map(state.byId).whereType<Emotion>().toList()
-        : const [];
-    if (emotions.isEmpty) return const SizedBox.shrink();
-    final (:background, :foreground) = storyColorsOf(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: GestureDetector(
-          onTap: onTap,
-          child: Wrap(
-            spacing: 6.0,
-            runSpacing: 6.0,
-            children: [
-              for (final Emotion emotion in emotions)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                  decoration: ShapeDecoration(
-                    shape: const StadiumBorder(),
-                    color: Color.alphaBlend(foreground.withValues(alpha: 0.1), background).withValues(alpha: 0.85),
-                  ),
-                  child: Text('${emotion.emoji} ${emotion.title}', style: TextStyle(color: foreground, fontSize: 13.0)),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 final class _EmotionsHeartButton extends StatelessWidget {
   final VoidCallback onTap;
 
-  /// Filled once a gallery item has emotions, which show above its comments.
+  /// Filled once a gallery item has emotions.
   final bool isFilled;
 
   const _EmotionsHeartButton({required this.onTap, this.isFilled = false});
