@@ -56,6 +56,8 @@ const Duration _kVideoFallbackDuration = Duration(seconds: 5);
 const int _kMaxSegments = 15;
 const double _kWideMinWidth = 800.0;
 const double _kReplyBarHeight = 64.0;
+// Over a photo the clouds need to read on any picture, so they are far stronger than a mind's texture.
+const double _kGalleryEmotionsOpacity = 0.6;
 
 /// The day's items as stories: segments on top, a tap on an edge or a swipe moves between them. Opened from a tile it
 /// stands still; with [autoplay] (▶ on a day or a week) a timer moves on and holding pauses it.
@@ -435,25 +437,23 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
       onImagesOpened: _onImagesOpened,
       onImagesClosed: _onImagesClosed,
     ),
-    // A gallery photo's emotions float behind it like a mind's, from its emotion tag.
+    // A gallery photo's emotions float over it like a mind's clouds, lightly see-through, from its emotion tag.
     _ => Stack(
       key: ValueKey(item.id),
       fit: StackFit.expand,
       children: [
-        _GalleryEmotionsBuilder(
-          find: () => _emotionTagOf(item.id),
-          builder: (context, tag) => tag == null
-              ? const SizedBox.shrink()
-              : AnimatedEmotionTexture(
-                  mind: tag,
-                  color: storyColorsOf(context).foreground,
-                  opacity: context.watchStorySettings().textureOpacity,
-                ),
-        ),
         _ViewerPage(
           item: item,
           isActive: isCurrent && !_isHeld,
           onVideoDuration: (duration) => _onMediaDuration(item.id, duration),
+        ),
+        IgnorePointer(
+          child: _GalleryEmotionsBuilder(
+            find: () => _emotionTagOf(item.id),
+            builder: (context, tag) => tag == null
+                ? const SizedBox.shrink()
+                : AnimatedEmotionTexture(mind: tag, color: Colors.white, opacity: _kGalleryEmotionsOpacity),
+          ),
         ),
       ],
     ),
