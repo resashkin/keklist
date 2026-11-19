@@ -3,6 +3,8 @@ import 'dart:math' as math;
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
+import 'package:keklist/domain/services/entities/emotion.dart';
+import 'package:keklist/presentation/blocs/emotion_bloc/emotion_bloc.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart' as kek_date;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -567,12 +569,22 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
                 onRecordingChanged: _onRecordingChanged,
               ),
             ),
-            if (root != null)
-              SafeArea(
-                top: false,
-                left: false,
-                child: _EmotionsHeartButton(onTap: () => _editEmotions(_liveMind(root.id) ?? root)),
-              ),
+            SafeArea(
+              top: false,
+              left: false,
+              child: root != null
+                  ? _EmotionsHeartButton(onTap: () => _editEmotions(_liveMind(root.id) ?? root))
+                  : BlocBuilder<MindBloc, MindState>(
+                      buildWhen: (_, current) => current is MindList,
+                      builder: (context, _) {
+                        final Mind? tag = _emotionTagOf(rootId);
+                        return _EmotionsHeartButton(
+                          emotionIds: tag?.emotionIds ?? const [],
+                          onTap: () => _editGalleryEmotions(rootId: rootId, dayIndex: dayIndex, tag: tag),
+                        );
+                      },
+                    ),
+            ),
           ],
         ),
       ],
@@ -603,6 +615,37 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
           context.read<MindBloc>().add(MindSetEmotions(mindId: mind.id, emotionIds: ids.toList())),
     ),
   );
+
+  /// The emotions of a gallery photo or video, kept as an emotion tag on its feed id.
+  Mind? _emotionTagOf(String rootId) {
+    final MindState state = context.read<MindBloc>().state;
+    return state is MindList
+        ? state.values.firstWhereOrNull((mind) => mind.rootId == rootId && mind.isEmotionTag)
+        : null;
+  }
+
+  /// Applied once the sheet closes, so quick taps can't create two tags before the first one is stored.
+  Future<void> _editGalleryEmotions({required String rootId, required int dayIndex, required Mind? tag}) async {
+    final MindBloc minds = context.read<MindBloc>();
+    Set<String> selected = {...?tag?.emotionIds};
+    await _whileHeld(
+      () => EmotionMarkingSheet.show(
+        context: context,
+        initialSelectedIds: selected,
+        onSelectionChanged: (ids) => selected = ids,
+      ),
+    );
+    final Mind? current = mounted ? _emotionTagOf(rootId) : tag;
+    if (current == null) {
+      if (selected.isNotEmpty) {
+        minds.add(MindCreate(dayIndex: dayIndex, mindContent: const [], rootId: rootId, emotionIds: selected.toList()));
+      }
+    } else if (selected.isEmpty) {
+      minds.add(MindDelete(mind: current));
+    } else {
+      minds.add(MindSetEmotions(mindId: current.id, emotionIds: selected.toList()));
+    }
+  }
 
   // Comments
 
@@ -1129,24 +1172,44 @@ final class _Loading extends StatelessWidget {
 final class _EmotionsHeartButton extends StatelessWidget {
   final VoidCallback onTap;
 
-  const _EmotionsHeartButton({required this.onTap});
+  /// Shown as emojis in place of the heart, for a gallery item whose emotions aren't drawn anywhere else.
+  final List<String> emotionIds;
+
+  const _EmotionsHeartButton({required this.onTap, this.emotionIds = const []});
 
   @override
   Widget build(BuildContext context) {
     final (:background, :foreground) = storyColorsOf(context);
     const double size = 48.0;
+    final EmotionState emotionState = context.watch<EmotionBloc>().state;
+    final List<String> emojis = emotionState is EmotionsList
+        ? emotionIds.map(emotionState.byId).whereType<Emotion>().map((emotion) => emotion.emoji).toList()
+        : const [];
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 4.0, 12.0, 10.0),
       child: Material(
         color: Color.alphaBlend(foreground.withValues(alpha: 0.1), background),
-        shape: const CircleBorder(),
+        shape: const StadiumBorder(),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,
-          child: SizedBox.square(
-            dimension: size,
-            child: Icon(Icons.favorite_border_rounded, color: foreground.withValues(alpha: 0.85), size: 22.0),
-          ),
+          child: emojis.isEmpty
+              ? SizedBox.square(
+                  dimension: size,
+                  child: Icon(Icons.favorite_border_rounded, color: foreground.withValues(alpha: 0.85), size: 22.0),
+                )
+              : Container(
+                  height: size,
+                  constraints: const BoxConstraints(minWidth: size, maxWidth: 140.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    emojis.join(' '),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
+                ),
         ),
       ),
     );

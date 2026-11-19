@@ -30,7 +30,7 @@ final class MindReflections {
     final Map<String, MindReflections> byRoot = {};
     for (final Mind mind in minds) {
       final String? rootId = mind.rootId;
-      if (rootId != null) byRoot[rootId] = (byRoot[rootId] ?? const MindReflections()).adding(mind);
+      if (rootId != null && !mind.isEmotionTag) byRoot[rootId] = (byRoot[rootId] ?? const MindReflections()).adding(mind);
     }
     return byRoot;
   }

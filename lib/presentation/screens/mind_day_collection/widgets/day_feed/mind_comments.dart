@@ -329,6 +329,14 @@ final class MindCommentBar extends StatelessWidget {
   Widget _build(BuildContext context) {
     final bool canSend = controller.text.trim().isNotEmpty || images.isNotEmpty;
     final VoidCallback? onAddImages = images.length < kMaxMindImages ? this.onAddImages : null;
+    // A tap anywhere outside the bar, replies included, hides the keyboard; its own buttons keep it.
+    return TapRegion(
+      groupId: MindCommentBar,
+      child: _buildBar(context, canSend: canSend, onAddImages: onAddImages),
+    );
+  }
+
+  Widget _buildBar(BuildContext context, {required bool canSend, required VoidCallback? onAddImages}) {
     return SafeArea(
       top: false,
       child: Padding(
@@ -356,6 +364,8 @@ final class MindCommentBar extends StatelessWidget {
           controller: controller,
           focusNode: focusNode,
           autofocus: autofocus,
+          groupId: MindCommentBar,
+          onTapOutside: (_) => focusNode.unfocus(),
           minLines: 1,
           maxLines: 5,
           keyboardType: TextInputType.multiline,

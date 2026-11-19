@@ -257,11 +257,10 @@ final class _MindCreatorScreenState extends KekWidgetState<MindCreatorScreen> {
   }
 }
 
-/// Opens the emotion sheet. A round button beside the attach ones, set apart by a ring in the emotion colors;
-/// once emotions are chosen it grows into a pill of their emojis.
+/// Opens the emotion sheet. A round white button like the attach ones; once emotions are chosen it grows into a pill
+/// of their emojis.
 final class _EmotionsButton extends StatelessWidget {
   static const double _size = 52.0;
-  static const double _ring = 2.5;
 
   final List<String> selectedIds;
   final VoidCallback onTap;
@@ -284,11 +283,6 @@ final class _EmotionsButton extends StatelessWidget {
           child: Container(
             height: _size,
             constraints: const BoxConstraints(minWidth: _size),
-            padding: const EdgeInsets.all(_ring),
-            decoration: ShapeDecoration(
-              shape: const StadiumBorder(),
-              gradient: SweepGradient(colors: [...kEmotionPalette.take(7), kEmotionPalette.first]),
-            ),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: emojis.isEmpty ? 0.0 : 12.0),
               alignment: Alignment.center,

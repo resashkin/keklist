@@ -60,8 +60,16 @@ Every story page has the reply bar, not only minds. A phone photo or video has n
 ordinary reflection minds whose `rootId` is the item's feed id (`DayFeedAsset.id` = `asset_<localIdentifier>`,
 `DayFeedFolderMedia.id` = `file_<path>` / `saf_<uri>`) and whose `dayIndex` is the day the photo was taken. They live in
 Hive like any comment, so backups, export and the web version carry them with no new model. `MindComments.save` /
-`sendRecording` and `MindReplies` take a `rootId` and a `dayIndex` instead of a root mind. Gallery pages have no
-emotions heart. Code that counts or groups reflections by `rootId` treats these like reflections of a missing mind
+`sendRecording` and `MindReplies` take a `rootId` and a `dayIndex` instead of a root mind.
+
+A gallery photo or video can be marked with emotions from the heart button. They are stored as an **emotion tag**: an
+empty reflection mind on the item's feed id carrying `emotionIds` (`Mind.isEmotionTag`: empty note and a root id
+starting with `asset_`, `file_` or `saf_`). Tags are left out of comment lists and reflection counts. The sheet's picks
+are applied once it closes: create the tag, update it, or delete it when nothing is left picked. The heart shows the
+picked emojis instead of the icon. Insights don't count tags yet (they only look at root minds).
+
+A tap anywhere outside the comment bar hides the keyboard (`TextField.onTapOutside`); the bar's own buttons share its
+`TapRegion` group, so sending or attaching keeps it up. Code that counts or groups reflections by `rootId` treats these like reflections of a missing mind
 (none of it assumes the root exists). If the photo is deleted from the phone, its comments stay in the data unseen.
 
 ### Video sound

@@ -138,9 +138,9 @@ final class MindEmotionChips extends StatelessWidget {
   }
 }
 
-/// The reflections of the mind with [rootId], oldest first.
+/// The reflections of the mind (or gallery item) with [rootId], oldest first; emotion tags aren't comments.
 List<Mind> mindReflectionsOf(Iterable<Mind> minds, String rootId) =>
-    minds.where((other) => other.rootId == rootId).toList()..sort((a, b) => a.creationDate.compareTo(b.creationDate));
+    minds.where((other) => other.rootId == rootId && !other.isEmotionTag).toList()..sort((a, b) => a.creationDate.compareTo(b.creationDate));
 
 /// The mind's reflections, oldest first: time, emotions and full text of each.
 final class MindReflectionsList extends StatelessWidget {

@@ -3,7 +3,7 @@
 ## Overview
 The mind creator (`MindCreatorScreen`) asks for emotions through one round button in the bar above the keyboard, next to the attach-images and record buttons. Save never opens the emotion sheet: a mind saved without picks simply has no emotions, which can be added later from its menu.
 
-The button is set apart from the plain white attach buttons by a ring in the emotion colors (`kEmotionPalette`). Once emotions are picked it grows into a pill showing their emojis. It is hidden while editing an existing text.
+The button is a plain white circle like the attach buttons. Once emotions are picked it grows into a pill showing their emojis. It is hidden while editing an existing text.
 
 There is no shake-to-tweak on the creator any more: the earlier `MindEmotionsPrompt` setting (`afterSave` / `button` / `never`) and its tweak sheet were removed.
 
@@ -14,7 +14,7 @@ There is no shake-to-tweak on the creator any more: the earlier `MindEmotionsPro
 - The `mind_emotions_prompt` analytics property is gone with it.
 
 ### 2. UI Layer
-- `mind_creator_screen.dart`: `_EmotionsButton` (52 pt, gradient ring, white fill, `Icons.add_reaction_outlined` or the chosen emojis) opens `EmotionMarkingSheet`.
+- `mind_creator_screen.dart`: `_EmotionsButton` (52 pt, white fill, `Icons.add_reaction_outlined` or the chosen emojis) opens `EmotionMarkingSheet`.
 - `ShakeScreenIds.creator` was removed.
 
 ## Testing

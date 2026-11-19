@@ -21,6 +21,14 @@ final class Mind with EquatableMixin {
   bool? get stringify => true;
 
   String get plainNote => noteContent.plainText;
+
+  /// The emotions of a gallery photo or video in the stories: an empty reflection hung on its feed id
+  /// (`asset_…`, `file_…`, `saf_…`; a mind's id is a UUID, so it never looks like one).
+  bool get isEmotionTag {
+    final String? root = rootId;
+    if (root == null || note.trim().isNotEmpty) return false;
+    return root.startsWith('asset_') || root.startsWith('file_') || root.startsWith('saf_');
+  }
   MindNoteContent get noteContent => MindNoteContent.parse(note);
   List<MindNoteAudio> get audioNotes => noteContent.audioPieces;
 

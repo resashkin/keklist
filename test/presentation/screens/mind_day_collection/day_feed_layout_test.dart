@@ -123,6 +123,17 @@ void main() {
       expect(items.map((item) => item.mind.id), ['root']);
       expect(items.single.reflectionCount, 2);
     });
+
+    test('an emotion tag on a gallery photo is not a comment', () {
+      final Mind tag = _mind(id: 'tag', rootId: 'asset_photo-1');
+      final Mind comment = _mind(id: 'comment', rootId: 'asset_photo-1', note: 'nice');
+      final Mind emptyReply = _mind(id: 'empty-reply', rootId: 'root');
+
+      expect(tag.isEmotionTag, isTrue);
+      expect(comment.isEmotionTag, isFalse);
+      expect(emptyReply.isEmotionTag, isFalse);
+      expect(MindReflections.countAll([tag, comment])['asset_photo-1']?.total, 1);
+    });
   });
 
   group('merge', () {
