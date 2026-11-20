@@ -18,16 +18,20 @@ const bool kScreenshotMode = bool.fromEnvironment('KEKLIST_SCREENSHOTS');
 const String kDemoAudioPath = 'audio/demo_voice.m4a';
 const String kDemoVideoPath = 'video/demo_round.mp4';
 
+/// Shown in the round-video camera circle while "recording" in screenshot builds; the simulator has no camera.
+const String kDemoRoundFacePath = 'video/demo_round_face.jpg';
+
 /// Days back from today, used by the capture test to open the right day.
 const int kDemoVoiceDayOffset = 1;
 const int kDemoTripDayOffset = 3;
 
-/// Today's notes and photos alternate in time: slot `i` is `(kDemoTodaySlots - i) × kDemoTodaySlotStep` before now.
+/// Today's three notes and three photos alternate in time: slot `i` is `(kDemoTodaySlots - i) × kDemoTodaySlotStep`
+/// before now. On a 3-column grid each wide note and the photo after it fill a row exactly.
 /// Photos take [kDemoTodayPhotoSlots]; `screenshots/prepare_media.py` stamps them with the same rule.
-const int kDemoTodaySlots = 8;
+const int kDemoTodaySlots = 6;
 const Duration kDemoTodaySlotStep = Duration(minutes: 35);
 const List<int> kDemoTodayPhotoSlots = [1, 3, 5];
-const List<int> _kDemoTodayMindSlots = [0, 2, 4, 6, 7];
+const List<int> _kDemoTodayMindSlots = [0, 2, 4];
 
 Future<void> seedScreenshotDemo({
   required SettingsRepository settings,
@@ -45,8 +49,8 @@ Future<void> seedScreenshotDemo({
       whatsNewSeenRelease: WhatsNewRelease.release,
       whatsNewSeenAt: DateTime.now(),
       reviewPromptedRelease: WhatsNewRelease.release,
-      // Notes and photos mixed in time order, notes as wide tiles.
-      dayFeed: const DayFeedSettings(mindCellSpan: 2, grouping: FeedGrouping.none),
+      // Notes and photos mixed in time order: a wide note and a photo per row of three.
+      dayFeed: const DayFeedSettings(columnCount: 3, mindCellSpan: 2, grouping: FeedGrouping.none),
       shakeDiscoveredScreenIds: const {
         ShakeScreenIds.day,
         ShakeScreenIds.settings,
@@ -120,13 +124,13 @@ typedef _Entry = (int daysAgo, String text, List<String> emotions);
 const List<_Entry> _textEntries = [
   (0, 'Morning run by the river, 6 km', ['proud']),
   (0, 'Coffee with Anna. We laughed for an hour', ['warmth', 'joy']),
-  (0, 'Finished the hard part of the project', ['proud', 'calm']),
   (0, 'A bit anxious about tomorrow’s talk', ['anxious']),
-  (0, 'Read 30 pages before sleep', ['calm']),
   (1, 'Rainy day, stayed in and cooked soup', ['calm']),
   (1, 'Called mom', ['grateful', 'love']),
   (2, 'Missed the train, read a book instead', ['annoyed', 'calm']),
   (2, 'New idea for the garden', ['inspired']),
+  (2, 'Finished the hard part of the project', ['proud', 'calm']),
+  (2, 'Read 30 pages before sleep', ['calm']),
   (3, 'Day trip to the mountains with friends', ['joy', 'inspired']),
   (3, 'The lake was so clear', ['calm', 'grateful']),
   (4, 'Long day at work', ['tired']),

@@ -10,13 +10,14 @@
 
 import datetime
 import struct
+import shutil
 import subprocess
 import sys
 import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-TODAY_SLOTS = 8
+TODAY_SLOTS = 6
 TODAY_SLOT_MINUTES = 35
 TODAY_PHOTO_SLOTS = [1, 3, 5]
 PHOTO_DIR = ROOT / 'demo' / 'photos'
@@ -116,6 +117,8 @@ def make_voice_and_video(out_dir: Path) -> None:
         '-vf', "crop='min(iw,ih)':'min(iw,ih)',scale=1200:1200,zoompan=z='1+0.0015*on':d=240:s=640x640:fps=30",
         '-t', '8', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-an', str(video))
     run('ffmpeg', '-y', '-loglevel', 'error', '-i', str(video), '-frames:v', '1', str(video_dir / 'demo_round.jpg'))
+    # The face in the camera circle of the recording scene; generated on pollinations.ai (no real person).
+    shutil.copy(ROOT / 'demo' / 'round_face.jpg', video_dir / 'demo_round_face.jpg')
 
 
 def main() -> int:

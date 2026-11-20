@@ -38,11 +38,11 @@ Output: `screenshots/out/<lang>/<device>/NN_<scene>.png`. `raw/`, `out/` and the
 | Scene | What the test shows |
 |---|---|
 | day | Today: wide note tiles and today's photos alternating in time (`kDemoToday*` slots, shared with `prepare_media.py`), no grouping |
-| typing | the note editor with a note being written (no keyboard) |
+| typing | the note editor with a note being written, keyboard up (the simulator's swipe-typing tip is turned off by `capture.sh`) |
 | emotions | the emotion sheet over Today, 38 flat demo emotions |
 | new_emotion | the new-emotion sheet over the emotion sheet |
 | insights | the Profile (insights) tab |
-| voice | yesterday: a voice note and a round video |
+| voice | the note editor while a round video is being recorded: the camera circle shows `screenshots/demo/round_face.jpg` (an AI-generated face from pollinations.ai, no real person), since the simulator has no camera |
 | gallery | the trip day, three days ago, with 8 photos |
 | calendar | the calendar scrolled to the past days |
 | web | not captured yet; needs a browser screenshot of the web version |
@@ -57,6 +57,8 @@ screen instead of shrinking the text.
 
 ## Edge Cases & Considerations
 - `capture.sh` erases only simulators it created (named `keklist-shots …`).
+- `flutter drive` sometimes installs the app and never starts it; with no screen after 7 minutes `capture.sh` starts over, up to 3 times.
+- In screenshot builds the round-video recorder skips the camera (`kScreenshotMode`) and the circle shows `kDemoRoundFacePath`.
 - iOS prints from the test go to the device log, so the script reads markers with `log stream`.
 - iPhone Duo has no simulator in Xcode 27.0; its entries in `devices.json` are marked `pending`.
 - Android, Android tablet and Googlebook capture are listed in `devices.json` but not implemented yet.

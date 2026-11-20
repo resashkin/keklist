@@ -14,6 +14,7 @@ import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_ev
 import 'package:keklist/presentation/blocs/tabs_container_bloc/tabs_container_state.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_editor_sheet.dart';
 import 'package:keklist/presentation/screens/emotions/emotion_marking_sheet.dart';
+import 'package:keklist/presentation/core/widgets/round_video/media_recording.dart';
 import 'package:keklist/presentation/screens/mind_creator/mind_creator_screen.dart';
 import 'package:keklist/presentation/screens/mind_day_collection/mind_day_collection_screen.dart';
 import 'package:keklist/presentation/screens/tabs_container/tabs_container_screen.dart';
@@ -43,6 +44,26 @@ void main() {
     Navigator.of(tester.element(find.byType(MindCreatorScreen))).pop();
     await _wait(tester, 1);
 
+    // A round video being recorded in the editor: tap switches the button to video, holding it records.
+    today.showMindCreator();
+    await _wait(tester, 2);
+    // Touches go in as the device's own, since the test binding draws a crosshair where its synthetic ones land.
+    final Offset recordButton = tester.getCenter(find.byType(MediaRecordToggleButton));
+    binding.shouldPropagateDevicePointerEvents = true;
+    _touch(binding, PointerDownEvent(pointer: 900, position: recordButton));
+    _touch(binding, PointerUpEvent(pointer: 900, position: recordButton));
+    await _wait(tester, 1);
+    _touch(binding, PointerDownEvent(pointer: 901, position: recordButton));
+    await tester.pump(const Duration(milliseconds: 400));
+    await _wait(tester, 2);
+    await _snap(tester, 'voice');
+    _touch(binding, PointerMoveEvent(pointer: 901, position: recordButton.translate(-300.0, 0.0)));
+    _touch(binding, PointerUpEvent(pointer: 901, position: recordButton.translate(-300.0, 0.0)));
+    await _wait(tester, 1);
+    binding.shouldPropagateDevicePointerEvents = false;
+    Navigator.of(tester.element(find.byType(MindCreatorScreen))).pop();
+    await _wait(tester, 1);
+
     final BuildContext context = tester.element(find.byType(TabsContainerScreen));
     EmotionMarkingSheet.show(
       context: context,
@@ -66,10 +87,7 @@ void main() {
     await _snap(tester, 'insights');
 
     await _openTab(tester, TabType.today);
-    await _goBackDays(tester, kDemoVoiceDayOffset);
-    await _snap(tester, 'voice');
-
-    await _goBackDays(tester, kDemoTripDayOffset - kDemoVoiceDayOffset);
+    await _goBackDays(tester, kDemoTripDayOffset);
     await _snap(tester, 'gallery');
 
     await _openTab(tester, TabType.calendar);
@@ -95,6 +113,9 @@ Future<void> _waitForDemoMedia() async {
   }
   print('KEKLIST_NO_MEDIA');
 }
+
+void _touch(IntegrationTestWidgetsFlutterBinding binding, PointerEvent event) =>
+    binding.handlePointerEventForSource(event, source: TestBindingEventSource.device);
 
 Future<void> _wait(WidgetTester tester, int seconds) => tester.pump(Duration(seconds: seconds));
 

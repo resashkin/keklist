@@ -46,6 +46,9 @@ xcrun simctl erase "$UDID"
 xcrun simctl boot "$UDID"
 xcrun simctl bootstatus "$UDID" -b >/dev/null
 xcrun simctl ui "$UDID" appearance dark
+# A fresh simulator covers the keyboard with its one-time swipe-typing tip on the first text field.
+xcrun simctl spawn "$UDID" defaults write com.apple.Preferences DidShowContinuousPathIntroduction -bool true
+xcrun simctl spawn "$UDID" defaults write com.apple.keyboard.preferences DidShowContinuousPathIntroduction -bool true
 xcrun simctl status_bar "$UDID" override --time "9:41" --dataNetwork wifi --wifiMode active --wifiBars 3 \
   --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100
 
@@ -67,7 +70,19 @@ DRIVE=$!
 
 MEDIA_COPIED=0
 SEEN=0
+STARTED=$SECONDS
+# flutter drive sometimes installs the app and never starts it; such a run is retried from scratch.
+STALL_SECONDS=420
 while kill -0 "$DRIVE" 2>/dev/null; do
+  if (( SEEN == 0 && SECONDS - STARTED > STALL_SECONDS )); then
+    kill "$DRIVE" 2>/dev/null || true
+    pkill -f "store_screenshots_test.dart.*$UDID" 2>/dev/null || true
+    ATTEMPT="${KEKLIST_CAPTURE_ATTEMPT:-1}"
+    (( ATTEMPT < 3 )) || { echo "✗ flutter drive stalled 3 times"; exit 1; }
+    echo "↻ flutter drive stalled, retrying ($((ATTEMPT + 1))/3)"
+    kill "$LOG_STREAM" 2>/dev/null || true
+    KEKLIST_CAPTURE_ATTEMPT=$((ATTEMPT + 1)) exec "$ROOT/capture.sh" "$DEVICE"
+  fi
   if [[ $MEDIA_COPIED == 0 ]] && CONTAINER="$(xcrun simctl get_app_container "$UDID" "$BUNDLE_ID" data 2>/dev/null)"; then
     mkdir -p "$CONTAINER/Documents"
     cp -R "$WORK/media/user_files" "$CONTAINER/Documents/"

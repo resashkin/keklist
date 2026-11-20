@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keklist/domain/repositories/files/app_file_repository.dart';
 import 'package:keklist/domain/services/audio_duration_extractor.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/domain/services/screenshots/screenshot_demo.dart';
 import 'package:keklist/presentation/core/extensions/localization_extensions.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:record/record.dart';
@@ -68,7 +69,9 @@ final class _MediaRecordToggleButtonState extends State<MediaRecordToggleButton>
   Future<void> _start() async {
     if (_recorder != null) return;
     final AppFileRepository files = context.read<AppFileRepository>();
-    final _HoldRecorder recorder = _mode == MediaRecordMode.audio ? _AudioHoldRecorder(files) : _VideoHoldRecorder(files);
+    final _HoldRecorder recorder = _mode == MediaRecordMode.audio
+        ? _AudioHoldRecorder(files)
+        : _VideoHoldRecorder(files);
     _recorder = recorder;
     _isReleased = false;
     _view.value = _RecordingView(mode: _mode, recorder: recorder);
@@ -280,7 +283,9 @@ final class _RecordingOverlay extends StatelessWidget {
               top: (button.top - circle) / 2 - 24.0,
               width: circle,
               height: circle,
-              child: IgnorePointer(child: _CameraCircle(recorder: recorder as _VideoHoldRecorder, isRecording: state.isRecording)),
+              child: IgnorePointer(
+                child: _CameraCircle(recorder: recorder as _VideoHoldRecorder, isRecording: state.isRecording),
+              ),
             ),
           Positioned(
             left: 12.0,
@@ -295,7 +300,10 @@ final class _RecordingOverlay extends StatelessWidget {
                   const SizedBox(width: 16.0),
                   _BlinkingDot(isOn: state.isRecording),
                   const SizedBox(width: 8.0),
-                  _Elapsed(recorder: recorder, style: TextStyle(color: colors.onSurface, fontSize: 15.0)),
+                  _Elapsed(
+                    recorder: recorder,
+                    style: TextStyle(color: colors.onSurface, fontSize: 15.0),
+                  ),
                   const Spacer(),
                   if (state.isLocked)
                     IconButton(
@@ -369,10 +377,8 @@ final class _BlinkingDot extends StatefulWidget {
 }
 
 final class _BlinkingDotState extends State<_BlinkingDot> with SingleTickerProviderStateMixin {
-  late final AnimationController _blink = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 600),
-  )..repeat(reverse: true);
+  late final AnimationController _blink = AnimationController(vsync: this, duration: const Duration(milliseconds: 600))
+    ..repeat(reverse: true);
 
   @override
   void dispose() {
@@ -429,41 +435,69 @@ final class _CameraCircle extends StatelessWidget {
   const _CameraCircle({required this.recorder, required this.isRecording});
 
   @override
-  Widget build(BuildContext context) => ValueListenableBuilder<CameraController?>(
-    valueListenable: recorder.camera,
-    builder: (context, camera, _) {
-      final bool isReady = camera?.value.isInitialized ?? false;
-      final Size preview = camera?.value.previewSize ?? const Size(1.0, 1.0);
-      return Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white10,
-          border: Border.all(color: isRecording ? Colors.redAccent : Colors.white24, width: 3.0),
-        ),
-        child: ClipOval(
-          child: isReady
-              // Blurred until the recording really starts, so the sharp picture tells when it does.
-              ? TweenAnimationBuilder<double>(
-                  tween: Tween(end: isRecording ? 0.0 : 16.0),
-                  duration: const Duration(milliseconds: 250),
-                  builder: (_, sigma, child) => ImageFiltered(
-                    imageFilter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma, tileMode: TileMode.decal),
-                    child: child,
-                  ),
-                  // The camera reports its preview size in landscape, while the phone is held upright;
-                  // the front preview comes mirrored, unlike the recorded video, so it's flipped back.
-                  child: Transform.flip(
-                    flipX: true,
-                    child: FittedBox(
-                      fit: BoxFit.cover,
-                      child: SizedBox(width: preview.height, height: preview.width, child: CameraPreview(camera!)),
-                    ),
-                  ),
-                )
-              : const Center(child: CircularProgressIndicator(color: Colors.white)),
-        ),
-      );
-    },
+  Widget build(BuildContext context) => kScreenshotMode
+      ? _DemoCameraCircle(isRecording: isRecording)
+      : ValueListenableBuilder<CameraController?>(
+          valueListenable: recorder.camera,
+          builder: (context, camera, _) {
+            final bool isReady = camera?.value.isInitialized ?? false;
+            final Size preview = camera?.value.previewSize ?? const Size(1.0, 1.0);
+            return Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white10,
+                border: Border.all(color: isRecording ? Colors.redAccent : Colors.white24, width: 3.0),
+              ),
+              child: ClipOval(
+                child: isReady
+                    // Blurred until the recording really starts, so the sharp picture tells when it does.
+                    ? TweenAnimationBuilder<double>(
+                        tween: Tween(end: isRecording ? 0.0 : 16.0),
+                        duration: const Duration(milliseconds: 250),
+                        builder: (_, sigma, child) => ImageFiltered(
+                          imageFilter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma, tileMode: TileMode.decal),
+                          child: child,
+                        ),
+                        // The camera reports its preview size in landscape, while the phone is held upright;
+                        // the front preview comes mirrored, unlike the recorded video, so it's flipped back.
+                        child: Transform.flip(
+                          flipX: true,
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: SizedBox(
+                              width: preview.height,
+                              height: preview.width,
+                              child: CameraPreview(camera!),
+                            ),
+                          ),
+                        ),
+                      )
+                    : const Center(child: CircularProgressIndicator(color: Colors.white)),
+              ),
+            );
+          },
+        );
+}
+
+/// The camera circle of a screenshot build: the demo face from the app files, framed like the real one.
+final class _DemoCameraCircle extends StatelessWidget {
+  final bool isRecording;
+
+  const _DemoCameraCircle({required this.isRecording});
+
+  @override
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(color: isRecording ? Colors.redAccent : Colors.white24, width: 3.0),
+    ),
+    child: ClipOval(
+      child: FutureBuilder<String>(
+        future: context.read<AppFileRepository>().resolveAbsolutePath(kDemoRoundFacePath),
+        builder: (context, snapshot) =>
+            snapshot.data == null ? const SizedBox.shrink() : Image.file(File(snapshot.data!), fit: BoxFit.cover),
+      ),
+    ),
   );
 }
 
@@ -561,6 +595,11 @@ final class _VideoHoldRecorder extends _HoldRecorder {
 
   @override
   Future<_StartResult> start() async {
+    // Store screenshots: no camera on the simulator, the circle shows a demo face instead.
+    if (kScreenshotMode) {
+      _stopwatch.start();
+      return _StartResult.started;
+    }
     try {
       final List<CameraDescription> cameras = await availableCameras();
       if (cameras.isEmpty) return _StartResult.failed;
