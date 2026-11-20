@@ -49,6 +49,16 @@ Submit the newest TestFlight build for App Store review
 
 Usage: bundle exec fastlane submit_to_review notes:"What changed"
 
+### ios upload_screenshots
+
+```sh
+[bundle exec] fastlane ios upload_screenshots
+```
+
+Upload the composed store screenshots (screenshots/out) to the version being prepared — nothing else
+
+Usage: bundle exec fastlane upload_screenshots
+
 ### ios register_new_device
 
 ```sh

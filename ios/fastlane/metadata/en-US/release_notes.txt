@@ -1,2 +1,3 @@
-* keklist on the App Store now speaks your language
+* Comments and emotions on photos and videos in stories
+* Videos as attachments
 * Fixes and improvements
