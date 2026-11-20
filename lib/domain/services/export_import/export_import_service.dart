@@ -1,3 +1,4 @@
+import 'package:keklist/domain/services/media_index/gallery_fingerprints.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -52,6 +53,7 @@ final class ExportImportService {
   /// Export minds to CSV file (backward compatibility)
   Future<ExportResult> exportToCSV() async {
     try {
+      await GalleryFingerprints.migrateLegacyRoots(_mindRepository);
       final minds = _mindRepository.values.toList();
 
       if (minds.isEmpty) {
@@ -82,6 +84,8 @@ final class ExportImportService {
   /// If password is provided, the ZIP will be encrypted with AES-256
   Future<ExportResult> exportToZIP({String? password}) async {
     try {
+      // Comments on gallery photos must hang on fingerprints, not this phone's photo ids, to find them elsewhere.
+      await GalleryFingerprints.migrateLegacyRoots(_mindRepository);
       final minds = _mindRepository.values.toList();
 
       if (minds.isEmpty) {

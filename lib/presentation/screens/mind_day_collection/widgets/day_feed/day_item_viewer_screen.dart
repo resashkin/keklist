@@ -3,6 +3,9 @@ import 'dart:math' as math;
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
+import 'package:keklist/domain/repositories/mind/mind_repository.dart';
+import 'package:keklist/domain/services/entities/photo_fingerprint.dart';
+import 'package:keklist/domain/services/media_index/gallery_fingerprints.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart' as kek_date;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -110,6 +113,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   late int _index = widget.initialIndex;
   // Real lengths of audio and video, reported once loaded, even by the neighbours of the current story.
   final Map<String, Duration> _mediaDurations = {};
+  static bool _hasMigratedGalleryRoots = false;
   double _dragOffsetY = 0.0;
   double _scrollPull = 0.0;
   // How far the finger itself moved down while the mind was pulled past its top.
@@ -138,6 +142,11 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   void initState() {
     super.initState();
     _files = context.read<AppFileRepository>();
+    // Once a launch: comments made before fingerprints move onto them, while the photo library is open to us.
+    if (!_hasMigratedGalleryRoots) {
+      _hasMigratedGalleryRoots = true;
+      unawaited(GalleryFingerprints.migrateLegacyRoots(context.read<MindRepository>()));
+    }
     _startTimer();
     _replyFocus.addListener(_onReplyFocus);
   }
@@ -449,7 +458,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
         ),
         IgnorePointer(
           child: _GalleryEmotionsBuilder(
-            find: () => _emotionTagOf(item.id),
+            find: () => _emotionTagOf(_rootOf(item)),
             builder: (context, tag) => tag == null
                 ? const SizedBox.shrink()
                 : AnimatedEmotionTexture(mind: tag, color: Colors.white, opacity: _kGalleryEmotionsOpacity),
@@ -545,7 +554,7 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
   /// A gallery photo or video has no mind of its own, so its comments hang on its feed id, on the day it was taken.
   Widget _buildReplies(DayFeedItem item) {
     final Mind? root = item is DayFeedMind ? item.mind : null;
-    final String rootId = root?.id ?? item.id;
+    final String rootId = _rootOf(item);
     final int dayIndex = root?.dayIndex ?? kek_date.DateUtils.getDayIndex(from: item.timestamp);
     final Widget panel = Column(
       mainAxisSize: MainAxisSize.min,
@@ -627,7 +636,25 @@ final class _DayItemViewerScreenState extends State<DayItemViewerScreen>
     ),
   );
 
-  /// The emotions of a gallery photo or video, kept as an emotion tag on its feed id.
+  /// Where an item's comments and emotions hang: a mind's own id, or a gallery photo's fingerprint, joining a thread
+  /// that another device started on the same photo.
+  String _rootOf(DayFeedItem item) {
+    if (item is DayFeedMind) return item.mind.id;
+    final PhotoFingerprint fingerprint = _fingerprintOf(item)!;
+    final MindState state = context.read<MindBloc>().state;
+    final Iterable<String> roots = state is MindList
+        ? state.values.map((mind) => mind.rootId).whereType<String>().where(PhotoFingerprint.isKey)
+        : const [];
+    return fingerprint.rootAmong(roots);
+  }
+
+  PhotoFingerprint? _fingerprintOf(DayFeedItem item) => switch (item) {
+    DayFeedAsset(:final asset) => GalleryFingerprints.ofAsset(asset),
+    DayFeedFolderMedia(:final timestamp) => GalleryFingerprints.ofFolderFile(timestamp),
+    DayFeedMind() => null,
+  };
+
+  /// The emotions of a gallery photo or video, kept as an emotion tag on its fingerprint.
   Mind? _emotionTagOf(String rootId) {
     final MindState state = context.read<MindBloc>().state;
     return state is MindList

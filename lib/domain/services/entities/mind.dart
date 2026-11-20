@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:keklist/domain/repositories/mind/object/mind_object.dart';
 import 'package:keklist/domain/services/entities/mind_note_content.dart';
+import 'package:keklist/domain/services/entities/photo_fingerprint.dart';
 
 part 'mind.g.dart';
 
@@ -22,12 +23,15 @@ final class Mind with EquatableMixin {
 
   String get plainNote => noteContent.plainText;
 
-  /// The emotions of a gallery photo or video in the stories: an empty reflection hung on its feed id
-  /// (`asset_…`, `file_…`, `saf_…`; a mind's id is a UUID, so it never looks like one).
+  /// The emotions of a gallery photo or video in the stories: an empty reflection hung on its [PhotoFingerprint] key
+  /// (or, from before fingerprints, its feed id `asset_…`, `file_…`, `saf_…`; a mind's id is a UUID, never like those).
   bool get isEmotionTag {
     final String? root = rootId;
     if (root == null || note.trim().isNotEmpty) return false;
-    return root.startsWith('asset_') || root.startsWith('file_') || root.startsWith('saf_');
+    return PhotoFingerprint.isKey(root) ||
+        root.startsWith('asset_') ||
+        root.startsWith('file_') ||
+        root.startsWith('saf_');
   }
   MindNoteContent get noteContent => MindNoteContent.parse(note);
   List<MindNoteAudio> get audioNotes => noteContent.audioPieces;

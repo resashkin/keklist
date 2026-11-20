@@ -57,14 +57,26 @@ Voice and round-video minds last as long as their recording (see `MEDIA_MINDS_IM
 ### Comments on gallery photos and videos
 
 Every story page has the reply bar, not only minds. A phone photo or video has no mind of its own, so its comments are
-ordinary reflection minds whose `rootId` is the item's feed id (`DayFeedAsset.id` = `asset_<localIdentifier>`,
-`DayFeedFolderMedia.id` = `file_<path>` / `saf_<uri>`) and whose `dayIndex` is the day the photo was taken. They live in
-Hive like any comment, so backups, export and the web version carry them with no new model. `MindComments.save` /
+ordinary reflection minds whose `rootId` is the photo's **fingerprint** and whose `dayIndex` is the day it was taken.
+They live in Hive like any comment, so backups, export and the web version carry them with no new model or CSV column.
+
+#### Photo fingerprint (`lib/domain/services/entities/photo_fingerprint.dart`)
+- A photo's local id differs on every iPhone, so comments hang on `photo:<taken-at UTC seconds>:<width>x<height>`
+  (`PhotoFingerprint.key`) and find their photo again after an export to another iPhone.
+- iOS: `AssetEntity.createDateTime` and its size (`GalleryFingerprints.ofAsset`). Android folder files: the file's own
+  time, no size (`ofFolderFile`), enough to survive an export to another Android phone with the same files.
+- Photos are never shared between an iPhone and an Android phone, so there is no cross-platform matching: comments on
+  iPhone photos stay in the data unseen on Android and show up again when the data goes back to an iPhone.
+- Matching (`matches`, `rootAmong`): the same size (either way round) or an unknown one, and the same time, or a time
+  shifted by whole quarter hours up to 14 h (another time zone). An exact match wins; a match joins the existing thread,
+  otherwise the item's own key starts one. Two burst shots in the same second of the same size share comments.
+- `GalleryFingerprints.migrateLegacyRoots` moves comments made before fingerprints (`asset_<id>`, `file_<path>`) onto
+  them: once a launch when the stories open, and before every CSV/ZIP export. `saf_<uri>` roots can't be resolved and stay. `MindComments.save` /
 `sendRecording` and `MindReplies` take a `rootId` and a `dayIndex` instead of a root mind.
 
 A gallery photo or video can be marked with emotions from the heart button. They are stored as an **emotion tag**: an
-empty reflection mind on the item's feed id carrying `emotionIds` (`Mind.isEmotionTag`: empty note and a root id
-starting with `asset_`, `file_` or `saf_`). Tags are left out of comment lists and reflection counts. The sheet's picks
+empty reflection mind on the photo's fingerprint carrying `emotionIds` (`Mind.isEmotionTag`: empty note and a
+fingerprint root, or a legacy `asset_`, `file_`, `saf_` one). Tags are left out of comment lists and reflection counts. The sheet's picks
 are applied once it closes: create the tag, update it, or delete it when nothing is left picked. The heart keeps its
 size (filled once there are emotions); the picked emotions float over the photo or video as the
 same `AnimatedEmotionTexture` clouds a mind has (fed the tag, which is a `Mind`), in white at 60% opacity, ignoring
