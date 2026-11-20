@@ -392,7 +392,12 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
                                   ? const NeverScrollableScrollPhysics()
                                   : const AlwaysScrollableScrollPhysics(),
                               // Room for the Add button floating over the end of the list.
-                              padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, _currentParentId == null ? 96.0 : 16.0),
+                              padding: EdgeInsets.fromLTRB(
+                                16.0,
+                                16.0,
+                                16.0,
+                                _currentParentId == null ? _addButtonClearance(context) : 16.0,
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
@@ -441,6 +446,11 @@ class _EmotionMarkingSheetState extends State<EmotionMarkingSheet> {
       ],
     );
   }
+
+  /// The Add button floats 12 pt above the safe area (outside edit mode) and is 56 pt tall; the last chips scroll
+  /// clear of it with a little air.
+  double _addButtonClearance(BuildContext context) =>
+      12.0 + 56.0 + 20.0 + (_editMode ? 0.0 : MediaQuery.paddingOf(context).bottom);
 
   Widget _buildChipsArea(BuildContext context, EmotionsList state, List<Emotion> children) {
     if (!_editMode) {

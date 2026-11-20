@@ -16,6 +16,9 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+TODAY_SLOTS = 8
+TODAY_SLOT_MINUTES = 35
+TODAY_PHOTO_SLOTS = [1, 3, 5]
 PHOTO_DIR = ROOT / 'demo' / 'photos'
 
 # Unsplash photo id -> days before today. Unsplash License: https://unsplash.com/license
@@ -86,7 +89,9 @@ def stamp_photos(out_dir: Path) -> None:
         order = per_day[days_ago] = per_day.get(days_ago, -1) + 1
         when = (today - datetime.timedelta(days=days_ago)).replace(hour=min(9 + order, 21))
         if days_ago == 0:
-            when = min(when, datetime.datetime.now() - datetime.timedelta(minutes=10 * (order + 1)))
+            # Between today's notes; keep in step with kDemoToday* in lib/domain/services/screenshots/screenshot_demo.dart.
+            slot = TODAY_PHOTO_SLOTS[order]
+            when = datetime.datetime.now() - datetime.timedelta(minutes=TODAY_SLOT_MINUTES * (TODAY_SLOTS - slot))
         jpeg = (PHOTO_DIR / f'{photo_id}.jpg').read_bytes()
         assert jpeg[:2] == b'\xff\xd8', photo_id
         (out_dir / f'{days_ago:02d}_{order:02d}_{photo_id}.jpg').write_bytes(jpeg[:2] + exif_segment(when) + jpeg[2:])

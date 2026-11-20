@@ -37,9 +37,9 @@ Output: `screenshots/out/<lang>/<device>/NN_<scene>.png`. `raw/`, `out/` and the
 ### Scenes
 | Scene | What the test shows |
 |---|---|
-| day | Today: notes and today's photos |
+| day | Today: wide note tiles and today's photos alternating in time (`kDemoToday*` slots, shared with `prepare_media.py`), no grouping |
 | typing | the note editor with a note being written (no keyboard) |
-| emotions | the emotion sheet over Today, 22 flat demo emotions |
+| emotions | the emotion sheet over Today, 38 flat demo emotions |
 | new_emotion | the new-emotion sheet over the emotion sheet |
 | insights | the Profile (insights) tab |
 | voice | yesterday: a voice note and a round video |

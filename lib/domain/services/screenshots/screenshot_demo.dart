@@ -22,6 +22,13 @@ const String kDemoVideoPath = 'video/demo_round.mp4';
 const int kDemoVoiceDayOffset = 1;
 const int kDemoTripDayOffset = 3;
 
+/// Today's notes and photos alternate in time: slot `i` is `(kDemoTodaySlots - i) × kDemoTodaySlotStep` before now.
+/// Photos take [kDemoTodayPhotoSlots]; `screenshots/prepare_media.py` stamps them with the same rule.
+const int kDemoTodaySlots = 8;
+const Duration kDemoTodaySlotStep = Duration(minutes: 35);
+const List<int> kDemoTodayPhotoSlots = [1, 3, 5];
+const List<int> _kDemoTodayMindSlots = [0, 2, 4, 6, 7];
+
 Future<void> seedScreenshotDemo({
   required SettingsRepository settings,
   required MindRepository minds,
@@ -38,6 +45,8 @@ Future<void> seedScreenshotDemo({
       whatsNewSeenRelease: WhatsNewRelease.release,
       whatsNewSeenAt: DateTime.now(),
       reviewPromptedRelease: WhatsNewRelease.release,
+      // Notes and photos mixed in time order, notes as wide tiles.
+      dayFeed: const DayFeedSettings(mindCellSpan: 2, grouping: FeedGrouping.none),
       shakeDiscoveredScreenIds: const {
         ShakeScreenIds.day,
         ShakeScreenIds.settings,
@@ -88,6 +97,22 @@ final List<Emotion> _emotions = [
   _emotion('annoyed', '😤', 'Annoyed', order: 19),
   _emotion('bored', '🙄', 'Bored', order: 20),
   _emotion('confused', '😵‍💫', 'Confused', order: 21),
+  _emotion('content', '😊', 'Content', order: 22),
+  _emotion('loved', '🥰', 'Loved', order: 23),
+  _emotion('playful', '😜', 'Playful', order: 24),
+  _emotion('amazed', '😲', 'Amazed', order: 25),
+  _emotion('confident', '😎', 'Confident', order: 26),
+  _emotion('relieved', '😮‍💨', 'Relieved', order: 27),
+  _emotion('cozy', '☕', 'Cozy', order: 28),
+  _emotion('motivated', '🚀', 'Motivated', order: 29),
+  _emotion('focused', '🎯', 'Focused', order: 30),
+  _emotion('sleepy', '😴', 'Sleepy', order: 31),
+  _emotion('overwhelmed', '😩', 'Overwhelmed', order: 32),
+  _emotion('guilty', '😔', 'Guilty', order: 33),
+  _emotion('embarrassed', '😳', 'Embarrassed', order: 34),
+  _emotion('disappointed', '😞', 'Disappointed', order: 35),
+  _emotion('homesick', '🏡', 'Homesick', order: 36),
+  _emotion('jealous', '😒', 'Jealous', order: 37),
 ];
 
 typedef _Entry = (int daysAgo, String text, List<String> emotions);
@@ -128,7 +153,9 @@ List<Mind> _minds() {
       id: 'demo-$dayIndex-$sortIndex',
       note: note,
       dayIndex: dayIndex,
-      creationDate: DateUtils.getDateFromDayIndex(dayIndex).add(Duration(hours: 9 + sortIndex * 2)),
+      creationDate: daysAgo == 0 && sortIndex < _kDemoTodayMindSlots.length
+          ? DateTime.now().subtract(kDemoTodaySlotStep * (kDemoTodaySlots - _kDemoTodayMindSlots[sortIndex]))
+          : DateUtils.getDateFromDayIndex(dayIndex).add(Duration(hours: 9 + sortIndex * 2)),
       sortIndex: sortIndex,
       rootId: null,
       emotionIds: emotionIds,

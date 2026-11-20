@@ -17,7 +17,6 @@ import 'package:keklist/presentation/core/extensions/localization_extensions.dar
 import 'package:keklist/presentation/core/helpers/bloc_utils.dart';
 import 'package:keklist/presentation/core/helpers/date_utils.dart';
 import 'package:keklist/presentation/core/screen/kek_screen_state.dart';
-import 'package:keklist/presentation/core/widgets/glass_app_bar.dart';
 import 'package:keklist/presentation/core/widgets/glass_segmented_switcher.dart';
 import 'package:keklist/presentation/core/shake/shake_to_tweak_mixin.dart';
 import 'package:keklist/presentation/screens/feedback/feedback_sheet.dart';
@@ -27,7 +26,6 @@ import 'package:keklist/presentation/screens/insights/widgets/insights_card.dart
 import 'package:keklist/presentation/screens/insights/widgets/insights_emotion_cards.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_format.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_memory_media_cards.dart';
-import 'package:keklist/presentation/blocs/user_profile_bloc/user_profile_bloc.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_profile_header.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_summary_cards.dart';
 import 'package:keklist/presentation/screens/insights/widgets/insights_tweak_sheet.dart';
@@ -82,16 +80,8 @@ final class _InsightsScreenState extends KekWidgetState<InsightsScreen> with Sha
     final List<Emotion> emotions = emotionState is EmotionsList ? emotionState.emotions : const [];
     final GalleryIndexer indexer = context.read<GalleryIndexer>();
 
+    // No navigation bar: the profile header right below already shows the name.
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: GlassAppBar(
-        centerTitle: true,
-        onTitleLongPress: requestTweak,
-        title: Text(switch (context.watch<UserProfileBloc>().state.nickname?.trim()) {
-          final String name when name.isNotEmpty => name,
-          _ => context.l10n.insights,
-        }),
-      ),
       body: _minds.isEmpty
           ? ListView(
               padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
