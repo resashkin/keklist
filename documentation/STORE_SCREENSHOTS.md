@@ -19,6 +19,15 @@ python3 screenshots/compose.py ru iphone_69 # one device, Russian captions
 ```
 Output: `screenshots/out/<lang>/<device>/NN_<scene>.png`. `raw/`, `out/` and the downloaded photos are gitignored.
 
+### Upload to App Store Connect
+```bash
+cd ios && bundle exec fastlane upload_screenshots
+```
+The lane copies the composed `en` and `ru` sets for `iphone_69` and `ipad_13` into `ios/fastlane/screenshots/<locale>/`
+(gitignored) and replaces those sets on the App Store version named by `pubspec.yaml` (creating or renaming the
+version being prepared if needed). It uploads nothing else and doesn't submit for review. Other locales show the
+primary (en-US) set unless they have their own in App Store Connect.
+
 ## Implementation Details
 ### Files
 - `screenshots/devices.json`: devices, output sizes, frame style and how each is captured.

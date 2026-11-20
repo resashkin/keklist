@@ -125,6 +125,7 @@ app.*.symbols
 **/ios/.env
 **/ios/fastlane/report.xml
 **/ios/fastlane/test_output/
+**/ios/fastlane/screenshots/
 Runner.app.dSYM.zip
 Runner.ipa
 

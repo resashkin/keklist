@@ -239,6 +239,52 @@ platform :ios do
     )
   end
 
+  desc "Upload the composed store screenshots (screenshots/out) to the version being prepared — nothing else"
+  desc "Usage: bundle exec fastlane upload_screenshots"
+  lane :upload_screenshots do
+    version = File.read(File.expand_path("../../pubspec.yaml", __dir__))[/^version:\s*([^\s+]+)/, 1]
+    UI.user_error!("Could not read version from pubspec.yaml") if version.nil?
+
+    # compose.py language → App Store Connect locale. Locales without their own set show the primary one (en-US).
+    locales = { "en" => "en-US", "ru" => "ru" }
+    devices = ["iphone_69", "ipad_13"]
+    composed_dir = File.expand_path("../../screenshots/out", __dir__)
+    screenshots_dir = File.expand_path("screenshots", __dir__)
+    FileUtils.rm_rf(Dir.glob(File.join(screenshots_dir, "*")))
+    locales.each do |lang, locale|
+      target = File.join(screenshots_dir, locale)
+      FileUtils.mkdir_p(target)
+      devices.each do |device|
+        shots = Dir.glob(File.join(composed_dir, lang, device, "*.png")).sort
+        UI.user_error!("No composed #{lang}/#{device} screenshots — run screenshots/compose.py #{lang} #{device}") if shots.empty?
+        # deliver tells devices apart by pixel size and orders a set by file name.
+        shots.each { |shot| FileUtils.cp(shot, File.join(target, "#{device}_#{File.basename(shot)}")) }
+      end
+    end
+
+    api_key = app_store_connect_api_key(
+      key_id: "#{ENV["APPSTORE_KEY_ID"]}",
+      issuer_id: "#{ENV["APPSTORE_ISSUER_ID"]}",
+      key_content: "#{ENV["APPSTORE_API_KEY_CONTENT_BASE_64"]}",
+      is_key_content_base64: true
+    )
+
+    upload_to_app_store(
+      api_key: api_key,
+      app_identifier: APP_IDENTIFIER,
+      platform: "ios",
+      app_version: version,
+      screenshots_path: screenshots_dir,
+      overwrite_screenshots: true,
+      skip_binary_upload: true,
+      skip_metadata: true,
+      skip_app_version_update: false,
+      submit_for_review: false,
+      run_precheck_before_submit: false,
+      force: true
+    )
+  end
+
   desc "Register new device"
   lane :register_new_device do  |options|
     api_key = app_store_connect_api_key(
