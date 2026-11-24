@@ -1,0 +1,3 @@
+* Kommentare und Emotionen zu Fotos und Videos in Storys
+* Videos als Anhänge
+* Fehlerbehebungen und Verbesserungen

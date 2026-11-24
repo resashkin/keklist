@@ -1,0 +1,3 @@
+* Comentarios y emociones en fotos y videos de las historias
+* Videos como adjuntos
+* Correcciones y mejoras
